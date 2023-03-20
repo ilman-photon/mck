@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-
 import NavBar from "@/components/navbar";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
