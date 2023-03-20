@@ -1,0 +1,52 @@
+@import "../styles/variables.module.scss";
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+
+  div {
+    color: $primary-color;
+  }
+}
+
+.navBar {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  background: #001a71;
+  padding: 2px 60px;
+
+  .link {
+    text-decoration: none;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    color: #fff;
+  }
+  :first-child {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+.bodyContainer {
+  padding: 36px 72px;
+  margin: 0;
+}
+
+.productCategory {
+  height: 206px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+  font-size: 31px;
+  font-weight: 600;
+  text-align: center;
+}

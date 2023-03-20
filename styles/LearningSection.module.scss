@@ -1,0 +1,27 @@
+.img {
+  width: inherit;
+}
+
+.heading_color {
+  color: #001a71;
+}
+
+.paragraph_color {
+  color: #3a3e41;
+}
+
+.btn {
+  width: 124px;
+  height: 44px;
+  color: #fff;
+  background-color: #001a71;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+.floatRight {
+  float: right;
+}

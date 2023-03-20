@@ -1,0 +1,40 @@
+{
+  "items": {
+    "carousalData": [
+      {
+        "id": 1,
+        "title": "Banner 1",
+        "body": "Banner 1 Example",
+        "imageUrl": "images/banner_1.png"
+      },
+      {
+        "id": 2,
+        "title": "Banner 2",
+        "body": "Banner 2 Example",
+        "imageUrl": "images/banner_2.png"
+      }
+    ],
+    "category": [
+      {
+        "id": 1,
+        "title": "Explore Acute Care",
+        "imgUrl": "images/cat_1.png"
+      },
+      {
+        "id": 2,
+        "title": "Explore Preventative Care",
+        "imgUrl": "images/cat_2.png"
+      },
+      {
+        "id": 3,
+        "title": "Explore Every Day Care",
+        "imgUrl": "images/cat_3.png"
+      },
+      {
+        "id": 4,
+        "title": "Explore Diagnosti Care",
+        "imgUrl": "images/cat_4.png"
+      }
+    ]
+  }
+}
