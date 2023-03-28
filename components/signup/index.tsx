@@ -1,20 +1,11 @@
-import styles1 from "@/styles/Header.module.scss";
-
 import { NextPage } from "next";
-import { useEffect } from "react";
 
-const SignUpComponent: NextPage = ({ styles }) => {
-  const { btn } = styles;
-
+const SignUpComponent: NextPage = () => {
   return (
-    <div>
-      <input
-        className={styles1.search}
-        type="string"
-        placeholder="First Name"
-      />
-      <input className={styles1.search} type="string" placeholder="Email" />
-      <div className={btn}>SUBMIT</div>
+    <div className="sign-form">
+      <input className="input-box" type="string" placeholder="First Name" />
+      <input className="input-box" type="string" placeholder="Email" />
+      <div className="btn">SUBMIT</div>
     </div>
   );
 };

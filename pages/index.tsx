@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+
 import NavBar from "@/components/navbar";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
@@ -18,12 +19,10 @@ export default function Home() {
       </Head>
 
       <Header />
-      <NavBar />
+      {/* <NavBar /> */}
       <CarouselComponent />
-      <div className={styles.bodyContainer + " " + "container"}>
-        <CategoryComponent />
-        <LearningSectionComponent />
-      </div>
+      <CategoryComponent />
+      <LearningSectionComponent />
 
       <Footer />
     </>

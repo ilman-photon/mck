@@ -1,29 +1,46 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import { items } from "../../public/items.json";
-import styles from "@/styles/Home.module.scss";
 
 export default function CategoryComponent() {
   const { category } = items;
-  useEffect(() => {
-    console.log("cate", category, items);
-  });
 
   return (
-    <div className="row">
-      {category.map((item) => (
-        <div
-          className="col col-sm-6 col-md-3 col-lg-3 col-xl-3 text-center"
-          key={item.id}
-        >
-          <div
-            className={styles.productCategory}
-            style={{ backgroundImage: `url(${item.imgUrl})` }}
-          >
-            {item.title}
+    <div className="container">
+      <div className="category-container">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 ">
+          <div className="category">
+            <div className="img-circle acute-border">
+              <img src="images/acute.png" />
+            </div>
+            <div className="title">Acute</div>
+            <div className="text">
+              Products to care for your specific symptoms.
+            </div>
+          </div>
+          <div className="category">
+            <div className="img-circle preventive-border">
+              <img src="images/preventive.png" />
+            </div>
+            <div className="title">Preventative Care</div>
+            <div className="text">
+              Products to help you prepare for anything.
+            </div>
+          </div>
+          <div className="category">
+            <div className="img-circle day-border">
+              <img src="images/every_day.png" />
+            </div>
+            <div className="title">Every Day Care</div>
+            <div className="text">Products to support your daily routine.</div>
+          </div>
+          <div className="category">
+            <div className="img-circle diagnostic-border">
+              <img src="images/diagnostic.png" />
+            </div>
+            <div className="title">Diagnostic Care</div>
+            <div className="text">Tools to monitor your health.</div>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 }

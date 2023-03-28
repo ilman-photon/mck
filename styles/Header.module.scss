@@ -9,20 +9,7 @@
 }
 
 .search {
-  width: 340px;
-  height: 48px;
-  border: 1px solid #ccd1e3;
-  border-radius: 24px;
-  background-color: #f8f9fb;
-  background-image: url("/images/search.png");
+  background-image: url("/images/search_btn.png");
   background-repeat: no-repeat;
-  background-size: 18px 18px;
   background-position: 95% center;
-  padding: 12px 16px;
-
-  &::placeholder {
-    color: #808cb8;
-    letter-spacing: 1.5px;
-    left: 16px;
-  }
 }
