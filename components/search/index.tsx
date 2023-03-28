@@ -3,7 +3,7 @@ export default function Search() {
   return (
     <>
       <input
-        className={styles.search}
+        className={`${styles.search} ${"input-box"}`}
         type="text"
         alt="Search"
         placeholder="Search"

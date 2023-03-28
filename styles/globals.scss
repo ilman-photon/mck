@@ -1,0 +1,448 @@
+@import "variables.module.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "GT Alpina Medium";
+  src: url("/public/fonts/GTAlpina-Medium.eot");
+  src: url("/public/fonts/GTAlpina-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/GTAlpina-Medium.woff2") format("woff2"),
+    url("/public/fonts/GTAlpina-Medium.woff") format("woff"),
+    url("/public/fonts/GTAlpina-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.heading-color {
+  color: $heading-color;
+}
+
+.text-color {
+  color: $text-color;
+}
+
+.input-box {
+  width: 100%;
+  font-size: 16px;
+  color: #4d5f9c;
+  background: #f8f9fb;
+  border: 1px solid #4d5f9c;
+  border-radius: 4px;
+  padding: 9px 16px;
+
+  &::placeholder {
+    color: #4d5f9c;
+  }
+}
+
+.btn {
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  background-color: #001a71;
+  border-radius: 8px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-banner {
+  padding: 12px;
+  color: #fff;
+  background-color: rgba(39, 44, 47, 0.8);
+  border-radius: 16px;
+  position: absolute;
+  left: 72px;
+  top: 233px;
+  h5,
+  p,
+  div {
+    margin: 12px;
+  }
+
+  h5 {
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 41px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}
+
+.category-container {
+  padding: 72px 182px 0 182px;
+
+  .category {
+    .img-circle {
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 100px;
+    }
+
+    .acute-border {
+      border: 8px solid #79cdee;
+    }
+    .preventive-border {
+      border: 8px solid #ffc238;
+    }
+    .day-border {
+      border: 8px solid #a7c8e9;
+    }
+    .diagnostic-border {
+      border: 8px solid #b2dbd3;
+    }
+
+    .title {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 24px;
+      color: #001a71;
+      line-height: 27px;
+      font-family: "GT Alpina Medium";
+    }
+
+    .text {
+      margin-top: 6px;
+      text-align: center;
+      color: #3a3e41;
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}
+
+.learning-container {
+  margin: 24px 0;
+  padding: 18px 36px;
+
+  .inner-col {
+    padding: 18px 36px;
+    margin: auto;
+
+    h5 {
+      color: #001a71;
+      line-height: 61px;
+      font-family: "GT Alpina Medium";
+      font-size: 54px;
+      font-weight: 500;
+    }
+
+    p {
+      color: #3a3e41;
+      padding: 24px 0;
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}
+
+.learning-container-bg {
+  margin: 24px 0;
+  padding: 18px 36px;
+  background: linear-gradient(
+      106.28deg,
+      rgba(167, 200, 233, 0.5) 0%,
+      rgba(69, 74, 75, 0.9) 46.09%
+    ),
+    linear-gradient(
+      76.74deg,
+      rgba(69, 74, 75, 0.9) 13.65%,
+      rgba(167, 200, 233, 0.5) 57.37%
+    );
+
+  .inner-col {
+    padding: 18px 36px;
+    margin: auto;
+
+    h5 {
+      color: #fff;
+      line-height: 61px;
+      font-family: "GT Alpina Medium";
+      font-size: 54px;
+      font-weight: 500;
+    }
+
+    p {
+      color: #fff;
+      padding: 24px 0;
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}
+
+.image-form {
+  display: flex;
+
+  .sign-up-form {
+    width: 100%;
+    background-color: #e6e8f1;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 24px;
+
+    h4 {
+      font-family: "GT Alpina Medium";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 41px;
+      color: #001a71;
+      padding: 6px 0;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 28px;
+      color: #3a3e41;
+      padding: 6px 0;
+    }
+
+    .sign-form {
+      input,
+      div {
+        margin: 6px 0;
+      }
+
+      .btn {
+        padding: 10px;
+      }
+    }
+
+    .hint {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #3a3e41;
+    }
+  }
+}
+
+.pramotional-container {
+  padding: 24px;
+  text-align: center;
+
+  h5 {
+    color: #001a71;
+    padding: 24px;
+    margin: 10px;
+    font-size: 54px;
+    line-height: 61px;
+    font-weight: 500;
+    font-family: "GTAlpina-Medium";
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 27px;
+    color: #3a3e41;
+  }
+}
+
+.pramotion-product-container {
+  padding: 12px 60px;
+
+  .product-container {
+    margin: 12px;
+    padding: 36px;
+
+    &.p-1 {
+      background: #d9f3fd;
+    }
+    &.p-2 {
+      background: #ffeabc;
+    }
+    &.p-3 {
+      background: #eaf1f8;
+    }
+    &.p-4 {
+      background: #e0eae8;
+    }
+
+    .logo-img {
+      margin-bottom: 12px;
+    }
+
+    .left-col {
+      padding-right: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .right-col {
+      padding-left: 12px;
+      margin: auto 0;
+
+      p {
+        margin: 12px 0;
+        color: #3a3e41;
+        font-size: 18px;
+        line-height: 27px;
+      }
+
+      div {
+        margin: 12px 0;
+        width: 139px;
+        height: 44px;
+        float: right;
+      }
+    }
+  }
+}
+
+.footer-bg {
+  background-color: #e6e8f1;
+}
+
+.f-p {
+  margin-top: 58px;
+  padding: 36px 72px;
+}
+
+.f-heading h5 {
+  color: #001a71;
+}
+
+.f-title {
+  color: #3a3e41;
+}
+
+.f-border {
+  border-left: 1px solid #cdd2e3;
+  border-right: 1px solid #cdd2e3;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+
+.icon-bg {
+  background-color: #001a71;
+}
+
+.footer-form {
+  padding: 0 12px;
+  background-color: #fff;
+
+  div {
+    padding: 6px 0;
+
+    input {
+      margin: 6px 0;
+    }
+
+    .submit-btn {
+      background-color: $container-bg-color;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 16px;
+      // font-weight: 800;
+    }
+  }
+}
+
+/* hi-res laptops and desktops */
+@media (max-width: 1281px) {
+}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width: 1025px) {
+  // .category-container {
+  //   padding: 12px 16px;
+
+  //   .category {
+  //     margin: 12px auto;
+  //     width: 200px;
+
+  //     .title {
+  //       font-size: 54px;
+  //       line-height: 27px;
+  //     }
+  //     .text {
+  //       font-size: 18px;
+  //       line-height: 27px;
+  //     }
+  //   }
+  // }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width: 961px) {
+  // .category-container {
+  //   padding: 12px 16px;
+
+  //   .category {
+  //     margin: 12px auto;
+  //     width: 200px;
+
+  //     .title {
+  //       font-size: 48px;
+  //       line-height: 27px;
+  //     }
+  //     .text {
+  //       font-size: 18px;
+  //       line-height: 27px;
+  //     }
+  //   }
+  // }
+}
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (max-width: 641px) {
+  // .category-container {
+  //   padding: 12px 16px;
+
+  //   .category {
+  //     margin: 12px auto;
+  //     width: 200px;
+
+  //     .title {
+  //       font-size: 40px;
+  //       line-height: 27px;
+  //     }
+  //     .text {
+  //       font-size: 18px;
+  //       line-height: 27px;
+  //     }
+  //   }
+  // }
+}
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (max-width: 481px) {
+}
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (max-width: 320px) {
+  .category-container {
+    padding: 12px 16px;
+
+    .category {
+      margin: 12px auto;
+      width: 200px;
+
+      .title {
+        font-size: 24px;
+        line-height: 27px;
+      }
+      .text {
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+  }
+}
