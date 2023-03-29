@@ -2,11 +2,10 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-
-import NavBar from "@/components/navbar";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
 import LearningSectionComponent from "@/components/learning_section";
+import CookiesComponent from "@/components/cookies";
 
 export default function Home() {
   return (
@@ -17,9 +16,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <CookiesComponent />
       <Header />
-      <NavBar />
+
       <CarouselComponent />
       <CategoryComponent />
       <LearningSectionComponent />
