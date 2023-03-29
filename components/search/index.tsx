@@ -1,13 +1,17 @@
-import styles from "@/styles/Header.module.scss";
 export default function Search() {
   return (
     <>
-      <input
-        className={`${styles.search} ${"input-box"}`}
-        type="text"
-        alt="Search"
-        placeholder="Search"
-      />
+      <div className="desktop-search">
+        <input
+          className="search input-box"
+          type="text"
+          alt="Search"
+          placeholder="Search"
+        />
+      </div>
+      <div className="mobile-search">
+        <img src="images/search_btn.png" />
+      </div>
     </>
   );
 }

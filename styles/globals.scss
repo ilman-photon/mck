@@ -24,6 +24,41 @@
   color: $text-color;
 }
 
+// Start Header Css
+.cookies-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 4px;
+  text-align: center;
+  background-color: #001a71;
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.cross-btn,
+.cookies-btn {
+  margin: 0 5px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.header {
+  width: 100%;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search {
+  background-image: url("/images/search_btn.png");
+  background-repeat: no-repeat;
+  background-position: 95% center;
+}
+
 .input-box {
   width: 100%;
   font-size: 16px;
@@ -37,6 +72,48 @@
     color: #4d5f9c;
   }
 }
+
+.navBar {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  background: #001a71;
+  padding: 2px 60px;
+}
+
+.link {
+  text-decoration: none;
+  padding: 5px 5px;
+  margin: 5px 5px;
+  color: #fff;
+}
+
+.link:first-child {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.arrow {
+  position: relative;
+  padding-right: 25px;
+}
+.arrow::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 0.2em solid #fff;
+  border-top: 0.2em solid #fff;
+  transform: rotate(135deg);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto 0;
+}
+
+// End Header Css
 
 .btn {
   font-size: 16px;
@@ -357,10 +434,19 @@
 
 /* hi-res laptops and desktops */
 @media (max-width: 1281px) {
+  .mobile-nav {
+    display: none;
+  }
+  .mobile-search {
+    display: none;
+  }
 }
 
 /* big landscape tablets, laptops, and desktops */
 @media (max-width: 1025px) {
+  .mobile-search {
+    display: none;
+  }
   // .category-container {
   //   padding: 12px 16px;
 
@@ -403,23 +489,77 @@
 
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 @media (max-width: 641px) {
-  // .category-container {
-  //   padding: 12px 16px;
+  .cookies-container {
+    display: inline-block;
+    padding: 8px 16px;
+  }
 
-  //   .category {
-  //     margin: 12px auto;
-  //     width: 200px;
+  .cookies-btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+  }
 
-  //     .title {
-  //       font-size: 40px;
-  //       line-height: 27px;
-  //     }
-  //     .text {
-  //       font-size: 18px;
-  //       line-height: 27px;
-  //     }
-  //   }
-  // }
+  .cross-btn {
+    width: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+  }
+  .header {
+    padding: 0 19px;
+    width: 100%;
+    height: 64px;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .logo-img {
+    width: 182px;
+  }
+
+  .mobile-search {
+    display: block;
+  }
+
+  .desktop-search {
+    display: none;
+  }
+  .navBar {
+    width: 320px;
+    background-color: #fff;
+    padding: 16px;
+    z-index: 9;
+    position: absolute;
+  }
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+  .link {
+    display: block;
+    color: #000;
+    margin: 4px 0;
+    padding: 4px 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: #001a71;
+    font-weight: 500;
+  }
+  .arrow {
+    position: relative;
+  }
+  .arrow::after {
+    border-right: 0.2em solid #001a71;
+    border-top: 0.2em solid #001a71;
+  }
 }
 
 /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */

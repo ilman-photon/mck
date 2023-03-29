@@ -1,15 +1,31 @@
-import styles from "@/styles/Header.module.scss";
-
-import Image from "next/image";
+import { useState } from "react";
+import { NextPage } from "next";
 import Search from "../search";
+import NavBar from "../navbar";
 
-export default function Header() {
+function Header() {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+    console.log("handleClick", isVisible);
+  };
   return (
-    <div className={`${styles.header}`}>
-      <Image src="/images/logo.png" width="332" height="58" alt="logo" />
-      <div>
+    <>
+      <div className="header">
+        <img
+          className="mobile-nav"
+          src="images/mobile_nav.png"
+          onClick={handleClick}
+        />
+        <div className="logo-img">
+          <img src="images/logo.png" alt="logo" />
+        </div>
+
         <Search />
       </div>
-    </div>
+      <NavBar isVisible={isVisible} />
+    </>
   );
 }
+
+export default Header;
