@@ -101,4 +101,5 @@ stages:
               appName: $(webAppName)
               runtimeStack: 'NODE|10.10'
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'npm run start'
+              startUpCommand: 'pm2 start --no-daemon --name foster-thrive /home/site/wwwroot/node_modules/next/dist/bin/next -- start --port 3000'
+              deploymentMethod: 'zipDeploy'
