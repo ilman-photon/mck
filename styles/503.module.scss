@@ -1,0 +1,43 @@
+.five-oh-three {
+  padding: 72px;
+  color: #001a71;
+
+  .heading {
+    font-size: 54px;
+    line-height: 61px;
+    font-family: "GTAlpina-Medium";
+  }
+
+  .text {
+    font-size: 36px;
+    line-height: 41px;
+    font-family: "GTAlpina-Medium";
+    padding: 12px 0;
+  }
+
+  .hint {
+    padding-top: 12px;
+    font-size: 18px;
+    line-height: 27px;
+    font-family: "sofia-pro-regular";
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 1025px) {
+  .five-oh-three {
+    padding: 64px;
+  }
+}
+
+@media (max-width: 961px) {
+  .five-oh-three {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 641px) {
+  .five-oh-three {
+    padding: 16px;
+  }
+}

@@ -8,7 +8,7 @@ export default function LearningSectionComponent() {
       <div className="container">
         <div className="learning-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="m-auto inner-col">
+            <div className="inner-col">
               <h5>Why Foster & Thrive</h5>
               <p>
                 At Foster & Thrive we believe over the counter products should
@@ -28,7 +28,7 @@ export default function LearningSectionComponent() {
         </div>
       </div>
       <div className="container">
-        <div className="learning-container-bg">
+        <div className="learning-container-bg green-light">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
             <div className="inner-col">
               <img
@@ -74,13 +74,13 @@ export default function LearningSectionComponent() {
       <div className="container">
         <div className="learning-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="inner-col image-form">
+            <div className="inner-col image-form form-grid-none">
               {/* <div className=""> */}
-              {/* <img
+              <img
                 className="h-auto max-w-full"
                 src="images/email_signup.png"
                 alt=""
-              /> */}
+              />
               {/* </div> */}
               <div className="sign-up-form">
                 <h4>Sign up Today!</h4>
@@ -102,7 +102,7 @@ export default function LearningSectionComponent() {
         </div>
       </div>
       <div className="container">
-        <div className="learning-container-bg">
+        <div className="learning-container-bg orange-light">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
             <div className="inner-col">
               <h5>Care that’s uniquely you</h5>
@@ -124,12 +124,12 @@ export default function LearningSectionComponent() {
         </div>
       </div>
 
-      <div className="pramotional-container text-center">
+      <div className="pramotional-container">
         <h5>Products worthy of you and yours</h5>
         <p>
           When it comes to caring for those you love, you need products that you
-          can trust to help heal <br /> and thrive. At Foster & Thrive,
-          consistent quality and efficiency is our top priority.
+          can trust to help heal and thrive. At Foster & Thrive, consistent
+          quality and efficiency is our top priority.
         </p>
       </div>
       <div className="container">

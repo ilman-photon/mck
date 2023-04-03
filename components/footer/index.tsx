@@ -1,12 +1,12 @@
 import SignUpComponent from "../signup";
 
-export default function Footer() {
+export default function FooterComponent() {
   return (
     <footer className="footer-bg f-heading">
       <div className="container f-p">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
-          <div className="">
-            <h5 className="mb-2.5 font-bold">Company</h5>
+          <div className="footer-row">
+            <h5 className="mb-2.5">Company</h5>
 
             <ul className="mb-0 list-none">
               <li>
@@ -23,7 +23,7 @@ export default function Footer() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-1 ml-0 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="m-2 ml-0 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -39,7 +39,7 @@ export default function Footer() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-1 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="m-2 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -55,7 +55,7 @@ export default function Footer() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-1 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="m-2 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -72,8 +72,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className=" f-border">
-            <h5 className="mb-2.5 font-bold">Legal</h5>
+          <div className="footer-row f-border">
+            <h5 className="mb-2.5">Legal</h5>
 
             <ul className="mb-0 list-none">
               <li>
@@ -99,14 +99,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="footer-form">
-            <h5 className="font-bold">Email Signup & Rewards</h5>
-            <div className="text-color">
-              Want to receive tips, personalized content and exclusive offers
-              from Foster & Thrive?
+          <div className="footer-row">
+            <div className="footer-form">
+              <h5>Email Signup & Rewards</h5>
+              <div className="text-color">
+                Want to receive tips, personalized content and exclusive offers
+                from Foster & Thrive?
+              </div>
+              <div className="text-color">Sign up today!</div>
+              <SignUpComponent />
             </div>
-            <div className="text-color">Sign up today!</div>
-            <SignUpComponent />
           </div>
         </div>
       </div>
