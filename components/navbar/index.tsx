@@ -1,13 +1,8 @@
 import Link from "next/link";
-import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { flattenDiagnosticMessageText } from "typescript";
 
-const NavBar: NextPage = ({ isVisible }) => {
+function NavBar({ isVisible }: Props) {
   const [subMenuVisible, setSubMenuVisible] = useState(false);
-  useEffect(() => {
-    console.log("isVisible", isVisible);
-  }, [isVisible]);
 
   const handleClick = () => {
     setSubMenuVisible(!subMenuVisible);
@@ -44,6 +39,10 @@ const NavBar: NextPage = ({ isVisible }) => {
       ></div>
     </>
   );
+}
+
+type Props = {
+  isVisible: boolean;
 };
 
 export default NavBar;

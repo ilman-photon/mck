@@ -1,0 +1,76 @@
+.four-oh-four {
+  padding: 72px;
+
+  .heading {
+    font-size: 54px;
+    line-height: 61px;
+    font-family: "GTAlpina-Medium";
+    color: #001a71;
+  }
+
+  .text {
+    color: #001a71;
+    font-size: 36px;
+    line-height: 41px;
+    font-family: "GTAlpina-Medium";
+    padding: 12px 0;
+  }
+
+  .hint {
+    font-size: 24px;
+    line-height: 27px;
+    color: #3a3e41;
+    font-family: "GTAlpina-Medium";
+    padding: 12px 0;
+  }
+
+  .table-container {
+    color: #001a71;
+    font-size: 18px;
+    line-height: 27px;
+    font-family: "sofia-pro-bold";
+    border: 0.5px solid #ccd1e3;
+    border-radius: 8px 8px;
+    width: 416px;
+    margin: 12px 0;
+
+    .table-heading {
+      padding: 12px 16px;
+      border: 0.5px solid #ccd1e3;
+      border-radius: 8px 8px 0 0;
+      background: #f8f9fb;
+    }
+
+    .table-text {
+      padding: 2px 16px;
+      font-size: 18px;
+      line-height: 27px;
+      color: #001a71;
+      text-decoration: underline;
+      font-family: "sofia-pro-regular";
+    }
+
+    .normal-text {
+      color: #3a3e41;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 1025px) {
+  .four-zero-four {
+    padding: 64px;
+  }
+}
+
+@media (max-width: 961px) {
+  .four-zero-four {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 641px) {
+  .four-zero-four {
+    padding: 16px;
+  }
+}

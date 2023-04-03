@@ -3,7 +3,7 @@ export default function Search() {
     <>
       <div className="desktop-search">
         <input
-          className="search input-box"
+          className="input-box search"
           type="text"
           alt="Search"
           placeholder="Search"

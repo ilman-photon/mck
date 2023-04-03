@@ -1,7 +1,6 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.scss";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import HeaderComponent from "@/components/header";
+import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
 import LearningSectionComponent from "@/components/learning_section";
@@ -17,13 +16,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CookiesComponent />
-      <Header />
+      <HeaderComponent />
 
       <CarouselComponent />
       <CategoryComponent />
       <LearningSectionComponent />
 
-      <Footer />
+      <FooterComponent />
     </>
   );
 }

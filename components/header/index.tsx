@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { NextPage } from "next";
 import Search from "../search";
 import NavBar from "../navbar";
 
-function Header() {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+function HeaderComponent() {
+  const [isVisible, setIsVisible] = useState(false);
+
   const handleClick = () => {
     setIsVisible(!isVisible);
-    console.log("handleClick", isVisible);
   };
+
   return (
     <>
       <div className="header">
@@ -28,4 +28,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderComponent;
