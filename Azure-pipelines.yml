@@ -12,12 +12,12 @@ variables:
   azureSubscription: 'foster-thrive-service-connection'
 
   # Web app name
-  #webAppName: 'foster-thrive-dev'
-  webAppName: 'foster-thrive-stg'
+  webAppName: 'foster-thrive-dev'
+  #webAppName: 'foster-thrive-stg'
 
   # Environment name
-  #environmentName: 'dev'
-  environmentName: 'stg'
+  environmentName: 'dev'
+  #environmentName: 'stg'
 
   # Agent VM image name
   vmImageName: 'windows-2019'
@@ -55,37 +55,13 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-#- stage: Dev_Deploy
-  #displayName: Deploy stage1 DEV
-  #dependsOn: Build
-  #condition: succeeded()
-  #jobs:
-  #- deployment: Deploy
-    #displayName: DevDeploy
-    #environment: $(environmentName)
-    #pool:
-      #vmImage: $(vmImageName)
-    #strategy:
-      #runOnce:
-        #deploy:
-          #steps:
-          #- task: AzureWebApp@1
-            #displayName: 'Multistage Stage 1: Dev'
-            #inputs:
-              #azureSubscription: $(azureSubscription)
-              #appType: webApp
-              #appName: $(webAppName)
-              #runtimeStack: 'NODE|10.10'
-              #package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              #startUpCommand: 'npm run start'
-              
-- stage: QA_Deploy
-  displayName: Deploy stage2 QA
+- stage: Dev_Deploy
+  displayName: Deploy stage1 DEV
   dependsOn: Build
   condition: succeeded()
   jobs:
   - deployment: Deploy
-    displayName: QA Deploy
+    displayName: DevDeploy
     environment: $(environmentName)
     pool:
       vmImage: $(vmImageName)
@@ -94,12 +70,36 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: 'Multistage Stage 2: QA'
+            displayName: 'Multistage Stage 1: Dev'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webApp
               appName: $(webAppName)
               runtimeStack: 'NODE|10.10'
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'pm2 start --no-daemon --name foster-thrive /home/site/wwwroot/node_modules/next/dist/bin/next -- start --port 3000'
-              deploymentMethod: 'zipDeploy'
+              startUpCommand: 'npm run start'
+              
+#-stage: QA_Deploy
+  #displayName: Deploy stage2 QA
+  #dependsOn: Build
+  #condition: succeeded()
+  #jobs:
+  #- deployment: Deploy
+    #displayName: QA Deploy
+    #environment: $(environmentName)
+    #pool:
+      #vmImage: $(vmImageName)
+    #strategy:
+      #runOnce:
+        #deploy:
+          #steps:
+          #- task: AzureWebApp@1
+            #displayName: 'Multistage Stage 2: QA'
+            #inputs:
+              #azureSubscription: $(azureSubscription)
+              #appType: webApp
+              #appName: $(webAppName)
+              #runtimeStack: 'NODE|10.10'
+              #package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              #startUpCommand: 'pm2 start --no-daemon --name foster-thrive /home/site/wwwroot/node_modules/next/dist/bin/next -- start --port 3000'
+              #deploymentMethod: 'zipDeploy'
