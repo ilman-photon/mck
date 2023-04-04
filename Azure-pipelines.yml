@@ -39,7 +39,7 @@ stages:
 
     - script: |
         npm install
-        npm next build --if-present
+        npm next build 
         npm run test --if-present
       displayName: 'npm install, build and test'
 
@@ -55,32 +55,32 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- stage: Dev_Deploy
-  displayName: Deploy stage1 DEV
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    displayName: DevDeploy
-    environment: $(environmentName)
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Multistage Stage 1: Dev'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appType: webApp
-              appName: $(webAppName)
-              runtimeStack: 'NODE|19.7.0'
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+#- stage: Dev_Deploy
+  #displayName: Deploy stage1 DEV
+  #dependsOn: Build
+  #condition: succeeded()
+  #jobs:
+  #- deployment: Deploy
+    #displayName: DevDeploy
+    #environment: $(environmentName)
+    #pool:
+      #vmImage: $(vmImageName)
+    #strategy:
+      #runOnce:
+        #deploy:
+          #steps:
+          #- task: AzureWebApp@1
+            #displayName: 'Multistage Stage 1: Dev'
+            #inputs:
+              #azureSubscription: $(azureSubscription)
+              #appType: webApp
+              #appName: $(webAppName)
+              #runtimeStack: 'NODE|19.7.0'
+              #package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
               
-              deploymentMethod: 'web deploy'
+              #deploymentMethod: 'web deploy'
               
-              startUpCommand: 'npm start -p 3000'
+              #startUpCommand: 'npm start -p 3000'
               
 #- stage: QA_Deploy
   #displayName: Deploy stage2 QA
