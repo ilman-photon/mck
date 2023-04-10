@@ -1,18 +1,185 @@
 .search-page-container {
   padding: 72px;
 
-  .search-result-count {
-    font-size: 54px;
-    line-height: 61px;
-    color: #001a71;
-    font-family: "GTAlpina-Medium";
-    padding-bottom: 48px;
+  .search-page-header {
+    .search-result-count {
+      font-size: 54px;
+      line-height: 61px;
+      color: #001a71;
+      font-family: "GTAlpina-Medium";
+      padding-bottom: 48px;
+    }
+
+    .search-result-text {
+      font-size: 18px;
+      line-height: 27px;
+      color: #000000;
+      font-family: "sofia-pro-regular";
+
+      i {
+        font-family: "sofia-pro-bold";
+        color: #dc2e21;
+      }
+    }
+
+    .showing-result-count {
+      font-size: 18px;
+      line-height: 27px;
+      color: #3a3e41;
+      font-family: "sofia-pro-regular";
+      padding-top: 21px;
+    }
   }
 
-  .search-result-text {
-    font-size: 18px;
-    line-height: 27px;
-    color: #000000;
-    font-family: "sofia-pro-regular";
+  .search-page-section {
+    border-top: 1px solid #ccd1e3;
+    margin-top: 42px;
+    padding-top: 36px;
+
+    .active-filter-section {
+      display: flex;
+      align-items: center;
+
+      .text {
+        font-size: 18px;
+        line-height: 27px;
+        font-family: "sofia-pro-regular";
+        color: #001a71;
+      }
+
+      img {
+        margin: auto 10px;
+      }
+
+      .selected-filter {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 12px;
+        line-height: 18px;
+        font-family: "sofia-pro-regular";
+        color: #001a71;
+
+        div {
+          background: #f8f9fb;
+          border: 1px solid #001a71;
+          border-radius: 10px;
+          margin: 2px 2px;
+          padding: 2px 8px;
+
+          span {
+            // margin: 2px;
+            padding: 0 3px;
+          }
+
+          .close-btn {
+            margin-left: 6px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .showing-filter-count {
+      font-size: 18px;
+      line-height: 27px;
+      font-family: "sofia-pro-regular";
+      color: #3a3e41;
+      margin: 5px 0;
+    }
+
+    .filter-and-product-section {
+      margin-top: 21px;
+      display: flex;
+
+      .filter-section {
+        width: 200px;
+        margin-right: 22px;
+
+        .filter-container {
+          padding: 6px 12px;
+          border-right: 1px solid #ccd1e3;
+          border-bottom: 1px solid #ccd1e3;
+
+          .heading {
+            margin-bottom: 4px;
+            font-size: 16px;
+            line-height: 24px;
+            font-family: "sofia-pro-bold";
+            color: #001a71;
+          }
+          .filter-option {
+            margin: 2px 0;
+
+            .filter-row {
+              display: flex;
+              align-items: center;
+
+              input {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+              }
+              div {
+                margin-left: 8px;
+                font-size: 14px;
+                line-height: 21px;
+                font-family: "sofia-pro-regular";
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      .product-list-section {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .product-container {
+          border: 1px solid #ccd1e3;
+          border-radius: 8px;
+          margin: 12px 2px;
+          width: 150px;
+          padding: 16px;
+          cursor: pointer;
+
+          .product-img {
+            width: 100%;
+          }
+
+          .category {
+            font-size: 12px;
+            line-height: 18px;
+            font-family: "sofia-pro-bold";
+            color: #001a71;
+            border-radius: 10px;
+            width: 79px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+          }
+
+          .name {
+            font-size: 18px;
+            line-height: 23px;
+            font-family: "sofia-pro-bold";
+            color: #001a71;
+            margin-top: 14px;
+            margin-bottom: 4px;
+          }
+
+          .description {
+            font-size: 16px;
+            line-height: 18px;
+            font-family: "sofia-pro-regular";
+            color: #3a3e41;
+          }
+        }
+      }
+    }
   }
 }
