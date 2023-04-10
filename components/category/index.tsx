@@ -1,8 +1,4 @@
-import { items } from "../../public/items.json";
-
 export default function CategoryComponent() {
-  const { category } = items;
-
   return (
     <div className="container">
       <div className="category-container">

@@ -1,13 +1,21 @@
 import { useState } from "react";
 import Search from "../search";
 import NavBar from "../navbar";
+import { useRouter } from "next/router";
 
 function HeaderComponent() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
+
+  function handleOnCLickLogo() {
+    router.push({
+      pathname: "/",
+    });
+  }
 
   return (
     <>
@@ -17,7 +25,7 @@ function HeaderComponent() {
           src="images/mobile_nav.png"
           onClick={handleClick}
         />
-        <div className="logo-img">
+        <div className="brand-logo" onClick={handleOnCLickLogo}>
           <img src="images/logo.png" alt="logo" />
         </div>
 
