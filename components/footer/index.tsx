@@ -3,7 +3,7 @@ import SignUpComponent from "../signup";
 export default function FooterComponent() {
   return (
     <footer className="footer-bg f-heading">
-      <div className="container f-p">
+      <div className="container mx-auto f-p">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
           <div className="footer-row">
             <h5 className="mb-2.5">Company</h5>

@@ -17,14 +17,12 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "sofia-pro-light";
-  src: url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3")
-      format("woff2"),
-    url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3")
-      format("woff"),
-    url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3")
-      format("opentype");
+  src: url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+    url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+    url("https://use.typekit.net/af/2e2409/00000000000000007735f990/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
   font-display: auto;
   font-style: normal;
   font-weight: 300;
@@ -33,12 +31,9 @@
 
 @font-face {
   font-family: "sofia-pro-regular";
-  src: url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-      format("woff2"),
-    url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-      format("woff"),
-    url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-      format("opentype");
+  src: url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+    url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+    url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
   font-display: auto;
   font-style: normal;
   font-weight: 400;
@@ -47,12 +42,9 @@
 
 @font-face {
   font-family: "sofia-pro-bold";
-  src: url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3")
-      format("woff2"),
-    url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3")
-      format("woff"),
-    url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3")
-      format("opentype");
+  src: url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),
+    url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),
+    url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
   font-display: auto;
   font-style: normal;
   font-weight: 700;
@@ -95,6 +87,30 @@
   font-family: "sofia-pro-regular";
 }
 
+.text-sofia-reg {
+  font-family: "sofia-pro-regular";
+}
+
+.text-gtl-med {
+  font-family: "GTAlpina-Medium";
+}
+
+.text-27 {
+  font-size: 27px;
+}
+
+.text-54 {
+  font-size: 54px;
+}
+
+.blue-bg {
+  background-color: #001a71;
+}
+
+.blue-txt {
+  color: #001a71;
+}
+
 .cross-btn,
 .cookies-btn {
   margin: 0 5px;
@@ -118,6 +134,7 @@
 .mobile-nav {
   display: none;
 }
+
 .mobile-search {
   display: none;
 }
@@ -170,6 +187,7 @@
   position: relative;
   padding-right: 25px;
 }
+
 .arrow::after {
   content: "";
   display: inline-block;
@@ -209,6 +227,7 @@
   position: absolute;
   left: 72px;
   bottom: 30px;
+
   h2,
   p,
   div {
@@ -220,6 +239,7 @@
     font-size: 36px;
     line-height: 41px;
   }
+
   p {
     font-family: "sofia-pro-regular";
     font-size: 20px;
@@ -245,12 +265,15 @@
     .acute-border {
       border: 8px solid #79cdee;
     }
+
     .preventive-border {
       border: 8px solid #ffc238;
     }
+
     .day-border {
       border: 8px solid #a7c8e9;
     }
+
     .diagnostic-border {
       border: 8px solid #b2dbd3;
     }
@@ -359,6 +382,7 @@
     }
 
     .sign-form {
+
       input,
       div {
         margin: 6px 0;
@@ -411,12 +435,15 @@
     &.p-1 {
       background: #d9f3fd;
     }
+
     &.p-2 {
       background: #ffeabc;
     }
+
     &.p-3 {
       background: #eaf1f8;
     }
+
     &.p-4 {
       background: #e0eae8;
     }
@@ -539,6 +566,7 @@
   .mobile-nav {
     display: none;
   }
+
   .mobile-search {
     display: none;
   }
@@ -549,6 +577,7 @@
   .cookies-container {
     font-size: 10px;
   }
+
   .mobile-search {
     display: none;
   }
@@ -618,6 +647,7 @@
     padding-bottom: 5px;
     margin: 0;
   }
+
   .header {
     padding: 0 19px;
     width: 100%;
@@ -639,6 +669,7 @@
   .desktop-search {
     display: none;
   }
+
   .navBar {
     width: 320px;
     background-color: #fff;
@@ -646,12 +677,15 @@
     z-index: 9;
     position: absolute;
   }
+
   .hide {
     display: none;
   }
+
   .show {
     display: block;
   }
+
   .link {
     display: block;
     color: #000;
@@ -662,18 +696,22 @@
     color: #001a71;
     font-weight: 500;
   }
+
   .arrow {
     position: relative;
   }
+
   .arrow::after {
     border-right: 0.2em solid #001a71;
     border-top: 0.2em solid #001a71;
   }
+
   .hero-banner {
     left: 0;
     right: 0;
     margin: 0 auto;
     bottom: 5px;
+
     h2 {
       font-size: 28px;
       line-height: 32px;
@@ -691,12 +729,14 @@
         font-size: 24px;
         line-height: 27px;
       }
+
       .text {
         font-size: 18px;
         line-height: 27px;
       }
     }
   }
+
   .learning-container {
     margin: 24px auto;
     padding: 0 16px;
@@ -727,11 +767,13 @@
 
           .sign-form {
             padding: 0 8px;
+
             input,
             div {
               margin: 8px 0;
             }
           }
+
           .hint {
             font-size: 14px;
             line-height: 21px;
@@ -747,11 +789,13 @@
         font-size: 27px;
         line-height: 31px;
       }
+
       p {
         padding: 16px 0;
         font-size: 16px;
         line-height: 24px;
       }
+
       .btn {
         margin: auto;
         font-size: 14px;
@@ -759,6 +803,7 @@
       }
     }
   }
+
   .learning-container-bg {
     margin: 0;
     padding: 12px 16px;
@@ -771,11 +816,13 @@
         font-size: 32px;
         line-height: 36px;
       }
+
       p {
         padding: 24px 0 0 0;
         font-size: 16px;
         line-height: 24px;
       }
+
       .btn {
         margin: 0;
         font-size: 14px;
@@ -783,6 +830,7 @@
       }
     }
   }
+
   .pramotional-container {
     padding: 24px 16px 12px 16px;
 
@@ -891,9 +939,7 @@
 }
 
 /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-@media (max-width: 481px) {
-}
+@media (max-width: 481px) {}
 
 /* smartphones, iPhone, portrait 480x320 phones */
-@media (max-width: 320px) {
-}
+@media (max-width: 320px) {}

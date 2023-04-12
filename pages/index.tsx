@@ -17,11 +17,9 @@ export default function Home() {
       </Head>
       <CookiesComponent />
       <HeaderComponent />
-
       <CarouselComponent />
       <CategoryComponent />
       <LearningSectionComponent />
-
       <FooterComponent />
     </>
   );

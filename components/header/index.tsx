@@ -19,7 +19,7 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="header">
+      <div className="container flex mx-auto header">
         <img
           className="mobile-nav"
           src="images/mobile_nav.png"
