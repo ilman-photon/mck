@@ -57,6 +57,7 @@ export default function CarouselComponent() {
         >
           {carousalData.map((ele) => {
             return (
+              <div className="container mx-auto">
               <div
                 key={ele.id}
                 className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -74,6 +75,7 @@ export default function CarouselComponent() {
                   </p>
                   <div className="btn w-[124px] h-[44px]">Learn More</div>
                 </div>
+              </div>
               </div>
             );
           })}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 
 function NavBar({ isVisible }: Props) {
   const [subMenuVisible, setSubMenuVisible] = useState(false);
@@ -10,6 +11,7 @@ function NavBar({ isVisible }: Props) {
 
   return (
     <>
+    <div className="container flex mx-auto">
       <div className={`navBar ${isVisible ? "show" : "hide"}`}>
         <Link className="link" href="/">
           Home
@@ -37,6 +39,7 @@ function NavBar({ isVisible }: Props) {
       <div
         className={`submenu-container" ${subMenuVisible ? "show" : "hide"}`}
       ></div>
+      </div>
     </>
   );
 }
