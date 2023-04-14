@@ -85,9 +85,9 @@ export default function LearningSectionComponent() {
         </div>
       </div>
 
-      <div className="pramotional-container">
-        <h5>Products worthy of you and yours</h5>
-        <p>
+      <div className="w-full container pb-20 text-center mx-auto">
+        <h5 className=" mx-auto w-full lg:w-1/2 lg:px-24 lg:pt-10 m-10 text-27 lg:text-54 text-gtl-med blue-txt">Products worthy of you and yours</h5>
+        <p className=" mx-auto w-full lg:w-1/2 px-3 text-lg text-sofia-reg grey-txt">
           When it comes to caring for those you love, you need products that you
           can trust to help heal and thrive. At Foster & Thrive, consistent
           quality and efficiency is our top priority.
@@ -96,100 +96,101 @@ export default function LearningSectionComponent() {
       <div className="container mx-auto">
         <div className="pramotion-product-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="product-container p-1">
-              <div className="logo-img">
+            <div className="grey-bg m-3 p-9">
+              <div className="logo-img mb-3">
                 <img
                   className="h-auto max-w-full"
                   src="images/F&T_logo_acute.png"
                 />
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div className="left-col">
+                <div className="pr-3 my-auto">
                   <img
-                    className="h-auto max-w-full"
+                    className="h-auto w-auto"
                     src="images/allergy_relief.png"
                   />
                 </div>
-                <div className="right-col">
+                <div className="text-justify">
                   <p>
                     Allergy relief that starts working fast on the first day you
                     take it. Each antihistamine tablet contains 10 mg Cetirizine
                     HCl to relieve your worst allergy symptoms, indoors and out,
                     for a full 24 hours.
                   </p>
-                  <div className="btn">Where to buy</div>
+                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">Where to buy</div>
                 </div>
               </div>
             </div>
 
-            <div className="product-container p-2">
-              <div className="logo-img">
+            <div className="yellow-bg m-3 p-9">
+              <div className="logo-img mb-3">
                 <img
                   className="h-auto max-w-full"
                   src="images/F&T_logo_preventative.png"
                 />
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div className="left-col">
+                <div className="pr-3 my-auto">
                   <img
-                    className="h-auto max-w-full"
+                    className="h-auto w-auto"
                     src="images/vitamin_D3.png"
                   />
                 </div>
-                <div className="right-col">
+                <div className="text-justify">
                   <p>
-                    Get an extra strength dose for bone, teeth, muscle, and
+                  Get an extra strength dose for bone, teeth, muscle, and
                     immune health support. Foster & Thrieve Extra Strength
                     Vitamin D3 is formulated with 5000 IU (125 mcg) for those
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="btn">Where to buy</div>
+                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">Where to buy</div>
                 </div>
               </div>
             </div>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="product-container p-3">
-              <div className="logo-img">
+          <div className="grey-light-bg m-3 p-9">
+              <div className="logo-img mb-3">
                 <img
                   className="h-auto max-w-full"
                   src="images/F&T_logo_every_day.png"
                 />
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div className="left-col">
+                <div className="pr-3 my-auto">
                   <img
-                    className="h-auto max-w-full"
+                    className="h-auto w-auto"
                     src="images/adhesive_bandages.png"
                   />
                 </div>
-                <div className="right-col">
+                <div className="text-justify">
                   <p>
                     For every ouch, oops, and uh-oh, there are Foster & Thrive
                     Adhesive Bandages. Find the right adhesive bandage for your
                     specific needs.
                   </p>
-                  <div className="btn">Where to buy</div>
+                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">Where to buy</div>
                 </div>
               </div>
             </div>
-            <div className="product-container p-4">
-              <div className="logo-img">
+
+
+            <div className="grey-thick-bg  m-3 p-9">
+              <div className="logo-img mb-3">
                 <img
                   className="h-auto max-w-full"
                   src="images/F&T_logo_diagnostic.png"
                 />
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div className="left-col">
+                <div className="pr-3 my-auto">
                   <img
-                    className="h-auto max-w-full"
+                    className="h-auto w-auto"
                     src="images/blood_pressure_monitor.png"
                   />
                 </div>
-                <div className="right-col">
+                <div className="text-justify">
                   <p>
                     Get an extra strength dose for bone, teeth, muscle, and
                     immune health support. Foster & Thrieve Extra Strength
@@ -197,7 +198,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="btn">Where to buy</div>
+                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">Where to buy</div>
                 </div>
               </div>
             </div>
