@@ -920,7 +920,6 @@
 @media (max-width: 320px) {}
 
 
-
 .text-sofia-reg {
   font-family: "sofia-pro-regular";
 }
@@ -963,4 +962,19 @@
 
 .grey-txt {
   color: #3a3e41;
+}
+
+.grey-bg {
+  background-color: #3a3e41;
+}
+
+.header-bg-white{
+  background-color: #FFFAF6;
+}
+
+.sticky{
+  position: sticky;
+  top:0;
+  z-index: 9;
+  border: 1px solid red;
 }
