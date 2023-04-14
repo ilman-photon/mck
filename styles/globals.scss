@@ -86,31 +86,6 @@
 .cookies-text {
   font-family: "sofia-pro-regular";
 }
-
-.text-sofia-reg {
-  font-family: "sofia-pro-regular";
-}
-
-.text-gtl-med {
-  font-family: "GTAlpina-Medium";
-}
-
-.text-27 {
-  font-size: 27px;
-}
-
-.text-54 {
-  font-size: 54px;
-}
-
-.blue-bg {
-  background-color: #001a71;
-}
-
-.blue-txt {
-  color: #001a71;
-}
-
 .cross-btn,
 .cookies-btn {
   margin: 0 5px;
@@ -943,3 +918,49 @@
 
 /* smartphones, iPhone, portrait 480x320 phones */
 @media (max-width: 320px) {}
+
+
+
+.text-sofia-reg {
+  font-family: "sofia-pro-regular";
+}
+
+.text-gtl-med {
+  font-family: "GTAlpina-Medium";
+}
+
+.text-27 {
+  font-size: 27px;
+}
+
+.text-54 {
+  font-size: 54px;
+}
+
+.blue-bg {
+  background-color: #001a71;
+}
+
+.yellow-bg {
+  background-color: #FFEABC;
+}
+
+.grey-bg {
+  background-color: #d9f3fd;
+}
+
+.grey-light-bg {
+  background-color: #EAF1F8;
+}
+
+.grey-thick-bg {
+  background-color: #E0EAE8;
+}
+
+.blue-txt {
+  color: #001a71;
+}
+
+.grey-txt {
+  color: #3a3e41;
+}
