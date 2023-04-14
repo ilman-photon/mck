@@ -11,7 +11,7 @@ function NavBar({ isVisible }: Props) {
 
   return (
     <>
-      <div className="container flex w-8/12 ml-auto">
+      <div className="container flex w-9/12 ml-auto">
         <div className="mx-auto flex">
           <Link className="text-lg text-sofia-reg text-center font-semibold flex  my-auto" href="/products">
             Products

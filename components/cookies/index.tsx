@@ -1,6 +1,6 @@
 function CookiesComponent() {
   return (
-    <div className="container flex text-sofia-reg text-sm mx-auto grey-bg text-white p-1">
+    <div className="container flex text-sofia-reg text-sm mx-auto grey-bg text-white">
       <div className="flex-none lg:flex w-11/12 lg:w-fit mx-auto">
         <p className="p-1 pl-0 text-center lg:text-left lg:w-fit">
           We use cookies to enhance your browsing experience, serve personalized
