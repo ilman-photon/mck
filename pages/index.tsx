@@ -5,8 +5,21 @@ import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
 import LearningSectionComponent from "@/components/learning_section";
 import CookiesComponent from "@/components/cookies";
+import useAxios from "@/hooks/useApi";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { response, loading, error } = useAxios({
+    method: "GET",
+    url: "/api/episerver/v3.0/content/6",
+    headers: {
+      "Accept-Language": "en",
+    },
+  });
+
+  useEffect(() => {
+    console.log(response, loading, error);
+  });
   return (
     <>
       <Head>

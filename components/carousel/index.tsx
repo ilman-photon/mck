@@ -57,25 +57,24 @@ export default function CarouselComponent() {
         >
           {carousalData.map((ele) => {
             return (
-              <div className="container mx-auto">
-              <div
-                key={ele.id}
-                className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                data-te-carousel-active
-                data-te-carousel-item
-              >
-                <img src={ele.imageUrl} className="block w-full" alt="..." />
-                <div className="hero-banner">
-                  <h2>
-                    Foster & Thrive <br /> With you for life.
-                  </h2>
-                  <p>
-                    You’re in control of your health journey. <br /> We are here
-                    to help.
-                  </p>
-                  <div className="btn w-[124px] h-[44px]">Learn More</div>
+              <div className="container mx-auto" key={ele.id}>
+                <div
+                  className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                  data-te-carousel-active
+                  data-te-carousel-item
+                >
+                  <img src={ele.imageUrl} className="block w-full" alt="..." />
+                  <div className="hero-banner">
+                    <h2>
+                      Foster & Thrive <br /> With you for life.
+                    </h2>
+                    <p>
+                      You’re in control of your health journey. <br /> We are
+                      here to help.
+                    </p>
+                    <div className="btn w-[124px] h-[44px]">Learn More</div>
+                  </div>
                 </div>
-              </div>
               </div>
             );
           })}
