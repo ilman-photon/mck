@@ -29,7 +29,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="desktop-search">
+      <div className="desktop-search w-2/12">
         <input
           className="input-box search"
           type="text"

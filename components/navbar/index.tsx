@@ -11,8 +11,34 @@ function NavBar({ isVisible }: Props) {
 
   return (
     <>
-    <div className="container flex mx-auto">
+      <div className="container flex w-8/12 ml-auto">
+        <div className="mx-auto flex">
+          <Link className="text-lg text-sofia-reg text-center font-semibold flex  my-auto" href="/products">
+            Products
+            <img className="w-2 h-1 relative top-1 ml-1 my-auto mr-9" src="images/menu_down.png" />
+          </Link>
+          <Link className="text-lg text-sofia-reg text-center font-semibold flex  my-auto" href="/products">
+            Health Needs
+            <img className="w-2 h-1 relative top-1 ml-1 my-auto mr-9" src="images/menu_down.png" />
+          </Link>
+          <Link className="text-lg text-sofia-reg text-center font-semibold my-auto mr-9" href="/why_f&T">
+            Why F&T
+          </Link>
+          <Link className="text-lg text-sofia-reg text-center font-semibold my-auto mr-9" href="/wheretobuy">
+            Where to Buy
+          </Link>
+          <Link className="text-lg text-sofia-reg text-center font-semibold my-auto mr-9" href="/blog">
+            Blog
+          </Link>
+          <Link className="text-lg text-sofia-reg text-center font-semibold my-auto mr-9" href="/healthcareprofessionals">
+            Health Care Professionals
+          </Link>
+        </div>
+      </div>
+
+      {/* <div className="container flex mx-auto">
       <div className={`navBar ${isVisible ? "show" : "hide"}`}>
+        <div>
         <Link className="link" href="/">
           Home
         </Link>
@@ -35,11 +61,11 @@ function NavBar({ isVisible }: Props) {
         <Link className="link" href="/healthcareprofessionals">
           Health Care Professionals
         </Link>
-      </div>
+      </div></div>
       <div
         className={`submenu-container" ${subMenuVisible ? "show" : "hide"}`}
       ></div>
-      </div>
+      </div> */}
     </>
   );
 }
