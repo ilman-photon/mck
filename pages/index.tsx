@@ -9,17 +9,17 @@ import useAxios from "@/hooks/useApi";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { response, loading, error } = useAxios({
-    method: "GET",
-    url: "/api/episerver/v3.0/content/6",
-    headers: {
-      "Accept-Language": "en",
-    },
-  });
+  // const { response, loading, error } = useAxios({
+  //   method: "GET",
+  //   url: "/api/episerver/v3.0/content/6",
+  //   headers: {
+  //     "Accept-Language": "en",
+  //   },
+  // });
 
-  useEffect(() => {
-    console.log(response, loading, error);
-  });
+  // useEffect(() => {
+  //   console.log(response, loading, error);
+  // });
   return (
     <>
       <Head>
