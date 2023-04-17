@@ -96,7 +96,7 @@ export default function LearningSectionComponent() {
       <div className="container mx-auto">
         <div className="pramotion-product-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="grey-bg m-3 p-9">
+            <div className="bg-mckthingrey m-3 p-9">
               <div className="logo-img mb-3">
                 <img
                   className="h-auto max-w-full"

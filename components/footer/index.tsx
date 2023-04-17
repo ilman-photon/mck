@@ -2,24 +2,22 @@ import SignUpComponent from "../signup";
 
 export default function FooterComponent() {
   return (
-    <footer className="footer-bg f-heading">
-      <div className="container mx-auto f-p">
+    <footer className="bg-mcklightyellow">
+      <div className="container mx-auto mt-0 px-9 py-0 lg:mt-9 lg:py-16">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
-          <div className="footer-row">
-            <h5 className="mb-2.5">Company</h5>
-
-            <ul className="mb-0 list-none">
-              <li>
-                <a className="f-title" href="#!">
+          <div className=" my-6 lg:my-0 text-gtl-med">
+            <ul className="mb-0 list-none lg:py-0 px-0">
+              <li className="my-2 lg:my-0">
+                <a className="text-sofia-reg text-lg" href="#!">
                   Contact Us
                 </a>
               </li>
-              <li>
-                <a className="f-title" href="#!">
+              <li className="my-2">
+                <a className="text-sofia-reg text-lg" href="#!">
                   F&Q
                 </a>
               </li>
-              <li>
+              <li className="my-2">
                 <a
                   href="#!"
                   type="button"
@@ -72,41 +70,39 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div className="footer-row f-border">
-            <h5 className="mb-2.5">Legal</h5>
-
+          <div className="f-border py-6 lg:py-0 pl-0">
             <ul className="mb-0 list-none">
-              <li>
-                <a className="f-title" href="#!">
+              <li className="my-2 lg:my-0">
+                <a className="text-sofia-reg text-lg" href="#!">
                   Privacy Notice
                 </a>
               </li>
-              <li>
-                <a className="f-title" href="#!">
+              <li className="my-2">
+                <a className="text-sofia-reg text-lg" href="#!">
                   Terms of Use
                 </a>
               </li>
-              <li>
-                <a className="f-title" href="#!">
+              <li className="my-2">
+                <a className="text-sofia-reg text-lg" href="#!">
                   Cookie Settings
                 </a>
               </li>
-              <li>
-                <a className="f-title" href="#!">
+              <li className="my-2">
+                <a className="text-sofia-reg text-lg" href="#!">
                   Do Not Sell My Information
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="footer-row">
-            <div className="footer-form">
-              <h5>Email Signup & Rewards</h5>
-              <div className="text-color">
+          <div className="px-0 py-0 mt-6">
+            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border-2">
+              <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">Email Signup & Rewards</h5>
+              <div className="px-0 text-lg mcknormalgrey text-sofia-reg mcknormalgrey">
                 Want to receive tips, personalized content and exclusive offers
                 from Foster & Thrive?
               </div>
-              <div className="text-color">Sign up today!</div>
+              <div className="mcknormalgrey py-6 px-0 text-lg text-sofia-reg mcknormalgrey">Sign up today!</div>
               <SignUpComponent />
             </div>
           </div>
@@ -115,3 +111,4 @@ export default function FooterComponent() {
     </footer>
   );
 }
+

@@ -20,7 +20,7 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="container grid sticky mx-auto header-bg-white hover:bg-violet-700 blue-txt hover:text-white">
+      <div className="container mx-auto header-bg-white hover:bg-violet-700 blue-txt hover:text-white">
         <div className="w-full my-10">
           <img
             className="mobile-nav"
