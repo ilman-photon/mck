@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-axios.defaults.baseURL = "https://mcco02mstrub73kinte.dxcloud.episerver.net";
+// axios.defaults.baseURL = "https://mcco02mstrub73kinte.dxcloud.episerver.net";
 
 const useAxios = (axiosParams: AxiosRequestConfig) => {
   const [response, setResponse] = useState<AxiosResponse>();
