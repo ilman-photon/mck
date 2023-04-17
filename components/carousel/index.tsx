@@ -64,15 +64,15 @@ export default function CarouselComponent() {
                   data-te-carousel-item
                 >
                   <img src={ele.imageUrl} className="block w-full" alt="..." />
-                  <div className="hero-banner">
-                    <h2>
+                  <div className="hero-banner p-3 text-white rounded-r-2xl rounded-b-2xl rounded-l-none absolute left-0 bottom-8"> 
+                    <h2 className="m-3">
                       Foster & Thrive <br /> With you for life.
                     </h2>
-                    <p>
+                    <p className="m-3">
                       You’re in control of your health journey. <br /> We are
                       here to help.
                     </p>
-                    <div className="btn w-[124px] h-[44px]">Learn More</div>
+                    <div className="btn w-[124px] h-[44px] m-3">Learn More</div>
                   </div>
                 </div>
               </div>
