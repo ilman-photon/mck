@@ -31,7 +31,7 @@ export default function Search() {
     <>
       <div className="desktop-search w-2/12">
         <input
-          className="input-box search"
+          className="search my-2"
           type="text"
           alt="Search"
           placeholder="Search"
