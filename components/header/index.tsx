@@ -5,27 +5,40 @@ import { useRouter } from "next/router";
 import NavDropComponent from "../navdrop";
 
 function HeaderComponent() {
+  const logogrey = "images/logo.png";
+  const logowhite = "images/logo_white.png";
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
+  const [isSmall, setIsSmall] = useState(logogrey);
   const headerImgRef = useRef(null);
   const [imgWidth, setImgWidth] = useState(null);
   const [divHeight, setDivHeight] = useState(null);
-  const handleScroll = (elTopOffset: any, elHeight: any) => {
+  const [megaMenuShow, seMegaMenuShow] = useState(false)
+  const handleScroll = (elTopOffset: any, elHeight: any) => {    
+
     const style = {
       width: '120px',
       position: 'absolute',
-      bottom: '10px'
+      'margin-top': '10px',
+      'z-index': '9',
+      'fill': '#fff'
     };
     const style1 = {
-      margin:0
+      margin: 0,
+      background: '#001A71',
+      color: '#fff',
+      position: 'absolute',
+      top: '-28px'
     };
 
     if (window.pageYOffset > elTopOffset + elHeight) {
       setImgWidth(style);
       setDivHeight(style1);
+      setIsSmall(logowhite);
     } else {
       setImgWidth(null);
       setDivHeight(null);
+      setIsSmall(logogrey);
     }
 
   };
@@ -52,7 +65,7 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="container sticky mx-auto header-bg-white hover:bg-violet-700 blue-txt hover:text-white">
+      <div className="hidden lg:block container sticky mx-auto bg-transparent blue-txt">
         <div className="w-full my-10" style={divHeight} >
           <img
             className="mobile-nav"
@@ -60,17 +73,16 @@ function HeaderComponent() {
             onClick={handleClick}
           />
           <div ref={headerImgRef} className="brand-logo pl-5" onClick={handleOnCLickLogo}>
-            <img src="images/logo.png" alt="logo" style={imgWidth} />
+            <img src={isSmall} alt="logo" style={imgWidth} />
           </div>
         </div>
-        <div className="w-full flex">
+        <div className="w-full flex  border-b-2 border-mcknormalgrey" style={divHeight}>
           <NavBar isVisible={isVisible} />
           <Search />
         </div>
-        {/* <NavDropComponent/> */}
       </div>
-
     </>
+
   );
 }
 

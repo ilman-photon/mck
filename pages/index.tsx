@@ -29,7 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CookiesComponent />
-      <HeaderComponent />
+      {/* <HeaderComponent /> */}
       <CarouselComponent />
       <CategoryComponent />
       <LearningSectionComponent />

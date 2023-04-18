@@ -3,7 +3,7 @@ import SignUpComponent from "../signup";
 export default function FooterComponent() {
   return (
     <footer className="bg-mcklightyellow">
-      <div className="container mx-auto mt-0 px-9 py-0 lg:mt-9 lg:py-16">
+      <div className="container mx-auto mt-0 px-9 py-0 lg:mt-9 lg:py-3">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
           <div className=" my-6 lg:my-0 text-gtl-med">
             <ul className="mb-0 list-none lg:py-0 px-0">
@@ -14,7 +14,7 @@ export default function FooterComponent() {
               </li>
               <li className="my-2">
                 <a className="text-sofia-reg text-lg" href="#!">
-                  F&Q
+                  FAQ
                 </a>
               </li>
               <li className="my-2">

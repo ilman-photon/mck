@@ -86,6 +86,7 @@
 .cookies-text {
   font-family: "sofia-pro-regular";
 }
+
 .cross-btn,
 .cookies-btn {
   margin: 0 5px;
@@ -197,11 +198,13 @@
 .hero-banner {
   padding: 12px;
   color: #fff;
-  background-color: rgba(39, 44, 47, 0.8);
+  background-color: rgb(39 44 47 / 55%);
   border-radius: 16px;
   position: absolute;
-  left: 72px;
+  left: 0;
   bottom: 30px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 
   h2,
   p,
@@ -968,13 +971,15 @@
   background-color: #3a3e41;
 }
 
-.header-bg-white{
+.header-bg-white {
   background-color: #FFFAF6;
 }
 
-.sticky{
-  position: sticky;
-  top:0;
+.sticky {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  right: 0;
   z-index: 9;
-  border: 1px solid red;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 47.03%, rgba(255, 255, 255, 0) 100%);
 }
