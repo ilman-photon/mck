@@ -29,9 +29,10 @@ export default function LearningSectionComponent() {
                 <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
                   {ele?.name}
                 </h2>
-                <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
-                  {ele?.description?.value}
-                </p>
+                <p
+                  className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left"
+                  dangerouslySetInnerHTML={{ __html: ele?.description?.value }}
+                ></p>
                 <div className="btn w-[124px] h-[44px] mx-auto lg:mx-0">
                   {ele?.buttonText?.value}
                 </div>
