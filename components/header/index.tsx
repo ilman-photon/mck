@@ -7,30 +7,29 @@ import NavDropComponent from "../navdrop";
 function HeaderComponent() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
-  const headerImgRef = useRef(null);
-  const [imgWidth, setImgWidth] = useState(null);
-  const [divHeight, setDivHeight] = useState(null);
+  const headerImgRef = useRef<HTMLDivElement>(null);
+  const [imgWidth, setImgWidth] = useState({});
+  const [divHeight, setDivHeight] = useState({});
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
-      width: '120px',
-      position: 'absolute',
-      bottom: '10px'
+      width: "120px",
+      position: "absolute",
+      bottom: "10px",
     };
     const style1 = {
-      margin:0
+      margin: 0,
     };
 
     if (window.pageYOffset > elTopOffset + elHeight) {
       setImgWidth(style);
       setDivHeight(style1);
     } else {
-      setImgWidth(null);
-      setDivHeight(null);
+      setImgWidth({});
+      setDivHeight({});
     }
-
   };
   useEffect(() => {
-    var header = headerImgRef.current.getBoundingClientRect();
+    var header = headerImgRef.current!.getBoundingClientRect();
     const handleScrollEvent = () => {
       handleScroll(header.top, header.height);
     };
@@ -53,13 +52,17 @@ function HeaderComponent() {
   return (
     <>
       <div className="container sticky mx-auto header-bg-white hover:bg-violet-700 blue-txt hover:text-white">
-        <div className="w-full my-10" style={divHeight} >
+        <div className="w-full my-10" style={divHeight}>
           <img
             className="mobile-nav"
             src="images/mobile_nav.png"
             onClick={handleClick}
           />
-          <div ref={headerImgRef} className="brand-logo pl-5" onClick={handleOnCLickLogo}>
+          <div
+            ref={headerImgRef}
+            className="brand-logo pl-5"
+            onClick={handleOnCLickLogo}
+          >
             <img src="images/logo.png" alt="logo" style={imgWidth} />
           </div>
         </div>
@@ -69,7 +72,6 @@ function HeaderComponent() {
         </div>
         {/* <NavDropComponent/> */}
       </div>
-
     </>
   );
 }
