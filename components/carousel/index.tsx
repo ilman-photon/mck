@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { items } from "../../public/items.json";
+import HeaderComponent from "../header";
 
 export default function CarouselComponent() {
   const carousalData = [
@@ -31,6 +32,35 @@ export default function CarouselComponent() {
         data-te-carousel-init
         data-te-carousel-slide
       >
+        <HeaderComponent />
+        <div
+          className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']"
+        // ref={imgRefDiv}
+        >
+          {carousalData.map((ele) => {
+            return (
+              <div className="container mx-auto" key={ele.id}>
+                <div
+                  className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                  data-te-carousel-active
+                  data-te-carousel-item
+                >
+                  <img src={ele.imageUrl} className="block w-full" alt="..." />
+                  <div className="hero-banner p-3 text-white rounded-r-2xl rounded-b-2xl rounded-l-none absolute left-0 bottom-8">
+                    <h2 className="m-3">
+                      Foster & Thrive <br /> With you for life.
+                    </h2>
+                    <p className="m-3">
+                      You're in control of your health journey. <br /> We are
+                      here to help.
+                    </p>
+                    <div className="btn w-[124px] h-[44px] m-3">Learn More</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <div
           className="absolute right-0 bottom-0 left-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
           data-te-carousel-indicators
@@ -51,34 +81,8 @@ export default function CarouselComponent() {
             );
           })}
         </div>
-        <div
-          className="relative w-full overflow-hidden after:clear-both after:block after:content-['']"
-          // ref={imgRefDiv}
-        >
-          {carousalData.map((ele) => {
-            return (
-              <div className="container mx-auto" key={ele.id}>
-                <div
-                  className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                  data-te-carousel-active
-                  data-te-carousel-item
-                >
-                  <img src={ele.imageUrl} className="block w-full" alt="..." />
-                  <div className="hero-banner p-3 text-white rounded-r-2xl rounded-b-2xl rounded-l-none absolute left-0 bottom-8"> 
-                    <h2 className="m-3">
-                      Foster & Thrive <br /> With you for life.
-                    </h2>
-                    <p className="m-3">
-                      You’re in control of your health journey. <br /> We are
-                      here to help.
-                    </p>
-                    <div className="btn w-[124px] h-[44px] m-3">Learn More</div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        
+
       </div>
     </div>
   );
