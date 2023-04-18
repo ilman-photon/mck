@@ -13,11 +13,11 @@ function NavBar({ isVisible }: Props) {
     <>
       <div className="container flex w-9/12 ml-auto">
         <div className="mx-auto flex">
-          <Link className="text-lg text-sofia-reg text-center font-semibold flex  my-auto" href="/products">
+          <Link className="text-lg text-sofia-reg text-center font-semibold flex my-auto" href="/products">
             Products
             <img className="w-2 h-1 relative top-1 ml-1 my-auto mr-9" src="images/menu_down.png" />
           </Link>
-          <Link className="text-lg text-sofia-reg text-center font-semibold flex  my-auto" href="/products">
+          <Link className="text-lg text-sofia-reg text-center font-semibold flex my-auto" href="/products">
             Health Needs
             <img className="w-2 h-1 relative top-1 ml-1 my-auto mr-9" src="images/menu_down.png" />
           </Link>

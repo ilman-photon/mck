@@ -1,11 +1,12 @@
+import SignUpComponent from "../signup";
 
 function NavDropComponent() {
     return (
-        <div>
-            <ul className="w-10/12 flex mx-auto mt-8">
+        <div className="w-full flex mx-auto absolute bg-white z-10">
+            <ul className="w-11/12 flex mx-auto ">
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
-                    <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Acute</a>
+                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Acute</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Allergy Relief</li>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Pain Relief</li>
@@ -20,7 +21,7 @@ function NavDropComponent() {
                 </li>
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
-                    <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Preventative Care</a>
+                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Preventative Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Immunity</li>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Nutrition</li>
@@ -33,7 +34,7 @@ function NavDropComponent() {
                 </li>
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
-                    <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Every Day Care</a>
+                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Every Day Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">First Aid</li>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Daily Living Support</li>
@@ -51,7 +52,7 @@ function NavDropComponent() {
                 </li>
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
-                    <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Diagnostic Care</a>
+                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Diagnostic Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Diagnostic Care</li>
                             <li className="blue-txt text-left text-sofia-reg py-3 pl-2">Thermometers</li>
@@ -62,8 +63,16 @@ function NavDropComponent() {
                     </div>
                 </li>
                 <li className="w-1/5">
-                    <div>
-                        <p>h1</p>
+                    <div className="px-0 py-0 mt-6">
+                        <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border-2">
+                            <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">Email Signup & Rewards</h5>
+                            <div className="px-0 text-lg mcknormalgrey text-sofia-reg mcknormalgrey">
+                                Want to receive tips, personalized content and exclusive offers
+                                from Foster & Thrive?
+                            </div>
+                            <div className="mcknormalgrey py-6 px-0 text-lg text-sofia-reg mcknormalgrey">Sign up today!</div>
+                            <SignUpComponent />
+                        </div>
                     </div>
                 </li>
             </ul>
