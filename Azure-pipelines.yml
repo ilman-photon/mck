@@ -107,7 +107,7 @@ stages:
            ambika.r@photon.com
           instructions: 'Please approve'
           onTimeout:  'resume'
-- stage 3: staging_Deploy
+- stage: staging_Deploy
   displayName: Deploy staging
   dependsOn: StageApproval
   condition: succeeded()
