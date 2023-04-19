@@ -16,7 +16,7 @@ variables:
   webAppName1: 'foster-thrive-dev'
   webAppName2: 'foster-thrive-stg'
 
-  # Environment names
+  # Environment name
   environmentName1: 'dev'
   environmentName2: 'stg'
 
@@ -56,7 +56,22 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- stage 1: Dev_Deploy
+      - stage1: StageApproval
+  jobs:
+  - job: waitForValidation
+    displayName: Wait for external validation
+    pool: server
+    timeoutInMinutes: 180 # job times out in 3 hours
+    steps:
+      - task: ManualValidation@0
+        timeoutInMinutes: 180 # task times out 3 hours
+        inputs:
+          notifyUsers: |
+           ambika.r@photon.com,ankitkumar.sachan@photon.com
+          instructions: 'Please approve'
+          onTimeout:  'resume'
+
+- stage2: Dev_Deploy
   displayName: Deploy stage1 DEV
   dependsOn: Build
   condition: succeeded()
@@ -78,7 +93,7 @@ stages:
               WebAppName: 'foster-thrive-dev'
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
           
-- stage 2: StageApproval
+- stage3: StageApproval
   jobs:
   - job: waitForValidation
     displayName: Wait for external validation
@@ -94,7 +109,7 @@ stages:
           onTimeout:  'resume'
 - stage 3: staging_Deploy
   displayName: Deploy staging
-  dependsOn: Build
+  dependsOn: StageApproval
   condition: succeeded()
   jobs:
   - deployment: Deploy
