@@ -35,7 +35,7 @@ export default function CarouselComponent() {
         <HeaderComponent />
         <div
           className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']"
-        // ref={imgRefDiv}
+          // ref={imgRefDiv}
         >
           {carousalData.map((ele) => {
             return (
@@ -51,8 +51,8 @@ export default function CarouselComponent() {
                       Foster & Thrive <br /> With you for life.
                     </h2>
                     <p className="m-3">
-                      You're in control of your health journey. <br /> We are
-                      here to help.
+                      You&lsquo;re in control of your health journey. <br /> We
+                      are here to help.
                     </p>
                     <div className="btn w-[124px] h-[44px] m-3">Learn More</div>
                   </div>
@@ -81,8 +81,6 @@ export default function CarouselComponent() {
             );
           })}
         </div>
-        
-
       </div>
     </div>
   );
