@@ -56,7 +56,7 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- stage: Dev_Deploy
+- stage 1: Dev_Deploy
   displayName: Deploy stage1 DEV
   dependsOn: Build
   condition: succeeded()
@@ -78,7 +78,7 @@ stages:
               WebAppName: 'foster-thrive-dev'
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
           
-- stage: StageApproval
+- stage 2: StageApproval
   jobs:
   - job: waitForValidation
     displayName: Wait for external validation
@@ -92,7 +92,7 @@ stages:
            ambika.r@photon.com
           instructions: 'Please approve'
           onTimeout:  'resume'
-- stage: staging_Deploy
+- stage 3: staging_Deploy
   displayName: Deploy staging
   dependsOn: Build
   condition: succeeded()
