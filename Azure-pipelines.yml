@@ -16,7 +16,7 @@ variables:
   webAppName1: 'foster-thrive-dev'
   webAppName2: 'foster-thrive-stg'
 
-  # Environment name
+  # Environment names
   environmentName1: 'dev'
   environmentName2: 'stg'
 
