@@ -56,7 +56,7 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-      - stage1: StageApproval
+- stage1: StageApproval
   jobs:
   - job: waitForValidation
     displayName: Wait for external validation
