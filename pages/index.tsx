@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
@@ -17,8 +17,18 @@ export default function Home() {
     },
   });
 
+  const [categoryData, setCategoryData] = useState([]);
+
+  function filteredData(valueType: string) {
+    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
+      return ele.contentType.some((arrEle: string) => {
+        return arrEle == valueType;
+      });
+    });
+  }
+
   useEffect(() => {
-    console.log(response?.data[0]?.blockArea?.expandedValue, error, loading);
+    console.log(response, error, loading);
   });
   return (
     <>
@@ -28,12 +38,20 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <CookiesComponent /> */}
-      <HeaderComponent />
-      {/* <CarouselComponent /> */}
-      {/* <CategoryComponent /> */}
-      <LearningSectionComponent />
-      <FooterComponent />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
+      {!loading && !error && response && (
+        <>
+          <CookiesComponent />
+          <HeaderComponent />
+          <CarouselComponent />
+          <CategoryComponent />
+          <LearningSectionComponent
+            sectionData={filteredData("TwoCloumnBlock")}
+          />
+          <FooterComponent />
+        </>
+      )}
     </>
   );
 }
