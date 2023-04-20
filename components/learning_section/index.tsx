@@ -2,17 +2,17 @@ import SignUpComponent from "../signup";
 import useAxios from "@/hooks/useApi";
 
 export default function LearningSectionComponent() {
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*",
-    headers: {
-      "Accept-Language": "en",
-    },
-  });
+  // const { response, error, loading } = useAxios({
+  //   method: "GET",
+  //   url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*",
+  //   headers: {
+  //     "Accept-Language": "en",
+  //   },
+  // });
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {/* {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {!loading &&
         !error &&
@@ -39,7 +39,7 @@ export default function LearningSectionComponent() {
               </div>
             </div>
           );
-        })}
+        })} */}
 
       <div className="container mx-auto grid md:grid-cols-2 w-full">
         <div className="p-5 lg:p-16 my-auto">
