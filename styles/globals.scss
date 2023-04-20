@@ -198,15 +198,7 @@
 }
 
 .hero-banner {
-  padding: 12px;
-  color: #fff;
   background-color: rgb(39 44 47 / 55%);
-  border-radius: 16px;
-  position: absolute;
-  left: 0;
-  bottom: 30px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 
   h2,
   p,
@@ -929,9 +921,14 @@
   font-family: "sofia-pro-regular";
 }
 
+.text-sofia-bold{
+  font-family: "sofia-pro-bold";
+}
+
 .text-gtl-med {
   font-family: "GTAlpina-Medium";
 }
+
 
 .text-27 {
   font-size: 27px;
@@ -979,19 +976,8 @@
 
 .sticky {
   position: fixed;
-  top: 28px;
   left: 0;
   right: 0;
   z-index: 9;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 47.03%, rgba(255, 255, 255, 0) 100%);
-}
-
-.nav__submenu {
-  display: none;
-}
-
-.nav__menu-item:hover {
-  .nav__submenu {
-    display: block;
-  }
 }

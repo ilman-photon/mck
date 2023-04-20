@@ -18,7 +18,8 @@ module.exports = {
         transparent: 'transparent',
         current: 'currentColor',
         'mckblue': '#001a71',
-        'mcklightblue' : '#e6e8f1',
+        'mckblue-90': '#1A317F',
+        'mcklightblue': '#e6e8f1',
         'mckyellow': '#FFEABC',
         'mcklightyellow': '#FFF6ED',
         'mckgrey': '#d9f3fd',
@@ -27,8 +28,11 @@ module.exports = {
         'mckthingrey': '#CCD1E3',
         'mcknormalgrey': '#3a3e41',
         'mckhwhite': '#FFFAF6',
-        'mckgreen': '#2CCFAD'        
+        'mckgreen': '#2CCFAD'
       },
+      padding: {
+        '72px': '72px',
+      }
     },
   },
   plugins: [],

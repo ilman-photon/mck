@@ -3,7 +3,7 @@ import SignUpComponent from "../signup";
 export default function FooterComponent() {
   return (
     <footer className="bg-mcklightyellow">
-      <div className="container mx-auto mt-0 px-9 py-0 lg:mt-9 lg:py-3">
+      <div className="container mx-auto mt-0 lg:py-6 lg:px-[72px] py-2 px-5">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
           <div className=" my-6 lg:my-0 text-gtl-med">
             <ul className="mb-0 list-none lg:py-0 px-0">
@@ -70,7 +70,7 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div className="f-border py-6 lg:py-0 pl-0">
+          <div className="f-border py-6 lg:py-0 lg:pl-6 pl-0">
             <ul className="mb-0 list-none">
               <li className="my-2 lg:my-0">
                 <a className="text-sofia-reg text-lg" href="#!">
@@ -95,8 +95,8 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div className="px-0 py-0 mt-6">
-            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border-2">
+          <div className="px-0 py-0 pl-0 lg:pl-6">
+            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border mt-5 lg:mt-0">
               <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">Email Signup & Rewards</h5>
               <div className="px-0 text-lg mcknormalgrey text-sofia-reg mcknormalgrey">
                 Want to receive tips, personalized content and exclusive offers
