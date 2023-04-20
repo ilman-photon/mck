@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
-import CategoryComponent from "@/components/category";
+import CategoryComponent from "@/components/category/index1.js";
 import LearningSectionComponent from "@/components/learning_section/index1.js";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
@@ -11,13 +11,11 @@ import useAxios from "@/hooks/useApi";
 export default function Home() {
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*",
+    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*&Select=blockArea",
     headers: {
       "Accept-Language": "en",
     },
   });
-
-  const [categoryData, setCategoryData] = useState([]);
 
   function filteredData(valueType: string) {
     return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
@@ -30,6 +28,7 @@ export default function Home() {
   useEffect(() => {
     console.log(response, error, loading);
   });
+
   return (
     <>
       <Head>
@@ -44,8 +43,8 @@ export default function Home() {
         <>
           {/* <CookiesComponent /> */}
           <HeaderComponent />
-          <CarouselComponent />
-          <CategoryComponent />
+          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+          <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
           <LearningSectionComponent
             sectionData={filteredData("TwoCloumnBlock")}
           />
