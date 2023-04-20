@@ -4,8 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- develop
-- release/*
+ - none
+#- develop
+#- release/*
 
 variables:
 
@@ -16,7 +17,7 @@ variables:
   webAppName1: 'foster-thrive-dev'
   webAppName2: 'foster-thrive-stg'
 
-  # Environment names
+  # Environment name
   environmentName1: 'dev'
   environmentName2: 'stg'
 
@@ -56,9 +57,24 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
+- stage: DevStageApproval
+  jobs:
+  - job: waitForValidation
+    displayName: Wait for external validation
+    pool: server
+    timeoutInMinutes: 180 # job times out in 3 hours
+    steps:
+      - task: ManualValidation@0
+        timeoutInMinutes: 180 # task times out 3 hours
+        inputs:
+          notifyUsers: |
+           ambika.r@photon.com,ankitkumar.sachan@photon.com
+          instructions: 'Please approve'
+          onTimeout:  'resume'
+
 - stage: Dev_Deploy
   displayName: Deploy stage1 DEV
-  dependsOn: Build
+  dependsOn: DevStageApproval
   condition: succeeded()
   jobs:
   - deployment: Deploy
@@ -94,7 +110,7 @@ stages:
           onTimeout:  'resume'
 - stage: staging_Deploy
   displayName: Deploy staging
-  dependsOn: Build
+  dependsOn: StageApproval
   condition: succeeded()
   jobs:
   - deployment: Deploy
