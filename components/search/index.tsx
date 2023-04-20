@@ -29,9 +29,9 @@ export default function Search() {
 
   return (
     <>
-      <div className="w-2/12 h-14">
+      <div className="w-2/12 h-12">
         <input
-          className="search my-6 flex ml-auto"
+          className="search my-4 flex ml-auto"
           type=""
           alt=""
           placeholder=""
