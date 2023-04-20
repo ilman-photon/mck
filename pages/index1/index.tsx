@@ -8,7 +8,7 @@ import CookiesComponent from "@/components/cookies";
 export default function Index1Page() {
   return (
     <>
-      <CookiesComponent />
+      {/* <CookiesComponent /> */}
       <HeaderComponent />
       <CarouselComponent />
       <CategoryComponent />

@@ -144,7 +144,7 @@ function NavDropComponent() {
         </li>
         <li className="w-1/5">
           <div className="px-0 py-0 mt-6">
-            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border-2">
+            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
               <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">
                 Email Signup & Rewards
               </h5>

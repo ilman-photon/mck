@@ -41,7 +41,7 @@ export default function Home() {
       {error && <p>{error.message}</p>}
       {!loading && !error && response && (
         <>
-          <CookiesComponent />
+          {/* <CookiesComponent /> */}
           <HeaderComponent />
           <CarouselComponent sectionData={filteredData("CarouselBlock")} />
           <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
