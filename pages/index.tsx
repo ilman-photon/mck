@@ -43,7 +43,7 @@ export default function Home() {
         <>
           <CookiesComponent />
           <HeaderComponent />
-          <CarouselComponent />
+          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
           <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
           <LearningSectionComponent
             sectionData={filteredData("TwoCloumnBlock")}

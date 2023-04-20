@@ -1,4 +1,3 @@
-import useAxios from "@/hooks/useApi";
 import axios from "axios";
 import { useEffect, useState } from "react";
 export default function CategoryComponent({ sectionData }) {
@@ -24,12 +23,11 @@ export default function CategoryComponent({ sectionData }) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
-        console.log("axios response", responses);
       })
       .catch((error) => {
         setLoading(true);
       });
-  }, [response]);
+  }, []);
 
   return (
     <div className="container w-full mx-auto my-10 lg:my-20 grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -39,7 +37,7 @@ export default function CategoryComponent({ sectionData }) {
         response &&
         response.map((item) => {
           return (
-            <div>
+            <div key={item?.data?.contentLink?.id}>
               <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
                 <img src={item?.data?.prodcutCategoryImage?.value?.url} />
               </div>
