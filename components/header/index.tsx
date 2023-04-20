@@ -16,9 +16,9 @@ function HeaderComponent() {
   const [megaMenuShow, seMegaMenuShow] = useState(false);
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
-      width: "120px",
+      width: "180px",
       position: "absolute",
-      marginTop: "10px",
+      marginTop: "12px",
       zIndex: "9",
       fill: "#fff",
     };
@@ -79,7 +79,7 @@ function HeaderComponent() {
           </div>
         </div>
         <div
-          className="w-full flex  border-b-2 border-mcknormalgrey"
+          className="w-full flex border-b border-mcknormalgrey"
           style={divHeight}
         >
           <NavBar isVisible={isVisible} />

@@ -119,6 +119,8 @@
   background-image: url("/images/search_btn.png");
   background-repeat: no-repeat;
   background-position: 95% center;
+  background-color: transparent;
+  width: 100%;
 }
 
 .input-box {
@@ -982,4 +984,14 @@
   right: 0;
   z-index: 9;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 47.03%, rgba(255, 255, 255, 0) 100%);
+}
+
+.nav__submenu {
+  display: none;
+}
+
+.nav__menu-item:hover {
+  .nav__submenu {
+    display: block;
+  }
 }

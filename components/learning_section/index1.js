@@ -5,7 +5,7 @@ export default function LearningSectionComponent({ sectionData }) {
     console.log("LearningSectionComponent", sectionData);
   });
 
-  return (
+  return (    
     <>
       {sectionData?.map((ele) => {
         return (

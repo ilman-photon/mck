@@ -29,12 +29,12 @@ export default function Search() {
 
   return (
     <>
-      <div className="desktop-search w-2/12">
+      <div className="w-2/12 h-14">
         <input
-          className="search my-2"
-          type="text"
-          alt="Search"
-          placeholder="Search"
+          className="search my-6 flex ml-auto"
+          type=""
+          alt=""
+          placeholder=""
           onChange={(e) => setSearchText(e.target.value)}
           onClick={handleSearch}
           onKeyDown={(e) => handleKeyDown(e)}
