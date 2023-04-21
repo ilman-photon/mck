@@ -23,6 +23,7 @@ export default function CategoryComponent({ sectionData }) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
+        console.log("category", response);
       })
       .catch((error) => {
         setLoading(true);
@@ -38,8 +39,13 @@ export default function CategoryComponent({ sectionData }) {
         response.map((item) => {
           return (
             <div key={item?.data?.contentLink?.id}>
-              <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
-                <img src={item?.data?.prodcutCategoryImage?.value?.url} />
+              <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52 border">
+                <style jsx>{`
+                  .border {
+                    border: 2px solid ${item?.data?.backgroundColor?.value};
+                  }
+                `}</style>
+                <img src={item?.data?.productCategoryImage?.value?.url} />
               </div>
               <div className="text-center text-gtl-med text-xl lg:text-2xl mt-7 lg:mt-10">
                 {item?.data?.name}
@@ -47,7 +53,7 @@ export default function CategoryComponent({ sectionData }) {
               <div
                 className="text-center text-sofia-reg w-3/4 mx-auto text-base lg:text-lg"
                 dangerouslySetInnerHTML={{
-                  __html: item?.data?.prodcutCategoryDescription?.value,
+                  __html: item?.data?.productCategoryDescription?.value,
                 }}
               ></div>
             </div>
