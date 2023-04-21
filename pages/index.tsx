@@ -7,6 +7,8 @@ import CategoryComponent from "@/components/category/index1.js";
 import LearningSectionComponent from "@/components/learning_section/index1.js";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
+import PromotionalTextComponent from "@/components/promotional_text";
+import RecommendationalProductComponent from "@/components/recommendational_product";
 
 export default function Home() {
   const { response, error, loading } = useAxios({
@@ -47,6 +49,12 @@ export default function Home() {
           <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
           <LearningSectionComponent
             sectionData={filteredData("TwoCloumnBlock")}
+          />
+          <PromotionalTextComponent
+            sectionData={filteredData("OneColumnBlock")}
+          />
+          <RecommendationalProductComponent
+            sectionData={filteredData("RecommendedProductBlock")}
           />
           <FooterComponent />
         </>
