@@ -2,7 +2,7 @@ import { NextPage } from "next";
 
 const SignUpComponent: NextPage = () => {
   return (
-    <div className="sign-form">
+    <div className="sign-form grid">
       <input className="input-box mt-3" type="string" placeholder="First Name" />
       <input className="input-box mt-3" type="string" placeholder="Last Name" />
       <input className="input-box mt-3" type="string" placeholder="Email" />

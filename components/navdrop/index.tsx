@@ -4,7 +4,7 @@ function NavDropComponent() {
   return (
     <div className="w-full flex mx-auto absolute bg-white z-10">
       <ul className="w-11/12 flex mx-auto ">
-        <li className="w-1/5 pl-2">
+        <li className="w-1/5">
           <div className="border-l border-black">
             <a
               href=""
@@ -40,7 +40,7 @@ function NavDropComponent() {
             </ul>
           </div>
         </li>
-        <li className="w-1/5 pl-2">
+        <li className="w-1/5">
           <div className="border-l border-black">
             <a
               href=""
@@ -70,7 +70,7 @@ function NavDropComponent() {
             </ul>
           </div>
         </li>
-        <li className="w-1/5 pl-2">
+        <li className="w-1/5">
           <div className="border-l border-black">
             <a
               href=""
@@ -115,7 +115,7 @@ function NavDropComponent() {
             </ul>
           </div>
         </li>
-        <li className="w-1/5 pl-2">
+        <li className="w-1/5">
           <div className="border-l border-black">
             <a
               href=""
@@ -143,7 +143,7 @@ function NavDropComponent() {
           </div>
         </li>
         <li className="w-1/5">
-          <div className="px-0 py-0 mt-6">
+          <div className="px-0 py-0 mb-7 whitespace-normal">
             <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
               <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">
                 Email Signup & Rewards

@@ -51,7 +51,7 @@ export default function LearningSectionComponent() {
             beyond the box, and that wellness and being well go hand in hands.
             So we make our own products with high quality ingredients.
           </p>
-          <div className="btn w-[124px] h-[44px] mx-auto lg:mx-0">
+          <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
             LEARN MORE
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function LearningSectionComponent() {
             You can find our products at many of the major outlets including
             Walmart, CVS, Wallgreens, Amazon, Target and more.
           </p>
-          <div className="btn w-[124px] h-[44px] mx-auto lg:mx-0">
+          <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
             LEARN MORE
           </div>
         </div>
@@ -143,7 +143,7 @@ export default function LearningSectionComponent() {
       </div>
 
       <div className="w-full container pb-20 text-center mx-auto">
-        <h5 className=" mx-auto w-full lg:w-1/2 lg:px-24 lg:pt-10 m-10 text-27 lg:text-54 text-gtl-med blue-txt">
+        <h5 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
           Products worthy of you and yours
         </h5>
         <p className=" mx-auto w-full lg:w-1/2 px-3 text-lg text-sofia-reg grey-txt">
@@ -176,7 +176,7 @@ export default function LearningSectionComponent() {
                     HCl to relieve your worst allergy symptoms, indoors and out,
                     for a full 24 hours.
                   </p>
-                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
                     Where to buy
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
                     Where to buy
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function LearningSectionComponent() {
                     Adhesive Bandages. Find the right adhesive bandage for your
                     specific needs.
                   </p>
-                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
                     Where to buy
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold">
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
                     Where to buy
                   </div>
                 </div>
