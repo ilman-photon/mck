@@ -37,13 +37,13 @@ function AboutDropComponent() {
                 </li>
                 <li className="w-1/4">
                     <div className="px-0 py-0 whitespace-normal mb-5">
-                        <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
+                        <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
                             <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg text-mckblue">Email Signup & Rewards</h5>
                             <div className="px-0 text-lg text-mckblue text-sofia-reg">
                                 Want to receive tips, personalized content and exclusive offers
                                 from Foster & Thrive?
                             </div>
-                            <div className="text-mckblue py-6 px-0 text-lg text-sofia-reg">Sign up today!</div>
+                            <div className="py-3 px-0 text-lg text-sofia-reg text-mcknormalgrey">Sign up today!</div>
                             <SignUpComponent />
                         </div>
                     </div>

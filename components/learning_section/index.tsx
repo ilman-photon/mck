@@ -30,7 +30,7 @@ export default function LearningSectionComponent() {
                 <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
                   {ele?.name}
                 </h2>
-                <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+                <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
                   {ele?.description?.value}
                 </p>
                 <div className="btn w-[124px] h-[44px] mx-auto lg:mx-0">
@@ -46,12 +46,12 @@ export default function LearningSectionComponent() {
           <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
             Why Foster & Thrive
           </h2>
-          <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+          <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
             At Foster & Thrive we believe over the counter products should go
             beyond the box, and that wellness and being well go hand in hands.
             So we make our own products with high quality ingredients.
           </p>
-          <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+          <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
             LEARN MORE
           </div>
         </div>
@@ -67,11 +67,11 @@ export default function LearningSectionComponent() {
           <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
             Where to buy
           </h2>
-          <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+          <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
             You can find our products at many of the major outlets including
             Walmart, CVS, Wallgreens, Amazon, Target and more.
           </p>
-          <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+          <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
             LEARN MORE
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function LearningSectionComponent() {
           <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
             Quality That Matters
           </h2>
-          <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+          <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
             In health as in life. You get out what you put in. At Foster &
             Thrive, we put care in all we do. With products formulated for your
             needs. Fit your budget and made to make you well. Because when you
@@ -105,7 +105,7 @@ export default function LearningSectionComponent() {
             <h4 className="text-4xl blue-txt text-left text-gtl-med ">
               Sign up Today!
             </h4>
-            <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+            <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
               Get the latest updates & promotions.
             </p>
             <SignUpComponent />
@@ -118,7 +118,7 @@ export default function LearningSectionComponent() {
           <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
             Sign up & Save
           </h2>
-          <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+          <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
             Sign up today to receive tips, personal content, and exclusive
             offers from Foster & Thrive.
           </p>
@@ -130,7 +130,7 @@ export default function LearningSectionComponent() {
           <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
             Care that’s uniquely you
           </h2>
-          <p className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left">
+          <p className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left">
             At Foster & Thrive, we know that care can take many forms. We’ve
             considered care from all angles., so that you can make sure you care
             for yourself in the best possible way. Your health is your business,
@@ -142,7 +142,7 @@ export default function LearningSectionComponent() {
         </div>
       </div>
 
-      <div className="w-full container pb-20 text-center mx-auto">
+      {/* <div className="w-full container pb-20 text-center mx-auto">
         <h5 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
           Products worthy of you and yours
         </h5>
@@ -151,7 +151,7 @@ export default function LearningSectionComponent() {
           can trust to help heal and thrive. At Foster & Thrive, consistent
           quality and efficiency is our top priority.
         </p>
-      </div>
+      </div> */}
       <div className="container mx-auto">
         <div className="pramotion-product-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
@@ -162,25 +162,25 @@ export default function LearningSectionComponent() {
                   src="images/F&T_logo_acute.png"
                 />
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-2">
+              <div className="flex grid-cols-3 gap-4 pr-3 my-auto text-justify">
                 <div className="pr-3 my-auto">
                   <img
                     className="h-auto w-auto"
                     src="images/allergy_relief.png"
                   />
                 </div>
-                <div className="text-justify">
+                <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left">
                   <p>
                     Allergy relief that starts working fast on the first day you
                     take it. Each antihistamine tablet contains 10 mg Cetirizine
                     HCl to relieve your worst allergy symptoms, indoors and out,
                     for a full 24 hours.
                   </p>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+                </div>
+              </div>              
+              <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
                     Where to buy
                   </div>
-                </div>
-              </div>
             </div>
 
             <div className="yellow-bg m-3 p-9">
@@ -202,7 +202,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
                     Where to buy
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function LearningSectionComponent() {
                     Adhesive Bandages. Find the right adhesive bandage for your
                     specific needs.
                   </p>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
                     Where to buy
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
                     Where to buy
                   </div>
                 </div>

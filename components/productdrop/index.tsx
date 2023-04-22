@@ -64,7 +64,7 @@ function ProductDropComponent() {
                 </li>
                 <li className="w-1/5">
                     <div className="px-0 py-0 whitespace-normal mb-5">
-                        <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
+                        <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
                             <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg text-mckblue">Email Signup & Rewards</h5>
                             <div className="px-0 text-lg text-mckblue text-sofia-reg">
                                 Want to receive tips, personalized content and exclusive offers

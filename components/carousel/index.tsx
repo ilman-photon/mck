@@ -93,7 +93,7 @@ export default function CarouselComponent({ sectionData }: any) {
                         }}
                       ></p>
                       <div
-                        className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0"
+                        className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
                         }
