@@ -62,7 +62,11 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     }
                   `}</style>
                   <div className="logo-img mb-3">
-                    <img className="h-auto max-w-full" src="" />
+                    <img
+                      className="h-auto max-w-full"
+                      src={ele?.data?.imageTitle?.value?.url}
+                      alt={ele?.data?.title?.value}
+                    />
                   </div>
                   <div className="grid md:grid-cols-2 lg:grid-cols-2">
                     <div className="pr-3 my-auto">
