@@ -3,17 +3,17 @@ import SignUpComponent from "../signup";
 export default function FooterComponent() {
   return (
     <footer className="bg-mcklightyellow">
-      <div className="container mx-auto mt-0 lg:py-6 lg:px-[72px] py-2 px-5">
+      <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
           <div className=" my-6 lg:my-0 text-gtl-med">
             <ul className="mb-0 list-none lg:py-0 px-0">
               <li className="my-2 lg:my-0">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   Contact Us
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   FAQ
                 </a>
               </li>
@@ -21,7 +21,7 @@ export default function FooterComponent() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-2 ml-0 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="mr-3 ml-0 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -37,7 +37,7 @@ export default function FooterComponent() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-2 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="ml-0 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -53,7 +53,7 @@ export default function FooterComponent() {
                 <a
                   href="#!"
                   type="button"
-                  className="m-2 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  className="ml-3 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
@@ -66,6 +66,18 @@ export default function FooterComponent() {
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   </svg>
                 </a>
+                <a
+                  href="#!"
+                  type="button"
+                  className="ml-3 h-6 w-6 icon-bg rounded-full leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                >
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0.75" width="24" height="24" rx="12" fill="#001A71" />
+                    <path d="M19.8406 9.54922C19.8406 9.54922 19.6844 8.44609 19.2031 7.96172C18.5938 7.32422 17.9125 7.32109 17.6 7.28359C15.3625 7.12109 12.0031 7.12109 12.0031 7.12109H11.9969C11.9969 7.12109 8.6375 7.12109 6.4 7.28359C6.0875 7.32109 5.40625 7.32422 4.79688 7.96172C4.31563 8.44609 4.1625 9.54922 4.1625 9.54922C4.1625 9.54922 4 10.8461 4 12.1398V13.3523C4 14.6461 4.15937 15.943 4.15937 15.943C4.15937 15.943 4.31562 17.0461 4.79375 17.5305C5.40313 18.168 6.20313 18.1461 6.55938 18.2148C7.84063 18.3367 12 18.3742 12 18.3742C12 18.3742 15.3625 18.368 17.6 18.2086C17.9125 18.1711 18.5938 18.168 19.2031 17.5305C19.6844 17.0461 19.8406 15.943 19.8406 15.943C19.8406 15.943 20 14.6492 20 13.3523V12.1398C20 10.8461 19.8406 9.54922 19.8406 9.54922ZM10.3469 14.8242V10.3273L14.6687 12.5836L10.3469 14.8242Z" fill="white" />
+                  </svg>
+                </a>
               </li>
             </ul>
           </div>
@@ -73,22 +85,22 @@ export default function FooterComponent() {
           <div className="f-border py-6 lg:py-0 lg:pl-6 pl-0">
             <ul className="mb-0 list-none">
               <li className="my-2 lg:my-0">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   Privacy Notice
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   Terms of Use
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   Cookie Settings
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg" href="#!">
+                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
                   Do Not Sell My Information
                 </a>
               </li>
@@ -96,13 +108,13 @@ export default function FooterComponent() {
           </div>
 
           <div className="px-0 py-0 pl-0 lg:pl-6">
-            <div className="px-3 py-3 lg:py-4 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border mt-5 lg:mt-0">
-              <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg mckblue">Email Signup & Rewards</h5>
-              <div className="px-0 text-lg mcknormalgrey text-sofia-reg mcknormalgrey">
+            <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border mt-5 lg:mt-0">
+              <h5 className="m-0 pb-3 px-0 text-2xl text-gtl-med text-mckblue">Email Signup & Rewards</h5>
+              <div className="px-0 text-lg text-sofia-reg text-mcknormalgrey">
                 Want to receive tips, personalized content and exclusive offers
                 from Foster & Thrive?
               </div>
-              <div className="mcknormalgrey py-6 px-0 text-lg text-sofia-reg mcknormalgrey">Sign up today!</div>
+              <div className="py-3 px-0 text-lg text-sofia-reg text-mcknormalgrey">Sign up today!</div>
               <SignUpComponent />
             </div>
           </div>

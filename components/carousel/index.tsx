@@ -84,7 +84,7 @@ export default function CarouselComponent({ sectionData }: any) {
                       className="block w-full"
                       alt="..."
                     />
-                    <div className="hero-banner p-3 text-white rounded-r-2xl rounded-b-2xl rounded-l-none absolute left-0 bottom-8">
+                    <div className="hero-banner p-3 text-white absolute left-0 bottom-20">
                       <h2 className="m-3">{ele?.data?.title?.value}</h2>
                       <p
                         className="m-3"
@@ -93,7 +93,7 @@ export default function CarouselComponent({ sectionData }: any) {
                         }}
                       ></p>
                       <div
-                        className="btn w-[124px] h-[44px] m-3"
+                        className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
                         }
