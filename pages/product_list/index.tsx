@@ -4,6 +4,7 @@ import HeaderComponent from "@/components/header";
 import CarouselComponent from "@/components/carousel";
 import { useEffect } from "react";
 import axios, { AxiosError } from "axios";
+import RecommendationalProductComponent from "@/components/recommendational_product";
 
 function ProductListPage() {
   const dataJson = {
@@ -5493,15 +5494,16 @@ function ProductListPage() {
       }
     );
 
-    console.log("res", res);
+    // console.log("res", res);
 
     return res;
   }
 
   useEffect(() => {
+    console.log("dataJson", dataJson);
     FetchProducts()
       .then((res) => {
-        console.log("fetch", res);
+        // console.log("fetch", res);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }, []);
@@ -5514,7 +5516,75 @@ function ProductListPage() {
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
-      <div>PLP</div>
+      <div className="container lg:p-18">
+        <div>Active Filter</div>
+        <div>Showing 65 results</div>
+        <div className="flex">
+          <div className="flex-none h-max pr-8 mr-6 border-r-2 border-b-2">
+            <div>Gender</div>
+            <div className="flex items-center my-px">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                className="w-4 h-4"
+              />
+              <label htmlFor="default-checkbox" className="ml-2">
+                View All
+              </label>
+            </div>
+            <div>
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                className="w-4 h-4"
+              />
+              <label htmlFor="default-checkbox" className="ml-2">
+                Male
+              </label>
+            </div>
+            <div>
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                className="w-4 h-4"
+              />
+              <label htmlFor="default-checkbox" className="ml-2">
+                Female
+              </label>
+            </div>
+          </div>
+          <div className="flex-auto">
+            {/* <RecommendationalProductComponent /> */}
+            <div>Recommandation Products</div>
+            <div className="flex gap-0.5 flex-wrap">
+              {dataJson.results.map((item: any) => {
+                console.log("rec", item?.recommendedProduct);
+                return (
+                  <div
+                    className="w-52 h-96 border-2"
+                    key={item?.contentLink?.id}
+                  >
+                    <img src={item?.image?.value?.url} alt="" />
+                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
+                      What ?
+                    </div>
+                    <div className="mckblue">{item?.name}</div>
+                    <div
+                      className="mcknormalgrey"
+                      dangerouslySetInnerHTML={{
+                        __html: item?.ingredients?.value,
+                      }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
       <FooterComponent />
     </>
   );
