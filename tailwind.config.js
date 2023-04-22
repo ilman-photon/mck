@@ -19,6 +19,7 @@ module.exports = {
         current: 'currentColor',
         'mckblue': '#001a71',
         'mckblue-90': '#1A317F',
+        'beige-50': '#FFFAF6',
         'mcklightblue': '#e6e8f1',
         'mckyellow': '#FFEABC',
         'mcklightyellow': '#FFF6ED',
@@ -27,7 +28,6 @@ module.exports = {
         'mckthickgrey': '#E0EAE8',
         'mckthingrey': '#CCD1E3',
         'mcknormalgrey': '#3a3e41',
-        'mckhwhite': '#FFFAF6',
         'mckgreen': '#2CCFAD'
       },
       padding: {

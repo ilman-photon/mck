@@ -76,13 +76,13 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       />
                     </div>
                     <div className="text-justify">
-                      <div
+                      <div className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }}
                       ></div>
                       <div
-                        className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold"
+                        className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
                         }

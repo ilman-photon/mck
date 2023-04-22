@@ -3,6 +3,7 @@ import { useEffect } from "react";
 export default function LearningSectionComponent({ sectionData }) {
   useEffect(() => {
     console.log("LearningSectionComponent", sectionData);
+    console.log("hoi",sectionData[3].contentBlockArea.value[0].contentLink.id)
   });
 
   return (

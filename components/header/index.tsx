@@ -25,7 +25,7 @@ function HeaderComponent() {
     };
     const style1 = {
       margin: 0,
-      background: "#001A71",
+      background: "#001a71",
       color: "#fff",
       position: "absolute",
       top: "0",
