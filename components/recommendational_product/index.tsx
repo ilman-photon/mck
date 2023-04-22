@@ -68,28 +68,27 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       alt={ele?.data?.title?.value}
                     />
                   </div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                    <div className="pr-3 my-auto">
+                  <div className="flex grid-cols-3 gap-4 pr-3 my-auto text-justify">
+                    <div className="mx-auto my-auto h-full w-full pr-4">
                       <img
-                        className="h-auto w-auto"
+                        className="my-auto h-full w-full"
                         src={ele?.data?.image?.value.url}
                       />
                     </div>
-                    <div className="text-justify">
-                      <div className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left"
+                    <div className="text-justify pr-9">
+                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }}
                       ></div>
-                      <div
-                        className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0"
-                        onClick={() =>
-                          handleCTABtn(ele?.data?.buttonUrl?.value)
-                        }
-                      >
-                        {ele?.data?.buttonText?.value}
-                      </div>
                     </div>
+                  </div>
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto mr-9"
+                    onClick={() =>
+                      handleCTABtn(ele?.data?.buttonUrl?.value)
+                    }
+                  >
+                    {ele?.data?.buttonText?.value}
                   </div>
                 </div>
               );

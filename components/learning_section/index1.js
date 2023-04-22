@@ -16,12 +16,12 @@ export default function LearningSectionComponent({ sectionData }) {
               <img src={ele?.image?.value?.url} />
             </div>
             <div className="p-5 lg:p-16 my-auto col-span-1 w-full lg:w-1/2">
-              <h2 className="text-2xl lg:text-5xl text-gtl-med text-center lg:text-left blue-txt">
+              <h2 className="text-2xl lg:text-5xl text-gtl-med lg:text-left blue-txt">
                 {ele?.name}
               </h2>
-              <div className="text-base text-sofia-reg lg:pr-5 py-5 text-center lg:text-left" dangerouslySetInnerHTML={{ __html: ele?.description?.value }}></div>
+              <div className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left" dangerouslySetInnerHTML={{ __html: ele?.description?.value }}></div>
               {ele?.buttonText?.value && (
-                <div className="w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer mx-auto lg:mx-0">
+                <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
                   {ele?.buttonText?.value}
                 </div>
               )}
