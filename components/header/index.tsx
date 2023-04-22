@@ -65,7 +65,7 @@ function HeaderComponent() {
   return (
     <>
       <div className="hidden lg:block container sticky mx-auto bg-transparent blue-txt">
-        <div className="w-full mt-7 mb-12" style={divHeight}>
+        <div className="w-full mb-12" style={divHeight}>
           <img
             className="mobile-nav"
             src="images/mobile_nav.png"
@@ -76,7 +76,7 @@ function HeaderComponent() {
             className="brand-logo pl-5"
             onClick={handleOnCLickLogo}
           >
-            <img src={isSmall} alt="logo" className="h-14" style={imgWidth} />
+            <img src={isSmall} alt="logo" className="h-14 mt-7" style={imgWidth} />
           </div>
         </div>
         <div

@@ -154,7 +154,7 @@ export default function LearningSectionComponent() {
       </div> */}
       <div className="container mx-auto">
         <div className="pramotion-product-container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2">
+          <div className="grid grid-cols-none md:grid-cols-2 lg:grid-cols-2">
             <div className="bg-mckthingrey m-3 p-9">
               <div className="logo-img mb-3">
                 <img
@@ -162,7 +162,7 @@ export default function LearningSectionComponent() {
                   src="images/F&T_logo_acute.png"
                 />
               </div>
-              <div className="flex grid-cols-3 gap-4 pr-3 my-auto text-justify">
+              <div className="grid lg:flex grid-cols-none lg:grid-cols-3 gap-4 pr-3 my-auto text-justify">
                 <div className="pr-3 my-auto">
                   <img
                     className="h-auto w-auto"
@@ -178,7 +178,7 @@ export default function LearningSectionComponent() {
                   </p>
                 </div>
               </div>              
-              <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
+              <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-0 lg:ml-auto">
                     Where to buy
                   </div>
             </div>

@@ -12,16 +12,16 @@ export default function LearningSectionComponent({ sectionData }) {
         return (
           <div className={`${(ele?.assetPosition?.value) === 'Right' ? 'flex-row-reverse' : ''} container mx-auto grid lg:flex w-full`}
             key={ele?.image?.value?.id}>
-            <div className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto p-5 lg:px-20 lg:py-10 col-span-1`}>
-              <img src={ele?.image?.value?.url} />
+            <div className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:py-9 lg:px-9 col-span-1`}>
+              <img className="w-full px-5 lg:px-0" src={ele?.image?.value?.url} />
             </div>
-            <div className="p-5 lg:p-16 my-auto col-span-1 w-full lg:w-1/2">
-              <h2 className="text-2xl lg:text-5xl text-gtl-med lg:text-left blue-txt">
+            <div className="p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
+              <h2 className="pb-6 text-2xl lg:text-54 text-gtl-med text-center lg:text-left blue-txt">
                 {ele?.name}
               </h2>
-              <div className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left" dangerouslySetInnerHTML={{ __html: ele?.description?.value }}></div>
+              <div className="jsx-290076256 text-lg text-sofia-reg text-center lg:text-left pb-6" dangerouslySetInnerHTML={{ __html: ele?.description?.value }}></div>
               {ele?.buttonText?.value && (
-                <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto">
+                <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-0 lg:ml-auto">
                   {ele?.buttonText?.value}
                 </div>
               )}

@@ -31,7 +31,7 @@ export default function Search() {
     <>
       <div className="w-2/12 h-12">
         <input
-          className="search my-4 flex ml-auto"
+          className="search my-4 flex ml-auto hover:border-none focus:border-none active:border-none border-none"
           type=""
           alt=""
           placeholder=""
