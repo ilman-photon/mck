@@ -32,7 +32,14 @@ module.exports = {
       },
       padding: {
         '72px': '72px',
-      }
+      },
+      fontSize: {
+        '27': '1.688rem',
+        '54': '3.375rem',
+      },
+      borderWidth: {
+        '3': '3px',
+      },
     },
   },
   plugins: [],

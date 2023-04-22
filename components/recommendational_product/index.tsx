@@ -68,7 +68,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       alt={ele?.data?.title?.value}
                     />
                   </div>
-                  <div className="flex grid-cols-3 gap-4 pr-3 my-auto text-justify">
+                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 pr-3 my-auto text-justify">
                     <div className="mx-auto my-auto h-full w-full pr-4">
                       <img
                         className="my-auto h-full w-full"
@@ -83,7 +83,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       ></div>
                     </div>
                   </div>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto mr-9"
+                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
                     onClick={() =>
                       handleCTABtn(ele?.data?.buttonUrl?.value)
                     }
