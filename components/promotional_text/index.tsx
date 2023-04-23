@@ -4,7 +4,7 @@ function PromotionalTextComponent({ sectionData }: any) {
       {sectionData?.map((item: any) => {
         return (
           <div
-            className="w-full container pb-20 text-center mx-auto"
+            className="w-full container pb-9 text-center mx-auto"
             key={item?.contentLink?.id}
           >
             <h5 className="text-2xl lg:text-5xl text-gtl-med blue-txt mt-6">

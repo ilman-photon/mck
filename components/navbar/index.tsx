@@ -9,7 +9,7 @@ function NavBar({ isVisible }: Props) {
 
   return (
     <>
-      <div className="container flex w-8/12  ml-auto">
+      <div className="hidden md:flex container lg:flex w-8/12  ml-auto">
         <div className=" mx-auto flex ">
           <div className="group ml-9 mr-9 whitespace-nowrap">
             <Link className="text-lg text-sofia-reg text-center font-medium flex my-3 border-b-3 border-transparent hover:border-solid hover:border-mcklightyellow" href="/products">

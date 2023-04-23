@@ -96,16 +96,16 @@ export default function CarouselComponent({ sectionData }: any) {
                       className="block w-full"
                       alt="..."
                     />
-                    <div className="hero-banner p-3 text-white absolute left-0 bottom-20">
-                      <h2 className="m-3">{ele?.data?.title?.value}</h2>
+                    <div className="pl-18 hero-banner text-white absolute left-0 bottom-20 hidden md:block">
+                      <h2 className="my-3">{ele?.data?.title?.value}</h2>
                       <p
-                        className="m-3"
+                        className="my-3"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }}
                       ></p>
                       <div
-                        className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-auto"
+                        className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
                         }
