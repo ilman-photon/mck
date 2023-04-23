@@ -29,8 +29,9 @@ export default function Search() {
 
   return (
     <>
-      <div className="w-2/12 h-12 lg:block hidden">
-        <input
+      <div className="w-2/12 h-12 lg:block hidden">        
+      <img className="flex ml-auto  px-5 py-5" src="images/search_btn.png" />
+        {/* <input
           className="search my-4 flex ml-auto hover:border-none focus:border-none active:border-none border-none"
           type=""
           alt=""
@@ -39,7 +40,7 @@ export default function Search() {
           onClick={handleSearch}
           onKeyDown={(e) => handleKeyDown(e)}
           value={searchText}
-        />
+        /> */}
       </div>
       <div className="mobile-search grid ml-auto">
         <img className="px-5 py-5" src="images/search_btn.png" />
