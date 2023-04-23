@@ -11,6 +11,7 @@ function ProductListPage() {
   const [productListData, SetProductListData] = useState<any>();
   const [recommendedProductListData, SetRecommendedProductListData] =
     useState<any>();
+  const [productFilter, setProductFilter] = useState<any>();
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -26,6 +27,17 @@ function ProductListPage() {
         return arrEle == valueType;
       });
     });
+  }
+
+  function FetchProductFilter() {
+    return axios.get(
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/?expand=*`,
+      {
+        headers: {
+          "Accept-Language": "en",
+        },
+      }
+    );
   }
 
   function fetchRecommandedProduct() {
@@ -53,6 +65,12 @@ function ProductListPage() {
   }
 
   useEffect(() => {
+    FetchProductFilter()
+      .then((response) => {
+        setProductFilter(response);
+      })
+      .catch((e) => console.log(e));
+
     fetchRecommandedProduct()
       .then((response) => {
         SetRecommendedProductListData(response);
@@ -84,40 +102,181 @@ function ProductListPage() {
         <div>Active Filter</div>
         <div>Showing 65 results</div>
         <div className="flex">
-          <div className="flex-none h-max pr-8 mr-6 border-r-2 border-b-2">
-            <div>Gender</div>
-            <div className="flex items-center my-px">
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                className="w-4 h-4"
-              />
-              <label htmlFor="default-checkbox" className="ml-2">
-                View All
-              </label>
+          <div className="flex-none h-max">
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].ageCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
             </div>
-            <div>
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                className="w-4 h-4"
-              />
-              <label htmlFor="default-checkbox" className="ml-2">
-                Male
-              </label>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].availabilityCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
             </div>
-            <div>
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                className="w-4 h-4"
-              />
-              <label htmlFor="default-checkbox" className="ml-2">
-                Female
-              </label>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].formCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].genderCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].healthNeedsCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeAcute?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypePreventiveCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
             </div>
           </div>
           <div className="flex-auto">
