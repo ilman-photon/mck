@@ -7,13 +7,12 @@ export default function CarouselComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [current, setCurrent] = useState(0);
 
-  const imgRefDiv = useRef();
   const dataFetchedRef = useRef(false);
 
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      console.log("idRequests");
       return axios.get(
         `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/${item?.contentLink?.id}`,
         {
@@ -34,15 +33,29 @@ export default function CarouselComponent({ sectionData }: any) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
+        console.log("carosal", responses);
       })
       .catch((error) => {
         setLoading(true);
       });
   }, []);
 
-  function handleCarouselImage(id: any) {
-    // imgRefDiv.current[id-1].style
-    console.log("id", id, imgRefDiv.current);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      infiniteScroll();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [current]);
+
+  function handleCarouselImage(index: any) {
+    setCurrent(index);
+  }
+
+  function infiniteScroll() {
+    if (current >= response?.length - 1) {
+      return setCurrent(0);
+    }
+    return setCurrent(current + 1);
   }
 
   const handleCTABtn = (url: string) => {
@@ -60,18 +73,18 @@ export default function CarouselComponent({ sectionData }: any) {
         data-te-carousel-slide
       >
         <HeaderComponent />
-        <div
-          className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']"
-          // ref={imgRefDiv}
-        >
+        <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           {loading && <p>Loading...</p>}
 
           {!loading &&
             response &&
             response.map((ele: any, index: number) => {
+              console.log("index", index, "current", current);
               return (
                 <div
-                  className="container mx-auto"
+                  className={`container mx-auto ${
+                    index == current ? "block" : "hidden"
+                  }`}
                   key={ele?.data?.contentLink?.id + "_" + index}
                 >
                   <div
@@ -115,11 +128,9 @@ export default function CarouselComponent({ sectionData }: any) {
             response.map((ele: any, index: number) => {
               return (
                 <button
-                  key={ele?.data?.contentLink?.id + index}
+                  key={ele?.data?.contentLink?.id + "_" + index}
                   type="button"
-                  onClick={() =>
-                    handleCarouselImage(ele?.data?.contentLink?.id)
-                  }
+                  onClick={() => handleCarouselImage(index)}
                   data-te-target="#carouselExampleCaptions"
                   data-te-slide-to="0"
                   data-te-carousel-active
