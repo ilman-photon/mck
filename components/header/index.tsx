@@ -64,23 +64,21 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="hidden lg:block container sticky mx-auto bg-transparent blue-txt">
-        <div className="w-full mb-12" style={divHeight}>
-          <img
-            className="mobile-nav"
-            src="images/mobile_nav.png"
-            onClick={handleClick}
-          />
+      <div className="flex lg:grid container sticky mx-auto bg-transparent blue-txt">
+        <div className="w-full mb-12 flex" style={divHeight}>
+          <div className="mobile-nav px-5 py-5">
+          <img className="w-full" src="images/mobile_nav.png" onClick={handleClick}/>
+          </div>          
           <div
             ref={headerImgRef}
-            className="brand-logo pl-5"
+            className="brand-logo pl-5 ml-auto lg:ml-0"
             onClick={handleOnCLickLogo}
           >
-            <img src={isSmall} alt="logo" className="h-14 mt-7" style={imgWidth} />
+            <img src={isSmall} alt="logo" className="lg:h-14 h-auto mt-1 lg:mt-7" style={imgWidth} />
           </div>
         </div>
         <div
-          className="w-full flex border-b border-mcknormalgrey"
+          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18"
           style={divHeight}
         >
           <NavBar isVisible={isVisible} />

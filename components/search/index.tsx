@@ -29,7 +29,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="w-2/12 h-12">
+      <div className="w-2/12 h-12 lg:block hidden">
         <input
           className="search my-4 flex ml-auto hover:border-none focus:border-none active:border-none border-none"
           type=""
@@ -41,8 +41,8 @@ export default function Search() {
           value={searchText}
         />
       </div>
-      <div className="mobile-search">
-        <img src="images/search_btn.png" />
+      <div className="mobile-search grid ml-auto">
+        <img className="px-5 py-5" src="images/search_btn.png" />
       </div>
     </>
   );

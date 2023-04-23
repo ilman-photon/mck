@@ -47,11 +47,11 @@ export default function CategoryComponent({ sectionData }) {
                 `}</style>
                 <img src={item?.data?.productCategoryImage?.value?.url} />
               </div>
-              <div className="text-center text-gtl-med text-xl lg:text-2xl mt-7 lg:mt-10">
+              <div className="text-center text-gtl-med text-xl lg:text-2xl mt-7 lg:mt-10 text-mckblue">
                 {item?.data?.name}
               </div>
               <div
-                className="text-center text-sofia-reg w-3/4 mx-auto text-base lg:text-lg"
+                className="text-center text-sofia-reg w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
                 }}
