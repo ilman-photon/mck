@@ -1,0 +1,365 @@
+import useAxios from "@/hooks/useApi";
+import FooterComponent from "@/components/footer";
+import HeaderComponent from "@/components/header";
+import CarouselComponent from "@/components/carousel";
+import { useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
+
+function ProductListPage() {
+  const router = useRouter();
+  const [productListData, SetProductListData] = useState<any>();
+  const [recommendedProductListData, SetRecommendedProductListData] =
+    useState<any>();
+  const [productFilter, setProductFilter] = useState<any>();
+
+  const { response, error, loading } = useAxios({
+    method: "GET",
+    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*&Select=blockArea",
+    headers: {
+      "Accept-Language": "en",
+    },
+  });
+
+  function filteredData(valueType: string) {
+    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
+      return ele.contentType.some((arrEle: string) => {
+        return arrEle == valueType;
+      });
+    });
+  }
+
+  function FetchProductFilter() {
+    return axios.get(
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/?expand=*`,
+      {
+        headers: {
+          "Accept-Language": "en",
+        },
+      }
+    );
+  }
+
+  function fetchRecommandedProduct() {
+    return axios.get(
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute care' or  productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage') and (recommendedProduct/value eq true))`,
+      {
+        headers: {
+          "Accept-Language": "en",
+        },
+      }
+    );
+  }
+
+  function FetchProductList() {
+    const res = axios.get(
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=genderCategory/value/name eq 'Male'`,
+      {
+        headers: {
+          "Accept-Language": "en",
+        },
+      }
+    );
+
+    return res;
+  }
+
+  useEffect(() => {
+    FetchProductFilter()
+      .then((response) => {
+        setProductFilter(response);
+      })
+      .catch((e) => console.log(e));
+
+    fetchRecommandedProduct()
+      .then((response) => {
+        SetRecommendedProductListData(response);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+
+    FetchProductList()
+      .then((response) => {
+        SetProductListData(response);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+  }, []);
+
+  const handleCTABtn = (url: string) => {
+    router.push({
+      pathname: "",
+    });
+  };
+
+  return (
+    <>
+      <HeaderComponent />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
+      {!loading && !error && response && (
+        <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+      )}
+      <div className="container lg:p-18">
+        <div>Active Filter</div>
+        <div>Showing 65 results</div>
+        <div className="flex">
+          <div className="flex-none h-max">
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].ageCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].availabilityCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].formCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].genderCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].healthNeedsCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeAcute?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              {productFilter?.data[0].productTypePreventiveCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+          </div>
+          <div className="flex-auto">
+            <div className="">
+              <div className="container mx-auto">
+                <div className="grid md:grid-cols-2 lg:grid-cols-2">
+                  {recommendedProductListData?.data?.results.map(
+                    (item: any) => {
+                      return (
+                        <div
+                          className="bg-color m-3 p-9"
+                          key={item?.contentLink?.id}
+                        >
+                          <style jsx>{`
+                            .bg-color {
+                              background-color: ${item?.backgroundColor?.value};
+                            }
+                          `}</style>
+                          <div className="logo-img mb-3">
+                            <img
+                              className="h-auto max-w-full"
+                              src={item?.imageTitle?.value?.url}
+                              alt={item?.title?.value}
+                            />
+                          </div>
+                          <div className="grid md:grid-cols-2 lg:grid-cols-2">
+                            <div className="pr-3 my-auto">
+                              <img
+                                className="h-auto w-auto"
+                                src={item?.image?.value.url}
+                              />
+                            </div>
+                            <div className="text-justify">
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: item?.description?.value,
+                                }}
+                              ></div>
+                              <div
+                                className="w-36 text-center blue-bg rounded text-white align-middle py-3 mt-5 font-bold"
+                                onClick={() =>
+                                  handleCTABtn(item?.buttonUrl?.value)
+                                }
+                              >
+                                {item?.buttonText?.value || "No Name"}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-0.5 flex-wrap border-2">
+              {productListData?.data?.results.map((item: any) => {
+                return (
+                  <div
+                    className="w-52 h-96 border-2"
+                    key={item?.contentLink?.id}
+                  >
+                    <img src={item?.image?.value?.url} alt="" />
+                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
+                      What ?
+                    </div>
+                    <div className="mckblue">{item?.name}</div>
+                    <div
+                      className="mcknormalgrey"
+                      dangerouslySetInnerHTML={{
+                        __html: item?.ingredients?.value,
+                      }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+      <FooterComponent />
+    </>
+  );
+}
+
+export default ProductListPage;
