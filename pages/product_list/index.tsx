@@ -6844,7 +6844,7 @@ function ProductListPage() {
                             background-color: ${item?.backgroundColor?.value};
                           }
                         `}</style>
-                        <div className="logo-img mb-3">
+                        <div className="w-full lg:w-44 mb-3">
                           <img
                             className="h-auto max-w-full"
                             src={item?.imageTitle?.value?.url}

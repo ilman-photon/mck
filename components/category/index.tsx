@@ -37,7 +37,7 @@ export default function CategoryComponent() {
             </clipPath>
           </defs>
         </svg>
-        <div className="text-center text-gtl-med text-xl lg:text-2xl mt-7 lg:mt-10">
+        <div className="text-center text-gtl-med text-xl lg:text-2xl mt-7 lg:mt-10 text-mckblue">
           Acute
         </div>
         <div className="text-center text-sofia-reg w-3/4 mx-auto text-base lg:text-lg">

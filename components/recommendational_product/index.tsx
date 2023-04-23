@@ -61,7 +61,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       background-color: ${ele?.data?.backgroundColor?.value};
                     }
                   `}</style>
-                  <div className="logo-img mb-3">
+                  <div className="w-full lg:w-44 mb-3">
                     <img
                       className="h-auto max-w-full"
                       src={ele?.data?.imageTitle?.value?.url}
@@ -71,11 +71,11 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 pr-3 my-auto text-justify">
                     <div className="mx-auto my-auto h-full w-full pr-4">
                       <img
-                        className="my-auto h-full w-full"
+                        className="mx-auto lg:my-auto lg:h-full lg:w-full"
                         src={ele?.data?.image?.value.url}
                       />
                     </div>
-                    <div className="text-justify pr-9">
+                    <div className="text-justify pr-0 lg:pr-9 ">
                       <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
