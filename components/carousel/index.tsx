@@ -79,7 +79,6 @@ export default function CarouselComponent({ sectionData }: any) {
           {!loading &&
             response &&
             response.map((ele: any, index: number) => {
-              console.log("index", index, "current", current);
               return (
                 <div
                   className={`container mx-auto ${
