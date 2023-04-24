@@ -104,7 +104,18 @@ function ProductListPage() {
         <div className="flex">
           <div className="flex-none h-max">
             <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={productFilter?.data[0].ageCategoryImage?.value?.url}
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].ageCategoryLabel?.value}
+                </label>
+              </div>
               {productFilter?.data[0].ageCategory?.value?.map((item: any) => {
+                console.log(item);
                 return (
                   <div className="flex items-center my-px" key={item?.id}>
                     <input
@@ -121,6 +132,18 @@ function ProductListPage() {
               })}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={
+                  productFilter?.data[0].availabilityCategoryImage?.value?.url
+                }
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].availabilityCategoryLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].availabilityCategory?.value?.map(
                 (item: any) => {
@@ -141,6 +164,17 @@ function ProductListPage() {
               )}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={productFilter?.data[0].formCategoryImage?.value?.url}
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].formCategoryLabel?.value}
+              </label>
+            </div>
+
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].formCategory?.value?.map((item: any) => {
                 return (
@@ -159,6 +193,16 @@ function ProductListPage() {
               })}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={productFilter?.data[0].genderCategoryImage?.value?.url}
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].genderCategoryLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].genderCategory?.value?.map(
                 (item: any) => {
@@ -178,7 +222,18 @@ function ProductListPage() {
                 }
               )}
             </div>
-
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={
+                  productFilter?.data[0].healthNeedsCategoryImage?.value?.url
+                }
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].healthNeedsCategoryLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].healthNeedsCategory?.value?.map(
                 (item: any) => {
@@ -199,6 +254,16 @@ function ProductListPage() {
               )}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={productFilter?.data[0].productTypeAcuteImage?.value?.url}
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].productTypeAcuteLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].productTypeAcute?.value?.map(
                 (item: any) => {
@@ -219,6 +284,19 @@ function ProductListPage() {
               )}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={
+                  productFilter?.data[0].productTypeDiagnosticCareImage?.value
+                    ?.url
+                }
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].productTypeDiagnosticCareLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
                 (item: any) => {
@@ -239,6 +317,19 @@ function ProductListPage() {
               )}
             </div>
 
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={
+                  productFilter?.data[0].productTypeEveryDayCareImage?.value
+                    ?.url
+                }
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].productTypeEveryDayCareLabel?.value}
+              </label>
+            </div>
             <div className="border-r-2 border-b-2">
               {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
                 (item: any) => {
@@ -257,6 +348,20 @@ function ProductListPage() {
                   );
                 }
               )}
+            </div>
+
+            <div className="flex items-center my-px">
+              <img
+                id="category-name"
+                src={
+                  productFilter?.data[0].productTypePreventiveCareImage?.value
+                    ?.url
+                }
+                alt=""
+              />
+              <label htmlFor="category-name" className="ml-2">
+                {productFilter?.data[0].productTypePreventiveCareLabel?.value}
+              </label>
             </div>
 
             <div className="border-r-2 border-b-2">
@@ -312,7 +417,7 @@ function ProductListPage() {
                             <div className="text-justify">
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: item?.description?.value,
+                                  __html: item?.highlightDescription?.value,
                                 }}
                               ></div>
                               <div
@@ -347,7 +452,7 @@ function ProductListPage() {
                     <div
                       className="mcknormalgrey"
                       dangerouslySetInnerHTML={{
-                        __html: item?.ingredients?.value,
+                        __html: item?.highlightDescription?.value,
                       }}
                     ></div>
                   </div>
