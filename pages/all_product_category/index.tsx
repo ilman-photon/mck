@@ -252,7 +252,287 @@ function AllProductCategoryPage() {
         <div>Active Filter</div>
         <div>Showing 65 results</div>
         <div className="flex">
-          <div className="flex-none h-max">Filter</div>
+          <div className="flex-none h-max">
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={productFilter?.data[0].acuteImage?.value?.url}
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].acuteLabel?.value}
+                </label>
+              </div>
+
+              {productFilter?.data[0].productTypeAcute?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={
+                    productFilter?.data[0].productTypePreventiveCareImage?.value
+                      ?.url
+                  }
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].productTypePreventiveCareLabel?.value}
+                </label>
+              </div>
+
+              {productFilter?.data[0].productTypePreventiveCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={
+                    productFilter?.data[0].productTypeEveryDayCareImage?.value
+                      ?.url
+                  }
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].productTypeEveryDayCareLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={
+                    productFilter?.data[0].productTypeDiagnosticCareImage?.value
+                      ?.url
+                  }
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].productTypeDiagnosticCareLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={
+                    productFilter?.data[0].healthNeedsCategoryImage?.value?.url
+                  }
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].healthNeedsCategoryLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].healthNeedsCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={productFilter?.data[0].genderCategoryImage?.value?.url}
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].genderCategoryLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].genderCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={productFilter?.data[0].ageCategoryImage?.value?.url}
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].ageCategoryLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].ageCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={productFilter?.data[0].formCategoryImage?.value?.url}
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].formCategoryLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].formCategory?.value?.map((item: any) => {
+                return (
+                  <div className="flex items-center my-px" key={item?.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="default-checkbox" className="ml-2">
+                      {item?.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-r-2 border-b-2">
+              <div className="flex items-center my-px">
+                <img
+                  id="category-name"
+                  src={
+                    productFilter?.data[0].availabilityCategoryImage?.value?.url
+                  }
+                  alt=""
+                />
+                <label htmlFor="category-name" className="ml-2">
+                  {productFilter?.data[0].availabilityCategoryLabel?.value}
+                </label>
+              </div>
+              {productFilter?.data[0].availabilityCategory?.value?.map(
+                (item: any) => {
+                  return (
+                    <div className="flex items-center my-px" key={item?.id}>
+                      <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="default-checkbox" className="ml-2">
+                        {item?.name}
+                      </label>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+          </div>
           <div className="flex-auto">
             <div className="container mx-auto">
               <div>Acute Care</div>

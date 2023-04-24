@@ -53,7 +53,7 @@ function ProductListPage() {
 
   function FetchProductList() {
     const res = axios.get(
-      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=genderCategory/value/name eq 'Male'`,
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -138,14 +138,11 @@ function ProductListPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypePreventiveCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].preventiveCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypePreventiveCareLabel?.value}
+                  {productFilter?.data[0].preventiveCareLabel?.value}
                 </label>
               </div>
 
@@ -172,14 +169,11 @@ function ProductListPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypeEveryDayCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].everyDayCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypeEveryDayCareLabel?.value}
+                  {productFilter?.data[0].everyDayCareLabel?.value}
                 </label>
               </div>
               {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
@@ -205,14 +199,11 @@ function ProductListPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypeDiagnosticCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].diagnosticCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypeDiagnosticCareLabel?.value}
+                  {productFilter?.data[0].diagnosticCareLabel?.value}
                 </label>
               </div>
               {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
