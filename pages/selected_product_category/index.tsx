@@ -99,7 +99,7 @@ function ProductListPage() {
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
-      <div className="container lg:p-18">
+      <div className="container lg:p-18 mx-auto lg:px-0">
         {/* <div>Active Filter</div>
         <div>Showing 65 results</div> */}
         <div className="flex">
@@ -437,20 +437,20 @@ function ProductListPage() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-0.5 flex-wrap border-2">
+            <div className="flex gap-0.5 flex-wrap product-list-container">
               {productListData?.data?.results.map((item: any) => {
                 return (
                   <div
-                    className="w-52 h-96 border-2"
+                    className="w-52 h-96 border-2 product-list-item"
                     key={item?.contentLink?.id}
                   >
                     <img src={item?.image?.value?.url} alt="" />
                     <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
                       What ?
                     </div>
-                    <div className="mckblue">{item?.name}</div>
+                    <div className="mckblue product-list-title">{item?.name}</div>
                     <div
-                      className="mcknormalgrey"
+                      className="mcknormalgrey product-list-description"
                       dangerouslySetInnerHTML={{
                         __html: item?.highlightDescription?.value,
                       }}
