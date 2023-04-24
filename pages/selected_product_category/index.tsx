@@ -104,7 +104,7 @@ function ProductListPage() {
         <div>Showing 65 results</div> */}
         <div className="flex">
           <div className="flex-none h-max">
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -134,7 +134,7 @@ function ProductListPage() {
                 }
               )}
             </div>
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -165,7 +165,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -195,7 +195,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -225,7 +225,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -257,7 +257,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -287,7 +287,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -315,7 +315,7 @@ function ProductListPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -343,7 +343,7 @@ function ProductListPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -437,7 +437,7 @@ function ProductListPage() {
                   >
                     <img src={item?.image?.value?.url} alt="" />
                     <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                      What ?
+                    Acute Care
                     </div>
                     <div className="mckblue product-list-title">{item?.name}</div>
                     <div
