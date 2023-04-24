@@ -99,7 +99,7 @@ function ProductListPage() {
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
-      <div className="container lg:p-18 mx-auto">
+      <div className="container lg:p-18">
         {/* <div>Active Filter</div>
         <div>Showing 65 results</div> */}
         <div className="flex">
