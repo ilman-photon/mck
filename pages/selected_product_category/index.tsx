@@ -99,7 +99,7 @@ function ProductListPage() {
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
-      <div className="container lg:p-18 mx-auto lg:px-0">
+      <div className="container lg:p-18 mx-auto">
         {/* <div>Active Filter</div>
         <div>Showing 65 results</div> */}
         <div className="flex">
@@ -111,7 +111,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].acuteImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].acuteLabel?.value}
                 </label>
               </div>
@@ -141,7 +141,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].preventiveCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].preventiveCareLabel?.value}
                 </label>
               </div>
@@ -172,7 +172,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].everyDayCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].everyDayCareLabel?.value}
                 </label>
               </div>
@@ -202,7 +202,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].diagnosticCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].diagnosticCareLabel?.value}
                 </label>
               </div>
@@ -234,7 +234,7 @@ function ProductListPage() {
                   }
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].healthNeedsCategoryLabel?.value}
                 </label>
               </div>
@@ -264,7 +264,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].genderCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].genderCategoryLabel?.value}
                 </label>
               </div>
@@ -294,7 +294,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].ageCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].ageCategoryLabel?.value}
                 </label>
               </div>
@@ -322,7 +322,7 @@ function ProductListPage() {
                   src={productFilter?.data[0].formCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].formCategoryLabel?.value}
                 </label>
               </div>
@@ -352,7 +352,7 @@ function ProductListPage() {
                   }
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].availabilityCategoryLabel?.value}
                 </label>
               </div>

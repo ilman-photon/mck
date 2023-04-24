@@ -991,8 +991,9 @@
     margin-right: 4px;
     margin-bottom: 24px;
       img {
-        width: 180px;
+        max-width: 180px;
         height: 240px;
+        margin: 0 auto;
     }
     .bg-mckthingrey {
       margin-top: 8px;
@@ -1027,7 +1028,7 @@
       min-height: 275px;
       margin-bottom: 16px;
       img {
-        width: 145px;
+        max-width: 145px;
         max-height: 112px;
       }
     }
@@ -1040,3 +1041,9 @@
   }
 }
 /* Product-list-slider Styles End */
+
+/* Filter Styles Start */
+  .filter-title {
+    color: 001a71;
+    font-weight: 800;
+}
