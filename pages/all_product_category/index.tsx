@@ -272,8 +272,8 @@ function AllProductCategoryPage() {
                         <div className="logo-img mb-3">
                           <img
                             className="h-auto max-w-full"
-                            src={item?.imageTitle?.value?.url}
-                            alt={item?.title?.value}
+                            src="" // {item?.imageTitle?.value?.url}
+                            alt="" // {item?.title?.value}
                           />
                         </div>
                         <div className="grid md:grid-cols-2 lg:grid-cols-2">
@@ -295,7 +295,7 @@ function AllProductCategoryPage() {
                                 handleCTABtn(item?.buttonUrl?.value)
                               }
                             >
-                              {item?.buttonText?.value || "No Name"}
+                              {item?.buttonText?.value || "WHERE TO BUY"}
                             </div>
                           </div>
                         </div>
@@ -344,8 +344,8 @@ function AllProductCategoryPage() {
                         <div className="logo-img mb-3">
                           <img
                             className="h-auto max-w-full"
-                            src={item?.imageTitle?.value?.url}
-                            alt={item?.title?.value}
+                            src="" // {item?.imageTitle?.value?.url}
+                            alt="" // {item?.title?.value}
                           />
                         </div>
                         <div className="grid md:grid-cols-2 lg:grid-cols-2">
@@ -414,8 +414,8 @@ function AllProductCategoryPage() {
                       <div className="logo-img mb-3">
                         <img
                           className="h-auto max-w-full"
-                          src={item?.imageTitle?.value?.url}
-                          alt={item?.title?.value}
+                          src="" // {item?.imageTitle?.value?.url}
+                          alt="" // {item?.title?.value}
                         />
                       </div>
                       <div className="grid md:grid-cols-2 lg:grid-cols-2">
@@ -482,8 +482,8 @@ function AllProductCategoryPage() {
                       <div className="logo-img mb-3">
                         <img
                           className="h-auto max-w-full"
-                          src={item?.imageTitle?.value?.url}
-                          alt={item?.title?.value}
+                          src="" // {item?.imageTitle?.value?.url}
+                          alt="" // {item?.title?.value}
                         />
                       </div>
                       <div className="grid md:grid-cols-2 lg:grid-cols-2">
