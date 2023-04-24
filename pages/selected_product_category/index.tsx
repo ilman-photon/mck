@@ -67,6 +67,7 @@ function ProductListPage() {
   useEffect(() => {
     FetchProductFilter()
       .then((response) => {
+        console.log("response", response);
         setProductFilter(response);
       })
       .catch((e) => console.log(e));
@@ -107,11 +108,11 @@ function ProductListPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={productFilter?.data[0].productTypeAcuteImage?.value?.url}
+                  src={productFilter?.data[0].acuteImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypeAcuteLabel?.value}
+                  {productFilter?.data[0].acuteLabel?.value}
                 </label>
               </div>
 
