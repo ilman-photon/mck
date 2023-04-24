@@ -249,8 +249,8 @@ function AllProductCategoryPage() {
         <CategoryComponent sectionData={[categoryData]} />
       )}
       <div className="container lg:p-18">
-        <div>Active Filter</div>
-        <div>Showing 65 results</div>
+        {/* <div>Active Filter</div>
+        <div>Showing 65 results</div> */}
         <div className="flex">
           <div className="flex-none h-max">
             <div className="border-r-2 border-b-2">
@@ -287,14 +287,11 @@ function AllProductCategoryPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypePreventiveCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].preventiveCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypePreventiveCareLabel?.value}
+                  {productFilter?.data[0].preventiveCareLabel?.value}
                 </label>
               </div>
 
@@ -321,14 +318,11 @@ function AllProductCategoryPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypeEveryDayCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].everyDayCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypeEveryDayCareLabel?.value}
+                  {productFilter?.data[0].everyDayCareLabel?.value}
                 </label>
               </div>
               {productFilter?.data[0].productTypeEveryDayCare?.value?.map(
@@ -354,14 +348,11 @@ function AllProductCategoryPage() {
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
-                  src={
-                    productFilter?.data[0].productTypeDiagnosticCareImage?.value
-                      ?.url
-                  }
+                  src={productFilter?.data[0].diagnosticCareImage?.value?.url}
                   alt=""
                 />
                 <label htmlFor="category-name" className="ml-2">
-                  {productFilter?.data[0].productTypeDiagnosticCareLabel?.value}
+                  {productFilter?.data[0].diagnosticCareLabel?.value}
                 </label>
               </div>
               {productFilter?.data[0].productTypeDiagnosticCare?.value?.map(
