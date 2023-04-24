@@ -23,7 +23,6 @@ export default function CategoryComponent({ sectionData }) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
-        console.log("category", response);
       })
       .catch((error) => {
         setLoading(true);
