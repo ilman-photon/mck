@@ -1,11 +1,11 @@
 import FooterComponent from "@/components/footer";
-import HeaderComponent from "@/components/header";
+import HeaderNoStickyComponent from "@/components/header_nosticky";
 
 function fiveOhthree() {
   return (
     <>
-      <HeaderComponent />
-      <div className="five-oh-three">
+      <HeaderNoStickyComponent />
+      <div className="five-oh-three container mx-auto">
         <div className="heading">Hmmm! </div>
         <div className="text">
           It looks like the service is temporarily unavailable.
