@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
- - none
-#- develop
+
+- develop
 #- release/*
 
 variables:
@@ -41,8 +41,7 @@ stages:
 
     - script: |
         npm install
-        npm run dev
-        npm run start
+        npm build:dev
         npm run test --if-present
       displayName: 'npm install, build and test'
 
@@ -95,39 +94,3 @@ stages:
               WebAppName: 'foster-thrive-dev'
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
           
-- stage: StageApproval
-  jobs:
-  - job: waitForValidation
-    displayName: Wait for external validation
-    pool: server
-    timeoutInMinutes: 180 # job times out in 3 hours
-    steps:
-      - task: ManualValidation@0
-        timeoutInMinutes: 180 # task times out 3 hours
-        inputs:
-          notifyUsers: |
-           ambika.r@photon.com
-          instructions: 'Please approve'
-          onTimeout:  'resume'
-- stage: staging_Deploy
-  displayName: Deploy staging
-  dependsOn: StageApproval
-  condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    displayName: staging Deploy
-    environment: $(environmentName2)
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'foster-thrive-service-connection'
-              appType: 'webApp'
-              WebAppName: 'foster-thrive-stg'
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
- 
