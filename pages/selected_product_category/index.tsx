@@ -15,7 +15,7 @@ function ProductListPage() {
 
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*&Select=blockArea",
+    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
     headers: {
       "Accept-Language": "en",
     },
@@ -31,7 +31,7 @@ function ProductListPage() {
 
   function FetchProductFilter() {
     return axios.get(
-      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/?expand=*`,
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
       {
         headers: {
           "Accept-Language": "en",
@@ -42,7 +42,7 @@ function ProductListPage() {
 
   function fetchRecommandedProduct() {
     return axios.get(
-      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute care' or  productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage') and (recommendedProduct/value eq true))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute care' or  productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage') and (recommendedProduct/value eq true))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -53,7 +53,7 @@ function ProductListPage() {
 
   function FetchProductList() {
     const res = axios.get(
-      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -67,7 +67,6 @@ function ProductListPage() {
   useEffect(() => {
     FetchProductFilter()
       .then((response) => {
-        console.log("response", response);
         setProductFilter(response);
       })
       .catch((e) => console.log(e));
@@ -439,7 +438,9 @@ function ProductListPage() {
                     <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
                       What ?
                     </div>
-                    <div className="mckblue product-list-title">{item?.name}</div>
+                    <div className="mckblue product-list-title">
+                      {item?.name}
+                    </div>
                     <div
                       className="mcknormalgrey product-list-description"
                       dangerouslySetInnerHTML={{

@@ -105,9 +105,7 @@ function ProductSearchList() {
           </div>
           <div className="showing-filter-count">Showing 6 results</div>
           <div className="filter-and-product-section">
-            <div className="filter-section">
-              <FilterComponent />
-            </div>
+            <div className="filter-section">{/* <FilterComponent /> */}</div>
             <div className="product-list-section">
               {ProductArr.map((ele, index) => {
                 return (

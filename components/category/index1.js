@@ -7,7 +7,7 @@ export default function CategoryComponent({ sectionData }) {
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item) => {
       return axios.get(
-        `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
         {
           headers: {
             "Accept-Language": "en",

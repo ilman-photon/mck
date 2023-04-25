@@ -14,7 +14,7 @@ export default function CarouselComponent({ sectionData }: any) {
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axios.get(
-        `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
         {
           headers: {
             "Accept-Language": "en",
@@ -33,7 +33,6 @@ export default function CarouselComponent({ sectionData }: any) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
-        console.log("carosal", responses);
       })
       .catch((error) => {
         setLoading(true);
