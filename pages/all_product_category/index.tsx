@@ -250,7 +250,7 @@ function AllProductCategoryPage() {
         <div>Showing 65 results</div> */}
         <div className="flex">
           <div className="flex-none h-max">
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -280,7 +280,7 @@ function AllProductCategoryPage() {
                 }
               )}
             </div>
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -311,7 +311,7 @@ function AllProductCategoryPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -341,7 +341,7 @@ function AllProductCategoryPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -371,7 +371,7 @@ function AllProductCategoryPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -403,7 +403,7 @@ function AllProductCategoryPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -433,7 +433,7 @@ function AllProductCategoryPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -461,7 +461,7 @@ function AllProductCategoryPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -489,7 +489,7 @@ function AllProductCategoryPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -523,7 +523,7 @@ function AllProductCategoryPage() {
           </div>
           <div className="flex-auto">
             <div className="container mx-auto">
-              <div>Acute Care</div>
+              <div className="section-title">Acute Care</div>
               {!recommendedAcuteCareLoading && recommendedAcuteCare && (
                 <div className="grid md:grid-cols-2 lg:grid-cols-2">
                   {recommendedAcuteCare?.map((item: any) => {
@@ -572,20 +572,20 @@ function AllProductCategoryPage() {
                   })}
                 </div>
               )}
-              <div className="flex gap-0.5 flex-wrap">
+              <div className="flex gap-0.5 flex-wrap product-list-container">
                 {acuteCareData?.data?.results.map((item: any) => {
                   return (
                     <div
-                      className="w-52 h-96 border-2"
+                      className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                        What ?
+                      Acute Care
                       </div>
-                      <div className="mckblue">{item?.name}</div>
+                      <div className="mckblue product-list-title">{item?.name}</div>
                       <div
-                        className="mcknormalgrey"
+                        className="mcknormalgrey product-list-description"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}
@@ -595,7 +595,7 @@ function AllProductCategoryPage() {
                 })}
               </div>
 
-              <div>Preventive Care</div>
+              <div className="section-title">Preventive Care</div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
                 {recommendedPreventiveCare &&
                   recommendedPreventiveCare?.map((item: any) => {
@@ -643,20 +643,20 @@ function AllProductCategoryPage() {
                     );
                   })}
               </div>
-              <div className="flex gap-0.5 flex-wrap">
+              <div className="flex gap-0.5 flex-wrap product-list-container">
                 {preventiveCareData?.data?.results.map((item: any) => {
                   return (
                     <div
-                      className="w-52 h-96 border-2"
+                      className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                        What ?
+                      Preventive Care
                       </div>
-                      <div className="mckblue">{item?.name}</div>
+                      <div className="mckblue product-list-title">{item?.name}</div>
                       <div
-                        className="mcknormalgrey"
+                        className="mcknormalgrey product-list-description"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}
@@ -666,7 +666,7 @@ function AllProductCategoryPage() {
                 })}
               </div>
 
-              <div>Every Day Care</div>
+              <div className="section-title">Every Day Care</div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
                 {recommendedEveryDayCare?.map((item: any) => {
                   return (
@@ -711,20 +711,20 @@ function AllProductCategoryPage() {
                   );
                 })}
               </div>
-              <div className="flex gap-0.5 flex-wrap">
+              <div className="flex gap-0.5 flex-wrap product-list-container">
                 {everyDayCareData?.data?.results.map((item: any) => {
                   return (
                     <div
-                      className="w-52 h-96 border-2"
+                      className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                        What ?
+                      Every Day Care
                       </div>
-                      <div className="mckblue">{item?.name}</div>
+                      <div className="mckblue product-list-title">{item?.name}</div>
                       <div
-                        className="mcknormalgrey"
+                        className="mcknormalgrey product-list-description"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}
@@ -734,7 +734,7 @@ function AllProductCategoryPage() {
                 })}
               </div>
 
-              <div>Diagnostic Care</div>
+              <div className="section-title">Diagnostic Care</div>
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
                 {recommendedDiagnosticCare?.map((item: any) => {
                   return (
@@ -779,20 +779,20 @@ function AllProductCategoryPage() {
                   );
                 })}
               </div>
-              <div className="flex gap-0.5 flex-wrap">
+              <div className="flex gap-0.5 flex-wrap product-list-container">
                 {diagnosticCareData?.data?.results.map((item: any) => {
                   return (
                     <div
-                      className="w-52 h-96 border-2"
+                      className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                        What ?
+                      Diagnostic Care
                       </div>
-                      <div className="mckblue">{item?.name}</div>
+                      <div className="mckblue product-list-title">{item?.name}</div>
                       <div
-                        className="mcknormalgrey"
+                        className="mcknormalgrey product-list-description"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}

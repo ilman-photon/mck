@@ -6,7 +6,7 @@ function ProductDropComponent() {
             <ul className="w-11/12 flex mx-auto ">
                 <li className="w-1/5">
                     <div className="border-l border-black">
-                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Acute</a>
+                        <a href="selected_product_category" className="text-gtl-med text-2xl blue-txt text-left pl-2">Acute</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Allergy Relief</a></li>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Pain Relief</a></li>
@@ -21,7 +21,7 @@ function ProductDropComponent() {
                 </li>
                 <li className="w-1/5">
                     <div className="border-l border-black">
-                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Preventative Care</a>
+                        <a href="selected_product_category" className="text-gtl-med text-2xl blue-txt text-left pl-2">Preventative Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Immunity</a></li>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Nutrition</a></li>
@@ -34,7 +34,7 @@ function ProductDropComponent() {
                 </li>
                 <li className="w-1/5">
                     <div className="border-l border-black">
-                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Every Day Care</a>
+                        <a href="selected_product_category" className="text-gtl-med text-2xl blue-txt text-left pl-2">Every Day Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer hover:bg-beige-50">First Aid</a></li>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Daily Living Support</a></li>
@@ -52,7 +52,7 @@ function ProductDropComponent() {
                 </li>
                 <li className="w-1/5">
                     <div className="border-l border-black">
-                        <a href="" className="text-gtl-med text-2xl blue-txt text-left pl-2">Diagnostic Care</a>
+                        <a href="selected_product_category" className="text-gtl-med text-2xl blue-txt text-left pl-2">Diagnostic Care</a>
                         <ul>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Diagnostic Care</a></li>
                             <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Thermometers</a></li>

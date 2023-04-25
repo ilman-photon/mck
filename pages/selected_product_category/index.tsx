@@ -98,19 +98,19 @@ function ProductListPage() {
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
-      <div className="container lg:p-18 mx-auto lg:px-0">
+      <div className="container lg:p-18">
         {/* <div>Active Filter</div>
         <div>Showing 65 results</div> */}
         <div className="flex">
           <div className="flex-none h-max">
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].acuteImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].acuteLabel?.value}
                 </label>
               </div>
@@ -133,14 +133,14 @@ function ProductListPage() {
                 }
               )}
             </div>
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].preventiveCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].preventiveCareLabel?.value}
                 </label>
               </div>
@@ -164,14 +164,14 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].everyDayCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].everyDayCareLabel?.value}
                 </label>
               </div>
@@ -194,14 +194,14 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].diagnosticCareImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].diagnosticCareLabel?.value}
                 </label>
               </div>
@@ -224,7 +224,7 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -233,7 +233,7 @@ function ProductListPage() {
                   }
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].healthNeedsCategoryLabel?.value}
                 </label>
               </div>
@@ -256,14 +256,14 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].genderCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].genderCategoryLabel?.value}
                 </label>
               </div>
@@ -286,14 +286,14 @@ function ProductListPage() {
               )}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].ageCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].ageCategoryLabel?.value}
                 </label>
               </div>
@@ -314,14 +314,14 @@ function ProductListPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
                   src={productFilter?.data[0].formCategoryImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].formCategoryLabel?.value}
                 </label>
               </div>
@@ -342,7 +342,7 @@ function ProductListPage() {
               })}
             </div>
 
-            <div className="border-r-2 border-b-2">
+            <div className="border-r-2 border-b-2 pt-3 pb-3">
               <div className="flex items-center my-px">
                 <img
                   id="category-name"
@@ -351,7 +351,7 @@ function ProductListPage() {
                   }
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2">
+                <label htmlFor="category-name" className="ml-2 filter-title">
                   {productFilter?.data[0].availabilityCategoryLabel?.value}
                 </label>
               </div>
@@ -436,7 +436,7 @@ function ProductListPage() {
                   >
                     <img src={item?.image?.value?.url} alt="" />
                     <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                      What ?
+                    Acute Care
                     </div>
                     <div className="mckblue product-list-title">
                       {item?.name}
