@@ -12,7 +12,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       console.log("idRequests");
       return axios.get(
-        `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
         {
           headers: {
             "Accept-Language": "en",
@@ -31,7 +31,6 @@ function RecommendationalProductComponent({ sectionData }: any) {
       .then((responses) => {
         setLoading(false);
         setResponse(responses);
-        console.log("RecommendationalProductComponent", responses);
       })
       .catch((error) => {
         setLoading(true);
@@ -76,17 +75,17 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       />
                     </div>
                     <div className="text-justify pr-0 lg:pr-9 ">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
+                      <div
+                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }}
                       ></div>
                     </div>
                   </div>
-                  <div className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
-                    onClick={() =>
-                      handleCTABtn(ele?.data?.buttonUrl?.value)
-                    }
+                  <div
+                    className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
+                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
                   >
                     {ele?.data?.buttonText?.value}
                   </div>

@@ -30,7 +30,7 @@ function AllProductCategoryPage() {
 
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*&Select=blockArea",
+    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
     headers: {
       "Accept-Language": "en",
     },
@@ -41,7 +41,7 @@ function AllProductCategoryPage() {
       .then((res) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
         let categoryIds = axios.get(
-          `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/${id}`,
+          `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
           {
             headers: {
               "Accept-Language": "en",
@@ -84,7 +84,6 @@ function AllProductCategoryPage() {
     acuteCareRecommendation()
       .then((res) => {
         setRecommendedAcuteCare(res);
-        console.log("acuteCareRecommendation", res);
         setRecommendedAcuteCareLoading(false);
       })
       .catch((e) => {
@@ -115,7 +114,6 @@ function AllProductCategoryPage() {
       .catch((e) => {
         console.log(e);
       });
-    console.log("everyDayCareRecommendation", everyDayCareRecommendation());
     setRecommendedEveryDayCare(everyDayCareRecommendation());
 
     fetchDiagnosticCarePruducts()
@@ -125,13 +123,12 @@ function AllProductCategoryPage() {
       .catch((e) => {
         console.log(e);
       });
-    console.log("diagnosticCareRecommendation", diagnosticCareRecommendation());
     setRecommendedDiagnosticCare(diagnosticCareRecommendation());
   }, []);
 
   function fetchCategoryId() {
     return axios.get(
-      "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/?expand=*",
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
       {
         headers: {
           "Accept-Language": "en",
@@ -142,7 +139,7 @@ function AllProductCategoryPage() {
 
   function FetchProductFilter() {
     return axios.get(
-      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/?expand=*`,
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
       {
         headers: {
           "Accept-Language": "en",
@@ -153,7 +150,7 @@ function AllProductCategoryPage() {
 
   function fetchAcuteCarePruducts() {
     return axios.get(
-      "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))",
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -170,7 +167,7 @@ function AllProductCategoryPage() {
 
   function fetchPreventiveCarePruducts() {
     return axios.get(
-      "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage'))",
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -189,7 +186,7 @@ function AllProductCategoryPage() {
 
   function fetchEveryDayCarePruducts() {
     return axios.get(
-      "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Every Day Care') and ContentType/any(t:t eq 'ProductDetailsPage'))",
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Every Day Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -206,7 +203,7 @@ function AllProductCategoryPage() {
 
   function fetchDiagnosticCarePruducts() {
     return axios.get(
-      "https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Diagnostic Care') and ContentType/any(t:t eq 'ProductDetailsPage'))",
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Diagnostic Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
