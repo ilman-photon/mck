@@ -13,7 +13,7 @@ import RecommendationalProductComponent from "@/components/recommendational_prod
 export default function Home() {
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/home/&expand=*&Select=blockArea`,
+    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
     headers: {
       "Accept-Language": "en",
     },
