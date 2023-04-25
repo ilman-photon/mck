@@ -68,7 +68,8 @@ stages:
         timeoutInMinutes: 180 # task times out 3 hours
         inputs:
           notifyUsers: |
-           ambika.r@photon.com,ankitkumar.sachan@photon.com
+           ambika.r@photon.com
+           ankitkumar.sachan@photon.com
           instructions: 'Please approve'
           onTimeout:  'resume'
 
