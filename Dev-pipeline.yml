@@ -41,7 +41,7 @@ stages:
 
     - script: |
         npm install
-        npm build:dev
+        npm next build
         npm run test --if-present
       displayName: 'npm install, build and test'
 
