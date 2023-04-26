@@ -94,4 +94,4 @@ stages:
               appType: 'webApp'
               WebAppName: 'foster-thrive-dev'
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-          
+              StartupCommand: npm run start
