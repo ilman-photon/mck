@@ -27,6 +27,8 @@ export default function Home() {
     });
   }
 
+  console.log("environment", process.env.API_URL);
+
   return (
     <>
       <Head>
