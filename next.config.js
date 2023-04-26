@@ -22,7 +22,7 @@ const nextConfig = {
       ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
       : test
       ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
-      : "https://mcco02mstrub73kprod.dxcloud.episerver.net",
+      : "https://mcco02mstrub73kinte.dxcloud.episerver.net",
   },
 };
 
