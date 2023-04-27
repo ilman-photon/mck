@@ -950,6 +950,9 @@
 .grey-thick-bg {
   background-color: #E0EAE8;
 }
+.shade-blue-bg {
+  background-color: #F8F9FB;
+}
 
 .blue-txt {
   color: #001a71;
@@ -1055,4 +1058,38 @@
   line-height: 61px;
   color: #001A71;
   padding: 0 24px 24px;
+}
+
+/** Contact Page Style Start **/
+.contact-container {
+  border: 0.5px solid #CCD1E3;
+  //color: #3A3E41;
+  .contact-header {
+    background-color: #F8F9FB;
+  }
+  .contact-body {
+    border-top: 0.5px solid #CCD1E3;
+    .inquiry-text {
+      padding: 0 60px 12px 36px;
+      margin: 0;
+    }
+    .contact-number {
+      min-width: 194px;
+    }
+    p {
+      margin-top: 3px;
+    }
+  }
+}
+@media screen and (max-width: 1023px) {
+  .contact-container {
+    .contact-body {
+      .inquiry-text {
+        margin: 0;
+      } 
+      p {
+        margin-left: 37px;
+      }
+    }
+  }
 }

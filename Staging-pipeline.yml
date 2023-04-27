@@ -4,8 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- None
-#- release/*
+ - release/*
 
 variables:
 
@@ -22,7 +21,6 @@ variables:
 
   # Agent VM image name
   vmImageName: 'windows-2019'
-
 stages:
 - stage: Build
   displayName: Build stage
@@ -40,7 +38,7 @@ stages:
 
     - script: |
         npm install
-        npm next build
+        npm build:stg
         npm run test --if-present
       displayName: 'npm install, build and test'
 
@@ -54,60 +52,9 @@ stages:
         replaceExistingArchive: true
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: drop 
-      
-    - task: Veracode@3
-      inputs:
-        ConnectionDetailsSelection: 'Credentials'
-        apiId: $(apiId)
-        apiKey: $(apiKey)
-        veracodeAppProfile: $(appProfile)
-        version: '$(build.buildID)'
-        filepath: '$(Build.ArtifactStagingDirectory)'
-        optargs: '-scanallnonfataltoplevelmodules true -toplevel'
-        importResults: true
-        failBuildOnPolicyFail: false
-        maximumWaitTime: '30'
-        createSandBox: true
-        sandboxName: 'Web'
+      artifact: drop
 
-- stage: DevStageApproval
-  jobs:
-  - job: waitForValidation
-    displayName: Wait for external validation
-    pool: server
-    timeoutInMinutes: 180 # job times out in 3 hours
-    steps:
-      - task: ManualValidation@0
-        timeoutInMinutes: 180 # task times out 3 hours
-        inputs:
-          notifyUsers: |
-           ambika.r@photon.com,ankitkumar.sachan@photon.com
-          instructions: 'Please approve'
-          onTimeout:  'resume'
 
-- stage: Dev_Deploy
-  displayName: Deploy stage1 DEV
-  dependsOn: DevStageApproval
-  condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    displayName: DevDeploy
-    environment: $(environmentName1)
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'foster-thrive-service-connection'
-              appType: 'webApp'
-              WebAppName: 'foster-thrive-dev'
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-          
 - stage: StageApproval
   jobs:
   - job: waitForValidation

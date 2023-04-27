@@ -27,7 +27,7 @@ export default function Home() {
     });
   }
 
-  console.log("env", process.env.API_URL);
+  console.log("environment", process.env.API_URL);
 
   return (
     <>
