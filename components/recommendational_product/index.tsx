@@ -44,7 +44,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
   };
 
   return (
-    <div className="container mx-auto">
+    <div id="promotion-container" className="container mx-auto">
       <div className="pramotion-product-container">
         <div className="grid md:grid-cols-2 lg:grid-cols-2">
           {!loading &&
@@ -62,6 +62,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   `}</style>
                   <div className="w-full lg:w-44 mb-3">
                     <img
+                      id="logo"
                       className="h-auto max-w-full"
                       src={ele?.data?.imageTitle?.value?.url}
                       alt={ele?.data?.title?.value}
@@ -70,11 +71,12 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 pr-3 my-auto text-justify">
                     <div className="mx-auto my-auto h-full w-full pr-4">
                       <img
+                        id="image"
                         className="mx-auto lg:my-auto lg:h-full lg:w-full"
                         src={ele?.data?.image?.value.url}
                       />
                     </div>
-                    <div className="text-justify pr-0 lg:pr-9 ">
+                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
                       <div
                         className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
                         dangerouslySetInnerHTML={{
@@ -84,6 +86,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     </div>
                   </div>
                   <div
+                    id="cta-btn"
                     className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
                   >

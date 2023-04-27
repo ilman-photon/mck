@@ -104,6 +104,7 @@ export default function CarouselComponent({ sectionData }: any) {
                         }}
                       ></p>
                       <div
+                        id="cta-btn"
                         className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)

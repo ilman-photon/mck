@@ -12,6 +12,7 @@ function ProductListPage() {
   const [recommendedProductListData, SetRecommendedProductListData] =
     useState<any>();
   const [productFilter, setProductFilter] = useState<any>();
+  const [activeFilter, setActiveFilter] = useState<any>([]);
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -20,7 +21,7 @@ function ProductListPage() {
       "Accept-Language": "en",
     },
   });
-
+  // filter data to share as props
   function filteredData(valueType: string) {
     return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
@@ -51,43 +52,59 @@ function ProductListPage() {
     );
   }
 
-  function FetchProductList() {
-    const res = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Acute Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+  function fetchProductList(filter = "Acute Care") {
+    const promise = axios.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq '${filter}') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
         },
       }
     );
-
-    return res;
+    promise
+      .then((res) => {
+        console.log("FetchProductList", res);
+        SetProductListData(res);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
   }
 
   useEffect(() => {
     FetchProductFilter()
-      .then((response) => {
-        setProductFilter(response);
+      .then((res) => {
+        setProductFilter(res);
       })
       .catch((e) => console.log(e));
 
     fetchRecommandedProduct()
-      .then((response) => {
-        SetRecommendedProductListData(response);
+      .then((res) => {
+        SetRecommendedProductListData(res);
       })
       .catch((e: Error | AxiosError) => console.log(e));
 
-    FetchProductList()
-      .then((response) => {
-        SetProductListData(response);
-      })
-      .catch((e: Error | AxiosError) => console.log(e));
+    fetchProductList();
   }, []);
 
   const handleCTABtn = (url: string) => {
     router.push({
       pathname: "",
     });
+  };
+
+  const handleCheckBox = (e: any, filter: any) => {
+    console.log("handleCheckBox", e, filter);
+    let f: any = [];
+    if (e.target.checked) {
+      setActiveFilter([...activeFilter, filter]);
+      fetchProductList(filter);
+    } else {
+      setActiveFilter(
+        activeFilter.filter((item: any) => {
+          return item !== filter;
+        })
+      );
+      fetchProductList();
+    }
   };
 
   return (
@@ -99,18 +116,26 @@ function ProductListPage() {
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
       )}
       <div className="container lg:p-18">
-        {/* <div>Active Filter</div>
-        <div>Showing 65 results</div> */}
+        <div className="flex">
+          Active Filter :
+          <div className="flex">
+            {activeFilter.map((item: any) => {
+              return <div key={item}>{item}</div>;
+            })}
+            <div onClick={() => setActiveFilter([])}>Clear All</div>
+          </div>
+        </div>
+        {/* <div>Showing 65 results</div> */}
         <div className="flex">
           <div className="flex-none h-max">
             <div className="border-r-2 border-b-2 pb-3">
               <div className="flex items-center my-px">
                 <img
-                  id="category-name"
+                  id="acute"
                   src={productFilter?.data[0].acuteImage?.value?.url}
                   alt=""
                 />
-                <label htmlFor="category-name" className="ml-2 filter-title">
+                <label htmlFor="acute" className="ml-2 filter-title">
                   {productFilter?.data[0].acuteLabel?.value}
                 </label>
               </div>
@@ -118,14 +143,18 @@ function ProductListPage() {
               {productFilter?.data[0].productTypeAcute?.value?.map(
                 (item: any) => {
                   return (
-                    <div className="flex items-center my-px" key={item?.id}>
+                    <div
+                      className="flex items-center my-px"
+                      key={item?.id}
+                      onClick={(e) => handleCheckBox(e, item?.name)}
+                    >
                       <input
-                        id="default-checkbox"
+                        id={item?.name}
                         type="checkbox"
                         value=""
                         className="w-4 h-4"
                       />
-                      <label htmlFor="default-checkbox" className="ml-2">
+                      <label htmlFor={item?.name} className="ml-2">
                         {item?.name}
                       </label>
                     </div>
@@ -436,7 +465,7 @@ function ProductListPage() {
                   >
                     <img src={item?.image?.value?.url} alt="" />
                     <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                    Acute Care
+                      Acute Care
                     </div>
                     <div className="mckblue product-list-title">
                       {item?.name}

@@ -21,7 +21,7 @@ function HeaderComponent() {
       marginTop: "12px",
       zIndex: "9",
       fill: "#fff",
-      height:'auto',
+      height: "auto",
     };
     const style1 = {
       margin: 0,
@@ -56,7 +56,7 @@ function HeaderComponent() {
     setIsVisible(!isVisible);
   };
 
-  function handleOnCLickLogo() {
+  function handleOnClickLogo() {
     router.push({
       pathname: "/",
     });
@@ -64,17 +64,31 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="flex lg:grid container  mx-auto bg-transparent blue-txt">
+      <div
+        id="header"
+        className="flex lg:grid container sticky mx-auto bg-transparent blue-txt"
+      >
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
-          <img className="w-full" src="images/mobile_nav.png" onClick={handleClick}/>
-          </div>          
+            <img
+              id="logo-image"
+              className="w-full"
+              src="images/mobile_nav.png"
+              onClick={handleClick}
+            />
+          </div>
           <div
             ref={headerImgRef}
             className="brand-logo pl-5 ml-auto lg:ml-0"
-            onClick={handleOnCLickLogo}
+            onClick={handleOnClickLogo}
           >
-            <img src={isSmall} alt="logo" className="lg:h-14 h-auto mt-1 lg:mt-7" style={imgWidth} />
+            <img
+              id="logo-image"
+              src={isSmall}
+              alt="logo"
+              className="lg:h-14 h-auto mt-1 lg:mt-7"
+              style={imgWidth}
+            />
           </div>
         </div>
         <div

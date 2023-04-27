@@ -2,18 +2,24 @@ import SignUpComponent from "../signup";
 
 export default function FooterComponent() {
   return (
-    <footer className="bg-mcklightyellow">
+    <footer id="footer" className="bg-mcklightyellow">
       <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
         <div className="grid md:grid-cols-3 lg:grid-cols-3">
           <div className=" my-6 lg:my-0 text-gtl-med">
             <ul className="mb-0 list-none lg:py-0 px-0">
               <li className="my-2 lg:my-0">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   Contact Us
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   FAQ
                 </a>
               </li>
@@ -73,9 +79,24 @@ export default function FooterComponent() {
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="0.75" width="24" height="24" rx="12" fill="#001A71" />
-                    <path d="M19.8406 9.54922C19.8406 9.54922 19.6844 8.44609 19.2031 7.96172C18.5938 7.32422 17.9125 7.32109 17.6 7.28359C15.3625 7.12109 12.0031 7.12109 12.0031 7.12109H11.9969C11.9969 7.12109 8.6375 7.12109 6.4 7.28359C6.0875 7.32109 5.40625 7.32422 4.79688 7.96172C4.31563 8.44609 4.1625 9.54922 4.1625 9.54922C4.1625 9.54922 4 10.8461 4 12.1398V13.3523C4 14.6461 4.15937 15.943 4.15937 15.943C4.15937 15.943 4.31562 17.0461 4.79375 17.5305C5.40313 18.168 6.20313 18.1461 6.55938 18.2148C7.84063 18.3367 12 18.3742 12 18.3742C12 18.3742 15.3625 18.368 17.6 18.2086C17.9125 18.1711 18.5938 18.168 19.2031 17.5305C19.6844 17.0461 19.8406 15.943 19.8406 15.943C19.8406 15.943 20 14.6492 20 13.3523V12.1398C20 10.8461 19.8406 9.54922 19.8406 9.54922ZM10.3469 14.8242V10.3273L14.6687 12.5836L10.3469 14.8242Z" fill="white" />
+                  <svg
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      y="0.75"
+                      width="24"
+                      height="24"
+                      rx="12"
+                      fill="#001A71"
+                    />
+                    <path
+                      d="M19.8406 9.54922C19.8406 9.54922 19.6844 8.44609 19.2031 7.96172C18.5938 7.32422 17.9125 7.32109 17.6 7.28359C15.3625 7.12109 12.0031 7.12109 12.0031 7.12109H11.9969C11.9969 7.12109 8.6375 7.12109 6.4 7.28359C6.0875 7.32109 5.40625 7.32422 4.79688 7.96172C4.31563 8.44609 4.1625 9.54922 4.1625 9.54922C4.1625 9.54922 4 10.8461 4 12.1398V13.3523C4 14.6461 4.15937 15.943 4.15937 15.943C4.15937 15.943 4.31562 17.0461 4.79375 17.5305C5.40313 18.168 6.20313 18.1461 6.55938 18.2148C7.84063 18.3367 12 18.3742 12 18.3742C12 18.3742 15.3625 18.368 17.6 18.2086C17.9125 18.1711 18.5938 18.168 19.2031 17.5305C19.6844 17.0461 19.8406 15.943 19.8406 15.943C19.8406 15.943 20 14.6492 20 13.3523V12.1398C20 10.8461 19.8406 9.54922 19.8406 9.54922ZM10.3469 14.8242V10.3273L14.6687 12.5836L10.3469 14.8242Z"
+                      fill="white"
+                    />
                   </svg>
                 </a>
               </li>
@@ -85,36 +106,52 @@ export default function FooterComponent() {
           <div className="f-border py-6 lg:py-0 lg:pl-6 pl-0">
             <ul className="mb-0 list-none">
               <li className="my-2 lg:my-0">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   Privacy Notice
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   Terms of Use
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   Cookie Settings
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-sofia-reg text-lg text-mcknormalgrey" href="#!">
+                <a
+                  className="text-sofia-reg text-lg text-mcknormalgrey"
+                  href="#!"
+                >
                   Do Not Sell My Information
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="px-0 py-0 pl-0 lg:pl-6">
+          <div id="footer-sign-up" className="px-0 py-0 pl-0 lg:pl-6">
             <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border mt-5 lg:mt-0">
-              <h5 className="m-0 pb-3 px-0 text-2xl text-gtl-med text-mckblue">Email Signup & Rewards</h5>
+              <h5 className="m-0 pb-3 px-0 text-2xl text-gtl-med text-mckblue">
+                Email Signup & Rewards
+              </h5>
               <div className="px-0 text-lg text-sofia-reg text-mcknormalgrey">
                 Want to receive tips, personalized content and exclusive offers
                 from Foster & Thrive?
               </div>
-              <div className="py-3 px-0 text-lg text-sofia-reg text-mcknormalgrey">Sign up today!</div>
+              <div className="py-3 px-0 text-lg text-sofia-reg text-mcknormalgrey">
+                Sign up today!
+              </div>
               <SignUpComponent />
             </div>
           </div>
@@ -123,4 +160,3 @@ export default function FooterComponent() {
     </footer>
   );
 }
-

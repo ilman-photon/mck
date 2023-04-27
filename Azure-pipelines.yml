@@ -9,6 +9,10 @@ trigger:
 
 variables:
 
+  appProfile: 'FosterAndThrive-Web'
+  apiId: '51be08b76187d3a380336849b484efca'
+  apiKey: 'bbbaa7779ee9ba4dcf167c36168a57b7fc81044e708e04ad252bb904434bb2907675c1c8adee7e09a46da5fb494d76375f048e03eef30fd9a0e8cfb9e823a3f1'
+
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'foster-thrive-service-connection'
 
@@ -55,6 +59,7 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop 
+
       
     - task: Veracode@3
       inputs:
@@ -62,12 +67,12 @@ stages:
         apiId: $(apiId)
         apiKey: $(apiKey)
         veracodeAppProfile: $(appProfile)
-        version: '$(build.buildID)'
+        version: '$(Build.BuildId).zip'
         filepath: '$(Build.ArtifactStagingDirectory)'
-        optargs: '-scanallnonfataltoplevelmodules true -toplevel'
+        #optargs: '-scanallnonfataltoplevelmodules true'
         importResults: true
         failBuildOnPolicyFail: false
-        maximumWaitTime: '30'
+        maximumWaitTime: '90'
         createSandBox: true
         sandboxName: 'Web'
 
