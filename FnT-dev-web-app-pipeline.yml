@@ -9,7 +9,7 @@ variables:
   azureSubscription: 'foster-thrive-service-connection'
 
   # Web app name
-  webAppName1: 'foster-thrive-dev'
+  webAppName: 'foster-thrive-dev'
   
   # Environment name
   environmentName: 'dev'
@@ -81,5 +81,5 @@ stages:
               ConnectionType: 'AzureRM'
               azureSubscription: 'foster-thrive-service-connection'
               appType: 'webApp'
-              WebAppName: 'foster-thrive-dev'
+              WebAppName: $(webAppName)
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
