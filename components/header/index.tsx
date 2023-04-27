@@ -64,7 +64,7 @@ function HeaderComponent() {
 
   return (
     <>
-      <div className="flex lg:grid container sticky mx-auto bg-transparent blue-txt">
+      <div className="flex lg:grid container  mx-auto bg-transparent blue-txt">
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
           <img className="w-full" src="images/mobile_nav.png" onClick={handleClick}/>

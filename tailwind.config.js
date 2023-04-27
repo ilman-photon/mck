@@ -30,6 +30,12 @@ module.exports = {
         mcknormalgrey: "#3a3e41",
         mckgreen: "#2CCFAD",
       },
+      width: {
+        '526': '526px',
+      },
+      height: {
+        '636': '636px',
+      },
       padding: {
         "72px": "72px",
       },
@@ -42,6 +48,7 @@ module.exports = {
       },
       spacing: {
         18: "72px",
+        14:"14px",
       },
     },
   },
