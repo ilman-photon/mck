@@ -72,7 +72,7 @@ stages:
         #optargs: '-scanallnonfataltoplevelmodules true'
         importResults: true
         failBuildOnPolicyFail: false
-        maximumWaitTime: '30'
+        maximumWaitTime: '90'
         createSandBox: true
         sandboxName: 'Web'
 
