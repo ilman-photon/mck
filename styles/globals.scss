@@ -954,6 +954,16 @@
   background-color: #F8F9FB;
 }
 
+.shade-blue-border {
+  border: 0.5px solid #CCD1E3;
+}
+.shade-blue-border-top {
+  border-top: 0.5px solid #CCD1E3;
+}
+.shade-blue-border-70 {
+  border: 0.5px solid #4D5F9C;
+}
+
 .blue-txt {
   color: #001a71;
 }
@@ -1063,7 +1073,6 @@
 /** Contact Page Style Start **/
 .contact-container {
   border: 0.5px solid #CCD1E3;
-  //color: #3A3E41;
   .contact-header {
     background-color: #F8F9FB;
   }
@@ -1091,5 +1100,44 @@
         margin-left: 37px;
       }
     }
+  }
+}
+/*** FAQ Style ***/
+.tab {
+  border: 0.5px solid #CCD1E3;
+  &-label {
+    &:hover {
+      background: #CCD1E3;
+    }
+    &::after {
+      content: "\02795";
+      //background-image: url('images/plus.svg');
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      transition: all 1s;
+    }
+  }
+  &-content {
+    max-height: 0;
+    padding: 0 1em;
+    transition: all 1s;
+  }
+}
+
+// :checked
+input[type=checkbox] {
+  display: none;
+}
+input:checked {
+  + .tab-label {
+    &::after {
+      content: "\2796";
+    }
+  }
+  ~ .tab-content {
+    max-height: 100vh;
+    padding: 24px;
+    border-top: 0.5px solid #CCD1E3;
   }
 }
