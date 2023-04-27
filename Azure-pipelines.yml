@@ -67,7 +67,7 @@ stages:
         apiId: $(apiId)
         apiKey: $(apiKey)
         veracodeAppProfile: $(appProfile)
-        version: '$(Build.BuildId)'
+        version: '$(Build.BuildId).zip'
         filepath: '$(Build.ArtifactStagingDirectory)'
         #optargs: '-scanallnonfataltoplevelmodules true'
         importResults: true
