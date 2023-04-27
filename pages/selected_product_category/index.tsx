@@ -120,7 +120,7 @@ function ProductListPage() {
           Active Filter :
           <div className="flex">
             {activeFilter.map((item: any) => {
-              return <div>{item}</div>;
+              return <div key={item}>{item}</div>;
             })}
             <div onClick={() => setActiveFilter([])}>Clear All</div>
           </div>
