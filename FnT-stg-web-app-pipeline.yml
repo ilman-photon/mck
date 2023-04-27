@@ -1,0 +1,85 @@
+# Pipeline to deploy the FnT Web app to the stage environment. The FnT web app points to the Optimizely DXP Integration environment
+
+trigger:
+- None
+
+variables:
+
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'foster-thrive-service-connection'
+
+  # Web app name
+  webAppName1: 'foster-thrive-stg'
+  
+  # Environment name
+  environmentName: 'stg'
+
+  # Agent VM image name
+  vmImageName: 'windows-2019'
+
+stages:
+- stage: Build
+  displayName: Build UI Web App stage
+  jobs:
+  - job: Build
+    displayName: Build UI Web App
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+    - script: |
+        npm install
+        npm run build:stg
+        npm run test --if-present
+      displayName: 'npm install, build and test'
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
+
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      artifact: drop 
+      
+    - task: Veracode@3
+      inputs:
+        ConnectionDetailsSelection: 'Credentials'
+        apiId: $(apiId)
+        apiKey: $(apiKey)
+        veracodeAppProfile: $(appProfile)
+        version: '$(build.buildID)'
+        filepath: '$(Build.ArtifactStagingDirectory)'
+        optargs: '-scanallnonfataltoplevelmodules true -toplevel'
+        importResults: true
+        failBuildOnPolicyFail: false
+        maximumWaitTime: '30'
+        createSandBox: true
+        sandboxName: 'Web'
+
+- stage: Deploy
+  displayName: Deploy UI Web App to Staging environment
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy UI Web App to Staging environment
+    environment: $(environmentName)
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'foster-thrive-service-connection'
+              appType: 'webApp'
+              WebAppName: 'foster-thrive-dev'
+              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
