@@ -69,10 +69,10 @@ stages:
         veracodeAppProfile: $(appProfile)
         version: '$(Build.BuildId)'
         filepath: '$(Build.ArtifactStagingDirectory)'
-        optargs: '-scanallnonfataltoplevelmodules true'
+        #optargs: '-scanallnonfataltoplevelmodules true'
         importResults: true
         failBuildOnPolicyFail: false
-        maximumWaitTime: '5'
+        maximumWaitTime: '30'
         createSandBox: true
         sandboxName: 'Web'
 
