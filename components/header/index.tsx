@@ -66,7 +66,7 @@ function HeaderComponent() {
     <>
       <div
         id="header"
-        className="flex lg:grid container mx-auto bg-transparent blue-txt"
+        className="flex lg:grid container sticky mx-auto bg-transparent blue-txt"
       >
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
