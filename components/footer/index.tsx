@@ -10,7 +10,7 @@ export default function FooterComponent() {
               <li className="my-2 lg:my-0">
                 <a
                   className="text-sofia-reg text-lg text-mcknormalgrey"
-                  href="#!"
+                  href="/contact_us"
                 >
                   Contact Us
                 </a>
@@ -18,7 +18,7 @@ export default function FooterComponent() {
               <li className="my-2">
                 <a
                   className="text-sofia-reg text-lg text-mcknormalgrey"
-                  href="#!"
+                  href="/faq"
                 >
                   FAQ
                 </a>
