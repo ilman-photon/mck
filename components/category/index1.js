@@ -37,7 +37,7 @@ export default function CategoryComponent({ sectionData }) {
         response &&
         response.map((item) => {
           return (
-            <div key={item?.data?.contentLink?.id}>
+            <div id="category" key={item?.data?.contentLink?.id}>
               <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52 border">
                 <style jsx>{`
                   .border {
