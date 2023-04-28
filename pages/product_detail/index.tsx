@@ -11,9 +11,9 @@ function ProductDetails() {
     return (
         <>
             <HeaderComponent />
-            <div className="grid grid-rows-2 grid-flow-col gap-4 container mx-auto">
+            <div className="grid grid-rows-2 grid-flow-col gap-4 container mx-auto mt-18">
                 <PdpCarousel />
-                <PdpLocation/>
+                {/* <PdpLocation/> */}
                 <PdpDetail />
             </div>
             <FooterComponent />
