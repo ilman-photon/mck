@@ -6,7 +6,7 @@ import NavDropComponent from "../navdrop";
 
 function HeaderComponent() {
   const logogrey = "images/logo.png";
-  const logowhite = "images/logo_white.png";
+  const logowhite = "images/logo.png";
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isSmall, setIsSmall] = useState(logogrey);
@@ -25,8 +25,8 @@ function HeaderComponent() {
     };
     const style1 = {
       margin: 0,
-      background: "#001a71",
-      color: "#fff",
+      background: "#FFF6ED",
+      color: "#001a71",
       position: "absolute",
       top: "0",
     };
