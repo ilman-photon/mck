@@ -25,12 +25,6 @@ function PdpCarousel() {
                             </li>
                         </ul>
                     </div>
-                    {/* <div className="_1VfWRb _3jywji YTKFIp">
-                    <svg width="8" height="15" viewBox="0 0 16 27" xmlns="http://www.w3.org/2000/svg" className="_1YdSSj"><path d="M16 23.207L6.11 13.161 16 3.093 12.955 0 0 13.161l12.955 13.161z" fill="#000" className=""></path></svg>
-                </div>
-                <div className="_1VfWRb VnysFO">
-                    <svg width="8" height="15" viewBox="0 0 16 27" xmlns="http://www.w3.org/2000/svg" className="_1YdSSj"><path d="M16 23.207L6.11 13.161 16 3.093 12.955 0 0 13.161l12.955 13.161z" fill="#000" className=""></path></svg>
-                </div> */}
                 </div>
                 <div className="w-[526px] h-[636px] box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue ml-14">
                     <img alt="" src="https://rukminim1.flixcart.com/image/416/416/k3q76a80/camera/a/9/y/sony-apsc-ilce-6100l-b-in5-mirrorless-original-imafm6msv5uzrmgt.jpeg?q=70" />
