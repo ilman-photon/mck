@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import HeaderComponent from "../header";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -71,7 +70,6 @@ export default function CarouselComponent({ sectionData }: any) {
         data-te-carousel-init
         data-te-carousel-slide
       >
-        <HeaderComponent />
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           {loading && <p>Loading...</p>}
 
