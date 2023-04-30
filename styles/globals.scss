@@ -1152,3 +1152,32 @@ input:checked {
     border-top: 0.5px solid #CCD1E3;
   }
 }
+
+.pdp-details-heading {
+  h1{
+    line-height: 61px;
+    font-size: 54px;
+    span{
+      line-height: 61px;
+      font-size: 54px;
+    }
+  }
+  h2{
+    font-size: 36px;
+    line-height: 41px;
+    span{
+      font-size: 36px;
+      font-size: 36px;
+    }
+  }
+}
+.pdp-detail-description{
+  div{
+    ul{
+      list-style-type: disc;
+    }
+  }
+  ul{
+    list-style-type: disc;
+  }
+}

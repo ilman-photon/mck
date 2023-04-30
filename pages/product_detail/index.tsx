@@ -2,12 +2,11 @@ import useAxios from "@/hooks/useApi";
 import axios from "axios";
 import { useRouter } from "next/router";
 import FooterComponent from "@/components/footer";
-import HeaderComponent from "@/components/header";
 import PdpCarousel from "@/components/pdp_carousel";
 import PdpDetail from "@/components/pdp_deatils";
 import PdpLocation from "@/components/pdp_location";
 import { useEffect, useState } from "react";
-
+import HeaderNoStickyComponent from "@/components/header_nosticky";
 
 function ProductDetails() {
     const router = useRouter();
@@ -35,8 +34,8 @@ function ProductDetails() {
 
     return (
         <>
-            <HeaderComponent />
-            <div className="grid grid-rows-2 grid-flow-col gap-4 container mx-auto mt-18">
+            <HeaderNoStickyComponent />
+            <div className="grid lg:grid-rows-2 lg:grid-flow-col lg:gap-4 container mx-4 lg:mx-auto mt-18">
                 {prodResponse && <PdpCarousel value={prodResponse} />}
                 <PdpLocation />
                 {/* <PdpDetail sectionData={ProductData("ProductBlock")}/> */}
