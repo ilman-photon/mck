@@ -35,18 +35,18 @@ function ContactUsComponent() {
                         <div className="p-6 contact-body">
                             <p className="text-base font-normal text-mcknormalgrey pb-3 inquiry-text text-sofia-reg" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].contactInformationDetail.value, }}></p>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"><img src="images/call.svg" className="inline-block mr-3" />{contactUsData?.data[0]?.contentArea.expandedValue[0].phoneNumber.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].phoneImage.expandedValue.url} alt="..." /> {contactUsData?.data[0]?.contentArea.expandedValue[0].phoneNumber.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].phoneTitle.value}</p>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"> <img src="images/timer.svg" className="inline-block mr-3" />{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourImage.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourTitle.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourValue.value}</p>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"> <img src="images/email.svg" className="inline-block mr-3" />{contactUsData?.data[0]?.contentArea.expandedValue[0].emailTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].emailImage.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].emailTitle.value}</span>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg mr-3 text-mckblue text-sofia-bold"><img src="images/Address.svg" className="inline-block mr-3" />{contactUsData?.data[0]?.contentArea.expandedValue[0].locationTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg mr-3 text-mckblue text-sofia-bold"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].locationIcon.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].locationTitle.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].locationValue.value}</p>
                             </div>
                         </div>
