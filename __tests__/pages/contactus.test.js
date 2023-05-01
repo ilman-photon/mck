@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
-import ContactUsComponent from "@/components/contactus";
+import ContactUsComponent from "@/components/contactus/ContactUsComponent";
 import axios from "axios";
 jest.mock("axios");
 
