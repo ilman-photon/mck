@@ -71,10 +71,10 @@ function HeaderNoStickyComponent() {
           </div>          
           <div
             ref={headerImgRef}
-            className="brand-logo pl-5 ml-auto lg:ml-0"
+            className="brand-logo"
             onClick={handleOnCLickLogo}
           >
-            <img src={isSmall} alt="logo" className="lg:h-14 h-auto mt-1 lg:mt-7" style={imgWidth} />
+            <img src={isSmall} alt="logo" className="mt-1 lg:mt-7 ml-3" style={imgWidth} />
           </div>
         </div>
         <div
