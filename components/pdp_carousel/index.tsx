@@ -1,6 +1,5 @@
 function PdpCarousel(prodViewData: any) {
     // console.log(prodViewData.value[0].productImages.value[0].url, "prodViewData")
-
     // {
     //     prodViewData.value &&
     //         (prodViewData.value.map((detail: any) => {

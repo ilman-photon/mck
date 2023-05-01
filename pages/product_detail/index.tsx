@@ -39,7 +39,7 @@ function ProductDetails() {
                 {prodResponse && <PdpCarousel value={prodResponse} />}
                 <PdpLocation />
                 {/* <PdpDetail sectionData={ProductData("ProductBlock")}/> */}
-                {responceValue && <PdpDetail value={responceValue} />}
+                {responceValue && <PdpDetail value={responceValue}/>}
             </div>
             <FooterComponent />
         </>
