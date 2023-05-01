@@ -4,7 +4,7 @@ function PdpDetail(pdpViewData: any) {
     return (
         <div className="lg:row-span-3 lg:ml-[72px] pdp-details-heading">
             <p className="text-gtl-med text-mckblue font-medium mb-6"
-                dangerouslySetInnerHTML={{ __html: pdpViewData.value[0].title.value, }}></p>
+                dangerouslySetInnerHTML={{ __html: pdpViewData.value[0].title.value,}}></p>
             <h2 className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2"
                 dangerouslySetInnerHTML={{ __html: pdpViewData.value[0].subTitle.value, }}></h2>
             <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2"

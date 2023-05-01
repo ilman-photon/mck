@@ -1,5 +1,5 @@
 .four-oh-four {
-  padding: 72px;
+  padding: 8px;
   flex-direction: column;
 
   .heading {
@@ -59,18 +59,27 @@
 }
 
 @media (max-width: 1025px) {
+  .four-oh-four {
+    padding: 72px;
+  }
   .four-zero-four {
     padding: 64px;
   }
 }
 
 @media (max-width: 961px) {
+  .four-oh-four {
+    padding: 72px;
+  }
   .four-zero-four {
     padding: 32px;
   }
 }
 
 @media (max-width: 641px) {
+  .four-oh-four {
+    padding: 72px;
+  }
   .four-zero-four {
     padding: 16px;
   }
