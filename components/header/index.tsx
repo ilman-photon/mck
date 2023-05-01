@@ -79,14 +79,14 @@ function HeaderComponent() {
           </div>
           <div
             ref={headerImgRef}
-            className="brand-logo pl-5 ml-auto lg:ml-0"
+            className="brand-logo"
             onClick={handleOnClickLogo}
           >
             <img
               id="logo-image"
               src={isSmall}
               alt="logo"
-              className="lg:h-14 h-auto mt-1 lg:mt-7"
+              className="mt-1 lg:mt-7 ml-3"
               style={imgWidth}
             />
           </div>

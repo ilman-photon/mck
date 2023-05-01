@@ -1,7 +1,33 @@
 import Link from "next/link";
 import SignUpComponent from "../signup";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function FooterComponent() {
+
+  const [footerData, setFooterData] = useState<any>();
+
+  const getData = async () => {
+    const response = await axios.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`
+    );
+    const secondBlock = response.data[0].footer.expandedValue[0].contentLink.id;
+    const responseid = await axios.get(
+      `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?References=268&expand=*`,{headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}},
+     // `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`
+    );
+
+    const red = `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`;
+    setFooterData(responseid);
+    console.log(red, "1");
+    console.log(responseid,"3")
+  };
+  console.log(footerData, "2");
+  useEffect(() => {
+    getData();
+  }, []);
+
+
   return (
     <footer id="footer" className="bg-mcklightyellow">
       <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
