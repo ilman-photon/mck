@@ -8,22 +8,22 @@ function ContactUsComponent() {
 
     function fetchContactUsDetails() {
         return axios.get(
-          `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/contact-us/&expand=*`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
+            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/contact-us/&expand=*`,
+            {
+                headers: {
+                    "Accept-Language": "en",
+                },
+            }
         );
-      }
+    }
 
-      useEffect(() => {
+    useEffect(() => {
         fetchContactUsDetails()
-          .then((res) => {
-            SetContactUsData(res);
-          })
-          .catch((e: Error | AxiosError) => console.log(e));
-      }, []);
+            .then((res) => {
+                SetContactUsData(res);
+            })
+            .catch((e: Error | AxiosError) => console.log(e));
+    }, []);
 
     return (
         <>
@@ -35,18 +35,22 @@ function ContactUsComponent() {
                         <div className="p-6 contact-body">
                             <p className="text-base font-normal text-mcknormalgrey pb-3 inquiry-text text-sofia-reg" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].contactInformationDetail.value, }}></p>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].phoneImage.expandedValue.url} alt="..." /> {contactUsData?.data[0]?.contentArea.expandedValue[0].phoneNumber.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex">
+                                    <img src={contactUsData?.data[0]?.contentArea.expandedValue[0].phoneImage.expandedValue.url} alt="Cell Icon" /> {contactUsData?.data[0]?.contentArea.expandedValue[0].phoneNumber.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].phoneTitle.value}</p>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourImage.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex">
+                                    <img src={contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourImage.expandedValue.url} alt="timer icon" />{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourTitle.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].operationHourValue.value}</p>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].emailImage.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].emailTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg text-mckblue text-sofia-bold mr-3 flex">
+                                    <img src={contactUsData?.data[0]?.contentArea.expandedValue[0].emailImage.expandedValue.url} alt="email icon" />{contactUsData?.data[0]?.contentArea.expandedValue[0].emailTitle.value}</span>
                             </div>
                             <div className="flex flex-col lg:flex-row pb-3">
-                                <span className="contact-number font-extrabold text-lg mr-3 text-mckblue text-sofia-bold flex"><img src={contactUsData?.data[0]?.contentArea.expandedValue[0].locationIcon.expandedValue.url} alt="..." />{contactUsData?.data[0]?.contentArea.expandedValue[0].locationTitle.value}</span>
+                                <span className="contact-number font-extrabold text-lg mr-3 text-mckblue text-sofia-bold flex">
+                                    <img src={contactUsData?.data[0]?.contentArea.expandedValue[0].locationIcon.expandedValue.url} alt="location icon" />{contactUsData?.data[0]?.contentArea.expandedValue[0].locationTitle.value}</span>
                                 <p className="text-base font-normal text-mcknormalgrey text-sofia-reg">{contactUsData?.data[0]?.contentArea.expandedValue[0].locationValue.value}</p>
                             </div>
                         </div>
@@ -54,7 +58,7 @@ function ContactUsComponent() {
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container mb-12">
                         <div className="text-mckblue py-3 px-4 text-lg font-extrabold shade-blue-bg text-sofia-bold">{contactUsData?.data[0]?.contentArea.expandedValue[0].whatWeCandoHeading.value}</div>
                         <div className="p-6 contact-body" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].whatWeCandoDetail.value, }}>
-                        {/* TODO Coordinate with CMS team to fix this */}
+                            {/* TODO Coordinate with CMS team to fix this */}
                             {/* <a href="" className="block pb-1 underline text-lg font-normal text-mckblue text-sofia-reg">Home</a> */}
                             {/* TODO Coordinate with CMS team to fix this */}
                             {/* <a href="" className="block pb-1 underline text-lg font-normal text-mckblue text-sofia-reg">Where to Buy</a> */}
