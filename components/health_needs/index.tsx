@@ -516,6 +516,53 @@ const HealthNeedsComponent = () => {
                                     );
                                 })}
                             </div>
+                            <div className="product-where-to-buy grid grid-cols-1 px-6">
+                                    <div className="relative isolate overflow-hidden border bg-slate-200 py-16 sm:py-24 lg:py-10">
+                                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                                            <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+                                                <div className="flex max-w-xl lg:max-w-lg border bg-slate-200">
+                                                    <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                    <div>
+                                                        <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                        <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex max-w-xl lg:max-w-lg border bg-slate-200">
+                                                    <img src="images/childrens-allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                    <div>
+                                                        <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                        <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {/* <!-- Image gallery --> */}
+                                <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
+                                    <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden border border-slate-400 lg:block">
+                                        <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="h-full w-full object-cover object-center" />
+                                    </div>
+                                    <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                                        <div className="flex max-w-xl lg:max-w-lg border border-slate-400">
+                                            <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                            <div>
+                                                <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
+                                            </div>
+                                        </div>
+                                        <div className="flex max-w-xl lg:max-w-lg border border-slate-400">
+                                            <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                            <div>
+                                                <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 uppercase cursor-pointer">Learn More</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                         </div>
                     </div>
                 </div>
