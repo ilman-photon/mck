@@ -21,7 +21,7 @@ export default function FooterComponent() {
     );
     setFooterData(response);
     setFooterSecondData(responseid);
-    console.log(responseid, "2")
+    //console.log(responseid, "2")
   };
   //console.log(footerData, "3");
   useEffect(() => {
