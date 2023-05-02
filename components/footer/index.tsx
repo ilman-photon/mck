@@ -28,7 +28,7 @@ export default function FooterComponent() {
     getData();
   }, []);
   
-  //console.log(footerSecondData, "1")
+  console.log(footerSecondData, "1")
  // console.log(footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue[0], "final");
 
 
@@ -43,6 +43,7 @@ export default function FooterComponent() {
                    <Link
                    className="text-sofia-reg text-lg text-mcknormalgrey my-2"
                    rel="stylesheet"
+                   key={link?.contentLink?.id}
                    href={link?.menuUrl?.value}
                  >{link?.menuTitle?.value}
                  </Link>
@@ -54,6 +55,7 @@ export default function FooterComponent() {
                    className="text-sofia-reg text-lg text-mcknormalgrey"
                    rel="stylesheet"
                    href={sociallink?.socialMediaImage?.expandedValue?.url}
+                   key={sociallink?.contentLink?.id}
                  ><img src={sociallink?.socialMediaImage?.expandedValue?.thumbnail?.value?.url} alt={sociallink?.socialMediaImage?.expandedValue?.altText?.value}></img>
                  </Link>
                 ))} 
@@ -69,6 +71,7 @@ export default function FooterComponent() {
                    className="text-sofia-reg text-lg text-mcknormalgrey py-2"
                    rel="stylesheet"
                    href={slink?.menuUrl?.value}
+                   key={slink?.contentLink?.id}
                  >{slink?.menuTitle?.value}
                  </Link>
                 ))}
