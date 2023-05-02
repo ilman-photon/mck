@@ -1,6 +1,6 @@
 import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
-import HealthNeedsComponent from "@/components/health_needs";
+import HealthNeedsCategories from "@/components/health_needs";
 //import CarouselComponent from "@/components/carousel";
 
 function HealthNeeds() {
@@ -9,7 +9,7 @@ function HealthNeeds() {
       <div className="grid">
         <HeaderComponent />
         {/* <CarouselComponent /> */}
-        <HealthNeedsComponent />
+        <HealthNeedsCategories />
         <FooterComponent />
       </div>
     </>
