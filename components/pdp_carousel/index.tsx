@@ -1,5 +1,5 @@
 function PdpCarousel(prodViewData: any) {
-    // console.log(prodViewData.value[0].productImages.value[0].url, "prodViewData")
+    console.log(prodViewData, "prodViewData")
     // {
     //     prodViewData.value &&
     //         (prodViewData.value.map((detail: any) => {
@@ -37,10 +37,10 @@ function PdpCarousel(prodViewData: any) {
                     <div className="_2mLllQ">
                         <ul className="_3GnUWp">
 
-                        {prodViewData.value[0].productImages.value.slice(0, 3).map((imgdata:any)=>(
-                            <img className="max-w-xl w-10" src={imgdata.url}  />
-                        )
-                        )}
+                            {prodViewData.value[0].productImages.value.slice(0, 3).map((imgdata: any) => (
+                                <img className="max-w-xl w-10" src={imgdata?.url} key={imgdata?.id} />
+                            )
+                            )}
 
                             {/* <li className="w-24 h-24 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3">
                                 <img className="max-w-xl w-10" src={prodViewData.value[0].productImages.value[0].url} />

@@ -32,7 +32,7 @@ function FaqComponent() {
                 <div className="text-center text-mckblue text-gtl-med pb-6"
                     dangerouslySetInnerHTML={{ __html: faqData?.description?.value, }}></div>
                     {faqData?.blockArea?.expandedValue?.map((bdata: any) => (
-                        <div className="tab text-mckblue text-sofia-bold font-extrabold text-lg w-full overflow-hidden rounded-lg mb-6">
+                        <div className="tab text-mckblue text-sofia-bold font-extrabold text-lg w-full overflow-hidden rounded-lg mb-6" key={faqData?.blockArea?.expandedValue?.contentLink?.id}>
                         <input type="checkbox" id={bdata?.contentLink?.id} />
                         <label className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer" htmlFor={bdata?.contentLink?.id}>
                             {bdata?.question?.value}</label>
