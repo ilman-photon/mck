@@ -111,10 +111,7 @@ const HealthNeedsComponent = () => {
 
     function fetchHealthNeedsCategories() {
         return axios.get(
-            //`https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/product-category-setting/&expand=*`,
-
             `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`,
-
             {
                 headers: {
                     "Accept-Language": "en",
@@ -134,11 +131,8 @@ const HealthNeedsComponent = () => {
     console.log("healthNeedData---", healthNeedData);
 
     return (
-
         <>
-
             <div className="container w-full mx-auto grid grid-cols-1">
-
                 <div className="health-needs-categories">
                     <div className="health-needs-categories-icons">
                         <ul>
