@@ -69,7 +69,7 @@ function ContactUsComponent() {
                         </div>
                     </div>
                 </div>
-                <p className="text-sofia-reg text-mcknormalgrey font-normal text-base" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].disclaimer.value, }}></p>
+                <p className="text-sofia-reg text-mcknormalgrey font-normal text-base pb-12" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].disclaimer.value, }}></p>
             </div>
         </>
     );

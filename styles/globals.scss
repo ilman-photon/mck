@@ -54,6 +54,7 @@
 @import "404.module.scss";
 @import "503.module.scss";
 @import "ProductSearchList.module.scss";
+@import "HealthNeeds.module.scss";
 
 .green-light {
   background-color: #e0eae8;
@@ -1133,7 +1134,7 @@
     }
 
     .contact-number {
-      min-width: 240px;
+      min-width: 190px;
       white-space: nowrap;
 
       img {
