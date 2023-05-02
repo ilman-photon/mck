@@ -1,5 +1,3 @@
-import axios from "axios";
-
 function PdpDetail(pdpViewData: any) {
     return (
         <div className="lg:row-span-3 lg:ml-[72px] pdp-details-heading">
