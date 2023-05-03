@@ -141,7 +141,7 @@ const HealthNeedsComponent = () => {
                             {/* {healthNeedData?.healthNeedItem?.expandedValue?.map((bdata: any) => (
                                 <li key={bdata?.contentLink?.id}><img src={bdata?.image?.expandedValue?.url} />{bdata?.title?.value}</li>
                             ))} */}
-                            {healthNeedData.map((bdata: any) => (
+                            {healthNeedData && healthNeedData?.map((bdata: any) => (
                                 <li key={bdata?.contentLink?.id}><img src={bdata?.image?.expandedValue?.url} />{bdata?.name}</li>
                             ))}
                         </ul>
@@ -494,7 +494,7 @@ const HealthNeedsComponent = () => {
                             </div>
                             {/* Health needs categories title starts */}
                 <div>
-                {healthNeedData.map((bdata: any) => (
+                {healthNeedData?.map((bdata: any) => (
                     <>
                     <div className="section-title">{bdata?.name}</div>
                     <div>Product lists</div>
