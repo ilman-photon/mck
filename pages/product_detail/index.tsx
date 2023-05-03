@@ -37,7 +37,7 @@ function ProductDetails() {
             <HeaderNoStickyComponent />
             <div className="grid lg:grid-rows-2 lg:grid-flow-col lg:gap-4 container mx-4 lg:mx-auto mt-18">
                 {prodResponse && <PdpCarousel value={prodResponse} />}
-                <PdpLocation />
+                {/* <PdpLocation /> */}
                 {/* <PdpDetail sectionData={ProductData("ProductBlock")}/> */}
                 {responceValue && <PdpDetail value={responceValue}/>}
             </div>
