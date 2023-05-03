@@ -29,8 +29,8 @@ module.exports = {
         mckthingrey: "#CCD1E3",
         mcknormalgrey: "#3a3e41",
         mckgreen: "#2CCFAD",
-        mcklightyellow: "#F8F9FB",
         mcklggrey:"#4D5F9C",
+        mckbodybg: "#FFFDFB",
       },
       width: {
         '526': '526px',
