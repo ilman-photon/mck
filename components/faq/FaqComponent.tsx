@@ -53,24 +53,18 @@ function FaqComponent() {
                 <div className="grid lg:grid-cols-2 lg:gap-4 mt-6">
                     <div className="rounded-lg shade-blue-border overflow-hidden">
                         <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4">{faqData?.whatYouCanDoHeading?.value}</div>
-                        <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg">
-                        {faqData?.whatYouCanDoDeatils?.value}
-                            {/* <a href="" className="underline block pb-1">Home</a>
-                            <a href="" className="underline block pb-1">Where to Buy</a>
-                            <a href="" className="underline block pb-1">Privacy Notice</a> */}
+                        <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" dangerouslySetInnerHTML={{ __html: faqData?.whatYouCanDoDeatils?.value, }}>
                         </div>
                     </div>
                     <div className="mt-6 lg:mt-0">
                         <div className="rounded-lg shade-blue-border overflow-hidden">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4">{faqData?.speaktoAPharmacistHeading?.value}</div>
-                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg">
-                                <a href="" className="underline block pb-1">{faqData?.speaktoAPharmacistDetail?.value}</a>
+                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" dangerouslySetInnerHTML={{ __html: faqData?.speaktoAPharmacistDetail?.value, }}>
                             </div>
                         </div>
                         <div className="rounded-lg shade-blue-border overflow-hidden mt-6">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4">{faqData?.sendFeedBackHeading?.value}</div>
-                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg">
-                                <p>{faqData?.sendFeedBackDetails?.value} <a href="" className="underline"></a></p>
+                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" dangerouslySetInnerHTML={{ __html: faqData?.sendFeedBackDetails?.value, }}>    
                             </div>
                         </div>
                     </div>
