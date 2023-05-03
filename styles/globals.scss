@@ -1002,7 +1002,9 @@
 .pb-72 {
   padding-bottom: 72px;
 }
-
+footer {
+  margin-top: 72px;
+}
 .sticky {
   position: fixed;
   left: 0;
@@ -1181,6 +1183,7 @@
       height: 1em;
       text-align: center;
       transition: all 1s;
+      color: red;
     }
   }
 
@@ -1189,8 +1192,6 @@
     padding: 0 1em;
     transition: all 1s;
   }
-}
-
 // :checked
 input[type=checkbox] {
   display: none;
@@ -1208,6 +1209,7 @@ input:checked {
     padding: 24px;
     border-top: 0.5px solid #CCD1E3;
   }
+}
 }
 
 .pdp-details-heading {
@@ -1243,7 +1245,7 @@ input:checked {
     list-style-type: disc;
   }
 }
-/*** why FT Mobile styles ***/
+/*** why FT, Faq Mobile styles ***/
 @media screen and (max-width: 1023px) {
   .four-oh-four {
     padding-left: 16px;
@@ -1264,5 +1266,11 @@ input:checked {
   }
   .bg-transparent-right {
     background-image: none;
+  }
+  footer {
+    margin-top: 24px;
+  }
+  .tab input:checked ~ .tab-content {
+    padding: 16px;
   }
 }
