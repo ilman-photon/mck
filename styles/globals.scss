@@ -1156,10 +1156,20 @@
     .contact-body {
       .inquiry-text {
         margin: 0;
+        padding: 0 16px 16px 20px;
       }
 
       p {
-        margin-left: 37px;
+        margin: 0;
+      }
+      .contact-number {
+        min-width: unset;
+        img {
+          margin-right: 12px;
+        }
+      }
+      .contact-number-desc {
+        padding-left: 36px;
       }
     }
   }
