@@ -990,16 +990,17 @@
 }
 
 .bg-transparent-right {
-  background: linear-gradient(90deg, #F2F3F5 0%, rgba(241, 241, 242, 0) 0, rgba(222, 222, 223, 0.9) 96.68%);
-}
-
-.py-55 {
-  padding-top: 55px;
-  padding-bottom: 55px;
+  background: linear-gradient(90deg, rgba(222, 222, 223, 0) 0%, rgba(241, 241, 242, 0.9) 47.81%, #F2F3F5 102%);
 }
 
 .w-540 {
   width: 540px;
+}
+.mb-76 {
+  margin-bottom: 76px;
+}
+.pb-72 {
+  padding-bottom: 72px;
 }
 
 .sticky {
@@ -1240,5 +1241,28 @@ input:checked {
 
   ul {
     list-style-type: disc;
+  }
+}
+/*** why FT Mobile styles ***/
+@media screen and (max-width: 1023px) {
+  .four-oh-four {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .four-oh-four .heading {
+    font-size: 27px;
+    line-height: 30px;
+  }
+  .mb-76 {
+    margin-bottom: 24px;
+  }
+  .bg-transparent-left {
+    background-image: none;
+  }
+  .w-540 {
+    width: 100%;
+  }
+  .bg-transparent-right {
+    background-image: none;
   }
 }
