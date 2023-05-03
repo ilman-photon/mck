@@ -24,7 +24,6 @@ function FaqComponent() {
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
 
-    console.log(faqData);
     return (
         <>
             <div className="four-oh-four container flex mx-auto px-0">
