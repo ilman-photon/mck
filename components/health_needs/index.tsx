@@ -106,9 +106,8 @@ const HealthNeedsComponent = () => {
         }
     };
 
-    // Health needs - list of categories
+    // Health needs - list of categories starts
     const [healthNeedData, SetHealthNeedData] = useState<any>();
-
     function fetchHealthNeedsCategories() {
         return axios.get(
             `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`,
@@ -119,35 +118,42 @@ const HealthNeedsComponent = () => {
             }
         );
     }
-
     useEffect(() => {
         fetchHealthNeedsCategories()
             .then((res) => {
-                SetHealthNeedData(res.data[0]?.healthNeedsHighlight?.expandedValue[0]);
+                //SetHealthNeedData(res.data[0]?.healthNeedsHighlight?.expandedValue[0]);
+                SetHealthNeedData(res.data[0]?.healthNeedsCategory?.value);
             })
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
 
     console.log("healthNeedData---", healthNeedData);
+    // Health needs - list of categories ends
 
     return (
         <>
-            <div className="container w-full mx-auto grid grid-cols-1">
+            <div className="container w-full mx-auto grid grid-cols-1 max-w-7xl">
+
+                {/* Health needs categories section starts */}
                 <div className="health-needs-categories">
                     <div className="health-needs-categories-icons">
                         <ul>
-                            {healthNeedData?.healthNeedItem?.expandedValue?.map((bdata: any) => (
-
+                            {/* {healthNeedData?.healthNeedItem?.expandedValue?.map((bdata: any) => (
                                 <li key={bdata?.contentLink?.id}><img src={bdata?.image?.expandedValue?.url} />{bdata?.title?.value}</li>
-
+                            ))} */}
+                            {healthNeedData.map((bdata: any) => (
+                                <li key={bdata?.contentLink?.id}><img src={bdata?.image?.expandedValue?.url} />{bdata?.name}</li>
                             ))}
                         </ul>
                     </div>
                 </div>
+                {/* Health needs categories section ends */}
 
-                <div className="container lg:p-18">
+                <div className="container max-w-7xl mt-8">
+                    
+                    {/* Health needs Filter section starts */}
                     <div className="flex">
-                        Active Filter :
+                        Active Filters :
                         <div className="flex">
                             {activeFilter.map((item: any) => {
                                 return <div key={item}>{item}</div>;
@@ -156,7 +162,7 @@ const HealthNeedsComponent = () => {
                         </div>
                     </div>
                     {/* <div>Showing 65 results</div> */}
-                    <div className="flex">
+                    <div className="flex mt-8">
                         <div className="flex-none h-max">
                             <div className="border-r-2 border-b-2 pb-3">
                                 <div className="flex items-center my-px">
@@ -209,12 +215,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -239,12 +245,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -269,12 +275,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -301,12 +307,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -331,12 +337,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -360,12 +366,12 @@ const HealthNeedsComponent = () => {
                                     return (
                                         <div className="flex items-center my-px" key={item?.id}>
                                             <input
-                                                id="default-checkbox"
+                                                id={item?.name}
                                                 type="checkbox"
                                                 value=""
                                                 className="w-4 h-4"
                                             />
-                                            <label htmlFor="default-checkbox" className="ml-2">
+                                            <label htmlFor={item?.name} className="ml-2">
                                                 {item?.name}
                                             </label>
                                         </div>
@@ -388,12 +394,12 @@ const HealthNeedsComponent = () => {
                                     return (
                                         <div className="flex items-center my-px" key={item?.id}>
                                             <input
-                                                id="default-checkbox"
+                                                id={item?.name}
                                                 type="checkbox"
                                                 value=""
                                                 className="w-4 h-4"
                                             />
-                                            <label htmlFor="default-checkbox" className="ml-2">
+                                            <label htmlFor={item?.name} className="ml-2">
                                                 {item?.name}
                                             </label>
                                         </div>
@@ -419,12 +425,12 @@ const HealthNeedsComponent = () => {
                                         return (
                                             <div className="flex items-center my-px" key={item?.id}>
                                                 <input
-                                                    id="default-checkbox"
+                                                    id={item?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor="default-checkbox" className="ml-2">
+                                                <label htmlFor={item?.name} className="ml-2">
                                                     {item?.name}
                                                 </label>
                                             </div>
@@ -486,6 +492,16 @@ const HealthNeedsComponent = () => {
                                     </div>
                                 </div>
                             </div>
+                            {/* Health needs categories title starts */}
+                <div>
+                {healthNeedData.map((bdata: any) => (
+                    <>
+                    <div className="section-title">{bdata?.name}</div>
+                    <div>Product lists</div>
+                    </>
+                ))}
+                </div>
+                {/* Health needs categories title ends */}
                             <div className="flex gap-0.5 flex-wrap product-list-container">
                                 {productListData?.data?.results.map((item: any) => {
                                     return (
@@ -510,53 +526,56 @@ const HealthNeedsComponent = () => {
                                     );
                                 })}
                             </div>
+
+                            {/* Health needs Promotional banner section starts */}
                             <div className="product-where-to-buy grid grid-cols-1 px-6">
-                                    <div className="relative isolate overflow-hidden border bg-slate-200 py-16 sm:py-24 lg:py-10">
-                                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                                            <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-                                                <div className="flex max-w-xl lg:max-w-lg border bg-slate-200">
-                                                    <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
-                                                    <div>
-                                                        <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                        <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
-                                                    </div>
-                                                </div>
-                                                <div className="flex max-w-xl lg:max-w-lg border bg-slate-200">
-                                                    <img src="images/childrens-allergy-relief.png" alt="allergy relief" className="pr-6" />
-                                                    <div>
-                                                        <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                        <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
-                                                    </div>
+                                <div className="relative isolate overflow-hidden">
+                                    <div className="mx-auto max-w-7xl">
+                                        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+                                            <div className="flex max-w-xl border bg-slate-200 py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <div>
+                                                    <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                {/* <!-- Image gallery --> */}
-                                <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
-                                    <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden border border-slate-400 lg:block">
-                                        <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="h-full w-full object-cover object-center" />
-                                    </div>
-                                    <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                                        <div className="flex max-w-xl lg:max-w-lg border border-slate-400">
-                                            <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
-                                            <div>
-                                                <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Learn More</div>
-                                            </div>
-                                        </div>
-                                        <div className="flex max-w-xl lg:max-w-lg border border-slate-400">
-                                            <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
-                                            <div>
-                                                <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 uppercase cursor-pointer">Learn More</div>
+                                            <div className="flex max-w-xl border bg-slate-200 py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
+                                                <img src="images/childrens-allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <div>
+                                                    <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+                            </div>
+                            {/* Health needs Promotional banner section ends */}
+
+                            {/* Health needs Promotional banner section starts */}
+                            <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
+                                <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden border border-slate-400 lg:block">
+                                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="h-full w-full object-cover object-center" />
+                                </div>
+                                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                                    <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
+                                        <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                        <div>
+                                            <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
+                                        <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                        <div>
+                                            <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 uppercase cursor-pointer">Where to buy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Health needs Promotional banner section ends */}
                         </div>
                     </div>
                 </div>

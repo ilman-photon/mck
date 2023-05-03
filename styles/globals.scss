@@ -1014,7 +1014,7 @@
 .product-list-container {
   justify-content: flex-start;
   width: 100%;
-  padding: 24px 24px;
+  padding: 24px 0 24px 24px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 
@@ -1025,7 +1025,7 @@
     padding: 16px;
     border: 1px solid #CCD1E3;
     border-radius: 8px;
-    margin-right: 4px;
+    margin-right: 0;
     margin-bottom: 24px;
 
     img {
@@ -1191,7 +1191,7 @@
 }
 
 // :checked
-input[type=checkbox] {
+.tab input[type=checkbox] {
   display: none;
 }
 
