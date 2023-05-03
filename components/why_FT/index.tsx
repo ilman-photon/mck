@@ -41,7 +41,7 @@ function WhyFTComponent() {
                     <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src="images/My headaches.png" /></div>
                 </div>
 
-                <div className="w-full grid lg:flex items-center lg:pb-72">
+                <div className="w-full grid lg:flex items-center">
                     <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src="images/My headaches.png" /></div>
                     <div className="lg:w-3/6 lg:pl-18 lg:pr-12 lg:pt-0 pt-4">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4 lg:text-left text-center">You need products you can trust to heal and thrive.</h2>
