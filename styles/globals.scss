@@ -1215,6 +1215,9 @@ footer {
       list-style: disc;
       margin-left: 16px;
     }
+    ol {
+      list-style: auto;
+    }
   }
 // :checked
 input[type=checkbox] {
