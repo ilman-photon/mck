@@ -990,18 +990,21 @@
 }
 
 .bg-transparent-right {
-  background: linear-gradient(90deg, #F2F3F5 0%, rgba(241, 241, 242, 0) 0, rgba(222, 222, 223, 0.9) 96.68%);
-}
-
-.py-55 {
-  padding-top: 55px;
-  padding-bottom: 55px;
+  background: linear-gradient(90deg, rgba(222, 222, 223, 0) 0%, rgba(241, 241, 242, 0.9) 47.81%, #F2F3F5 102%);
 }
 
 .w-540 {
   width: 540px;
 }
-
+.mb-76 {
+  margin-bottom: 76px;
+}
+.pb-72 {
+  padding-bottom: 72px;
+}
+footer {
+  margin-top: 72px;
+}
 .sticky {
   position: fixed;
   left: 0;
@@ -1155,10 +1158,20 @@
     .contact-body {
       .inquiry-text {
         margin: 0;
+        padding: 0 16px 16px 20px;
       }
 
       p {
-        margin-left: 37px;
+        margin: 0;
+      }
+      .contact-number {
+        min-width: unset;
+        img {
+          margin-right: 12px;
+        }
+      }
+      .contact-number-desc {
+        padding-left: 36px;
       }
     }
   }
@@ -1180,6 +1193,7 @@
       height: 1em;
       text-align: center;
       transition: all 1s;
+      color: red;
     }
   }
 
@@ -1188,8 +1202,6 @@
     padding: 0 1em;
     transition: all 1s;
   }
-}
-
 // :checked
 .tab input[type=checkbox] {
   display: none;
@@ -1207,6 +1219,7 @@ input:checked {
     padding: 24px;
     border-top: 0.5px solid #CCD1E3;
   }
+}
 }
 
 .pdp-details-heading {
@@ -1240,5 +1253,34 @@ input:checked {
 
   ul {
     list-style-type: disc;
+  }
+}
+/*** why FT, Faq Mobile styles ***/
+@media screen and (max-width: 1023px) {
+  .four-oh-four {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .four-oh-four .heading {
+    font-size: 27px;
+    line-height: 30px;
+  }
+  .mb-76 {
+    margin-bottom: 24px;
+  }
+  .bg-transparent-left {
+    background-image: none;
+  }
+  .w-540 {
+    width: 100%;
+  }
+  .bg-transparent-right {
+    background-image: none;
+  }
+  footer {
+    margin-top: 24px;
+  }
+  .tab input:checked ~ .tab-content {
+    padding: 16px;
   }
 }
