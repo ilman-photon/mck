@@ -20,18 +20,12 @@ export default function FooterComponent() {
       `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`, { headers: { 'Accept-Language': 'en' } },
     );
     setFooterData(response);
-    setFooterSecondData(responseid);
-    //console.log(responseid, "2")
+    setFooterSecondData(responseid);    
   };
-  //console.log(footerData, "3");
   useEffect(() => {
     getData();
   }, []);
   
-  console.log(footerSecondData, "1")
- // console.log(footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue[0], "final");
-
-
   return (
     <footer id="footer" className="bg-mcklightyellow">
       <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">

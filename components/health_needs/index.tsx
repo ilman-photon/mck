@@ -62,7 +62,6 @@ const HealthNeedsComponent = () => {
         );
         promise
             .then((res) => {
-                console.log("FetchProductList", res);
                 SetProductListData(res);
             })
             .catch((e: Error | AxiosError) => console.log(e));

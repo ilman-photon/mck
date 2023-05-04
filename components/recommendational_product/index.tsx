@@ -10,7 +10,6 @@ function RecommendationalProductComponent({ sectionData }: any) {
 
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      console.log("idRequests");
       return axios.get(
         `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
         {

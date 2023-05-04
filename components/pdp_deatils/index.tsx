@@ -1,38 +1,64 @@
+import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+
 function PdpDetail(pdpViewData: any) {
+
+    
+    const [responceValue, setResponceValue] = useState<any>();
+
+    function fetchPDPDetails() {
+        return axios.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/vitamin-d3-50-mcg-2000/&expand=*`,
+            {
+                headers: {
+                    "Accept-Language": "en",
+                },
+            }
+        );
+    }
+    
+    useEffect(() => {
+        fetchPDPDetails()
+            .then((res) => {
+                setResponceValue(res.data[0]);
+            })
+            .catch((e: Error | AxiosError) => console.log(e));
+    }, []);
+
     return (
         <div className="lg:row-span-3 lg:ml-[72px] pdp-details-heading">
-            <p className="text-gtl-med text-mckblue font-medium mb-6"
-                dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.title.value, }}></p>
-            <h2 className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2"
-                dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.subTitle?.value, }}></h2>
-            <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2"
-                dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.volume?.value, }}></p>
+            <p className="text-gtl-med text-mckblue font-medium mb-6" id="pdp_details_001"
+                dangerouslySetInnerHTML={{ __html: responceValue?.title.value, }}></p>
+            <h2 className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2" id="pdp_details_002"
+                dangerouslySetInnerHTML={{ __html: responceValue?.subTitle?.value, }}></h2>
+            <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2" id="pdp_details_003"
+                dangerouslySetInnerHTML={{ __html: responceValue?.volume?.value, }}></p>
             {/* <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-6">100 SOFTGELS</p> */}
             <div className="border-y-2 py-6">
-                <h6 className="text-gtl-med text-mcknormalgrey text-2xl font-medium">Description</h6>
+                <h6 className="text-gtl-med text-mcknormalgrey text-2xl font-medium" id="pdp_details_004">Description</h6>
                 <ul className="pdp-detail-description text-sofia-reg text-mcknormalgrey text-lg font-normal list-disc pl-9">
-                    <div dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.description?.value, }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: responceValue?.description?.value, }}  id="pdp_details_005"></div>
                 </ul>
             </div>
             <div className="tab flex flex-wrap justify-start overflow-hidden text-black">
-                <input type="checkbox" id="chck2" />
-                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="chck2">Ingredients</label>
+                <input type="checkbox" id="pdp_details_chck2" />
+                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="pdp_details_chck2">Ingredients</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
-                    <p dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.ingredients?.value, }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: responceValue?.ingredients?.value, }}  id="pdp_details_006"></p>
                 </div>
             </div>
             <div className="tab flex flex-wrap justify-start overflow-hidden text-black">
-                <input type="checkbox" id="chck3" />
-                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="chck3">Directions</label>
+                <input type="checkbox" id="pdp_details_chck3" />
+                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="pdp_details_chck3">Directions</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
-                    <p dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.ingredients?.value, }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: responceValue?.ingredients?.value, }}  id="pdp_details_007"></p>
                 </div>
             </div>
             <div className="tab flex flex-wrap justify-start overflow-hidden text-black">
-                <input type="checkbox" id="chck4" />
-                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="chck4">Warnings</label>
+                <input type="checkbox" id="pdp_details_chck4" />
+                <label className="grow px-4 py-3 font-medium text-lg text-sofia-reg border-y flex w-full border-x-0" htmlFor="pdp_details_chck4">Warnings</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
-                    <p dangerouslySetInnerHTML={{ __html: pdpViewData?.value[0]?.warnings?.value, }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: responceValue?.warnings?.value, }}  id="pdp_details_008"></p>
                 </div>
             </div>
 
