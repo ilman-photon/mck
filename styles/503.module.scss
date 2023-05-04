@@ -1,6 +1,7 @@
 .five-oh-three {
-  padding: 72px;
+  padding: 72px 72px 0;
   color: #001a71;
+  width: 538px;
 
   .heading {
     font-size: 54px;
@@ -12,11 +13,9 @@
     font-size: 36px;
     line-height: 41px;
     font-family: "GTAlpina-Medium";
-    padding: 12px 0;
   }
 
   .hint {
-    padding-top: 12px;
     font-size: 18px;
     line-height: 27px;
     font-family: "sofia-pro-regular";
@@ -32,12 +31,26 @@
 
 @media (max-width: 961px) {
   .five-oh-three {
-    padding: 32px;
+    padding: 24px 16px 0;
+    width: 100%;
+    .heading {
+      font-size: 32px;
+      line-height: 36px;
+    }
+    .text {
+      font-size: 24px;
+      line-height: 27px;
+    }
+    .hint {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
+  
 }
 
 @media (max-width: 641px) {
   .five-oh-three {
-    padding: 16px;
+    padding: 24px 16px 0;
   }
 }

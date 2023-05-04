@@ -56,6 +56,10 @@
 @import "ProductSearchList.module.scss";
 @import "HealthNeeds.module.scss";
 
+a {
+  color: inherit;
+  text-decoration: underline;
+}
 .green-light {
   background-color: #e0eae8;
 }
