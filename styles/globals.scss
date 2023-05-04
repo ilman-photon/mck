@@ -1211,9 +1211,12 @@ footer {
     max-height: 0;
     padding: 0 1em;
     transition: all 1s;
-    ul {
+    ul, ol {
       list-style: disc;
       margin-left: 16px;
+    }
+    ol {
+      list-style: auto;
     }
   }
 // :checked
@@ -1298,7 +1301,7 @@ input:checked {
     padding: 16px;
   }
   .tab {
-    .tab-content ul {
+    .tab-content ul, ol {
       margin-left: 8px;
     }
     .tab-label:after {
