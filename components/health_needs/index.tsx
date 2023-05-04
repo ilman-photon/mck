@@ -536,14 +536,14 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">Where to buy</div>
                                                 </div>
                                             </div>
                                             <div className="flex max-w-xl border bg-slate-200 py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
                                                 <img src="images/childrens-allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">Where to buy</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -563,14 +563,14 @@ const HealthNeedsComponent = () => {
                                         <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                         <div>
                                             <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">Where to buy</div>
+                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">Where to buy</div>
                                         </div>
                                     </div>
                                     <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
                                         <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                         <div>
                                             <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 uppercase cursor-pointer">Where to buy</div>
+                                            <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">Where to buy</div>
                                         </div>
                                     </div>
                                 </div>
