@@ -1186,14 +1186,18 @@ footer {
       background: #CCD1E3;
     }
 
-    &::after {
-      content: "\02795";
+    &:after {
+      content: "+";
       //background-image: url('images/plus.svg');
-      width: 1em;
-      height: 1em;
+      width: 24px;
+      height: 24px;
       text-align: center;
       transition: all 1s;
-      color: red;
+      color: #001a71;
+      font-size: 30px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
     }
   }
 
@@ -1201,6 +1205,10 @@ footer {
     max-height: 0;
     padding: 0 1em;
     transition: all 1s;
+    ul {
+      list-style: disc;
+      margin-left: 16px;
+    }
   }
 // :checked
 input[type=checkbox] {
@@ -1210,7 +1218,7 @@ input[type=checkbox] {
 input:checked {
   +.tab-label {
     &::after {
-      content: "\2796";
+      content: "-";
     }
   }
 
@@ -1282,5 +1290,13 @@ input:checked {
   }
   .tab input:checked ~ .tab-content {
     padding: 16px;
+  }
+  .tab {
+    .tab-content ul {
+      margin-left: 8px;
+    }
+    .tab-label:after {
+      margin-top: -4px;
+    }
   }
 }
