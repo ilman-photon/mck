@@ -57,7 +57,6 @@ function AllProductCategoryPage() {
           .catch((e) => {
             setCategoryLoding(true);
             setCategoryError(e);
-            console.log(e);
           });
       })
       .catch((e) => {
