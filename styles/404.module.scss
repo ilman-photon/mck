@@ -55,7 +55,7 @@
   }
   .bg-logo-right {
     top: -70px;
-    right: -230px;
+    right: -150px;
     width: 744px;
     height: 530px;
   }
@@ -80,6 +80,9 @@
       width: 239px;
       height: 307px;
       z-index: -1;
+    }
+    .width-416 {
+      width: 100%;
     }
   }
 }
