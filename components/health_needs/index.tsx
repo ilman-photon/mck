@@ -108,31 +108,6 @@ const HealthNeedsComponent = () => {
         }
     };
 
-    // --------- Health needs - list of categories starts ---------
-    const [healthNeedData, setHealthNeedData] = useState<any>();
-    function fetchHealthNeedsCategories() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
-    }
-    useEffect(() => {
-        fetchHealthNeedsCategories()
-            .then((res: any) => {
-                //console.log("response: ",res.data[0].contentArea?.expandedValue);
-                const healthNeedsCategoriesList = res.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
-                //console.log("healthNeedsCategoriesList--- ",healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
-                const healthNeedsCategoriesListData = healthNeedsCategoriesList.length > 0 ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue : [];
-                setHealthNeedData(healthNeedsCategoriesListData);
-            })
-            .catch((e: Error | AxiosError) => console.log(e));
-    }, []);
-    // --------- Health needs - list of categories ends --------- //
-
     // -------- Recommended Products Section ----------- //
     const [recommendedProductsData, setRecommendedProductsData] = useState<any>();
     function fetchRecommendedProductsData() {
@@ -157,6 +132,42 @@ const HealthNeedsComponent = () => {
     // -------- Recommended Products Section ----------- //
 
 
+
+    // -------- Health needs page data fetch starts -------- //
+    const [healthNeedData, setHealthNeedData] = useState<any>();
+    const [activeFiltersData, setactiveFiltersData] = useState<any>();
+    const [productCategoryData, setproductCategoryData] = useState<any>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            // Health needs Categories List
+            const healthNeedsCategories = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const healthNeedsCategoriesList = healthNeedsCategories.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
+            console.log("healthNeedsCategoriesList --- ",healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
+            const healthNeedsCategoriesListData = healthNeedsCategoriesList.length > 0 ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue : [];
+            setHealthNeedData(healthNeedsCategoriesListData);
+
+            // Product Category setting - Filters data
+            const activeFiltersData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
+            const activeFiltersDataList = activeFiltersData?.data[0];
+            console.log("activeFilters --- ", activeFiltersDataList);
+            setactiveFiltersData(activeFiltersDataList);
+
+            // Product Category Helath needs - Left side category lists
+            const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const productCategoryDataList = productCategoryData?.data[0]?.categoryFilter?.expandedValue;
+            console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
+            //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
+            setproductCategoryData(productCategoryDataList);
+
+        };
+
+        fetchData();
+    }, []);
+    // -------- Health needs page data fetch ends -------- //
+
+
     return (
         <>
             <div className="container w-full mx-auto grid grid-cols-1 max-w-7xl">
@@ -178,50 +189,62 @@ const HealthNeedsComponent = () => {
 
                     {/* Health needs Filter section starts */}
                     <div className="flex">
-                        Active Filters :
+                        {activeFiltersData?.activeFiltersText?.value}
+                        <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} />
+                        <img src={activeFiltersData?.clearAllImage?.expandedValue?.url} />
                         <div className="flex">
-                            {activeFilter.map((item: any) => {
+                            {/* {activeFiltersData?.map((item: any) => {
                                 return <div key={item}>{item}</div>;
-                            })}
-                            <div onClick={() => setActiveFilter([])}>Clear All</div>
+                            })} */}
+                            <div onClick={() => setActiveFilter([])}>{activeFiltersData?.clearAllText?.value}</div>
                         </div>
                     </div>
-                    {/* <div>Showing 65 results</div> */}
+
+                    <div>{activeFiltersData?.showResultsText?.value}</div>
+
                     <div className="flex mt-8">
                         <div className="flex-none h-max">
                             <div className="border-r-2 border-b-2 pb-3">
+
+                                {/* Left main category lists */}
                                 <div className="flex items-center my-px">
+                                    <ul>
+                                {productCategoryData && productCategoryData?.map((bdata1: any) => (
+                                    <li key={bdata1?.contentLink?.id}>
                                     <img
                                         id="acute"
-                                        src={productFilter?.data[0].acuteImage?.value?.url}
+                                        src={bdata1?.categoryImage?.expandedValue?.url}
                                         alt=""
                                     />
                                     <label htmlFor="acute" className="ml-2 filter-title">
-                                        {productFilter?.data[0].acuteLabel?.value}
+                                        {/* {productFilter?.data[0].acuteLabel?.value} */}
+                                        {bdata1?.mainCategory?.value[0].name}
                                     </label>
+                                    </li>
+                                    
+                                    ))}
+                                    </ul>
+                                    
                                 </div>
+                                {/* Left main category lists */}
 
-                                {productFilter?.data[0].productTypeAcute?.value?.map(
-                                    (item: any) => {
-                                        return (
+                                {productCategoryData && productCategoryData?.map((bdata2: any) => (
                                             <div
                                                 className="flex items-center my-px"
-                                                key={item?.id}
-                                                onClick={(e) => handleCheckBox(e, item?.name)}
+                                                key={bdata2?.subCategory?.value[0]?.id}
+                                                onClick={(e) => handleCheckBox(e, bdata2?.name)}
                                             >
                                                 <input
-                                                    id={item?.name}
+                                                    id={bdata2?.subCategory?.value[0]?.name}
                                                     type="checkbox"
                                                     value=""
                                                     className="w-4 h-4"
                                                 />
-                                                <label htmlFor={item?.name} className="ml-2">
-                                                    {item?.name}
+                                                <label htmlFor={bdata2?.subCategory?.value?.name} className="ml-2">
+                                                    {bdata2?.subCategory?.value[0]?.name}
                                                 </label>
                                             </div>
-                                        );
-                                    }
-                                )}
+                                ))}
                             </div>
                             <div className="border-r-2 border-b-2 pt-3 pb-3">
                                 <div className="flex items-center my-px">
@@ -560,19 +583,19 @@ const HealthNeedsComponent = () => {
                                     <div className="mx-auto max-w-7xl">
                                         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
 
-                                    
+
                                             <div className="flex max-w-xl border bg-slate-200 py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText.value}</div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
                                                 </div>
                                             </div>
                                             <div className="flex max-w-xl border bg-slate-200 py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
                                                 <img src="images/childrens-allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText.value}</div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
                                                 </div>
                                             </div>
 
