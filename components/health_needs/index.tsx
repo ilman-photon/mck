@@ -246,7 +246,8 @@ const HealthNeedsComponent = () => {
                                             </div>
                                 ))}
                             </div>
-                            <div className="border-r-2 border-b-2 pt-3 pb-3">
+
+                            {/* <div className="border-r-2 border-b-2 pt-3 pb-3">
                                 <div className="flex items-center my-px">
                                     <img
                                         id="category-name"
@@ -275,7 +276,7 @@ const HealthNeedsComponent = () => {
                                         );
                                     }
                                 )}
-                            </div>
+                            </div> */}
 
                             <div className="border-r-2 border-b-2 pt-3 pb-3">
                                 <div className="flex items-center my-px">
