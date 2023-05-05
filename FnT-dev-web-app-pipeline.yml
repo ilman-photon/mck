@@ -35,11 +35,11 @@ stages:
       inputs:
         script: |
           cat next.config.js
-          mv config/env.stg.next.config.js next.config.js
+          mv config/env.dev.next.config.js next.config.js
           sleep 2s
-          printf "prep url updated"
+          printf "dev url updated"
           cat next.config.js
-      displayName: 'prep Url updation'
+      displayName: 'Dev Url updation'
 
     - script: |
         npm install
