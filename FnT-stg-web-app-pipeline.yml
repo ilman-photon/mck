@@ -30,6 +30,17 @@ stages:
       inputs:
         versionSpec: '18.x'
       displayName: 'Install Node.js'
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cat next.config.js
+          mv config/env.stg.next.config.js next.config.js
+          sleep 3s
+          printf "Stage url updated"
+          cat next.config.js
+      displayName: 'Stage Url updation'
+
     - script: |
         npm install
         npm run build:stg

@@ -1,7 +1,10 @@
 .five-oh-three {
   padding: 72px 72px 0;
   color: #001a71;
-  width: 538px;
+
+  .width-396 {
+    width: 396px;
+  }
 
   .heading {
     font-size: 54px;
@@ -21,11 +24,30 @@
     font-family: "sofia-pro-regular";
     text-decoration: underline;
   }
+
+  .bg-logo-right-503 {
+    top: -70px;
+    right: -150px;
+    width: 744px;
+    height: 530px;
+  }
 }
 
 @media (max-width: 1025px) {
   .five-oh-three {
     padding: 64px;
+  }
+}
+
+@media (max-width: 1023px) { 
+  .five-oh-three {
+    .bg-logo-right-503 {
+      top: 54px;
+      right: 0;
+      width: 239px;
+      height: 307px;
+      z-index: -1;
+    }
   }
 }
 
@@ -44,6 +66,9 @@
     .hint {
       font-size: 16px;
       line-height: 24px;
+    }
+    .width-396 {
+      width: 100%;
     }
   }
   

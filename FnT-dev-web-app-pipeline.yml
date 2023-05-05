@@ -30,11 +30,23 @@ stages:
       inputs:
         versionSpec: '18.x'
       displayName: 'Install Node.js'
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cat next.config.js
+          mv config/env.dev.next.config.js next.config.js
+          sleep 3s
+          printf "dev url updated"
+          cat next.config.js
+      displayName: 'Dev Url updation'
+
     - script: |
         npm install
         npm run build:dev
         npm run test --if-present
       displayName: 'npm install, build and test'
+
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:

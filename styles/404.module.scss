@@ -1,7 +1,5 @@
 .four-oh-four {
-  padding: 8px;
-  flex-direction: column;
-  padding-top: 75px;
+  padding: 72px 72px 0;
 
   .heading {
     font-size: 54px;
@@ -15,7 +13,7 @@
     font-size: 36px;
     line-height: 41px;
     font-family: "GTAlpina-Medium";
-    padding: 12px 0;
+    padding-right: 65px;
   }
 
   .hint {
@@ -23,7 +21,6 @@
     line-height: 27px;
     color: #3a3e41;
     font-family: "GTAlpina-Medium";
-    padding: 12px 0;
   }
 
   .table-container {
@@ -34,7 +31,6 @@
     border: 0.5px solid #ccd1e3;
     border-radius: 8px 8px;
     width: 416px;
-    margin: 12px 0;
 
     .table-heading {
       padding: 12px 16px;
@@ -57,6 +53,15 @@
       text-decoration: none;
     }
   }
+  .bg-logo-right {
+    top: -70px;
+    right: -150px;
+    width: 744px;
+    height: 530px;
+  }
+  .width-416 {
+    width: 416px;
+  }
 }
 
 @media (max-width: 1025px) {
@@ -67,10 +72,30 @@
     padding: 64px;
   }
 }
-
+@media (max-width: 1023px) {
+  .four-oh-four {
+    .bg-logo-right {
+      top: 54px;
+      right: 0;
+      width: 239px;
+      height: 307px;
+      z-index: -1;
+    }
+    .width-416 {
+      width: 100%;
+    }
+  }
+}
 @media (max-width: 961px) {
   .four-oh-four {
     padding: 24px 72px 0;
+    .table-container {
+      font-size: 16px;
+      line-height: 24px;
+      .table-heading {
+        padding: 12px;
+      }
+    }
   }
   .four-zero-four {
     padding: 32px;
