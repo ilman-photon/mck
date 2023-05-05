@@ -64,6 +64,7 @@ const HealthNeedsComponent = () => {
         );
         promise
             .then((res) => {
+                console.log("FetchProductList", res);
                 SetProductListData(res);
             })
             .catch((e: Error | AxiosError) => console.log(e));
@@ -143,7 +144,7 @@ const HealthNeedsComponent = () => {
             // Health needs Categories List
             const healthNeedsCategories = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const healthNeedsCategoriesList = healthNeedsCategories.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
-            console.log("healthNeedsCategoriesList --- ",healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
+            console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
             const healthNeedsCategoriesListData = healthNeedsCategoriesList.length > 0 ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue : [];
             setHealthNeedData(healthNeedsCategoriesListData);
 
@@ -207,43 +208,53 @@ const HealthNeedsComponent = () => {
 
                                 {/* Left main category lists */}
                                 <div className="flex items-center my-px">
-                                    <ul>
-                                {productCategoryData && productCategoryData?.map((bdata1: any) => (
-                                    <li key={bdata1?.contentLink?.id}>
-                                    <img
-                                        id="acute"
-                                        src={bdata1?.categoryImage?.expandedValue?.url}
-                                        alt=""
-                                    />
-                                    <label htmlFor="acute" className="ml-2 filter-title">
-                                        {/* {productFilter?.data[0].acuteLabel?.value} */}
-                                        {bdata1?.mainCategory?.value[0].name}
-                                    </label>
-                                    </li>
-                                    
-                                    ))}
-                                    </ul>
-                                    
+                                    <div>
+                                        {productCategoryData && productCategoryData?.map((bdata1: any) => (
+                                            <>
+                                            <div key={bdata1?.contentLink?.id}>
+                                                <img
+                                                    id="acute"
+                                                    src={bdata1?.categoryImage?.expandedValue?.url}
+                                                    alt=""
+                                                />
+                                                <label htmlFor="acute" className="ml-2 filter-title">
+                                                    {/* {productFilter?.data[0].acuteLabel?.value} */}
+                                                    {bdata1?.mainCategory?.value[0].name}
+                                                </label>
+                                            </div>
+                                        
+                                            <div>
+                                            <ul>
+                                            {bdata1?.subCategory?.value?.map((bdata2: any) => (
+                                                <li key={bdata2?.id}>
+                                                <div
+                                                    className="flex items-center my-px"
+                                                    
+                                                    onClick={(e) => handleCheckBox(e, bdata2?.name)}
+                                                >
+                                                    <input
+                                                        id={bdata2?.name}
+                                                        type="checkbox"
+                                                        value=""
+                                                        className="w-4 h-4"
+                                                    />
+                                                    <label htmlFor={bdata2?.name} className="ml-2">
+                                                        {bdata2?.name}
+                                                    </label>
+                                                </div>
+                                                </li>
+                                            ))}
+                                            </ul>
+                                            </div>
+                                            </>
+                                        ))}
+                                        
+                                    </div>
+
                                 </div>
                                 {/* Left main category lists */}
 
-                                {productCategoryData && productCategoryData?.map((bdata2: any) => (
-                                            <div
-                                                className="flex items-center my-px"
-                                                key={bdata2?.subCategory?.value[0]?.id}
-                                                onClick={(e) => handleCheckBox(e, bdata2?.name)}
-                                            >
-                                                <input
-                                                    id={bdata2?.subCategory?.value[0]?.name}
-                                                    type="checkbox"
-                                                    value=""
-                                                    className="w-4 h-4"
-                                                />
-                                                <label htmlFor={bdata2?.subCategory?.value?.name} className="ml-2">
-                                                    {bdata2?.subCategory?.value[0]?.name}
-                                                </label>
-                                            </div>
-                                ))}
+
                             </div>
 
                             {/* <div className="border-r-2 border-b-2 pt-3 pb-3">
@@ -489,20 +500,20 @@ const HealthNeedsComponent = () => {
                         </div>
                         <div className="flex-auto">
                             <div className="">
-                                <div className="container mx-auto">
+                                {/* <div className="container mx-auto">
                                     <div className="grid md:grid-cols-2 lg:grid-cols-2">
                                         {recommendedProductListData?.data?.results.map(
                                             (item: any) => {
                                                 return (
-                                                    <div
+                                                    <div    
                                                         className="bg-color m-3 p-9"
                                                         key={item?.contentLink?.id}
                                                     >
                                                         <style jsx>{`
-                        .bg-color {
-                          background-color: ${item?.backgroundColor?.value};
-                        }
-                      `}</style>
+                                                                .bg-color {
+                                                                    background-color: ${item?.backgroundColor?.value};
+                                                                }
+                                                                `}</style>
                                                         <div className="logo-img mb-3">
                                                             <img
                                                                 className="h-auto max-w-full"
@@ -538,7 +549,7 @@ const HealthNeedsComponent = () => {
                                             }
                                         )}
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* Health needs categories title starts */}
@@ -546,7 +557,31 @@ const HealthNeedsComponent = () => {
                                 {healthNeedData?.map((bdata: any) => (
                                     <>
                                         <div className="section-title">{bdata?.healthNeedCategory?.value[0]?.name}</div>
-                                        <div>Product lists</div>
+
+                                        <div className="flex gap-0.5 flex-wrap product-list-container">
+                                            {productListData?.data?.results.map((item: any) => {
+                                                return (
+                                                    <div
+                                                        className="w-52 h-96 border-2 product-list-item"
+                                                        key={item?.contentLink?.id}
+                                                    >
+                                                        <img src={item?.image?.value?.url} alt="" />
+                                                        <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
+                                                            testAcute Care
+                                                        </div>
+                                                        <div className="mckblue product-list-title">
+                                                            {item?.name}
+                                                        </div>
+                                                        <div
+                                                            className="mcknormalgrey product-list-description"
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: item?.highlightDescription?.value,
+                                                            }}
+                                                        ></div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </>
                                 ))}
                             </div>
@@ -561,7 +596,7 @@ const HealthNeedsComponent = () => {
                                         >
                                             <img src={item?.image?.value?.url} alt="" />
                                             <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                                                Acute Care
+                                                test Acute Care
                                             </div>
                                             <div className="mckblue product-list-title">
                                                 {item?.name}
