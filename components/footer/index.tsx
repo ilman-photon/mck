@@ -29,14 +29,15 @@ export default function FooterComponent() {
   return (
     <footer id="footer" className="bg-mcklightyellow">
       <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
-        <div className="grid md:grid-cols-3 lg:grid-cols-3">
-          <div className=" my-6 lg:my-0 text-gtl-med">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2">
+          <div className="my-6 lg:my-0 text-gtl-med border-r">
             <ul className="mb-0 list-none lg:py-0 px-0">
               <li className="my-2 lg:my-0 grid">
                 {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map((link:any)=>(
                    <Link
                    className="text-sofia-reg text-lg text-mcknormalgrey my-2"
                    rel="stylesheet"
+                   id={link?.contentLink?.id}
                    key={link?.contentLink?.id}
                    href={link?.menuUrl?.value}
                  >{link?.menuTitle?.value}
@@ -50,6 +51,7 @@ export default function FooterComponent() {
                    rel="stylesheet"
                    href={sociallink?.socialMediaImage?.expandedValue?.url}
                    key={sociallink?.contentLink?.id}
+                   id={sociallink?.contentLink?.id}
                  ><img src={sociallink?.socialMediaImage?.expandedValue?.thumbnail?.value?.url} alt={sociallink?.socialMediaImage?.expandedValue?.altText?.value}></img>
                  </Link>
                 ))} 
@@ -57,7 +59,7 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div className="f-border py-6 lg:py-0 lg:pl-6 pl-0">
+          <div className="py-6 lg:py-0 lg:pl-6 pl-0">
             <ul className="mb-0 list-none">
               <li className="my-2 lg:my-0 grid">
               {footerSecondData?.data[0]?.menuItemsColumn2?.expandedValue.map((slink:any)=>(
@@ -66,6 +68,7 @@ export default function FooterComponent() {
                    rel="stylesheet"
                    href={slink?.menuUrl?.value}
                    key={slink?.contentLink?.id}
+                   id={slink?.contentLink?.id}
                  >{slink?.menuTitle?.value}
                  </Link>
                 ))}
@@ -73,7 +76,7 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div id="footer-sign-up" className="px-0 py-0 pl-0 lg:pl-6">
+          {/* <div id="footer-sign-up" className="px-0 py-0 pl-0 lg:pl-6">
             <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border mt-5 lg:mt-0">
               <h5 className="m-0 pb-3 px-0 text-2xl text-gtl-med text-mckblue">
               {footerSecondData?.data[0]?.subscription?.expandedValue[0]?.name}
@@ -89,7 +92,7 @@ export default function FooterComponent() {
               </div>
               <SignUpComponent />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
