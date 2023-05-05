@@ -2,7 +2,7 @@ import ServiceUnavailableCoumponent from "@/components/503/503";
 import FooterComponent from "@/components/footer";
 import HeaderNoStickyComponent from "@/components/header_nosticky";
 
-function FourOhFour() {
+function FiveOhThree() {
   return (
     <>
       <div className="grid">
@@ -14,4 +14,4 @@ function FourOhFour() {
   );
 }
 
-export default FourOhFour;
+export default FiveOhThree;
