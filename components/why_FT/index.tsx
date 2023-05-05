@@ -29,8 +29,8 @@ function WhyFTComponent() {
 
     return (
         <>
-            <div className="four-oh-four container flex mx-auto px-0">
-                <div className="mb-76 sm:mb-6">
+            <div className="four-oh-four container flex flex-col mx-auto px-0">
+                <div className="mb-76 mb-6">
                     <img src="images/why F and T header banner.png" alt={whyFTData?.contentArea?.expandedValue[0]?.name} id="wft_img_001" />
                 </div>
                 <div className="heading lg:pb-7 pb-4 text-center">{whyFTData?.contentArea?.expandedValue[1]?.name}</div>
