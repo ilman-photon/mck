@@ -2,7 +2,7 @@ function FourOhFourCoumponent() {
     return (
         <>
             <div className="four-oh-four container flex flex-row mx-auto">
-                <div className="lg:width-416 w-full">
+                <div className="width-416">
                 <div className="lg:heading pb-3 text-32 text-gtl-med font-medium" id="err-404-label-001">Oops! </div>
                 <div className="lg:text pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002">We can’t find the page you are looking for.</div>
                 <div className="lg:hint pb-6 text-xl">Not to worry...</div>
