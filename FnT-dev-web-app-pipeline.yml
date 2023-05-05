@@ -36,7 +36,7 @@ stages:
         script: |
           cat next.config.js
           mv config/env.dev.next.config.js next.config.js
-          sleep 2s
+          sleep 3s
           printf "dev url updated"
           cat next.config.js
       displayName: 'Dev Url updation'
