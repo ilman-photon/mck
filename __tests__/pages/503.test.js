@@ -1,23 +1,23 @@
 import { render, screen, act } from '@testing-library/react';
-import fiveOhthree from "@/components/503/index";
+import ServiceUnavailableCoumponent from "@/components/503/503";
 import axios from "axios";
 jest.mock("axios");
 
 
-describe('fiveOhthreePage - Display values from CMS', () => {
+describe('ServiceUnavailableCoumponent - Display values from CMS', () => {
   beforeEach(() => {
-    axios.get.mockResolvedValue( {data: fiveOhthreeData} );
+    axios.get.mockResolvedValue( {data: serviceUnavailableCoumponentData} );
   });
 
   test('Display values from CMS', async () => {
     await act(async () => {
-      render(<fiveOhthree />);
+      render(<ServiceUnavailableCoumponent />);
     });
     // expect(screen.getByText('Hmmm!')).toBeInTheDocument();
   });
 });
 
-const fiveOhthreeData = [
+const serviceUnavailableCoumponentData = [
     {
         "contentLink": {
             "id": 346,

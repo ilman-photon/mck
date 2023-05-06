@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
-import WhyFTComponent from "@/components/why_FT/index";
+import WhyFTComponent from "@/components/why_FT/WhyFTComponent";
 import axios from "axios";
 jest.mock("axios");
 
