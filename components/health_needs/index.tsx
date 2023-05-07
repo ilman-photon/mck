@@ -149,8 +149,6 @@ const HealthNeedsComponent = () => {
     }, []);
     // -------- Recommended Products Section ----------- //
 
-
-
     // -------- Health needs page data fetch starts -------- //
     const [healthNeedData, setHealthNeedData] = useState<any>();
     const [activeFiltersData, setactiveFiltersData] = useState<any>();
@@ -187,7 +185,25 @@ const HealthNeedsComponent = () => {
     }, []);
     // -------- Health needs page data fetch ends -------- //
 
-
+    // -------- View all checkbox functionality ------- //
+    // const viewallhandleCheckBox = (event: React.MouseEvent<HTMLDivElement>, label: string) => {
+    //     const value = (event.target as HTMLInputElement).value;
+    //     const isChecked = (event.target as HTMLInputElement).checked;
+        
+    //     if (label === 'viewall') {
+    //         // If "View All" checkbox is clicked, update all sub-categories checkboxes
+    //         setActiveFilter(isChecked ? leftfiltermaindata?.subCategory?.value?.map((item: any) => item.name) : []);
+    //         document.querySelectorAll('input[type=checkbox]').forEach((checkbox: HTMLInputElement) => {
+    //             checkbox.checked = isChecked;
+    //         });
+    //     } else {
+    //         // If a sub-category checkbox is clicked, update the active filter
+    //         const newActiveFilter = isChecked ? [...activeFilter, value] : activeFilter.filter((item: string) => item !== value);
+    //         setActiveFilter(newActiveFilter);
+    //     }
+    // };
+    
+    
     return (
         <>
             <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1 max-w-7xl">
@@ -213,7 +229,7 @@ const HealthNeedsComponent = () => {
                             {activeFiltersData?.activeFiltersText?.value}
                             <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} className="mr-2 ml-2" />
 
-                            <div className="flex">
+                            <div className="flex flex-wrap items-baseline">
                                 {activeFilter?.map((item: any) => {
                                     return (
                                         <div className="flex rounded-full mck-hn-selected-value" key={item}>
@@ -229,10 +245,13 @@ const HealthNeedsComponent = () => {
                                         </div>
                                     );
                                 })}
+                                <div className="flex cursor-pointer ml-2 items-baseline">
+                                {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
+                                <img src="/images/hn-delete-icon.svg"
+                                    className="mck-filter-clearall-icon"
+                                    alt="delete icon" />
+                                <div className="underline" onClick={() => setActiveFilter([])}>{activeFiltersData?.clearAllText?.value}</div>
                             </div>
-                            <div className="flex cursor-pointer">
-                                <img src={activeFiltersData?.clearAllImage?.expandedValue?.url} />
-                                <div onClick={() => setActiveFilter([])}>{activeFiltersData?.clearAllText?.value}</div>
                             </div>
                         </div>
 
@@ -266,14 +285,25 @@ const HealthNeedsComponent = () => {
                                                 <div className="border-b-2 pb-3 mb-2 mck-hn-filter-subcat">
                                                     <ul>
                                                         <li>
-                                                            <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, viewall)}>
+                                                            {/* <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, viewall)}>
                                                                 <input
                                                                     id="mck-viewall"
                                                                     type="checkbox"
                                                                     value="view all"
                                                                     className="w-4 h-4"
                                                                 />
-                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey">
+                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
+                                                                    View All
+                                                                </label>
+                                                            </div> */}
+                                                            <div className="flex items-center my-px">
+                                                                <input
+                                                                    id="mck-viewall"
+                                                                    type="checkbox"
+                                                                    value="view all"
+                                                                    className="w-4 h-4"
+                                                                />
+                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
                                                                     View All
                                                                 </label>
                                                             </div>
@@ -289,7 +319,7 @@ const HealthNeedsComponent = () => {
                                                                         value={leftfiltersubdata?.name}
                                                                         className="w-4 h-4"
                                                                     />
-                                                                    <label htmlFor={leftfiltersubdata?.name} className="ml-2">
+                                                                    <label htmlFor={leftfiltersubdata?.name} className="ml-2 text-sm">
                                                                         {leftfiltersubdata?.name}
                                                                     </label>
                                                                 </div>
@@ -318,7 +348,7 @@ const HealthNeedsComponent = () => {
                                         {/* Health needs categories title & product carousel items starts */}
                                         <section>
                                             <div className="section-title text-mckblue">{healthcategorytitle?.healthNeedCategory?.value[0]?.name}</div>
-
+                                            {/* Product items */}
                                             <div className="flex gap-0.5 flex-wrap product-list-container">
                                                 {productListData?.data?.results.map((item: any) => {
                                                     return (
@@ -349,7 +379,7 @@ const HealthNeedsComponent = () => {
                             </div>
                             {/* Health needs - Right coloumn ends */}
 
-                            {/* Health needs Promotional banner section starts */}
+                            {/* Health needs Promotional banner section starts - 2 products */}
                             <div className="product-where-to-buy grid grid-cols-1 px-6">
                                 <div className="relative isolate overflow-hidden">
                                     <div className="mx-auto max-w-7xl">
@@ -378,7 +408,7 @@ const HealthNeedsComponent = () => {
                             </div>
                             {/* Health needs Promotional banner section ends */}
 
-                            {/* Health needs Promotional banner section starts */}
+                            {/* Health needs Promotional banner section starts - 3 products */}
                             <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
                                 <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden border border-slate-400 lg:block">
                                     <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="h-full w-full object-cover object-center" />

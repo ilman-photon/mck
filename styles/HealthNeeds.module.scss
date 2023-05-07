@@ -229,7 +229,7 @@
     line-height: 24px;
   }
   .mck-hn-selected-value {
-    padding: 2px 8px;
+    padding: 0 8px 2px;
     background: #f8f9fb;
     border: 1px solid #001a71;
     border-radius: 10px;
@@ -241,7 +241,7 @@
     font-weight: bold;
   }
   .mck-filter-delete-icon {
-    width: 12px;
+    width: 10px;
   }
   .mck-hn-filter-subcat {
     padding-right: 15px;
@@ -251,5 +251,9 @@
   }
   .mck-hn-filter-category {
     padding: 0;
+  }
+  .mck-filter-clearall-icon {
+    width: 12px;
+    margin-right: 5px;
   }
 }
