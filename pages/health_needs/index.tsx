@@ -1,3 +1,4 @@
+import React from "react";
 import useAxios from "@/hooks/useApi";
 import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
@@ -6,6 +7,8 @@ import axios, { AxiosError } from "axios";
 import HealthNeedsComponent from "@/components/health_needs";
 
 function HealthNeedsPage() {
+  
+  // Loading
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,

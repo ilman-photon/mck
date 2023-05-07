@@ -183,39 +183,73 @@
     }
   }
 }
-.health-needs-categories {
-  background-color: #F2F4F9;
-  height: auto;
-  padding: 50px 0 0;
-  margin-top: 50px;
-  .health-needs-categories-icons {
-    ul {
-      list-style: none;
-      -ms-box-orient: horizontal;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -moz-flex;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
-      li {
-        font-family: 'sofia-pro-regular';
-        color: #001A71;
-        font-size: 18px;
-        text-align: center;
-        padding: 0 30px 50px;
-        flex: 1 1 0;
-        flex-basis: auto;
-        img {
-          width: auto;
-          margin: 0 auto 10px auto;
-        }
-        &:last-child {
-          margin-right: 0;
+.mck-health-needs-page {
+  font-family: "sofia-pro-regular";
+  .health-needs-categories {
+    background-color: #f2f4f9;
+    height: auto;
+    padding: 50px 0 0;
+    margin-top: 50px;
+    .health-needs-categories-icons {
+      ul {
+        list-style: none;
+        -ms-box-orient: horizontal;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        li {
+          font-family: "sofia-pro-regular";
+          color: #001a71;
+          font-size: 18px;
+          text-align: center;
+          padding: 0 30px 50px;
+          flex: 1 1 0;
+          flex-basis: auto;
+          img {
+            width: auto;
+            margin: 0 auto 10px auto;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
         }
       }
     }
+  }
+  .filter-title {
+    color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-bold";
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .mck-hn-selected-value {
+    padding: 2px 8px;
+    background: #f8f9fb;
+    border: 1px solid #001a71;
+    border-radius: 10px;
+    margin: 0 4px;
+    font-family: "sofia-pro-regular";
+    font-size: 14px;
+    color: #001a71;
+    align-items: baseline;
+    font-weight: bold;
+  }
+  .mck-filter-delete-icon {
+    width: 12px;
+  }
+  .mck-hn-filter-subcat {
+    padding-right: 15px;
+  }
+  .mck-hn-filter-subcat:last-child {
+    margin: 0;
+  }
+  .mck-hn-filter-category {
+    padding: 0;
   }
 }
