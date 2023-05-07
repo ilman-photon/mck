@@ -207,11 +207,11 @@ const HealthNeedsComponent = () => {
 
                 <div className="container max-w-7xl mt-8">
 
-                    {/* Health needs top Active Filter section starts */}
+                    {/* Health needs - Top Active Filter section starts */}
                     <section>
-                        <div className="flex">
+                        <div className="flex mb-2 items-center text-mckblue">
                             {activeFiltersData?.activeFiltersText?.value}
-                            <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} />
+                            <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} className="mr-2 ml-2" />
 
                             <div className="flex">
                                 {activeFilter?.map((item: any) => {
@@ -220,7 +220,7 @@ const HealthNeedsComponent = () => {
                                             {item}&nbsp;
                                             <img
                                                 src="/images/hn-delete-icon.svg"
-                                                className="mck-filter-delete-icon"
+                                                className="mck-filter-delete-icon cursor-pointer"
                                                 alt="delete icon"
                                                 onClick={() => {
                                                     setActiveFilter(activeFilter.filter((filterItem: any) => filterItem !== item));
@@ -230,15 +230,16 @@ const HealthNeedsComponent = () => {
                                     );
                                 })}
                             </div>
-                            <div className="flex">
+                            <div className="flex cursor-pointer">
                                 <img src={activeFiltersData?.clearAllImage?.expandedValue?.url} />
                                 <div onClick={() => setActiveFilter([])}>{activeFiltersData?.clearAllText?.value}</div>
                             </div>
                         </div>
 
-                        <div>{activeFiltersData?.showResultsText?.value}</div>
+                        <div className="text-mcknormalgrey">{activeFiltersData?.showResultsText?.value}</div>
+
                     </section>
-                    {/* Health needs top Active Filter section starts */}
+                    {/* Health needs - Top Active Filter section starts */}
 
                     {/* Health needs - Left coloumn Filter section starts */}
                     <div className="flex mt-8">
@@ -272,7 +273,7 @@ const HealthNeedsComponent = () => {
                                                                     value="view all"
                                                                     className="w-4 h-4"
                                                                 />
-                                                                <label htmlFor="mck-view-all" className="ml-2">
+                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey">
                                                                     View All
                                                                 </label>
                                                             </div>
@@ -316,7 +317,7 @@ const HealthNeedsComponent = () => {
 
                                         {/* Health needs categories title & product carousel items starts */}
                                         <section>
-                                            <div className="section-title">{healthcategorytitle?.healthNeedCategory?.value[0]?.name}</div>
+                                            <div className="section-title text-mckblue">{healthcategorytitle?.healthNeedCategory?.value[0]?.name}</div>
 
                                             <div className="flex gap-0.5 flex-wrap product-list-container">
                                                 {productListData?.data?.results.map((item: any) => {
