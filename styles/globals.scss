@@ -57,7 +57,7 @@
 @import "HealthNeeds.module.scss";
 
 a {
-  color: #001A71;
+  color: inherit;
   text-decoration: underline;
 }
 .green-light {
@@ -1306,6 +1306,50 @@ input:checked {
     }
     .tab-label:after {
       margin-top: -4px;
+    }
+  }
+}
+
+/*Header issue changes*/
+
+@media (min-width: 768px) {
+  .header {
+    // height: 178px;
+    justify-content: inherit;
+    padding: 0;
+  }
+  .header:hover, .header-sticky:hover {
+    background: #001A71 !important;
+    color: #fff !important;
+  }
+  .header:hover .group svg path {
+    fill: #fff;
+  }
+  .search-icon {
+    position: absolute;
+    bottom: 23px;
+    right: 43px;
+  }
+  .header:hover .search-icon path {
+    fill: #fff;
+  }
+  .brand-logo {
+    padding-left: 32px;
+  }
+  .signup-form {
+    width: 27%;
+  }
+  .bg-gradient {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 47.03%, rgba(255, 255, 255, 0) 100%);
+    width: 100%;
+    height: 363px;
+    left: 0px;
+    top: 0px;
+    z-index: 8;
+  }
+  #nav-bar {
+    a {
+      text-decoration: none;
     }
   }
 }
