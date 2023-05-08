@@ -1347,4 +1347,9 @@ input:checked {
     top: 0px;
     z-index: 8;
   }
+  #nav-bar {
+    a {
+      text-decoration: none;
+    }
+  }
 }
