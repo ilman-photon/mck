@@ -2,6 +2,7 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 function PdpCarousel(prodViewData: any) {
+    const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
     const [prodResponse, setProdResponse] = useState<any>();
 
@@ -23,6 +24,23 @@ function PdpCarousel(prodViewData: any) {
             })
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
+     const handleDownArrowClick =()=>{
+        if(selectedItemIndex === prodResponse?.productImages?.value.length -1){
+            return
+        }
+        setSelectedItemIndex(selectedItemIndex + 1)
+     }
+
+     const handleUpArrowClick = () =>{
+        if(selectedItemIndex <= 0){
+            return
+        }
+        setSelectedItemIndex(selectedItemIndex - 1)
+     }
+
+     const handleImageClick =(i:any) =>{
+        setSelectedItemIndex(i)
+     }
 
     return (
         <div className="flex mx-auto">
@@ -30,12 +48,21 @@ function PdpCarousel(prodViewData: any) {
                 <div className="">
                     <div className="_2mLllQ">
                         <ul className="_3GnUWp">
-                            {prodResponse?.productImages?.value?.slice(0, 5).map((imgdata: any) => (
-                                <li className="w-24 h-24 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3" id={"pdp_carousel_"+imgdata?.id}  key={imgdata?.id}>
-                                    <img className="max-w-xl w-10" src={imgdata?.url}  />
+                        <button onClick={handleUpArrowClick}>Up arrow</button>
+                            {prodResponse?.productImages?.value?.slice(0, 5).map((imgdata: any ,index :any ) => (
+                                <li className="w-24 h-24 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3" id={"pdp_carousel_"+imgdata?.id}  
+                                // key={imgdata?.id}
+                                key={Math.random()}
+                                onClick={() => {
+                                    handleImageClick(index);
+                                  }}
+                                >
+
+                                    <img className="max-w-xl w-10" src={imgdata?.url}  alt=""/>
                                 </li>
                             )
                             )}
+                            <button onClick={handleDownArrowClick}>Down arrow</button>
                         </ul>
                     </div>
                 </div>
