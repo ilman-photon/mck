@@ -27,8 +27,8 @@ function FourOhFourCoumponent() {
         <>
             <div className="four-oh-four container flex flex-row mx-auto">
                 <div className="lg:width-416 w-full">
-                <div className="lg:heading pb-3 text-32 text-gtl-med font-medium" id="err-404-label-001">{notFoundData?.data[0]?.title.value}</div>
-                <div className="lg:text pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.description.value}}></div>
+                <div className="heading pb-3 text-32 text-gtl-med font-medium text-mckblue" id="err-404-label-001">{notFoundData?.data[0]?.title.value}</div>
+                <div className="text pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.description.value}}></div>
                 <div className="table-container">
                     <div className="table-heading font-extrabold text-sofia-bold" id="err-404-label-003">{notFoundData?.data[0]?.contentArea.expandedValue[0].title.value}</div>
                     <div className="normal-text p-6 text-sofia-reg font-normal lg:text-lg text-base" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}}></div>

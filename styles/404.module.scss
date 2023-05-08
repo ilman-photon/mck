@@ -14,6 +14,15 @@
     line-height: 41px;
     font-family: "GTAlpina-Medium";
     padding-right: 65px;
+
+    p {
+      &:nth-child(3) {
+        color: #3A3E41;
+        font-size: 24px;
+        line-height: 27px;
+        padding-top: 24px;
+      }
+    }
   }
 
   .hint {

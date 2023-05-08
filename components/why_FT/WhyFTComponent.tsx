@@ -29,7 +29,7 @@ function WhyFTComponent() {
 
     return (
         <>
-            <div className="four-oh-four container flex flex-col mx-auto px-0">
+            <div className="four-oh-four why-FT container flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
                 <div className="mb-76 mb-6">
                     <img src="images/why F and T header banner.png" alt={whyFTData?.contentArea?.expandedValue[0]?.name} id="wft_img_001" />
                 </div>
@@ -39,7 +39,7 @@ function WhyFTComponent() {
                 </div>
                 <div className="relative lg:mb-12 mb-6">
                     <img src="images/health_journey.png" alt={whyFTData?.contentArea?.expandedValue[2]?.name}/>
-                    <div className="lg:absolute top-0 left-0 right-0 bottom-0 bg-transparent-left lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8">
+                    <div className="lg:absolute top-0 left-0 right-0 bottom-0 bg-transparent-left lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4">{whyFTData?.contentArea?.expandedValue[2]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey" dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[2]?.description?.value,}}></p>
                         <button className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden">{whyFTData?.contentArea?.expandedValue[2]?.buttonText?.value}</button>
@@ -50,7 +50,7 @@ function WhyFTComponent() {
                 </div>
                 <div className="relative lg:mb-12 mb-6">
                     <img src="images/heal and thrive.png" />
-                    <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8">
+                    <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4">{whyFTData?.contentArea?.expandedValue[4]?.name}</h2>
                         <p className="pb-6 text-sofia-reg lg:text-lg font-normal text-mcknormalgrey text-base" dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[4]?.description?.value,}}></p>
                         <button className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden">{whyFTData?.contentArea?.expandedValue[4]?.buttonText?.value}</button>

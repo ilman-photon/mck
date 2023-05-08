@@ -70,6 +70,7 @@ export default function CarouselComponent({ sectionData }: any) {
         data-te-carousel-init
         data-te-carousel-slide
       >
+        <div className="bg-gradient absolute"></div>
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           {loading && <p>Loading...</p>}
 
