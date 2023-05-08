@@ -1,7 +1,10 @@
 # Pipeline to deploy the FnT Web app to the development environment. The FnT web app points to the Optimizely DXP Integration environment
 
 trigger:
-- None
+- develop
+
+pr: # Trigger on pull requests towards branches
+- develop
 
 variables:
 
