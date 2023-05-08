@@ -39,7 +39,7 @@ module.exports = {
         '636': '636px',
       },
       padding: {
-        "72px": "72px",
+        72: "72px",
       },
       fontSize: {
         27: "1.688rem",
