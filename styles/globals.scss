@@ -1042,7 +1042,7 @@ footer {
 
     img {
       max-width: 180px;
-      height: 240px;
+      height: auto;
       margin: 0 auto;
     }
 
@@ -1100,20 +1100,14 @@ footer {
 
 /* Product-list-slider Styles End */
 
-/* Filter Styles Start */
-.filter-title {
-  color: 001a71;
-  font-weight: 800;
-}
-
 /* All Product Category Styles */
 .section-title {
   font-family: "GTAlpina-Medium";
   font-weight: 500;
-  font-size: 54px;
+  font-size: 48px;
   line-height: 61px;
   color: #001A71;
-  padding: 0 24px 24px;
+  padding: 0 24px 0;
 }
 
 /** Contact Page Style Start **/
