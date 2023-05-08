@@ -10,6 +10,7 @@ const HealthNeedsComponent = () => {
     const [recommendedProductListData, SetRecommendedProductListData] = useState<any>();
     const [productFilter, setProductFilter] = useState<any>();
     const [activeFilter, setActiveFilter] = useState<any>([]);
+    const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
 
     const { response, error, loading } = useAxios({
         method: "GET",
@@ -52,9 +53,15 @@ const HealthNeedsComponent = () => {
     }
 
     // Right section product carousel data
-    function fetchProductList(filter = "Acute Care") {
+    function fetchProductList(filter: any) {
+        let queryParameter = '';
+        if (filter === '') {
+            queryParameter = `(productType/value/name eq 'Acute Care')`;
+        } else {
+            queryParameter = filter;
+        }
         const promise = axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq '${filter}') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
             {
                 headers: {
                     "Accept-Language": "en",
@@ -82,7 +89,8 @@ const HealthNeedsComponent = () => {
             })
             .catch((e: Error | AxiosError) => console.log(e));
 
-        fetchProductList();
+        fetchProductList('');
+
     }, []);
 
     const handleCTABtn = (url: string) => {
@@ -109,22 +117,57 @@ const HealthNeedsComponent = () => {
         }
     }
 
-    // Existing code
-    const handleCheckBox = (e: any, filter: any) => {
-        console.log("handleCheckBox ---- ", e, filter);
-        let f: any = [];
+    const handleCheckBox = (e: any, filter: any, categoryId: any) => {
         if (e.target.checked) {
+            if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
+                selectedFilterItems[categoryId]['items'].push(filter);
+            }
+            //existing code
             setActiveFilter([...activeFilter, filter]);
-            fetchProductList(filter);
         } else {
+            const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
+            selectedFilterItems[categoryId]['items'].splice(index, 1);
+            //existing code
             setActiveFilter(
                 activeFilter.filter((item: any) => {
                     return item !== filter;
                 })
             );
-            fetchProductList();
         }
-    };
+        setSelectedFilterItems(selectedFilterItems);
+    }
+
+    
+    useEffect(() => {
+        createQueryParameters();
+    }, [activeFilter])
+
+    const createQueryParameters = () => {
+        let queryParams = "";
+        if (selectedFilterItems.length > 0) {
+            let lastCatId = 0;
+            selectedFilterItems.map((category: any, catId: any) => {
+                if (category.items.length > 0) {
+                    if (lastCatId > 0 && lastCatId != catId) {
+                        queryParams += ' and ';
+                    }
+                    queryParams += '(';
+                    category.items.map((item: any, index: any) => {
+                        const itemName = item.replace(/[^a-zA-Z ]/g, "");
+                        const encodeItemName = encodeURI(itemName);
+                        const concatStr = (category.items.length === (index + 1)) ? '' : ' or ';
+                        queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
+                    });
+                    queryParams += `)`;
+                    lastCatId = catId;
+                }
+            });
+        }
+
+        console.log(queryParams);
+
+        fetchProductList(queryParams);
+    }
 
     // -------- Recommended Products Section ----------- //
     const [recommendedProductsData, setRecommendedProductsData] = useState<any>();
@@ -178,11 +221,23 @@ const HealthNeedsComponent = () => {
             console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
             //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
             setproductCategoryData(productCategoryDataList);
+            createTempFilterArr(productCategoryDataList)
 
         };
 
         fetchData();
     }, []);
+
+    const createTempFilterArr = (results: any) => {
+        let tempArr: any = [];
+        results?.map((leftfiltermaindata: any) => {
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['items'] = [];
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['isBusinessVerticalCategory'] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['productType'] = leftfiltermaindata?.isBusinessVerticalCategory?.value ? 'productType' : leftfiltermaindata?.name;
+        });
+        setSelectedFilterItems(tempArr);
+    }
     // -------- Health needs page data fetch ends -------- //
 
     // -------- View all checkbox functionality ------- //
@@ -312,7 +367,7 @@ const HealthNeedsComponent = () => {
                                                     <ul>
                                                         {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: any) => (
                                                             <li key={leftfiltersubdata?.id}>
-                                                                <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name)}>
+                                                                <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name, leftfiltermaindata?.mainCategory?.value[0].id)}>
                                                                     <input
                                                                         id={leftfiltersubdata?.name}
                                                                         type="checkbox"
