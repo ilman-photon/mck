@@ -66,7 +66,7 @@ function HeaderComponent() {
     <>
       <div
         id="header"
-        className="flex lg:grid container sticky mx-auto bg-transparent blue-txt"
+        className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt"
       >
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
@@ -92,7 +92,7 @@ function HeaderComponent() {
           </div>
         </div>
         <div
-          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18"
+          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
           style={divHeight}
         >
           <NavBar isVisible={isVisible} />
