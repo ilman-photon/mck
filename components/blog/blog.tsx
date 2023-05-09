@@ -132,7 +132,7 @@ function BlogComponent() {
                         <div className='lg:px-6 px-2 py-2 pb-0'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
                                 <input type="checkbox" id="acute-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" for='acute-1'>
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='acute-1'>
                                     <svg className='mr-3' width="18" height="23" viewBox="0 0 18 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.355 5.22691L13.347 0.878906C12.159 1.08891 10.567 1.57891 8.45501 2.48891C-1.50099 6.77091 0.0490063 10.0689 5.32901 9.88491C5.32901 9.88491 9.20901 9.82291 11.365 9.14491C11.365 9.14491 -0.166994 13.5209 2.09701 17.5269C2.09701 17.5269 4.03701 21.3489 13.737 16.9729C13.737 16.9729 17.723 15.3429 16.853 14.4449C15.959 13.5229 13.321 13.8309 10.497 15.0029C7.78501 16.1269 3.64301 18.6929 6.19301 21.1629C6.19301 21.1629 7.80901 22.6729 11.527 21.9949" stroke="#001A71" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Acute Care</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
@@ -150,7 +150,7 @@ function BlogComponent() {
                         <div className='lg:px-6 px-2'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
                                 <input type="checkbox" id="diagnostic-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" for='diagnostic-1'>
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='diagnostic-1'>
                                     <svg className='mr-3' width="19" height="25" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.1208 10.637C18.1208 10.637 7.52883 9.57696 6.76683 15.423M8.37283 18.723C5.66283 17.471 6.41083 13.851 9.05883 13.027C12.1948 12.051 15.5988 14.675 15.3768 17.863C15.1168 21.617 11.0108 23.741 7.51483 23.225C1.65083 22.361 0.040831 15.665 3.75283 11.565C5.66483 9.45296 8.37283 8.71896 10.8628 7.48896C11.9008 6.97496 12.9988 6.05696 12.9308 4.80096C12.9308 3.07696 11.5048 1.67896 9.74483 1.67896C7.98483 1.67896 6.55883 3.07696 6.55883 4.80096C6.55883 4.80096 6.46083 7.40696 9.50083 7.99296" stroke="#001A71" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Diagnostic Care</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
@@ -168,7 +168,7 @@ function BlogComponent() {
                         <div className='lg:px-6 px-2'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
                                 <input type="checkbox" id="every-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" for='every-1'>
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='every-1'>
                                     <svg className='mr-3' width="16" height="25" viewBox="0 0 16 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9549 16.5989C11.6189 17.3649 11.0229 19.4429 10.4909 20.8109C9.99288 22.0869 8.73688 23.2669 7.26888 23.2649C5.62888 23.2629 4.01488 22.0089 4.01288 20.1989C4.00888 17.6249 6.31288 16.5049 7.23288 15.6809C9.52688 13.6289 13.5509 11.4409 13.5469 7.92688C13.5429 4.35888 10.5049 1.69688 7.22888 1.69288C4.03288 1.68888 0.938875 4.10488 0.942875 7.91088C0.946875 11.0869 4.19087 12.9149 7.23487 15.6789C9.68487 17.9029 12.0589 20.4529 15.0589 23.2269" stroke="#001A71" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Every Day Care</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
@@ -186,7 +186,7 @@ function BlogComponent() {
                         <div className='lg:px-6 px-2'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
                                 <input type="checkbox" id="preventative-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" for='preventative-1'>
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='preventative-1'>
                                     <svg className='mr-3' width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.4934 9.02714C19.4934 9.02714 21.7594 12.1191 19.4934 15.7851C17.1934 19.5051 12.8214 19.1631 12.8214 19.1631C6.89536 18.6431 8.01736 14.4551 8.01736 14.4551C8.01736 14.4551 8.58736 11.2211 12.5834 11.9811C16.5794 12.7411 15.5794 17.6891 15.5794 17.6891C15.5794 17.6891 14.7934 23.9291 7.95536 23.2271C5.20536 22.9451 2.95536 21.1711 1.87736 18.4951C0.591358 15.3051 2.12336 12.5031 2.12336 12.5031C2.12336 12.5031 4.22536 7.24114 10.9674 8.98514C10.9674 8.98514 7.83936 7.50914 8.99936 4.46314C8.99936 4.46314 9.64736 2.45514 11.5754 1.82914C12.7854 1.43514 14.3234 1.82514 14.9294 2.88114C16.0874 4.89114 13.4814 6.03514 13.4814 6.03514C9.36536 7.63314 6.84136 4.35514 6.84136 4.35514C6.84136 4.35514 5.60136 2.88714 5.49336 1.67914" stroke="#001A71" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Preventative Care</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
@@ -204,7 +204,7 @@ function BlogComponent() {
                         <div className='lg:px-6 px-2'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
                                 <input type="checkbox" id="health-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" for='health-1'>Health Needs</label>
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='health-1'>Health Needs</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
                                     <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Allergy Relief</button>
                                     <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Pain Relief</button>
