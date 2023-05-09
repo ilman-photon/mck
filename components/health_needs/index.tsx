@@ -11,6 +11,7 @@ const HealthNeedsComponent = () => {
     const [productFilter, setProductFilter] = useState<any>();
     const [activeFilter, setActiveFilter] = useState<any>([]);
     const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
+    const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
 
     const { response, error, loading } = useAxios({
         method: "GET",
@@ -70,7 +71,7 @@ const HealthNeedsComponent = () => {
         );
         promise
             .then((res) => {
-                console.log("FetchProductList----- ", res);
+                // console.log("FetchProductList----- ", res);
                 SetProductListData(res);
             })
             .catch((e: Error | AxiosError) => console.log(e));
@@ -117,13 +118,14 @@ const HealthNeedsComponent = () => {
         }
     }
 
-    const handleCheckBox = (e: any, filter: any, categoryId: any) => {
+    const handleCheckBox = (e: any, filter: any, categoryId: any, subCategoryId: any) => {
         if (e.target.checked) {
             if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
                 selectedFilterItems[categoryId]['items'].push(filter);
             }
             //existing code
             setActiveFilter([...activeFilter, filter]);
+            selectedFilterItems[categoryId][subCategoryId].checked = true;
         } else {
             const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
             selectedFilterItems[categoryId]['items'].splice(index, 1);
@@ -133,11 +135,68 @@ const HealthNeedsComponent = () => {
                     return item !== filter;
                 })
             );
+            selectedFilterItems[categoryId][subCategoryId].checked = false;
+            selectedFilterItems[categoryId].isCategoryChecked = false;
         }
         setSelectedFilterItems(selectedFilterItems);
     }
 
-    
+    const handleViewAllChange = (e: any, categoryId: any) => {
+        let isCategoryChecked = false;
+        let subCategoryChecked = false;
+        if (e.target.checked) {
+            if (selectedViewAllCateory.indexOf(categoryId) === -1) {
+                selectedViewAllCateory.push(categoryId);
+            }
+            isCategoryChecked = true;
+            subCategoryChecked = true;
+        } else {
+            const index = selectedViewAllCateory.indexOf(categoryId);
+            selectedViewAllCateory.splice(index, 1);
+            isCategoryChecked = false;
+            subCategoryChecked = false;
+        }
+
+        selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
+        
+        selectedFilterItems[categoryId].map((sub_category: any) => {
+            sub_category.checked = subCategoryChecked;
+            if (subCategoryChecked) {
+                selectedFilterItems[categoryId]['items'].push(sub_category.name);
+            } else {
+                const index = selectedFilterItems[categoryId]['items'].indexOf(sub_category.name);
+                selectedFilterItems[categoryId]['items'].splice(index, 1);
+            }
+            // console.log(sub_category)
+        });
+
+        let selectedSubCat:any = [];
+        selectedFilterItems.map((category: any) => {
+            category.items.map((name: any) => {
+                if (selectedSubCat.indexOf(name) === -1) {
+                    selectedSubCat.push(name);
+                }
+            });
+        });
+        setActiveFilter([...selectedSubCat]);
+        if (selectedViewAllCateory.length > 0)  {
+            // let queryParams = '';
+            // selectedViewAllCateory.map((catId: any, index: any) => {
+            //     if (selectedFilterItems[catId].isCategoryChecked) {
+            //         const categoryName = selectedFilterItems[catId].categoryName;
+            //         const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+            //         const encodeItemName = encodeURI(itemName);
+            //         const joinedCond = (selectedViewAllCateory.length === index + 1) ? '' : 'and ';
+            //         queryParams += `(${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond}`;
+            //     }
+            // })
+            // console.log(queryParams);
+            // fetchProductList(queryParams);
+        } else {
+            fetchProductList('');
+        }
+    }
+
     useEffect(() => {
         createQueryParameters();
     }, [activeFilter])
@@ -146,8 +205,10 @@ const HealthNeedsComponent = () => {
         let queryParams = "";
         if (selectedFilterItems.length > 0) {
             let lastCatId = 0;
+            let minCategoryCnt = 0;
+            let minSubCategoryCnt = 0;
             selectedFilterItems.map((category: any, catId: any) => {
-                if (category.items.length > 0) {
+                if (!category.isCategoryChecked && category.items.length > 0) {
                     if (lastCatId > 0 && lastCatId != catId) {
                         queryParams += ' and ';
                     }
@@ -158,15 +219,33 @@ const HealthNeedsComponent = () => {
                         const concatStr = (category.items.length === (index + 1)) ? '' : ' or ';
                         queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
                     });
+                    
+                    minSubCategoryCnt += category.items.length;
                     queryParams += `)`;
                     lastCatId = catId;
+                } else {
+                    minCategoryCnt += category.isCategoryChecked;
+                    if (category.isCategoryChecked) {
+                        const categoryName = selectedFilterItems[catId].categoryName;
+                        const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+                        const encodeItemName = encodeURI(itemName);
+                        //console.log(selectedViewAllCateory, minCategoryCnt)
+                        const joinedCond = (selectedViewAllCateory.length === minCategoryCnt) ? '' : 'and ';
+                        const beforeCond = (minSubCategoryCnt > 0) ? ' and ' : '';
+                        queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
+                    }
                 }
             });
+            
+            // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
+            if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+                queryParams = "";
+            }
         }
-
-        console.log(queryParams);
-
-        fetchProductList(queryParams);
+        
+        // console.log(queryParams);
+        if (queryParams)
+            fetchProductList(queryParams);
     }
 
     // -------- Recommended Products Section ----------- //
@@ -185,7 +264,7 @@ const HealthNeedsComponent = () => {
         fetchRecommendedProductsData()
             .then((res: any) => {
                 const recommendedProductsDataList = res.data[0];
-                console.log("recommendedProductsDataList--- ", recommendedProductsDataList);
+                // console.log("recommendedProductsDataList--- ", recommendedProductsDataList);
                 setRecommendedProductsData(recommendedProductsDataList);
             })
             .catch((e: Error | AxiosError) => console.log(e));
@@ -204,7 +283,7 @@ const HealthNeedsComponent = () => {
             const healthNeedsCategories = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const healthNeedsCategoriesList = healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
 
-            console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
+            // console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
 
             const healthNeedsCategoriesListData = healthNeedsCategoriesList.length > 0 ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue : [];
             setHealthNeedData(healthNeedsCategoriesListData);
@@ -212,13 +291,13 @@ const HealthNeedsComponent = () => {
             // Product Category setting - Filters data
             const activeFiltersData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
             const activeFiltersDataList = activeFiltersData?.data[0];
-            console.log("activeFilters --- ", activeFiltersDataList);
+            // console.log("activeFilters --- ", activeFiltersDataList);
             setactiveFiltersData(activeFiltersDataList);
 
             // Product Category Helath needs - Left side category lists
             const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const productCategoryDataList = productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-            console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
+            // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
             //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
             setproductCategoryData(productCategoryDataList);
             createTempFilterArr(productCategoryDataList)
@@ -233,11 +312,31 @@ const HealthNeedsComponent = () => {
         results?.map((leftfiltermaindata: any) => {
             tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
             tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['items'] = [];
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id][leftfiltermaindata?.subCategory?.value[0].id] = [];
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['categoryName'] = leftfiltermaindata?.mainCategory?.value[0].name;
             tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['isBusinessVerticalCategory'] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
             tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['productType'] = leftfiltermaindata?.isBusinessVerticalCategory?.value ? 'productType' : leftfiltermaindata?.name;
+            tempArr[leftfiltermaindata?.mainCategory?.value[0].id]['isCategoryChecked'] = false;
+            leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
+                tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
+                tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id]['checked'] = false;
+                tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id]['name'] = subItem.name;
+            });
         });
         setSelectedFilterItems(tempArr);
     }
+
+    const handleClearAll = () => {
+        setActiveFilter([]);
+        selectedFilterItems.map((category: any) => {
+            category.isCategoryChecked = false;
+            category.map((sub_category: any) => {
+                sub_category.checked = false;
+            });
+        });
+        fetchProductList('');
+    }
+
     // -------- Health needs page data fetch ends -------- //
 
     // -------- View all checkbox functionality ------- //
@@ -305,7 +404,7 @@ const HealthNeedsComponent = () => {
                                 <img src="/images/hn-delete-icon.svg"
                                     className="mck-filter-clearall-icon"
                                     alt="delete icon" />
-                                <div className="underline" onClick={() => setActiveFilter([])}>{activeFiltersData?.clearAllText?.value}</div>
+                                <div className="underline" onClick={handleClearAll}>{activeFiltersData?.clearAllText?.value}</div>
                             </div>
                             </div>
                         </div>
@@ -351,12 +450,14 @@ const HealthNeedsComponent = () => {
                                                                     View All
                                                                 </label>
                                                             </div> */}
-                                                            <div className="flex items-center my-px">
+                                                            <div className="flex items-center my-px" onClick={(e) => handleViewAllChange(e, leftfiltermaindata?.mainCategory?.value[0].id)}>
                                                                 <input
-                                                                    id="mck-viewall"
+                                                                    id={leftfiltermaindata?.mainCategory?.value[0]?.name}
                                                                     type="checkbox"
                                                                     value="view all"
                                                                     className="w-4 h-4"
+                                                                    checked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id]?.isCategoryChecked}
+                                                                    defaultChecked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id]?.isCategoryChecked}
                                                                 />
                                                                 <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
                                                                     View All
@@ -367,12 +468,14 @@ const HealthNeedsComponent = () => {
                                                     <ul>
                                                         {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: any) => (
                                                             <li key={leftfiltersubdata?.id}>
-                                                                <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name, leftfiltermaindata?.mainCategory?.value[0].id)}>
+                                                                <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name, leftfiltermaindata?.mainCategory?.value[0].id, leftfiltersubdata?.id)}>
                                                                     <input
                                                                         id={leftfiltersubdata?.name}
                                                                         type="checkbox"
                                                                         value={leftfiltersubdata?.name}
                                                                         className="w-4 h-4"
+                                                                        checked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id][leftfiltersubdata?.id]?.checked}
+                                                                        defaultChecked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id][leftfiltersubdata?.id]?.checked}
                                                                     />
                                                                     <label htmlFor={leftfiltersubdata?.name} className="ml-2 text-sm">
                                                                         {leftfiltersubdata?.name}
