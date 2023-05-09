@@ -31,12 +31,20 @@ module.exports = {
         mckgreen: "#2CCFAD",
         mcklggrey:"#4D5F9C",
         mckbodybg: "#FFFDFB",
+        mckskyblue: "#0084D4",
+        mckgreen: "#00AD50",
+        mckblue70: "#4D5F9C",
       },
       width: {
         '526': '526px',
+        598 : '598px',
+        842 : '842px',
+        83: '83%',
       },
       height: {
-        '636': '636px',
+        636: '636px',
+        782: '782px',
+        500: '500px',
       },
       padding: {
         72: "72px",
@@ -51,6 +59,13 @@ module.exports = {
       spacing: {
         18: "72px",
         14:"14px",
+      },
+      bg: {
+        mckbgwhite: "#FFFDFB",
+        inputbg: "#F8F9FB",
+      },
+      shadow: {
+        wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
       },
     },
   },
