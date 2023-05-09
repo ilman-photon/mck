@@ -52,6 +52,13 @@ module.exports = {
         18: "72px",
         14:"14px",
       },
+      backgroundColor: theme => ({
+        'preventiveyellow': '#FFC238',
+        'diagnosticgreen': '#b2dbd3',
+        'acuteblue': '#CCD1E3',
+        'everydayblue': '#A7C8E9',
+        'shadesblue': '#F2F4F9',
+      }),
     },
   },
   plugins: [],

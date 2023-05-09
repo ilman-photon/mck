@@ -978,6 +978,10 @@ a {
   border: 0.5px solid #4D5F9C;
 }
 
+.shade-grey-right-border {
+  border-right: 1px solid #767676;
+}
+
 .blue-txt {
   color: #001a71;
 }
@@ -992,6 +996,10 @@ a {
 
 .header-bg-white {
   background-color: #FFFAF6;
+}
+
+.border-blue {
+  border: 1px solid #001A71;
 }
 
 .bg-transparent-left {
@@ -1237,6 +1245,41 @@ input:checked {
     border-top: 0.5px solid #CCD1E3;
   }
 }
+}
+
+.category-card {
+  .tab {
+    border: 0px;
+  }
+  input:checked {
+    ~.tab-content {
+      border-top: 0px solid #CCD1E3;
+      padding-top: 0px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-bottom: 0px;
+      margin-bottom: 18px;
+    }
+    +.tab-label {
+      &::after {
+        position: absolute;
+        right: 15px;
+        top: 5px;
+      }
+    }
+  }
+  .tab-label {
+    &:after {
+      position: absolute;
+      right: 15px;
+      top: 7px;
+    }
+  }
+  .tab-content {
+    ul, ol {
+      margin-left: 0px;
+    }
+  }
 }
 
 .pdp-details-heading {
