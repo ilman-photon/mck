@@ -67,6 +67,13 @@ module.exports = {
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
       },
+      backgroundColor: theme => ({
+        'preventiveyellow': '#FFC238',
+        'diagnosticgreen': '#b2dbd3',
+        'acuteblue': '#CCD1E3',
+        'everydayblue': '#A7C8E9',
+        'shadesblue': '#F2F4F9',
+      }),
     },
   },
   plugins: [],
