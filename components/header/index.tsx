@@ -99,7 +99,7 @@ function HeaderComponent() {
         id="header"
         className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
       >
-        <div className="w-full mb-12 flex" style={divHeight}>
+        <div className="flex" style={divHeight}>
           {/* <div className="mobile-nav px-5 py-5">
             <img
               id="logo-image"
@@ -110,8 +110,7 @@ function HeaderComponent() {
           </div> */}
 
           {/* Hamburger menu starts */}
-          <div className="md:hidden sm:hidden lg:hidden xl:hidden">
-            <div className="hamburger-menu" onClick={handleHamburgerClick}>
+            <div className="hamburger-menu md:hidden sm:hidden lg:hidden xl:hidden" onClick={handleHamburgerClick}>
               <div className={`bar ${isBarAnimated ? 'animate' : ''}`}></div>
             </div>
             <div className={`mobile-menu bg-mcklightyellow text-mckblue ${isMobileMenuActive ? 'active' : ''}`}>
@@ -149,9 +148,6 @@ function HeaderComponent() {
             </div>
           </div>
           {/* Hambuger menu ends */}
-
-          
-        </div>
         
         <div
             ref={headerImgRef}
@@ -172,7 +168,7 @@ function HeaderComponent() {
             <img id="logo-image" src={logoSrc}
               // src={isSmall}
               alt="logo"
-              className="mt-1 lg:mt-7 ml-3"
+              className="lg:mt-7"
               style={imgWidth}
             />
           </div>
