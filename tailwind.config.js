@@ -35,6 +35,7 @@ module.exports = {
         mckskyblue: "#0084D4",
         mckgreen: "#00AD50",
         mckblue70: "#4D5F9C",
+        mckgreyborder: "#808CB8",
       },
       width: {
         '526': '526px',
