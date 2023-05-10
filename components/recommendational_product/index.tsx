@@ -51,7 +51,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
             response.map((ele: any, index: number) => {
               return (
                 <div
-                  className="bg-color m-3 p-9"
+                  className="bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
                   key={ele?.data?.contentLink?.id}
                 >
                   <style jsx>{`
@@ -59,35 +59,35 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       background-color: ${ele?.data?.backgroundColor?.value};
                     }
                   `}</style>
-                  <div className="w-full lg:w-44 mb-3">
+                  <div className="w-full lg:w-44 mb-4">
                     <img
-                      id="logo"
-                      className="h-auto max-w-full"
+                      // id="logo"
+                      className="h-auto max-w-full mx-auto"
                       src={ele?.data?.imageTitle?.value?.url}
-                      alt={ele?.data?.title?.value}
+                      alt={ele?.data?.title?.value} tabIndex={0} id={ele?.data?.imageTitle?.value?.url}
                     />
                   </div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full pr-4">
+                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
                       <img
-                        id="image"
+                        //id="image"
                         className="mx-auto lg:my-auto lg:h-full lg:w-full"
-                        src={ele?.data?.image?.value.url}
+                        src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
                       />
                     </div>
                     <div id="p-text" className="text-justify pr-0 lg:pr-9">
                       <div
-                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left"
+                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
-                        }}
+                        }} tabIndex={0} id={ele?.data?.description?.value}
                       ></div>
                     </div>
                   </div>
                   <div
-                    id="cta-btn"
-                    className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
-                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
+                    //id="cta-btn"
+                    className="w-[124px] h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value}
                   >
                     {ele?.data?.buttonText?.value}
                   </div>

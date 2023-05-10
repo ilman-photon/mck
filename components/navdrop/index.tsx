@@ -142,7 +142,7 @@ function NavDropComponent() {
             </ul>
           </div>
         </li>
-        <li className="w-1/5 signup-form">
+        {/* <li className="w-1/5 signup-form">
           <div className="px-0 py-0 mb-7 whitespace-normal">
             <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
               <h5 className="m-0 pb-3 px-0 text-2xl text-sofia-reg text-mckblue">
@@ -158,7 +158,7 @@ function NavDropComponent() {
               <SignUpComponent />
             </div>
           </div>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
