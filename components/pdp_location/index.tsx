@@ -35,7 +35,7 @@ function PdpLocation() {
             <img className="mb-6" src="images/map.png" alt="map" />
             <div className="max-h-96 overflow-y-auto scrollbar-thin">
                 {responseValue?.map((value: any, index: Number) => {
-                    return <div className="mt-11 pr-5 " onClick={() => handleLocationClick(index, value)}>
+                    return <div className="mt-11 pr-5 " key={value.id} onClick={() => handleLocationClick(index, value)}>
                         <div>Image</div>
                         <div className="flex">
                             <span className="text-sofia-reg text-mcknormalgrey" >
