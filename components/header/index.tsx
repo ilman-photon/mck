@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import NavDropComponent from "../navdrop";
 
 function HeaderComponent() {
-  const logogrey = "images/logo.png";
-  const logowhite = "images/logo.png";
+  const logogrey = "images/logo_color.png";
+  const logowhite = "images/logo_beige.png";
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isSmall, setIsSmall] = useState(logogrey);
@@ -99,7 +99,8 @@ function HeaderComponent() {
         id="header"
         className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
       >
-        <div className="flex" style={divHeight}>
+        <div className="flex">
+        {/* <div className="flex" style={divHeight}> */}
           {/* <div className="mobile-nav px-5 py-5">
             <img
               id="logo-image"
@@ -110,7 +111,7 @@ function HeaderComponent() {
           </div> */}
 
           {/* Hamburger menu starts */}
-            <div className="hamburger-menu md:hidden sm:hidden lg:hidden xl:hidden" onClick={handleHamburgerClick}>
+            <div className="hamburger-menu md:hidden lg:hidden xl:hidden" onClick={handleHamburgerClick}>
               <div className={`bar ${isBarAnimated ? 'animate' : ''}`}></div>
             </div>
             <div className={`mobile-menu bg-mcklightyellow text-mckblue ${isMobileMenuActive ? 'active' : ''}`}>
@@ -158,7 +159,6 @@ function HeaderComponent() {
               // src={isSmall}
               alt="logo"
               className="mt-1 lg:mt-7 ml-3"
-              style={imgWidth}
             />
           </div>
           <div
@@ -169,14 +169,11 @@ function HeaderComponent() {
               // src={isSmall}
               alt="logo"
               className="lg:mt-7"
-              style={imgWidth}
             />
           </div>
 
         <div
-          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
-          style={divHeight}
-        >
+          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky">
           <NavBar isVisible={isVisible} />
           <Search />
         </div>

@@ -66,7 +66,7 @@ export default function CarouselComponent({ sectionData }: any) {
     <div>
       <div
         id="carouselExampleCaptions"
-        className="relative"
+        className="relative mt-16 lg:mt-0"
         data-te-carousel-init
         data-te-carousel-slide
       >

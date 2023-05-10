@@ -415,7 +415,7 @@ const HealthNeedsComponent = () => {
                     {/* Health needs - Top Active Filter section starts */}
 
                     {/* Health needs - Left coloumn Filter section starts */}
-                    <div className="flex mt-8">
+                    <div className="lg:flex md:flex flex-none mt-8">
                         <div className="flex-none h-max">
                             <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
                                 {/* Left main category lists */}
