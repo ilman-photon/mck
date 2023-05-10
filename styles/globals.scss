@@ -1050,11 +1050,12 @@ footer {
   left: 0;
   right: 0;
   z-index: 9;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.8) 47.03%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(255, 255, 255, 0.8) 47.03%,
+  //   rgba(255, 255, 255, 0) 100%
+  // );
+  background-color: #fff;
 }
 
 /* Product-list-slider Styles Start */
@@ -1437,15 +1438,10 @@ HAMBURGER MENU
 ----------------------*/
 
 .hamburger-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
   padding-top: 20px;
-  padding-left: 15px;
-  width: 100%;
+  width: 15%;
   height: 64px;
   cursor: pointer;
-  z-index: 9998;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
@@ -1513,28 +1509,43 @@ Mobiles Menu
   padding: 0;
 }
 
-.mobile-menu .ulmenu {
-  margin-top: 80px;
+.mobile-menu .main-menu {
+  margin-top: 24px;
 }
 
 .mobile-menu li {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 30px;
   margin: 0;
   overflow: hidden;
-  padding: 5px;
+  padding: 5px 0 5px 20px;
   position: relative;
   text-align: left;
   text-transform: uppercase;
-  padding-left: 15px;
 }
 
-.mobile-menu li:hover {
-  background: #cccccc;
+.mobile-menu .main-menu li:hover {
+  background: #fff;
+  border-left: 4px solid;
+  padding: 5px 0 5px 16px;
 }
 
 .mobile-menu li a {
   text-decoration: none;
+}
+.mobile-menu .sub-menu li {
+  font-family: "sofia-pro-regular";
+  background-color: #FFF6ED;
+}
+.mobile-menu .sub-menu li:hover {
+  background: #fff;
+  border-left: 4px solid #FFF6ED;
+  padding: 5px 0 5px 16px;
+}
+.mobile-menu .main-menu .has-children:hover {
+  background: #FFF6ED;
+  border-left: 4px solid #FFF6ED;
+  padding: 5px 0 5px 16px;
 }
 
 /*---------------------
@@ -1542,7 +1553,7 @@ Mobiles Menu
 	----------------------*/
 
 .mobile-menu {
-  top: 0;
+  top: 64px;
   max-width: 90%;
   left: -100%;
   width: 100%;
@@ -1588,13 +1599,13 @@ Mobiles Menu
   position: absolute;
   display: block;
   font-size: 0.7em;
-  top: 5px;
-  right: 10px;
+  top: 15px;
+  right: 20px;
   transition: 0.6s;
   -webkit-transition: 0.6s;
   -moz-transition: 0.6s;
-  border: solid black;
-  border-width: 0 3px 3px 0;
+  border: solid #001A71;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(45deg);
