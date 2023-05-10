@@ -87,10 +87,10 @@ function HeaderComponent() {
   // logo onhover
   const [logoSrc, setLogoSrc] = useState('images/logo.png');
   function handleHeaderMouseEnter() {
-    setLogoSrc('images/logo_white.png');
+    setLogoSrc('images/logo_beige.png');
   }
   function handleHeaderMouseLeave() {
-    setLogoSrc('images/logo.png');
+    setLogoSrc('images/logo_color.png');
   }
 
   return (
