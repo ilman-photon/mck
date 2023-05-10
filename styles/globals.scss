@@ -697,8 +697,8 @@ a {
     bottom: 5px;
 
     h2 {
-      font-size: 28px;
-      line-height: 32px;
+      font-size: 24px;
+      line-height: 28px;
     }
   }
 
@@ -948,6 +948,7 @@ a {
 
 .text-54 {
   font-size: 54px;
+  line-height: 61px;
 }
 
 .text-32 {
@@ -1379,6 +1380,13 @@ footer {
     .tab-label:after {
       margin-top: -4px;
     }
+  }
+  .text-54 {
+    font-size: 27px;
+    line-height: 30px;
+  }
+  .hero-banner {
+    background: rgba(39, 44, 47, 0.8);
   }
 }
 
