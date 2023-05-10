@@ -41,7 +41,7 @@ function TermsComponent() {
 
                     <div className="pt-6 pb-6 [&>*:last-child]:pb-0">
                         <h2 className="lg:pb-6 pb-4 lg:text-4xl text-27 text-base text-mckblue text-gtl-med font-medium">Privacy</h2>
-                        <p className="lg:text-lg text-base grey-txt text-sofia-reg font-normal">Haleon respects the privacy of its website visitors. Please refer to Haleons Privacy Policy for an explanation of your rights and responsibilities with respect to the information that is disclosed on this website.</p>
+                        <p className="lg:text-lg text-base grey-txt text-sofia-reg font-normal">Haleon respects the privacy of its website visitors. Please refer to Haleon Privacy Policy for an explanation of your rights and responsibilities with respect to the information that is disclosed on this website.</p>
                     </div>
 
                     <div className="pt-6 pb-6 [&>*:last-child]:pb-0">
