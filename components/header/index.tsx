@@ -62,35 +62,91 @@ function HeaderComponent() {
     });
   }
 
+  'react';
+
+  // hamburger menu
+  const [isBarAnimated, setIsBarAnimated] = useState(false);
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+  const [isChildrenOpen, setIsChildrenOpen] = useState(false);
+
+  function handleHamburgerClick() {
+    setIsBarAnimated(!isBarAnimated);
+    setIsMobileMenuActive(!isMobileMenuActive);
+  }
+
+  function handleChildrenClick() {
+    setIsChildrenOpen(!isChildrenOpen);
+  }
+
+  // logo onhover
+  const [logoSrc, setLogoSrc] = useState('images/logo.png');
+  function handleHeaderMouseEnter() {
+    setLogoSrc('images/logo_white.png');
+  }
+  function handleHeaderMouseLeave() {
+    setLogoSrc('images/logo.png');
+  }
+
   return (
     <>
-      <div
+      <div onMouseEnter={handleHeaderMouseEnter} onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt"
       >
         <div className="w-full mb-12 flex" style={divHeight}>
-          <div className="mobile-nav px-5 py-5">
+          {/* <div className="mobile-nav px-5 py-5">
             <img
               id="logo-image"
               className="w-full"
               src="images/mobile_nav.png"
               onClick={handleClick}
             />
+          </div> */}
+
+          {/* Hamburger menu starts */}
+          <div className="md:hidden sm:hidden lg:hidden xl:hidden">
+          <div className="hamburger-menu bg-mckwhite border-b border-mckblue" onClick={handleHamburgerClick}>
+            <div className={`bar ${isBarAnimated ? 'animate' : ''}`}></div>
           </div>
+          <div className={`mobile-menu bg-mcklightyellow text-mckblue ${isMobileMenuActive ? 'active' : ''}`}>
+            <ul className="ulmenu">
+              <li><a href="#">Home</a></li>
+              <li className="has-children" onClick={handleChildrenClick}>
+                <a href="#">Products</a>
+                <span className={`icon-arrow ${isChildrenOpen ? 'open' : ''}`}></span>
+                {isChildrenOpen && (
+                  <ul className="open">
+                    <li><a href="#">Acute Care</a></li>
+                    <li><a href="#">Preventative Care</a></li>
+                    <li><a href="#">Every Day Care</a></li>
+                    <li><a href="#">Diagnostic Care</a></li>
+                  </ul>
+                )}
+              </li>
+              <li><a href="#">Health Needs</a></li>
+              <li><a href="#">Why F&T</a></li>
+              <li><a href="#">Where to Buy</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Health Care Professionals</a></li>
+            </ul>
+          </div>
+          </div>
+          {/* Hambuger menu ends */}
+
           <div
             ref={headerImgRef}
             className="brand-logo"
             onClick={handleOnClickLogo}
           >
-            <img
-              id="logo-image"
-              src={isSmall}
+            <img id="logo-image" src={logoSrc}
+              // src={isSmall}
               alt="logo"
               className="mt-1 lg:mt-7 ml-3"
               style={imgWidth}
             />
           </div>
         </div>
+
         <div
           className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
           style={divHeight}

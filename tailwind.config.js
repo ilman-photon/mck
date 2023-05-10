@@ -31,6 +31,7 @@ module.exports = {
         mckgreen: "#2CCFAD",
         mcklggrey:"#4D5F9C",
         mckbodybg: "#FFFDFB",
+        mckwhite: "#FFFFFF",
         mckskyblue: "#0084D4",
         mckgreen: "#00AD50",
         mckblue70: "#4D5F9C",
