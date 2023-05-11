@@ -86,7 +86,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   </div>
                   <div
                     id="cta-btn"
-                    className="w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
+                    className="w-[139px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  ml-0 lg:ml-auto mr-9"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
                   >
                     {ele?.data?.buttonText?.value}

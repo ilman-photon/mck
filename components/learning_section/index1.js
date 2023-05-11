@@ -70,11 +70,11 @@ export default function LearningSectionComponent({ sectionData }) {
                 {ele?.title?.value}
               </h2>
               <div
-                className="jsx-290076256 text-2xl text-sofia-reg text-center lg:text-left pb-6"
+                className="jsx-290076256 text-2xl  text-sofia-reg text-center lg:text-left pb-6"
                 dangerouslySetInnerHTML={{ __html: ele?.description?.value }}
               ></div>
               {ele?.buttonText?.value && (
-                <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0">
+                <div className="jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0">
                   {ele?.buttonText?.value}
                 </div>
               )}

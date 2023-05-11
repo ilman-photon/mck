@@ -79,3 +79,17 @@
     padding: 24px 16px 0;
   }
 }
+
+.error-msg{
+  p{
+    font-size: 36px;
+      line-height: 40px;
+      &:nth-child(3){
+        line-height: 24px;
+      }
+      &:last-child{
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}

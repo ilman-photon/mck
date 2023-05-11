@@ -1143,7 +1143,10 @@ Mobiles Menu
   font-size: 32px;
   line-height: 36px;
 }
-
+.text-36 {
+  font-size: 36px;
+  line-height: 40px;
+}
 .blue-bg {
   background-color: #001a71;
 }
@@ -1230,6 +1233,9 @@ Mobiles Menu
 }
 .pb-72 {
   padding-bottom: 72px;
+}
+.pd-12{
+  padding: 12px;
 }
 footer {
   margin-top: 72px;
@@ -1367,12 +1373,12 @@ footer {
 
     .contact-number {
       min-width: 190px;
-      white-space: nowrap;
+      word-break: break-all;
 
       img {
         width: fit-content;
         height: fit-content;
-        margin-right: 10px;
+        margin-right: 15px;
         margin-top: 5px;
       }
     }
