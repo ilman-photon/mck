@@ -639,7 +639,7 @@ Mobiles Menu
 
 .mobile-menu .main-menu li:hover {
   background: #fff;
-  border-left: 4px solid;
+  border-left: 4px solid #001A71;
   padding: 5px 0 5px 16px;
 }
 
@@ -1242,15 +1242,10 @@ footer {
 }
 .sticky {
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 9;
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(255, 255, 255, 0.8) 47.03%,
-  //   rgba(255, 255, 255, 0) 100%
-  // );
-  background-color: #fff;
 }
 
 /* Product-list-slider Styles Start */

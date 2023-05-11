@@ -92,23 +92,21 @@ export default function CarouselComponent({ sectionData }: any) {
                     <img
                       src={ele?.data?.image?.value.url}
                       className="block w-full"
-                      alt="..."
-                    />
-                    <div className="pl-18 hero-banner text-white absolute left-0 bottom-20 hidden md:block">
-                      <h2 className="my-3">{ele?.data?.title?.value}</h2>
+                      alt="Carousel Image"
+                      id={ele?.data?.title?.value + "_" + index} tabIndex={0}/>
+                    <div className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-0 pb-3 lg:pb-0 hero-banner text-white lg:absolute left-0 bottom-20 md:block">
+                      <h2 className="lg:my-3 my-0 pb-2.5 lg:pb-0" id={ele?.data?.title?.value} tabIndex={0}>{ele?.data?.title?.value}</h2>
                       <p
-                        className="my-3"
+                        className="lg:my-3 pb-4 lg:pb-0"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
-                        }}
-                      ></p>
+                        }} tabIndex={0} id={ele?.data?.description?.value}></p>
                       <div
-                        id="cta-btn"
-                        className="jsx-290076256 w-[124px] h-[44px] leading-5 m-3 ml-0 text-sofia-bold flex pd-12 justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer"
+                        id={ele?.data?.buttonText?.value}
+                        className="jsx-290076256 w-[124px] h-[44px] leading-5 lg:m-3 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
-                        }
-                      >
+                        } tabIndex={0} role="button">
                         {ele?.data?.buttonText?.value}
                       </div>
                     </div>

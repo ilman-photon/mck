@@ -15,20 +15,20 @@ function BlogComponent() {
                     </div>
                     <article className='mostrecent-article shadow-md rounded-lg lg:mb-12 mb-6'>
                         <figure>
-                            <img src="images/blog-recentarticle.png" className='w-full'/>
+                            <img src="images/blog-recentarticle.png" className='w-full' alt="Are your medications causing you to lose nutrients? article" id='blog-img-001'/>
                         </figure>
                         <figcaption>
                             <div className='content lg:p-6 p-4'>
-                                <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue lg:pb-3 no-underline' aria-aria-labelledby='Are your medications causing you to lose nutrients'>Are your medications causing you to lose nutrients?</a>
+                                <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue lg:pb-3 no-underline' aria-labelledby='Are your medications causing you to lose nutrients' id='blog-link-001'>Are your medications causing you to lose nutrients?</a>
                                 <div className='pb-3 lg:pt-0 pt-3'>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border'>February 18, 2022</span>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border'>65 min read</span>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>76.6K views</span>
+                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border' id='blog-label-001'>February 18, 2022</span>
+                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id='blog-label-002'>65 min read</span>
+                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span>
                                 </div>
                                 <div className='flex'>
-                                    <div className='bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2'>Preventive Care</div>
-                                    <div className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border'>Sample Tag 1</div>
-                                    <div className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border'>Sample Tag 2</div>
+                                    <div className='bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2' id='blog-label-004'>Preventive Care</div>
+                                    <div className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border' id='blog-label-006'>Sample Tag 1</div>
+                                    <div className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border' id='blog-label-007'>Sample Tag 2</div>
                                 </div>
                             </div>
                         </figcaption>
@@ -36,7 +36,7 @@ function BlogComponent() {
                     <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6'>
                             <figure>
-                                <img src="images/blog-oldarticle1.png" className='w-full'/>
+                                <img src="images/blog-oldarticle1.png" className='w-full' alt='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report article'  id='blog-img-002'/>
                             </figure>
                             <figcaption>
                                 <div className='content lg:p-6 p-4'>
@@ -56,7 +56,7 @@ function BlogComponent() {
                         </article>
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6'>
                             <figure>
-                                <img src="images/blog-oldarticle2.png" className='w-full'/>
+                                <img src="images/blog-oldarticle2.png" className='w-full' alt='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report article'  id='blog-img-003'/>
                             </figure>
                             <figcaption>
                                 <div className='content lg:p-6 p-4'>
@@ -76,7 +76,7 @@ function BlogComponent() {
                         </article>
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6'>
                             <figure>
-                                <img src="images/blog-oldarticle3.png" className='w-full'/>
+                                <img src="images/blog-oldarticle3.png" className='w-full' alt='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report article'  id='blog-img-004'/>
                             </figure>
                             <figcaption>
                                 <div className='content lg:p-6 p-4'>
@@ -96,7 +96,7 @@ function BlogComponent() {
                         </article>
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6'>
                             <figure>
-                                <img src="images/blog-oldarticle4.png" className='w-full'/>
+                                <img src="images/blog-oldarticle4.png" className='w-full'  alt='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report article'  id='blog-img-005'/>
                             </figure>
                             <figcaption>
                                 <div className='content lg:p-6 p-4'>
@@ -128,22 +128,22 @@ function BlogComponent() {
                     </div>
 
                     <div className='category-card shade-blue-border rounded-lg overflow-hidden pb-4 mb-6'>
-                        <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg">Category</div>
+                        <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg" id='blog-label-008'>Category</div>
                         <div className='lg:px-6 px-2 py-2 pb-0'>
                             <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
-                                <input type="checkbox" id="acute-1" />
-                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='acute-1'>
+                                <input type="checkbox" id="acute-1" value='' />
+                                <label className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor='acute-1' id='blog-label-008-01'>
                                     <svg className='mr-3' width="18" height="23" viewBox="0 0 18 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.355 5.22691L13.347 0.878906C12.159 1.08891 10.567 1.57891 8.45501 2.48891C-1.50099 6.77091 0.0490063 10.0689 5.32901 9.88491C5.32901 9.88491 9.20901 9.82291 11.365 9.14491C11.365 9.14491 -0.166994 13.5209 2.09701 17.5269C2.09701 17.5269 4.03701 21.3489 13.737 16.9729C13.737 16.9729 17.723 15.3429 16.853 14.4449C15.959 13.5229 13.321 13.8309 10.497 15.0029C7.78501 16.1269 3.64301 18.6929 6.19301 21.1629C6.19301 21.1629 7.80901 22.6729 11.527 21.9949" stroke="#001A71" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Acute Care</label>
                                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Allergy Relief</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Pain Relief</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Cough, Cold & Flu Relief</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Digestion Health</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Smoking Cessation</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Ear Care</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Sinus Care</button>
-                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>Oral Care</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-02'>Allergy Relief</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-03'>Pain Relief</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-04'>Cough, Cold & Flu Relief</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-05'>Digestion Health</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-06'>Smoking Cessation</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-07'>Ear Care</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-08'>Sinus Care</button>
+                                    <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1' id='blog-label-008-09'>Oral Care</button>
                                 </div>
                             </div>
                         </div>
@@ -220,57 +220,57 @@ function BlogComponent() {
                     </div>
 
                     <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
-                        <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg">Trending Blogs</div>
+                        <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg" id='blog-label-009'>Trending Blogs</div>
                         <div className='m-4'>
                             <div className='border border-t-0 border-x-0 py-1'>
-                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='Four Ways Pharmacies Can Benefit from Central Fill as a Service'>Four Ways Pharmacies Can Benefit from Central Fill as a Service</a>
+                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='Four Ways Pharmacies Can Benefit from Central Fill as a Service' id='blog-label-009-01'>Four Ways Pharmacies Can Benefit from Central Fill as a Service</a>
                             </div>
                             <div className='border border-t-0 border-x-0 py-1'>
-                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report'>CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
+                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report' id='blog-label-009-02'>CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
                             </div>
                             <div className='border border-t-0 border-x-0 py-1'>
-                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='How COVID-19 has impacted the role of pharmacists around the world, National Library of Medicine, Feb. 22, 2021'>How COVID-19 has impacted the role of pharmacists around the world, National Library of Medicine, Feb. 22, 2021</a>
+                                <a href='' className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline' aria-label='How COVID-19 has impacted the role of pharmacists around the world, National Library of Medicine, Feb. 22, 2021' id='blog-label-009-03'>How COVID-19 has impacted the role of pharmacists around the world, National Library of Medicine, Feb. 22, 2021</a>
                             </div>
                         </div>
                     </div>
 
                     <div className='related-card'>
-                        <div className="text-mckblue text-sofia-bold font-extrabold text-lg mb-6">Related Products</div>
-                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-12 mb-4 pt-4">
+                        <div className="text-mckblue text-sofia-bold font-extrabold text-lg mb-6"  id='blog-label-010'>Related Products</div>
+                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4">
                             <figure className='w-full text-center'>
-                                <img src="images/r-p-list.png" className="px-5 lg:px-0 m-auto"/>
+                                <img src="images/r-p-list.png" className="px-5 lg:px-0 m-auto" alt='Allergy Relief Product'  id='blog-img-006'/>
                             </figure>
                             <figcaption>
                                 <div className="content p-6">
-                                    <div className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3">Acute Care</div>
-                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">Allergy Relief</a>
-                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base">Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
+                                    <div className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-01'>Acute Care</div>
+                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='blog-label-010-02'>Allergy Relief</a>
+                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-03'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                                 </div>
                             </figcaption>
                         </div>
                         
-                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-12 mb-4 pt-4">
+                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4">
                             <figure className='w-full text-center'>
-                                <img src="images/r-blood-pressure.png" className="px-5 lg:px-0 m-auto"/>
+                                <img src="images/r-blood-pressure.png" className="px-5 lg:px-0 m-auto" alt='Blood Pressure Monitor Product'  id='blog-img-007'/>
                             </figure>
                             <figcaption>
                                 <div className="content p-6">
-                                    <div className="bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3">Diagnostic Care</div>
-                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">Blood Pressure Monitor</a>
-                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base">Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
+                                    <div className="bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-04'>Diagnostic Care</div>
+                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='blog-label-010-05'>Blood Pressure Monitor</a>
+                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-06'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                                 </div>
                             </figcaption>
                         </div>
                         
-                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-12 mb-4 pt-4">
+                        <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4">
                             <figure className='w-full text-center'>
-                                <img src="images/r-vitamin.png" className="px-5 lg:px-0 m-auto"/>
+                                <img src="images/r-vitamin.png" className="px-5 lg:px-0 m-auto" alt='Vitamin D3 Product'  id='blog-img-008'/>
                             </figure>
                             <figcaption>
                                 <div className="content p-6">
-                                    <div className="bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3">Preventive Care</div>
-                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">Vitamin D3</a>
-                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base">Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
+                                    <div className="bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-07'>Preventive Care</div>
+                                    <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='blog-label-010-08'>Vitamin D3</a>
+                                    <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-09'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                                 </div>
                             </figcaption>
                         </div>
