@@ -78,6 +78,9 @@ module.exports = {
         'everydayblue': '#A7C8E9',
         'shadesblue': '#F2F4F9',
       }),
+      border: {
+        blue20: "#CCD1E3",
+      }
     },
   },
   plugins: [],

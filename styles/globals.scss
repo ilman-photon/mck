@@ -1137,6 +1137,7 @@ Mobiles Menu
 
 .text-54 {
   font-size: 54px;
+  line-height: 61px;
 }
 
 .text-32 {
@@ -1570,6 +1571,10 @@ footer {
     .tab-label:after {
       margin-top: -4px;
     }
+  }
+  .text-54 {
+    font-size: 32px;
+    line-height: 36px;
   }
 }
 
