@@ -1,7 +1,20 @@
 # Pipeline to deploy the FnT Web app to the stage environment. The FnT web app points to the Optimizely DXP Integration environment
 
-trigger:
-- None
+
+schedules:
+- cron: "30 11 * * 1-5"
+  displayName: Schedule build1 at 5PM
+  branches:
+   include:
+    - develop
+  always: true
+
+- cron: "30 15 * * 1-5"
+  displayName: Schedule build2 at 9PM
+  branches:
+   include:
+    - develop
+  always: true
 
 variables:
 
