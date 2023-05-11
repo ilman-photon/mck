@@ -84,10 +84,23 @@ function HeaderComponent() {
     setIsHealthNeedsOpen(!isHealthNeedsOpen);
   }
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 1024); // set breakpoint as per your requirement
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // logo onhover
   const [logoSrc, setLogoSrc] = useState('images/logo.png');
   function handleHeaderMouseEnter() {
-    setLogoSrc('images/logo_beige.png');
+    if (!isMobile) {
+      setLogoSrc('images/logo_beige.png');
+    }
   }
   function handleHeaderMouseLeave() {
     setLogoSrc('images/logo.png');
@@ -97,10 +110,10 @@ function HeaderComponent() {
     <>
       <div onMouseEnter={handleHeaderMouseEnter} onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
+        className="header flex lg:grid container sticky mx-auto lg:bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
       >
         {/* <div className="flex"> */}
-        <div className="flex" style={divHeight}>
+        <div className="flex" style={!isMobile ? divHeight : undefined}>
           {/* <div className="mobile-nav px-5 py-5">
             <img
               id="logo-image"
@@ -156,12 +169,13 @@ function HeaderComponent() {
             // src={isSmall}
             alt="logo"
             className="lg:mt-7"
-            style={imgWidth}
+            style={isMobile ? undefined : imgWidth}
           />
         </div>
 
         {/* <div className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"> */}
-        <div className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky" style={divHeight}>
+        <div className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
+        style={!isMobile ? divHeight : undefined}>
           <NavBar isVisible={isVisible} />
           <Search />
         </div>
