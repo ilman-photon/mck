@@ -36,7 +36,7 @@ export default function Home() {
       <Script
         id="google-analytics"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
+        dangerouslySetInnerHTML={{ 
           __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
