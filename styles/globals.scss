@@ -1411,7 +1411,8 @@ footer {
 }
 
 /*** FAQ Style ***/
-.tab {
+.faq-container {
+  .tab {
   border: 0.5px solid #ccd1e3;
 
   &-label {
@@ -1466,6 +1467,8 @@ footer {
     }
   }
 }
+}
+
 
 .category-card {
   .tab {
