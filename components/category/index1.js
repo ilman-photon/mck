@@ -50,7 +50,7 @@ export default function CategoryComponent({ sectionData }) {
                 {item?.data?.name}
               </div>
               <div
-                className="text-center text-sofia-reg w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
+                className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
                 }} tabIndex={0} id={item?.data?.productCategoryDescription?.value}></div>

@@ -77,7 +77,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     </div>
                     <div id="p-text" className="text-justify pr-0 lg:pr-9">
                       <div
-                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                        className="text-lg text-sofia-reg text-center text-mcknormalgrey font-normal col-span-2 lg:text-left pb-4"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }} tabIndex={0} id={ele?.data?.description?.value}

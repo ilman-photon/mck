@@ -67,7 +67,7 @@ export default function LearningSectionComponent({ sectionData }) {
                 {ele?.title?.value}
               </h2>
               <div
-                className="jsx-290076256 text-2xl text-sofia-reg text-center lg:text-left lg:pb-6 pb-4"
+                className="jsx-290076256 text-lg font-normal text-sofia-reg text-center lg:text-left lg:pb-6 pb-4 text-mcknormalgrey"
                 dangerouslySetInnerHTML={{ __html: ele?.description?.value }} tabIndex={0} id={ele?.description?.value}
               ></div>
               {ele?.buttonText?.value && (
