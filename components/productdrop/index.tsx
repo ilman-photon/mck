@@ -18,9 +18,9 @@ function ProductDropComponent({ subMenuData }: Props) {
   function getSubMenuData() {
     axios
       .get(
-        `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?References=${getIds?.join(
-          ","
-        )}&expand=*`,
+        `${
+          process.env.API_URL
+        }/api/episerver/v3.0/content/?References=${getIds?.join(",")}&expand=*`,
         {
           headers: {
             "Accept-Language": "en",

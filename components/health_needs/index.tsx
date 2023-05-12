@@ -415,7 +415,7 @@ const HealthNeedsComponent = () => {
                     {/* Health needs - Top Active Filter section starts */}
 
                     {/* Health needs - Left coloumn Filter section starts */}
-                    <div className="flex mt-8">
+                    <div className="lg:flex md:flex sm-flex flex-none mt-8">
                         <div className="flex-none h-max">
                             <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
                                 {/* Left main category lists */}
@@ -549,7 +549,7 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">test Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
                                                 </div>
                                             </div>
                                             <div className="flex max-w-xl bg-color py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
@@ -557,7 +557,7 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
 
@@ -579,7 +579,7 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
 
@@ -592,7 +592,7 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
                                             <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
@@ -600,7 +600,7 @@ const HealthNeedsComponent = () => {
                                                 <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
                                 </div>

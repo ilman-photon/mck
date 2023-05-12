@@ -51,7 +51,7 @@ export default function LearningSectionComponent() {
             beyond the box, and that wellness and being well go hand in hands.
             So we make our own products with high quality ingredients.
           </p>
-          <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
+          <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
             LEARN MORE
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function LearningSectionComponent() {
             You can find our products at many of the major outlets including
             Walmart, CVS, Wallgreens, Amazon, Target and more.
           </p>
-          <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
+          <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
             LEARN MORE
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function LearningSectionComponent() {
                   </p>
                 </div>
               </div>              
-              <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-0 lg:ml-auto">
+              <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex ml-0 lg:ml-auto">
                     Where to buy
                   </div>
             </div>
@@ -202,7 +202,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
+                  <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
                     Where to buy
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function LearningSectionComponent() {
                     Adhesive Bandages. Find the right adhesive bandage for your
                     specific needs.
                   </p>
-                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
+                  <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
                     Where to buy
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function LearningSectionComponent() {
                     with higher Vitamin D needs and/or deficiency as determined
                     by healthcare professionals.
                   </p>
-                  <div className="jsx-290076256 w-[124px] h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
+                  <div className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer">
                     Where to buy
                   </div>
                 </div>
