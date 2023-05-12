@@ -375,7 +375,7 @@ const HealthNeedsComponent = () => {
                 </div>
                 {/* Health needs - Top category section ends */}
 
-                <div className="container max-w-7xl mt-8">
+                <div className="container max-w-7xl lg:mt-8 mt-6 px-4 lg:px-0">
 
                     {/* Health needs - Top Active Filter section starts */}
                     <section>
@@ -417,39 +417,34 @@ const HealthNeedsComponent = () => {
                     {/* Health needs - Left coloumn Filter section starts */}
                     <div className="lg:flex md:flex sm-flex flex-none mt-8">
                         <div className="flex-none h-max">
-                            <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
+                            <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
                                 {/* Left main category lists */}
                                 <div className="flex items-center my-px">
-                                    <div>
+                                    <div className="w-full border rounded px-4 lg:px-0">
                                         {productCategoryData && productCategoryData?.map((leftfiltermaindata: any) => (
                                             <>
                                                 {/* Left filter main category */}
-                                                <div className="flex mb-2" key={leftfiltermaindata?.contentLink?.id}>
-                                                    <img
-                                                        id={leftfiltermaindata?.mainCategory?.value[0].name}
-                                                        src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
-                                                    />
-                                                    <label htmlFor="acute" className="ml-2 filter-title">
-                                                        {leftfiltermaindata?.mainCategory?.value[0].name}
+                                            
+
+                                                <section className="mck-hn-mobile-accordion tab overflow-hidden">
+                                                    <input className="mck-hn-accordion-title-check" type="checkbox" id={leftfiltermaindata?.contentLink?.id} />
+                                                    <label className="tab-label p-4 lg:p-0" htmlFor={leftfiltermaindata?.contentLink?.id}>
+                                                    <div className="flex lg:mb-2 w-full" key={leftfiltermaindata?.contentLink?.id}>
+                                                        <img
+                                                            id={leftfiltermaindata?.mainCategory?.value[0].name}
+                                                            src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
+                                                        />
+                                                        <label htmlFor="acute" className="ml-2 filter-title">
+                                                            {leftfiltermaindata?.mainCategory?.value[0].name}
+                                                        </label>
+                                                    </div>
                                                     </label>
-                                                </div>
                                                 {/* Left filter main category */}
 
                                                 {/* Left filter sub category */}
-                                                <div className="border-b-2 pb-3 mb-2 mck-hn-filter-subcat">
+                                                <div className="lg:border-b-2 pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                                                     <ul>
-                                                        <li>
-                                                            {/* <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, viewall)}>
-                                                                <input
-                                                                    id="mck-viewall"
-                                                                    type="checkbox"
-                                                                    value="view all"
-                                                                    className="w-4 h-4"
-                                                                />
-                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
-                                                                    View All
-                                                                </label>
-                                                            </div> */}
+                                                        <li className="list-none">
                                                             <div className="flex items-center my-px" onClick={(e) => handleViewAllChange(e, leftfiltermaindata?.mainCategory?.value[0].id)}>
                                                                 <input
                                                                     id={leftfiltermaindata?.mainCategory?.value[0]?.name}
@@ -467,7 +462,7 @@ const HealthNeedsComponent = () => {
                                                     </ul>
                                                     <ul>
                                                         {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: any) => (
-                                                            <li key={leftfiltersubdata?.id}>
+                                                            <li className="list-none" key={leftfiltersubdata?.id}>
                                                                 <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name, leftfiltermaindata?.mainCategory?.value[0].id, leftfiltersubdata?.id)}>
                                                                     <input
                                                                         id={leftfiltersubdata?.name}
@@ -486,6 +481,7 @@ const HealthNeedsComponent = () => {
                                                     </ul>
                                                 </div>
                                                 {/* Left filter sub category */}
+                                                </section>
                                             </>
                                         ))}
                                     </div>
@@ -538,26 +534,26 @@ const HealthNeedsComponent = () => {
                             {/* Health needs - Right coloumn ends */}
 
                             {/* Health needs Promotional banner section starts - 2 products */}
-                            <div className="product-where-to-buy grid grid-cols-1 px-6">
+                            <div className="product-where-to-buy grid grid-cols-1 lg:px-6">
                                 <div className="relative isolate overflow-hidden">
                                     <div className="mx-auto max-w-7xl">
                                         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
 
                                             <style jsx>{`.bg-color {background-color: ${recommendedProductsData?.recommendedProductBackgroundColorCode?.value};}`}</style>
-                                            <div className="flex max-w-xl bg-color py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
+                                            <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-10 px-4 lg:px-8 items-center">
                                                 {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full" />
                                                 <div>
-                                                    <p className="mt-4 text-lg">test Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
+                                                    <p className="lg:mt-4 text-lg">test Allergy relief that starts working fast on the first day you take it.</p>
+                                                    <div id="cta-btn" className="jsx-290076256 leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right w-auto">{recommendedProductsData?.recommendedProductButtonText?.value}</div>
                                                 </div>
                                             </div>
-                                            <div className="flex max-w-xl bg-color py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
+                                            <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-10 px-4 lg:px-8 items-center">
                                                 {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full" />
                                                 <div>
-                                                    <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <p className="lg:mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
+                                                    <div id="cta-btn" className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
 
@@ -570,37 +566,37 @@ const HealthNeedsComponent = () => {
 
                             {/* Health needs Promotional banner section starts - 3 products */}
                             <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
-                                <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden border border-slate-400 lg:block">
-                                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="h-full w-full object-cover object-center" />
-                                    <div className="mck-hn-recommend-prd-content">
-                                        <img id="logo-image" src="images/logo.png" alt="logo" className="mt-1 lg:mt-7 ml-3" />
-                                        <div className="flex max-w-xl bg-color py-16 sm:py-24 lg:py-10 px-6 lg:px-8">
+                                <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
+                                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png" alt="Two each of gray, white, and black shirts laying flat." className="w-full object-contain object-center" />
+                                    <div className="mck-hn-recommend-prd-content absolute top-0">
+                                        <img id="logo-image" src="images/logo.png" alt="logo" className="mt-1 lg:mt-12 ml-12" />
+                                        <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 items-center">
                                                 {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
 
                                     </div>
                                 </div>
-                                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                                <div className="lg:grid lg:grid-cols-1 lg:gap-y-8">
                                 
-                                <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
+                                <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 py-4 lg:py-0 lg:px-8 items-center mb-4 lg:mb-0">
                                                 {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
-                                            <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-6 lg:px-8">
+                                            <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 lg:px-8 py-4 lg:py-0 items-center">
                                                 {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                                                <img src="images/allergy-relief.png" alt="allergy relief" className="pr-6" />
+                                                <img src="images/allergy-relief.png" alt="allergy relief" className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full" />
                                                 <div>
                                                     <p className="mt-4 text-lg">Allergy relief that starts working fast on the first day you take it.</p>
-                                                    <div id="cta-btn" className="jsx-290076256 w-[124px] leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
+                                                    <div id="cta-btn" className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"><a href={recommendedProductsData?.recommendedProductButtonUrl?.value}>{recommendedProductsData?.recommendedProductButtonText?.value}</a></div>
                                                 </div>
                                             </div>
                                 </div>
