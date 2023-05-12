@@ -1423,15 +1423,17 @@ footer {
     &:after {
       content: "+";
       //background-image: url('images/plus.svg');
-      width: 24px;
-      height: 24px;
+      width: 14px;
+      height: 14px;
       text-align: center;
       transition: all 1s;
       color: #001a71;
-      font-size: 30px;
+      font-size: 27px;
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
+      position: relative; 
+      top: 9px;
     }
   }
 
