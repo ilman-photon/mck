@@ -5,14 +5,14 @@ trigger:
 - None
 
 schedules:
-- cron: "30 11 * * 1-5"
+- cron: "30 11 * * 0-6"
   displayName: Schedule build1 at 5PM
   branches:
    include:
     - develop
   always: true
 
-- cron: "30 15 * * 1-5"
+- cron: "30 15 * * 0-6"
   displayName: Schedule build2 at 9PM
   branches:
    include:
