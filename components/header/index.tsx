@@ -3,6 +3,7 @@ import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
 import NavDropComponent from "../navdrop";
+import axios, { AxiosError } from "axios";
 
 function HeaderComponent() {
   const logogrey = "images/logo.png";
@@ -14,6 +15,8 @@ function HeaderComponent() {
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
   const [megaMenuShow, seMegaMenuShow] = useState(false);
+  const [headerData, setHeaderData] = useState<any>();
+  const [menuData, setMenuData] = useState<any>();
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -52,6 +55,32 @@ function HeaderComponent() {
     };
   }, []);
 
+  useEffect(() => {
+    fetchHeaderData();
+  }, []);
+
+  function fetchHeaderData() {
+    axios
+      .get(
+        `https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/v3.0/content/?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/application-settings/&expand=*`,
+        {
+          headers: {
+            "Accept-Language": "en",
+          },
+        }
+      )
+      .then((res) => {
+        setHeaderData(res.data[0]);
+        setMenuData(
+          res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
+            .expandedValue
+        );
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+  }
+
+  function fetchHeaderMenu() {}
+
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
@@ -62,7 +91,7 @@ function HeaderComponent() {
     });
   }
 
-  'react';
+  ("react");
 
   // hamburger menu
   const [isBarAnimated, setIsBarAnimated] = useState(false);
@@ -79,17 +108,19 @@ function HeaderComponent() {
   }
 
   // logo onhover
-  const [logoSrc, setLogoSrc] = useState('images/logo.png');
+  const [logoSrc, setLogoSrc] = useState("images/logo.png");
   function handleHeaderMouseEnter() {
-    setLogoSrc('images/logo_white.png');
+    setLogoSrc("images/logo_white.png");
   }
   function handleHeaderMouseLeave() {
-    setLogoSrc('images/logo.png');
+    setLogoSrc("images/logo.png");
   }
 
   return (
     <>
-      <div onMouseEnter={handleHeaderMouseEnter} onMouseLeave={handleHeaderMouseLeave}
+      <div
+        onMouseEnter={handleHeaderMouseEnter}
+        onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className="header flex lg:grid container sticky mx-auto bg-transparent blue-txt"
       >
@@ -105,31 +136,60 @@ function HeaderComponent() {
 
           {/* Hamburger menu starts */}
           <div className="md:hidden sm:hidden lg:hidden xl:hidden">
-          <div className="hamburger-menu bg-mckwhite border-b border-mckblue" onClick={handleHamburgerClick}>
-            <div className={`bar ${isBarAnimated ? 'animate' : ''}`}></div>
-          </div>
-          <div className={`mobile-menu bg-mcklightyellow text-mckblue ${isMobileMenuActive ? 'active' : ''}`}>
-            <ul className="ulmenu">
-              <li><a href="#">Home</a></li>
-              <li className="has-children" onClick={handleChildrenClick}>
-                <a href="#">Products</a>
-                <span className={`icon-arrow ${isChildrenOpen ? 'open' : ''}`}></span>
-                {isChildrenOpen && (
-                  <ul className="open">
-                    <li><a href="#">Acute Care</a></li>
-                    <li><a href="#">Preventative Care</a></li>
-                    <li><a href="#">Every Day Care</a></li>
-                    <li><a href="#">Diagnostic Care</a></li>
-                  </ul>
-                )}
-              </li>
-              <li><a href="#">Health Needs</a></li>
-              <li><a href="#">Why F&T</a></li>
-              <li><a href="#">Where to Buy</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Health Care Professionals</a></li>
-            </ul>
-          </div>
+            <div
+              className="hamburger-menu bg-mckwhite border-b border-mckblue"
+              onClick={handleHamburgerClick}
+            >
+              <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
+            </div>
+            <div
+              className={`mobile-menu bg-mcklightyellow text-mckblue ${
+                isMobileMenuActive ? "active" : ""
+              }`}
+            >
+              <ul className="ulmenu">
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li className="has-children" onClick={handleChildrenClick}>
+                  <a href="#">Products</a>
+                  <span
+                    className={`icon-arrow ${isChildrenOpen ? "open" : ""}`}
+                  ></span>
+                  {isChildrenOpen && (
+                    <ul className="open">
+                      <li>
+                        <a href="#">Acute Care</a>
+                      </li>
+                      <li>
+                        <a href="#">Preventative Care</a>
+                      </li>
+                      <li>
+                        <a href="#">Every Day Care</a>
+                      </li>
+                      <li>
+                        <a href="#">Diagnostic Care</a>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <a href="#">Health Needs</a>
+                </li>
+                <li>
+                  <a href="#">Why F&T</a>
+                </li>
+                <li>
+                  <a href="#">Where to Buy</a>
+                </li>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Health Care Professionals</a>
+                </li>
+              </ul>
+            </div>
           </div>
           {/* Hambuger menu ends */}
 
@@ -138,7 +198,9 @@ function HeaderComponent() {
             className="brand-logo"
             onClick={handleOnClickLogo}
           >
-            <img id="logo-image" src={logoSrc}
+            <img
+              id="logo-image"
+              src={logoSrc}
               // src={isSmall}
               alt="logo"
               className="mt-1 lg:mt-7 ml-3"
@@ -151,7 +213,7 @@ function HeaderComponent() {
           className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
           style={divHeight}
         >
-          <NavBar isVisible={isVisible} />
+          <NavBar menuData={menuData} />
           <Search />
         </div>
       </div>
