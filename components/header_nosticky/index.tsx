@@ -21,7 +21,7 @@ function HeaderNoStickyComponent() {
       marginTop: "12px",
       zIndex: "9",
       fill: "#fff",
-      height:'auto',
+      height: "auto",
     };
     const style1 = {
       margin: 0,
@@ -67,21 +67,30 @@ function HeaderNoStickyComponent() {
       <div className="flex lg:grid container mx-auto bg-transparent blue-txt">
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
-          <img className="w-full" src="images/mobile_nav.png" onClick={handleClick}/>
-          </div>          
+            <img
+              className="w-full"
+              src="images/mobile_nav.png"
+              onClick={handleClick}
+            />
+          </div>
           <div
             ref={headerImgRef}
             className="brand-logo"
             onClick={handleOnCLickLogo}
           >
-            <img src={isSmall} alt="logo" className="mt-1 lg:mt-7 ml-3" style={imgWidth} />
+            <img
+              src={isSmall}
+              alt="logo"
+              className="mt-1 lg:mt-7 ml-3"
+              style={imgWidth}
+            />
           </div>
         </div>
         <div
           className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18"
           style={divHeight}
         >
-          <NavBar isVisible={isVisible} />
+          {/* <NavBar /> */}
           <Search />
         </div>
       </div>
