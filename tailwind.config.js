@@ -52,8 +52,10 @@ module.exports = {
       },
       padding: {
         72: "72px",
+        54: "54px",
       },
       fontSize: {
+        32: "2rem",
         27: "1.688rem",
         54: "3.375rem",
       },
@@ -82,6 +84,10 @@ module.exports = {
         'everydayblue': '#A7C8E9',
         'shadesblue': '#F2F4F9',
       }),
+      boxShadow: {
+        'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
+        'circleshadow': '0px 9px 11px -5px rgba(0, 0, 0, 0.25)',
+      },
       border: {
         blue20: "#CCD1E3",
       }
