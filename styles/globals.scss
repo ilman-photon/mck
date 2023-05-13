@@ -1636,3 +1636,48 @@ footer {
     }
   }
 }
+/*---------------------
+	Nav Tabs - Health Page
+	----------------------*/
+  .NavTabs_Contain {
+    .tabs {
+      display: flex;
+      flex-wrap: wrap; // make sure it wraps
+    }
+    .tabs label {
+      order: 1; // Put the labels first
+      display: flex;
+      justify-content: center;
+      -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+      flex-grow: 3;
+      transition: background ease 0.2s;
+    }
+    .tabs .tab {
+      order: 99; // Put the tabs last
+      flex-grow: 1;
+      width: 100%;
+      display: none;
+      background: #fff;
+    }
+    .tabs input[type="radio"] {
+      display: none;
+    }
+  
+    .tabs input[type="radio"]:checked + label + .tab {
+      display: block;
+    }
+      
+    @media (max-width: 45em) {
+      .tabs .tab,
+      .tabs label {
+        order: initial;
+      }
+      .tabs label {
+        display: flex;
+        width: 100%;
+        margin-right: 0;
+        justify-content: flex-start;
+      }
+    }
+  }
