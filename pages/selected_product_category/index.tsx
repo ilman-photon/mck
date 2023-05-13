@@ -6,6 +6,7 @@ import CarouselComponent from "@/components/carousel";
 import axios, { AxiosError } from "axios";
 import ProductListComponent from "@/components/product_list";
 import RecommendationalProductComponent from "@/components/recommendational_product";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function ProductListPage() {
   
@@ -40,6 +41,7 @@ function ProductListPage() {
 
   return (
     <>
+      <GoogleTagManager/>
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}

@@ -3,10 +3,12 @@ import PrivacypolicyComponent from "@/components/privacy_policy/PrivacypolicyCom
 import HeaderNoStickyComponent from "@/components/header_nosticky";
 //import HeaderComponent from "@/components/header";
 import React from "react";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function Terms() {
     return (
         <>
+        <GoogleTagManager/>
         <HeaderNoStickyComponent />
         <PrivacypolicyComponent />
         <FooterComponent />

@@ -3,6 +3,7 @@ import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
 import { useEffect, useState } from "react";
 import FilterComponent from "@/components/filter";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function ProductSearchList() {
   const router = useRouter();
@@ -77,6 +78,7 @@ function ProductSearchList() {
 
   return (
     <>
+      <GoogleTagManager/>
       <HeaderComponent />
       <div className="search-page-container">
         <div className="search-page-header">

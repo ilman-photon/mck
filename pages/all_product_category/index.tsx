@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CategoryComponent from "@/components/category/index1";
 import { useRouter } from "next/router";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function AllProductCategoryPage() {
   const router = useRouter();
@@ -233,6 +234,7 @@ function AllProductCategoryPage() {
 
   return (
     <>
+      <GoogleTagManager/>
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
