@@ -24,6 +24,23 @@ const nextConfig = {
       ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
       : "https://mcco02mstrub73kinte.dxcloud.episerver.net",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'mcco02mstrub73kinte.dxcloud.episerver.net',
+        port: '',
+        pathname: '/globalassets/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mcco02mstrub73kinte.dxcloud.episerver.net',
+        port: '',
+        pathname: '/contentassets/**',
+      },
+      
+    ],
+  },
 };
 
 module.exports = nextConfig;
