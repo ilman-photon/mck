@@ -67,6 +67,10 @@ module.exports = {
       bg: {
         mckbgwhite: "#FFFDFB",
         inputbg: "#F8F9FB",
+        mckthingrey: "#CCD1E3",
+        mckyellow: "#FFEABC",
+        lightblue: "#EAF1F8",
+        acuteblue: "#DBDFEB",
       },
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
