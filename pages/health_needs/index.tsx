@@ -5,6 +5,7 @@ import HeaderComponent from "@/components/header";
 import CarouselComponent from "@/components/carousel";
 import axios, { AxiosError } from "axios";
 import HealthNeedsComponent from "@/components/health_needs";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function HealthNeedsPage() {
   
@@ -39,6 +40,7 @@ function HealthNeedsPage() {
 
   return (
     <>
+      <GoogleTagManager/>
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
