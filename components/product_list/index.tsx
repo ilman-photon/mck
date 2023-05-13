@@ -333,20 +333,7 @@ function ProductListComponent() {
         <>
             <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1 max-w-7xl">
 
-
-                {/* Health needs - Top category section starts */}
-                <div className="health-needs-categories">
-                    <div className="health-needs-categories-icons">
-                        <ul>
-                            {healthNeedData && healthNeedData?.map((healthneedsdata: any) => (
-                                <li key={healthneedsdata?.contentLink?.id}><img src={healthneedsdata?.image?.expandedValue?.url} />{healthneedsdata?.title.value}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-                {/* Health needs - Top category section ends */}
-
-                <div className="container max-w-7xl mt-8">
+                <div className="container max-w-7xl lg:mt-8 mt-6 px-4 lg:px-0">
 
                     {/* Health needs - Top Active Filter section starts */}
                     <section>
@@ -388,57 +375,34 @@ function ProductListComponent() {
                     {/* Health needs - Left coloumn Filter section starts */}
                     <div className="lg:flex md:flex sm-flex flex-none mt-8">
                         <div className="flex-none h-max">
-                            {/* Accordion Start */}
-
-                            <div className="accordion-section tab overflow-hidden">
-
-                                <input type="checkbox" id="1" />
-
-                                <label className="tab-label" htmlFor="1">Header</label>
-
-                                <div className="tab-content">
-
-                                    <p>hello Arun</p>
-
-                                </div>
-
-                            </div>
-
-                            {/* Accordion End */}
 
                             <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
-                                {/* Left main category lists */}
-                                <div className="flex items-center my-px">
-                                    <div>
+                              {/* Left main category lists */}
+                              <div className="flex items-center my-px">
+                                    <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
                                         {productCategoryData && productCategoryData?.map((leftfiltermaindata: any) => (
                                             <>
                                                 {/* Left filter main category */}
-                                                <div className="flex mb-2" key={leftfiltermaindata?.contentLink?.id}>
-                                                    <img
-                                                        id={leftfiltermaindata?.mainCategory?.value[0].name}
-                                                        src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
-                                                    />
-                                                    <label htmlFor="acute" className="ml-2 filter-title">
-                                                        {leftfiltermaindata?.mainCategory?.value[0].name}
+
+                                                <section className="mck-hn-mobile-accordion tab overflow-hidden">
+                                                    <input className="mck-hn-accordion-title-check" type="checkbox" id={leftfiltermaindata?.contentLink?.id} />
+                                                    <label className="tab-label p-4 lg:p-0" htmlFor={leftfiltermaindata?.contentLink?.id}>
+                                                    <div className="flex lg:mb-2 w-full lg:mt-2" key={leftfiltermaindata?.contentLink?.id}>
+                                                        <img
+                                                            id={leftfiltermaindata?.mainCategory?.value[0].name}
+                                                            src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
+                                                        />
+                                                        <label htmlFor="acute" className="ml-2 filter-title">
+                                                            {leftfiltermaindata?.mainCategory?.value[0].name}
+                                                        </label>
+                                                    </div>
                                                     </label>
-                                                </div>
                                                 {/* Left filter main category */}
 
                                                 {/* Left filter sub category */}
-                                                <div className="border-b-2 pb-3 mb-2 mck-hn-filter-subcat">
+                                                <div className="lg:border-b-2 pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                                                     <ul>
-                                                        <li>
-                                                            {/* <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, viewall)}>
-                                                                <input
-                                                                    id="mck-viewall"
-                                                                    type="checkbox"
-                                                                    value="view all"
-                                                                    className="w-4 h-4"
-                                                                />
-                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
-                                                                    View All
-                                                                </label>
-                                                            </div> */}
+                                                        <li className="list-none">
                                                             <div className="flex items-center my-px" onClick={(e) => handleViewAllChange(e, leftfiltermaindata?.mainCategory?.value[0].id)}>
                                                                 <input
                                                                     id={leftfiltermaindata?.mainCategory?.value[0]?.name}
@@ -448,7 +412,7 @@ function ProductListComponent() {
                                                                     checked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id]?.isCategoryChecked}
                                                                     defaultChecked={selectedFilterItems[leftfiltermaindata?.mainCategory?.value[0].id]?.isCategoryChecked}
                                                                 />
-                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm">
+                                                                <label htmlFor="mck-view-all" className="ml-2 text-mcknormalgrey text-sm" id="">
                                                                     View All
                                                                 </label>
                                                             </div>
@@ -456,7 +420,7 @@ function ProductListComponent() {
                                                     </ul>
                                                     <ul>
                                                         {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: any) => (
-                                                            <li key={leftfiltersubdata?.id}>
+                                                            <li className="list-none" key={leftfiltersubdata?.id}>
                                                                 <div className="flex items-center my-px" onClick={(e) => handleCheckBox(e, leftfiltersubdata?.name, leftfiltermaindata?.mainCategory?.value[0].id, leftfiltersubdata?.id)}>
                                                                     <input
                                                                         id={leftfiltersubdata?.name}
@@ -475,7 +439,7 @@ function ProductListComponent() {
                                                     </ul>
                                                 </div>
                                                 {/* Left filter sub category */}
-
+                                                </section>
                                             </>
                                         ))}
                                     </div>
@@ -547,8 +511,8 @@ function ProductListComponent() {
                                             <div className="mckblue product-list-title">
                                                 {item?.name}
                                             </div>
-                                            <div
-                                                className="mcknormalgrey product-list-description"
+                                            <div id="my_text"
+                                                className="mcknormalgrey product-list-description ellipsis"
                                                 dangerouslySetInnerHTML={{
                                                     __html: item?.highlightDescription?.value,
                                                 }}
