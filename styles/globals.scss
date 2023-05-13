@@ -1411,8 +1411,7 @@ footer {
 }
 
 /*** FAQ Style ***/
-.faq-container {
-  .tab {
+.tab {
   border: 0.5px solid #ccd1e3;
 
   &-label {
@@ -1423,17 +1422,15 @@ footer {
     &:after {
       content: "+";
       //background-image: url('images/plus.svg');
-      width: 14px;
-      height: 14px;
+      width: 24px;
+      height: 24px;
       text-align: center;
       transition: all 1s;
       color: #001a71;
-      font-size: 27px;
+      font-size: 30px;
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
-      position: relative; 
-      top: 9px;
     }
   }
 
@@ -1469,8 +1466,6 @@ footer {
     }
   }
 }
-}
-
 
 .category-card {
   .tab {
