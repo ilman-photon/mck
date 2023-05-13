@@ -42,14 +42,13 @@ function PdpCarousel(prodViewData: any) {
         setSelectedItemIndex(i)
      }
 
-    return (
+     return (
         <div className="flex mx-auto">
-            <div className="flex mx-auto">
-                <div className="">
-                    <div className="_2mLllQ">
-                        <ul className="_3GnUWp">
-                        <button onClick={handleUpArrowClick}>Up arrow</button>
-                            {prodResponse?.productImages?.value?.slice(0, 5).map((imgdata: any ,index :any ) => (
+            <div className="flex mx-auto flex-col-reverse lg:flex-row">
+                <div className="pdp_images flex lg:grid">
+                    <button onClick={handleUpArrowClick}>Up arrow</button>
+                    <ul className="_3GnUWp flex lg:grid">
+                        {prodResponse?.productImages?.value?.slice(0, 5).map((imgdata: any ,index :any ) => (
                                 <li className="w-24 h-24 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3" id={"pdp_carousel_"+imgdata?.id}  
                                 // key={imgdata?.id}
                                 key={Math.random()}
@@ -57,21 +56,19 @@ function PdpCarousel(prodViewData: any) {
                                     handleImageClick(index);
                                   }}
                                 >
-
                                     <img className="max-w-xl w-10" src={imgdata?.url}  alt=""/>
                                 </li>
                             )
                             )}
-                            <button onClick={handleDownArrowClick}>Down arrow</button>
-                        </ul>
-                    </div>
+                    </ul>
+                    <button onClick={handleDownArrowClick}>Down arrow</button>
                 </div>
-                <div className="w-[526px] h-[636px] box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue ml-14">
-                    <img alt="" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[1]?.url} />
-                </div>
+               <div className="w-[526px] h-[636px] box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue ml-14">
+                  <img alt="" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[selectedItemIndex]?.url} />
+               </div>
             </div>
         </div>
-    );
+     )
 }
 
 export default PdpCarousel;
