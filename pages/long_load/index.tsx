@@ -1,6 +1,6 @@
 import FooterComponent from "@/components/footer";
 import GoogleTagManager from "@/components/google_tag_manager";
-import HeaderNoStickyComponent from "@/components/header_nosticky";
+import HeaderComponent from "@/components/header";
 import LongLoadComponent from "@/components/long_load/longload";
 
 function LongLoad() {
@@ -8,7 +8,7 @@ function LongLoad() {
     <>
       <div className="grid">
         <GoogleTagManager/>
-        <HeaderNoStickyComponent />
+        <HeaderComponent />
         <LongLoadComponent/>
         <FooterComponent />
       </div>
