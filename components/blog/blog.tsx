@@ -164,7 +164,7 @@ function BlogComponent() {
                                     </React.Fragment>
                                     <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
                                         {item.subCategory.value.map((item: any, index: number) => (
-                                            <button className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>{item.description}</button>
+                                            <button  key={index} className='w-full list-none text-sofia-reg text-base font-normal text-mckblue cursor-pointer text-left hover:bg-shadesblue pl-2 py-1'>{item.description}</button>
                                         ))}
                                     </div>
                                 </div>
