@@ -1706,3 +1706,23 @@ footer {
   .pb-10{
     padding-bottom: 10px;
   }
+  .product-detail-page{
+    margin-top: 210px;
+    .pdp_images{
+      .carousel-prev,.carousel-next{
+        margin: 0 auto;
+      }
+    }
+     .tab-label:after {
+      content: "+";
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      transition: all 1s;
+      color: #3a3e41;
+      font-size: 30px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+  }
+  }
