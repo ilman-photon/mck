@@ -65,6 +65,7 @@
 @import "ProductSearchList.module.scss";
 @import "HealthNeeds.module.scss";
 @import "productList.module.scss";
+@import "AllProductList.module.scss";
 
 a {
   color: inherit;
@@ -1303,7 +1304,7 @@ footer {
 
 @media screen and (max-width: 767px) {
   .product-list-container {
-    padding: 0 16px;
+    padding: 16px 0 16px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
@@ -1526,6 +1527,27 @@ footer {
       font-size: 36px;
     }
   }
+  .tab{
+    input{
+      display: none;
+    }
+    .tab-content{
+      padding: 0;
+    }
+  }
+}
+.pdp-carousel{
+  @media screen and (max-width: 1023px) {
+      ul{
+        li{
+          margin-right: 12px;
+          margin-top: 16px;
+          &:last-child{
+            margin-right: 0;
+          }
+        }
+      }
+  }
 }
 
 .pdp-detail-description {
@@ -1679,4 +1701,8 @@ footer {
         justify-content: flex-start;
       }
     }
+  }
+
+  .pb-10{
+    padding-bottom: 10px;
   }
