@@ -43,8 +43,6 @@ function BlogComponent() {
                         <figcaption>
                             <div className='content lg:p-6 p-4'>
                             <h1 className='lg:text-54 text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' dangerouslySetInnerHTML={{ __html:ArticleContent?.data[0].relatedArticleHeading.value }}></h1>
-
-                                <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue lg:pb-3 no-underline' aria-labelledby='Are your medications causing you to lose nutrients' id='blog-link-001'>Are your medications causing you to lose nutrients?</a>
                                 <div className='pb-3 lg:pt-0 pt-3'>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border' id='blog-label-001'>February 18, 2022</span>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id='blog-label-002'>65 min read</span>
