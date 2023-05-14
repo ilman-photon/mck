@@ -1,4 +1,4 @@
-import useAxios from "@/hooks/useApi";
+import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
@@ -250,7 +250,7 @@ function ResultComponent() {
         const fetchData = async () => {
 
             // Health needs Categories List
-            const healthNeedsCategories = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const healthNeedsCategories = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const healthNeedsCategoriesList = healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
 
             // console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
@@ -259,13 +259,13 @@ function ResultComponent() {
             setHealthNeedData(healthNeedsCategoriesListData);
 
             // Product Category setting - Filters data
-            const activeFiltersData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
+            const activeFiltersData = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
             const activeFiltersDataList = activeFiltersData?.data[0];
             // console.log("activeFilters --- ", activeFiltersDataList);
             setactiveFiltersData(activeFiltersDataList);
 
             // Product Category Helath needs - Left side category lists
-            const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const productCategoryData = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const productCategoryDataList = productCategoryData?.data[0]?.categoryFilter?.expandedValue;
             // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
             //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
