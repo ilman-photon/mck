@@ -1,6 +1,7 @@
 import { render, screen, act } from '@testing-library/react';
 import HealthCareProfessional from "@/pages/health_care_professional";
 import axios from "axios";
+import { footerData } from '../components/__mocks__/footer';
 jest.mock("axios");
 
 jest.mock('next/router', () => {
@@ -9,11 +10,15 @@ jest.mock('next/router', () => {
     }
 });
 
+beforeAll(() => {
+    axios.get.mockResolvedValue({ data: footerData });
+})
+
 describe('HealthCareProfessional - Display values from CMS', () => {
 
     test('Render Health Care Professional Page', async () => {
         await act(async () => {
-        render(<HealthCareProfessional />);
+            render(<HealthCareProfessional />);
         });
         
         expect(screen.getByText('What people are saying:')).toBeInTheDocument();
