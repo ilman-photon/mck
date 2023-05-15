@@ -3,7 +3,7 @@ import React from 'react'
 function BlogSearchComponent() {
   return (
     <>
-      <div className='container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6  mx-auto'>
+      <div className='container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16'>
         <div id="search" className="w-full relative flex items-center content-center">
             <input
             className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
