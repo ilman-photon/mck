@@ -360,7 +360,7 @@ const HealthNeedsComponent = () => {
     
     return (
         <>
-            <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1 max-w-7xl">
+            <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
 
 
                 {/* Health needs - Top category section starts */}
@@ -375,7 +375,7 @@ const HealthNeedsComponent = () => {
                 </div>
                 {/* Health needs - Top category section ends */}
 
-                <div className="container max-w-7xl lg:mt-8 mt-6 px-4 lg:px-0">
+                <div className="container lg:mt-8 mt-6 px-4 lg:px-0">
 
                     {/* Health needs - Top Active Filter section starts */}
                     <section>

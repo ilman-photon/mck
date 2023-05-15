@@ -92,7 +92,7 @@ function WhereComponent() {
 
     return isLoaded ? (
         <>
-            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782">
+            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 mt-16">
                 <div className="p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full">
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {

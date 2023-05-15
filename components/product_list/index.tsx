@@ -331,9 +331,9 @@ function ProductListComponent() {
 
     return (
         <>
-            <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1 max-w-7xl">
+            <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
 
-                <div className="container max-w-7xl lg:mt-8 mt-6 px-4 lg:px-0">
+                <div className="container lg:mt-8 mt-6 px-4 lg:px-0">
 
                     {/* Health needs - Top Active Filter section starts */}
                     <section>

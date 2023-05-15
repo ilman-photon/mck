@@ -26,7 +26,7 @@ function ServiceUnavailableCoumponent() {
 
     return (
         <>
-            <div className="four-oh-four 503-error-page container flex flex-row mx-auto">
+            <div className="four-oh-four 503-error-page container flex flex-row mx-auto lg:mt-36 mt-16">
                 <div className="lg:width-416 w-full">
                 <div className="lg:heading pb-3 text-54 text-gtl-med font-medium text-mckblue" id="err-404-label-001">{serviceErrorData?.data[0]?.title.value}</div>
                 <div className="lg:text error-msg pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002" dangerouslySetInnerHTML={{ __html: serviceErrorData?.data[0]?.description.value}}></div>

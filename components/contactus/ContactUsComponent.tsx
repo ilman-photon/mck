@@ -27,7 +27,7 @@ function ContactUsComponent() {
 
     return (
         <>
-            <div className="four-oh-four container flex flex-col mx-auto px-0">
+            <div className="four-oh-four container flex flex-col mx-auto px-0 lg:mt-36 mt-16">
                 <div className="heading pb-6" id="cu_label_001">{contactUsData?.data[0]?.title.value}</div>
                 <div className="grid lg:grid-cols-2 lg:gap-4">
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
