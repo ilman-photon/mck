@@ -535,7 +535,7 @@ function AllProductCategoryPage() {
       {/* Four Col Category End */}
 
 
-      <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 max-w-7xl">
+      <div className="allproductlist-page container w-full mx-auto grid grid-cols-1">
 
         {/* All Product - Top Active Filter section Start */}
         <section>

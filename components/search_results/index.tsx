@@ -310,7 +310,7 @@ function ResultComponent() {
 
     return (
         <>
-            <div className="search-results lg:p-72 p-4 pb-0 container mx-auto">
+            <div className="search-results lg:p-72 p-4 pb-0 container mx-auto lg:mt-36 mt-16">
                 {/* <div>
                     <div className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1" tabIndex={0} id="sr_label_001">18 results found for “Pain Relief”</div>
                     <div className="lg:text-lg text-base text-sofia-reg text-black pb-1 font-normal" tabIndex={0} id="sr_label_002">Showing results for <span className="text-mckblue italic">Pain Relief</span></div>
