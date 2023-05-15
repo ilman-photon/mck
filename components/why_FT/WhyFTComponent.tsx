@@ -38,7 +38,7 @@ function WhyFTComponent() {
                     <div className="pb-4" dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[1]?.description?.value,}} id="wft_label_003" tabIndex={0}></div>
                 </div>
                 <div className="relative lg:mb-12 mb-6">
-                    <img src="images/health_journey.png" alt={whyFTData?.contentArea?.expandedValue[2]?.name} id="wft_img_004" tabIndex={0}/>
+                    <img src="images/health_journey.png" alt={whyFTData?.contentArea?.expandedValue[2]?.name} id="wft_img_004" tabIndex={0} className="w-full"/>
                     <div className="lg:absolute top-0 left-0 right-0 bottom-0 bg-transparent-left lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4" id="wft_label_005" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[2]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey" dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[2]?.description?.value,}} id="wft_label_006" tabIndex={0}></p>
@@ -46,7 +46,7 @@ function WhyFTComponent() {
                     </div>
                 </div>
                 <div className="lg:mb-12 mb-6">
-                    <img src="images/With you for life image.png" alt={whyFTData?.contentArea?.expandedValue[3]?.name} id="wft_img_008" tabIndex={0} />
+                    <img src="images/With you for life image.png" alt={whyFTData?.contentArea?.expandedValue[3]?.name} id="wft_img_008" tabIndex={0} className="w-full" />
                 </div>
                 <div className="relative lg:mb-12 mb-6">
                     <img src="images/heal and thrive.png" id="wft_img_009" tabIndex={0} />
@@ -61,11 +61,11 @@ function WhyFTComponent() {
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4 lg:text-left text-center" id="wft_label_013" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[5]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg lg:text-lg text-base font-normal text-mcknormalgrey" id="wft_label_014" tabIndex={0} dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[5]?.description?.value,}}></p>
                     </div>
-                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[5]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[5]?.name} id="wft_img_015" tabIndex={0}/></div>
+                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[5]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[5]?.name} id="wft_img_015" tabIndex={0} className="w-full" /></div>
                 </div>
 
                 <div className="w-full grid lg:flex items-center">
-                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[6]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[6]?.name} id="wft_img_016" tabIndex={0} /></div>
+                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[6]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[6]?.name} id="wft_img_016" tabIndex={0} className="w-full" /></div>
                     <div className="lg:w-3/6 lg:pl-18 lg:pr-12 lg:pt-0 pt-4">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4 lg:text-left text-center" id="wft_label_017" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[6]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg lg:text-lg text-base font-normal text-mcknormalgrey" id="wft_label_018" tabIndex={0} dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[5]?.description?.value,}}></p>
