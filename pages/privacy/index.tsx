@@ -1,6 +1,6 @@
 import FooterComponent from "@/components/footer";
 import GoogleTagManager from "@/components/google_tag_manager";
-import HeaderNoStickyComponent from "@/components/header_nosticky";
+import HeaderComponent from "@/components/header";
 import PrivacyComponent from "@/components/privacy/PrivacyComponent";
 
 function privacy() {
@@ -8,7 +8,7 @@ function privacy() {
     return (
         <>
             <GoogleTagManager/>
-            <HeaderNoStickyComponent />
+            <HeaderComponent />
             <PrivacyComponent />
             <FooterComponent />
         </>

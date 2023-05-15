@@ -29,7 +29,7 @@ const BlogDetailsComponent = () => {
 
     return (
         <>
-            <div className='container w-full lg:p-72 lg:pb-0 p-4 pt-6  mx-auto'>
+            <div className='container w-full lg:p-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
                     <Image
                         src={BlogListingContent?.data[0].image.expandedValue.url}

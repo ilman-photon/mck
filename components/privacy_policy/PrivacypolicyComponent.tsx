@@ -3,7 +3,7 @@ import React from 'react'
 function PrivacypolicyComponent() {
   return (
     <>
-            <div className="privacypolicy container flex flex-col lg:p-72 lg:pb-0 p-4 pt-6 pb-0 mx-auto">
+            <div className="privacypolicy container flex flex-col lg:p-72 lg:pb-0 p-4 pt-6 pb-0 mx-auto lg:mt-36 mt-16">
                 <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center font-medium" id='privacy-label-001'>Privacy Notice</h1>
                 <div className="text-center text-mckblue text-gtl-med lg:text-27 text-xl font-medium"  id='privacy-label-001-01'>Effective Date: December 1, 2021</div>        
 
