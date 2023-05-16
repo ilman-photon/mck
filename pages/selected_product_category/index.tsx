@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAxios from "@/hooks/useApi";
 import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
@@ -7,9 +7,15 @@ import axios, { AxiosError } from "axios";
 import ProductListComponent from "@/components/product_list";
 import RecommendationalProductComponent from "@/components/recommendational_product";
 import GoogleTagManager from "@/components/google_tag_manager";
+import { useRouter } from "next/router";
 
 function ProductListPage() {
-  
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("router", router.query);
+  });
+
   // Loading
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -41,7 +47,7 @@ function ProductListPage() {
 
   return (
     <>
-      <GoogleTagManager/>
+      <GoogleTagManager />
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}

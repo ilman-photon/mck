@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SignUpComponent from "../signup";
 import axios from "axios";
+import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [subMenu, setSubMenu] = useState<any>();
@@ -39,12 +40,20 @@ function ProductDropComponent({ subMenuData }: Props) {
           return (
             <li className="w-1/5" key={Math.random()}>
               <div className="border-l border-black">
-                <a
-                  href={item?.menuItemUrl?.value}
+                <Link
+                  href={{
+                    pathname: item?.menuItemUrl?.value,
+                    query: {
+                      filter: item?.menuItemName?.value,
+                    },
+                  }}
+                  as={
+                    item?.menuItemUrl?.value + "/" + item?.menuItemName?.value
+                  }
                   className="text-gtl-med text-2xl blue-txt text-left pl-2"
                 >
                   {item?.menuItemName?.value}
-                </a>
+                </Link>
                 <ul>
                   {item?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
@@ -53,12 +62,22 @@ function ProductDropComponent({ subMenuData }: Props) {
                           className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"
                           key={Math.random()}
                         >
-                          <a
-                            href={ele?.menuItemUrl?.value}
+                          <Link
+                            href={{
+                              pathname: ele?.menuItemUrl?.value,
+                              query: {
+                                filter: ele?.menuItemName?.value,
+                              },
+                            }}
+                            as={
+                              ele?.menuItemUrl?.value +
+                              "/" +
+                              ele?.menuItemName?.value
+                            }
                             className="cursor-pointer"
                           >
                             {ele?.menuItemName?.value}
-                          </a>
+                          </Link>
                         </li>
                       );
                     }
