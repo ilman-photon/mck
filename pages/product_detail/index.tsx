@@ -14,8 +14,10 @@ function ProductDetails() {
             {/* <HeaderNoStickyComponent /> */}
             <HeaderComponent />
             <div className="product-detail-page grid lg:grid-rows-2 lg:grid-flow-col lg:gap-4 container mx-4 lg:mx-auto mt-18">
+                <div className="left-column">
                 <PdpCarousel/>
                 <PdpLocation />
+                </div>
                 <PdpDetail/>
             </div>
             <FooterComponent />

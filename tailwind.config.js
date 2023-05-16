@@ -64,6 +64,9 @@ module.exports = {
         72: "72px",
         54: "54px",
       },
+      paddingtop: {
+        72: "72px",
+      },
       fontSize: {
         32: "2rem",
         27: "1.688rem",

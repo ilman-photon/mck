@@ -95,7 +95,7 @@ function PdpLocation(props: any) {
     }
 
     return isLoaded ? (
-        <div className="row-span-2">
+        <div className="row-span-2 pt-[72px]">
             <div className="relative">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
