@@ -412,7 +412,7 @@ a {
 }
 
 .pramotion-product-container {
-  padding: 12px 0;
+  padding: 12px 60px;
 
   .product-container {
     margin: 12px;
@@ -1250,6 +1250,11 @@ footer {
   right: 0;
   z-index: 9;
 }
+.swiper-container {
+  display: grid;
+  grid-template-columns:  repeat(2, minmax(2rem, 8fr));
+  grid-gap: 0;
+}
 
 /* Product-list-slider Styles Start */
 .product-list-container {
@@ -1259,6 +1264,21 @@ footer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 
+  // display: flex;  
+  // (should be added for swiper in health needs)
+
+  .swiper-list-tem{
+    width: 174px;
+    min-height: 695px;
+    // height: auto;
+    padding: 16px 16px 26px 16px;
+    border: 1px solid #ccd1e3;
+    border-radius: 8px;
+    margin-right: 0;
+    margin-bottom: 24px;
+    margin-left: 0px;
+
+  }
   .product-list-item {
     width: 212px;
     min-height: 395px;
@@ -1601,9 +1621,6 @@ footer {
   .text-54 {
     font-size: 32px;
     line-height: 36px;
-  }
-  .header {
-    background-color: #FFFAF6B2;
   }
 }
 
