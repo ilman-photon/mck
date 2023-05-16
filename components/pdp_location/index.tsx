@@ -96,13 +96,17 @@ function PdpLocation(props: any) {
 
     return isLoaded ? (
         <div className="row-span-2">
+            <div className="relative">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
                 onKeyDown={(e) => handleKey(e)}
-                className="flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-mcklightyellow "  title="Search" role="combobox" />
+                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-mcklightyellow pl-9"  title="Search" role="combobox" />
+                <img src="images\search_btn.png" className="absolute left-4 top-4" />
+            </div>
+            
             <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
-            <div className="mb-6" style={{ position: "relative", height: "40vh" }}>
+            <div className="mb-6 h-[300px]" style={{ position: "relative"}}>
                 <GoogleMap
                     mapContainerClassName="map-container"
                     mapContainerStyle={style}
@@ -159,21 +163,21 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="max-h-96 overflow-y-auto scrollbar-thin">
+            <div className="h-[500px] overflow-y-auto scrollbar-thin">
             {responseValue?.map((value: any, index: Number) => {
-                        return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
+                        return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
                         <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
-                                <p tabIndex={0} aria-label="1230 Lindon Ave" id="pdp-location-004">{value.Address}, </p>
-                                <p tabIndex={0} aria-label="DENVER, CO. 80202" id="pdp-location-005">{value.City} {value.Zip}</p>
-                                <p tabIndex={0} aria-label="303-571-5314" id="pdp-location-006">{value.Phone}</p>
+                                <p tabIndex={0} aria-label="1230 Lindon Ave"  className="leading-5" id="pdp-location-004">{value.Address}, </p>
+                                <p tabIndex={0} aria-label="DENVER, CO. 80202" id="pdp-location-005" className="leading-5">{value.City} {value.Zip}</p>
+                                <p tabIndex={0} aria-label="303-571-5314" id="pdp-location-006" className="leading-5">{value.Phone}</p>
                             </div>
-                            <div className="text-2xl font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
+                            <div className="text-2xl font-extrabold text-mcknormalgrey leading-5" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold">
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="pdp-img-009" />
                                 <p className="inline-block relative top-1" tabIndex={0} role="link" id="pdp-location-010" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</p>
                             </div>
