@@ -1524,6 +1524,19 @@ footer {
     }
   }
   .tab{
+    input:checked {
+      + .tab-label {
+        &::after {
+          content: "-";
+        }
+      }
+  
+      ~ .tab-content {
+        max-height: 100vh;
+        padding: 24px;
+        border-top: 0.5px solid #ccd1e3;
+      }
+    }
     input{
       display: none;
     }
@@ -1707,11 +1720,6 @@ footer {
   }
   .product-detail-page{
     margin-top: 210px;
-    .pdp_images{
-      .carousel-prev,.carousel-next{
-        margin: 0 auto;
-      }
-    }
      .tab-label:after {
       content: "+";
       width: 24px;
