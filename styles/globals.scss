@@ -412,7 +412,7 @@ a {
 }
 
 .pramotion-product-container {
-  padding: 12px 60px;
+  padding: 12px 0;
 
   .product-container {
     margin: 12px;
@@ -1621,6 +1621,9 @@ footer {
   .text-54 {
     font-size: 32px;
     line-height: 36px;
+  }
+  .header {
+    background-color: #FFFAF6B2;
   }
 }
 
