@@ -4,7 +4,7 @@
 trigger:
 - None
 
-schedules:
+#schedules:
 #- cron: "30 11 * * 0-6"
 #  displayName: Schedule build1 at 5PM
 #  branches:
