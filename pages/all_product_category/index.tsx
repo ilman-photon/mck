@@ -669,8 +669,8 @@ function AllProductCategoryPage() {
                           <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                         </div>
                         <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                          <div tabIndex={0} className="mx-auto my-auto lg:pr-4 pb-4 lg:pb-0">
-                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto" /></div>
+                          <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
                           <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                             <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                               dangerouslySetInnerHTML={{
@@ -816,8 +816,8 @@ function AllProductCategoryPage() {
                           <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                         </div>
                         <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                          <div tabIndex={0} className="mx-auto my-auto lg:pr-4 pb-4 lg:pb-0">
-                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto" /></div>
+                          <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
                           <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                             <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                               dangerouslySetInnerHTML={{
@@ -960,8 +960,8 @@ function AllProductCategoryPage() {
                         <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                       </div>
                       <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                        <div tabIndex={0} className="mx-auto my-auto lg:pr-4 pb-4 lg:pb-0">
-                          <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto" /></div>
+                        <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                          <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
                         <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                           <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                             dangerouslySetInnerHTML={{
@@ -1100,8 +1100,8 @@ function AllProductCategoryPage() {
                         <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                       </div>
                       <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                        <div tabIndex={0} className="mx-auto my-auto lg:pr-4 pb-4 lg:pb-0">
-                          <img src={item?.image?.value.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto" />
+                        <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                          <img src={item?.image?.value.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" />
                         </div>
                         <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                           <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
