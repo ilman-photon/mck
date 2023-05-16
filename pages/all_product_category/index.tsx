@@ -33,6 +33,7 @@ function AllProductCategoryPage() {
   const [recommendedDiagnosticCare, setRecommendedDiagnosticCare] =
     useState<any>();
   const [recommendedProductListData, SetRecommendedProductListData] = useState<any>();
+  const [productCategory, setProductCategory] = useState<any>();
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -97,6 +98,10 @@ function AllProductCategoryPage() {
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList)
 
+      const productCategory = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`);
+      const productCategoryList = productCategory?.data[0].contentArea?.expandedValue[1]?.contentBlockArea?.expandedValue;
+      setProductCategory(productCategoryList);
+      
     };
 
     fetchData();
@@ -495,43 +500,24 @@ function AllProductCategoryPage() {
 
 
       {/*  Four Col Category Start */}
-      <div className="container w-full mx-auto my-6 mb-0 lg:my-20 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0 four-col">
-        <div id="category" className="mb-6">
-          <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
-            <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/everyday_care_200x200_new.png" alt="category image" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/everyday_care_200x200_new.png" tabIndex={0} />
-          </div>
-          <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0}>Explore Acute Care</div>
-          <div className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey" tabIndex={0}>
-            <p>&nbsp;Products to care for your specific symptoms.</p>
-          </div>
+      {productCategory && (
+        <div className="container w-full mx-auto my-6 mb-0 lg:my-20 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0 four-col">
+          {productCategory?.map((item: any, index: number) => {
+            return (
+              <div id="category" className="mb-6" key={index}>
+                <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
+                  <img src={item?.productCategoryImage?.expandedValue?.url} alt={item?.productCategoryName?.value} tabIndex={0} />
+                </div>
+                <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0}>{item?.productCategoryName?.value}</div>
+                <div className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey" tabIndex={0}
+                  dangerouslySetInnerHTML={{
+                    __html: item?.productCategoryDescription?.value
+                    }}></div>
+              </div>
+            )
+          })}
         </div>
-        <div id="category" className="mb-6">
-          <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
-            <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/preventative_care_200x200.png" alt="category image" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/preventative_care_200x200.png" tabIndex={0} />
-          </div>
-          <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0}>Explore Preventative Care</div>
-          <div className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey" tabIndex={0}>
-            <p>Products to help you prepare for anything.</p>
-          </div>
-        </div>
-        <div id="category" className="mb-6">
-          <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
-            <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/every_day_care_200x200.svg" alt="category image" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/every_day_care_200x200.svg" tabIndex={0} />
-          </div><div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0}>Explore Everyday Care</div>
-          <div className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey" tabIndex={0}>
-            <p>Products to support your daily routine.</p>
-          </div>
-        </div>
-        <div id="category" className="mb-6">
-          <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
-            <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/diagnostic_care_200x200.png" alt="category image" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/diagnostic_care_200x200.png" tabIndex={0} />
-          </div>
-          <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0}>Explore Diganostic Care</div>
-          <div className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey" tabIndex={0}>
-            <p>Tools to monitor your health.</p>
-          </div>
-        </div>
-      </div>
+      )}
       {/* Four Col Category End */}
 
 
@@ -541,7 +527,7 @@ function AllProductCategoryPage() {
         <section>
           <div className="flex mb-2 items-center text-mckblue" tabIndex={0} id="hn_label_003">
             {activeFiltersData?.activeFiltersText?.value}
-            <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} className="mr-2 ml-2" tabIndex={0} id="hn_label_003_1" />
+            <img src={activeFiltersData?.activeFiltersImage?.expandedValue?.url} className="mr-2 ml-2" tabIndex={0} id="hn_label_003_1" alt="hn_label_003_1" />
 
             <div className="flex flex-wrap items-baseline" tabIndex={0} id="hn_label_003_2">
               {activeFilter?.map((item: any) => {
@@ -655,35 +641,34 @@ function AllProductCategoryPage() {
               <div className="section-title">Acute Care</div>
 
               {/* Two Col Banner */}
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4"><img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"><p>You’re in touch with your health, able to pinpoint what you need. With Foster &amp; Thrive, you can easily target and treat your precise needs.</p>
+              {!recommendedAcuteCareLoading && recommendedAcuteCare && (
+                <div className="grid md:grid-cols-2 lg:grid-cols-2">
+                  {recommendedAcuteCare?.map((item: any) => {
+                    return(
+                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                        <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                          <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                        </div>
+                        <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                          <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
+                          <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
+                            <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                              dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value
+                              }}
+                            ></div>
+                          </div>
+                        </div>
+                        <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto" 
+                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                          {item?.buttonText?.value || "WHERE TO BUY"}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
+                    )
+                  })}
                 </div>
-                <div tabIndex={0} className="bg-[#FFEABC] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
-                        <p>Everybody deserves optimal health, and nobody is immune to everything. With Foster &amp; Thrive, you can be prepared for almost anything.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
-              </div>
+              )}
 
               {/* Two Col Banner End */}
 
@@ -691,50 +676,20 @@ function AllProductCategoryPage() {
 
               <div className="container mx-auto relative product-carousel">
                 <div className="flex gap-0.5 flex-wrap product-list-container">
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-4.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type-08</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <div>
-                        <div>
-                          <div>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 1</div>
+                  {acuteCareData?.data?.results.map((item: any) => {
+                    return (
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                        <img src={item?.image?.value?.url} alt={item?.name} loading="lazy"/>
+                        <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
+                        <div className="mckblue product-list-title">{item?.name}</div>
+                        <div className="mcknormalgrey product-list-description"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.highlightDescription?.value,
+                          }}>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Allergy Relief Product Type-1</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 29</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/product_sample_5.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 5</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
                 <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 pt-0 pd-10">1/9</div>
                 <div className="lg:block hidden carousel-button w-full lg:absolute flex items-center justify-center top-28">
@@ -832,34 +787,33 @@ function AllProductCategoryPage() {
               <div className="section-title">Preventive Care</div>
               {/* Two Col Banner */}
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4"><img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"><p>You’re in touch with your health, able to pinpoint what you need. With Foster &amp; Thrive, you can easily target and treat your precise needs.</p>
+              {recommendedPreventiveCare && (
+                <div className="grid md:grid-cols-2 lg:grid-cols-2">
+                  {recommendedPreventiveCare.map((item: any) => {
+                    return (
+                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                        <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                          <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                        </div>
+                        <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                          <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                            <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
+                          <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
+                            <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                              dangerouslySetInnerHTML={{
+                                __html: item?.highlightDescription?.value,
+                              }}></div>
+                          </div>
+                        </div>
+                        <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                            {item?.buttonText?.value || "WHERE TO BUY"}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
+                    )
+                  })}
                 </div>
-                <div tabIndex={0} className="bg-[#FFEABC] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
-                        <p>Everybody deserves optimal health, and nobody is immune to everything. With Foster &amp; Thrive, you can be prepared for almost anything.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
-              </div>
+              )}
 
               {/* Two Col Banner End */}
 
@@ -867,50 +821,20 @@ function AllProductCategoryPage() {
 
               <div className="container mx-auto relative product-carousel">
                 <div className="flex gap-0.5 flex-wrap product-list-container">
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-4.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type-08</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <div>
-                        <div>
-                          <div>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 1</div>
+                  {preventiveCareData?.data?.results.map((item: any) => {
+                    return (
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                        <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} loading="lazy" />
+                        <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Preventive Care</div>
+                        <div className="mckblue product-list-title">{item?.name}</div>
+                        <div className="mcknormalgrey product-list-description"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value,
+                            }}>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Allergy Relief Product Type-1</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 29</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/product_sample_5.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 5</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
                 <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 pt-0 pd-10">1/9</div>
                 <div className="lg:block hidden carousel-button w-full lg:absolute flex items-center justify-center top-28">
@@ -1006,34 +930,32 @@ function AllProductCategoryPage() {
 
               <div className="section-title">Every Day Care</div>
               {/* Two Col Banner */}
-
+              
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4"><img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"><p>You’re in touch with your health, able to pinpoint what you need. With Foster &amp; Thrive, you can easily target and treat your precise needs.</p>
+                {recommendedEveryDayCare?.map((item: any) => {
+                  return (
+                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                      <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                        <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                      </div>
+                      <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                        <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                          <img src={item?.image?.value?.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
+                        <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
+                          <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                      <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                        onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                          {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
                     </div>
-                  </div>
-                  <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
-                <div tabIndex={0} className="bg-[#FFEABC] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
-                        <p>Everybody deserves optimal health, and nobody is immune to everything. With Foster &amp; Thrive, you can be prepared for almost anything.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
+                  )
+                })}
               </div>
 
               {/* Two Col Banner End */}
@@ -1042,50 +964,20 @@ function AllProductCategoryPage() {
 
               <div className="container mx-auto relative product-carousel">
                 <div className="flex gap-0.5 flex-wrap product-list-container">
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-4.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type-08</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <div>
-                        <div>
-                          <div>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 1</div>
+                  {everyDayCareData?.data?.results.map((item: any) => {
+                    return (
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                        <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
+                        <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Every Day Care</div>
+                        <div className="mckblue product-list-title">{item?.name}</div>
+                        <div className="mcknormalgrey product-list-description"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value,
+                            }}>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Allergy Relief Product Type-1</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 29</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/product_sample_5.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 5</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
                 <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 pt-0 pd-10">1/9</div>
                 <div className="lg:block hidden carousel-button w-full lg:absolute flex items-center justify-center top-28">
@@ -1179,32 +1071,30 @@ function AllProductCategoryPage() {
               {/* Two Col Banner */}
 
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
-                <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4"><img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"><p>You’re in touch with your health, able to pinpoint what you need. With Foster &amp; Thrive, you can easily target and treat your precise needs.</p>
+                {recommendedDiagnosticCare?.map((item: any) => {
+                  return (
+                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                      <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                        <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                      </div>
+                      <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                        <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                          <img src={item?.image?.value.url} alt={`promotion-image-${item?.contentLink?.id}`} className="mx-auto lg:my-auto lg:h-full lg:w-full" />
+                        </div>
+                        <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
+                          <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value,
+                            }}></div>
+                        </div>
+                      </div>
+                      <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                        onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                        {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
                     </div>
-                  </div>
-                  <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
-                <div tabIndex={0} className="bg-[#FFEABC] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0">
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png" className="h-auto max-w-full mx-auto" /></div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
-                      <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png" alt="promotion image" className="mx-auto lg:my-auto lg:h-full lg:w-full" /></div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
-                        <p>Everybody deserves optimal health, and nobody is immune to everything. With Foster &amp; Thrive, you can be prepared for almost anything.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto">WHERE TO BUY</div>
-                </div>
+                  )
+                })}
               </div>
 
               {/* Two Col Banner End */}
@@ -1213,50 +1103,20 @@ function AllProductCategoryPage() {
 
               <div className="container mx-auto relative product-carousel">
                 <div className="flex gap-0.5 flex-wrap product-list-container">
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-4.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type-08</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <div>
-                        <div>
-                          <div>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 1</div>
+                  {diagnosticCareData?.data?.results.map((item: any) => {
+                    return (
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                        <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
+                        <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Diagnostic Care</div>
+                        <div className="mckblue product-list-title">{item?.name}</div>
+                        <div className="mcknormalgrey product-list-description"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.highlightDescription?.value,
+                            }}>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Allergy Relief Product Type-1</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 29</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/product_sample_5.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Ear Care Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 5</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
-                  <div className="lg:block hidden w-52 h-96 border-2 product-list-item">
-                    <img src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/acute-care-3.png" alt="" />
-                    <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
-                    <div className="mckblue product-list-title">Pain Relief Product Type - 6</div>
-                    <div className="mcknormalgrey product-list-description">
-                      <p>Antihistamine Loratadine oral solution USP, 5 mg/5 ml product 10</p>
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
                 <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 pt-0 pd-10">1/9</div>
                 <div className="lg:block hidden carousel-button w-full lg:absolute flex items-center justify-center top-28">
