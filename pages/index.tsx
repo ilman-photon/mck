@@ -9,7 +9,7 @@ import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
 import PromotionalTextComponent from "@/components/promotional_text";
 import RecommendationalProductComponent from "@/components/recommendational_product";
-import GoogleTagManager from '@/components/google_tag_manager';
+import GoogleTagManager from "@/components/google_tag_manager";
 
 export default function Home() {
   const { response, error, loading } = useAxios({
@@ -28,11 +28,9 @@ export default function Home() {
     });
   }
 
-  console.log("environment", process.env.API_URL);
-
   return (
     <>
-      <GoogleTagManager/>
+      <GoogleTagManager />
       <Head>
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
