@@ -11,7 +11,7 @@ function PdpCarousel(prodViewData: any) {
 
     function fetchPDPCarouselDetails() {
         return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length >0 ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`,
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`,
             {
                 headers: {
                     "Accept-Language": "en",
