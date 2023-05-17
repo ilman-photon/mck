@@ -46,7 +46,7 @@ stages:
 
     - task: CmdLine@2
       inputs:
-        script: 'npm install --upgrade'
+        script: 'npm install --save-dev eslint-config-prettier'
       displayName: 'npm install'
 
     - task: CmdLine@2
