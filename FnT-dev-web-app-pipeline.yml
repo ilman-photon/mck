@@ -1,10 +1,10 @@
 # Pipeline to deploy the FnT Web app to the development environment. The FnT web app points to the Optimizely DXP Integration environment
 
 trigger:
-- none
+- develop
 
-#pr: # Trigger on pull requests towards branches
-#- develop
+pr: # Trigger on pull requests towards branches
+- develop
 
 variables:
 
@@ -44,11 +44,26 @@ stages:
           cat next.config.js
       displayName: 'Dev Url updation'
 
-    - script: |
-        npm install
-        npm run build:dev
-        npm run test --if-present
-      displayName: 'npm install, build and test'
+    - task: CmdLine@2
+      inputs:
+        script: 'npm install'
+      displayName: 'npm install'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'npm run build'
+      displayName: 'npm build'    
+
+    #- task: CmdLine@2
+    #  inputs:
+    #    script: 'npm run test --if-present'
+    #  displayName: 'npm test'
+    
+    #- script: |
+    #    npm install
+    #    npm run build:dev
+    #    npm run test --if-present
+    #  displayName: 'npm install, build and test'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'

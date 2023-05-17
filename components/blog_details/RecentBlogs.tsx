@@ -15,7 +15,8 @@ const ResentBlogListComponent = () => {
     };
 
     return (
-
+        <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
+            <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg" id='blog-label-009'>Recent Blogs</div>
             <div className='m-4'>
                 {ResentBlogList?.map((item: any, index: number) => (
                     <div key={index} className='border border-t-0 border-x-0 py-1'>
@@ -23,6 +24,7 @@ const ResentBlogListComponent = () => {
                     </div>
                 ))}
             </div>
+        </div>
     );
 }
 export default memo(ResentBlogListComponent);

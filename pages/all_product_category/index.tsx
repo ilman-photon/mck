@@ -51,7 +51,7 @@ function AllProductCategoryPage() {
       queryParameter = filter;
     }
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -91,7 +91,7 @@ function AllProductCategoryPage() {
       setactiveFiltersData(activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+      const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`);
       const productCategoryDataList = productCategoryData?.data[0]?.categoryFilter?.expandedValue;
       // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
       //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
@@ -261,7 +261,7 @@ function AllProductCategoryPage() {
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += ' and ';
+            queryParams += ' or ';
           }
           queryParams += '(';
           category.items.map((item: any, index: any) => {
@@ -448,6 +448,14 @@ function AllProductCategoryPage() {
       pathname: "",
     });
   };
+
+  const handleProductClick = (data : any) =>{
+    const title = data.routeSegment
+    router.push({
+        pathname: '/product_detail', 
+        query: { data: title },
+      });
+}
 
   return (
     <>
@@ -644,7 +652,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {acuteCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={item?.name} loading="lazy"/>
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -789,7 +798,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {preventiveCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} loading="lazy" />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Preventive Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -932,7 +942,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {everyDayCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Every Day Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -1071,7 +1082,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {diagnosticCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Diagnostic Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>

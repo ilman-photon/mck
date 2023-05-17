@@ -5,7 +5,7 @@ jest.mock("axios");
 
 describe('WhereToBuyComponent - Display values from CMS', () => {
   beforeEach(() => {
-    axios.get.mockResolvedValue( {data: whereToBuyData, isLoaded: true} );
+    axios.get.mockResolvedValue( {data: whereToBuyData} );
   });
 
   test('Render where to buy compontent', async () => {
