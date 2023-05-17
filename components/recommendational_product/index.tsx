@@ -43,15 +43,15 @@ function RecommendationalProductComponent({ sectionData }: any) {
   };
 
   return (
-    <div id="promotion-container" className="container mx-auto">
+    <div id="promotion-container" className="container mx-auto lg:px-14">
       <div className="pramotion-product-container">
-        <div className="grid md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 [&>*:nth-last-child(1):nth-child(odd)]:col-span-2">
           {!loading &&
             response &&
             response.map((ele: any, index: number) => {
               return (
                 <div
-                  className="bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
+                  className="bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4"
                   key={ele?.data?.contentLink?.id}
                 >
                   <style jsx>{`
@@ -59,23 +59,23 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       background-color: ${ele?.data?.backgroundColor?.value};
                     }
                   `}</style>
-                  <div className="w-full lg:w-44 mb-4">
+                  <div className="w-full lg:w-44 lg:mb-8 mb-4">
                     <img
                       // id="logo"
-                      className="h-auto max-w-full mx-auto"
+                      className="h-auto max-w-fit mx-auto w-80"
                       src={ele?.data?.imageTitle?.value?.url}
                       alt={ele?.data?.title?.value} tabIndex={0} id={ele?.data?.imageTitle?.value?.url}
                     />
                   </div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                    <div className="mx-auto my-auto lg:h-60 lg:w-48 lg:pr-4 pb-4 lg:pb-0 object-contain col-span-1">
                       <img
                         //id="image"
-                        className="mx-auto lg:my-auto lg:h-full lg:w-full"
+                        className="mx-auto lg:my-auto"
                         src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
                       />
                     </div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
+                    <div id="p-text" className="text-justify pr-0 lg:pr-9  col-span-2">
                       <div
                         className="text-lg text-sofia-reg text-center text-mcknormalgrey font-normal col-span-2 lg:text-left pb-4"
                         dangerouslySetInnerHTML={{
@@ -86,7 +86,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   </div>
                   <div
                     //id="cta-btn"
-                    className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value}
                   >
                     {ele?.data?.buttonText?.value}

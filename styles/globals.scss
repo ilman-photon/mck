@@ -221,12 +221,14 @@
     font-family: "sofia-pro-bold";
     font-size: 36px;
     line-height: 41px;
+    max-width: 343px;
   }
 
   p {
     font-family: "sofia-pro-regular";
     font-size: 20px;
     line-height: 23px;
+    max-width: 343px;
   }
 }
 
@@ -410,7 +412,6 @@
 .pramotion-product-container {
   padding: 12px 0;
   // padding: 12px 60px; for carouselin health needs
-
   .product-container {
     margin: 12px;
     padding: 36px;
@@ -1645,25 +1646,44 @@ footer {
     margin-left: 10%;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 968px) {
   .header {
     // height: 178px;
     justify-content: inherit;
     padding: 0;
   }
   .header:hover,
-  .header-sticky:hover {
+  .header-sticky:hover,
+  .brand-logo:hover +.header-sticky {
     background: #001a71 !important;
     color: #fff !important;
+  } 
+  .header-sticky:hover .icon-arrow {
+    border-color: #fff;
   }
   .header:hover .group svg path {
     fill: #fff;
   }
-  .search-icon {
-    position: absolute;
-    bottom: 23px;
-    right: 43px;
+  .search-icon path {
+    fill: #001a71;
   }
+
+  .header:hover .search-icon path {
+    fill: #fff;
+  }
+
+  .input-search:focus + svg {
+    fill: red;
+  }
+
+  .input-search:focus + .search-icon path {
+    fill: #001A71 !important;
+  }
+  // .search-icon {
+  //   position: absolute;
+  //   bottom: 23px;
+  //   right: 43px;
+  // }
   .header:hover .search-icon path {
     fill: #fff;
   }
@@ -1755,3 +1775,154 @@ footer {
       justify-content: flex-end;
   }
   }
+
+  .input-search {
+    transition: all .5s ease-in-out;
+  }
+  
+  .input-search::placeholder {
+    color: #4D5F9C;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+  
+  }
+  
+  // .btn-search {
+    // width: 50px;
+    // height: 50px;
+    // border-style: none;
+    // font-size: 20px;
+    // font-weight: bold;
+    // outline: none;
+    // cursor: pointer;
+    // border-radius: 50%;
+    // position: absolute;
+    // right: 15px;
+    // color: #ffffff;
+    // background-color: transparent;
+  // }
+  
+  // .input-search:hover{
+  //   background-color: red;
+  // }
+  
+  
+  .btn-search:focus~.input-search {
+    width: 310px;
+    border-radius: 0px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  }
+  
+  .input-search:focus {
+    border: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  }
+  
+  .search-icon {
+    pointer-events: none;
+    z-index: 999;
+  }
+  .input-search:focus + .search-icon,
+  .input-search:focus-visible + .search-icon,
+  .input-search:visited + .search-icon {
+    top: 1.2rem;
+    right:1.5rem;
+  }
+  
+  .search-box {
+    // width: 250px;
+    z-index: 9999;
+  }
+
+  /**
+/**
+-----------------------------
+Mobile and iPad Navigation
+-----------------------------
+**/
+@media (max-width: 968px) {
+  .header {
+    padding: 0 19px;
+  }
+  .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {
+      background-color: rgba(255, 250, 246, 0.6980392157) !important;
+      color: #001a71 !important;
+  }
+  .header-sticky:hover .icon-arrow {
+    border-color: #001a71;
+  }
+  .mobile-customenav {
+    top: 64px;
+    max-width: 90%;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9997;
+    overflow-y: auto;
+    transform: translateZ(205px);
+    transition: all .5s ease-in-out;
+    padding-bottom: 65px;
+    &.active {
+      left: 0;
+      transform: translateZ(0);
+      transition: all .5s ease-in-out;
+    }
+    .isMobileUi {
+      padding: 0;
+      margin-top: 24px;
+      width: 100%;
+      height: 100vh;
+      overflow-y: scroll;
+      div {
+        overflow: hidden;
+        padding: 5px 0 5px 0px;
+        position: relative;
+          .secondmenu{
+            padding: 0px;
+            padding-left: 20px;
+            div {
+              padding: 5px 0px;
+            }
+          }
+      }
+      a {
+        font-family: 'sofia-pro-bold',sans-serif;
+        font-size: 16px;
+        line-height: 30px;
+        margin: 0;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: left;
+        &:empty {
+          display: none;
+          ~span {
+            display: none;
+          }
+        }
+        &.seperatemenu-hover {
+          padding-left: 20px;
+          &:hover {
+            background: #fff;
+            border-left: 4px solid #001a71;
+            padding: 5px 0 5px 16px;
+          }
+        }
+      }
+      .submenu {
+        padding: 5px 0 5px 20px;
+        li {
+          a {
+            font-family: sofia-pro-regular;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1400px) and (min-width:1200px) {
+  .mobile-customenav {width: 64.666667%;}
+}

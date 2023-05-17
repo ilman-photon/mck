@@ -143,111 +143,36 @@ function HeaderComponent() {
         id="header"
         className="header flex lg:grid container sticky mx-auto lg:bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
       >
-        {/* <div className="flex"> */}
+        
         <div className="flex" style={!isMobile ? divHeight : undefined}>
-          {/* <div className="mobile-nav px-5 py-5">
-            <img
-              id="logo-image"
-              className="w-full"
-              src="images/mobile_nav.png"
-              onClick={handleClick}
-            />
-          </div> */}
-
           {/* Hamburger menu starts */}
           <div
             className="hamburger-menu lg:hidden xl:hidden"
-            onClick={handleHamburgerClick}
+            onClick = {()=>handleHamburgerClick()}
           >
             <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
-          </div>
-          <div
-            className={`mobile-menu bg-mcklightyellow text-mckblue ${
-              isMobileMenuActive ? "active" : ""
-            }`}
-          >
-            <ul className="main-menu">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li className="has-children" onClick={handleProductsClick}>
-                <a href="#">Products</a>
-                <span
-                  className={`icon-arrow ${isProductsOpen ? "open" : ""}`}
-                ></span>
-                {isProductsOpen && (
-                  <ul className="sub-menu open">
-                    <li>
-                      <a href="#">Acute Care</a>
-                    </li>
-                    <li>
-                      <a href="#">Preventative Care</a>
-                    </li>
-                    <li>
-                      <a href="#">Every Day Care</a>
-                    </li>
-                    <li>
-                      <a href="#">Diagnostic Care</a>
-                    </li>
-                  </ul>
-                )}
-              </li>
-              <li className="has-children" onClick={handleHealthNeedsClick}>
-                <a href="#">Health needs</a>
-                <span
-                  className={`icon-arrow ${isHealthNeedsOpen ? "open" : ""}`}
-                ></span>
-                {isHealthNeedsOpen && (
-                  <ul className="sub-menu open">
-                    <li>
-                      <a href="#">Beauty</a>
-                    </li>
-                    <li>
-                      <a href="#">Bone</a>
-                    </li>
-                    <li>
-                      <a href="#">Digestion</a>
-                    </li>
-                    <li>
-                      <a href="#">Energy</a>
-                    </li>
-                  </ul>
-                )}
-              </li>
-              <li>
-                <a href="#">Why F&T</a>
-              </li>
-              <li>
-                <a href="#">Where to Buy</a>
-              </li>
-              <li>
-                <a href="#">Blog</a>
-              </li>
-              <li>
-                <a href="#">Health Care Professionals</a>
-              </li>
-            </ul>
           </div>
         </div>
         {/* Hambuger menu ends */}
 
-        <div ref={headerImgRef} className="brand-logo">
+        <div
+          ref={headerImgRef}
+          className="brand-logo"
+          onClick={handleOnClickLogo}
+        >
           <img
             id="logo-image"
             src={logoSrc}
-            // src={isSmall}
             alt="logo"
             className="lg:mt-7"
             style={isMobile ? undefined : imgWidth}
           />
         </div>
-
-        {/* <div className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"> */}
         <div
           className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
           style={!isMobile ? divHeight : undefined}
         >
-          <NavBar menuData={menuData} />
+          <NavBar menuData={menuData} isMobileMenuActive={isMobileMenuActive} />
           <Search />
         </div>
       </div>
