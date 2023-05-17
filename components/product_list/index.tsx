@@ -182,7 +182,8 @@ function ProductListComponent() {
 
       // Product Category Helath needs - Left side category lists
       const productCategoryData = await axios(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+        // `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
       const productCategoryDataList =
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
