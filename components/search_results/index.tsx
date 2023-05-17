@@ -306,6 +306,13 @@ function ResultComponent() {
         });
         fetchProductList('');
     }
+    const handleProductClick = (data : any) =>{
+        const title = data.routeSegment
+        router.push({
+            pathname: '/product_detail', 
+            query: { data: title },
+          });
+    }
 
 
     return (
@@ -444,7 +451,7 @@ function ResultComponent() {
                                                         return (
                                                             <div
                                                                 className="w-52 h-96 border-2 product-list-item"
-                                                                key={item?.contentLink?.id}>
+                                                                key={item?.contentLink?.id} onClick={()=>handleProductClick(item)}>
                                                                 <img src={item?.image?.value?.url} alt="" />
                                                                 <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
                                                                     {healthcategorytitle?.healthNeedCategory?.value[0]?.name}
