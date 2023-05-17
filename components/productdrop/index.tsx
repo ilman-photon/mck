@@ -5,6 +5,7 @@ import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [subMenu, setSubMenu] = useState<any>();
+  const [active, setActive] = useState(null)
 
   useEffect(() => {
     if (subMenuData) {
@@ -34,12 +35,12 @@ function ProductDropComponent({ subMenuData }: Props) {
   }
 
   return (
-    <div className="w-full flex mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
-      <ul className="w-11/12 flex mx-auto ">
+    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
+      <ul className="lg:w-11/12 xl:w-11/12 lg:flex lg:mx-auto xl:flex xl:mx-auto ">
         {subMenu?.map((item: any) => {
           return (
-            <li className="w-1/5" key={Math.random()}>
-              <div className="border-l border-black">
+            <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
+              <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                   href={{
                     pathname: item?.menuItemUrl?.value,
@@ -54,7 +55,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                 >
                   {item?.menuItemName?.value}
                 </Link>
-                <ul>
+                <ul className={`hidden submenu ${item?.subMenuContentBlockArea?.value === null? "hidden": "group-hover:block" }`}>
                   {item?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
                       return (
@@ -83,6 +84,10 @@ function ProductDropComponent({ subMenuData }: Props) {
                     }
                   )}
                 </ul>
+		              <span
+                  onClick={() => setActive(item)}
+                  className={`${item?.subMenuContentBlockArea?.value == null? "lg:hidden xl:hidden" : "icon-arrow lg:hidden xl:hidden"} ${active == item ? 'open' : ''}` } 
+                > </span>
               </div>
             </li>
           );
