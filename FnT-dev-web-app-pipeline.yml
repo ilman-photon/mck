@@ -44,10 +44,10 @@ stages:
           cat next.config.js
       displayName: 'Dev Url updation'
 
-    #- task: CmdLine@2
-    #  inputs:
-    #    script: 'npm install'
-    #  displayName: 'npm install'
+    - task: CmdLine@2
+      inputs:
+        script: 'npm install'
+      displayName: 'npm install'
 
     - task: CmdLine@2
       inputs:
