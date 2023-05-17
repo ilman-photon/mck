@@ -502,6 +502,14 @@ function AllProductCategoryPage() {
     });
   };
 
+  const handleProductClick = (data : any) =>{
+    const title = data.routeSegment
+    router.push({
+        pathname: '/product_detail', 
+        query: { data: title },
+      });
+}
+
   return (
     <>
       <GoogleTagManager />
@@ -698,7 +706,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {acuteCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={item?.name} loading="lazy"/>
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Acute Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -844,7 +853,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {preventiveCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} loading="lazy" />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Preventive Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -988,7 +998,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {everyDayCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Every Day Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
@@ -1128,7 +1139,8 @@ function AllProductCategoryPage() {
                 <div className="flex gap-0.5 flex-wrap product-list-container">
                   {diagnosticCareData?.data?.results.map((item: any) => {
                     return (
-                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}>
+                      <div className="w-52 h-96 border-2 product-list-item" key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}>
                         <img src={item?.image?.value?.url} alt={`product-image-${item?.contentLink?.id}`} />
                         <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">Diagnostic Care</div>
                         <div className="mckblue product-list-title">{item?.name}</div>
