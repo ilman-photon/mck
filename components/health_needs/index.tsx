@@ -168,6 +168,7 @@ const HealthNeedsComponent = () => {
             if (subCategoryChecked) {
                 selectedFilterItems[categoryId]['items'].push(sub_category.name);
             } else {
+                selectedFilterItems[categoryId]['items'] = [];
                 const index = selectedFilterItems[categoryId]['items'].indexOf(sub_category.name);
                 selectedFilterItems[categoryId]['items'].splice(index, 1);
             }
@@ -360,7 +361,15 @@ const HealthNeedsComponent = () => {
     //         setActiveFilter(newActiveFilter);
     //     }
     // };
-    
+
+
+    const handleProductClick = (data : any) =>{
+        const title = data.routeSegment
+        router.push({
+            pathname: '/product_detail', 
+            query: { data: title },
+          });
+    }
     
     return (
         <>
@@ -525,6 +534,7 @@ const HealthNeedsComponent = () => {
                                                             style={{ flex: '0 0 0%', width: '30%' }}
                                                             >
                                                         <div
+                                                         onClick={()=>handleProductClick(item)}
                                                             className="w-52 h-96 border-2 swiper-list-item"
                                                             key={item?.contentLink?.id}>
                                                             <img src={item?.image?.value?.url} alt={item?.image?.value?.url} tabIndex={0} id="hn_label_005_01" />

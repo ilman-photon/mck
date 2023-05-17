@@ -1,14 +1,17 @@
 
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 function PdpCarousel(prodViewData: any) {
+    const router = useRouter();
+  const { data } = router.query;
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
     const [prodResponse, setProdResponse] = useState<any>();
 
     function fetchPDPCarouselDetails() {
         return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/vitamin-d3-50-mcg-2000/&expand=*`,
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length  ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`,
             {
                 headers: {
                     "Accept-Language": "en",
