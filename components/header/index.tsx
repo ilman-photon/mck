@@ -2,13 +2,19 @@ import { useState, useRef, useEffect } from "react";
 import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
+import NavDropComponent from "../navdrop";
 import axios, { AxiosError } from "axios";
 
 function HeaderComponent() {
+  const logogrey = "images/logo.png";
+  const logowhite = "images/logo_beige.png";
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+  const [isSmall, setIsSmall] = useState(logogrey);
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
+  const [megaMenuShow, seMegaMenuShow] = useState(false);
   const [headerData, setHeaderData] = useState<any>();
   const [menuData, setMenuData] = useState<any>();
   const handleScroll = (elTopOffset: any, elHeight: any) => {
@@ -31,9 +37,11 @@ function HeaderComponent() {
     if (window.pageYOffset > elTopOffset + elHeight) {
       setImgWidth(style);
       setDivHeight(style1);
+      setIsSmall(logowhite);
     } else {
       setImgWidth({});
       setDivHeight({});
+      setIsSmall(logogrey);
     }
   };
   useEffect(() => {
@@ -50,10 +58,6 @@ function HeaderComponent() {
   useEffect(() => {
     fetchHeaderData();
   }, []);
-
-  useEffect(() => {
-    setLogoSrc(headerData?.logoImage?.expandedValue?.url);
-  }, [headerData]);
 
   function fetchHeaderData() {
     axios
@@ -75,11 +79,19 @@ function HeaderComponent() {
       .catch((e: Error | AxiosError) => console.log(e));
   }
 
+  function fetchHeaderMenu() {}
+
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
+
   function handleOnClickLogo() {
     router.push({
       pathname: "/",
     });
   }
+
+  ("react");
 
   // hamburger menu
   const [isBarAnimated, setIsBarAnimated] = useState(false);
@@ -113,16 +125,14 @@ function HeaderComponent() {
   }, []);
 
   // logo onhover
-  const [logoSrc, setLogoSrc] = useState(
-    headerData?.logoImage?.expandedValue?.url
-  );
+  const [logoSrc, setLogoSrc] = useState("images/logo.png");
   function handleHeaderMouseEnter() {
     if (!isMobile) {
-      setLogoSrc(headerData?.secondLogoImage?.expandedValue?.url);
+      setLogoSrc("images/logo_beige.png");
     }
   }
   function handleHeaderMouseLeave() {
-    setLogoSrc(headerData?.logoImage?.expandedValue?.url);
+    setLogoSrc("images/logo.png");
   }
 
   return (
@@ -135,6 +145,15 @@ function HeaderComponent() {
       >
         {/* <div className="flex"> */}
         <div className="flex" style={!isMobile ? divHeight : undefined}>
+          {/* <div className="mobile-nav px-5 py-5">
+            <img
+              id="logo-image"
+              className="w-full"
+              src="images/mobile_nav.png"
+              onClick={handleClick}
+            />
+          </div> */}
+
           {/* Hamburger menu starts */}
           <div
             className="hamburger-menu lg:hidden xl:hidden"
@@ -212,19 +231,18 @@ function HeaderComponent() {
         </div>
         {/* Hambuger menu ends */}
 
-        <div
-          ref={headerImgRef}
-          className="brand-logo"
-          onClick={handleOnClickLogo}
-        >
+        <div ref={headerImgRef} className="brand-logo">
           <img
             id="logo-image"
             src={logoSrc}
+            // src={isSmall}
             alt="logo"
             className="lg:mt-7"
             style={isMobile ? undefined : imgWidth}
           />
         </div>
+
+        {/* <div className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"> */}
         <div
           className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
           style={!isMobile ? divHeight : undefined}

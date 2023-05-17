@@ -38,7 +38,7 @@ export default function CategoryComponent({ sectionData }) {
         response.map((item) => {
           return (
             <div id="category" key={item?.data?.contentLink?.id} className="mb-6">
-              <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52">
+              <div className="mx-auto w-36 lg:w-52 h-36 lg:h-52 cursor-pointer">
                 <style jsx>{`
                   .border {
                     border: 2px solid ${item?.data?.backgroundColor?.value};
@@ -46,7 +46,7 @@ export default function CategoryComponent({ sectionData }) {
                 `}</style>
                 <img src={item?.data?.productCategoryImage?.value?.url} alt="category image" id={item?.data?.productCategoryImage?.value?.url} tabIndex={0}/>
               </div>
-              <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue" tabIndex={0} id={item?.data?.name}>
+              <div className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer" tabIndex={0} id={item?.data?.name}>
                 {item?.data?.name}
               </div>
               <div

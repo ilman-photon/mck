@@ -182,7 +182,8 @@ function ProductListComponent() {
 
       // Product Category Helath needs - Left side category lists
       const productCategoryData = await axios(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+        // `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
       const productCategoryDataList =
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
@@ -239,6 +240,13 @@ function ProductListComponent() {
     fetchProductList("");
   };
 
+  const handleProductClick = (data : any) =>{
+    const title = data.routeSegment
+    router.push({
+        pathname: '/product_detail', 
+        query: { data: title },
+      });
+}
   return (
     <>
       <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
@@ -590,6 +598,7 @@ function ProductListComponent() {
                     <div
                       className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
@@ -699,6 +708,7 @@ function ProductListComponent() {
                     <div
                       className="w-52 h-96 border-2 product-list-item"
                       key={item?.contentLink?.id}
+                      onClick={()=>handleProductClick(item)}
                     >
                       <img src={item?.image?.value?.url} alt="" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
