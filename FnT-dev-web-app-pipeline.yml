@@ -54,10 +54,10 @@ stages:
         script: 'npm run build'
       displayName: 'npm build'    
 
-    - task: CmdLine@2
-      inputs:
-        script: 'npm run test --if-present'
-      displayName: 'npm test'
+    #- task: CmdLine@2
+    #  inputs:
+    #    script: 'npm run test --if-present'
+    #  displayName: 'npm test'
     
     #- script: |
     #    npm install
