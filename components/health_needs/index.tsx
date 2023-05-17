@@ -66,7 +66,7 @@ const HealthNeedsComponent = () => {
             queryParameter = filter;
         }
         const promise = axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
             {
                 headers: {
                     "Accept-Language": "en",
@@ -215,7 +215,7 @@ const HealthNeedsComponent = () => {
             selectedFilterItems.map((category: any, catId: any) => {
                 if (!category.isCategoryChecked && category.items.length > 0) {
                     if (lastCatId > 0 && lastCatId != catId) {
-                        queryParams += ' and ';
+                        queryParams += ' or ';
                     }
                     queryParams += '(';
                     category.items.map((item: any, index: any) => {
