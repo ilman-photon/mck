@@ -2,6 +2,10 @@ import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { Navigation } from 'swiper';
+import 'swiper/css/navigation';
 
 const HealthNeedsComponent = () => {
 
@@ -164,6 +168,7 @@ const HealthNeedsComponent = () => {
             if (subCategoryChecked) {
                 selectedFilterItems[categoryId]['items'].push(sub_category.name);
             } else {
+                selectedFilterItems[categoryId]['items'] = [];
                 const index = selectedFilterItems[categoryId]['items'].indexOf(sub_category.name);
                 selectedFilterItems[categoryId]['items'].splice(index, 1);
             }
@@ -356,7 +361,15 @@ const HealthNeedsComponent = () => {
     //         setActiveFilter(newActiveFilter);
     //     }
     // };
-    
+
+
+    const handleProductClick = (data : any) =>{
+        const title = data.routeSegment
+        router.push({
+            pathname: '/product_detail', 
+            query: { data: title },
+          });
+    }
     
     return (
         <>
@@ -415,7 +428,8 @@ const HealthNeedsComponent = () => {
                     {/* Health needs - Top Active Filter section starts */}
 
                     {/* Health needs - Left coloumn Filter section starts */}
-                    <div className="lg:flex md:flex sm-flex flex-none mt-8">
+                    {/* <div className="swiper-container mt-8"> */}
+                    <div className="grid grid-cols-3 mt-8">
                         <div className="flex-none h-max">
                             <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
                                 {/* Left main category lists */}
@@ -492,7 +506,8 @@ const HealthNeedsComponent = () => {
 
                         </div>
 
-                        <div className="flex-auto">
+                        {/* <div className="flex-auto"> */}
+                        <div className="col-span-2">
 
                             {/* Health needs - Right coloumn starts */}
                             <div>
@@ -504,10 +519,23 @@ const HealthNeedsComponent = () => {
                                             <div className="section-title text-mckblue" tabIndex={0} id="hn_label_005">{healthcategorytitle?.healthNeedCategory?.value[0]?.name}</div>
                                             {/* Product items */}
                                             <div className="flex gap-0.5 flex-wrap product-list-container">
-                                                {productListData?.data?.results.map((item: any) => {
-                                                    return (
+                                                <Swiper
+                                                    modules={[Navigation]}
+                                                    spaceBetween={0}
+                                                    navigation
+                                                    slidesPerView={5}
+                                                    onSlideChange={() => console.log('slide change')}
+                                                    onSwiper={(swiper) => console.log(swiper)}
+                                                    // style={{ margin: 0, padding: 0 }}
+                                                >
+                                                    {productListData?.data?.results.map((item: any) => {
+                                                        return (
+                                                            <SwiperSlide 
+                                                            style={{ flex: '0 0 0%', width: '30%' }}
+                                                            >
                                                         <div
-                                                            className="w-52 h-96 border-2 product-list-item"
+                                                         onClick={()=>handleProductClick(item)}
+                                                            className="w-52 h-96 border-2 swiper-list-item"
                                                             key={item?.contentLink?.id}>
                                                             <img src={item?.image?.value?.url} alt={item?.image?.value?.url} tabIndex={0} id="hn_label_005_01" />
                                                             <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey" tabIndex={0} id="hn_label_005_02">
@@ -523,8 +551,10 @@ const HealthNeedsComponent = () => {
                                                                 }}
                                                             ></div>
                                                         </div>
-                                                    );
-                                                })}
+                                                            </SwiperSlide>
+                                                         );
+                                                    })}
+                                                </Swiper>
                                             </div>
                                         </section>
                                         {/* Health needs categories title & product carousel items starts */}
