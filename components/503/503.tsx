@@ -28,10 +28,10 @@ function ServiceUnavailableCoumponent() {
         <>
             <div className="four-oh-four 503-error-page container flex flex-row mx-auto lg:mt-36 mt-16">
                 <div className="lg:width-416 w-full">
-                <div className="lg:heading pb-3 text-54 text-gtl-med font-medium text-mckblue" id="err-503-label-001" tabIndex={0} aria-label={serviceErrorData?.data[0]?.title.value}>{serviceErrorData?.data[0]?.title.value}</div>
-                <div className="lg:text error-msg pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-503-label-002" dangerouslySetInnerHTML={{ __html: serviceErrorData?.data[0]?.description.value}} tabIndex={0} aria-label={serviceErrorData?.data[0]?.description.value}></div>
+                <div className="lg:heading pb-3 text-54 text-gtl-med font-medium text-mckblue" id="err-404-label-001">{serviceErrorData?.data[0]?.title.value}</div>
+                <div className="lg:text error-msg pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002" dangerouslySetInnerHTML={{ __html: serviceErrorData?.data[0]?.description.value}}></div>
                 </div>
-                <div className="bg-logo-right overflow-hidden lg:relative absolute"><img src={serviceErrorData?.data[0]?.backgroundImage?.expandedValueurl} alt={serviceErrorData?.data[0]?.backgroundImage?.expandedValueurl} id="err-503-img-003" tabIndex={0}/></div>
+                <div className="bg-logo-right overflow-hidden lg:relative absolute"><img src={serviceErrorData?.data[0]?.backgroundImage?.expandedValueurl} alt="oops" id="err-404-img-005"/></div>
             </div>
             
         </>
