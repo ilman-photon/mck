@@ -46,7 +46,7 @@ stages:
 
     - task: CmdLine@2
       inputs:
-        script: 'npm install'
+        script: 'npm install --upgrade'
       displayName: 'npm install'
 
     - task: CmdLine@2
