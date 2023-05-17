@@ -30,10 +30,10 @@ export default function LearningSectionComponent({ sectionData }) {
             id="learning-section"
             className={`${
               ele?.assetPosition?.value === "Right" ? "flex-row-reverse" : ""
-            } container mx-auto grid lg:flex w-full`}
+            } container mx-auto grid lg:flex w-full lg:mb-12`}
             key={ele?.image?.value?.id}>
             <div
-              className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:py-9 lg:px-9 col-span-1`}
+              className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 col-span-1`}
             >
               {ele?.name === "Sign up & Save" ? (
                 <div className="m-5 lg:m-0 my-auto inner-col form-grid-none grid md:grid-cols-2 lg:grid-cols-2 border-mcknormalgrey border rounded-lg">

@@ -30,7 +30,7 @@ export default function CategoryComponent({ sectionData }) {
   }, []);
 
   return (
-    <div className="container w-full mx-auto my-6 mb-0 lg:my-20 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0">
+    <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0">
       {loading && <p>Loading...</p>}
 
       {!loading &&
