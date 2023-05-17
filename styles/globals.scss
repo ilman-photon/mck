@@ -409,6 +409,7 @@
 
 .pramotion-product-container {
   padding: 12px 0;
+  // padding: 12px 60px; for carouselin health needs
 
   .product-container {
     margin: 12px;
@@ -1260,7 +1261,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 
-  // display: flex;  
+  display: flex;  
   // (should be added for swiper in health needs)
 
   .swiper-list-tem{
