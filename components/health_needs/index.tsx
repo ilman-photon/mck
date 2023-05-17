@@ -57,29 +57,29 @@ const HealthNeedsComponent = () => {
     );
   }
 
-  // Right section product carousel data
-  function fetchProductList(filter: any) {
-    let queryParameter = "";
-    if (filter === "") {
-      queryParameter = `(productType/value/name eq 'Acute Care')`;
-    } else {
-      queryParameter = filter;
+    // Right section product carousel data
+    function fetchProductList(filter: any) {
+        let queryParameter = '';
+        if (filter === '') {
+            queryParameter = `(productType/value/name eq 'Acute Care')`;
+        } else {
+            queryParameter = filter;
+        }
+        const promise = axios.get(
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
+            {
+                headers: {
+                    "Accept-Language": "en",
+                },
+            }
+        );
+        promise
+            .then((res) => {
+                // console.log("FetchProductList----- ", res);
+                SetProductListData(res);
+            })
+            .catch((e: Error | AxiosError) => console.log(e));
     }
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
-    promise
-      .then((res) => {
-        // console.log("FetchProductList----- ", res);
-        SetProductListData(res);
-      })
-      .catch((e: Error | AxiosError) => console.log(e));
-  }
 
   useEffect(() => {
     FetchProductFilter()
@@ -212,52 +212,52 @@ const HealthNeedsComponent = () => {
     createQueryParameters();
   }, [activeFilter]);
 
-  const createQueryParameters = () => {
-    let queryParams = "";
-    if (selectedFilterItems.length > 0) {
-      let lastCatId = 0;
-      let minCategoryCnt = 0;
-      let minSubCategoryCnt = 0;
-      selectedFilterItems.map((category: any, catId: any) => {
-        if (!category.isCategoryChecked && category.items.length > 0) {
-          if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " and ";
-          }
-          queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr = category.items.length === index + 1 ? "" : " or ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
-
-          minSubCategoryCnt += category.items.length;
-          queryParams += `)`;
-          lastCatId = catId;
-        } else {
-          minCategoryCnt += category.isCategoryChecked;
-          if (category.isCategoryChecked) {
-            const categoryName = selectedFilterItems[catId].categoryName;
-            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            //console.log(selectedViewAllCateory, minCategoryCnt)
-            const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-          }
+    const createQueryParameters = () => {
+        let queryParams = "";
+        if (selectedFilterItems.length > 0) {
+            let lastCatId = 0;
+            let minCategoryCnt = 0;
+            let minSubCategoryCnt = 0;
+            selectedFilterItems.map((category: any, catId: any) => {
+                if (!category.isCategoryChecked && category.items.length > 0) {
+                    if (lastCatId > 0 && lastCatId != catId) {
+                        queryParams += ' or ';
+                    }
+                    queryParams += '(';
+                    category.items.map((item: any, index: any) => {
+                        const itemName = item.replace(/[^a-zA-Z ]/g, "");
+                        const encodeItemName = encodeURI(itemName);
+                        const concatStr = (category.items.length === (index + 1)) ? '' : ' or ';
+                        queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
+                    });
+                    
+                    minSubCategoryCnt += category.items.length;
+                    queryParams += `)`;
+                    lastCatId = catId;
+                } else {
+                    minCategoryCnt += category.isCategoryChecked;
+                    if (category.isCategoryChecked) {
+                        const categoryName = selectedFilterItems[catId].categoryName;
+                        const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+                        const encodeItemName = encodeURI(itemName);
+                        //console.log(selectedViewAllCateory, minCategoryCnt)
+                        const joinedCond = (selectedViewAllCateory.length === minCategoryCnt) ? '' : 'and ';
+                        const beforeCond = (minSubCategoryCnt > 0) ? ' and ' : '';
+                        queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
+                    }
+                }
+            });
+            
+            // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
+            if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+                queryParams = "";
+            }
         }
-      });
-
-      // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
-      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        queryParams = "";
-      }
+        
+        // console.log(queryParams);
+        if (queryParams)
+            fetchProductList(queryParams);
     }
-
-    // console.log(queryParams);
-    if (queryParams) fetchProductList(queryParams);
-  };
 
   // -------- Recommended Products Section ----------- //
   const [recommendedProductsData, setRecommendedProductsData] = useState<any>();
