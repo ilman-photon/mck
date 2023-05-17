@@ -259,7 +259,7 @@ function ResultComponent() {
             setHealthNeedData(healthNeedsCategoriesListData);
 
             // Product Category setting - Filters data
-            const activeFiltersData = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`);
+            const activeFiltersData = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
             const activeFiltersDataList = activeFiltersData?.data[0];
             // console.log("activeFilters --- ", activeFiltersDataList);
             setactiveFiltersData(activeFiltersDataList);
