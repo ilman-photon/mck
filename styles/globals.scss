@@ -1926,3 +1926,22 @@ Mobile and iPad Navigation
 @media (max-width: 1400px) and (min-width:1200px) {
   .mobile-customenav {width: 64.666667%;}
 }
+
+.swiper-slide-custom {
+  width: auto !important;
+}
+.swiper-button-next, .swiper-button-prev {
+  width: 48px !important;
+  height: 48px !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 0 !important;
+  background-image: url('../public/images/product-carousel-right.svg') !important;
+  width: 48px;
+  height: 48px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.swiper-button-prev:after {
+  background-image: url('../public/images/product-carousel-left.svg') !important;
+}

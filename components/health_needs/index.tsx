@@ -489,7 +489,7 @@ const HealthNeedsComponent = () => {
 
           {/* Health needs - Left coloumn Filter section starts */}
           {/* <div className="swiper-container mt-8"> */}
-          <div className="grid grid-cols-3 mt-8">
+          <div className="grid lg:grid-cols-3 grid-cols-1 mt-8">
             <div className="flex-none h-max">
               <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
                 {/* Left main category lists */}
@@ -650,7 +650,7 @@ const HealthNeedsComponent = () => {
                     {/* Health needs categories title & product carousel items starts */}
                     <section>
                       <div
-                        className="section-title text-mckblue"
+                        className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4"
                         tabIndex={0}
                         id="hn_label_005"
                       >
@@ -660,7 +660,7 @@ const HealthNeedsComponent = () => {
                         }
                       </div>
                       {/* Product items */}
-                      <div className="flex gap-0.5 flex-wrap product-list-container">
+                      <div className="lg:pt-6 lg:pl-6 lg:pb-6">
                         <Swiper
                           modules={[Navigation]}
                           spaceBetween={0}
@@ -668,26 +668,27 @@ const HealthNeedsComponent = () => {
                           slidesPerView={5}
                           onSlideChange={() => console.log("slide change")}
                           onSwiper={(swiper) => console.log(swiper)}
-                          // style={{ margin: 0, padding: 0 }}
+                          className="h-480"
+                          
                         >
                           {productListData?.data?.results.map((item: any) => {
                             return (
                               <SwiperSlide
                                 key={item?.contentLink?.id}
-                                style={{ flex: "0 0 0%", width: "30%" }}
+                                className="swiper-slide-custom"
                               >
                                 <div
                                   onClick={() => handleProductClick(item)}
-                                  className="w-52 h-96 border-2 swiper-list-item"
+                                  className="swiper-list-item w-212 rounded-lg border border-[#CCD1E3] mr-1 p-4"
                                 >
                                   <img
                                     src={item?.image?.value?.url}
                                     alt={item?.image?.value?.url}
                                     tabIndex={0}
-                                    id="hn_label_005_01"
+                                    id="hn_label_005_01" className="h-fit mx-auto"
                                   />
                                   <div
-                                    className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey"
+                                    className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold"
                                     tabIndex={0}
                                     id="hn_label_005_02"
                                   >
@@ -697,14 +698,14 @@ const HealthNeedsComponent = () => {
                                     }
                                   </div>
                                   <div
-                                    className="mckblue product-list-title"
+                                    className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl"
                                     tabIndex={0}
                                     id="hn_label_005_03"
                                   >
                                     {item?.name}
                                   </div>
                                   <div
-                                    className="mcknormalgrey product-list-description"
+                                    className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal"
                                     tabIndex={0}
                                     id="hn_label_005_03"
                                     dangerouslySetInnerHTML={{
@@ -725,7 +726,7 @@ const HealthNeedsComponent = () => {
               {/* Health needs - Right coloumn ends */}
 
               {/* Health needs Promotional banner section starts - 2 products */}
-              <div className="product-where-to-buy grid grid-cols-1 lg:px-6">
+              <div className="product-where-to-buy grid grid-cols-1 lg:px-6 lg:pt-12 lg:pr-0">
                 <div className="relative isolate overflow-hidden">
                   <div className="mx-auto max-w-7xl">
                     <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
@@ -740,7 +741,7 @@ const HealthNeedsComponent = () => {
                         <img
                           src="images/allergy-relief.png"
                           alt="allergy relief"
-                          className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                          className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
                           tabIndex={0}
                           id="hn_label_006"
                         />
@@ -775,7 +776,7 @@ const HealthNeedsComponent = () => {
                         <img
                           src="images/allergy-relief.png"
                           alt="allergy relief"
-                          className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                          className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
                           tabIndex={0}
                           id="hn_label_006_03"
                         />
@@ -818,12 +819,12 @@ const HealthNeedsComponent = () => {
               {/* Health needs Promotional banner section ends */}
 
               {/* Health needs Promotional banner section starts - 3 products */}
-              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
+              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6 lg:pr-0">
                 <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
                   <img
                     src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png"
                     alt="Two each of gray, white, and black shirts laying flat."
-                    className="w-full object-contain object-center"
+                    className="w-full h-full"
                     tabIndex={0}
                     id="hn_label_007"
                   />
@@ -840,7 +841,7 @@ const HealthNeedsComponent = () => {
                       <img
                         src="images/allergy-relief.png"
                         alt="allergy relief"
-                        className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                        className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
                         tabIndex={0}
                         id="hn_label_007_02"
                       />
@@ -884,7 +885,7 @@ const HealthNeedsComponent = () => {
                     <img
                       src="images/allergy-relief.png"
                       alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                      className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
                       tabIndex={0}
                       id="hn_label_007_04"
                     />
@@ -925,7 +926,7 @@ const HealthNeedsComponent = () => {
                     <img
                       src="images/allergy-relief.png"
                       alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                      className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
                       tabIndex={0}
                       id="hn_label_007_07"
                     />
