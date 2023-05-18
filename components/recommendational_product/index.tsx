@@ -38,7 +38,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
 
   const handleCTABtn = (url: string) => {
     router.push({
-      pathname: "",
+      pathname: url,
     });
   };
 
