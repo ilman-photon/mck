@@ -93,7 +93,7 @@ function WhereComponent() {
     return isLoaded ? (
         <>
             <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 mt-16">
-                <div className="p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full">
+                <div className="p-6 lg:w-550 w-full overflow-y-scroll h-636 lg:h-full">
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
@@ -105,7 +105,7 @@ function WhereComponent() {
                                     <p tabIndex={0} aria-label="DENVER, CO. 80202" id="wb-label-005">{value.City} {value.Zip}</p>
                                     <p tabIndex={0} aria-label="303-571-5314" id="wb-label-006">{value.Phone}</p>
                                 </div>
-                                <div className="text-2xl font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="wb-label-007">{Number(value.Distance).toFixed(1)} mi</div>
+                                <div className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="wb-label-007">{Number(value.Distance).toFixed(1)} mi</div>
                             </div>
                             <div className="flex flex-row justify-between">
                                 <div className="text-lg font-extrabold text-mckblue text-sofia-bold" tabIndex={0} role="link" id="wb-label-008" onClick={()=>showOnline(value.StoreUrl)}>View Online</div>
@@ -173,7 +173,7 @@ function WhereComponent() {
                         })}
                     </GoogleMap>
                     <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
-                        <label htmlFor="fname" className="flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0" id="wb-label-012">First name:</label>
+                        <label htmlFor="fname" className="flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0" id="wb-label-012">Where to buy</label>
                         <input type="text" id="fname" name="fname"
                             value={textInput}
                             onKeyDown={(e) => handleKey(e)}

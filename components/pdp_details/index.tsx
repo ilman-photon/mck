@@ -33,11 +33,11 @@ function PdpDetail(pdpViewData: any) {
                 dangerouslySetInnerHTML={{ __html: responceValue?.title.value, }}></p>
             <h2 className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2" id="pdp_details_002"
                 dangerouslySetInnerHTML={{ __html: responceValue?.subTitle?.value, }}></h2>
-            <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-2" id="pdp_details_003"
+            <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-6" id="pdp_details_003"
                 dangerouslySetInnerHTML={{ __html: responceValue?.volume?.value, }}></p>
             {/* <p className="text-gtl-med text-mcknormalgrey text-4xl font-medium mb-6">100 SOFTGELS</p> */}
             <div tabIndex={0} className="border-y-2 py-6">
-                <h6 className="text-gtl-med text-mcknormalgrey text-2xl font-medium" id="pdp_details_004">Description</h6>
+                <h6 className="text-gtl-med text-mcknormalgrey text-2xl font-medium mb-3" id="pdp_details_004">Description</h6>
                 <ul className="pdp-detail-description text-sofia-reg text-mcknormalgrey text-lg font-normal list-disc pl-9">
                     <div dangerouslySetInnerHTML={{ __html: responceValue?.description?.value, }} id="pdp_details_005"></div>
                 </ul>
