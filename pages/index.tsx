@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
-import CategoryComponent from "@/components/category/index1.js";
+import CategoryComponent from "@/components/category";
 import HomePageSectionComponent from "@/components/homepage_section";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";

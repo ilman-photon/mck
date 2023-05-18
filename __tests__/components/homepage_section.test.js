@@ -1,5 +1,5 @@
 import { render, screen, act } from "@testing-library/react";
-import CategoryComponent from "@/components/homepage_section/index1.js";
+import CategoryComponent from "@/components/homepage_section";
 import axios from "axios";
 jest.mock("axios");
 
