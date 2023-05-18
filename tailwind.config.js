@@ -106,6 +106,9 @@ module.exports = {
         'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
         'circleshadow': '0px 9px 11px -5px rgba(0, 0, 0, 0.25)',
       },
+      lineHeight:{
+        linemax: "50px",
+      },
       border: {
         blue20: "#CCD1E3",
       }
