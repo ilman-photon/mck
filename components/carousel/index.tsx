@@ -146,7 +146,7 @@ export default function CarouselComponent({ sectionData }: any) {
                   data-te-target="#carouselExampleCaptions"
                   data-te-slide-to="0"
                   data-te-carousel-active
-                  className="mx-[3px] box-content w-4 h-4 flex-initial cursor-pointer border-0 border-transparent rounded-full bg-[#CCD1E3] bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+                  className={`mx-[3px] box-content w-4 h-4 flex-initial cursor-pointer border-0 border-transparent rounded-full bg-[#CCD1E3] bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none ${index == current ? "bg-mckblue" : "bg-mckthingrey"}`}
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>
