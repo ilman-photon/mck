@@ -68,12 +68,14 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     />
                   </div>
                   <div className="xl:grid lg:grid md:grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto lg:h-60 lg:w-48 lg:pr-4 pb-4 lg:pb-0 object-contain col-span-1">
-                      <img
-                        //id="image"
-                        className="mx-auto lg:my-auto"
-                        src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
-                      />
+                    <div className="pb-4 lg:pb-0 col-span-1">
+                      <div className="mx-auto my-auto lg:h-60 object-contain col-span-1">
+                        <img
+                          //id="image"
+                          className="mx-auto lg:my-auto"
+                          src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
+                        />
+                      </div>
                     </div>
                     <div id="p-text" className="text-justify pr-0 lg:pr-9  col-span-2">
                       <div
