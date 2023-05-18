@@ -34,7 +34,9 @@ function FourOhFourCoumponent() {
                     <div className="normal-text p-6 text-sofia-reg font-normal lg:text-lg text-base" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}} tabIndex={0} aria-label={notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}></div>
                 </div>
                 </div>
-                <div className="bg-logo-right overflow-hidden lg:relative absolute"><img src={notFoundData?.data[0]?.backgroundImage?.expandedValue.url} alt={notFoundData?.data[0]?.backgroundImage?.expandedValue.url} id="err-404-img-005"/></div>
+                <div className="bg-logo-right overflow-hidden lg:relative absolute">
+                    <img src={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} alt={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} id="err-404-img-005"/>
+                </div>
             </div>
             
         </>
