@@ -101,7 +101,7 @@ function PdpLocation(props: any) {
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
                 onKeyDown={(e) => handleKey(e)}
-                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-mcklightyellow pl-9"  title="Search" role="combobox" />
+                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 pl-9"  title="Search" role="combobox" />
                 <img src="images\search_btn.png" className="absolute left-4 top-4" />
             </div>
             
@@ -163,9 +163,9 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="h-[500px] overflow-y-auto scrollbar-thin">
+            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
             {responseValue?.map((value: any, index: Number) => {
-                        return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
+                        return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
                         <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
@@ -173,11 +173,11 @@ function PdpLocation(props: any) {
                                 <p tabIndex={0} aria-label="DENVER, CO. 80202" id="pdp-location-005" className="leading-5">{value.City} {value.Zip}</p>
                                 <p tabIndex={0} aria-label="303-571-5314" id="pdp-location-006" className="leading-5">{value.Phone}</p>
                             </div>
-                            <div className="text-2xl font-extrabold text-mcknormalgrey leading-5" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
+                            <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 pr-4" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5">
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 pr-4">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="pdp-img-009" />
                                 <p className="inline-block relative top-1" tabIndex={0} role="link" id="pdp-location-010" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</p>
                             </div>

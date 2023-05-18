@@ -44,6 +44,7 @@ module.exports = {
         598 : '598px',
         842 : '842px',
         83: '83%',
+        550: '550px',
       },
       height: {
         636: '636px',
@@ -71,6 +72,7 @@ module.exports = {
         32: "2rem",
         27: "1.688rem",
         54: "3.375rem",
+        28: "28px",
       },
       borderWidth: {
         3: "3px",
@@ -86,6 +88,7 @@ module.exports = {
         mckyellow: "#FFEABC",
         lightblue: "#EAF1F8",
         acuteblue: "#DBDFEB",
+        mckblue70: "#4D5F9C",
       },
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
