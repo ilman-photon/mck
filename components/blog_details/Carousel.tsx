@@ -14,7 +14,7 @@ export default function CarouselComponent() {
                     </figure>
                     <figcaption>
                         <div className="content lg:p-6 p-4">
-                            <a href="" className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
+                            <a href="" className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-xl text-gtl-med text-mckblue no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
                             <div className="pb-3 pt-3">
                                 <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border">February 18, 2022</span>
                                 <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border">65 min read</span>
@@ -35,7 +35,7 @@ export default function CarouselComponent() {
                     </figure>
                     <figcaption>
                         <div className="content lg:p-6 p-4">
-                            <a href="" className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
+                            <a href="" className="articleTitle lg:text-32 text-xl leading-10 max-[576px]:leading-8 sm:text-32 text-gtl-med text-mckblue no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report">CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report</a>
                             <div className="pb-3 pt-3">
                                 <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border">February 18, 2022</span>
                                 <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border">65 min read</span>

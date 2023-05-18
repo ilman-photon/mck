@@ -45,6 +45,7 @@ module.exports = {
         842 : '842px',
         83: '83%',
         550: '550px',
+        212: '212px',
       },
       height: {
         636: '636px',
@@ -105,6 +106,9 @@ module.exports = {
       boxShadow: {
         'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
         'circleshadow': '0px 9px 11px -5px rgba(0, 0, 0, 0.25)',
+      },
+      lineHeight:{
+        linemax: "50px",
       },
       border: {
         blue20: "#CCD1E3",
