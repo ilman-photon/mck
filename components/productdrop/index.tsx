@@ -5,7 +5,7 @@ import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [subMenu, setSubMenu] = useState<any>();
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState(null);
 
   useEffect(() => {
     if (subMenuData) {
@@ -34,6 +34,16 @@ function ProductDropComponent({ subMenuData }: Props) {
       });
   }
 
+  function updateUrl(path: String, type: string) {
+    let f = "?filter=";
+    let splitPath = path !== null ? path?.split(f) : "";
+    if (type === "1") {
+      return splitPath[1];
+    } else {
+      return splitPath[0];
+    }
+  }
+
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
       <ul className="lg:w-11/12 xl:w-11/12 lg:flex lg:mx-auto xl:flex xl:mx-auto ">
@@ -43,19 +53,22 @@ function ProductDropComponent({ subMenuData }: Props) {
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                   href={{
-                    pathname: item?.menuItemUrl?.value,
+                    pathname: updateUrl(item?.menuItemUrl?.value, "0"),
                     query: {
-                      filter: item?.menuItemName?.value,
+                      filter: updateUrl(item?.menuItemUrl?.value, "1"),
                     },
                   }}
-                  as={
-                    item?.menuItemUrl?.value + "/" + item?.menuItemName?.value
-                  }
                   className="text-gtl-med text-2xl blue-txt text-left pl-2"
                 >
                   {item?.menuItemName?.value}
                 </Link>
-                <ul className={`hidden submenu ${item?.subMenuContentBlockArea?.value === null? "hidden": "group-hover:block" }`}>
+                <ul
+                  className={`hidden submenu ${
+                    item?.subMenuContentBlockArea?.value === null
+                      ? "hidden"
+                      : "group-hover:block"
+                  }`}
+                >
                   {item?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
                       return (
@@ -65,16 +78,11 @@ function ProductDropComponent({ subMenuData }: Props) {
                         >
                           <Link
                             href={{
-                              pathname: ele?.menuItemUrl?.value,
+                              pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
                               query: {
-                                filter: ele?.menuItemName?.value,
+                                filter: updateUrl(ele?.menuItemUrl?.value, "1"),
                               },
                             }}
-                            as={
-                              ele?.menuItemUrl?.value +
-                              "/" +
-                              ele?.menuItemName?.value
-                            }
                             className="cursor-pointer"
                           >
                             {ele?.menuItemName?.value}
@@ -84,10 +92,16 @@ function ProductDropComponent({ subMenuData }: Props) {
                     }
                   )}
                 </ul>
-		              <span
+                <span
                   onClick={() => setActive(item)}
-                  className={`${item?.subMenuContentBlockArea?.value == null? "lg:hidden xl:hidden" : "icon-arrow lg:hidden xl:hidden"} ${active == item ? 'open' : ''}` } 
-                > </span>
+                  className={`${
+                    item?.subMenuContentBlockArea?.value == null
+                      ? "lg:hidden xl:hidden"
+                      : "icon-arrow lg:hidden xl:hidden"
+                  } ${active == item ? "open" : ""}`}
+                >
+                  {" "}
+                </span>
               </div>
             </li>
           );

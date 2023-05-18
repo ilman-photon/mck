@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
-import CategoryComponent from "@/components/category/index1.js";
-import LearningSectionComponent from "@/components/learning_section/index1.js";
+import CategoryComponent from "@/components/category";
+import HomePageSectionComponent from "@/components/homepage_section";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
 import PromotionalTextComponent from "@/components/promotional_text";
@@ -45,7 +45,7 @@ export default function Home() {
           <HeaderComponent />
           <CarouselComponent sectionData={filteredData("CarouselBlock")} />
           <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
-          <LearningSectionComponent
+          <HomePageSectionComponent
             sectionData={filteredData("TwoCloumnBlock")}
           />
           <PromotionalTextComponent
