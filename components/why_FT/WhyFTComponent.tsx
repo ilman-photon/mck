@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import CarouselComponent from "../carousel";
-
+import CarouselComponent from "@/components/carousel";
 
 function WhyFTComponent() {
 
