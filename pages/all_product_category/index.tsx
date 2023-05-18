@@ -98,9 +98,20 @@ function AllProductCategoryPage() {
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList)
 
-      const productCategory = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`);
-      const productCategoryList = productCategory?.data[0].contentArea?.expandedValue[1]?.contentBlockArea?.expandedValue;
+      // Four column block area
+      const productLandingPage = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`);
+      const productCategoryList = productLandingPage?.data[0].contentArea?.expandedValue[1]?.contentBlockArea?.expandedValue;
       setProductCategory(productCategoryList);
+      
+      // Recommended product area block 
+      const recommendedAcuteCare = productLandingPage?.data[0].contentArea?.expandedValue[2]?.contentBlockArea?.expandedValue;
+      const preventiveCareData = productLandingPage?.data[0].contentArea?.expandedValue[3]?.contentBlockArea?.expandedValue;
+      const everyDayCareData = productLandingPage?.data[0].contentArea?.expandedValue[4]?.contentBlockArea?.expandedValue;
+      const diagnosticCareData = productLandingPage?.data[0].contentArea?.expandedValue[5]?.contentBlockArea?.expandedValue;
+      setRecommendedAcuteCare(recommendedAcuteCare);
+      setRecommendedPreventiveCare(preventiveCareData);
+      setRecommendedEveryDayCare(everyDayCareData);
+      setRecommendedDiagnosticCare(diagnosticCareData);
       
     };
 
@@ -358,44 +369,6 @@ function AllProductCategoryPage() {
 
   }, []);
 
-  useEffect(() => {
-    
-    acuteCareRecommendation()
-      .then((res) => {
-        setRecommendedAcuteCare(res);
-        setRecommendedAcuteCareLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setRecommendedAcuteCareLoading(true);
-      });
-
-  }, [acuteCareData]);
-
-  useEffect(() => {
-
-    preventiveCareRecommendation()
-      .then((res) => {
-        setRecommendedPreventiveCare(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-  }, [preventiveCareData]);
-
-  useEffect(() => {
-
-    setRecommendedDiagnosticCare(diagnosticCareRecommendation());
-
-  }, [diagnosticCareData]);
-
-  useEffect(() => {
-
-    setRecommendedEveryDayCare(everyDayCareRecommendation());
-
-  }, [everyDayCareData]);
-
   function fetchCategoryId() {
     return axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
@@ -429,12 +402,6 @@ function AllProductCategoryPage() {
     );
   }
 
-  const acuteCareRecommendation = async () => {
-    return await acuteCareData?.data?.results.filter((item: any) => {
-      return item.recommendedProduct.value;
-    });
-  };
-
   function fetchPreventiveCarePruducts() {
     return axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Preventative Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
@@ -442,14 +409,6 @@ function AllProductCategoryPage() {
         headers: {
           "Accept-Language": "en",
         },
-      }
-    );
-  }
-
-  async function preventiveCareRecommendation() {
-    return await recommendedPreventiveCare?.data?.results.filter(
-      (item: any) => {
-        return item.recommendedProduct.value;
       }
     );
   }
@@ -465,12 +424,6 @@ function AllProductCategoryPage() {
     );
   }
 
-  function diagnosticCareRecommendation() {
-    return recommendedDiagnosticCare?.data?.results.filter((item: any) => {
-      return item.recommendedProduct.value;
-    });
-  }
-
   function fetchDiagnosticCarePruducts() {
     return axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=((productType/value/name eq 'Diagnostic Care') and ContentType/any(t:t eq 'ProductDetailsPage'))`,
@@ -480,12 +433,6 @@ function AllProductCategoryPage() {
         },
       }
     );
-  }
-
-  function everyDayCareRecommendation() {
-    return recommendedEveryDayCare?.data?.results.filter((item: any) => {
-      return item.recommendedProduct.value;
-    });
   }
 
   function filteredData(valueType: string) {
@@ -668,13 +615,13 @@ function AllProductCategoryPage() {
               <div className="section-title">Acute Care</div>
 
               {/* Two Col Banner */}
-              {!recommendedAcuteCareLoading && recommendedAcuteCare && (
+              {recommendedAcuteCare && (
                 <div className="grid md:grid-cols-2 lg:grid-cols-2">
                   {recommendedAcuteCare?.map((item: any) => {
                     return(
-                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.backgroundColor?.value}}>
                         <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                          <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                          <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                         </div>
                         <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
                           <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
@@ -682,15 +629,14 @@ function AllProductCategoryPage() {
                           <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                             <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                               dangerouslySetInnerHTML={{
-                              __html: item?.recommendedProductDescription?.value
+                              __html: item?.description?.value
                               }}
                             ></div>
                           </div>
                         </div>
                         <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto" 
-                          onClick={() => handleCTABtn(item?.recommendedProductButtonUrl?.value)}
-                          style={{color: item?.recommendedProductButtonColor?.value}}>
-                            {item?.recommendedProductButtonText?.value || "WHERE TO BUY"}
+                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                          {item?.buttonText?.value || "WHERE TO BUY"}
                         </div>
                       </div>
                     )
@@ -820,9 +766,9 @@ function AllProductCategoryPage() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-2">
                   {recommendedPreventiveCare.map((item: any) => {
                     return (
-                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                      <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.backgroundColor?.value}}>
                         <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                          <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                          <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                         </div>
                         <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
                           <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
@@ -830,14 +776,13 @@ function AllProductCategoryPage() {
                           <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                             <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                               dangerouslySetInnerHTML={{
-                                __html: item?.recommendedProductDescription?.value,
+                                __html: item?.description?.value,
                               }}></div>
                           </div>
                         </div>
                         <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
-                          onClick={() => handleCTABtn(item?.recommendedProductButtonUrl?.value)}
-                          style={{color: item?.recommendedProductButtonColor?.value}}>
-                            {item?.recommendedProductButtonText?.value || "WHERE TO BUY"}
+                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                            {item?.buttonText?.value || "WHERE TO BUY"}
                         </div>
                       </div>
                     )
@@ -965,9 +910,9 @@ function AllProductCategoryPage() {
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
                 {recommendedEveryDayCare?.map((item: any) => {
                   return (
-                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.backgroundColor?.value}}>
                       <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                        <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                        <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                       </div>
                       <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
                         <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
@@ -975,15 +920,14 @@ function AllProductCategoryPage() {
                         <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                           <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                             dangerouslySetInnerHTML={{
-                              __html: item?.recommendedProductDescription?.value,
+                              __html: item?.description?.value,
                             }}
                           ></div>
                         </div>
                       </div>
                       <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
-                        onClick={() => handleCTABtn(item?.recommendedProductButtonUrl?.value)}
-                        style={{color: item?.recommendedProductButtonColor?.value}}>
-                          {item?.recommendedProductButtonText?.value || "WHERE TO BUY"}
+                        onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                          {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
                     </div>
                   )
@@ -1106,9 +1050,9 @@ function AllProductCategoryPage() {
               <div className="grid md:grid-cols-2 lg:grid-cols-2">
                 {recommendedDiagnosticCare?.map((item: any) => {
                   return (
-                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.recommendedProductBackgroundColorCode?.value}}>
+                    <div tabIndex={0} className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0" key={item?.contentLink?.id} style={{backgroundColor: item?.backgroundColor?.value}}>
                       <div tabIndex={0} className="w-full lg:w-44 mb-4">
-                        <img src={item?.recommendedProductLogoImage?.value} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
+                        <img src={item?.imageTitle?.value?.url} alt={`title-image-${item?.contentLink?.id}`} className="h-auto max-w-full mx-auto" />
                       </div>
                       <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
                         <div tabIndex={0} className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
@@ -1117,14 +1061,13 @@ function AllProductCategoryPage() {
                         <div tabIndex={0} id="p-text" className="text-justify pr-0 lg:pr-9">
                           <div tabIndex={0} className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
                             dangerouslySetInnerHTML={{
-                              __html: item?.recommendedProductDescription?.value,
+                              __html: item?.description?.value,
                             }}></div>
                         </div>
                       </div>
                       <div tabIndex={0} role="button" className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
-                        onClick={() => handleCTABtn(item?.recommendedProductButtonUrl?.value)}
-                        style={{color: item?.recommendedProductButtonColor?.value}}>
-                          {item?.recommendedProductButtonText?.value || "WHERE TO BUY"}
+                        onClick={() => handleCTABtn(item?.buttonUrl?.value)}>
+                        {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
                     </div>
                   )
