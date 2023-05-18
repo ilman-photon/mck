@@ -440,7 +440,7 @@ function ResultComponent() {
 
                                 {/* Health needs - Right coloumn starts */}
                                 <div>
-                                    {healthNeedData?.map((healthcategorytitle: any) => (
+                                    {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
                                         <>
 
                                             {/* Health needs categories title & product carousel items starts */}
@@ -454,7 +454,7 @@ function ResultComponent() {
                                                                 key={item?.contentLink?.id} onClick={()=>handleProductClick(item)}>
                                                                 <img src={item?.image?.value?.url} alt="" />
                                                                 <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                                                                    {healthcategorytitle?.healthNeedCategory?.value[0]?.name}
+                                                                    {item?.form?.value[1]?.name}
                                                                 </div>
                                                                 <div className="mckblue product-list-title">
                                                                     {item?.name}
@@ -472,7 +472,7 @@ function ResultComponent() {
                                             </section>
                                             {/* Health needs categories title & product carousel items starts */}
                                         </>
-                                    ))}
+                                    {/* ))} */}
                                 </div>
                                 {/* Health needs - Right coloumn ends */}
 
