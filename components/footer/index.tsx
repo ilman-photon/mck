@@ -28,15 +28,15 @@ export default function FooterComponent() {
 
   return (
     <footer id="footer" className="container mx-auto bg-mcklightyellow">
-      <div className="mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
+      <div className="mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
         <div className="grid md:grid-cols-2 lg:grid-cols-2">
-          <div className="my-6 lg:my-0 text-gtl-med border-r">
+          <div className="lg:my-0 text-gtl-med lg:border-r border-b-2 lg:pb-0 pb-1 lg:mb-0 mb-6">
             <ul className="mb-0 list-none lg:py-0 px-0">
-              <li className="my-2 lg:my-0 grid">
+              <li className="lg:my-0 grid">
                 {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
                   (link: any) => (
                     <Link
-                      className="text-sofia-reg text-lg text-mcknormalgrey my-2"
+                      className="text-sofia-reg text-lg text-mcknormalgrey lg:my-2 mb-3"
                       rel="stylesheet"
                       id={link?.contentLink?.id}
                       key={link?.contentLink?.id}
@@ -47,7 +47,7 @@ export default function FooterComponent() {
                   )
                 )}
               </li>
-              <li className="my-2 flex">
+              <li className="lg:my-2 flex">
                 {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
                   (sociallink: any) => (
                     <Link
@@ -75,13 +75,13 @@ export default function FooterComponent() {
             </ul>
           </div>
 
-          <div className="py-6 lg:py-0 lg:pl-6 pl-0">
+          <div className="lg:py-0 lg:pl-6 pl-0">
             <ul className="mb-0 list-none">
-              <li className="my-2 lg:my-0 grid">
+              <li className="lg:my-0 grid">
                 {footerSecondData?.data[0]?.menuItemsColumn2?.expandedValue.map(
                   (slink: any) => (
                     <Link
-                      className="text-sofia-reg text-lg text-mcknormalgrey py-2"
+                      className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3"
                       rel="stylesheet"
                       href={slink?.menuUrl?.value}
                       key={slink?.contentLink?.id}

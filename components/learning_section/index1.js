@@ -39,7 +39,8 @@ export default function LearningSectionComponent({ sectionData }) {
             id="learning-section"
             className={`${
               ele?.assetPosition?.value === "Right" ? "flex-row-reverse" : ""
-            } container mx-auto grid lg:flex w-full lg:mb-12`}
+            } container mx-auto grid lg:flex w-full lg:py-6`}
+            style={{backgroundColor: ele?.backgroundColor?.value}}
             key={ele?.image?.value?.id}>
             <div
               className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 col-span-1`}
