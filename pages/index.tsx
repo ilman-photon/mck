@@ -4,7 +4,7 @@ import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category/index1.js";
-import HomePageSectionComponent from "@/components/homepage_section/index1.js";
+import HomePageSectionComponent from "@/components/homepage_section";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
 import PromotionalTextComponent from "@/components/promotional_text";
