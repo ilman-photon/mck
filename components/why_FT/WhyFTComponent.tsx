@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-
+import CarouselComponent from "@/components/carousel";
 
 function WhyFTComponent() {
 
@@ -25,13 +25,19 @@ function WhyFTComponent() {
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
 
-    console.log(whyFTData, "why");
+    function filteredCarouselData(valueType: string) {
+        return whyFTData?.contentArea?.expandedValue?.filter((ele: any) => {
+          return ele.contentType.some((arrEle: string) => {
+            return arrEle == valueType;
+          });
+        });
+    }
 
     return (
         <>
             <div className="four-oh-four why-FT container flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
                 <div className="mb-76 mb-6">
-                    <img src="images/why F and T header banner.png" alt={whyFTData?.contentArea?.expandedValue[0]?.name} id="wft_img_001" tabIndex={0} className="w-full" />
+                    {whyFTData && <CarouselComponent sectionData={filteredCarouselData("CarouselBlock")} />}
                 </div>
                 <div className="heading lg:pb-7 pb-4 text-center" id="wft_label_002" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[1]?.name}</div>
                 <div className="grey-txt lg:pb-12 pb-6 text-sofia-reg lg:text-lg text-base font-normal">
