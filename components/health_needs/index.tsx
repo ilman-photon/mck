@@ -405,12 +405,12 @@ const HealthNeedsComponent = () => {
     <>
       <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
         {/* Health needs - Top category section starts */}
-        <div className="health-needs-categories" tabIndex={0} id="hn_label_002">
+        <div className="health-needs-categories p-[36px] mt-[72px] bg-[#F2F4F9] pb-0" tabIndex={0} id="hn_label_002">
           <div className="health-needs-categories-icons">
-            <ul>
+            <ul className="flex flex-wrap">
               {healthNeedData &&
                 healthNeedData?.map((healthneedsdata: any) => (
-                  <li key={healthneedsdata?.contentLink?.id}>
+                  <li key={healthneedsdata?.contentLink?.id} className="text-sofia-reg text-mckblue text-lg text-center grow shrink pl-[30px] pr-[30px] pb-[36px]">
                     <img src={healthneedsdata?.image?.expandedValue?.url} />
                     {healthneedsdata?.title.value}
                   </li>
@@ -420,7 +420,7 @@ const HealthNeedsComponent = () => {
         </div>
         {/* Health needs - Top category section ends */}
 
-        <div className="container lg:mt-8 mt-6 px-4 lg:px-0">
+        <div className="container lg:mt-12 mt-6 px-4 lg:px-0">
           {/* Health needs - Top Active Filter section starts */}
           <section>
             <div
@@ -489,9 +489,9 @@ const HealthNeedsComponent = () => {
 
           {/* Health needs - Left coloumn Filter section starts */}
           {/* <div className="swiper-container mt-8"> */}
-          <div className="grid lg:grid-cols-3 grid-cols-1 mt-8">
+          <div className="grid lg:grid-cols-3 grid-cols-1 mt-6">
             <div className="flex-none h-max">
-              <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
+              <div className="lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category">
                 {/* Left main category lists */}
                 <div className="flex items-center my-px">
                   <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
@@ -538,7 +538,7 @@ const HealthNeedsComponent = () => {
                             {/* Left filter main category */}
 
                             {/* Left filter sub category */}
-                            <div className="lg:border-b-2 pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                            <div className="lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                               <ul>
                                 <li className="list-none">
                                   <div
@@ -729,7 +729,7 @@ const HealthNeedsComponent = () => {
               <div className="product-where-to-buy grid grid-cols-1 lg:px-6 lg:pt-12 lg:pr-0">
                 <div className="relative isolate overflow-hidden">
                   <div className="mx-auto max-w-7xl">
-                    <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+                    <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-16 lg:max-w-none lg:grid-cols-2">
                       <style jsx>{`
                         .bg-color {
                           background-color: ${recommendedProductsData
@@ -819,7 +819,7 @@ const HealthNeedsComponent = () => {
               {/* Health needs Promotional banner section ends */}
 
               {/* Health needs Promotional banner section starts - 3 products */}
-              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6 lg:pr-0">
+              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-3 lg:px-6 lg:pr-0">
                 <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
                   <img
                     src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png"
@@ -879,7 +879,7 @@ const HealthNeedsComponent = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:grid lg:grid-cols-1 lg:gap-y-8">
+                <div className="lg:grid lg:grid-cols-1 lg:gap-y-3">
                   <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 py-4 lg:py-0 lg:px-8 items-center mb-4 lg:mb-0">
                     {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
                     <img
