@@ -1,7 +1,16 @@
 import { useEffect } from "react";
 import SignUpComponent from "../signup";
+import { useRouter } from "next/router";
 
 export default function LearningSectionComponent({ sectionData }) {
+  const router = useRouter();
+
+  const handleCTABtn = (url) => {
+    router.push({
+      pathname: url,
+    });
+  };
+
   const signfrom = (
     <div className="p-5 lg:p-16 my-auto inner-col image-form form-grid-none grid md:grid-cols-2">
       <div className="">
@@ -30,7 +39,8 @@ export default function LearningSectionComponent({ sectionData }) {
             id="learning-section"
             className={`${
               ele?.assetPosition?.value === "Right" ? "flex-row-reverse" : ""
-            } container mx-auto grid lg:flex w-full lg:mb-12`}
+            } container mx-auto grid lg:flex w-full lg:py-6`}
+            style={{backgroundColor: ele?.backgroundColor?.value}}
             key={ele?.image?.value?.id}>
             <div
               className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 col-span-1`}
@@ -71,7 +81,8 @@ export default function LearningSectionComponent({ sectionData }) {
                 dangerouslySetInnerHTML={{ __html: ele?.description?.value }} tabIndex={0} id={ele?.description?.value}
               ></div>
               {ele?.buttonText?.value && (
-                <div className="jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0 mx-auto" tabIndex={0} id={ele?.buttonText?.value} role="button">
+                <div className="jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0 mx-auto" tabIndex={0} id={ele?.buttonText?.value} role="button"
+                  onClick={() => handleCTABtn(ele?.buttonUrl?.value)}>
                   {ele?.buttonText?.value}
                 </div>
               )}

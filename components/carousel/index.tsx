@@ -96,16 +96,16 @@ export default function CarouselComponent({ sectionData }: any) {
                       id={ele?.data?.title?.value + "_" + index}
                       tabIndex={0}
                     />
-                    <div className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-0 pb-3 lg:pb-0 hero-banner text-white lg:absolute left-0 bottom-20 md:block">
+                    <div className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full" style={{backgroundColor: ele?.backgroundColor?.value}}>
                       <h2
-                        className="lg:my-3 my-0 pb-2.5 lg:pb-0 text-mcklightyellow"
+                        className=" text-mcklightyellow lg:mb-3"
                         id={ele?.data?.title?.value}
                         tabIndex={0}
                       >
                         {ele?.data?.title?.value}
                       </h2>
                       <p
-                        className="lg:my-3 pb-4 lg:pb-0 text-mcklightyellow"
+                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }}
@@ -114,8 +114,8 @@ export default function CarouselComponent({ sectionData }: any) {
                       ></p>
                       {ele?.data?.buttonText?.value && (
                         <div
-                          id={ele?.data?.buttonText?.value}
-                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:m-3 lg:ml-0 mb-1 lg:mb-6 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer`}
+                          id={ele?.data?.buttonText?.value+index}
+                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                           onClick={() =>
                             handleCTABtn(ele?.data?.buttonUrl?.value)
                           }
@@ -146,7 +146,9 @@ export default function CarouselComponent({ sectionData }: any) {
                   data-te-target="#carouselExampleCaptions"
                   data-te-slide-to="0"
                   data-te-carousel-active
-                  className="mx-[3px] box-content w-4 h-4 flex-initial cursor-pointer border-0 border-transparent rounded-full bg-[#CCD1E3] bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+                  className={`mx-[3px] box-content lg:w-4 xl:w-4 lg:h-4 xl:h-4 w-2 h-2 flex-initial cursor-pointer border-0 border-transparent rounded-full  bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none ${
+                    index == current ? "bg-mckblue" : "bg-mckthingrey"
+                  }`}
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>

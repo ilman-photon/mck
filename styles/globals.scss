@@ -213,9 +213,9 @@
 .hero-banner {
   background: linear-gradient(
     90.06deg,
-    rgba(58, 62, 65, 0.87) 0.04%,
-    rgba(58, 62, 65, 0.466719) 50%,
-    rgba(58, 62, 65, 0) 99.95%
+    rgba(58, 62, 65, 0.87),
+    rgba(58, 62, 65, 0.47),
+    rgba(58, 62, 65, 0),
   );
   h2 {
     font-family: "sofia-pro-bold";
@@ -725,13 +725,6 @@ Mobiles Menu
   -webkit-transform: rotate(45deg);
 }
 
-.icon-arrow.open {
-  transition: 0.6s;
-  -webkit-transition: 0.6s;
-  -moz-transition: 0.6s;
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
 
 /* hi-res laptops and desktops */
 @media (max-width: 1281px) {
@@ -794,6 +787,14 @@ Mobiles Menu
       margin: 12px auto;
       width: 200px;
     }
+  }
+
+  .icon-arrow.open {
+    transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
   }
 }
 
@@ -883,10 +884,15 @@ Mobiles Menu
     right: 0;
     margin: 0 auto;
     bottom: 5px;
-
+    background-color: rgba(39, 44, 47, 0.8);
     h2 {
-      font-size: 28px;
+      font-size: 24px;
       line-height: 32px;
+      max-width: fit-content;
+    }
+    p {
+      font-size: 18px;
+      max-width: fit-content;
     }
   }
 
@@ -1848,6 +1854,7 @@ Mobile and iPad Navigation
     max-width: 100%;
   }
   .header {
+    position: sticky;
     padding: 0 19px;
   }
   .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {

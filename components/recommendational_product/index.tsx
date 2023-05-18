@@ -38,7 +38,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
 
   const handleCTABtn = (url: string) => {
     router.push({
-      pathname: "",
+      pathname: url,
     });
   };
 
@@ -61,19 +61,20 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   `}</style>
                   <div className="w-full lg:w-44 lg:mb-8 mb-4">
                     <img
-                      // id="logo"
                       className="h-auto max-w-fit mx-auto w-80"
                       src={ele?.data?.imageTitle?.value?.url}
-                      alt={ele?.data?.imageTitle?.value?.url} tabIndex={0} id={ele?.data?.imageTitle?.value?.url}
+                      alt={ele?.data?.imageTitle?.value?.url} tabIndex={0} id={'home-product-image'+index}
                     />
                   </div>
                   <div className="xl:grid lg:grid md:grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto lg:h-60 lg:w-48 lg:pr-4 pb-4 lg:pb-0 object-contain col-span-1">
-                      <img
-                        //id="image"
-                        className="mx-auto lg:my-auto"
-                        src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
-                      />
+                    <div className="pb-4 lg:pb-0 col-span-1">
+                      <div className="mx-auto my-auto lg:h-60 object-contain col-span-1">
+                        <img
+                          //id="image"
+                          className="mx-auto lg:my-auto"
+                          src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
+                        />
+                      </div>
                     </div>
                     <div id="p-text" className="text-justify pr-0 lg:pr-9  col-span-2">
                       <div
@@ -87,7 +88,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   <div
                     //id="cta-btn"
                     className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
-                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value}
+                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value+index}
                   >
                     {ele?.data?.buttonText?.value}
                   </div>

@@ -40,6 +40,7 @@ module.exports = {
         mckgreyborder: "#808CB8",
       },
       width: {
+        487 : '487px',
         '526': '526px',
         598 : '598px',
         842 : '842px',
@@ -67,6 +68,11 @@ module.exports = {
       padding: {
         72: "72px",
         54: "54px",
+        36: "36px",
+        30: "30px",
+      },
+      margin: {
+        72: "72px",
       },
       paddingtop: {
         72: "72px",
