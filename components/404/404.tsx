@@ -35,7 +35,9 @@ function FourOhFourCoumponent() {
                 </div>
                 </div>
                 <div className="bg-logo-right overflow-hidden lg:relative absolute">
-                    <img src={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} alt={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} id="err-404-img-005"/>
+                    {notFoundData && 
+                        <img src={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} alt={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} id="err-404-img-005"/>
+                    }
                 </div>
             </div>
             
