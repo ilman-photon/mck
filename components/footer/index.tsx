@@ -27,8 +27,8 @@ export default function FooterComponent() {
   }, []);
 
   return (
-    <footer id="footer" className="bg-mcklightyellow">
-      <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
+    <footer id="footer" className="container mx-auto bg-mcklightyellow">
+      <div className="mt-0 lg:py-9 lg:px-[72px] py-2 px-5">
         <div className="grid md:grid-cols-2 lg:grid-cols-2">
           <div className="my-6 lg:my-0 text-gtl-med border-r">
             <ul className="mb-0 list-none lg:py-0 px-0">
@@ -56,6 +56,7 @@ export default function FooterComponent() {
                       href={sociallink?.socialMediaUrl?.value}
                       key={sociallink?.contentLink?.id}
                       id={sociallink?.contentLink?.id}
+                      aria-label = {sociallink?.socialMediaUrl?.value}
                     >
                       <img
                         src={
