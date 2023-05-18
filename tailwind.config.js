@@ -67,6 +67,11 @@ module.exports = {
       padding: {
         72: "72px",
         54: "54px",
+        36: "36px",
+        30: "30px",
+      },
+      margin: {
+        72: "72px",
       },
       paddingtop: {
         72: "72px",
