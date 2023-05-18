@@ -1844,6 +1844,9 @@ Mobile and iPad Navigation
 -----------------------------
 **/
 @media (max-width: 968px) {
+  .container {
+    max-width: 100%;
+  }
   .header {
     padding: 0 19px;
   }
