@@ -15,13 +15,14 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList, OnArticleSelec
         <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
             {ArticleList?.map((item: any, index: any) => (
                   <Link
+                  key={index}
                   href={{
                       pathname: "/blog_details",
                       query: { id: `${HandelURLToId(item.contentLink.url)}` },
                   }}
                   className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
               >
-                <article key={index} className='shadow-md rounded-lg lg:mb-12 mb-6' onClick={(e) => OnArticleSelect(item)}>
+                <article  className='shadow-md rounded-lg lg:mb-12 mb-6' onClick={(e) => OnArticleSelect(item)}>
                     <figure>
                         <img src={item.image.expandedValue.url} className='w-full' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
                     </figure>
