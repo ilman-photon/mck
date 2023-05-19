@@ -30,16 +30,16 @@ console.log(id)
 
     return (
         <>
-            <div className='container w-full lg:p-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
+            <div className='container w-full lg:p-7 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
-                    <img
+                    <img className='m-auto'
                         src={BlogListingContent?.data[0]?.image.expandedValue.url}
                         alt={BlogListingContent?.data[0]?.image.expandedValue.name}
                         id={BlogListingContent?.data[0]?.image.expandedValue.name}
                     />
                 </div>
                 <div className='grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10'>
-                    <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-24'>
+                    <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
                                 <h1 className='lg:text-54 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' dangerouslySetInnerHTML={{ __html: BlogListingContent?.data[0]?.relatedArticleHeading.value }}></h1>
