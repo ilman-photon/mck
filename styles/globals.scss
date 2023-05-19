@@ -1938,8 +1938,24 @@ Mobile and iPad Navigation
     }
   }
 }
+@media (max-width: 1025px) and (min-width: 1023px) {
+  .isMobileUi .group {
+    margin: 0 20px !important;
+  }
+}
 @media (max-width: 1400px) and (min-width:1200px) {
-  .mobile-customenav {width: 64.666667%;}
+  .header {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+  #nav-bar .container,
+  #carouselExampleCaptions .container {
+    max-width: 100%;
+  }
+  .isMobileUi .group {
+    margin: 0 30px !important;
+  }
 }
 
 .swiper-slide-custom {
