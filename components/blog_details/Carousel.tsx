@@ -31,6 +31,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ ProductList, titl
             <div className='grid lg:grid-cols-2 gap-4 lg:relative'>
                 {BlogListingContent?.data.results.map((item1: any, index: any) => (
                     <Link
+                    key={index}
                         href={{
                             pathname: "/blog_details",
                             query: { id: `${HandelURLToId(item1.contentLink.url)}` },
@@ -38,7 +39,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ ProductList, titl
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
                         <article className="shadow-md rounded-lg lg:mb-12 mb-6"
-                            key={index}>
+                            >
                             <figure>
                                 <img
                                     src={item1.image.value.url}
