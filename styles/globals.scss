@@ -1447,7 +1447,7 @@ footer {
       &:hover {
         background: #ccd1e3;
       }
-      
+  
       &:after {
         content: "+";
         //background-image: url('images/plus.svg');
@@ -1969,6 +1969,18 @@ Mobile and iPad Navigation
         }
       }
     }
+  }
+  .input-search:focus + .search-icon,
+  .input-search:focus-visible + .search-icon,
+  .input-search:visited + .search-icon {
+    top: 0;
+    right:1.5rem;
+  }
+  .input-search,
+  .input-search:focus,
+  .input-search:focus-visible,
+  .input-search:visited {
+    top: -18px !important;
   }
 }
 @media (max-width: 1025px) and (min-width: 1023px) {
