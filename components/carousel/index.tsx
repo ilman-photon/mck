@@ -5,37 +5,39 @@ import { useRouter } from "next/router";
 export default function CarouselComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(0);
 
   const dataFetchedRef = useRef(false);
 
-  function idRequests() {
-    return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
-    });
+  async function idRequests() {
+    const requests = sectionData[0]?.contentBlockArea?.value?.map(
+      (item: any) => {
+        return axios.get(
+          `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+          {
+            headers: {
+              "Accept-Language": "en",
+            },
+          }
+        );
+      }
+    );
+
+    try {
+      const responses = await axios.all(requests);
+      setLoading(false);
+      setResponse(responses);
+    } catch (error) {
+      setLoading(true);
+    }
   }
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
-    axios
-      .all(idRequests())
-      .then((responses) => {
-        setLoading(false);
-        setResponse(responses);
-      })
-      .catch((error) => {
-        setLoading(true);
-      });
+    idRequests();
   }, []);
 
   useEffect(() => {
