@@ -60,35 +60,23 @@ function HeaderComponent() {
   }, []);
 
   function fetchHeaderData() {
-    interface Item {
-      // Define the properties of an item
-    }
-    const items: Item[] = JSON.parse(localStorage.getItem("items") || "[]");
-    console.log("items fetchHeaderData", items);
-    if (items.length === 0) {
-      axios
-        .get(
-          `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
-        )
-        .then((res) => {
-          setHeaderData(res.data[0]);
-          localStorage.setItem(
-            "items",
-            JSON.stringify(
-              res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
-                .expandedValue
-            )
-          );
-          const items: Item[] = JSON.parse(localStorage.getItem("items") || "[]");          
-          setMenuData(items);
-        })
-        .catch((e: Error | AxiosError) => console.log(e));
-    }
+    axios
+      .get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
+        {
+          headers: {
+            "Accept-Language": "en",
+          },
+        }
+      )
+      .then((res) => {
+        setHeaderData(res.data[0]);
+        setMenuData(
+          res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
+            .expandedValue
+        );
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
   }
 
   function fetchHeaderMenu() {}
