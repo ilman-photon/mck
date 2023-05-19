@@ -42,7 +42,7 @@ console.log(id)
                     <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-24'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
-                                <h1 className='lg:text-54 text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' dangerouslySetInnerHTML={{ __html: BlogListingContent?.data[0]?.relatedArticleHeading.value }}></h1>
+                                <h1 className='lg:text-54 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' dangerouslySetInnerHTML={{ __html: BlogListingContent?.data[0]?.relatedArticleHeading.value }}></h1>
                                 <div className='grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-3 lg:pb-6 pb-4'>
                                     <div className='lg:pb-0 pb-4'>
                                         <span className='text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid shade-grey-right-border' id='blog-label-001'>{GetTime(BlogListingContent?.data[0]?.startPublish)}</span>

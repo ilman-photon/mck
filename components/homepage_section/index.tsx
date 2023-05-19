@@ -38,13 +38,13 @@ export default function HomePageSectionComponent({ sectionData }: any) {
           <div
             id="learning-section"
             className={`${
-              ele?.assetPosition?.value === "Right" ? "flex-row-reverse" : ""
-            } container mx-auto grid lg:flex w-full lg:py-6`}
-            style={{ backgroundColor: ele?.backgroundColor?.value }}
+              ele?.assetPosition?.value === "Right" ? "flex-row-reverse text-center" : "text-left"
+            } container mx-auto grid lg:flex w-full lg:py-6 mb-6`}
+            style={{backgroundColor: ele?.backgroundColor?.value}}
             key={ele?.image?.value?.id}
           >
             <div
-              className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 col-span-1`}
+              className={`${ele?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 pt-6 col-span-1`}
             >
               {ele?.name === "Sign up & Save" ? (
                 <div className="m-5 lg:m-0 my-auto inner-col form-grid-none grid md:grid-cols-2 lg:grid-cols-2 border-mcknormalgrey border rounded-lg">
@@ -80,21 +80,24 @@ export default function HomePageSectionComponent({ sectionData }: any) {
             </div>
             <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
               <h2
-                className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-center lg:text-left blue-txt"
+                className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt"
                 tabIndex={0}
                 id={ele?.title?.value}
               >
                 {ele?.title?.value}
               </h2>
               <div
-                className="jsx-290076256 text-lg font-normal text-sofia-reg text-center lg:text-left lg:pb-6 pb-4 text-mcknormalgrey"
+                className="jsx-290076256 text-lg font-normal text-sofia-reg text-left lg:pb-6 pb-4 text-mcknormalgrey"
                 dangerouslySetInnerHTML={{ __html: ele?.description?.value }}
                 tabIndex={0}
                 id={ele?.description?.value}
               ></div>
               {ele?.buttonText?.value && (
                 <div
-                  className="jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0 mx-auto"
+                  className={`${
+                  ele?.assetPosition?.value === "Right" ? "mx-auto" : "ml-0" } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  style={{backgroundColor: `${
+                    ele?.assetPosition?.value === "Right" ? ele?.buttonColorCode?.value : ele?.buttonColorCode?.value}`}}
                   tabIndex={0}
                   id={ele?.buttonText?.value}
                   role="button"

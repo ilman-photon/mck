@@ -459,34 +459,34 @@ function ProductListComponent() {
             <div className="flex-auto">
               {/* Product Listing Two Col banner section starts*/}
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-2">
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 ml-6">
                 <div
                   tabIndex={0}
-                  className="bg-[#EAF1F8;] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
+                  className="bg-[#EAF1F8;] lg:p-9 p-4"
                 >
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                  <div tabIndex={0} className="w-full mb-4">
                     <img
                       src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
                       id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
-                      className="h-auto max-w-full mx-auto"
+                      className="h-auto max-w-full"
                     />
                   </div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
                     <div
                       tabIndex={0}
-                      className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0"
+                      className="lg:h-60 object-contain col-span-1 lg:mr-6"
                     >
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
                         id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
                         alt="promotion image"
-                        className="mx-auto lg:my-auto lg:h-full lg:w-full"
+                        className="mx-auto lg:my-auto"
                       />
                     </div>
                     <div
                       tabIndex={0}
                       id="p-text"
-                      className="text-justify pr-0 lg:pr-9"
+                      className="text-justify pr-0 col-span-2"
                     >
                       <div
                         tabIndex={0}
@@ -503,32 +503,32 @@ function ProductListComponent() {
                   <div
                     tabIndex={0}
                     role="button"
-                    className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto"
                   >
                     WHERE TO BUY
                   </div>
                 </div>
                 <div
                   tabIndex={0}
-                  className="bg-[#FFEABC] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
+                  className="bg-[#FFEABC] lg:p-9 p-4 lg:ml-4"
                 >
-                  <div tabIndex={0} className="w-full lg:w-44 mb-4">
+                  <div tabIndex={0} className="w-full mb-4">
                     <img
                       src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
                       id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
-                      className="h-auto max-w-full mx-auto"
+                      className="h-auto max-w-full"
                     />
                   </div>
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="mx-auto my-auto h-full w-full lg:pr-4 pb-4 lg:pb-0">
+                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
+                    <div className="lg:h-60 object-contain col-span-1 lg:mr-6">
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png"
                         id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png"
                         alt="promotion image"
-                        className="mx-auto lg:my-auto lg:h-full lg:w-full"
+                        className="mx-auto lg:my-auto"
                       />
                     </div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9">
+                    <div id="p-text" className="text-justify pr-0 col-span-2">
                       <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
                         <p>
                           Everybody deserves optimal health, and nobody is
@@ -540,7 +540,7 @@ function ProductListComponent() {
                   </div>
                   <div
                     role="button"
-                    className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto"
                   >
                     WHERE TO BUY
                   </div>
@@ -550,24 +550,24 @@ function ProductListComponent() {
               <div className="grid md:grid-cols-2 lg:grid-cols-1">
                 <div
                   tabIndex={0}
-                  className="bg-[#DBDFEB] bg-color lg:m-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
+                  className="bg-[#DBDFEB] lg:ml-6 mt-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
                 >
-                  <div className="lg:flex grid grid-cols-none lg:grid-cols-3 gap-4 lg:pr-3 my-auto text-justify">
+                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
                     <div
                       tabIndex={0}
-                      className="mx-auto my-auto lg:pr-4 pb-4 lg:pb-0"
+                      className="lg:h-56 object-contain col-span-1 lg:mr-6"
                     >
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
                         id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
                         alt="promotion image"
-                        className="mx-auto lg:my-auto lg:h-full lg:w-full"
+                        className="mx-auto lg:my-auto"
                       />
                     </div>
                     <div
                       tabIndex={0}
                       id="p-text"
-                      className="text-justify pr-0 lg:pr-9"
+                      className="text-justify pr-0 col-span-2"
                     >
                       <div
                         tabIndex={0}
@@ -584,7 +584,7 @@ function ProductListComponent() {
                   <div
                     tabIndex={0}
                     role="button"
-                    className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto"
                   >
                     WHERE TO BUY
                   </div>
