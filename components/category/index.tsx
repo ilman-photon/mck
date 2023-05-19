@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
@@ -41,7 +42,7 @@ export default function CategoryComponent({ sectionData }: any) {
       },
     });
   }
-
+  console.log(response);
   return (
     <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0">
       {loading && <p>Loading...</p>}
@@ -78,7 +79,11 @@ export default function CategoryComponent({ sectionData }: any) {
                 tabIndex={0}
                 id={item?.data?.name}
               >
-                {item?.data?.name}
+                <Link
+                  href={`/selected_product_category?type=${item?.data?.productCategoryType.value[0].name}`}
+                >
+                  {item?.data?.name}
+                </Link>
               </div>
               <div
                 className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
