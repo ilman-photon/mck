@@ -67,6 +67,10 @@
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 
+body {
+  background-color: #FFFDFB;
+}
+
 .green-light {
   background-color: #e0eae8;
 }
@@ -1904,7 +1908,7 @@ Mobile and iPad Navigation
   }
   .mobile-customenav {
     top: 64px;
-    max-width: 90%;
+    max-width: 75%;
     left: -100%;
     width: 100%;
     height: 100%;
@@ -1999,7 +2003,7 @@ Mobile and iPad Navigation
     max-width: 100%;
   }
   .isMobileUi .group {
-    margin: 0 30px !important;
+    margin: 0 25px !important;
   }
 }
 
