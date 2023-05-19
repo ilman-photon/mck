@@ -1992,7 +1992,7 @@ Mobile and iPad Navigation
     margin: 0 20px !important;
   }
 }
-@media (max-width: 1400px) and (min-width:1200px) {
+@media (max-width: 1400px) and (min-width:1000px) {
   .header {
     display: block;
     width: 100%;
@@ -2004,6 +2004,7 @@ Mobile and iPad Navigation
   }
   .isMobileUi .group {
     margin: 0 25px !important;
+    a {font-size: 16px;}
   }
 }
 
