@@ -634,9 +634,9 @@ function ProductListComponent() {
                       id="logo-image"
                       src="images/logo.png"
                       alt="logo"
-                      className="mt-1 lg:mt-12 ml-12"
+                      className="mt-1 lg:mt-12 ml-12 desktop:ml-3"
                     />
-                    <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 items-center">
+                    <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 desktop:px-3 items-center">
                       <img
                         src="images/allergy-relief.png"
                         alt="allergy relief"
@@ -649,7 +649,7 @@ function ProductListComponent() {
                         </p>
                         <div
                           id="cta-btn"
-                          className="w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
+                          className="w-auto leading-5 pd-12 h-[44px] m-3 desktop:m-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
                         >
                           where to buy
                         </div>
