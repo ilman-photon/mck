@@ -1,0 +1,28 @@
+.privacypolicy {
+    h1 {
+        font-size: 54px;
+        line-height: 61px;
+        font-family: "GTAlpina-Medium";
+        color: #001A71;
+    }
+
+    span:nth-child(1) {
+        font-family: "GTAlpina-Medium";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 41px;
+        color: #001A71;
+    }
+    a{
+        color: #001A71;
+        font-family: "GTAlpina-Medium";
+        font-size: 24px;
+        line-height: 27px;
+        text-decoration: underline;
+    }
+
+}
+.privacypolicy>div:nth-child(2) p{
+    color: red;
+}
