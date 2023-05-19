@@ -24,10 +24,11 @@ const SocialMediaIconComponent = () => {
                 <Link
                     className="text-sofia-reg text-lg text-mcknormalgrey"
                     rel="stylesheet"
-                    href={item?.socialMediaImage?.expandedValue?.url}
+                    href={item?.socialMediaUrl.value}
                     key={item?.contentLink?.id}
                     id={item?.contentLink?.id}
-                ><img src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url} alt={item?.socialMediaImage?.expandedValue?.altText?.value}></img>
+                >
+                    <img src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url} alt={item?.socialMediaImage?.expandedValue?.altText?.value}></img>
                 </Link>
             ))}
         </div>
