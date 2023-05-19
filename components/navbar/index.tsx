@@ -12,7 +12,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
     <>
       <div
         id="nav-bar"
-        className={`md:flex container lg:flex w-8/12 ml-auto mobile-customenav ${isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""}`}
+        className={`md:flex container lg:flex ml-auto mobile-customenav ${isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""}`}
         
       >
         <div className="lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi">

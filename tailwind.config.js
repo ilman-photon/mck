@@ -61,9 +61,15 @@ module.exports = {
       },
       left: {
         36: '36px',
+        10: '-10px'
       },
+      right: {
+        0: '0',
+        10:'-10px',
+      },  
       top: {
         13: '-13px',
+        27: '27px'
       },
       bottom: {
         13: '-13px',
@@ -121,7 +127,10 @@ module.exports = {
       },
       border: {
         blue20: "#CCD1E3",
-      }
+      },
+      screens: {
+        desktop: {'max': '1280px'},
+      },
     },
   },
   plugins: [],

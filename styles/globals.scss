@@ -68,6 +68,10 @@
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 
+body {
+  background-color: #FFFDFB;
+}
+
 .green-light {
   background-color: #e0eae8;
 }
@@ -1491,7 +1495,7 @@ footer {
   
       ~ .tab-content {
         max-height: 100vh;
-        padding: 24px;
+        padding: 12px;
         border-top: 0.5px solid #ccd1e3;
       }
     }
@@ -1564,7 +1568,7 @@ footer {
   
       ~ .tab-content {
         max-height: 100vh;
-        padding: 24px;
+        padding: 12px;
         border-top: 0.5px solid #ccd1e3;
       }
     }
@@ -1573,6 +1577,36 @@ footer {
     }
     .tab-content{
       padding: 0;
+    }
+  }
+}
+.product-detail-page{
+  .tab{
+    input:checked {
+      + .tab-label {
+          &::before {
+          content: "-";
+          position: absolute;
+          right: 14px;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          transition: all 1s;
+          color: #3a3e41;
+          font-size: 30px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          top: 10px;
+        }
+      }
+      @media screen and (max-width: 1023px) {
+        + .tab-label {
+          &::before {
+          content: none;
+        }
+      }
+      }
     }
   }
 }
@@ -1771,6 +1805,9 @@ footer {
   }
   .product-detail-page{
     margin-top: 210px;
+    @media (max-width: 968px) {
+      margin-top: 24px;
+    }
      .tab-label:after {
       content: "+";
       width: 24px;
@@ -1872,7 +1909,7 @@ Mobile and iPad Navigation
   }
   .mobile-customenav {
     top: 64px;
-    max-width: 90%;
+    max-width: 75%;
     left: -100%;
     width: 100%;
     height: 100%;
@@ -1938,9 +1975,37 @@ Mobile and iPad Navigation
       }
     }
   }
+  .input-search:focus + .search-icon,
+  .input-search:focus-visible + .search-icon,
+  .input-search:visited + .search-icon {
+    top: 0;
+    right:1.5rem;
+  }
+  .input-search,
+  .input-search:focus,
+  .input-search:focus-visible,
+  .input-search:visited {
+    top: -18px !important;
+  }
+}
+@media (max-width: 1025px) and (min-width: 1023px) {
+  .isMobileUi .group {
+    margin: 0 20px !important;
+  }
 }
 @media (max-width: 1400px) and (min-width:1200px) {
-  .mobile-customenav {width: 64.666667%;}
+  .header {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+  #nav-bar .container,
+  #carouselExampleCaptions .container {
+    max-width: 100%;
+  }
+  .isMobileUi .group {
+    margin: 0 25px !important;
+  }
 }
 
 .swiper-slide-custom {
@@ -2056,4 +2121,15 @@ Mobile and iPad Navigation
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.table-container{
+  p{
+    a{
+      span{
+        text-decoration: underline;
+        color: #001A71;
+      }
+    }
+  }
 }
