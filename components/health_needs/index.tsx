@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper";
 import "swiper/css/navigation";
+import ProductComponent from "./product";
 
 const HealthNeedsComponent = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const HealthNeedsComponent = () => {
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
+  const [selectedProduct, setSelectedProduct] = useState<any>([]);
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -57,29 +59,50 @@ const HealthNeedsComponent = () => {
     );
   }
 
-    // Right section product carousel data
-    function fetchProductList(filter: any) {
-        let queryParameter = '';
-        if (filter === '') {
-            queryParameter = `(productType/value/name eq 'Acute Care')`;
-        } else {
-            queryParameter = filter;
-        }
-        const promise = axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
-        promise
-            .then((res) => {
-                // console.log("FetchProductList----- ", res);
-                SetProductListData(res);
-            })
-            .catch((e: Error | AxiosError) => console.log(e));
+  // Right section product carousel data
+  function fetchProductList(filter: any) {
+    if(filter.length >0){
+      const query  = filter.match(/eq '(.*)'/);
+      const queryParams = { filter: query[1] };
+    router.push({
+      pathname: '/health_needs',
+      query: queryParams,
+    });
     }
+    
+    const query = filter
+    const regex = /'([^']+)'/g;
+    const matches = [...query.matchAll(regex)];
+    const values = matches.map(match => match[1]);
+
+
+    let queryParameter = '';
+    if (filter === '') {
+      queryParameter = `(productType/value/name eq 'Acute Care')`;
+      // queryParameter = `(healthNeeds/value/name eq 'Bone')`;
+
+    } else {
+      queryParameter = filter;
+    }
+    const promise = axios.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${filter})?orderby=name asc`,
+      // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      {
+        headers: {
+          "Accept-Language": "en",
+        },
+      }
+    );
+    promise
+      .then((res) => {
+        console.log("FetchProductList----- ", res);
+        SetProductListData(res);
+        const item = {"name" : values[0]}
+       
+        setSelectedProduct([{ item, data: res.data }]);     
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+  }
 
   useEffect(() => {
     FetchProductFilter()
@@ -253,7 +276,7 @@ const HealthNeedsComponent = () => {
                 queryParams = "";
             }
         }
-        
+
         // console.log(queryParams);
         if (queryParams)
             fetchProductList(queryParams);
@@ -329,6 +352,44 @@ const HealthNeedsComponent = () => {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    // setSelectedProduct([])
+    const fetchData = async () => {
+    const healthNeedsCategories = await axios.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+    );
+    const healthNeedsCategoriesList =
+      healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
+        (categoryList: any) => categoryList.name === "Health Need Highlights"
+      );
+
+    // console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
+
+    const healthNeedsCategoriesListData =
+      healthNeedsCategoriesList.length > 0
+        ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
+        : [];
+    healthNeedsCategoriesListData?.map((item :any)=>{
+      axios.get(`${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${item.name}')`,
+  {
+    headers: {
+      "Accept-Language": "en",
+    },
+  }
+  )
+      .then(res =>{
+        setSelectedProduct((prevSelectedProducts :any) => [
+          ...prevSelectedProducts,
+          { item, data: res.data },
+        ]);
+      })
+      })
+    };
+
+    fetchData();
+  },[])
+ 
+
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
@@ -401,6 +462,26 @@ const HealthNeedsComponent = () => {
     });
   };
 
+  const handleHealthNeedData = (data :any , healthNeedData :any ) =>{
+  const categoryId =healthNeedData?.healthNeeds?.value[0]
+  const subCategoryId = healthNeedData?.healthNeeds?.value[1]
+  const filter = data
+
+  
+    if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
+      selectedFilterItems[categoryId]["items"].push(filter);
+    }
+    //existing code
+    setActiveFilter([...activeFilter, filter]);
+    selectedFilterItems[categoryId][subCategoryId].checked = true;
+      const queryParams = { filter: data };
+    router.push({
+      pathname: '/health_needs',
+      query: queryParams,
+    });
+
+  }
+
   return (
     <>
       <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
@@ -410,7 +491,8 @@ const HealthNeedsComponent = () => {
             <ul className="flex flex-wrap">
               {healthNeedData &&
                 healthNeedData?.map((healthneedsdata: any) => (
-                  <li key={healthneedsdata?.contentLink?.id} className="text-sofia-reg text-mckblue text-lg text-center grow shrink pl-[30px] pr-[30px] pb-[36px]">
+                  <li key={healthneedsdata?.contentLink?.id} className="text-sofia-reg text-mckblue text-lg text-center grow shrink pl-[30px] pr-[30px] pb-[36px]"
+                  onClick ={()=>(handleHealthNeedData(healthneedsdata?.title.value , healthneedsdata))}>
                     <img src={healthneedsdata?.image?.expandedValue?.url} />
                     {healthneedsdata?.title.value}
                   </li>
@@ -645,83 +727,10 @@ const HealthNeedsComponent = () => {
             <div className="col-span-2">
               {/* Health needs - Right coloumn starts */}
               <div>
-                {healthNeedData?.map((healthcategorytitle: any) => (
-                  <>
-                    {/* Health needs categories title & product carousel items starts */}
-                    <section>
-                      <div
-                        className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4"
-                        tabIndex={0}
-                        id="hn_label_005"
-                      >
-                        {
-                          healthcategorytitle?.healthNeedCategory?.value[0]
-                            ?.name
-                        }
-                      </div>
-                      {/* Product items */}
-                      <div className="lg:pt-6 lg:pl-6 lg:pb-6">
-                        <Swiper
-                          modules={[Navigation]}
-                          spaceBetween={0}
-                          navigation
-                          slidesPerView={5}
-                          onSlideChange={() => console.log("slide change")}
-                          onSwiper={(swiper) => console.log(swiper)}
-                          className="h-480"
-                          
-                        >
-                          {productListData?.data?.results.map((item: any) => {
-                            return (
-                              <SwiperSlide
-                                key={item?.contentLink?.id}
-                                className="swiper-slide-custom"
-                              >
-                                <div
-                                  onClick={() => handleProductClick(item)}
-                                  className="swiper-list-item w-212 rounded-lg border border-[#CCD1E3] mr-1 p-4"
-                                >
-                                  <img
-                                    src={item?.image?.value?.url}
-                                    alt={item?.image?.value?.url}
-                                    tabIndex={0}
-                                    id="hn_label_005_01" className="h-fit mx-auto"
-                                  />
-                                  <div
-                                    className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold"
-                                    tabIndex={0}
-                                    id="hn_label_005_02"
-                                  >
-                                    {
-                                      healthcategorytitle?.healthNeedCategory
-                                        ?.value[0]?.name
-                                    }
-                                  </div>
-                                  <div
-                                    className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl"
-                                    tabIndex={0}
-                                    id="hn_label_005_03"
-                                  >
-                                    {item?.name}
-                                  </div>
-                                  <div
-                                    className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal"
-                                    tabIndex={0}
-                                    id="hn_label_005_03"
-                                    dangerouslySetInnerHTML={{
-                                      __html: item?.highlightDescription?.value,
-                                    }}
-                                  ></div>
-                                </div>
-                              </SwiperSlide>
-                            );
-                          })}
-                        </Swiper>
-                      </div>
-                    </section>
-                    {/* Health needs categories title & product carousel items starts */}
-                  </>
-                ))}
+
+<ProductComponent selectedProduct={selectedProduct}/>
+              
+                
               </div>
               {/* Health needs - Right coloumn ends */}
 
