@@ -250,7 +250,7 @@ function ProductListComponent() {
   return (
     <>
       <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
-        <div className="container lg:mt-8 mt-6 px-4 lg:px-0">
+        <div className="container lg:mt-8 mt-6 px-4 lg:px-4 xl:px-0">
           {/* Health needs - Top Active Filter section starts */}
           <section>
             <div className="flex mb-2 items-center text-mckblue">
@@ -304,7 +304,7 @@ function ProductListComponent() {
           {/* Health needs - Top Active Filter section starts */}
 
           {/* Health needs - Left coloumn Filter section starts */}
-          <div className="lg:flex md:flex sm-flex flex-none mt-8">
+          <div className="lg:flex md:flex-none sm-flex flex-none mt-8">
             <div className="flex-none h-max">
               <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
                 {/* Left main category lists */}
@@ -622,7 +622,7 @@ function ProductListComponent() {
 
               {/* Product Listing Promotion Banner Start */}
 
-              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-6">
+              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-3 lg:px-6">
                 <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
                   <img
                     src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png"
@@ -640,7 +640,7 @@ function ProductListComponent() {
                       <img
                         src="images/allergy-relief.png"
                         alt="allergy relief"
-                        className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                        className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-40"
                       />
                       <div>
                         <p className="mt-4 text-lg">
@@ -657,12 +657,12 @@ function ProductListComponent() {
                     </div>
                   </div>
                 </div>
-                <div className="lg:grid lg:grid-cols-1 lg:gap-y-8">
+                <div className="lg:grid lg:grid-cols-1 lg:gap-y-3">
                   <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 py-4 lg:py-0 lg:px-8 items-center mb-4 lg:mb-0">
                     <img
                       src="images/allergy-relief.png"
                       alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-36"
                     />
                     <div>
                       <p className="mt-4 text-lg">
@@ -681,7 +681,7 @@ function ProductListComponent() {
                     <img
                       src="images/allergy-relief.png"
                       alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-full"
+                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-36"
                     />
                     <div>
                       <p className="mt-4 text-lg">
