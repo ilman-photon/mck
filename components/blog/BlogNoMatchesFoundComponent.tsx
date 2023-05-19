@@ -11,7 +11,7 @@ function BlogNoMatchesFoundComponent() {
       <div className='container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto'>
         <div id="search" className="w-full relative flex items-center content-center">
             <input
-            className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
+            className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue placeholder:text-opacity-50 pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
             placeholder="CoverMyMeds"
             />
             <svg className="absolute right-4 z-10 cursor-pointer" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
