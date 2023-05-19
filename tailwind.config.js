@@ -61,9 +61,15 @@ module.exports = {
       },
       left: {
         36: '36px',
+        10: '-10px'
       },
+      right: {
+        0: '0',
+        10:'-10px',
+      },  
       top: {
         13: '-13px',
+        27: '27px'
       },
       bottom: {
         13: '-13px',

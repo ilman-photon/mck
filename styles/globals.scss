@@ -1447,7 +1447,7 @@ footer {
       &:hover {
         background: #ccd1e3;
       }
-  
+      
       &:after {
         content: "+";
         //background-image: url('images/plus.svg');
@@ -1490,7 +1490,7 @@ footer {
   
       ~ .tab-content {
         max-height: 100vh;
-        padding: 24px;
+        padding: 12px;
         border-top: 0.5px solid #ccd1e3;
       }
     }
@@ -1563,7 +1563,7 @@ footer {
   
       ~ .tab-content {
         max-height: 100vh;
-        padding: 24px;
+        padding: 12px;
         border-top: 0.5px solid #ccd1e3;
       }
     }
@@ -1572,6 +1572,36 @@ footer {
     }
     .tab-content{
       padding: 0;
+    }
+  }
+}
+.product-detail-page{
+  .tab{
+    input:checked {
+      + .tab-label {
+          &::before {
+          content: "-";
+          position: absolute;
+          right: 14px;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          transition: all 1s;
+          color: #3a3e41;
+          font-size: 30px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          top: 10px;
+        }
+      }
+      @media screen and (max-width: 1023px) {
+        + .tab-label {
+          &::before {
+          content: none;
+        }
+      }
+      }
     }
   }
 }
@@ -1770,6 +1800,9 @@ footer {
   }
   .product-detail-page{
     margin-top: 210px;
+    @media (max-width: 968px) {
+      margin-top: 24px;
+    }
      .tab-label:after {
       content: "+";
       width: 24px;

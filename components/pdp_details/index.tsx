@@ -42,24 +42,26 @@ function PdpDetail(pdpViewData: any) {
                     <div dangerouslySetInnerHTML={{ __html: responceValue?.description?.value, }} id="pdp_details_005"></div>
                 </ul>
             </div>
-            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y">
+
+            
+            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y relative">
                 <input type="checkbox" id="pdp_details_chck2" />
                 <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" htmlFor="pdp_details_chck2">Ingredients</label>
-                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
+                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: responceValue?.ingredients?.value, }} id="pdp_details_006"></p>
                 </div>
             </div>
-            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y">
+            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y relative">
                 <input type="checkbox" id="pdp_details_chck3" />
                 <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" htmlFor="pdp_details_chck3">Directions</label>
-                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
+                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: responceValue?.ingredients?.value, }} id="pdp_details_007"></p>
                 </div>
             </div>
-            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y">
+            <div tabIndex={0} className="tab w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y relative">
                 <input type="checkbox" id="pdp_details_chck4" />
                 <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" htmlFor="pdp_details_chck4">Warnings</label>
-                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full">
+                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: responceValue?.warnings?.value, }} id="pdp_details_008"></p>
                 </div>
             </div>

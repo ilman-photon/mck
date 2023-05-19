@@ -127,6 +127,7 @@ function PdpLocation(props: any) {
                                 onClick={() => {
                                     handleMapClick(value, index);
                                 }}
+                                
                             >
 
                                 {selectedMarker === value && (
@@ -138,8 +139,9 @@ function PdpLocation(props: any) {
 
                                         onCloseClick={() => { setSelectedMarker(null); setSelectedStore(-1) }}
                                     >
-                                        <div className="" key={value.id} onClick={() => handleLocationClick(index, value)}>
-                                            <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
+                                        <div className="container" key={value.id} onClick={() => handleLocationClick(index, value)}>
+                                            <div className="pb-2">
+                                                <img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                                             <div className="flex">
                                                 <span className="text-sofia-reg text-mcknormalgrey" >
                                                     <span >{value.Address}, </span>
