@@ -80,14 +80,15 @@ export default function HomePageSectionComponent({ sectionData }: any) {
             </div>
             <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
               <h2
-                className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt"
+                className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med lg:text-left xl:text-left blue-txt"
+                
                 tabIndex={0}
                 id={ele?.title?.value}
               >
                 {ele?.title?.value}
               </h2>
               <div
-                className="jsx-290076256 text-lg font-normal text-sofia-reg text-left lg:pb-6 pb-4 text-mcknormalgrey"
+                className="jsx-290076256 text-lg font-normal text-sofia-reg lg:text-left xl:text-left lg:pb-6 pb-4 text-mcknormalgrey"
                 dangerouslySetInnerHTML={{ __html: ele?.description?.value }}
                 tabIndex={0}
                 id={ele?.description?.value}
