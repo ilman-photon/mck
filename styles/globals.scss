@@ -1665,7 +1665,8 @@ footer {
     background: #001a71 !important;
     color: #fff !important;
   } 
-  .header-sticky:hover .icon-arrow {
+  .header-sticky:hover .icon-arrow,
+  .brand-logo:hover +.header-sticky .icon-arrow {
     border-color: #fff;
   }
   .header:hover .group svg path {
@@ -1861,6 +1862,9 @@ Mobile and iPad Navigation
   .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {
       background-color: rgba(255, 250, 246, 0.6980392157) !important;
       color: #001a71 !important;
+  }
+  .header:hover .search-icon path {
+    fill: #001a71 !important;
   }
   .header-sticky:hover .icon-arrow {
     border-color: #001a71;

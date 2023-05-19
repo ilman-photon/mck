@@ -59,9 +59,9 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       background-color: ${ele?.data?.backgroundColor?.value};
                     }
                   `}</style>
-                  <div className="w-full lg:w-44 lg:mb-8 mb-4">
+                  <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
                     <img
-                      className="h-auto max-w-fit mx-auto w-80"
+                      className="h-auto max-w-fit mx-auto w-56 lg:w-80 xl:w-80"
                       src={ele?.data?.imageTitle?.value?.url}
                       alt={ele?.data?.imageTitle?.value?.url} tabIndex={0} id={'home-product-image'+index}
                     />
@@ -78,7 +78,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     </div>
                     <div id="p-text" className="text-justify pr-0 lg:pr-9  col-span-2">
                       <div
-                        className="text-lg text-sofia-reg text-center text-mcknormalgrey font-normal col-span-2 lg:text-left pb-4"
+                        className="text-lg text-sofia-reg text-mcknormalgrey font-normal col-span-2 text-left pb-4"
                         dangerouslySetInnerHTML={{
                           __html: ele?.data?.description?.value,
                         }} tabIndex={0} id={ele?.data?.description?.value}
@@ -87,7 +87,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   </div>
                   <div
                     //id="cta-btn"
-                    className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
+                    className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 ml-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value+index}
                   >
                     {ele?.data?.buttonText?.value}

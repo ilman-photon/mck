@@ -115,7 +115,8 @@ export default function CarouselComponent({ sectionData }: any) {
                       {ele?.data?.buttonText?.value && (
                         <div
                           id={ele?.data?.buttonText?.value+index}
-                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                          style={{backgroundColor: ele?.data?.ctaButtonColor?.value}}
                           onClick={() =>
                             handleCTABtn(ele?.data?.buttonUrl?.value)
                           }
