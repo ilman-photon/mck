@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import SignUpComponent from "../signup";
 import axios from "axios";
+import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [subMenu, setSubMenu] = useState<any>();
+  const [active, setActive] = useState(null);
 
   useEffect(() => {
     if (subMenuData) {
@@ -32,20 +34,41 @@ function ProductDropComponent({ subMenuData }: Props) {
       });
   }
 
+  function updateUrl(path: String, type: string) {
+    let f = "?filter=";
+    let splitPath = path !== null ? path?.split(f) : "";
+    if (type === "1") {
+      return splitPath[1];
+    } else {
+      return splitPath[0];
+    }
+  }
+
   return (
-    <div className="w-full flex mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
-      <ul className="w-11/12 flex mx-auto ">
+    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
+      <ul className="lg:w-11/12 xl:w-11/12 lg:flex lg:mx-auto xl:flex xl:mx-auto ">
         {subMenu?.map((item: any) => {
           return (
-            <li className="w-1/5" key={Math.random()}>
-              <div className="border-l border-black">
-                <a
-                  href={item?.menuItemUrl?.value}
+            <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
+              <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
+                <Link
+                  href={{
+                    pathname: updateUrl(item?.menuItemUrl?.value, "0"),
+                    query: {
+                      filter: updateUrl(item?.menuItemUrl?.value, "1"),
+                    },
+                  }}
                   className="text-gtl-med text-2xl blue-txt text-left pl-2"
                 >
                   {item?.menuItemName?.value}
-                </a>
-                <ul>
+                </Link>
+                <ul
+                  className={`hidden submenu ${
+                    item?.subMenuContentBlockArea?.value === null
+                      ? "hidden"
+                      : "group-hover:block"
+                  }`}
+                >
                   {item?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
                       return (
@@ -53,17 +76,32 @@ function ProductDropComponent({ subMenuData }: Props) {
                           className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"
                           key={Math.random()}
                         >
-                          <a
-                            href={ele?.menuItemUrl?.value}
+                          <Link
+                            href={{
+                              pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
+                              query: {
+                                filter: updateUrl(ele?.menuItemUrl?.value, "1"),
+                              },
+                            }}
                             className="cursor-pointer"
                           >
                             {ele?.menuItemName?.value}
-                          </a>
+                          </Link>
                         </li>
                       );
                     }
                   )}
                 </ul>
+                <span
+                  onClick={() => setActive(item)}
+                  className={`${
+                    item?.subMenuContentBlockArea?.value == null
+                      ? "lg:hidden xl:hidden"
+                      : "icon-arrow lg:hidden xl:hidden"
+                  } ${active == item ? "open" : ""}`}
+                >
+                  {" "}
+                </span>
               </div>
             </li>
           );

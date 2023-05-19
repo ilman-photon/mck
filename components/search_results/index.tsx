@@ -1,4 +1,4 @@
-import useAxios from "@/hooks/useApi";
+import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
@@ -61,7 +61,7 @@ function ResultComponent() {
             queryParameter = filter;
         }
         const promise = axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
             {
                 headers: {
                     "Accept-Language": "en",
@@ -203,7 +203,7 @@ function ResultComponent() {
             selectedFilterItems.map((category: any, catId: any) => {
                 if (!category.isCategoryChecked && category.items.length > 0) {
                     if (lastCatId > 0 && lastCatId != catId) {
-                        queryParams += ' and ';
+                        queryParams += ' or ';
                     }
                     queryParams += '(';
                     category.items.map((item: any, index: any) => {
@@ -250,7 +250,7 @@ function ResultComponent() {
         const fetchData = async () => {
 
             // Health needs Categories List
-            const healthNeedsCategories = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const healthNeedsCategories = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
             const healthNeedsCategoriesList = healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter((categoryList: any) => categoryList.name === "Health Need Highlights");
 
             // console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
@@ -259,13 +259,13 @@ function ResultComponent() {
             setHealthNeedData(healthNeedsCategoriesListData);
 
             // Product Category setting - Filters data
-            const activeFiltersData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
+            const activeFiltersData = await axios.get(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
             const activeFiltersDataList = activeFiltersData?.data[0];
             // console.log("activeFilters --- ", activeFiltersDataList);
             setactiveFiltersData(activeFiltersDataList);
 
             // Product Category Helath needs - Left side category lists
-            const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`);
+            const productCategoryData = await axios(`${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-search-result/&expand=*`);
             const productCategoryDataList = productCategoryData?.data[0]?.categoryFilter?.expandedValue;
             // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
             //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
@@ -306,17 +306,24 @@ function ResultComponent() {
         });
         fetchProductList('');
     }
+    const handleProductClick = (data : any) =>{
+        const title = data.routeSegment
+        router.push({
+            pathname: '/product_detail', 
+            query: { data: title },
+          });
+    }
 
 
     return (
         <>
-            <div className="search-results lg:p-72 p-4 pb-0 container mx-auto">
-                <div>
+            <div className="search-results lg:p-72 p-4 pb-0 container mx-auto lg:mt-36 mt-16">
+                {/* <div>
                     <div className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1" tabIndex={0} id="sr_label_001">18 results found for “Pain Relief”</div>
                     <div className="lg:text-lg text-base text-sofia-reg text-black pb-1 font-normal" tabIndex={0} id="sr_label_002">Showing results for <span className="text-mckblue italic">Pain Relief</span></div>
                     <div className="lg:text-base text-sm text-sofia-reg text-black lg:pb-5 pb-3 font-normal" tabIndex={0} id="sr_label_003">Search for <span className="text-mckred italic">Pain Releef</span></div>
                     <div className="lg:text-lg text-base pb-1.5 text-sofia-reg font-normal textmcknormalgrey lg:pb-11 border-b-[#CCD1E3]" tabIndex={0} id="sr_label_004">Showing 18 results</div>
-                </div>
+                </div> */}
                 <div className="mck-product-filter">
                     <div className="container max-w-7xl mt-8">
 
@@ -433,7 +440,7 @@ function ResultComponent() {
 
                                 {/* Health needs - Right coloumn starts */}
                                 <div>
-                                    {healthNeedData?.map((healthcategorytitle: any) => (
+                                    {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
                                         <>
 
                                             {/* Health needs categories title & product carousel items starts */}
@@ -444,10 +451,10 @@ function ResultComponent() {
                                                         return (
                                                             <div
                                                                 className="w-52 h-96 border-2 product-list-item"
-                                                                key={item?.contentLink?.id}>
+                                                                key={item?.contentLink?.id} onClick={()=>handleProductClick(item)}>
                                                                 <img src={item?.image?.value?.url} alt="" />
                                                                 <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                                                                    {healthcategorytitle?.healthNeedCategory?.value[0]?.name}
+                                                                    {item?.form?.value[1]?.name}
                                                                 </div>
                                                                 <div className="mckblue product-list-title">
                                                                     {item?.name}
@@ -465,7 +472,7 @@ function ResultComponent() {
                                             </section>
                                             {/* Health needs categories title & product carousel items starts */}
                                         </>
-                                    ))}
+                                    {/* ))} */}
                                 </div>
                                 {/* Health needs - Right coloumn ends */}
 

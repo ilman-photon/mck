@@ -3,7 +3,7 @@ import React from 'react';
 function TermsComponent() {
     return (
         <>
-            <div className="terms container flex flex-col lg:p-72 p-4 pt-6 pb-0 mx-auto">
+            <div className="terms container flex flex-col lg:p-72 p-4 pt-6 pb-0 mx-auto lg:mt-36 mt-16">
                 <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center" id='terms-label-001'>Foster & Thrive Terms of Use</h1>
                 <div className="text-center text-mckblue text-gtl-med lg:text-27 text-xl"  id='terms-label-001-01'>Last updated 07/22/2022</div>        
 

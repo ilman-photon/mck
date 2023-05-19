@@ -17,6 +17,13 @@ function PdpLocation(props: any) {
     });
     const [selectedMarker, setSelectedMarker] = useState(null);
 
+    const showMapClicked = (lat : any ,long :any) => {
+        window.open("https://maps.google.com?q="+lat+","+long );
+      };
+
+    const showOnline = (url : any) =>{
+        window.open(url, '_blank');
+    }
     function fectchLatandLongDetails() {
         return axios.get(
             `https://maps.googleapis.com/maps/api/geocode/json?key=${googleApiKey}&${!isNaN(textInput) ? `components=postal_code:${Number(textInput)}` : `address=${textInput}`}`,
@@ -88,14 +95,18 @@ function PdpLocation(props: any) {
     }
 
     return isLoaded ? (
-        <div className="row-span-2">
+        <div className="row-span-2 pt-[72px]">
+            <div className="relative">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
                 onKeyDown={(e) => handleKey(e)}
-                className="flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-mcklightyellow "  title="Search" role="combobox" />
+                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 pl-9"  title="Search" role="combobox" />
+                <img src="images\search_btn.png" className="absolute left-4 top-4" />
+            </div>
+            
             <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
-            <div className="mb-6" style={{ position: "relative", height: "40vh" }}>
+            <div className="mb-6 h-[300px]" style={{ position: "relative"}}>
                 <GoogleMap
                     mapContainerClassName="map-container"
                     mapContainerStyle={style}
@@ -116,6 +127,7 @@ function PdpLocation(props: any) {
                                 onClick={() => {
                                     handleMapClick(value, index);
                                 }}
+                                
                             >
 
                                 {selectedMarker === value && (
@@ -127,8 +139,9 @@ function PdpLocation(props: any) {
 
                                         onCloseClick={() => { setSelectedMarker(null); setSelectedStore(-1) }}
                                     >
-                                        <div className="" key={value.id} onClick={() => handleLocationClick(index, value)}>
-                                            <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                                        <div className="container" key={value.id} onClick={() => handleLocationClick(index, value)}>
+                                            <div className="pb-2">
+                                                <img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                                             <div className="flex">
                                                 <span className="text-sofia-reg text-mcknormalgrey" >
                                                     <span >{value.Address}, </span>
@@ -139,9 +152,9 @@ function PdpLocation(props: any) {
                                             </div>
 
                                             <div className="flex mt-2">
-                                                <button className="text-sofia-bold font-extrabold text-mckblue">View Online</button>
+                                                <button className="text-sofia-bold font-extrabold text-mckblue" onClick={()=>showOnline(value.StoreUrl)}>View Online</button>
 
-                                                <button className="text-sofia-bold font-extrabold text-mckblue ml-auto">Get Directions</button>
+                                                <button className="text-sofia-bold font-extrabold text-mckblue ml-auto" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</button>
                                             </div>
                                         </div>
                                     </InfoWindow>
@@ -152,23 +165,23 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="max-h-96 overflow-y-auto scrollbar-thin">
+            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
             {responseValue?.map((value: any, index: Number) => {
-                        return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
-                        <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                        return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
+                        <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
-                                <p tabIndex={0} aria-label="1230 Lindon Ave" id="wb-label-004">{value.Address}, </p>
-                                <p tabIndex={0} aria-label="DENVER, CO. 80202" id="wb-label-005">{value.City} {value.Zip}</p>
-                                <p tabIndex={0} aria-label="303-571-5314" id="wb-label-006">{value.Phone}</p>
+                                <p tabIndex={0} aria-label="1230 Lindon Ave"  className="leading-5" id="pdp-location-004">{value.Address}, </p>
+                                <p tabIndex={0} aria-label="DENVER, CO. 80202" id="pdp-location-005" className="leading-5">{value.City} {value.Zip}</p>
+                                <p tabIndex={0} aria-label="303-571-5314" id="pdp-location-006" className="leading-5">{value.Phone}</p>
                             </div>
-                            <div className="text-2xl font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="wb-label-007">{Number(value.Distance).toFixed(1)} mi</div>
+                            <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 pr-4" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold" tabIndex={0} role="link" id="wb-label-008">View Online</div>
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold">
-                                <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="wb-img-009" />
-                                <p className="inline-block relative top-1" tabIndex={0} role="link" id="wb-label-010">Get Directions</p>
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 pr-4">
+                                <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="pdp-img-009" />
+                                <p className="inline-block relative top-1" tabIndex={0} role="link" id="pdp-location-010" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</p>
                             </div>
                         </div>
                     </div>

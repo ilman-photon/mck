@@ -27,7 +27,7 @@ function ContactUsComponent() {
 
     return (
         <>
-            <div className="four-oh-four container flex flex-col mx-auto px-0">
+            <div className="four-oh-four container flex flex-col mx-auto px-0 lg:mt-36 mt-16">
                 <div className="heading pb-6" id="cu_label_001">{contactUsData?.data[0]?.title.value}</div>
                 <div className="grid lg:grid-cols-2 lg:gap-4">
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
@@ -57,7 +57,7 @@ function ContactUsComponent() {
                     </div>
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
                         <div className="text-mckblue lg:py-3 lg:px-4 p-3 lg:text-lg text-base font-extrabold shade-blue-bg text-sofia-bold" id="cu_label_015">{contactUsData?.data[0]?.contentArea.expandedValue[0].whatWeCandoHeading.value}</div>
-                        <div className="lg:p-6 p-4 contact-body underline lg:text-lg text-base font-normal text-mckblue text-sofia-reg" id="cu_link_016" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].whatWeCandoDetail.value, }}>
+                        <div className="lg:p-6 p-4 contact-body lg:text-lg text-base font-normal text-mckblue text-sofia-reg" id="cu_link_016" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].whatWeCandoDetail.value, }}>
                             {/* TODO Coordinate with CMS team to fix this */}
                             {/* <a href="" className="block pb-1 underline text-lg font-normal text-mckblue text-sofia-reg">Home</a> */}
                             {/* TODO Coordinate with CMS team to fix this */}
@@ -69,7 +69,7 @@ function ContactUsComponent() {
                         </div>
                     </div>
                 </div>
-                <p className="text-sofia-reg text-mcknormalgrey font-normal lg:text-base text-sm lg:pb-12" id="cu_label_017" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].disclaimer.value, }}></p>
+                <p className="text-sofia-reg text-mcknormalgrey font-normal lg:text-base text-sm disclaimer" id="cu_label_017" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea.expandedValue[0].disclaimer.value, }}></p>
             </div>
         </>
     );

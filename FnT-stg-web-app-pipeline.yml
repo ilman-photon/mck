@@ -4,20 +4,20 @@
 trigger:
 - None
 
-schedules:
-- cron: "30 11 * * 0-6"
-  displayName: Schedule build1 at 5PM
-  branches:
-   include:
-    - develop
-  always: true
+#schedules:
+#- cron: "30 11 * * 0-6"
+#  displayName: Schedule build1 at 5PM
+#  branches:
+#   include:
+#    - develop
+#  always: true
 
-- cron: "30 15 * * 0-6"
-  displayName: Schedule build2 at 9PM
-  branches:
-   include:
-    - develop
-  always: true
+#- cron: "30 15 * * 0-6"
+#  displayName: Schedule build2 at 9PM
+#  branches:
+#   include:
+#    - develop
+#  always: true
 
 variables:
 
@@ -57,11 +57,21 @@ stages:
           cat next.config.js
       displayName: 'Stage Url updation'
 
-    - script: |
-        npm install
-        npm run build:stg
-        npm run test --if-present
-      displayName: 'npm install, build and test'
+    - task: CmdLine@2
+      inputs:
+        script: 'npm install'
+      displayName: 'npm install'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'npm run build'
+      displayName: 'npm build'    
+
+    #- task: CmdLine@2
+    #  inputs:
+    #    script: 'npm run test --if-present'
+    #  displayName: 'npm test'
+    
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:

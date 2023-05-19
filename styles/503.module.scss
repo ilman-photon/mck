@@ -90,6 +90,10 @@
       &:last-child{
       font-size: 18px;
       line-height: 27px;
+      font-family: "sofia-pro-regular";
+      a{
+        text-decoration: underline;
+      }
     }
   }
 }

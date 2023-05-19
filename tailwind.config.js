@@ -40,24 +40,57 @@ module.exports = {
         mckgreyborder: "#808CB8",
       },
       width: {
+        487 : '487px',
         '526': '526px',
         598 : '598px',
         842 : '842px',
         83: '83%',
+        550: '550px',
+        212: '212px',
       },
       height: {
         636: '636px',
         782: '782px',
         500: '500px',
+        300: '300px',
+        395: '395px',
+        480: '480px',
+      },
+      minHeight: {
+        57: '57px',
+      },
+      left: {
+        36: '36px',
+        10: '-10px'
+      },
+      right: {
+        0: '0',
+        10:'-10px',
+      },  
+      top: {
+        13: '-13px',
+        27: '27px'
+      },
+      bottom: {
+        13: '-13px',
       },
       padding: {
         72: "72px",
         54: "54px",
+        36: "36px",
+        30: "30px",
+      },
+      margin: {
+        72: "72px",
+      },
+      paddingtop: {
+        72: "72px",
       },
       fontSize: {
         32: "2rem",
         27: "1.688rem",
         54: "3.375rem",
+        28: "28px",
       },
       borderWidth: {
         3: "3px",
@@ -73,6 +106,7 @@ module.exports = {
         mckyellow: "#FFEABC",
         lightblue: "#EAF1F8",
         acuteblue: "#DBDFEB",
+        mckblue70: "#4D5F9C",
       },
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
@@ -88,9 +122,15 @@ module.exports = {
         'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
         'circleshadow': '0px 9px 11px -5px rgba(0, 0, 0, 0.25)',
       },
+      lineHeight:{
+        linemax: "50px",
+      },
       border: {
         blue20: "#CCD1E3",
-      }
+      },
+      screens: {
+        desktop: {'max': '1280px'},
+      },
     },
   },
   plugins: [],
