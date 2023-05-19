@@ -42,8 +42,8 @@ export default function Search() {
 
   return (
     <>
-         <div className="relative w-64 search-box" >
-        <button className="btn-search w-12 h-12 bg-transparent right-4 absolute cursor-pointer outline-none font-black border-0" aria-label="search-icon"></button>
+         <div className="relative w-60 search-box" >
+        <button className="btn-search w-11 h-12 bg-transparent right-4 absolute cursor-pointer outline-none font-black border-0" aria-label="search-icon"></button>
  
         <input type={textInput} onKeyDown={(e) => handleKey(e)} 
          className="input-search outline-0 h-12 w-12 border-none text-sofia-reg placeholder:text-sofia-reg text-base placeholder:text-base font-normal placeholder:font-normal tracking-normal placeholder:tracking-normal rounded px-3 py-4 pr-10 bg-transparent absolute inset-y-0 right-3.5 blue-txt focus:w-80 focus:bg-white focus:top-1   " placeholder="Search..." aria-label="search-bar"/>
