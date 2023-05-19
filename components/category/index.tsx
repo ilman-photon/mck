@@ -81,7 +81,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 {item?.data?.name}
               </div>
               <div
-                className="text-center text-sofia-reg font-normal w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
+                className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
                 }}
