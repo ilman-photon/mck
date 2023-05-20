@@ -41,7 +41,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                                 id='blog-label-010-02'>
                                 {item.name}
                             </a>
-                            <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.description.value }}></p>
+                            <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>
                         </div>
                     </figcaption>
                 </div>))}

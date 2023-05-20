@@ -77,7 +77,7 @@ const BlogDetailsComponent = () => {
                         </div>
                         <RelatedProducts
                             OnRelatedProductClick={(e) => console.log(e)}
-                            title={'Related Products'}
+                            title={response?.data[0]?.relatedProductHeading.value}
                             BlogListingContent={response?.data[0]?.relatedProducts.expandedValue}
                         />
                     </div>
