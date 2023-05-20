@@ -72,7 +72,6 @@ function HealthCareProfessionalComponent() {
         }
     }, [response])
 
-    console.log("response -->", response)
     return (
         <>
             {
@@ -129,7 +128,7 @@ function HealthCareProfessionalComponent() {
                             {
                                 tabRelated && tabRelated.length > 0 && tabRelated?.map((tab: any, idx: number) => {
                                     return(
-                                        <span key={idx}>
+                                        <React.Fragment key={idx}>
                                             <input type="radio" name="tabs" id={tab?.title?.value} checked = {tab?.title?.value === tabSelected}
                                                 onChange={() => handleChage(tab?.title?.value)}
                                             />
@@ -145,7 +144,7 @@ function HealthCareProfessionalComponent() {
                                                     dangerouslySetInnerHTML={{__html: tab?.description?.value}}
                                                 />
                                             </div>
-                                        </span>
+                                        </React.Fragment>
                                     )
                                 })
                             }
