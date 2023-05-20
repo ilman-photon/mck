@@ -31,7 +31,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                 <div className='pb-3 lg:pt-0 pt-3'>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border'>{GetTime(item.startPublish)}</span>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border'>{item.readMinute.value}</span>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span>
+                                    {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                 </div>
                                 <div className='flex flex-wrap'>
                                     {item.tag.value.map((item: any, index: any) => (
