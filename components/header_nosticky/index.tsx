@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import NavDropComponent from "../navdrop";
 
 function HeaderNoStickyComponent() {
-  const logogrey = "images/logo.png";
-  const logowhite = "images/logo_white.png";
+  const logogrey = "images/logo.svg";
+  const logowhite = "images/beige.svg";
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isSmall, setIsSmall] = useState(logogrey);
