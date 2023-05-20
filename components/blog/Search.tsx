@@ -10,7 +10,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, OnSear
     return (
         <>
                 <input
-                    className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
+                    className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue placeholder:text-opacity-50 pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
                     placeholder={placeholder}
                     onChange={(e) => OnSearchChange(e)}
                     

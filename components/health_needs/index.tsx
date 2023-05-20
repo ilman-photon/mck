@@ -571,8 +571,8 @@ const HealthNeedsComponent = () => {
 
           {/* Health needs - Left coloumn Filter section starts */}
           {/* <div className="swiper-container mt-8"> */}
-          <div className="grid lg:grid-cols-3 grid-cols-1 mt-6">
-            <div className="flex-none h-max">
+          <div className="lg:flex mt-6">
+            <div className="lg:w-1/6 xl:w-1/6 w-full h-max">
               <div className="lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category">
                 {/* Left main category lists */}
                 <div className="flex items-center my-px">
@@ -724,7 +724,7 @@ const HealthNeedsComponent = () => {
             </div>
 
             {/* <div className="flex-auto"> */}
-            <div className="col-span-2">
+            <div className="lg:w-10/12 xl:w-10/12 w-full">
               {/* Health needs - Right coloumn starts */}
               <div>
 

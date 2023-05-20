@@ -5,37 +5,39 @@ import { useRouter } from "next/router";
 export default function CarouselComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(0);
 
   const dataFetchedRef = useRef(false);
 
-  function idRequests() {
-    return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
-    });
+  async function idRequests() {
+    const requests = sectionData[0]?.contentBlockArea?.value?.map(
+      (item: any) => {
+        return axios.get(
+          `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+          {
+            headers: {
+              "Accept-Language": "en",
+            },
+          }
+        );
+      }
+    );
+
+    try {
+      const responses = await axios.all(requests);
+      setLoading(false);
+      setResponse(responses);
+    } catch (error) {
+      setLoading(true);
+    }
   }
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
-    axios
-      .all(idRequests())
-      .then((responses) => {
-        setLoading(false);
-        setResponse(responses);
-      })
-      .catch((error) => {
-        setLoading(true);
-      });
+    idRequests();
   }, []);
 
   useEffect(() => {
@@ -51,9 +53,10 @@ export default function CarouselComponent({ sectionData }: any) {
 
   function infiniteScroll() {
     if (current >= response?.length - 1) {
-      return setCurrent(0);
+      setCurrent(0);
+    } else {
+      setCurrent(current + 1);
     }
-    return setCurrent(current + 1);
   }
 
   const handleCTABtn = (url: string) => {
@@ -61,7 +64,6 @@ export default function CarouselComponent({ sectionData }: any) {
       pathname: "",
     });
   };
-
   return (
     <div>
       <div
@@ -96,7 +98,10 @@ export default function CarouselComponent({ sectionData }: any) {
                       id={ele?.data?.title?.value + "_" + index}
                       tabIndex={0}
                     />
-                    <div className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full" style={{backgroundColor: ele?.backgroundColor?.value}}>
+                    <div
+                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                      style={{ backgroundColor: ele?.backgroundColor?.value }}
+                    >
                       <h2
                         className=" text-mcklightyellow lg:mb-3"
                         id={ele?.data?.title?.value}
@@ -114,9 +119,11 @@ export default function CarouselComponent({ sectionData }: any) {
                       ></p>
                       {ele?.data?.buttonText?.value && (
                         <div
-                          id={ele?.data?.buttonText?.value+index}
+                          id={ele?.data?.buttonText?.value + index}
                           className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
-                          style={{backgroundColor: ele?.data?.ctaButtonColor?.value}}
+                          style={{
+                            backgroundColor: ele?.data?.ctaButtonColor?.value,
+                          }}
                           onClick={() =>
                             handleCTABtn(ele?.data?.buttonUrl?.value)
                           }

@@ -125,14 +125,14 @@ function HeaderComponent() {
   }, []);
 
   // logo onhover
-  const [logoSrc, setLogoSrc] = useState("images/logo.png");
+  const [logoSrc, setLogoSrc] = useState("images/logo.svg");
   function handleHeaderMouseEnter() {
     if (!isMobile) {
-      setLogoSrc("images/logo_beige.png");
+      setLogoSrc("images/logo_beige.svg");
     }
   }
   function handleHeaderMouseLeave() {
-    setLogoSrc("images/logo.png");
+    setLogoSrc("images/logo.svg");
   }
 
   return (

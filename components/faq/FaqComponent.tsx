@@ -53,18 +53,18 @@ function FaqComponent() {
                 <div className="grid lg:grid-cols-2 lg:gap-4 mt-6">
                     <div className="rounded-lg shade-blue-border overflow-hidden">
                         <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_008">{faqData?.whatYouCanDoHeading?.value}</div>
-                        <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" id="faq_label_009" dangerouslySetInnerHTML={{ __html: faqData?.whatYouCanDoDeatils?.value, }}>
+                        <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_009" dangerouslySetInnerHTML={{ __html: faqData?.whatYouCanDoDeatils?.value, }}>
                         </div>
                     </div>
                     <div className="mt-6 lg:mt-0">
                         <div className="rounded-lg shade-blue-border overflow-hidden">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_010">{faqData?.speaktoAPharmacistHeading?.value}</div>
-                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" id="faq_label_011" dangerouslySetInnerHTML={{ __html: faqData?.speaktoAPharmacistDetail?.value, }}>
+                            <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_011" dangerouslySetInnerHTML={{ __html: faqData?.speaktoAPharmacistDetail?.value, }}>
                             </div>
                         </div>
                         <div className="rounded-lg shade-blue-border overflow-hidden mt-6">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_012">{faqData?.sendFeedBackHeading?.value}</div>
-                            <div className="lg:p-6 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" id="faq_label_013" dangerouslySetInnerHTML={{ __html: faqData?.sendFeedBackDetails?.value, }}>    
+                            <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_013" dangerouslySetInnerHTML={{ __html: faqData?.sendFeedBackDetails?.value, }}>    
                             </div>
                         </div>
                     </div>
