@@ -11,3 +11,7 @@ export const GetTime = (time: any) => {
     return formattedDate
 
 }
+export const HandelURLToId = (string: any) => {
+    const expectedURL = string?.slice(string.indexOf("blog/") + 5, string.length - 1)
+    return expectedURL
+}
