@@ -54,7 +54,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ ProductList, titl
                                     <div className="pb-3 pt-3">
                                         <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border">{GetTime(item1.startPublish)}</span>
                                         <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border">{item1.readMinute.value}</span>
-                                        <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span>
+                                        {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
                                     </div>
                                     <div className="flex flex-wrap">
                                         {item1.tag.value.map((item: any, index: any) => (

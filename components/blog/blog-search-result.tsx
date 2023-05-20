@@ -28,26 +28,25 @@ function BlogSearchComponent() {
     useEffect(() => {
         fetchBlogListing();
     }, []);
-    const handelChange = (e: any) => {
-        console.log(e)
-        setnoSearchResult(e.target.value)
+    const HandelSearch = (e: any,searchstring:any) => {
+        console.log(e,searchstring)
     }
 
-    function handleKeyDown(e: any) {
-        if (e.keyCode == 13) {
-            console.log('e', e)
-
-        }
-    }
+    // function handleKeyDown(e: any) {
+    //     if (e.keyCode == 13) {
+    //         console.log('e', e)
+    //     }
+    // }
     return (
         <>
             <div className='container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16'>
                 <div id="search" className="w-full relative flex items-center content-center">
                     <SearchComponent
                         placeholder={BlogListingContent?.data[0].blogSearchPlaceholderText.value}
-                        OnSearchChange={handelChange}
-                        handleClick={() => setnoSearchClick(true)}
+                        handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
+                       
                     />
+
                 </div>
             </div>
             <div className='container grid grid-cols-3 gap-4 w-full lg:mt-12 lg:px-9 lg:pb-0 p-4 lg:pt-0 mx-auto'>
@@ -68,7 +67,7 @@ function BlogSearchComponent() {
                                     <div className='pb-3 lg:pt-0 pt-3'>
                                         <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border' id="sr-label-004-01">{GetTime(ArticleContent?.data[0].startPublish)}</span>
                                         <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id="sr-label-004-02">65 min read</span>
-                                        <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-004-03">1.3K views</span>
+                                        {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-004-03">1.3K views</span> */}
                                     </div>
                                     <div className='flex'>
                                         <div className='bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2' id="sr-label-004-04">Diagnostic Care</div>
@@ -108,7 +107,7 @@ function BlogSearchComponent() {
                                     <div className='pb-3 lg:pt-0 pt-3'>
                                         <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border' id="sr-label-006-01">February 18, 2022</span>
                                         <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id="sr-label-006-01">65 min read</span>
-                                        <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-006-03">1.3K views</span>
+                                        {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-006-03">1.3K views</span> */}
                                     </div>
                                     <div className='flex'>
                                         <div className='bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2' id="sr-label-006-04">Diagnostic Care</div>
@@ -232,10 +231,10 @@ function BlogSearchComponent() {
 
                 <div className='lg:col-span-1 col-start-1 col-end-7'>
                     <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
+                     
                         <SearchComponent
                             placeholder={BlogListingContent?.data[0].blogSearchPlaceholderText.value}
-                            OnSearchChange={(e) => setnoSearchResult(e)}
-                            handleClick={() => setnoSearchClick(true)}
+                            handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
                         />
                     </div>
                     <CatogaryComponent
