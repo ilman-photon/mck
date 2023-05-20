@@ -20,6 +20,16 @@ function BlogComponent() {
             "Accept-Language": "en",
         },
     });
+    const fetchRelatedProducts = async () => {
+        const responseid = await axios.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`, { headers: { 'Accept-Language': 'en' } },
+        );
+  
+        setArticleContent(responseid);
+    };
+    useEffect(() => {
+        fetchRelatedProducts();
+    }, []);
 
     const handleProductClick = (data: any) => {
         const title = data.routeSegment;
@@ -76,7 +86,7 @@ function BlogComponent() {
                     <RelatedProducts
                         OnRelatedProductClick={(e) => handleProductClick(e)}
                         title={response?.data[0].relatedProductHeadingText.value}
-                        BlogListingContent={[]}
+                        BlogListingContent={ArticleContent?.data[0].relatedProducts.expandedValue}
                     />
 
                 </div>
