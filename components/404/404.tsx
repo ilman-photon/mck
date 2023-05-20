@@ -14,7 +14,7 @@ function FourOhFourCoumponent() {
             }
         );
     }
-
+console.log(notFoundData, "error")
     useEffect(() => {
         fetchNotFoundDetails()
             .then((res) => {

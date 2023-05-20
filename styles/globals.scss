@@ -1383,6 +1383,8 @@ footer {
 
     p {
       a {
+        white-space: nowrap;
+        display: inline-flex;
         span {
           display: block;
           padding-bottom: 4px;
