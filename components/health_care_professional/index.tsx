@@ -90,12 +90,12 @@ function HealthCareProfessionalComponent() {
                                 {
                                     response && customers && customers.length > 0 && customers.map((customer: any, idx: number) =>{
                                         return(
-                                            <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative">
-                                                <div className="text-sofia-reg text-base font-normal text-mckblack pb-4" tabIndex={0} id="hcp-label-003"
+                                            <div key={customer?.customerName?.value} className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative" >
+                                                <div className="text-sofia-reg text-base font-normal text-mckblack pb-4" tabIndex={0} id={`hcp-label-000${idx}`}
                                                     dangerouslySetInnerHTML={{__html: customer?.reviewComment.value}}
                                                 >
                                                 </div>
-                                                <div className='text-sofia-reg text-base font-medium text-mckblue' tabIndex={0} id="hcp-label-004">{customer.customerName.value} - {customer?.customerQualification?.value} </div>
+                                                <div className='text-sofia-reg text-base font-medium text-mckblue' tabIndex={0} id={`hcp-label-0000${idx}`}>{customer.customerName.value} - {customer?.customerQualification?.value} </div>
                                                 
                                                 <div className='w-full absolute left-0 -bottom-11'>
                                                     <svg width="84" height="84" className='mx-auto shadow-circleshadow rounded-full' viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="84" height="84" rx="42" fill="white"/><path d="M38 49.9841C38 56.6115 32.6274 61.984 26 61.984C19.3726 61.984 14 56.6115 14 49.9841C14 28.041 33 19.717 33 22.5508C33 22.5508 23 28.2834 26 35.7167C29 43.15 38 43.3567 38 49.9841Z" fill="#A7C8E9"/><path d="M70 49.9841C70 56.6115 64.6274 61.984 58 61.984C51.3726 61.984 46 56.6115 46 49.9841C46 28.041 65 19.717 65 22.5508C65 22.5508 55 28.2834 58 35.7167C61 43.15 70 43.3567 70 49.9841Z" fill="#A7C8E9"/></svg>
@@ -129,7 +129,7 @@ function HealthCareProfessionalComponent() {
                             {
                                 tabRelated && tabRelated.length > 0 && tabRelated?.map((tab: any, idx: number) => {
                                     return(
-                                        <>
+                                        <span key={idx}>
                                             <input type="radio" name="tabs" id={tab?.title?.value} checked = {tab?.title?.value === tabSelected}
                                                 onChange={() => handleChage(tab?.title?.value)}
                                             />
@@ -145,7 +145,7 @@ function HealthCareProfessionalComponent() {
                                                     dangerouslySetInnerHTML={{__html: tab?.description?.value}}
                                                 />
                                             </div>
-                                        </>
+                                        </span>
                                     )
                                 })
                             }
