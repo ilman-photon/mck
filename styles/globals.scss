@@ -1457,7 +1457,6 @@ footer {
   
       &:after {
         content: "+";
-        //background-image: url('images/plus.svg');
         width: 24px;
         height: 24px;
         text-align: center;
@@ -1468,6 +1467,7 @@ footer {
         align-items: flex-end;
         justify-content: flex-end;
       }
+      
     }
   
     &-content {
@@ -1489,9 +1489,18 @@ footer {
     }
   
     input:checked {
-      + .tab-label {
-        &::after {
+      +.tab-label {
+        &:after {
           content: "-";
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          transition: all 1s;
+          color: #001a71;
+          font-size: 30px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
         }
       }
   

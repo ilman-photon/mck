@@ -36,7 +36,7 @@ export default function FooterComponent() {
                 {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
                   (link: any) => (
                     <Link
-                      className="text-sofia-reg text-lg text-mcknormalgrey lg:my-2 mb-3"
+                      className="text-sofia-reg text-lg text-mcknormalgrey lg:my-2 mb-3 w-fit"
                       rel="stylesheet"
                       id={link?.contentLink?.id}
                       key={link?.contentLink?.id}
@@ -81,7 +81,7 @@ export default function FooterComponent() {
                 {footerSecondData?.data[0]?.menuItemsColumn2?.expandedValue.map(
                   (slink: any) => (
                     <Link
-                      className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3"
+                      className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3 w-fit"
                       rel="stylesheet"
                       href={slink?.menuUrl?.value}
                       key={slink?.contentLink?.id}
