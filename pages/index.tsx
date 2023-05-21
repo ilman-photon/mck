@@ -46,9 +46,10 @@ export default function Home() {
           {response.data[0].blockArea?.expandedValue?.map((item: any, index: number) => (
             <React.Fragment key={index}>
               {item?.contentType[1] === "CarouselBlock" ? <CarouselComponent sectionData={filteredData("CarouselBlock")} /> :
-                item?.contentType[1] === 'TwoCloumnBlock' ? <ImageVideoAndTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
-                  item?.contentType[1] === 'OneColumnBlock' ? <ImageVideoOrTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} textAlignment={'text-center'} /> :
-                    item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null}
+                item?.contentType[1] === 'FourColumnBlock' ? <CategoryComponent sectionData={filteredData("FourColumnBlock")} /> :
+                  item?.contentType[1] === 'TwoCloumnBlock' ? <ImageVideoAndTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
+                    item?.contentType[1] === 'OneColumnBlock' ? <ImageVideoOrTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} textAlignment={'text-center'} /> :
+                      item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null}
             </React.Fragment>
           ))}
           <FooterComponent />
