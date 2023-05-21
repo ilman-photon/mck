@@ -18,6 +18,8 @@ const HealthNeedsComponent = () => {
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
+  const [selectedHealthNeed , setSelectedHealthNeed] = useState<any>([]);
+  const [healthData , setHealthData] = useState(false)
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -69,6 +71,11 @@ const HealthNeedsComponent = () => {
       query: queryParams,
     });
     }
+    else{
+      router.push({
+        pathname: '/health_needs'
+      });
+    }
     
     const query = filter
     const regex = /'([^']+)'/g;
@@ -82,10 +89,16 @@ const HealthNeedsComponent = () => {
       // queryParameter = `(healthNeeds/value/name eq 'Bone')`;
 
     } else {
-      queryParameter = filter;
+      if(filter.includes('healthNeeds')){
+        queryParameter = filter;
+      }
+      else{
+        queryParameter = filter + " or ContentType/any(t:t eq 'ProductDetailsPage')"
+      }
+      
     }
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${filter})?orderby=name asc`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter})`,
       // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
@@ -97,9 +110,37 @@ const HealthNeedsComponent = () => {
       .then((res) => {
         console.log("FetchProductList----- ", res);
         SetProductListData(res);
-        const item = {"name" : values[0]}
-       
-        setSelectedProduct([{ item, data: res.data }]);     
+        let tempObj : any ={}
+        if(filter.includes('Health%20Needs')){
+          setHealthData(!healthData)
+        }
+        else{     
+        res.data.results.map((item : any)=>{
+        values.map( key =>{
+            let tempArray = item.healthNeeds.value.filter( (healthNeeds :any) => healthNeeds.name === key )
+
+            if(tempArray.length === 1){
+              if(tempObj[key]){
+                let categoryArray : any = tempObj[key]
+                categoryArray.push(item)
+                tempObj[key] = categoryArray
+
+              }
+              else{
+                tempObj[key] = [item]
+              }
+              
+            }
+
+          })
+        })
+        let productArray : any =[]
+        values.map(key =>{
+          
+          productArray.push({ item :{name : key}, data : {results:tempObj[key]}})
+        })
+        setSelectedProduct(productArray)  
+      }  
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -228,6 +269,9 @@ const HealthNeedsComponent = () => {
       // fetchProductList(queryParams);
     } else {
       fetchProductList("");
+      router.push({
+          pathname: '/health_needs',
+      })
     }
   };
 
@@ -250,7 +294,7 @@ const HealthNeedsComponent = () => {
                     category.items.map((item: any, index: any) => {
                         const itemName = item.replace(/[^a-zA-Z ]/g, "");
                         const encodeItemName = encodeURI(itemName);
-                        const concatStr = (category.items.length === (index + 1)) ? '' : ' or ';
+                        const concatStr = (category.items.length === (index + 1)) ? '' : ' and ';
                         queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
                     });
                     
@@ -277,9 +321,14 @@ const HealthNeedsComponent = () => {
             }
         }
 
-        // console.log(queryParams);
+        
         if (queryParams)
             fetchProductList(queryParams);
+        else{        
+            router.push({
+              pathname: '/health_needs',
+            });         
+        }
     }
 
   // -------- Recommended Products Section ----------- //
@@ -346,7 +395,19 @@ const HealthNeedsComponent = () => {
       // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
       //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
       setproductCategoryData(productCategoryDataList);
-      createTempFilterArr(productCategoryDataList);
+      createTempFilterArr(productCategoryDataList);  
+      const subCategories = productCategoryDataList[0].subCategory.value;
+const mainCategory = productCategoryDataList[0].mainCategory.value[0];
+
+subCategories.forEach((subCat :any) => {
+  const name = subCat.name;
+  const catId = mainCategory.id;
+  const subCatId = subCat.id;
+  
+  selectedHealthNeed[name] = { cat_id: catId, sub_cat_id: subCatId };
+});
+
+setSelectedHealthNeed(selectedHealthNeed);
     };
 
     fetchData();
@@ -387,7 +448,7 @@ const HealthNeedsComponent = () => {
     };
 
     fetchData();
-  },[])
+  },[healthData])
  
 
   const createTempFilterArr = (results: any) => {
@@ -463,23 +524,28 @@ const HealthNeedsComponent = () => {
   };
 
   const handleHealthNeedData = (data :any , healthNeedData :any ) =>{
-  const categoryId =healthNeedData?.healthNeeds?.value[0]
-  const subCategoryId = healthNeedData?.healthNeeds?.value[1]
-  const filter = data
 
-  
-    if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
-      selectedFilterItems[categoryId]["items"].push(filter);
-    }
-    //existing code
-    setActiveFilter([...activeFilter, filter]);
-    selectedFilterItems[categoryId][subCategoryId].checked = true;
       const queryParams = { filter: data };
-    router.push({
-      pathname: '/health_needs',
-      query: queryParams,
-    });
+      router.push({
+        pathname: '/health_needs',
+        query: queryParams,
+      });
 
+ if(selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked){
+
+  setActiveFilter(
+    activeFilter.filter((item: any) => {
+      return item !== selectedHealthNeed[data].key;
+    })
+  );
+  selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked = false
+ }
+ else{
+
+  selectedFilterItems[selectedHealthNeed[data].cat_id].items.push(data)
+setActiveFilter([...activeFilter,selectedHealthNeed[data].key ]);
+      selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked = true;
+ }
   }
 
   return (
@@ -571,8 +637,8 @@ const HealthNeedsComponent = () => {
 
           {/* Health needs - Left coloumn Filter section starts */}
           {/* <div className="swiper-container mt-8"> */}
-          <div className="lg:flex mt-6">
-            <div className="lg:w-1/6 xl:w-1/6 w-full h-max">
+          <div className="grid lg:grid-cols-3 grid-cols-1 mt-6">
+            <div className="flex-none h-max">
               <div className="lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category">
                 {/* Left main category lists */}
                 <div className="flex items-center my-px">
@@ -607,7 +673,8 @@ const HealthNeedsComponent = () => {
                                   }
                                 />
                                 <label
-                                  htmlFor="acute"
+                                  htmlFor={leftfiltermaindata?.mainCategory?.value[0]
+                                    .name}
                                   className="ml-2 filter-title"
                                 >
                                   {
@@ -724,7 +791,7 @@ const HealthNeedsComponent = () => {
             </div>
 
             {/* <div className="flex-auto"> */}
-            <div className="lg:w-10/12 xl:w-10/12 w-full">
+            <div className="col-span-2">
               {/* Health needs - Right coloumn starts */}
               <div>
 
@@ -735,244 +802,11 @@ const HealthNeedsComponent = () => {
               {/* Health needs - Right coloumn ends */}
 
               {/* Health needs Promotional banner section starts - 2 products */}
-              <div className="product-where-to-buy grid grid-cols-1 lg:px-6 lg:pt-12 lg:pr-0">
-                <div className="relative isolate overflow-hidden">
-                  <div className="mx-auto max-w-7xl">
-                    <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-16 lg:max-w-none lg:grid-cols-2">
-                      <style jsx>{`
-                        .bg-color {
-                          background-color: ${recommendedProductsData
-                            ?.recommendedProductBackgroundColorCode?.value};
-                        }
-                      `}</style>
-                      <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-10 px-4 lg:px-8 items-center">
-                        {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                        <img
-                          src="images/allergy-relief.png"
-                          alt="allergy relief"
-                          className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
-                          tabIndex={0}
-                          id="hn_label_006"
-                        />
-                        <div>
-                          <p
-                            className="lg:mt-4 text-lg"
-                            tabIndex={0}
-                            id="hn_label_006_01"
-                          >
-                            test Allergy relief that starts working fast on the
-                            first day you take it.
-                          </p>
-                          <div
-                            className="jsx-290076256 leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right w-auto"
-                            tabIndex={0}
-                            id="hn_label_006_02"
-                            role="button"
-                            aria-label={
-                              recommendedProductsData
-                                ?.recommendedProductButtonText?.value
-                            }
-                          >
-                            {
-                              recommendedProductsData
-                                ?.recommendedProductButtonText?.value
-                            }
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-10 px-4 lg:px-8 items-center">
-                        {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                        <img
-                          src="images/allergy-relief.png"
-                          alt="allergy relief"
-                          className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
-                          tabIndex={0}
-                          id="hn_label_006_03"
-                        />
-                        <div>
-                          <p
-                            className="lg:mt-4 text-lg"
-                            tabIndex={0}
-                            id="hn_label_006_04"
-                          >
-                            Allergy relief that starts working fast on the first
-                            day you take it.
-                          </p>
-                          <div
-                            className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                            tabIndex={0}
-                            id="hn_label_006_05"
-                            aria-label={
-                              recommendedProductsData
-                                ?.recommendedProductButtonText?.value
-                            }
-                          >
-                            <a
-                              href={
-                                recommendedProductsData
-                                  ?.recommendedProductButtonUrl?.value
-                              }
-                            >
-                              {
-                                recommendedProductsData
-                                  ?.recommendedProductButtonText?.value
-                              }
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
               {/* Health needs Promotional banner section ends */}
 
               {/* Health needs Promotional banner section starts - 3 products */}
-              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-3 lg:px-6 lg:pr-0">
-                <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
-                  <img
-                    src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png"
-                    alt="Two each of gray, white, and black shirts laying flat."
-                    className="w-full h-full"
-                    tabIndex={0}
-                    id="hn_label_007"
-                  />
-                  <div className="mck-hn-recommend-prd-content absolute top-0">
-                    <img
-                      src="images/logo.png"
-                      alt="logo"
-                      className="mt-1 lg:mt-12 ml-12"
-                      tabIndex={0}
-                      id="hn_label_007_01"
-                    />
-                    <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 items-center">
-                      {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                      <img
-                        src="images/allergy-relief.png"
-                        alt="allergy relief"
-                        className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
-                        tabIndex={0}
-                        id="hn_label_007_02"
-                      />
-                      <div>
-                        <p
-                          className="mt-4 text-lg"
-                          tabIndex={0}
-                          id="hn_label_007_02"
-                        >
-                          Allergy relief that starts working fast on the first
-                          day you take it.
-                        </p>
-                        <div
-                          className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                          tabIndex={0}
-                          id="hn_label_007_03"
-                          aria-label={
-                            recommendedProductsData
-                              ?.recommendedProductButtonText?.value
-                          }
-                        >
-                          <a
-                            href={
-                              recommendedProductsData
-                                ?.recommendedProductButtonUrl?.value
-                            }
-                          >
-                            {
-                              recommendedProductsData
-                                ?.recommendedProductButtonText?.value
-                            }
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="lg:grid lg:grid-cols-1 lg:gap-y-3">
-                  <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 py-4 lg:py-0 lg:px-8 items-center mb-4 lg:mb-0">
-                    {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                    <img
-                      src="images/allergy-relief.png"
-                      alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
-                      tabIndex={0}
-                      id="hn_label_007_04"
-                    />
-                    <div>
-                      <p
-                        className="mt-4 text-lg"
-                        tabIndex={0}
-                        id="hn_label_007_05"
-                      >
-                        Allergy relief that starts working fast on the first day
-                        you take it.
-                      </p>
-                      <div
-                        className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                        tabIndex={0}
-                        id="hn_label_007_06"
-                        aria-label={
-                          recommendedProductsData?.recommendedProductButtonText
-                            ?.value
-                        }
-                      >
-                        <a
-                          href={
-                            recommendedProductsData?.recommendedProductButtonUrl
-                              ?.value
-                          }
-                        >
-                          {
-                            recommendedProductsData
-                              ?.recommendedProductButtonText?.value
-                          }
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 lg:px-8 py-4 lg:py-0 items-center">
-                    {/* <img src={recommendedProductsData?.recommendedProductBackgroundImage?.expandedValue?.url} alt="allergy relief" className="pr-6" /> */}
-                    <img
-                      src="images/allergy-relief.png"
-                      alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-36 lg:w-44"
-                      tabIndex={0}
-                      id="hn_label_007_07"
-                    />
-                    <div>
-                      <p
-                        className="mt-4 text-lg"
-                        tabIndex={0}
-                        id="hn_label_007_08"
-                      >
-                        Allergy relief that starts working fast on the first day
-                        you take it.
-                      </p>
-                      <div
-                        className="jsx-290076256 w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                        tabIndex={0}
-                        id="hn_label_007_09"
-                        aria-label={
-                          recommendedProductsData?.recommendedProductButtonText
-                            ?.value
-                        }
-                      >
-                        <a
-                          href={
-                            recommendedProductsData?.recommendedProductButtonUrl
-                              ?.value
-                          }
-                        >
-                          {
-                            recommendedProductsData
-                              ?.recommendedProductButtonText?.value
-                          }
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               {/* Health needs Promotional banner section ends */}
             </div>
           </div>
