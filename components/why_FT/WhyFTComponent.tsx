@@ -67,11 +67,11 @@ function WhyFTComponent() {
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4 lg:text-left text-center" id="wft_label_013" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[5]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg lg:text-lg text-base font-normal text-mcknormalgrey" id="wft_label_014" tabIndex={0} dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[5]?.description?.value,}}></p>
                     </div>
-                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[5]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[5]?.name} id="wft_img_015" tabIndex={0} className="w-full" /></div>
+                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[5]?.image?.expandedValue?.url} alt={whyFTData?.contentArea?.expandedValue[5]?.name} id="wft_img_015" tabIndex={0} className="w-full" /></div>
                 </div>
 
                 <div className="w-full grid lg:flex items-center">
-                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[6]?.image?.expandedValue.url} alt={whyFTData?.contentArea?.expandedValue[6]?.name} id="wft_img_016" tabIndex={0} className="w-full" /></div>
+                    <div className="lg:w-3/6 rounded-lg overflow-hidden"><img src={whyFTData?.contentArea?.expandedValue[6]?.image?.expandedValue?.url} alt={whyFTData?.contentArea?.expandedValue[6]?.name} id="wft_img_016" tabIndex={0} className="w-full" /></div>
                     <div className="lg:w-3/6 lg:pl-18 lg:pr-12 lg:pt-0 pt-4">
                         <h2 className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4 lg:text-left text-center" id="wft_label_017" tabIndex={0}>{whyFTData?.contentArea?.expandedValue[6]?.name}</h2>
                         <p className="lg:pb-6 pb-4 text-sofia-reg lg:text-lg text-base font-normal text-mcknormalgrey" id="wft_label_018" tabIndex={0} dangerouslySetInnerHTML={{__html: whyFTData?.contentArea?.expandedValue[5]?.description?.value,}}></p>
