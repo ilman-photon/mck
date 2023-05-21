@@ -39,7 +39,7 @@ const ProductComponent =({selectedProduct}:any)=>{
                           className="h-480"
 
                         >
-                          {product?.data?.results.map((item: any) => {
+                          {product?.data?.results?.map((item: any) => {
                             return (
                               <SwiperSlide
                                 key={item?.contentLink?.id}
