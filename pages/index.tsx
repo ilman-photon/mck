@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
@@ -43,17 +43,14 @@ export default function Home() {
         <>
           {/* <CookiesComponent /> */}
           <HeaderComponent />
-          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-          <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
-          <HomePageSectionComponent
-            sectionData={filteredData("TwoCloumnBlock")}
-          />
-          <PromotionalTextComponent
-            sectionData={filteredData("OneColumnBlock")}
-          />
-          <RecommendationalProductComponent
-            sectionData={filteredData("RecommendedProductBlock")}
-          />
+          {response.data[0].blockArea?.expandedValue?.map((item: any, index: number) => (
+            <React.Fragment key={index}>
+              {item?.contentType[1] === "CarouselBlock" ? <CarouselComponent sectionData={filteredData("CarouselBlock")} /> :
+                item?.contentType[1] === 'TwoCloumnBlock' ? <HomePageSectionComponent sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
+                  item?.contentType[1] === 'OneColumnBlock' ? <PromotionalTextComponent sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
+                    item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null}
+            </React.Fragment>
+          ))}
           <FooterComponent />
         </>
       )}
