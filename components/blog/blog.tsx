@@ -12,7 +12,11 @@ function BlogComponent() {
     const [ArticleContent, setArticleContent] = useState<any>();
     const [ActiveSearch, setActiveSearch] = useState<boolean>(false);
     const [searchString, setSearchString] = useState<any>();
+    const [RelatedBlog, setRelatedBlog] = useState<any>();
     const router = useRouter()
+    useEffect(() => {
+        fetchRelatedProducts();
+    }, [ActiveSearch]);
     const { response, error, loading } = useAxios({
         method: "GET",
         url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog-listing-setting/&expand=*`,
@@ -24,8 +28,8 @@ function BlogComponent() {
         const responseid = await axios.get(
             `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
-  
-        setArticleContent(responseid);
+
+        setRelatedBlog(responseid);
     };
     useEffect(() => {
         fetchRelatedProducts();
@@ -52,7 +56,7 @@ function BlogComponent() {
     }
     return (
         <>
-            <div className='container grid grid-cols-3 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16'>
+            <div className='container grid grid-cols-3 gap-4 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16'>
 
                 <div className='lg:col-span-2 col-start-1 col-end-7'>
                     <div id="search"
@@ -86,7 +90,7 @@ function BlogComponent() {
                     <RelatedProducts
                         OnRelatedProductClick={(e) => handleProductClick(e)}
                         title={response?.data[0].relatedProductHeadingText.value}
-                        BlogListingContent={ArticleContent?.data[0].relatedProducts.expandedValue}
+                        BlogListingContent={RelatedBlog?.data[0].relatedProducts.expandedValue}
                     />
 
                 </div>

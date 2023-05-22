@@ -47,8 +47,11 @@ module.exports = {
         83: '83%',
         550: '550px',
         212: '212px',
+        270: '270px'
       },
       height: {
+        402: '402px',
+        414: '414px',
         636: '636px',
         782: '782px',
         500: '500px',
@@ -57,6 +60,7 @@ module.exports = {
         480: '480px',
       },
       minHeight: {
+        52: '52px',
         57: '57px',
       },
       left: {
@@ -85,7 +89,7 @@ module.exports = {
         27: "1.688rem",
         54: "3.375rem",
         28: "28px",
-      },
+        20: "20px"   },
       borderWidth: {
         3: "3px",
       },
@@ -118,6 +122,8 @@ module.exports = {
       },
       lineHeight:{
         linemax: "50px",
+        24:"24px",
+        32:"32px"
       },
       border: {
         blue20: "#CCD1E3",

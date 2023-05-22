@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
 import CarouselComponent from "@/components/carousel";
 import CategoryComponent from "@/components/category";
-import HomePageSectionComponent from "@/components/homepage_section";
+import ImageVideoAndTextSection from "@/components/homepage_section";
 import CookiesComponent from "@/components/cookies";
 import useAxios from "@/hooks/useApi";
-import PromotionalTextComponent from "@/components/promotional_text";
+import ImageVideoOrTextSection from "@/components/promotional_text";
 import RecommendationalProductComponent from "@/components/recommendational_product";
 import GoogleTagManager from "@/components/google_tag_manager";
 
@@ -43,17 +43,15 @@ export default function Home() {
         <>
           {/* <CookiesComponent /> */}
           <HeaderComponent />
-          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-          <CategoryComponent sectionData={filteredData("FourColumnBlock")} />
-          <HomePageSectionComponent
-            sectionData={filteredData("TwoCloumnBlock")}
-          />
-          <PromotionalTextComponent
-            sectionData={filteredData("OneColumnBlock")}
-          />
-          <RecommendationalProductComponent
-            sectionData={filteredData("RecommendedProductBlock")}
-          />
+          {response.data[0].blockArea?.expandedValue?.map((item: any, index: number) => (
+            <React.Fragment key={index}>
+              {item?.contentType[1] === "CarouselBlock" ? <CarouselComponent sectionData={filteredData("CarouselBlock")} /> :
+                item?.contentType[1] === 'FourColumnBlock' ? <CategoryComponent sectionData={filteredData("FourColumnBlock")} /> :
+                  item?.contentType[1] === 'TwoCloumnBlock' ? <ImageVideoAndTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
+                    item?.contentType[1] === 'OneColumnBlock' ? <ImageVideoOrTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} textAlignment={'text-center'} /> :
+                      item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null}
+            </React.Fragment>
+          ))}
           <FooterComponent />
         </>
       )}
