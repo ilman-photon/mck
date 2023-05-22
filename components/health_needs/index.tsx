@@ -2,7 +2,7 @@ import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import HealthNeedCategory from "./HealthNeedCategory"
+import HealthNeedCategory from "./healthNeedCategory"
 import HealthNeedFilter from "./HealthNeedFilter";
 
 const HealthNeedsComponent = () => {
