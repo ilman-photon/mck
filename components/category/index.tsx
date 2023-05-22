@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
@@ -32,7 +33,7 @@ export default function CategoryComponent({ sectionData }: any) {
       });
   }, []);
 
-  function handleClickOnCategory(url: String) {
+  function handleClickOnCategory(url: string) {
     let f = "?filter=";
     let splitPath = url !== null ? url?.split(f) : "";
     router.push({
@@ -42,20 +43,22 @@ export default function CategoryComponent({ sectionData }: any) {
       },
     });
   }
+
   return (
-    <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 grid grid-cols-2 gap-4 lg:grid-cols-4 px-4 lg:px-0">
+    <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
       {loading && <p>Loading...</p>}
 
-      {!loading &&
-        response &&
-        response.map((item: any) => {
-          return (
+      {!loading && response && (
+        <div className="flex flex-wrap justify-center">
+          {response.map((item: any, index: number) => (
             <div
-              id="category"
               key={item?.data?.contentLink?.id}
-              className="mb-6 cursor-pointer"
+              className={`mb-6 cursor-pointer ${
+                index < 4 ? "w-full lg:w-1/4" : "w-full lg:w-1/2"
+              }`}
             >
               <div
+                id="category"
                 className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
                 onClick={() =>
                   handleClickOnCategory(item?.data?.productCategoryUrl?.value)
@@ -93,8 +96,9 @@ export default function CategoryComponent({ sectionData }: any) {
                 id={item?.data?.productCategoryDescription?.value}
               ></div>
             </div>
-          );
-        })}
+          ))}
+        </div>
+      )}
     </div>
   );
 }
