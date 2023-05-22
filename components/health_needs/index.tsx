@@ -2,18 +2,11 @@ import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Navigation } from "swiper";
-import "swiper/css/navigation";
-import ProductComponent from "./product";
+import ProductComponent from "./product_List_Carousel";
+import HealthNeedCategory from "./healthNeedCategory";
 
 const HealthNeedsComponent = () => {
   const router = useRouter();
-  const [productListData, SetProductListData] = useState<any>();
-  const [recommendedProductListData, SetRecommendedProductListData] =
-    useState<any>();
-  const [productFilter, setProductFilter] = useState<any>();
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
@@ -21,22 +14,6 @@ const HealthNeedsComponent = () => {
   const [selectedHealthNeed , setSelectedHealthNeed] = useState<any>([]);
   const [healthData , setHealthData] = useState(false)
 
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
-    headers: {
-      "Accept-Language": "en",
-    },
-  });
-
-  // filter data to share as props
-  function filteredData(valueType: string) {
-    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
-      return ele.contentType.some((arrEle: string) => {
-        return arrEle == valueType;
-      });
-    });
-  }
 
   function FetchProductFilter() {
     return axios.get(
@@ -97,6 +74,7 @@ const HealthNeedsComponent = () => {
       }
       
     }
+   
     const promise = axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter})`,
       // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
@@ -109,7 +87,6 @@ const HealthNeedsComponent = () => {
     promise
       .then((res) => {
         console.log("FetchProductList----- ", res);
-        SetProductListData(res);
         let tempObj : any ={}
         if(filter.includes('Health%20Needs')){
           setHealthData(!healthData)
@@ -148,24 +125,19 @@ const HealthNeedsComponent = () => {
   useEffect(() => {
     FetchProductFilter()
       .then((res) => {
-        setProductFilter(res);
+      
       })
       .catch((e) => console.log(e));
 
     fetchRecommandedProduct()
       .then((res) => {
-        SetRecommendedProductListData(res);
+      
       })
       .catch((e: Error | AxiosError) => console.log(e));
 
     fetchProductList("");
   }, []);
 
-  const handleCTABtn = (url: string) => {
-    router.push({
-      pathname: "",
-    });
-  };
 
   // Get & display checkbox value - From Sub category list
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
@@ -255,24 +227,13 @@ const HealthNeedsComponent = () => {
     });
     setActiveFilter([...selectedSubCat]);
     if (selectedViewAllCateory.length > 0) {
-      // let queryParams = '';
-      // selectedViewAllCateory.map((catId: any, index: any) => {
-      //     if (selectedFilterItems[catId].isCategoryChecked) {
-      //         const categoryName = selectedFilterItems[catId].categoryName;
-      //         const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-      //         const encodeItemName = encodeURI(itemName);
-      //         const joinedCond = (selectedViewAllCateory.length === index + 1) ? '' : 'and ';
-      //         queryParams += `(${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond}`;
-      //     }
-      // })
-      // console.log(queryParams);
-      // fetchProductList(queryParams);
     } else {
       fetchProductList("");
       router.push({
           pathname: '/health_needs',
       })
     }
+    
   };
 
   useEffect(() => {
@@ -320,7 +281,7 @@ const HealthNeedsComponent = () => {
                 queryParams = "";
             }
         }
-
+        
         
         if (queryParams)
             fetchProductList(queryParams);
@@ -331,28 +292,6 @@ const HealthNeedsComponent = () => {
         }
     }
 
-  // -------- Recommended Products Section ----------- //
-  const [recommendedProductsData, setRecommendedProductsData] = useState<any>();
-  function fetchRecommendedProductsData() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/pdp/vitamin-d3-50-mcg-2000/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
-  }
-  useEffect(() => {
-    fetchRecommendedProductsData()
-      .then((res: any) => {
-        const recommendedProductsDataList = res.data[0];
-        // console.log("recommendedProductsDataList--- ", recommendedProductsDataList);
-        setRecommendedProductsData(recommendedProductsDataList);
-      })
-      .catch((e: Error | AxiosError) => console.log(e));
-  }, []);
-  // -------- Recommended Products Section ----------- //
 
   // -------- Health needs page data fetch starts -------- //
   const [healthNeedData, setHealthNeedData] = useState<any>();
@@ -369,8 +308,6 @@ const HealthNeedsComponent = () => {
         healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
           (categoryList: any) => categoryList.name === "Health Need Highlights"
         );
-
-      // console.log("healthNeedsCategoriesList --- ", healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue);
 
       const healthNeedsCategoriesListData =
         healthNeedsCategoriesList.length > 0
@@ -392,8 +329,6 @@ const HealthNeedsComponent = () => {
       );
       const productCategoryDataList =
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-      // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
-      //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);  
       const subCategories = productCategoryDataList[0].subCategory.value;
@@ -414,7 +349,6 @@ setSelectedHealthNeed(selectedHealthNeed);
   }, []);
 
   useEffect(()=>{
-    // setSelectedProduct([])
     const fetchData = async () => {
     const healthNeedsCategories = await axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
@@ -430,8 +364,11 @@ setSelectedHealthNeed(selectedHealthNeed);
       healthNeedsCategoriesList.length > 0
         ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
         : [];
+     
     healthNeedsCategoriesListData?.map((item :any)=>{
-      axios.get(`${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${item.name}')`,
+      const text = item.name;
+      const correctText = text.replace(/&/g, "");
+      axios.get(`${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
   {
     headers: {
       "Accept-Language": "en",
@@ -494,78 +431,16 @@ setSelectedHealthNeed(selectedHealthNeed);
     });
     fetchProductList("");
   };
-
-  // -------- Health needs page data fetch ends -------- //
-
-  // -------- View all checkbox functionality ------- //
-  // const viewallhandleCheckBox = (event: React.MouseEvent<HTMLDivElement>, label: string) => {
-  //     const value = (event.target as HTMLInputElement).value;
-  //     const isChecked = (event.target as HTMLInputElement).checked;
-
-  //     if (label === 'viewall') {
-  //         // If "View All" checkbox is clicked, update all sub-categories checkboxes
-  //         setActiveFilter(isChecked ? leftfiltermaindata?.subCategory?.value?.map((item: any) => item.name) : []);
-  //         document.querySelectorAll('input[type=checkbox]').forEach((checkbox: HTMLInputElement) => {
-  //             checkbox.checked = isChecked;
-  //         });
-  //     } else {
-  //         // If a sub-category checkbox is clicked, update the active filter
-  //         const newActiveFilter = isChecked ? [...activeFilter, value] : activeFilter.filter((item: string) => item !== value);
-  //         setActiveFilter(newActiveFilter);
-  //     }
-  // };
-
-  const handleProductClick = (data: any) => {
-    const title = data.routeSegment;
-    router.push({
-      pathname: "/product_detail",
-      query: { data: title },
-    });
-  };
-
-  const handleHealthNeedData = (data :any , healthNeedData :any ) =>{
-
-      const queryParams = { filter: data };
-      router.push({
-        pathname: '/health_needs',
-        query: queryParams,
-      });
-
- if(selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked){
-
-  setActiveFilter(
-    activeFilter.filter((item: any) => {
-      return item !== selectedHealthNeed[data].key;
-    })
-  );
-  selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked = false
- }
- else{
-
-  selectedFilterItems[selectedHealthNeed[data].cat_id].items.push(data)
-setActiveFilter([...activeFilter,selectedHealthNeed[data].key ]);
-      selectedFilterItems[selectedHealthNeed[data].cat_id][selectedHealthNeed[data].sub_cat_id].checked = true;
- }
-  }
-
   return (
     <>
       <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
         {/* Health needs - Top category section starts */}
-        <div className="health-needs-categories p-[36px] mt-[72px] bg-[#F2F4F9] pb-0" tabIndex={0} id="hn_label_002">
-          <div className="health-needs-categories-icons">
-            <ul className="flex flex-wrap">
-              {healthNeedData &&
-                healthNeedData?.map((healthneedsdata: any) => (
-                  <li key={healthneedsdata?.contentLink?.id} className="text-sofia-reg text-mckblue text-lg text-center grow shrink pl-[30px] pr-[30px] pb-[36px]"
-                  onClick ={()=>(handleHealthNeedData(healthneedsdata?.title.value , healthneedsdata))}>
-                    <img src={healthneedsdata?.image?.expandedValue?.url} />
-                    {healthneedsdata?.title.value}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </div>
+        <HealthNeedCategory healthNeedData ={healthNeedData} 
+        selectedFilterItems={selectedFilterItems}
+        selectedHealthNeed ={selectedHealthNeed}
+        setActiveFilter={setActiveFilter}
+        activeFilter = {activeFilter}/>
+        
         {/* Health needs - Top category section ends */}
 
         <div className="container lg:mt-12 mt-6 px-4 lg:px-0">
@@ -794,20 +669,8 @@ setActiveFilter([...activeFilter,selectedHealthNeed[data].key ]);
             <div className="col-span-2">
               {/* Health needs - Right coloumn starts */}
               <div>
-
-<ProductComponent selectedProduct={selectedProduct}/>
-              
-                
+                  <ProductComponent selectedProduct={selectedProduct}/>       
               </div>
-              {/* Health needs - Right coloumn ends */}
-
-              {/* Health needs Promotional banner section starts - 2 products */}
-             
-              {/* Health needs Promotional banner section ends */}
-
-              {/* Health needs Promotional banner section starts - 3 products */}
-              
-              {/* Health needs Promotional banner section ends */}
             </div>
           </div>
         </div>
