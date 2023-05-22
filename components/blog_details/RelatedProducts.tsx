@@ -18,7 +18,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                     <figure className='w-full text-center'>
                         <img
                             src={item.image.expandedValue?.url}
-                            className="px-5 lg:px-0 m-auto"
+                            className="px-5 lg:px-0 m-auto lg:w-32"
                             alt='Allergy Relief Product'
                             id='blog-img-006'
                         />
@@ -36,7 +36,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             </div>
 
                             <a href=""
-                                className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline"
+                                className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                                 id='blog-label-010-02'>
                                 {item.name}

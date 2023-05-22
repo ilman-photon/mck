@@ -12,16 +12,16 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({ CatogaryListing, 
 
     return (
         <div className='category-card shade-blue-border rounded-lg overflow-hidden pb-4 mb-6'>
-            <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg" id="blog-label-008">{Catogarytitle}</div>
+            <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg mb-4" id="blog-label-008">{Catogarytitle}</div>
             {CatogaryListing?.map((item1: any, index: number) => (
                 <div className='lg:px-6 px-2' key={index}>
                     <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
                         <React.Fragment>
                             <input type="checkbox" id={item1.categoryDisplayName.value} className="hidden" />
                             <label
-                                style={{ marginLeft: '1rem' }}
-                                className="tab-label py-2 px-4 flex cursor-pointer text-sofia-bold font-extrabold text-base relative" htmlFor={item1.categoryDisplayName.value}>
+                                className="tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative" htmlFor={item1.categoryDisplayName.value}>
                                  <img
+                                    className='mr-3'
                                     src={item1.categoryImage.expandedValue?.url}
                                     alt={item1.categoryImage.expandedValue?.name}
                                     id={item1.categoryImage.expandedValue?.name}
