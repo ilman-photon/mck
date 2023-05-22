@@ -6,8 +6,6 @@ import { Navigation } from "swiper";
 import "swiper/css/navigation";
 
 const ProductComponent = ({ selectedProduct }: any) => {
-  // {item ,healthcategorytitle} : any
-  // console.log("in product ", selectedProduct)
   const router = useRouter();
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
