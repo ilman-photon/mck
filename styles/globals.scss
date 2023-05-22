@@ -2136,6 +2136,19 @@ Mobile and iPad Navigation
   justify-content: flex-end;
 }
 
+.category-card .tab input:checked + .tab-label:after {
+  content: "-";
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  transition: all 1s;
+  color: #001a71;
+  font-size: 30px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
 .table-container{
   p{
     a{
