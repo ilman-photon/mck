@@ -87,13 +87,16 @@ function RecommendationalProductComponent({ sectionData }: any) {
                     </div>
                   </div>
                   {ele?.data?.buttonText?.value ? 
-                  <div
-                    //id="cta-btn"
-                    className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 ml-auto"
-                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)} tabIndex={0} role="button" id={ele?.data?.buttonText?.value+index}
-                  >
-                    {ele?.data?.buttonText?.value}
-                  </div>
+                    <div
+                      className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 ml-auto"
+                      onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
+                      tabIndex={0} 
+                      role="button"
+                      id={ele?.data?.buttonText?.value+index}
+                      style={{backgroundColor: ele?.data?.buttonColor?.value}}
+                    >
+                      {ele?.data?.buttonText?.value}
+                    </div>
                   : null}
                 </div>
               );

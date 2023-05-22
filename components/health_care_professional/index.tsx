@@ -53,7 +53,7 @@ function HealthCareProfessionalComponent() {
     const handleChage = (tabTitle: string) => {
         setTabSelected(tabTitle)
     }
-    const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=https://mcco02mstrub73kinte.dxcloud.episerver.net/en/generic/health-care-professionals/&expand=*`;
+    const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
 
     const fetchUrl = async() => {
         const res = await axios.get(url,  { headers: { 'Accept-Language': 'en' } })
@@ -79,6 +79,14 @@ function HealthCareProfessionalComponent() {
             setCarouselRelated(carouselRelated)
         }
     }, [response])
+
+	function filteredData(valueType: string) {
+        return response?.contentArea?.expandedValue?.filter((ele: any) => {
+            return ele.contentType.some((arrEle: string) => {
+                return arrEle == valueType;
+            });
+        });
+    }
 		
     return (
 			<>
@@ -86,7 +94,7 @@ function HealthCareProfessionalComponent() {
 					response && Object.keys(response).length > 0 && <>
 						<div className='container mx-auto'>
 							<div>
-                <Image src={HeaderImage} alt="Health Care Header Banner" className='w-full' id="hcp-img-001" tabIndex={0}></Image>
+								<CarouselComponent sectionData={filteredData("CarouselBlock")} />
 							</div>
 						</div>
 						<div className='bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6'>
