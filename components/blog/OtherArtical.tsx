@@ -21,26 +21,26 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                     }}
                     className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                 >
-                    <article className='shadow-md rounded-lg lg:mb-12 mb-6' >
-                        <figure>
-                            <img src={item.image.expandedValue.url} className='w-full' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
+                    <article className='shadow-md rounded-lg lg:mb-12 mb-6 overflow-hidden'>
+                        <figure className='lg:h-80 overflow-hidden'>
+                            <img src={item.image.expandedValue.url} className='w-full lg:h-414 object-cover' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
                         </figure>
                         <figcaption>
                             <div className='content lg:p-6 p-4'>
-                                <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline' aria-labelledby={item.title.value}>{item.title.value}</a>
-                                <div className='pb-3 lg:pt-0 pt-3'>
+                                <div className='lg:h-28'><a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</a></div>
+                                <div className='pb-3 pt-3'>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border'>{GetTime(item.startPublish)}</span>
                                     <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border'>{item.readMinute.value}</span>
                                     {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                 </div>
-                                <div className='flex flex-wrap'>
+                                <div className='flex flex-wrap [&>*:nth-child(1)]:ml-0 min-h-52'>
                                     {item.tag.value.map((item: any, index: any) => (
-                                        <div key={index}
-                                            style={{
-                                                backgroundColor: item.recommendedProductButtonColor?.value,
-                                                color: item.recommendedProductButtonText?.value
-                                            }}
-                                            className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border'>{item.description}</div>
+                                    <div key={index}
+                                        style={{
+                                            backgroundColor: item.recommendedProductButtonColor?.value,
+                                            color: item.recommendedProductButtonText?.value
+                                        }}
+                                        className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{item.description}</div>
                                     ))}
                                 </div>
                             </div>
