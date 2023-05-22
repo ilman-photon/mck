@@ -92,7 +92,6 @@ function HealthCareProfessionalComponent() {
 		nextBtn?.removeEventListener('click', handleNext, true)
 		prevBtn?.removeEventListener('click', handlePrev, true)
 	}
-	console.log("step 12 **** ", reviewCount)
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const nextBtn_ = document.getElementsByClassName('swiper-button-next')[0]
