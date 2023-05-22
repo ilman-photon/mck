@@ -76,7 +76,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     from: { opacity: 0, transform: "translateX(100%)" },
     enter: { opacity: 1, transform: "translateX(0%)" },
     leave: { opacity: 0, transform: "translateX(-100%)" },
-    config: { duration: 1100 },
+    config: { duration: 960 },
   });
 
   return (
