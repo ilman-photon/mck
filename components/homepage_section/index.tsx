@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import React, { useRef, useState, useEffect } from "react";
 
 export default function ImageVideoAndTextSection({ sectionData }: any) {
   const router = useRouter();
@@ -7,6 +8,54 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
     router.push({
       pathname: url,
     });
+  };
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const circlePlayButtonRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    const handlePlaying = () => {
+      setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
+
+    if (video) {
+      video.addEventListener("playing", handlePlaying);
+      video.addEventListener("pause", handlePause);
+
+      return () => {
+        video.removeEventListener("playing", handlePlaying);
+        video.removeEventListener("pause", handlePause);
+      };
+    }
+  }, []);
+
+  const handleTogglePlay = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+
+    const video = videoRef.current;
+
+    if (video) {
+      if (isPlaying) {
+        video.pause();
+        setIsPlaying(false);
+      } else {
+        const currentTime = video.currentTime;
+        const targetTime = 10; // Replace with the desired time in seconds
+        if (currentTime < targetTime) {
+          video.currentTime = targetTime;
+        }
+        video.play();
+        setIsPlaying(true);
+      }
+    }
   };
 
   return (

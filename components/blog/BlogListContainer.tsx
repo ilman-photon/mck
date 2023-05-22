@@ -32,7 +32,7 @@ const BlogListContainer = () => {
                                 </figure>
                                 <figcaption>
                                     <div className='content lg:p-6 p-4'>
-                                        <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline leading-9 lg:h-32' aria-labelledby={item.title.value}>{item.title.value}</a>
+                                        <a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-9 lg:h-32' aria-labelledby={item.title.value}>{item.title.value}</a>
                                         <div className='pb-3 pt-3'>
                                             <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border'>{GetTime(item.startPublish)}</span>
                                             <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border'>{item.readMinute.value}</span>
