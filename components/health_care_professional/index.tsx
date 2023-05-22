@@ -3,6 +3,13 @@ import Image from 'next/image';
 import HeaderImage from '../../public/images/health-professional.png';
 import Quotes from '../../public/images/teamcarousel-quotes.png';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
+import "swiper/css";
+import "swiper/css/navigation";
+import CarouselComponent from '../carousel';
+
+
 
 const tabStyle = [
     {
@@ -69,91 +76,90 @@ function HealthCareProfessionalComponent() {
             setCustomerReviewTitle(customerReviewTitle)
             setDescriptionValue(descriptionValue)
             setTabRelated(tabRelated)
+            setCarouselRelated(carouselRelated)
         }
     }, [response])
-
+		
     return (
-        <>
-            {
-                response && Object.keys(response).length > 0 && <>
-                    <div className='container mx-auto'>
-                    <div>
-                        <Image src={HeaderImage} alt="Health Care Header Banner" className='w-full' id="hcp-img-001" tabIndex={0}></Image>
-                    </div>
-                </div>
-                <div className='bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6'>
-                    <div className='container mx-auto'>
-                        <h1 className='text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6' id="hcp-label-002" tabIndex={0}> {customerReviewTitle?.value}</h1>
-                        <div className='relative lg:p-0 px-6 pb-8'>
-                            <div className='grid lg:grid-cols-3 grid-col gap-4 grid-rows-1'>
-                                {
-                                    response && customers && customers.length > 0 && customers.map((customer: any, idx: number) =>{
-                                        return(
-                                            <div key={customer?.customerName?.value} className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative" >
-                                                <div className="text-sofia-reg text-base font-normal text-mckblack pb-4" tabIndex={0} id={`hcp-label-000${idx}`}
-                                                    dangerouslySetInnerHTML={{__html: customer?.reviewComment.value}}
-                                                >
-                                                </div>
-                                                <div className='text-sofia-reg text-base font-medium text-mckblue' tabIndex={0} id={`hcp-label-0000${idx}`}>{customer.customerName.value} - {customer?.customerQualification?.value} </div>
-                                                
-                                                <div className='w-full absolute left-0 -bottom-11'>
-                                                    <svg width="84" height="84" className='mx-auto shadow-circleshadow rounded-full' viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="84" height="84" rx="42" fill="white"/><path d="M38 49.9841C38 56.6115 32.6274 61.984 26 61.984C19.3726 61.984 14 56.6115 14 49.9841C14 28.041 33 19.717 33 22.5508C33 22.5508 23 28.2834 26 35.7167C29 43.15 38 43.3567 38 49.9841Z" fill="#A7C8E9"/><path d="M70 49.9841C70 56.6115 64.6274 61.984 58 61.984C51.3726 61.984 46 56.6115 46 49.9841C46 28.041 65 19.717 65 22.5508C65 22.5508 55 28.2834 58 35.7167C61 43.15 70 43.3567 70 49.9841Z" fill="#A7C8E9"/></svg>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                            <div className='text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-20 pt-18'>1/{Math.ceil(customers?.length/3)}</div>
-                            
-                            <div className='lg:block hidden carousel-button w-full lg:absolute flex items-center justify-center top-28'>
-                                <div className='carousel-prev lg:absolute -left-6 cursor-pointer'>
-                                    <svg width="48" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-005" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#4D5F9C"/><path d="M28.9401 18.7106L27.0601 16.8306L19.0601 24.8306L27.0601 32.8306L28.9401 30.9506L22.8334 24.8306L28.9401 18.7106Z" fill="#ffffff"/></svg>
-                                </div>
-                                <div className='lg:hidden text-sofia-reg text-xl font-normal px-3'>1/3</div>
-                                <div className='carousel-next lg:absolute -right-6 cursor-pointer'>
-                                    <svg width="48" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"/><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"/></svg>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                <div className='container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0'>
-                    <div className='text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto' tabIndex={0} id="hcp-btn-007"
-                        dangerouslySetInnerHTML={{__html: descriptionValue}}
-                    />
-                    <div className='NavTabs_Contain lg:px-0 px-4'>
-                        <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
+			<>
+				{
+					response && Object.keys(response).length > 0 && <>
+						<div className='container mx-auto'>
+							<div>
+                <Image src={HeaderImage} alt="Health Care Header Banner" className='w-full' id="hcp-img-001" tabIndex={0}></Image>
+							</div>
+						</div>
+						<div className='bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6'>
+								<div className='container mx-auto'>
+										<h1 className='text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6' id="hcp-label-002" tabIndex={0}> {customerReviewTitle?.value}</h1>
+										<div className='relative lg:p-0 px-6 pb-6'>
+											<Swiper
+												modules={[Navigation]}
+												spaceBetween={10}
+												navigation
+												slidesPerView={3}
+												className="h-auto"
+											>
+												{
+														response && customers && customers.length > 0 && customers.map((customer: any, idx: number) =>{
+																return(
+																	<SwiperSlide key={idx} className='swiper-slide mb-18'>
+																		<div key={customer?.customerName?.value} className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative" >
+																				<div className="text-sofia-reg text-base font-normal text-mckblack pb-4" tabIndex={0} id={`hcp-label-000${idx}`}
+																						dangerouslySetInnerHTML={{__html: customer?.reviewComment.value}}
+																				>
+																				</div>
+																				<div className='text-sofia-reg text-base font-medium text-mckblue' tabIndex={0} id={`hcp-label-0000${idx}`}>{customer.customerName.value} - {customer?.customerQualification?.value} </div>
+																				
+																				<div className='w-full absolute left-0 -bottom-11'>
+																						<svg width="84" height="84" className='mx-auto shadow-circleshadow rounded-full' viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="84" height="84" rx="42" fill="white"/><path d="M38 49.9841C38 56.6115 32.6274 61.984 26 61.984C19.3726 61.984 14 56.6115 14 49.9841C14 28.041 33 19.717 33 22.5508C33 22.5508 23 28.2834 26 35.7167C29 43.15 38 43.3567 38 49.9841Z" fill="#A7C8E9"/><path d="M70 49.9841C70 56.6115 64.6274 61.984 58 61.984C51.3726 61.984 46 56.6115 46 49.9841C46 28.041 65 19.717 65 22.5508C65 22.5508 55 28.2834 58 35.7167C61 43.15 70 43.3567 70 49.9841Z" fill="#A7C8E9"/></svg>
+																				</div>
+																		</div>
+																	</SwiperSlide>
+																)
+														})
+												}
+											</Swiper>
+									</div>
+									<div className='text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4 pt-18'>2/{Math.ceil(customers?.length)}</div>
+								</div>
+						</div>
+						<div className='container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0'>
+								<div className='text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto' tabIndex={0} id="hcp-btn-007"
+										dangerouslySetInnerHTML={{__html: descriptionValue}}
+								/>
+								<div className='NavTabs_Contain lg:px-0 px-4'>
+										<div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
 
-                            {
-                                tabRelated && tabRelated.length > 0 && tabRelated?.map((tab: any, idx: number) => {
-                                    return(
-                                        <React.Fragment key={idx}>
-                                            <input type="radio" name="tabs" id={tab?.title?.value} checked = {tab?.title?.value === tabSelected}
-                                                onChange={() => handleChage(tab?.title?.value)}
-                                            />
-                                            <label htmlFor={tab?.title?.value} 
-                                                className={tabStyle[idx]?.className}>
-                                                {tabStyle[idx]?.svg1}
-                                                {tab?.tabTitle?.value}
-                                                {tabStyle[idx]?.svg2}
-                                            </label>
-                                            <div className="tab px-6 py-4">
-                                                <h3 className='text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12' tabIndex={idx} id="hcp-label-009">{tab?.title?.value}</h3>
-                                                <div className='text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6' tabIndex={idx} id="hcp-label-010"
-                                                    dangerouslySetInnerHTML={{__html: tab?.description?.value}}
-                                                />
-                                            </div>
-                                        </React.Fragment>
-                                    )
-                                })
-                            }
-                        </div> 
-                    </div>
-                </div>
-                </>
-            }
-        </>
+												{
+														tabRelated && tabRelated.length > 0 && tabRelated?.map((tab: any, idx: number) => {
+																return(
+																		<React.Fragment key={idx}>
+																				<input type="radio" name="tabs" id={tab?.title?.value} checked = {tab?.title?.value === tabSelected}
+																						onChange={() => handleChage(tab?.title?.value)}
+																				/>
+																				<label htmlFor={tab?.title?.value} 
+																						className={tabStyle[idx]?.className}>
+																						{tabStyle[idx]?.svg1}
+																						{tab?.tabTitle?.value}
+																						{tabStyle[idx]?.svg2}
+																				</label>
+																				<div className="tab px-6 py-4">
+																						<h3 className='text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12' tabIndex={idx} id="hcp-label-009">{tab?.title?.value}</h3>
+																						<div className='text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6' tabIndex={idx} id="hcp-label-010"
+																								dangerouslySetInnerHTML={{__html: tab?.description?.value}}
+																						/>
+																				</div>
+																		</React.Fragment>
+																)
+														})
+												}
+										</div> 
+								</div>
+						</div>
+					</>
+				}
+			</>
   )
 }
 export default HealthCareProfessionalComponent;
