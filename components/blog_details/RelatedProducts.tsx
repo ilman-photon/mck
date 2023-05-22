@@ -38,7 +38,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             <a href=""
                                 className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
-                                id='blog-label-010-02'>
+                                id={`blog-label-010-`+index}>
                                 {item.name}
                             </a>
                             <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>

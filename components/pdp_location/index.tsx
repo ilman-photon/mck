@@ -101,7 +101,7 @@ function PdpLocation(props: any) {
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
                 onKeyDown={(e) => handleKey(e)}
-                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 pl-9"  title="Search" role="combobox" />
+                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue bg-[#F8F9FB] pl-9"  title="Search" role="combobox" />
                 <img src="images\search_btn.png" className="absolute left-4 top-4" />
             </div>
             
@@ -175,7 +175,7 @@ function PdpLocation(props: any) {
                                 <p tabIndex={0} aria-label="DENVER, CO. 80202" id="pdp-location-005" className="leading-5">{value.City} {value.Zip}</p>
                                 <p tabIndex={0} aria-label="303-571-5314" id="pdp-location-006" className="leading-5">{value.Phone}</p>
                             </div>
-                            <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 pr-4" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
+                            <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 leading-[32px] pr-4" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>

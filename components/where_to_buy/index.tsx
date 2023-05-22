@@ -93,7 +93,7 @@ function WhereComponent() {
     return isLoaded ? (
         <>
             <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 mt-16">
-                <div className="p-6 lg:w-550 w-full overflow-y-scroll h-636 lg:h-full">
+                <div className="p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6">
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
@@ -173,14 +173,14 @@ function WhereComponent() {
                         })}
                     </GoogleMap>
                     <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
-                        <label htmlFor="fname" className="flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0" id="wb-label-012">Where to buy</label>
+                        <label htmlFor="fname" className="flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]" id="wb-label-012">Where to buy</label>
                         <input type="text" id="fname" name="fname"
                             value={textInput}
                             onKeyDown={(e) => handleKey(e)}
                             placeholder="City, State or Zip code"
-                            className="lg:w-83 bg-[#F8F9FB] pl-3 py-4 pr-10 border rounded border-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative"
+                            className="lg:w-83 bg-[#F8F9FB] pl-3 py-3 pr-10 border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
                         />
-                        <img src="images/location_on.svg" alt="location" className="absolute lg:top-8 top-18 right-8" />
+                        <img src="images/location_on.svg" alt="location" className="text-mckgreyborder absolute lg:top-8 top-18 right-8" />
                     </div>
                 </div>
             </div>

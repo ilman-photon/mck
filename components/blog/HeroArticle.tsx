@@ -17,21 +17,21 @@ const HeroArticle = (data: any) => {
             <figure className="w-full lg:h-402 lg:overflow-hidden">
                 <img
                     className="w-full"
-                    id={data.data?.image.value.name}
-                    src={data.data?.image.value.url}
-                    alt={data.data?.image.value.url}
+                    id={data.data?.image.value?.name}
+                    src={data.data?.image.value?.url}
+                    alt={data.data?.image.value?.url}
                 />
             </figure>
             <figcaption>
                 <div className='content lg:p-6 p-4'>
-                    <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data.data?.title.value}</h1>
+                    <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data.data?.title?.value}</h1>
                     <div className='pb-3 lg:pt-0 pt-3'>
                         <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border' id='blog-label-001'>{GetTime(data.data?.startPublish)}</span>
-                        <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id='blog-label-002'>{data.data?.readMinute.value}</span>
+                        <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border' id='blog-label-002'>{data.data?.readMinute?.value}</span>
                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
                     <div className='flex lg:flex-nowrap flex-wrap [&>*:nth-child(1)]:ml-0 '>
-                        {data.data?.tag.value.map((item: any, index: any) => (
+                        {data.data?.tag?.value.map((item: any, index: any) => (
                             <div key={index}
                                 style={{
                                     backgroundColor: item.tagBackgroundColorCode?.value,
