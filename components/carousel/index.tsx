@@ -1,11 +1,18 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useTransition, animated } from "react-spring";
 
-export default function CarouselComponent({ sectionData }: any) {
+interface CarouselComponentProps {
+  sectionData: any;
+}
+
+const CarouselComponent: React.FC<CarouselComponentProps> = ({
+  sectionData,
+}) => {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
 
   const dataFetchedRef = useRef(false);
@@ -47,7 +54,7 @@ export default function CarouselComponent({ sectionData }: any) {
     return () => clearInterval(interval);
   }, [current]);
 
-  function handleCarouselImage(index: any) {
+  function handleCarouselImage(index: number) {
     setCurrent(index);
   }
 
@@ -64,6 +71,14 @@ export default function CarouselComponent({ sectionData }: any) {
       pathname: "",
     });
   };
+
+  const transitions = useTransition(response?.[current], {
+    from: { opacity: 0, transform: "translateX(100%)" },
+    enter: { opacity: 1, transform: "translateX(0%)" },
+    leave: { opacity: 0, transform: "translateX(-100%)" },
+    config: { duration: 1100 },
+  });
+
   return (
     <div>
       <div
@@ -77,67 +92,63 @@ export default function CarouselComponent({ sectionData }: any) {
           {loading && <p>Loading...</p>}
 
           {!loading &&
-            response &&
-            response.map((ele: any, index: number) => {
-              return (
+            transitions((styles, item) => (
+              <animated.div
+                className={`container mx-auto ${item ? "block" : "hidden"}`}
+                style={styles}
+                key={item?.data?.contentLink?.id + "_" + current}
+              >
                 <div
-                  className={`container mx-auto ${
-                    index == current ? "block" : "hidden"
-                  }`}
-                  key={ele?.data?.contentLink?.id + "_" + index}
+                  className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                  data-te-carousel-active
+                  data-te-carousel-item
                 >
+                  <img
+                    src={item?.data?.image?.value.url}
+                    className="block w-full"
+                    alt="Carousel Image"
+                    id={item?.data?.title?.value + "_" + current}
+                    tabIndex={0}
+                  />
                   <div
-                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                    data-te-carousel-active
-                    data-te-carousel-item
+                    className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                    style={{ backgroundColor: item?.backgroundColor?.value }}
                   >
-                    <img
-                      src={ele?.data?.image?.value.url}
-                      className="block w-full"
-                      alt="Carousel Image"
-                      id={ele?.data?.title?.value + "_" + index}
+                    <h2
+                      className="text-mcklightyellow lg:mb-3"
+                      id={item?.data?.title?.value}
                       tabIndex={0}
-                    />
-                    <div
-                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                      style={{ backgroundColor: ele?.backgroundColor?.value }}
                     >
-                      <h2
-                        className=" text-mcklightyellow lg:mb-3"
-                        id={ele?.data?.title?.value}
-                        tabIndex={0}
-                      >
-                        {ele?.data?.title?.value}
-                      </h2>
-                      <p
-                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                        dangerouslySetInnerHTML={{
-                          __html: ele?.data?.description?.value,
+                      {item?.data?.title?.value}
+                    </h2>
+                    <p
+                      className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                      dangerouslySetInnerHTML={{
+                        __html: item?.data?.description?.value,
+                      }}
+                      tabIndex={0}
+                      id={item?.data?.description?.value}
+                    ></p>
+                    {item?.data?.buttonText?.value && (
+                      <div
+                        id={item?.data?.buttonText?.value + current}
+                        className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                        style={{
+                          backgroundColor: item?.data?.ctaButtonColor?.value,
                         }}
+                        onClick={() =>
+                          handleCTABtn(item?.data?.buttonUrl?.value)
+                        }
                         tabIndex={0}
-                        id={ele?.data?.description?.value}
-                      ></p>
-                      {ele?.data?.buttonText?.value && (
-                        <div
-                          id={ele?.data?.buttonText?.value + index}
-                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
-                          style={{
-                            backgroundColor: ele?.data?.ctaButtonColor?.value,
-                          }}
-                          onClick={() =>
-                            handleCTABtn(ele?.data?.buttonUrl?.value)
-                          }
-                          tabIndex={0}
-                          role="button"
-                        >
-                          {ele?.data?.buttonText?.value}
-                        </div>
-                      )}
-                    </div>
+                        role="button"
+                      >
+                        {item?.data?.buttonText?.value}
+                      </div>
+                    )}
                   </div>
                 </div>
-              );
-            })}
+              </animated.div>
+            ))}
         </div>
         <div
           className="absolute right-0 bottom-0 left-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
@@ -145,25 +156,25 @@ export default function CarouselComponent({ sectionData }: any) {
         >
           {!loading &&
             response &&
-            response.map((ele: any, index: number) => {
-              return (
-                <button
-                  key={ele?.data?.contentLink?.id + "_" + index}
-                  type="button"
-                  onClick={() => handleCarouselImage(index)}
-                  data-te-target="#carouselExampleCaptions"
-                  data-te-slide-to="0"
-                  data-te-carousel-active
-                  className={`mx-[3px] box-content lg:w-4 xl:w-4 lg:h-4 xl:h-4 w-2 h-2 flex-initial cursor-pointer border-0 border-transparent rounded-full  bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none ${
-                    index == current ? "bg-mckblue" : "bg-mckthingrey"
-                  }`}
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-              );
-            })}
+            response.map((item: any, index: number) => (
+              <button
+                key={item?.data?.contentLink?.id + "_" + index}
+                type="button"
+                onClick={() => handleCarouselImage(index)}
+                data-te-target="#carouselExampleCaptions"
+                data-te-slide-to="0"
+                data-te-carousel-active
+                className={`mx-[3px] box-content lg:w-4 xl:w-4 lg:h-4 xl:h-4 w-2 h-2 flex-initial cursor-pointer border-0 border-transparent rounded-full  bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none ${
+                  index === current ? "bg-mckblue" : "bg-mckthingrey"
+                }`}
+                aria-current={index === current ? "true" : undefined}
+                aria-label={`Slide ${index + 1}`}
+              ></button>
+            ))}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default CarouselComponent;
