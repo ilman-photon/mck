@@ -12,7 +12,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
     }
     return (
         <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
-            {ArticleList?.map((item: any, index: any) => (
+            {ArticleList?ArticleList?.map((item: any, index: any) => (
                 <Link
                     key={index}
                     href={{
@@ -47,7 +47,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                         </figcaption>
                     </article>
                 </Link>
-            ))}
+            )):null}
         </div>
 
     )
