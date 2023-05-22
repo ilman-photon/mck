@@ -51,13 +51,17 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     const interval = setInterval(() => {
       infiniteScroll();
     }, Number(sectionData[0].timeInterval?.value));
+
+    if (current >= response?.length - 1) {
+      clearInterval(interval);
+    }
+
     return () => clearInterval(interval);
   }, [current]);
 
   function handleCarouselImage(index: number) {
     setCurrent(index);
   }
-
   function infiniteScroll() {
     if (current >= response?.length - 1) {
       setCurrent(0);
@@ -76,7 +80,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     from: { opacity: 0, transform: "translateX(100%)" },
     enter: { opacity: 1, transform: "translateX(0%)" },
     leave: { opacity: 0, transform: "translateX(-100%)" },
-    config: { duration: 960 },
+    config: { duration: 1000 },
   });
 
   return (
