@@ -28,7 +28,7 @@ const BlogListContainer = () => {
                         >
                             <article className='shadow-md rounded-lg lg:mb-12 mb-6' >
                                 <figure>
-                                    <img src={item.image.value.url} className='w-full' id={item.image.value.id} />
+                                    <img src={item.image.value.url} className='w-full' alt={item.image.value.url} id={item.image.value.id} />
                                 </figure>
                                 <figcaption>
                                     <div className='content lg:p-6 p-4'>
