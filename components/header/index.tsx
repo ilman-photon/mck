@@ -162,8 +162,9 @@ function HeaderComponent() {
         >
           <img
             id="logo-image"
+            tabIndex={0}
             src={logoSrc}
-            alt="logo"
+            alt="Foster Thrive logo"
             className="lg:mt-7"
             style={isMobile ? undefined : imgWidth}
           />

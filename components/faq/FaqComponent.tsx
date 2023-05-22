@@ -26,7 +26,7 @@ function FaqComponent() {
 
     return (
         <>
-            <div className="four-oh-four faq-container container flex flex-col mx-auto px-0 lg:mt-36 mt-16">
+            <div className="four-oh-four faq-container container flex flex-col mx-auto px-0 lg:mt-36 lg:mt-16">
                 <div className="heading pb-3 text-center" id="faq_label_001">{faqData?.name}</div>
                 <div className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
                     dangerouslySetInnerHTML={{ __html: faqData?.description?.value, }} id="faq_label_002"></div>
@@ -45,7 +45,7 @@ function FaqComponent() {
                 <div className="shade-blue-border w-full lg:mt-6 mt-4 rounded-lg overflow-hidden">
                     <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_005">{faqData?.differentQuestionHeading?.value}</div>
                     <div className="shade-blue-border-top lg:p-6 p-4">
-                        <p className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium" id="faq_label_006">{faqData?.differentQuestionDetails?.value}</p>
+                       tml <p className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium" id="faq_label_006">{faqData?.differentQuestionDetails?.value}</p>
                         <button className="lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase" id="faq_btn_007">{faqData?.differentQuestionCTAText?.value}</button>
                     </div>
                 </div>

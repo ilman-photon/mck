@@ -25,10 +25,11 @@ exports[`renders correctly 1`] = `
     onClick={[Function]}
   >
     <img
-      alt="logo"
+      alt="Foster Thrive logo"
       className="lg:mt-7"
       id="logo-image"
       src="images/logo.png"
+      tabIndex={0}
       style={{}}
     />
   </div>
@@ -49,6 +50,7 @@ exports[`renders correctly 1`] = `
     >
       <button
         aria-label="search-icon"
+        aria-describedby="clikable search item listed"
         className="btn-search w-12 h-12 bg-transparent right-4 absolute cursor-pointer outline-none font-black border-0"
       />
       <input

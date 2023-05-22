@@ -55,7 +55,7 @@ function PdpCarousel(prodViewData: any) {
     }
 
      return (
-        <div className="flex mx-auto lg:h-[636px]">
+        <div className="flex mx-auto lg:h-[636px]" tabIndex={0} role='slider'>
             <div className="flex mx-auto flex-col-reverse lg:flex-row pdp-carousel">
                 <div className="pdp_images flex lg:grid relative">
                 <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
