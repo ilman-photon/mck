@@ -92,7 +92,7 @@ function WhereComponent() {
 
     return isLoaded ? (
         <>
-            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 mt-16">
+            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16">
                 <div className="p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6">
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {
@@ -121,7 +121,7 @@ function WhereComponent() {
                     <GoogleMap
                         mapContainerClassName="map-container"
                         mapContainerStyle={style}
-                        zoom={8}
+                        zoom={10}
                         center={{
                             lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                             lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,

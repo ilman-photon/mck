@@ -464,7 +464,7 @@ function ProductListComponent() {
                     <img
                       id="logo-image"
                       src="images/logo.png"
-                      alt="logo"
+                      alt="Foster Thrive logo"
                       className="mt-1 lg:mt-12 ml-12 desktop:ml-3"
                     />
                     <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 desktop:px-3 items-center">
