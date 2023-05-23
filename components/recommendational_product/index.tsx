@@ -90,9 +90,9 @@ function RecommendationalProductComponent({ sectionData }: any) {
                         <div className="mx-auto my-auto lg:h-60 object-contain">
                           <img
                             className="mx-auto lg:my-auto"
-                            src={ele?.data?.image?.value.url}
+                            src={ele?.data?.image?.value?.url}
                             tabIndex={0}
-                            id={ele?.data?.image?.value.url}
+                            id={ele?.data?.image?.value?.url}
                             alt="promotion image"
                           />
                         </div>
