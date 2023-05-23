@@ -1,4 +1,3 @@
-
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
@@ -65,8 +64,8 @@ function PdpCarousel(prodViewData: any) {
     const a = (imageH: string, idx: number) => `${imageH === `pdp_carousel_${idx}` ? 'bg-green' : 'bg-blue'}`
     
      return (
-        <div className="flex mx-auto lg:h-[636px]">
-            <div className="flex mx-auto flex-col-reverse lg:flex-row pdp-carousel">
+        <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" tabIndex={0} role='slider'>
+            <div className="flex flex-col-reverse lg:flex-row pdp-carousel">
                 <div className="pdp_images flex lg:grid relative">
                 <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
                 <img onClick={handleUpArrowClick} src="images\carousel_top.png" className="m-auto" />
