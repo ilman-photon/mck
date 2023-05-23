@@ -37,22 +37,31 @@ function RecommendationalProductComponent({ sectionData }: any) {
   }, []);
 
   const handleCTABtn = (url: string) => {
-   const tempUrl =url.split('=')[1]
-      const encodedValue = encodeURIComponent(tempUrl);
-      const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
-      router.push(desiredURL);
+    const tempUrl = url.split("=")[1];
+    const encodedValue = encodeURIComponent(tempUrl);
+    const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
+    router.push(desiredURL);
   };
-
   return (
     <div id="promotion-container" className="container mx-auto lg:px-14">
       <div className="pramotion-product-container">
-        <div className="md:grid lg:grid xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 [&>*:nth-last-child(1):nth-child(odd)]:col-span-2">
+        <div className="grid grid-cols-2">
           {!loading &&
             response &&
             response.map((ele: any, index: number) => {
+              let colSpan = "col-span-1";
+              let rowSpan = "";
+
+              if (response.length === 1) {
+                colSpan = "col-span-2";
+              } else if (response.length % 2 === 1 && index === 0) {
+                colSpan = "col-span-1";
+                rowSpan = "row-span-2";
+              }
+
               return (
                 <div
-                  className="bg-color lg:m-3 lg:p-9 p-4 sm:m-3 m-0 mb-4"
+                  className={`bg-color p-4 sm:m-3 mb-4 ${colSpan} ${rowSpan}`}
                   key={ele?.data?.contentLink?.id}
                 >
                   <style jsx>{`
@@ -60,44 +69,71 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       background-color: ${ele?.data?.backgroundColor?.value};
                     }
                   `}</style>
-                  <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
-                    <img
-                      className="h-auto max-w-fit mx-auto w-56 lg:w-80 xl:w-80"
-                      src={ele?.data?.imageTitle?.value?.url}
-                      alt={ele?.data?.imageTitle?.value?.url} tabIndex={0} id={'home-product-image'+index}
-                    />
-                  </div>
-                  <div className="xl:grid lg:grid md:grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-3 my-auto text-justify">
-                    <div className="pb-4 lg:pb-0 col-span-1">
-                      <div className="mx-auto my-auto lg:h-60 object-contain col-span-1">
-                        <img
-                          //id="image"
-                          className="mx-auto lg:my-auto"
-                          src={ele?.data?.image?.value.url} tabIndex={0} id={ele?.data?.image?.value.url} alt="promotion image"
-                        />
+
+                  <div
+                    className={`grid h-full ${
+                      colSpan === "col-span-2" ? "place-items-center" : ""
+                    }`}
+                  >
+                    <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
+                      <img
+                        className="h-auto max-w-fit mx-auto w-56 lg:w-80 xl:w-80"
+                        src={ele?.data?.imageTitle?.value?.url}
+                        alt={ele?.data?.imageTitle?.value?.url}
+                        tabIndex={0}
+                        id={"home-product-image" + index}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-3 my-auto text-justify">
+                      <div className="pb-4 lg:pb-0 col-span-1">
+                        <div className="mx-auto my-auto lg:h-60 object-contain">
+                          <img
+                            className="mx-auto lg:my-auto"
+                            src={ele?.data?.image?.value?.url}
+                            tabIndex={0}
+                            id={ele?.data?.image?.value?.url}
+                            alt="promotion image"
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        id="p-text"
+                        className={`text-justify pr-0 lg:pr-9 col-span-2 ${
+                          colSpan === "col-span-2"
+                            ? "flex justify-center items-center"
+                            : ""
+                        }`}
+                      >
+                        <div
+                          className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left pb-4"
+                          dangerouslySetInnerHTML={{
+                            __html: ele?.data?.description?.value,
+                          }}
+                          tabIndex={0}
+                          id={ele?.data?.description?.value}
+                        ></div>
                       </div>
                     </div>
-                    <div id="p-text" className="text-justify pr-0 lg:pr-9  col-span-2">
+
+                    {ele?.data?.buttonText?.value && (
                       <div
-                        className="text-lg text-sofia-reg text-mcknormalgrey font-normal col-span-2 text-left pb-4"
-                        dangerouslySetInnerHTML={{
-                          __html: ele?.data?.description?.value,
-                        }} tabIndex={0} id={ele?.data?.description?.value}
-                      ></div>
-                    </div>
+                        className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-9 ml-auto"
+                        onClick={() =>
+                          handleCTABtn(ele?.data?.buttonUrl?.value)
+                        }
+                        tabIndex={0}
+                        role="button"
+                        id={ele?.data?.buttonText?.value + index}
+                        style={{
+                          backgroundColor: ele?.data?.buttonColor?.value,
+                        }}
+                      >
+                        {ele?.data?.buttonText?.value}
+                      </div>
+                    )}
                   </div>
-                  {ele?.data?.buttonText?.value ? 
-                    <div
-                      className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 ml-auto"
-                      onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                      tabIndex={0} 
-                      role="button"
-                      id={ele?.data?.buttonText?.value+index}
-                      style={{backgroundColor: ele?.data?.buttonColor?.value}}
-                    >
-                      {ele?.data?.buttonText?.value}
-                    </div>
-                  : null}
                 </div>
               );
             })}
