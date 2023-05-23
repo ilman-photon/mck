@@ -180,7 +180,7 @@ function HealthCareProfessionalComponent() {
 																						{tab?.tabTitle?.value}
 																						{tabStyle[idx]?.svg2}
 																				</label>
-																				<div className="tab px-6 py-4">
+																				<div className="tab py-6 px-6">
 																						<h3 className='text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12' tabIndex={idx} id="hcp-label-009">{tab?.title?.value}</h3>
 																						<div className='text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6' tabIndex={idx} id="hcp-label-010"
 																								dangerouslySetInnerHTML={{__html: tab?.description?.value}}
