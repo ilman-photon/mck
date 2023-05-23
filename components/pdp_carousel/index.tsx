@@ -1,4 +1,3 @@
-
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
@@ -55,8 +54,8 @@ function PdpCarousel(prodViewData: any) {
     }
 
      return (
-        <div className="flex mx-auto lg:h-[636px]" tabIndex={0} role='slider'>
-            <div className="flex mx-auto flex-col-reverse lg:flex-row pdp-carousel">
+        <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" tabIndex={0} role='slider'>
+            <div className="flex flex-col-reverse lg:flex-row pdp-carousel">
                 <div className="pdp_images flex lg:grid relative">
                 <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
                 <img onClick={handleUpArrowClick} src="images\carousel_top.png" className="m-auto" />
@@ -90,7 +89,7 @@ function PdpCarousel(prodViewData: any) {
                 <svg width="24" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"></path></svg></div>
                 </div>
                <div className="lg:w-[526px] box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14">
-                  <img className="lg:w-[270px]" alt="" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[selectedItemIndex]?.url} />
+                  <img alt="" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[selectedItemIndex]?.url} />
                </div>
             </div>
         </div>

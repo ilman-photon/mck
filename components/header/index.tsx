@@ -141,7 +141,7 @@ function HeaderComponent() {
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        className="header flex lg:grid container sticky mx-auto lg:bg-transparent blue-txt bg-mckwhite"
+        className="header flex lg:grid container sticky mx-auto blue-txt bg-mckwhite"
       >
         
         <div className="flex" style={!isMobile ? divHeight : undefined}>

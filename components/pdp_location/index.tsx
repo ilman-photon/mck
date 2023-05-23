@@ -95,8 +95,8 @@ function PdpLocation(props: any) {
     }
 
     return isLoaded ? (
-        <div className="row-span-2 pt-[72px]">
-            <div className="relative">
+        <div className="row-span-2 lg:pt-[72px]">
+            <div className="relative mx-4 lg:mx-0">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
@@ -105,12 +105,12 @@ function PdpLocation(props: any) {
                 <img src="images\search_btn.png" className="absolute left-4 top-4" />
             </div>
             
-            <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
-            <div className="mb-6 h-[300px]" style={{ position: "relative"}}>
+            <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg mx-4 lg:mx-0" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
+            <div className="mb-6 h-[300px] mx-4 lg:mx-0" style={{ position: "relative"}}>
                 <GoogleMap
                     mapContainerClassName="map-container"
                     mapContainerStyle={style}
-                    zoom={8}
+                    zoom={10}
                     center={{
                         lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                         lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,
@@ -165,7 +165,7 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
+            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100 mx-4 lg:mx-0">
             {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
                         <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>

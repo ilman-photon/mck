@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="header flex lg:grid container sticky mx-auto lg:bg-transparent blue-txt bg-mckwhite border-b border-mckblue"
+  className="header flex lg:grid container sticky mx-auto blue-txt bg-mckwhite border-b border-mckblue"
   id="header"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}

@@ -1551,25 +1551,42 @@ footer {
 }
 
 .pdp-details-heading {
-  h1 {
-    line-height: 61px;
-    font-size: 54px;
-
-    span {
+  p{
+    h1 {
       line-height: 61px;
       font-size: 54px;
+      @media screen and (max-width: 1023px) {
+        line-height: 36px;
+        font-size: 32px;
+      }
+      span {
+        line-height: 61px;
+        font-size: 54px;
+        @media screen and (max-width: 1023px) {
+          line-height: 36px;
+          font-size: 32px;
+        }
+      }
+    }
+  
+    h2 {
+      font-size: 36px;
+      line-height: 41px;
+      @media screen and (max-width: 1023px) {
+        line-height: 22px;
+        font-size: 20px;
+      }
+      span {
+        font-size: 36px;
+        font-size: 36px;
+        @media screen and (max-width: 1023px) {
+          line-height: 22px;
+          font-size: 20px;
+        }
+      }
     }
   }
 
-  h2 {
-    font-size: 36px;
-    line-height: 41px;
-
-    span {
-      font-size: 36px;
-      font-size: 36px;
-    }
-  }
   .tab{
     input:checked {
       + .tab-label {
@@ -1689,7 +1706,7 @@ footer {
     line-height: 36px;
   }
   .header {
-    background-color: #FFFAF6B2;
+    // background-color: #FFFAF6B2;
   }
 }
 
