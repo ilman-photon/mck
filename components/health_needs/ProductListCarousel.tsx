@@ -45,7 +45,7 @@ const ProductComponent = ({ selectedProduct }: any) => {
                     >
                       <div
                           onClick={() => handleProductClick(item)}
-                        className="swiper-list-item w-212 rounded-lg border border-[#CCD1E3] mr-1 p-4"
+                        className="swiper-list-item w-212 min-h-480 rounded-lg border border-[#CCD1E3] mr-1 p-4"
                       >
                         <img
                           src={item?.image?.value?.url}
