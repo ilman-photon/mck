@@ -120,9 +120,16 @@ function HealthCareProfessionalComponent() {
 				{
 					response && Object.keys(response).length > 0 && <>
 						<div className='container mx-auto'>
-							<div>
-								<CarouselComponent sectionData={filteredData("CarouselBlock")} />
-							</div>
+							{
+								carouselRelated && carouselRelated?.length > 0 && 
+								<div>
+									{
+										carouselRelated?.length > 1 
+										? <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+										: <Image src={carouselRelated[0]?.image?.expandedValue?.url} height={500} width={500} alt="Health Care Header Banner" className='w-full' id="hcp-img-001" tabIndex={0}></Image>
+									}
+								</div>
+							}
 						</div>
 						<div className='bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6'>
 								<div className='container mx-auto'>
