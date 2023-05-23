@@ -66,6 +66,9 @@
     height: 530px;
   }
   margin-bottom: -85px;
+  @media (max-width: 1025px) {
+    margin-bottom: 0;
+  }  
 }
 
 
