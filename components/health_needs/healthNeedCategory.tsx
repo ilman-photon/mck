@@ -45,17 +45,17 @@ const HealthNeedCategory = ({healthNeedData , selectedFilterItems ,selectedHealt
     }
 
     return(
-        <div className="health-needs-categories p-6 mt-12 bg-gray-200 pb-0" tabIndex={0} id="hn_label_002">
+        <div className="health-needs-categories pt-9 px-1.5 mt-12 pb-0 bg-[#f2f4f9]" tabIndex={0} id="hn_label_002">
         <div className="health-needs-categories-icons">
           <ul className="flex flex-wrap">
             {healthNeedData &&
               healthNeedData?.map((healthneedsdata: any) => (
                 <li
                   key={healthneedsdata?.contentLink?.id} 
-                  className={`text-sofia-reg text-mckblue text-lg text-center grow shrink pl-6 pr-6 pb-6 ${activeIcon === healthneedsdata?.contentLink?.id ? 'active' : ''}`}
+                  className={`text-sofia-reg text-mckblue text-lg text-center flex-auto shrink pl-[30px] pr-[30px] pb-9 ${activeIcon === healthneedsdata?.contentLink?.id ? 'active' : ''}`}
                   onClick={() => handleHealthNeedData(healthneedsdata?.title.value, healthneedsdata)}
                 >
-                  <img src={healthneedsdata?.image?.expandedValue?.url} alt={healthneedsdata?.title.value} />
+                  <img src={healthneedsdata?.image?.expandedValue?.url} alt={healthneedsdata?.title.value} className="mb-3 mx-auto w-auto" />
                   {healthneedsdata?.title.value}
                 </li>
               ))}
