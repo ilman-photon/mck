@@ -126,6 +126,7 @@ function WhyFTComponent() {
             ></p>
             <button
               className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
+              style={{backgroundColor: whyFTData?.contentArea?.expandedValue[4]?.buttonColorCode?.value}}
               id="wft_btn_012"
               aria-label={
                 whyFTData?.contentArea?.expandedValue[4]?.buttonText?.value
@@ -200,6 +201,7 @@ function WhyFTComponent() {
             ></p>
             <button
               className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
+              style={{ backgroundColor: whyFTData?.contentArea?.expandedValue[5]?.buttonColorCode?.value }}
               id="wft_btn_019"
               aria-label={
                 whyFTData?.contentArea?.expandedValue[6]?.buttonText?.value

@@ -120,9 +120,16 @@ function HealthCareProfessionalComponent() {
 				{
 					response && Object.keys(response).length > 0 && <>
 						<div className='container mx-auto'>
-							<div>
-								<CarouselComponent sectionData={filteredData("CarouselBlock")} />
-							</div>
+							{
+								carouselRelated && carouselRelated?.length > 0 && 
+								<div>
+									{
+										carouselRelated?.length > 1 
+										? <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+										: <Image src={carouselRelated[0]?.image?.expandedValue?.url} height={500} width={500} alt="Health Care Header Banner" className='w-full' id="hcp-img-001" tabIndex={0}></Image>
+									}
+								</div>
+							}
 						</div>
 						<div className='bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6'>
 								<div className='container mx-auto'>
@@ -180,7 +187,7 @@ function HealthCareProfessionalComponent() {
 																						{tab?.tabTitle?.value}
 																						{tabStyle[idx]?.svg2}
 																				</label>
-																				<div className="tab px-6 py-4">
+																				<div className="tab py-6 px-6">
 																						<h3 className='text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12' tabIndex={idx} id="hcp-label-009">{tab?.title?.value}</h3>
 																						<div className='text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6' tabIndex={idx} id="hcp-label-010"
 																								dangerouslySetInnerHTML={{__html: tab?.description?.value}}
