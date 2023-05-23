@@ -2,6 +2,8 @@ import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import ActiveProductFilter from "../activeProductFilter";
+import ProductFilter from "../productFilter";
 
 function ResultComponent() {
   const router = useRouter();
@@ -275,6 +277,20 @@ function ResultComponent() {
     setSelectedFilterItems(tempArr);
   };
 
+  function handleClearOne(item: any) {
+    setActiveFilter(
+      activeFilter.filter((filterItem: any) => filterItem !== item)
+    );
+    selectedFilterItems.map((category: any) => {
+      category.isCategoryChecked = false;
+      category.map((sub_category: any) => {
+        if (item == sub_category.name) {
+          sub_category.checked = false;
+        }
+      });
+    });
+  }
+
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -332,55 +348,12 @@ function ResultComponent() {
           <div className="container max-w-7xl mt-8">
             {/* Health needs - Top Active Filter section starts */}
             <section>
-              <div
-                className="flex mb-2 items-center text-mckblue"
-                tabIndex={0}
-                id="sr_label_005"
-              >
-                {activeFiltersData?.activeFiltersText?.value}
-                <img
-                  src={
-                    activeFiltersData?.activeFiltersImage?.expandedValue?.url
-                  }
-                  className="mr-2 ml-2"
-                />
-
-                <div className="flex flex-wrap items-baseline">
-                  {activeFilter?.map((item: any) => {
-                    return (
-                      <div
-                        className="flex rounded-full mck-hn-selected-value"
-                        key={item}
-                      >
-                        {item}&nbsp;
-                        <img
-                          src="/images/hn-delete-icon.svg"
-                          className="mck-filter-delete-icon cursor-pointer"
-                          alt="delete icon"
-                          onClick={() => {
-                            setActiveFilter(
-                              activeFilter.filter(
-                                (filterItem: any) => filterItem !== item
-                              )
-                            );
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                  <div className="flex cursor-pointer ml-2 items-baseline">
-                    {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
-                    <img
-                      src="/images/hn-delete-icon.svg"
-                      className="mck-filter-clearall-icon"
-                      alt="delete icon"
-                    />
-                    <div className="underline" onClick={handleClearAll}>
-                      {activeFiltersData?.clearAllText?.value}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ActiveProductFilter
+                activeFiltersData={activeFiltersData}
+                activeFilter={activeFilter}
+                handleClearOne={handleClearOne}
+                handleClearAll={handleClearAll}
+              />
 
               <div
                 className="text-mcknormalgrey"
@@ -395,141 +368,12 @@ function ResultComponent() {
             {/* Health needs - Left coloumn Filter section starts */}
             <div className="lg:flex md:flex sm-flex flex-none mt-8">
               <div className="flex-none h-max">
-                <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
-                  {/* Left main category lists */}
-                  <div className="flex items-center my-px">
-                    <div>
-                      {productCategoryData &&
-                        productCategoryData?.map((leftfiltermaindata: any) => (
-                          <>
-                            {/* Left filter main category */}
-                            <div
-                              className="flex mb-2"
-                              key={leftfiltermaindata?.contentLink?.id}
-                            >
-                              <img
-                                id={
-                                  leftfiltermaindata?.mainCategory?.value[0]
-                                    .name
-                                }
-                                src={
-                                  leftfiltermaindata?.categoryImage
-                                    ?.expandedValue?.url
-                                }
-                              />
-                              <label
-                                htmlFor="acute"
-                                className="ml-2 filter-title"
-                              >
-                                {
-                                  leftfiltermaindata?.mainCategory?.value[0]
-                                    .name
-                                }
-                              </label>
-                            </div>
-                            {/* Left filter main category */}
-
-                            {/* Left filter sub category */}
-                            <div className="border-b-2 pb-3 mb-2 mck-hn-filter-subcat">
-                              <ul>
-                                <li>
-                                  <div
-                                    className="flex items-center my-px"
-                                    onClick={(e) =>
-                                      handleViewAllChange(
-                                        e,
-                                        leftfiltermaindata?.mainCategory
-                                          ?.value[0].id
-                                      )
-                                    }
-                                  >
-                                    <input
-                                      id={
-                                        leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.name
-                                      }
-                                      name={
-                                        leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.name
-                                      }
-                                      type="checkbox"
-                                      value="view all"
-                                      className="w-4 h-4"
-                                      checked={
-                                        selectedFilterItems[
-                                          leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
-                                        ]?.isCategoryChecked
-                                      }
-                                      defaultChecked={
-                                        selectedFilterItems[
-                                          leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
-                                        ]?.isCategoryChecked
-                                      }
-                                    />
-                                    <label
-                                      htmlFor="mck-view-all"
-                                      className="ml-2 text-mcknormalgrey text-sm"
-                                    >
-                                      View All
-                                    </label>
-                                  </div>
-                                </li>
-                              </ul>
-                              <ul>
-                                {leftfiltermaindata?.subCategory?.value?.map(
-                                  (leftfiltersubdata: any) => (
-                                    <li key={leftfiltersubdata?.id}>
-                                      <div
-                                        className="flex items-center my-px"
-                                        onClick={(e) =>
-                                          handleCheckBox(
-                                            e,
-                                            leftfiltersubdata?.name,
-                                            leftfiltermaindata?.mainCategory
-                                              ?.value[0].id,
-                                            leftfiltersubdata?.id
-                                          )
-                                        }
-                                      >
-                                        <input
-                                          id={leftfiltersubdata?.name}
-                                          type="checkbox"
-                                          value={leftfiltersubdata?.name}
-                                          className="w-4 h-4"
-                                          checked={
-                                            selectedFilterItems[
-                                              leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
-                                          }
-                                          defaultChecked={
-                                            selectedFilterItems[
-                                              leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
-                                          }
-                                        />
-                                        <label
-                                          htmlFor={leftfiltersubdata?.name}
-                                          className="ml-2 text-sm"
-                                        >
-                                          {leftfiltersubdata?.name}
-                                        </label>
-                                      </div>
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                            {/* Left filter sub category */}
-                          </>
-                        ))}
-                    </div>
-                  </div>
-                  {/* Left main category lists */}
-                </div>
+                <ProductFilter
+                  productCategoryData={productCategoryData}
+                  handleViewAllChange={handleViewAllChange}
+                  selectedFilterItems={selectedFilterItems}
+                  handleCheckBox={handleCheckBox}
+                />
               </div>
 
               <div className="flex-auto">
