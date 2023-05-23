@@ -63,7 +63,7 @@ function WhyFTComponent() {
         <div className="relative lg:mb-12 mb-6">
           <img
             src="images/health_journey.png"
-            alt={whyFTData?.contentArea?.expandedValue[2]?.name}
+            alt={whyFTData?.contentArea?.expandedValue[3]?.name}
             id="wft_img_004"
             tabIndex={0}
             className="w-full"
@@ -74,13 +74,13 @@ function WhyFTComponent() {
               id="wft_label_005"
               tabIndex={0}
             >
-              {whyFTData?.contentArea?.expandedValue[2]?.name}
+              {whyFTData?.contentArea?.expandedValue[3]?.name}
             </h2>
             <p
               className="lg:pb-6 pb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey"
               dangerouslySetInnerHTML={{
                 __html:
-                  whyFTData?.contentArea?.expandedValue[2]?.description?.value,
+                  whyFTData?.contentArea?.expandedValue[3]?.description?.value,
               }}
               id="wft_label_006"
               tabIndex={0}
@@ -89,10 +89,11 @@ function WhyFTComponent() {
               className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
               id="wft_btn_007"
               aria-label={
-                whyFTData?.contentArea?.expandedValue[2]?.buttonText?.value
+                whyFTData?.contentArea?.expandedValue[3]?.buttonText?.value
               }
+              style={{backgroundColor: whyFTData?.contentArea?.expandedValue[3]?.buttonColorCode?.value}}
             >
-              {whyFTData?.contentArea?.expandedValue[2]?.buttonText?.value}
+              {whyFTData?.contentArea?.expandedValue[3]?.buttonText?.value}
             </button>
           </div>
         </div>
@@ -106,7 +107,7 @@ function WhyFTComponent() {
           />
         </div>
         <div className="relative lg:mb-12 mb-6">
-          <img src="images/heal and thrive.png" id="wft_img_009" tabIndex={0} />
+          <img src="images/heal and thrive.png" id="wft_img_009" tabIndex={0} alt="heal and thrive" />
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
             <h2
               className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
@@ -130,6 +131,7 @@ function WhyFTComponent() {
               aria-label={
                 whyFTData?.contentArea?.expandedValue[4]?.buttonText?.value
               }
+              style={{backgroundColor: whyFTData?.contentArea?.expandedValue[4]?.buttonColorCode?.value}}
             >
               {whyFTData?.contentArea?.expandedValue[4]?.buttonText?.value}
             </button>
@@ -204,6 +206,7 @@ function WhyFTComponent() {
               aria-label={
                 whyFTData?.contentArea?.expandedValue[6]?.buttonText?.value
               }
+              style={{backgroundColor: whyFTData?.contentArea?.expandedValue[6]?.buttonColorCode?.value}}
             >
               {whyFTData?.contentArea?.expandedValue[6]?.buttonText?.value}
             </button>
