@@ -96,11 +96,68 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           {loading && <p>Loading...</p>}
 
           {!loading &&
-            transitions((styles, item) => (
-              <animated.div
-                className={`container mx-auto ${item ? "block" : "hidden"}`}
-                style={styles}
-                key={item?.data?.contentLink?.id + "_" + current}
+            (response.length > 1 ? (
+              transitions((styles, item) => (
+                <animated.div
+                  className={`container mx-auto ${item ? "block" : "hidden"}`}
+                  style={styles}
+                  key={item?.data?.contentLink?.id + "_" + current}
+                >
+                  <div
+                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                    data-te-carousel-active
+                    data-te-carousel-item
+                  >
+                    <img
+                      src={item?.data?.image?.value.url}
+                      className="block w-full"
+                      alt="Carousel Image"
+                      id={item?.data?.title?.value + "_" + current}
+                      tabIndex={0}
+                    />
+                    <div
+                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                      style={{ backgroundColor: item?.backgroundColor?.value }}
+                    >
+                      <h2
+                        className="text-mcklightyellow lg:mb-3"
+                        id={item?.data?.title?.value}
+                        tabIndex={0}
+                      >
+                        {item?.data?.title?.value}
+                      </h2>
+                      <p
+                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                        dangerouslySetInnerHTML={{
+                          __html: item?.data?.description?.value,
+                        }}
+                        tabIndex={0}
+                        id={item?.data?.description?.value}
+                      ></p>
+                      {item?.data?.buttonText?.value && (
+                        <div
+                          id={item?.data?.buttonText?.value + current}
+                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                          style={{
+                            backgroundColor: item?.data?.ctaButtonColor?.value,
+                          }}
+                          onClick={() =>
+                            handleCTABtn(item?.data?.buttonUrl?.value)
+                          }
+                          tabIndex={0}
+                          role="button"
+                        >
+                          {item?.data?.buttonText?.value}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </animated.div>
+              ))
+            ) : (
+              <div
+                className="container mx-auto block"
+                key={response[0]?.data?.contentLink?.id}
               >
                 <div
                   className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -108,50 +165,53 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   data-te-carousel-item
                 >
                   <img
-                    src={item?.data?.image?.value.url}
+                    src={response[0]?.data?.image?.value.url}
                     className="block w-full"
                     alt="Carousel Image"
-                    id={item?.data?.title?.value + "_" + current}
+                    id={response[0]?.data?.title?.value + "_" + current}
                     tabIndex={0}
                   />
                   <div
                     className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                    style={{ backgroundColor: item?.backgroundColor?.value }}
+                    style={{
+                      backgroundColor: response[0]?.backgroundColor?.value,
+                    }}
                   >
                     <h2
                       className="text-mcklightyellow lg:mb-3"
-                      id={item?.data?.title?.value}
+                      id={response[0]?.data?.title?.value}
                       tabIndex={0}
                     >
-                      {item?.data?.title?.value}
+                      {response[0]?.data?.title?.value}
                     </h2>
                     <p
                       className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                       dangerouslySetInnerHTML={{
-                        __html: item?.data?.description?.value,
+                        __html: response[0]?.data?.description?.value,
                       }}
                       tabIndex={0}
-                      id={item?.data?.description?.value}
+                      id={response[0]?.data?.description?.value}
                     ></p>
-                    {item?.data?.buttonText?.value && (
+                    {response[0]?.data?.buttonText?.value && (
                       <div
-                        id={item?.data?.buttonText?.value + current}
+                        id={response[0]?.data?.buttonText?.value + current}
                         className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                         style={{
-                          backgroundColor: item?.data?.ctaButtonColor?.value,
+                          backgroundColor:
+                            response[0]?.data?.ctaButtonColor?.value,
                         }}
                         onClick={() =>
-                          handleCTABtn(item?.data?.buttonUrl?.value)
+                          handleCTABtn(response[0]?.data?.buttonUrl?.value)
                         }
                         tabIndex={0}
                         role="button"
                       >
-                        {item?.data?.buttonText?.value}
+                        {response[0]?.data?.buttonText?.value}
                       </div>
                     )}
                   </div>
                 </div>
-              </animated.div>
+              </div>
             ))}
         </div>
         <div
