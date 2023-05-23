@@ -46,10 +46,13 @@ function HealthCareProfessionalComponent() {
     const [response, setResponse] = useState<any>()
     const [customers, setCustomers] = useState<any>()
     const [customerReviewTitle, setCustomerReviewTitle] = useState<any>()
+	const [reviewCount, setReviewCount] = useState<number>(1);
     const [descriptionValue, setDescriptionValue] = useState<any>()
     const [carouselRelated, setCarouselRelated] = useState<any>()
     const [tabRelated, setTabRelated] = useState<any>()
     const [tabSelected, setTabSelected] = useState("Key Benefits");
+	const [nextBtn, setNextBtn] = useState<Element>()
+	const [prevBtn, setPrevBtn] = useState<Element>()
     const handleChage = (tabTitle: string) => {
         setTabSelected(tabTitle)
     }
@@ -79,6 +82,26 @@ function HealthCareProfessionalComponent() {
             setCarouselRelated(carouselRelated)
         }
     }, [response])
+	const handleNext = () => {
+		setReviewCount(() => reviewCount + 1)
+		nextBtn?.removeEventListener('click', handleNext, true)
+		prevBtn?.removeEventListener('click', handlePrev, true)
+	}
+	const handlePrev = () => {
+		setReviewCount(() => reviewCount - 1)
+		nextBtn?.removeEventListener('click', handleNext, true)
+		prevBtn?.removeEventListener('click', handlePrev, true)
+	}
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const nextBtn_ = document.getElementsByClassName('swiper-button-next')[0]
+			const prevBtn_ = document.getElementsByClassName('swiper-button-prev')[0]
+			if(nextBtn_ && prevBtn_ && !nextBtn && !prevBtn){
+				setNextBtn(nextBtn_)
+				setPrevBtn(prevBtn_)
+			}
+		}
+	}, [response])
 
 	function filteredData(valueType: string) {
         return response?.contentArea?.expandedValue?.filter((ele: any) => {
@@ -87,7 +110,11 @@ function HealthCareProfessionalComponent() {
             });
         });
     }
-		
+	if(nextBtn && prevBtn){
+		nextBtn.addEventListener('click', handleNext, true) 
+		prevBtn.addEventListener('click', handlePrev, true)
+	}
+
     return (
 			<>
 				{
@@ -106,6 +133,7 @@ function HealthCareProfessionalComponent() {
 												spaceBetween={10}
 												navigation
 												slidesPerView={3}
+												slidesPerGroup={3}
 												className="h-auto"
 											>
 												{
@@ -129,7 +157,7 @@ function HealthCareProfessionalComponent() {
 												}
 											</Swiper>
 									</div>
-									<div className='text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4 pt-18'>2/{Math.ceil(customers?.length)}</div>
+									<div className='text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4 pt-18'>{reviewCount}/{Math.ceil(customers?.length/3)}</div>
 								</div>
 						</div>
 						<div className='container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0'>
