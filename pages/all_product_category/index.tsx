@@ -815,7 +815,6 @@ function AllProductCategoryPage() {
                           role="button"
                           className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
                           onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                          style={{backgroundColor: item?.buttonColor?.value}}
                         >
                           {item?.buttonText?.value || "WHERE TO BUY"}
                         </div>
@@ -1037,7 +1036,6 @@ function AllProductCategoryPage() {
                           role="button"
                           className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
                           onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                          style={{backgroundColor: item?.buttonColor?.value}}
                         >
                           {item?.buttonText?.value || "WHERE TO BUY"}
                         </div>
@@ -1255,7 +1253,6 @@ function AllProductCategoryPage() {
                         role="button"
                         className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
                         onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                        style={{backgroundColor: item?.buttonColor?.value}}
                       >
                         {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
@@ -1467,7 +1464,6 @@ function AllProductCategoryPage() {
                         role="button"
                         className="w-[139px] leading-5 pd-12 h-[44px] lg:m-3 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto lg:mr-9 mx-auto"
                         onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                        style={{backgroundColor: item?.buttonColor?.value}}
                       >
                         {item?.buttonText?.value || "WHERE TO BUY"}
                       </div>
