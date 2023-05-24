@@ -9,7 +9,7 @@ function ActiveProductFilter({
       {activeFiltersData?.activeFiltersText?.value}
       <img
         src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-        className="mr-2 ml-2"
+        className="mr-2 ml-2" alt={activeFiltersData?.activeFiltersText?.value}
       />
 
       <div className="flex flex-wrap items-baseline">
