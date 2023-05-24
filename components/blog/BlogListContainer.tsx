@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useEffect } from "react";
 import useAxios from "@/hooks/useApi";
 import Link from "next/link";
 import { GetTime, HandelURLToId } from "../CommonUtil/time";
@@ -12,6 +13,17 @@ const BlogListContainer = () => {
             "Accept-Language": "en",
         },
     });
+
+    useEffect(() => {
+        // Set the lang attribute to "en" on the <html> element
+        document.documentElement.lang = "en";
+    }, []);
+
+    useEffect(() => {
+        // Set the title of the document dynamically
+        document.title = response?.data[0]?.title.value || "Default Title";
+    }, [JSON.stringify(response)]);
+    
     return (
         <>
             <HeroArticle data={response?.data.results[0]} />
