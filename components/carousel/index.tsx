@@ -80,7 +80,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             (response.length > 1 ? (
               transitions((styles: any, item: any) => (
                 <animated.div
-                  className={`container mx-auto ${item ? "block" : "hidden"}`}
+                  className={`w-full mx-auto ${item ? "block" : "hidden"}`}
                   style={styles}
                   key={item?.contentLink?.id + "_" + current}
                 >
