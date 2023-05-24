@@ -32,6 +32,7 @@ const BlogDetailsComponent = () => {
                         src={response?.data[0]?.image.expandedValue.url}
                         alt={response?.data[0]?.image.expandedValue.name}
                         id={response?.data[0]?.image.expandedValue.name}
+                        style={{ display: response?.data[0]?.image.expandedValue.url ? 'block' : 'none' }}
                     />
                 </div>
                 <div className='grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10'>

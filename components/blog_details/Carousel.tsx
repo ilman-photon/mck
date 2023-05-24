@@ -27,7 +27,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ ProductList, titl
     }
     return (
         <div className='lg:pb-0 lg:p-6 lg:pt-0 pt-0 p-4'>
-            <h3 className='text-gtl-med text-mckblue text-32 font-medium lg:pb-6' dangerouslySetInnerHTML={{ __html: title }}></h3>
+            <h1 className='text-gtl-med text-mckblue text-32 font-medium lg:pb-6' dangerouslySetInnerHTML={{ __html: title }}></h1>
             <div className='grid lg:grid-cols-2 gap-4 lg:relative'>
                 {BlogListingContent?.data.results.map((item1: any, index: any) => (
                     <Link
