@@ -368,7 +368,7 @@ function HealthCareProfessionalComponent() {
           </div>
           <div className="container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0">
             <div
-              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
+              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
               tabIndex={0}
               id="hcp-btn-007"
               dangerouslySetInnerHTML={{ __html: descriptionValue }}
