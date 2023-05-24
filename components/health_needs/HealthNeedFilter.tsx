@@ -110,7 +110,7 @@ const HealthNeedFilter = ({ activeFiltersData,
                         src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
                         className="mr-2 ml-2"
                         tabIndex={0}
-                        id="hn_label_003_1"
+                        id="hn_label_003_1" alt={activeFiltersData?.activeFiltersText?.value}
                     />
 
                     <div
@@ -201,6 +201,8 @@ const HealthNeedFilter = ({ activeFiltersData,
                                                                 leftfiltermaindata?.categoryImage
                                                                     ?.expandedValue?.url
                                                             }
+                                                            alt={leftfiltermaindata?.mainCategory?.value[0]
+                                                                .name}
                                                         />
                                                         <label
                                                             htmlFor={leftfiltermaindata?.mainCategory?.value[0]
@@ -237,7 +239,8 @@ const HealthNeedFilter = ({ activeFiltersData,
                                                                     }
                                                                     type="checkbox"
                                                                     value="view all"
-                                                                    className="w-4 h-4"
+                                                                    className="w-4 h-4 accent-[#001A71]"
+
                                                                     checked={
                                                                         selectedFilterItems[
                                                                             leftfiltermaindata?.mainCategory
@@ -284,7 +287,7 @@ const HealthNeedFilter = ({ activeFiltersData,
                                                                             id={leftfiltersubdata?.name}
                                                                             type="checkbox"
                                                                             value={leftfiltersubdata?.name}
-                                                                            className="w-4 h-4"
+                                                                            className="w-4 h-4 accent-[#001A71]"
                                                                             checked={
                                                                                 selectedFilterItems[
                                                                                     leftfiltermaindata?.mainCategory

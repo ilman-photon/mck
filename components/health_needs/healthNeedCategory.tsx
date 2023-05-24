@@ -54,12 +54,12 @@ const HealthNeedCategory = ({
         tabIndex={0}
         id="hn_label_002"
       >
-        <div className="health-needs-categories-icons flex flex-wrap gap-4">
+        <ul className="health-needs-categories-icons flex flex-wrap gap-4">
           {healthNeedData &&
             healthNeedData?.map((healthneedsdata: any) => (
               <li
                 key={healthneedsdata?.contentLink?.id}
-                className={`list-none text-sofia-reg text-mckblue text-lg text-center flex-auto shrink pl-[30px] pr-[30px] pb-9 ${
+                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-9 ${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
@@ -79,7 +79,7 @@ const HealthNeedCategory = ({
                 {healthneedsdata?.title.value}
               </li>
             ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
