@@ -66,12 +66,17 @@ module.exports = {
       },
       left: {
         36: '36px',
+        18: '-18px',
       },
       top: {
         13: '-13px',
+        124: '124px',
       },
       bottom: {
         13: '-13px',
+      },
+      right: {
+        8: '-8px',
       },
       padding: {
         72: "72px",
@@ -124,7 +129,8 @@ module.exports = {
       lineHeight:{
         linemax: "50px",
         24:"24px",
-        32:"32px"
+        32:"32px",
+        30:"30px",
       },
       border: {
         blue20: "#CCD1E3",
