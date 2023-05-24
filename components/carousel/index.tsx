@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useTransition, animated } from "react-spring";
 
@@ -17,34 +16,16 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
   const dataFetchedRef = useRef(false);
 
-  async function idRequests() {
-    const requests = sectionData[0]?.contentBlockArea?.value?.map(
-      (item: any) => {
-        return axios.get(
-          `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
-        );
-      }
-    );
-
-    try {
-      const responses = await axios.all(requests);
-      setLoading(false);
-      setResponse(responses);
-    } catch (error) {
-      setLoading(true);
-    }
-  }
-
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
-    idRequests();
+    try {
+      setLoading(false);
+      setResponse(sectionData[0]?.contentBlockArea?.expandedValue);
+    } catch (error) {
+      setLoading(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -72,7 +53,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
   const handleCTABtn = (url: string) => {
     router.push({
-      pathname: "",
+      pathname: url,
     });
   };
 
@@ -97,11 +78,11 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
           {!loading &&
             (response.length > 1 ? (
-              transitions((styles, item) => (
+              transitions((styles: any, item: any) => (
                 <animated.div
                   className={`w-full mx-auto ${item ? "block" : "hidden"}`}
                   style={styles}
-                  key={item?.data?.contentLink?.id + "_" + current}
+                  key={item?.contentLink?.id + "_" + current}
                 >
                   <div
                     className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -109,10 +90,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     data-te-carousel-item
                   >
                     <img
-                      src={item?.data?.image?.value.url}
+                      src={item?.image?.value.url}
                       className="block w-full"
                       alt="Carousel Image"
-                      id={item?.data?.title?.value + "_" + current}
+                      id={item?.title?.value + "_" + current}
                       tabIndex={0}
                     />
                     <div
@@ -121,33 +102,31 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     >
                       <h2
                         className="text-mcklightyellow lg:mb-3"
-                        id={item?.data?.title?.value}
+                        id={item?.title?.value}
                         tabIndex={0}
                       >
-                        {item?.data?.title?.value}
+                        {item?.title?.value}
                       </h2>
                       <p
                         className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                         dangerouslySetInnerHTML={{
-                          __html: item?.data?.description?.value,
+                          __html: item?.description?.value,
                         }}
                         tabIndex={0}
-                        id={item?.data?.description?.value}
+                        id={item?.description?.value}
                       ></p>
-                      {item?.data?.buttonText?.value && (
+                      {item?.buttonText?.value && (
                         <div
-                          id={item?.data?.buttonText?.value + current}
+                          id={item?.buttonText?.value + current}
                           className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                           style={{
-                            backgroundColor: item?.data?.ctaButtonColor?.value,
+                            backgroundColor: item?.ctaButtonColor?.value,
                           }}
-                          onClick={() =>
-                            handleCTABtn(item?.data?.buttonUrl?.value)
-                          }
+                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}
                           tabIndex={0}
                           role="button"
                         >
-                          {item?.data?.buttonText?.value}
+                          {item?.buttonText?.value}
                         </div>
                       )}
                     </div>
@@ -157,7 +136,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             ) : (
               <div
                 className="container mx-auto block"
-                key={response[0]?.data?.contentLink?.id}
+                key={response[0]?.contentLink?.id}
               >
                 <div
                   className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -165,10 +144,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   data-te-carousel-item
                 >
                   <img
-                    src={response[0]?.data?.image?.value.url}
+                    src={response[0]?.image?.value.url}
                     className="block w-full"
                     alt="Carousel Image"
-                    id={response[0]?.data?.title?.value + "_" + current}
+                    id={response[0]?.title?.value + "_" + current}
                     tabIndex={0}
                   />
                   <div
@@ -179,34 +158,33 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   >
                     <h2
                       className="text-mcklightyellow lg:mb-3"
-                      id={response[0]?.data?.title?.value}
+                      id={response[0]?.title?.value}
                       tabIndex={0}
                     >
-                      {response[0]?.data?.title?.value}
+                      {response[0]?.title?.value}
                     </h2>
                     <p
                       className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                       dangerouslySetInnerHTML={{
-                        __html: response[0]?.data?.description?.value,
+                        __html: response[0]?.description?.value,
                       }}
                       tabIndex={0}
-                      id={response[0]?.data?.description?.value}
+                      id={response[0]?.description?.value}
                     ></p>
-                    {response[0]?.data?.buttonText?.value && (
+                    {response[0]?.buttonText?.value && (
                       <div
-                        id={response[0]?.data?.buttonText?.value + current}
+                        id={response[0]?.buttonText?.value + current}
                         className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                         style={{
-                          backgroundColor:
-                            response[0]?.data?.ctaButtonColor?.value,
+                          backgroundColor: response[0]?.ctaButtonColor?.value,
                         }}
                         onClick={() =>
-                          handleCTABtn(response[0]?.data?.buttonUrl?.value)
+                          handleCTABtn(response[0]?.buttonUrl?.value)
                         }
                         tabIndex={0}
                         role="button"
                       >
-                        {response[0]?.data?.buttonText?.value}
+                        {response[0]?.buttonText?.value}
                       </div>
                     )}
                   </div>
@@ -222,7 +200,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             response &&
             response.map((item: any, index: number) => (
               <button
-                key={item?.data?.contentLink?.id + "_" + index}
+                key={item?.contentLink?.id + "_" + index}
                 type="button"
                 onClick={() => handleCarouselImage(index)}
                 data-te-target="#carouselExampleCaptions"
