@@ -92,12 +92,12 @@ function WhereComponent() {
 
     return isLoaded ? (
         <>
-            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 mt-16">
+            <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16">
                 <div className="p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6">
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
-                            <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                            <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
                             <div className="flex flex-row justify-between pb-2">
                                 <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
                                     <p className="font-extrabold" tabIndex={0} aria-label="ABC Pharmacy" id="wb-label-003">{value.StoreName}</p>
@@ -108,10 +108,10 @@ function WhereComponent() {
                                 <div className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="wb-label-007">{Number(value.Distance).toFixed(1)} mi</div>
                             </div>
                             <div className="flex flex-row justify-between">
-                                <div className="text-lg font-extrabold text-mckblue text-sofia-bold" tabIndex={0} role="link" id="wb-label-008" onClick={()=>showOnline(value.StoreUrl)}>View Online</div>
+                                <div className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer" tabIndex={0} role="link" id="wb-label-008" onClick={()=>showOnline(value.StoreUrl)}>View Online</div>
                                 <div className="text-lg font-extrabold text-mckblue text-sofia-bold">
                                     <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="wb-img-009" />
-                                    <button className="inline-block relative top-1" tabIndex={0} role="link" id="wb-label-010" onClick={()=>showMapClicked(value.Lat,value.Lon,value.StoreName)}>Get Directions</button>
+                                    <button className="inline-block relative top-1 cursor-pointer" tabIndex={0} role="link" id="wb-label-010" onClick={()=>showMapClicked(value.Lat,value.Lon,value.StoreName)}>Get Directions</button>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ function WhereComponent() {
                     <GoogleMap
                         mapContainerClassName="map-container"
                         mapContainerStyle={style}
-                        zoom={8}
+                        zoom={10}
                         center={{
                             lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                             lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,
@@ -150,7 +150,7 @@ function WhereComponent() {
                                             onCloseClick={() => { setSelectedMarker(null); setSelectedStore(-1) }}
                                         >
                                             <div className="" key={value.id} onClick={() => handleLocationClick(index, value)}>
-                                                <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                                                <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
                                                 <div className="flex">
                                                     <span className="text-sofia-reg text-mcknormalgrey" >
                                                         <span >{value.Address}, </span>
@@ -161,9 +161,9 @@ function WhereComponent() {
                                                 </div>
 
                                                 <div className="flex mt-2">
-                                                    <button className="text-sofia-bold font-extrabold text-mckblue" onClick={()=>showOnline(value.StoreUrl)}>View Online</button>
+                                                    <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer" onClick={()=>showOnline(value.StoreUrl)}>View Online</button>
 
-                                                    <button className="text-sofia-bold font-extrabold text-mckblue ml-auto" onClick={()=>showMapClicked(value.Lat,value.Lon,value.StoreName)}>Get Directions</button>
+                                                    <button className="text-sofia-bold font-extrabold text-mckblue ml-auto cursor-pointer" onClick={()=>showMapClicked(value.Lat,value.Lon,value.StoreName)}>Get Directions</button>
                                                 </div>
                                             </div>
                                         </InfoWindow>

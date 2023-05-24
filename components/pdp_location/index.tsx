@@ -95,8 +95,8 @@ function PdpLocation(props: any) {
     }
 
     return isLoaded ? (
-        <div className="row-span-2 pt-[72px]">
-            <div className="relative">
+        <div className="row-span-2 lg:pt-[72px]">
+            <div className="relative mx-4 lg:mx-0">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
@@ -105,12 +105,12 @@ function PdpLocation(props: any) {
                 <img src="images\search_btn.png" className="absolute left-4 top-4" />
             </div>
             
-            <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
-            <div className="mb-6 h-[300px]" style={{ position: "relative"}}>
+            <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg mx-4 lg:mx-0" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
+            <div className="mb-6 h-[300px] mx-4 lg:mx-0" style={{ position: "relative"}}>
                 <GoogleMap
                     mapContainerClassName="map-container"
                     mapContainerStyle={style}
-                    zoom={8}
+                    zoom={10}
                     center={{
                         lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                         lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,
@@ -140,7 +140,7 @@ function PdpLocation(props: any) {
                                         onCloseClick={() => { setSelectedMarker(null); setSelectedStore(-1) }}
                                     >
                                         <div className="container" key={value.id} onClick={() => handleLocationClick(index, value)}>
-                                            <div className="pb-2">
+                                            <div className="pb-2 cursor-pointer">
                                                 <img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                                             <div className="flex">
                                                 <span className="text-sofia-reg text-mcknormalgrey" >
@@ -152,9 +152,9 @@ function PdpLocation(props: any) {
                                             </div>
 
                                             <div className="flex mt-2">
-                                                <button className="text-sofia-bold font-extrabold text-mckblue" onClick={()=>showOnline(value.StoreUrl)}>View Online</button>
+                                                <button  role="button" className="text-sofia-bold font-extrabold text-mckblue cursor-pointer" aria-pressed="true" onClick={()=>showOnline(value.StoreUrl)}>View Online</button>
 
-                                                <button className="text-sofia-bold font-extrabold text-mckblue ml-auto" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</button>
+                                                <button role="button" className="text-sofia-bold font-extrabold text-mckblue ml-auto cursor-pointer" aria-pressed="true" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</button>
                                             </div>
                                         </div>
                                     </InfoWindow>
@@ -165,10 +165,10 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
+            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100 mx-4 lg:mx-0">
             {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
-                        <div className="pb-2"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
+                        <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="pdp-img-002" /></div>
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
                                 <p tabIndex={0} aria-label="1230 Lindon Ave"  className="leading-5" id="pdp-location-004">{value.Address}, </p>
@@ -178,10 +178,10 @@ function PdpLocation(props: any) {
                             <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 leading-[32px] pr-4" tabIndex={0} aria-label=".3 mi" id="pdp-location-007">{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer" tabIndex={0} role="link" id="pdp-location-008" onClick={()=>showOnline(value.StoreUrl)} >View Online</div>
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 pr-4">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="pdp-img-009" />
-                                <p className="inline-block relative top-1" tabIndex={0} role="link" id="pdp-location-010" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</p>
+                                <p className="inline-block relative top-1 cursor-pointer" tabIndex={0} role="link" id="pdp-location-010" onClick={()=>showMapClicked(value.Lat,value.Lon)}>Get Directions</p>
                             </div>
                         </div>
                     </div>
