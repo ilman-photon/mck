@@ -26,6 +26,17 @@ function WhyFTComponent() {
       .catch((e: Error | AxiosError) => console.log(e));
   }, []);
 
+  useEffect(() => {
+      // Set the lang attribute to "en" on the <html> element
+      document.documentElement.lang = "en";
+  }, []);
+
+  useEffect(() => {
+    // Set the title of the document dynamically
+    document.title =
+      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Default Title";
+  }, [whyFTData]);
+
   function filteredData(valueType: string) {
     return whyFTData?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
