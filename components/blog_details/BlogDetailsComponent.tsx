@@ -24,6 +24,16 @@ const BlogDetailsComponent = () => {
         },
     });
 
+    useEffect(() => {
+        // Set the lang attribute to "en" on the <html> element
+        document.documentElement.lang = "en";
+    }, []);
+
+    useEffect(() => {
+        // Set the title of the document dynamically
+        document.title = response?.data[0]?.title.value || "Default Title";
+    }, [JSON.stringify(response)]);
+
     return (
         <>
             <div className='container w-full lg:px-7 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
