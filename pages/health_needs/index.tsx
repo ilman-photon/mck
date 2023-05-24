@@ -8,11 +8,10 @@ import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
 
 function HealthNeedsPage() {
-  
   // Loading
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
+    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
     headers: {
       "Accept-Language": "en",
     },
@@ -20,7 +19,7 @@ function HealthNeedsPage() {
 
   // filter data to share as props
   function filteredData(valueType: string) {
-    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
+    return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
         return arrEle == valueType;
       });
@@ -40,7 +39,7 @@ function HealthNeedsPage() {
 
   return (
     <>
-      <GoogleTagManager/>
+      <GoogleTagManager />
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}

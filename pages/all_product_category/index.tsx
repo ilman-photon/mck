@@ -1,4 +1,3 @@
-import useAxios from "@/hooks/useApi";
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
@@ -12,37 +11,28 @@ function AllProductCategoryPage() {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
   const [productFilter, setProductFilter] = useState<any>();
-  const [productListData, SetProductListData] = useState<any>();
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
-  
-  const [productCategory, setProductCategory] = useState<any>();
-  const [selectedProduct , setSelectedProduct] =useState<any>([])
-  const [categoryProduct , setCategoryProduct] = useState<any>([])
-  let productName :any =[]
 
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
-    headers: {
-      "Accept-Language": "en",
-    },
-  });
+  const [productCategory, setProductCategory] = useState<any>();
+  const [selectedProduct, setSelectedProduct] = useState<any>([]);
+  const [categoryProduct, setCategoryProduct] = useState<any>([]);
+  const [carouselData, setCarouselData] = useState<any>();
+  let productName: any = [];
 
   function fetchProductList(filter: any) {
-    console.log("in fetch")
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq 'Acute Care')`;
     } else {
       queryParameter = filter;
     }
-    console.log(queryParameter,"queryparam")
-    const query = filter
+
+    const query = filter;
     const regex = /'([^']+)'/g;
     const matches = [...query.matchAll(regex)];
-    const values = matches.map(match => match[1]);
+    const values = matches.map((match) => match[1]);
     const promise = axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
@@ -52,10 +42,10 @@ function AllProductCategoryPage() {
       }
     );
     promise
-    .then((res) => {
-      console.log("FetchProductList----- ", res);  
-    })
-     .catch((e: Error | AxiosError) => console.log(e));
+      .then((res) => {
+        console.log("FetchProductList----- ", res);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
   }
 
   // -------- Health needs page data fetch starts -------- //
@@ -95,6 +85,7 @@ function AllProductCategoryPage() {
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
+      setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
 
       // Four column block area
       const productLandingPage = await axios(
@@ -106,36 +97,36 @@ function AllProductCategoryPage() {
         productLandingPage?.data[0].contentArea?.expandedValue[1]
           ?.contentBlockArea?.expandedValue;
       setProductCategory(productCategoryList);
-      let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1]
-      setCategoryProduct( [tempObj]);
-      productCategoryList?.map((item :any) =>{
-        productName.push(item.productCategoryName.value)
-      })
-    productName?.map((item :any)=>{
-      
-      axios.get(`${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}')`,
-  {
-    headers: {
-      "Accept-Language": "en",
-    },
-  }
-  )
-      .then(res =>{
-        setSelectedProduct((prevSelectedProducts: any) => {
-          const itemExists = prevSelectedProducts.some(
-            (product: any) => product.item.name === item
-          );
-          if (itemExists) {
-            return prevSelectedProducts;
-          }
-          return [
-            ...prevSelectedProducts,
-            { item: { name: item }, data: res.data },
-          ];
-        })
-      })
-      })
-
+      let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
+      setCategoryProduct([tempObj]);
+      productCategoryList?.map((item: any) => {
+        productName.push(item.productCategoryName.value);
+      });
+      productName?.map((item: any) => {
+        axios
+          .get(
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}')`,
+            {
+              headers: {
+                "Accept-Language": "en",
+              },
+            }
+          )
+          .then((res) => {
+            setSelectedProduct((prevSelectedProducts: any) => {
+              const itemExists = prevSelectedProducts.some(
+                (product: any) => product.item.name === item
+              );
+              if (itemExists) {
+                return prevSelectedProducts;
+              }
+              return [
+                ...prevSelectedProducts,
+                { item: { name: item }, data: res.data },
+              ];
+            });
+          });
+      });
     };
 
     fetchData();
@@ -174,7 +165,6 @@ function AllProductCategoryPage() {
     setSelectedFilterItems(tempArr);
   };
 
-
   // Get & display checkbox value - From Sub category list
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
@@ -210,7 +200,6 @@ function AllProductCategoryPage() {
             const categoryName = selectedFilterItems[catId].categoryName;
             const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
-            //console.log(selectedViewAllCateory, minCategoryCnt)
             const joinedCond =
               selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
             const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
@@ -231,7 +220,7 @@ function AllProductCategoryPage() {
     fetchCategoryId()
       .then((res) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
-        let categoryIds = axios.get(
+        return axios.get(
           `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
           {
             headers: {
@@ -274,35 +263,25 @@ function AllProductCategoryPage() {
     );
   }
 
-  
-
-  function filteredData(valueType: string) {
-    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
-      return ele.contentType.some((arrEle: string) => {
-        return arrEle == valueType;
-      });
-    });
-  }
-
-
   return (
     <>
       <GoogleTagManager />
       <HeaderComponent />
-      {!loading && !error && response && (
-        <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-      )}
-    {categoryProduct &&  <CategoryComponent sectionData={categoryProduct} />}
+      {carouselData && <CarouselComponent sectionData={carouselData} />}
+      {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1">
-        <HealthNeedFilter activeFiltersData={activeFiltersData} 
-        activeFilter ={activeFilter} setActiveFilter={setActiveFilter} 
-        productCategoryData ={productCategoryData}
-        selectedFilterItems ={selectedFilterItems}
-        selectedProduct= {selectedProduct}
-        setSelectedFilterItems = {setSelectedFilterItems}
-        selectedViewAllCateory = {selectedViewAllCateory}
-        fetchProductList={fetchProductList}/>
+        <HealthNeedFilter
+          activeFiltersData={activeFiltersData}
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+          productCategoryData={productCategoryData}
+          selectedFilterItems={selectedFilterItems}
+          selectedProduct={selectedProduct}
+          setSelectedFilterItems={setSelectedFilterItems}
+          selectedViewAllCateory={selectedViewAllCateory}
+          fetchProductList={fetchProductList}
+        />
       </div>
       <FooterComponent />
     </>
