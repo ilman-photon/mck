@@ -34,8 +34,9 @@ function ResultComponent() {
     } else {
       queryParameter = filter;
     }
+    const StringParam=router.query.search?.toString().toLowerCase()
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${router.query.search}') or contains(tolower(description/value), '${router.query.search}') or contains(tolower(title/value), '${router.query.search}') or contains(tolower(name), '${router.query.search}') or contains(tolower(highlightDescription/value), '${router.query.search}'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
 
       {
         headers: {
