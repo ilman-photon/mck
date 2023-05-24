@@ -41,7 +41,7 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-        <html lang="en"/>
+        <html lang="en" />
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +51,7 @@ export default function Home() {
         {/* <CookiesComponent /> */}
         {isLoading && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="fixed inset-0 bg-black opacity-50"></div>
+            <div className="fixed inset-0 bg-black opacity-75"></div>
             <div
               className="relative"
               style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
