@@ -2236,3 +2236,17 @@ Video Player Code
 		}
 	}
 }
+/** health needs Mobile carousel style **/
+
+.carousel-controls {
+  .left-btn, .right-btn {
+    background-image: url('../public/images/product-carousel-left.svg');
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .right-btn {
+    background-image: url('../public/images/product-carousel-right.svg');
+  }
+}
