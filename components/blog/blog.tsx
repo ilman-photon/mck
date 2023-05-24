@@ -100,7 +100,7 @@ function BlogComponent() {
                   loading="eager"
                 />
               </div>
-            </div> // Render a loading indicator while data is being fetched
+            </div>
           ) : (
             (() => {
               switch (currentScreen) {

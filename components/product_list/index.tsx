@@ -3,7 +3,8 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import ProductFilter from "@/components/productFilter";
 import ActiveProductFilter from "@/components/activeProductFilter";
-
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import Image from "next/image";
 function ProductListComponent() {
   const router = useRouter();
   const [productListData, SetProductListData] = useState<any>();
@@ -11,9 +12,11 @@ function ProductListComponent() {
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state variable
 
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq '${router.query.filter}')`;
@@ -33,7 +36,10 @@ function ProductListComponent() {
         // console.log("FetchProductList----- ", res);
         SetProductListData(res);
       })
-      .catch((e: Error | AxiosError) => console.log(e));
+      .catch((e: Error | AxiosError) => console.log(e))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -265,6 +271,24 @@ function ProductListComponent() {
   };
   return (
     <>
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            <Image
+              src={gifImage}
+              alt="coba-image"
+              width={400}
+              height={400}
+              loading="eager"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
         <div className="container lg:mt-8 mt-6 px-4 lg:px-4 xl:px-0">
           {/* Health needs - Top Active Filter section starts */}
