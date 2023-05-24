@@ -34,7 +34,7 @@ function ResultComponent() {
     } else {
       queryParameter = filter;
     }
-    const StringParam=router.query.search?.toString().toLowerCase()
+    const StringParam = router.query.search?.toString().toLowerCase();
     const promise = axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
 
@@ -355,14 +355,6 @@ function ResultComponent() {
                 handleClearOne={handleClearOne}
                 handleClearAll={handleClearAll}
               />
-
-              <div
-                className="text-mcknormalgrey"
-                tabIndex={0}
-                id="sr_label_006"
-              >
-                {activeFiltersData?.showResultsText?.value}
-              </div>
             </section>
             {/* Health needs - Top Active Filter section starts */}
 
