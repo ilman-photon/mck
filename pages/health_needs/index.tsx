@@ -8,7 +8,6 @@ import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
 
 function HealthNeedsPage() {
-  
   // Loading
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -40,7 +39,7 @@ function HealthNeedsPage() {
 
   return (
     <>
-      <GoogleTagManager/>
+      <GoogleTagManager />
       <HeaderComponent />
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}

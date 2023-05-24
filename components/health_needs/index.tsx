@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import HealthNeedCategory from "./healthNeedCategory";
 import HealthNeedFilter from "./HealthNeedFilter";
 import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
-
+import Image from "next/image";
+import gifImage from "./FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 const HealthNeedsComponent = () => {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<any>([]);
@@ -14,6 +15,8 @@ const HealthNeedsComponent = () => {
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [selectedHealthNeed, setSelectedHealthNeed] = useState<any>([]);
   const [healthData, setHealthData] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); //
+  const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
 
   function FetchProductFilter() {
     return axios.get(
@@ -40,6 +43,7 @@ const HealthNeedsComponent = () => {
 
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    setIsLoading(true);
     if (filter.length > 0) {
       const query = filter.match(/eq '(.*)'/);
       const queryParams = { filter: query[1] };
@@ -114,7 +118,11 @@ const HealthNeedsComponent = () => {
           setSelectedProduct(productArray);
         }
       })
-      .catch((e: Error | AxiosError) => console.log(e));
+      .catch((e: Error | AxiosError) => console.log(e))
+      .finally(() => {
+        // Mengatur state isLoading menjadi false setelah selesai memuat data atau terjadi kesalahan
+        setIsLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -127,6 +135,23 @@ const HealthNeedsComponent = () => {
       .catch((e: Error | AxiosError) => console.log(e));
 
     fetchProductList("");
+  }, []);
+
+  useEffect(() => {
+    // Mengatur loading progress secara berkala
+    const interval = setInterval(() => {
+      setLoadingProgress((prevProgress) => {
+        const newProgress = prevProgress + 10;
+        if (newProgress === 100) {
+          clearInterval(interval);
+        }
+        return newProgress;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   // Get & display checkbox value - From Sub category list
@@ -329,6 +354,14 @@ const HealthNeedsComponent = () => {
 
   return (
     <>
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-30"></div>
+          <div className="relative">
+            <Image src={gifImage} alt="coba-image" />{" "}
+          </div>
+        </div>
+      )}
       <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
         <HealthNeedCategory
           healthNeedData={healthNeedData}
