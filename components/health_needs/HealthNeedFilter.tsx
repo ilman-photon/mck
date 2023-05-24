@@ -237,7 +237,8 @@ const HealthNeedFilter = ({ activeFiltersData,
                                                                     }
                                                                     type="checkbox"
                                                                     value="view all"
-                                                                    className="w-4 h-4"
+                                                                    className="w-4 h-4 accent-[#001A71]"
+
                                                                     checked={
                                                                         selectedFilterItems[
                                                                             leftfiltermaindata?.mainCategory
@@ -284,7 +285,7 @@ const HealthNeedFilter = ({ activeFiltersData,
                                                                             id={leftfiltersubdata?.name}
                                                                             type="checkbox"
                                                                             value={leftfiltersubdata?.name}
-                                                                            className="w-4 h-4"
+                                                                            className="w-4 h-4 accent-[#001A71]"
                                                                             checked={
                                                                                 selectedFilterItems[
                                                                                     leftfiltermaindata?.mainCategory
