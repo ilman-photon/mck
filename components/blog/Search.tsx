@@ -9,11 +9,11 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, handle
     const [searchData, setSearchData] = useState<string>();
     const fetchSearchBlog = async () => {
         const SearchResult = await axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), ${searchData}) or contains(tolower(description/value), ${searchData}))&expand=*`, { headers: { 'Accept-Language': 'en' } },
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), ${searchData?.toLowerCase()}) or contains(tolower(description/value), ${searchData?.toLowerCase()}))&expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
         handleClick(SearchResult.data.results, searchData)
     };
-  
+
 
     return (
         <>
