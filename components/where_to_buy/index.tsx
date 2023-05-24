@@ -97,18 +97,18 @@ function WhereComponent() {
                     <div className="pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg" tabIndex={0} aria-label="Disclaimer" id="wb-label-001">Disclaimer: Products are subject to availability</div>
                     {responseValue?.map((value: any, index: Number) => {
                         return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-4 mb-4"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
-                            <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                            <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id={`wb-img-00`+index} /></div>
                             <div className="flex flex-row justify-between pb-2">
                                 <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
-                                    <p className="font-extrabold" tabIndex={0} aria-label="ABC Pharmacy" id="wb-label-003">{value.StoreName}</p>
-                                    <p tabIndex={0} aria-label="1230 Lindon Ave" id="wb-label-004">{value.Address}, </p>
-                                    <p tabIndex={0} aria-label="DENVER, CO. 80202" id="wb-label-005">{value.City} {value.Zip}</p>
-                                    <p tabIndex={0} aria-label="303-571-5314" id="wb-label-006">{value.Phone}</p>
+                                    <p className="font-extrabold" tabIndex={0} aria-label="ABC Pharmacy" id={`wb-label-00`+index}>{value.StoreName}</p>
+                                    <p tabIndex={0} aria-label="1230 Lindon Ave" id={`wb-label-00`+index}>{value.Address}, </p>
+                                    <p tabIndex={0} aria-label="DENVER, CO. 80202" id={`wb-label-00`+index}>{value.City} {value.Zip}</p>
+                                    <p tabIndex={0} aria-label="303-571-5314" id={`wb-label-00`+index} >{value.Phone}</p>
                                 </div>
-                                <div className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id="wb-label-007">{Number(value.Distance).toFixed(1)} mi</div>
+                                <div className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey" tabIndex={0} aria-label=".3 mi" id={`wb-label-00`+index}>{Number(value.Distance).toFixed(1)} mi</div>
                             </div>
                             <div className="flex flex-row justify-between">
-                                <div className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer" tabIndex={0} role="link" id="wb-label-008" onClick={()=>showOnline(value.StoreUrl)}>View Online</div>
+                                <div className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer" tabIndex={0} role="link" id={`wb-label-00`+index} onClick={()=>showOnline(value.StoreUrl)}>View Online</div>
                                 <div className="text-lg font-extrabold text-mckblue text-sofia-bold">
                                     <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" tabIndex={0} id="wb-img-009" />
                                     <button className="inline-block relative top-1 cursor-pointer" tabIndex={0} role="link" id="wb-label-010" onClick={()=>showMapClicked(value.Lat,value.Lon,value.StoreName)}>Get Directions</button>
@@ -150,7 +150,7 @@ function WhereComponent() {
                                             onCloseClick={() => { setSelectedMarker(null); setSelectedStore(-1) }}
                                         >
                                             <div className="" key={value.id} onClick={() => handleLocationClick(index, value)}>
-                                                <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id="wb-img-002" /></div>
+                                                <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" tabIndex={0} id={`wb-img-00`+index} /></div>
                                                 <div className="flex">
                                                     <span className="text-sofia-reg text-mcknormalgrey" >
                                                         <span >{value.Address}, </span>

@@ -24,6 +24,16 @@ const BlogDetailsComponent = () => {
         },
     });
 
+    useEffect(() => {
+        // Set the lang attribute to "en" on the <html> element
+        document.documentElement.lang = "en";
+    }, []);
+
+    useEffect(() => {
+        // Set the title of the document dynamically
+        document.title = response?.data[0]?.title.value || "Default Title";
+    }, [JSON.stringify(response)]);
+
     return (
         <>
             <div className='container w-full lg:px-7 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
@@ -32,6 +42,7 @@ const BlogDetailsComponent = () => {
                         src={response?.data[0]?.image.expandedValue.url}
                         alt={response?.data[0]?.image.expandedValue.name}
                         id={response?.data[0]?.image.expandedValue.name}
+                        style={{ display: response?.data[0]?.image.expandedValue.url ? 'block' : 'none' }}
                     />
                 </div>
                 <div className='grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10'>

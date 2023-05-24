@@ -26,12 +26,17 @@ const SocialMediaIconComponent = () => {
                     rel="stylesheet"
                     href={item?.socialMediaUrl.value}
                     key={item?.contentLink?.id}
-                    id={item?.contentLink?.id}
+                    id={`link-${index}${item?.contentLink?.id}`}
+                    aria-label={item?.socialMediaUrl?.value}
                 >
-                    <img src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url} alt={item?.socialMediaImage?.expandedValue?.altText?.value}></img>
+                    <img
+                        src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url}
+                        alt={item?.socialMediaImage?.expandedValue?.altText?.value}
+                    />
                 </Link>
             ))}
         </div>
     );
-}
+};
+
 export default memo(SocialMediaIconComponent);

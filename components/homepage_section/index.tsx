@@ -64,8 +64,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
       {sectionData.video?.value?.url ? (
         <div
           id="learning-section"
-          className={`${
-            sectionData?.assetPosition?.value === "Right"
+          className={`${sectionData?.assetPosition?.value === "Right"
               ? "flex-row-reverse text-center"
               : "text-left"
             } container mx-auto grid lg:flex w-full lg:py-6 mb-6`}
@@ -282,7 +281,20 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
 
           </div>
         </div>
-      ) : null}
+      ) : <div
+        className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto`}
+        key={sectionData?.contentLink?.id}
+      >
+        <h3
+          className="text-2xl lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center" tabIndex={0} id={sectionData?.title?.value}
+        >
+          {sectionData?.title?.value}
+        </h3>
+        <div
+          className={`mx-auto w-full lg:${'w-1/2'} px-3 text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt  `}
+          dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }} tabIndex={0} id={sectionData?.description?.value}
+        ></div>
+      </div>}
     </div>
   );
 }
