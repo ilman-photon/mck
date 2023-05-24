@@ -2,8 +2,9 @@ import useAxios from "../../hooks/useApi";
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import HealthNeedCategory from "./healthNeedCategory"
+import HealthNeedCategory from "./healthNeedCategory";
 import HealthNeedFilter from "./HealthNeedFilter";
+import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 
 const HealthNeedsComponent = () => {
   const router = useRouter();
@@ -11,8 +12,8 @@ const HealthNeedsComponent = () => {
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
-  const [selectedHealthNeed , setSelectedHealthNeed] = useState<any>([]);
-  const [healthData , setHealthData] = useState(false)
+  const [selectedHealthNeed, setSelectedHealthNeed] = useState<any>([]);
+  const [healthData, setHealthData] = useState(false);
 
   function FetchProductFilter() {
     return axios.get(
@@ -39,41 +40,37 @@ const HealthNeedsComponent = () => {
 
   // Right section product carousel data
   function fetchProductList(filter: any) {
-    if(filter.length >0){
-      const query  = filter.match(/eq '(.*)'/);
+    if (filter.length > 0) {
+      const query = filter.match(/eq '(.*)'/);
       const queryParams = { filter: query[1] };
-    router.push({
-      pathname: '/health_needs',
-      query: queryParams,
-    });
-    }
-    else{
       router.push({
-        pathname: '/health_needs'
+        pathname: "/health_needs",
+        query: queryParams,
+      });
+    } else {
+      router.push({
+        pathname: "/health_needs",
       });
     }
-    
-    const query = filter
+
+    const query = filter;
     const regex = /'([^']+)'/g;
     const matches = [...query.matchAll(regex)];
-    const values = matches.map(match => match[1]);
+    const values = matches.map((match) => match[1]);
 
-
-    let queryParameter = '';
-    if (filter === '') {
+    let queryParameter = "";
+    if (filter === "") {
       queryParameter = `(productType/value/name eq 'Acute Care')`;
       // queryParameter = `(healthNeeds/value/name eq 'Bone')`;
-
     } else {
-      if(filter.includes('healthNeeds')){
+      if (filter.includes("healthNeeds")) {
         queryParameter = filter;
+      } else {
+        queryParameter =
+          filter + " or ContentType/any(t:t eq 'ProductDetailsPage')";
       }
-      else{
-        queryParameter = filter + " or ContentType/any(t:t eq 'ProductDetailsPage')"
-      }
-      
     }
-   
+
     const promise = axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter})`,
       // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
@@ -86,57 +83,51 @@ const HealthNeedsComponent = () => {
     promise
       .then((res) => {
         console.log("FetchProductList----- ", res);
-        let tempObj : any ={}
-        if(filter.includes('Health%20Needs')){
-          setHealthData(!healthData)
+        let tempObj: any = {};
+        if (filter.includes("Health%20Needs")) {
+          setHealthData(!healthData);
+        } else {
+          res.data.results.map((item: any) => {
+            values.map((key) => {
+              let tempArray = item.healthNeeds.value.filter(
+                (healthNeeds: any) => healthNeeds.name === key
+              );
+
+              if (tempArray.length === 1) {
+                if (tempObj[key]) {
+                  let categoryArray: any = tempObj[key];
+                  categoryArray.push(item);
+                  tempObj[key] = categoryArray;
+                } else {
+                  tempObj[key] = [item];
+                }
+              }
+            });
+          });
+          let productArray: any = [];
+          values.map((key) => {
+            productArray.push({
+              item: { name: key },
+              data: { results: tempObj[key] },
+            });
+          });
+          setSelectedProduct(productArray);
         }
-        else{     
-        res.data.results.map((item : any)=>{
-        values.map( key =>{
-            let tempArray = item.healthNeeds.value.filter( (healthNeeds :any) => healthNeeds.name === key )
-
-            if(tempArray.length === 1){
-              if(tempObj[key]){
-                let categoryArray : any = tempObj[key]
-                categoryArray.push(item)
-                tempObj[key] = categoryArray
-
-              }
-              else{
-                tempObj[key] = [item]
-              }
-              
-            }
-
-          })
-        })
-        let productArray : any =[]
-        values.map(key =>{
-          
-          productArray.push({ item :{name : key}, data : {results:tempObj[key]}})
-        })
-        setSelectedProduct(productArray)  
-      }  
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
 
   useEffect(() => {
     FetchProductFilter()
-      .then((res) => {
-      
-      })
+      .then((res) => {})
       .catch((e) => console.log(e));
 
     fetchRecommandedProduct()
-      .then((res) => {
-      
-      })
+      .then((res) => {})
       .catch((e: Error | AxiosError) => console.log(e));
 
     fetchProductList("");
   }, []);
-
 
   // Get & display checkbox value - From Sub category list
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
@@ -160,56 +151,55 @@ const HealthNeedsComponent = () => {
     createQueryParameters();
   }, [activeFilter]);
 
-    const createQueryParameters = () => {
-        let queryParams = "";
-        if (selectedFilterItems.length > 0) {
-            let lastCatId = 0;
-            let minCategoryCnt = 0;
-            let minSubCategoryCnt = 0;
-            selectedFilterItems.map((category: any, catId: any) => {
-                if (!category.isCategoryChecked && category.items.length > 0) {
-                    if (lastCatId > 0 && lastCatId != catId) {
-                        queryParams += ' or ';
-                    }
-                    queryParams += '(';
-                    category.items.map((item: any, index: any) => {
-                        const itemName = item.replace(/[^a-zA-Z ]/g, "");
-                        const encodeItemName = encodeURI(itemName);
-                        const concatStr = (category.items.length === (index + 1)) ? '' : ' and ';
-                        queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
-                    });
-                    
-                    minSubCategoryCnt += category.items.length;
-                    queryParams += `)`;
-                    lastCatId = catId;
-                } else {
-                    minCategoryCnt += category.isCategoryChecked;
-                    if (category.isCategoryChecked) {
-                        const categoryName = selectedFilterItems[catId].categoryName;
-                        const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-                        const encodeItemName = encodeURI(itemName);
-                        const joinedCond = (selectedViewAllCateory.length === minCategoryCnt) ? '' : 'and ';
-                        const beforeCond = (minSubCategoryCnt > 0) ? ' and ' : '';
-                        queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-                    }
-                }
-            });
+  const createQueryParameters = () => {
+    let queryParams = "";
+    if (selectedFilterItems.length > 0) {
+      let lastCatId = 0;
+      let minCategoryCnt = 0;
+      let minSubCategoryCnt = 0;
+      selectedFilterItems.map((category: any, catId: any) => {
+        if (!category.isCategoryChecked && category.items.length > 0) {
+          if (lastCatId > 0 && lastCatId != catId) {
+            queryParams += " or ";
+          }
+          queryParams += "(";
+          category.items.map((item: any, index: any) => {
+            const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURI(itemName);
+            const concatStr =
+              category.items.length === index + 1 ? "" : " and ";
+            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
+          });
 
-            if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-                queryParams = "";
-            }
+          minSubCategoryCnt += category.items.length;
+          queryParams += `)`;
+          lastCatId = catId;
+        } else {
+          minCategoryCnt += category.isCategoryChecked;
+          if (category.isCategoryChecked) {
+            const categoryName = selectedFilterItems[catId].categoryName;
+            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURI(itemName);
+            const joinedCond =
+              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
+            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
+            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
+          }
         }
-        
-        
-        if (queryParams)
-            fetchProductList(queryParams);
-        else{        
-            router.push({
-              pathname: '/health_needs',
-            });         
-        }
+      });
+
+      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+        queryParams = "";
+      }
     }
 
+    if (queryParams) fetchProductList(queryParams);
+    else {
+      router.push({
+        pathname: "/health_needs",
+      });
+    }
+  };
 
   // -------- Health needs page data fetch starts -------- //
   const [healthNeedData, setHealthNeedData] = useState<any>();
@@ -247,61 +237,62 @@ const HealthNeedsComponent = () => {
       const productCategoryDataList =
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
       setproductCategoryData(productCategoryDataList);
-      createTempFilterArr(productCategoryDataList);  
+      createTempFilterArr(productCategoryDataList);
       const subCategories = productCategoryDataList[0].subCategory.value;
-const mainCategory = productCategoryDataList[0].mainCategory.value[0];
+      const mainCategory = productCategoryDataList[0].mainCategory.value[0];
 
-subCategories.forEach((subCat :any) => {
-  const name = subCat.name;
-  const catId = mainCategory.id;
-  const subCatId = subCat.id;
-  
-  selectedHealthNeed[name] = { cat_id: catId, sub_cat_id: subCatId };
-});
+      subCategories.forEach((subCat: any) => {
+        const name = subCat.name;
+        const catId = mainCategory.id;
+        const subCatId = subCat.id;
 
-setSelectedHealthNeed(selectedHealthNeed);
+        selectedHealthNeed[name] = { cat_id: catId, sub_cat_id: subCatId };
+      });
+
+      setSelectedHealthNeed(selectedHealthNeed);
     };
 
     fetchData();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
-    const healthNeedsCategories = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
-    );
-    const healthNeedsCategoriesList =
-      healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
-        (categoryList: any) => categoryList.name === "Health Need Highlights"
+      const healthNeedsCategories = await axios.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
+      const healthNeedsCategoriesList =
+        healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
+          (categoryList: any) => categoryList.name === "Health Need Highlights"
+        );
 
-    const healthNeedsCategoriesListData =
-      healthNeedsCategoriesList.length > 0
-        ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
-        : [];
-     
-    healthNeedsCategoriesListData?.map((item :any)=>{
-      const text = item.name;
-      const correctText = text.replace(/&/g, "");
-      axios.get(`${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
-  {
-    headers: {
-      "Accept-Language": "en",
-    },
-  }
-  )
-      .then(res =>{
-        setSelectedProduct((prevSelectedProducts :any) => [
-          ...prevSelectedProducts,
-          { item, data: res.data },
-        ]);
-      })
-      })
+      const healthNeedsCategoriesListData =
+        healthNeedsCategoriesList.length > 0
+          ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
+          : [];
+
+      healthNeedsCategoriesListData?.map((item: any) => {
+        const text = item.name;
+        const correctText = text.replace(/&/g, "");
+        axios
+          .get(
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
+            {
+              headers: {
+                "Accept-Language": "en",
+              },
+            }
+          )
+          .then((res) => {
+            setSelectedProduct((prevSelectedProducts: any) => [
+              ...prevSelectedProducts,
+              { item, data: res.data },
+            ]);
+          });
+      });
     };
 
     fetchData();
-  },[healthData])
- 
+  }, [healthData]);
 
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
@@ -339,23 +330,38 @@ setSelectedHealthNeed(selectedHealthNeed);
   return (
     <>
       <div className="mck-health-needs-page container w-full mx-auto grid grid-cols-1">
-
-        <HealthNeedCategory healthNeedData ={healthNeedData} 
-        selectedFilterItems={selectedFilterItems}
-        selectedHealthNeed ={selectedHealthNeed}
-        setActiveFilter={setActiveFilter}
-        activeFilter = {activeFilter}
-        productCategoryData={productCategoryData?.length && productCategoryData[0]}
+        <HealthNeedCategory
+          healthNeedData={healthNeedData}
+          selectedFilterItems={selectedFilterItems}
+          selectedHealthNeed={selectedHealthNeed}
+          setActiveFilter={setActiveFilter}
+          activeFilter={activeFilter}
+          productCategoryData={
+            productCategoryData?.length && productCategoryData[0]
+          }
+        />
+        <HealthNeedCategoryMobile
+          healthNeedData={healthNeedData}
+          selectedFilterItems={selectedFilterItems}
+          selectedHealthNeed={selectedHealthNeed}
+          setActiveFilter={setActiveFilter}
+          activeFilter={activeFilter}
+          productCategoryData={
+            productCategoryData?.length && productCategoryData[0]
+          }
         />
 
-        <HealthNeedFilter activeFiltersData={activeFiltersData} 
-        activeFilter ={activeFilter} setActiveFilter={setActiveFilter} 
-        productCategoryData ={productCategoryData}
-        selectedFilterItems ={selectedFilterItems}
-        selectedProduct= {selectedProduct}
-        setSelectedFilterItems = {setSelectedFilterItems}
-        selectedViewAllCateory = {selectedViewAllCateory}
-        fetchProductList={fetchProductList}/>
+        <HealthNeedFilter
+          activeFiltersData={activeFiltersData}
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+          productCategoryData={productCategoryData}
+          selectedFilterItems={selectedFilterItems}
+          selectedProduct={selectedProduct}
+          setSelectedFilterItems={setSelectedFilterItems}
+          selectedViewAllCateory={selectedViewAllCateory}
+          fetchProductList={fetchProductList}
+        />
       </div>
     </>
   );
