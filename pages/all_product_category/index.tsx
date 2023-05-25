@@ -19,6 +19,7 @@ function AllProductCategoryPage() {
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [categoryProduct, setCategoryProduct] = useState<any>([]);
   const [carouselData, setCarouselData] = useState<any>();
+  let selectedCategoryName :any =[]
   let productName: any = [];
 
   function fetchProductList(filter: any) {
@@ -34,7 +35,7 @@ function AllProductCategoryPage() {
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -44,6 +45,13 @@ function AllProductCategoryPage() {
     promise
       .then((res) => {
         console.log("FetchProductList----- ", res);
+        selectedProduct.forEach((item: any)=> {
+          if (selectedCategoryName.includes(item.item.name)) {
+            item.data = { ...item.data, ...res };
+          }
+        });
+        setSelectedProduct(selectedProduct)
+        
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -105,7 +113,7 @@ function AllProductCategoryPage() {
       productName?.map((item: any) => {
         axios
           .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}')`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}' and ContentType/any(t:t eq 'ProductDetailsPage'))`,
             {
               headers: {
                 "Accept-Language": "en",
@@ -185,19 +193,24 @@ function AllProductCategoryPage() {
       let minSubCategoryCnt = 0;
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
+          const categoryName = selectedFilterItems[catId].categoryName;  
+          selectedCategoryName.push(categoryName)
           if (lastCatId > 0 && lastCatId != catId) {
             queryParams += " or ";
           }
-          queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr = category.items.length === index + 1 ? "" : " or ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
+          selectedCategoryName.map((item: any, index: any)=>{
+            queryParams += "(";
+            if(queryParams.includes(item)){  
+            const concatStr = selectedCategoryName.length === index + 1 ? "" : " or ";
+            queryParams = `(${category.productType}/value/name eq '${item}' ) ${concatStr}`;  
+          }
+          else{
+            const concatStr = selectedCategoryName.length === index + 1 ? "" : " or ";
+            queryParams += `${category.productType}/value/name eq '${item}') ${concatStr}`;
+          }
+          })
 
-          minSubCategoryCnt += category.items.length;
-          queryParams += `)`;
+          minSubCategoryCnt += category.items.length;          
           lastCatId = catId;
         } else {
           minCategoryCnt += category.isCategoryChecked;
@@ -213,7 +226,6 @@ function AllProductCategoryPage() {
         }
       });
 
-      // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
         queryParams = "";
       }
