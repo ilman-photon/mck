@@ -102,14 +102,20 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
           <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
             <h2
-              className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt"
+              className={`${sectionData?.assetPosition?.value === "Right"
+              ? "mx-auto lg:text-left text-center"
+              : "ml-0 text-left"
+              } lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt`}
               tabIndex={0}
               id={sectionData?.title?.value}
             >
               {sectionData?.title?.value}
             </h2>
             <div
-              className="jsx-290076256 text-lg font-normal text-sofia-reg text-left lg:pb-6 pb-4 text-mcknormalgrey"
+              className={`${sectionData?.assetPosition?.value === "Right"
+              ? "mx-auto lg:text-left text-center"
+              : "ml-0 text-left"
+              } jsx-290076256 text-lg font-normal text-sofia-reg lg:pb-6 pb-4 text-mcknormalgrey`}
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
@@ -144,10 +150,15 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            } container mx-auto grid lg:flex w-full lg:py-6 mb-6`}
+            } w-full lg:py-6 mb-6`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
+          <div 
+          className={`${sectionData?.assetPosition?.value === "Right"
+          ? "flex-row-reverse text-center"
+          : "text-left"
+          } container mx-auto grid lg:flex`}>
           <div
             className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 pt-6 col-span-1`}
           >
@@ -161,14 +172,20 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
           <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
             <h2
-              className="lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt"
+              className={`${sectionData?.assetPosition?.value === "Right" 
+              ? "mx-auto lg:text-left text-center"
+              : "ml-0 text-left"
+              } lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt`}
               tabIndex={0}
               id={sectionData?.title?.value}
             >
               {sectionData?.title?.value}
             </h2>
             <div
-              className="jsx-290076256 text-lg font-normal text-sofia-reg text-left lg:pb-6 pb-4 text-mcknormalgrey"
+              className={`${sectionData?.assetPosition?.value === "Right"
+              ? "mx-auto lg:text-left text-center"
+              : "ml-0 text-left"
+              } jsx-290076256 text-lg font-normal text-sofia-reg lg:pb-6 pb-4 text-mcknormalgrey`}
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
@@ -196,6 +213,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               </div>
             )}
           </div>
+          </div>
         </div>
       ) : sectionData.backgroundImage?.expandedValue?.url ? (sectionData.assetPosition?.value === 'Right' ?
         <div className="relative lg:mb-12 mb-6">
@@ -208,14 +226,15 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           />
           <div className="lg:absolute top-0 left-0 right-0 bottom-0 bg-transparent-left lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
             <h2
-              className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
+              className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
               id="wft_label_005"
               tabIndex={0}
+              role="title"
             >
               {sectionData?.name}
             </h2>
             <p
-              className="lg:pb-6 pb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey"
+              className="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis"
               dangerouslySetInnerHTML={{
                 __html:
                   sectionData?.description?.value,
