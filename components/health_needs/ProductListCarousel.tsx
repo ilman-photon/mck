@@ -22,7 +22,7 @@ const ProductComponent = ({ selectedProduct }: any) => {
             <div
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
               tabIndex={0}
-              id="hn_label_005"
+              id="hn_label_005" role="heading"
             >
               {
                 product?.item?.name
@@ -31,9 +31,10 @@ const ProductComponent = ({ selectedProduct }: any) => {
             <div className="lg:pt-6 lg:pl-6 lg:pb-6">
               <Swiper
                 modules={[Navigation]}
-                spaceBetween={0}
+                spaceBetween={4}
                 navigation
                 slidesPerView={5}
+                slidesPerGroup={5}
                 className="h-480"
 
               >
@@ -45,7 +46,7 @@ const ProductComponent = ({ selectedProduct }: any) => {
                     >
                       <div
                           onClick={() => handleProductClick(item)}
-                        className="swiper-list-item w-212 min-h-480 rounded-lg border border-[#CCD1E3] mr-1 p-4"
+                          className="swiper-list-item w-[198px] min-h-480 rounded-lg border border-[#CCD1E3] mr-1 p-4"
                       >
                         <img
                           src={item?.image?.value?.url}

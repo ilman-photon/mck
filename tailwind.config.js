@@ -139,7 +139,10 @@ module.exports = {
       },
       border: {
         blue20: "#CCD1E3",
-      }
+      },
+      screens: {
+        desktop: {'max': '1280px'},
+      },
     },
   },
   plugins: [],

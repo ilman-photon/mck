@@ -1698,7 +1698,8 @@ footer {
       margin-left: 8px;
     }
     .tab-label:after {
-      margin-top: -4px;
+      position: relative;
+      top: 5px;
     }
   }
   .text-54 {
