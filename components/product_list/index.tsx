@@ -406,7 +406,7 @@ function ProductListComponent() {
                   <div className="grid grid-cols-3 lg:grid-cols-3 my-auto text-justify">
                     <div
                       tabIndex={0}
-                      className="lg:h-56 object-contain col-span-1 lg:mr-6 mr-4"
+                      className="lg:h-56 object-contain col-span-1 lg:mr-6 mr-4 mb-4"
                     >
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
@@ -435,7 +435,7 @@ function ProductListComponent() {
                   <div
                     tabIndex={0}
                     role="button"
-                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto"
+                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto float-right lg:float-none"
                   >
                     WHERE TO BUY
                   </div>
@@ -443,7 +443,7 @@ function ProductListComponent() {
               </div>
 
               {/* Product items */}
-              <div className="grid grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
+              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
                 {productListData?.data?.results.map((item: any) => {
                   return (
                     <div
@@ -455,12 +455,12 @@ function ProductListComponent() {
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>
-                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl">
+                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
                         {item?.name}
                       </div>
                       <div
                         id="my_text"
-                        className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal ellipsis"
+                        className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}

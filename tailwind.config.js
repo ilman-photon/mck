@@ -63,6 +63,8 @@ module.exports = {
         52: '52px',
         57: '57px',
         480: '480px',
+        420: '420px',
+        450: '450px',
       },
       left: {
         36: '36px',
@@ -143,6 +145,7 @@ module.exports = {
       },
       screens: {
         desktop: {'max': '1280px'},
+        mobile: {'max': '767px'},
       },
     },
   },
