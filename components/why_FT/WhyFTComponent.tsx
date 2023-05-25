@@ -19,7 +19,14 @@ function WhyFTComponent() {
       }
     );
   }
+  useEffect(() => {
+    document.documentElement.lang = "en";
+  }, []);
 
+  useEffect(() => {
+    document.title =
+      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Default Title";
+  }, [whyFTData]);
   useEffect(() => {
     setIsLoading(true);
     fetchWhyFTDetails()

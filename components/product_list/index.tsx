@@ -299,10 +299,6 @@ function ProductListComponent() {
               handleClearOne={handleClearOne}
               handleClearAll={handleClearAll}
             />
-
-            <div className="text-mcknormalgrey">
-              {activeFiltersData?.showResultsText?.value}
-            </div>
           </section>
           {/* Health needs - Top Active Filter section starts */}
 
@@ -465,115 +461,6 @@ function ProductListComponent() {
                       <div
                         id="my_text"
                         className="mcknormalgrey product-list-description ellipsis"
-                        dangerouslySetInnerHTML={{
-                          __html: item?.highlightDescription?.value,
-                        }}
-                      ></div>
-                    </div>
-                  );
-                })}
-              </div>
-              {/* Product End */}
-
-              {/* Product Listing Promotion Banner Start */}
-
-              <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-3 lg:px-6">
-                <div className="aspect-h-4 aspect-w-3 overflow-hidden border border-slate-400 lg:block relative mb-4 lg:mb-0">
-                  <img
-                    src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/image_background.png"
-                    alt="Two each of gray, white, and black shirts laying flat."
-                    className="w-full object-contain object-center"
-                  />
-                  <div className="mck-hn-recommend-prd-content absolute top-0">
-                    <img
-                      id="logo-image"
-                      src="images/logo.png"
-                      alt="Foster Thrive logo"
-                      className="mt-1 lg:mt-12 ml-12 desktop:ml-3"
-                    />
-                    <div className="flex max-w-xl bg-color py-4 sm:py-24 lg:py-6 px-4 lg:px-12 desktop:px-3 items-center">
-                      <img
-                        src="images/allergy-relief.png"
-                        alt="allergy relief"
-                        className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-40"
-                      />
-                      <div>
-                        <p className="mt-4 text-lg">
-                          Allergy relief that starts working fast on the first
-                          day you take it.
-                        </p>
-                        <div
-                          id="cta-btn"
-                          className="w-auto leading-5 pd-12 h-[44px] m-3 desktop:m-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                        >
-                          where to buy
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="lg:grid lg:grid-cols-1 lg:gap-y-3">
-                  <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 py-4 lg:py-0 lg:px-8 items-center mb-4 lg:mb-0">
-                    <img
-                      src="images/allergy-relief.png"
-                      alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-36"
-                    />
-                    <div>
-                      <p className="mt-4 text-lg">
-                        Allergy relief that starts working fast on the first day
-                        you take it.
-                      </p>
-                      <div
-                        id="cta-btn"
-                        className="w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                      >
-                        where to buy
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex max-w-xl lg:max-w-lg border border-slate-400 px-4 lg:px-8 py-4 lg:py-0 items-center">
-                    <img
-                      src="images/allergy-relief.png"
-                      alt="allergy relief"
-                      className="lg:pr-6 pr-4 h-fit w-3/12 lg:w-36"
-                    />
-                    <div>
-                      <p className="mt-4 text-lg">
-                        Allergy relief that starts working fast on the first day
-                        you take it.
-                      </p>
-                      <div
-                        id="cta-btn"
-                        className="w-auto leading-5 pd-12 h-[44px] m-3 ml-0 text-sofia-bold flex justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer float-right"
-                      >
-                        where to buy
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product Listing Promotion Banner End */}
-
-              {/* Product items */}
-              <div className="flex gap-0.5 flex-wrap product-list-container">
-                {productListData?.data?.results.map((item: any) => {
-                  return (
-                    <div
-                      className="w-52 h-96 border-2 product-list-item"
-                      key={item?.contentLink?.id}
-                      onClick={() => handleProductClick(item)}
-                    >
-                      <img src={item?.image?.value?.url} alt="" />
-                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
-                        {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
-                      </div>
-                      <div className="mckblue product-list-title">
-                        {item?.name}
-                      </div>
-                      <div
-                        className="mcknormalgrey product-list-description"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}

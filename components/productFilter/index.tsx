@@ -32,7 +32,7 @@ function ProductFilter({
                         id={leftfiltermaindata?.mainCategory?.value[0].name}
                         src={
                           leftfiltermaindata?.categoryImage?.expandedValue?.url
-                        }
+                        } alt={leftfiltermaindata?.mainCategory?.value[0].name}
                       />
                       <label htmlFor="acute" className="ml-2 filter-title">
                         {leftfiltermaindata?.mainCategory?.value[0].name}
