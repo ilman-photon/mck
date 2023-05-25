@@ -136,6 +136,7 @@ module.exports = {
         24:"24px",
         32:"32px",
         30:"30px",
+        18:"18px",
       },
       border: {
         blue20: "#CCD1E3",
