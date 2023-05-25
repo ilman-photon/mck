@@ -339,12 +339,12 @@ function WhereComponent() {
                 value={textInput}
                 onKeyDown={(e) => handleKey(e)}
                 placeholder="City, State or Zip code"
-                className="lg:w-83 bg-[#F8F9FB] pl-3 py-3 pr-10 border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
+                className="lg:w-83 bg-[#F8F9FB] pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
               <img
                 src="images/location_on.svg"
                 alt="location"
-                className="text-mckgreyborder absolute lg:top-8 top-18 right-8"
+                className="text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
               />
             </div>
           </div>
