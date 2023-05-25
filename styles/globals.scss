@@ -1457,7 +1457,8 @@ footer {
       }
   
       &:after {
-        content: "+";
+        content: "";
+        background-image: url('../public/images/plus.svg');
         width: 24px;
         height: 24px;
         text-align: center;
@@ -1492,7 +1493,8 @@ footer {
     input:checked {
       +.tab-label {
         &:after {
-          content: "-";
+          content: "";
+          background-image: url('../public/images/minus.svg');
           width: 24px;
           height: 24px;
           text-align: center;
@@ -1591,7 +1593,8 @@ footer {
     input:checked {
       + .tab-label {
         &::after {
-          content: "-";
+          content: "";
+          background-image: url('../public/images/minus.svg');
         }
       }
   
@@ -1614,7 +1617,8 @@ footer {
     input:checked {
       + .tab-label {
           &::before {
-          content: "-";
+          content: "";
+          background-image: url('../public/images/minus.svg');
           position: absolute;
           right: 14px;
           width: 24px;
@@ -1699,7 +1703,7 @@ footer {
     }
     .tab-label:after {
       position: relative;
-      top: 5px;
+      top: 0;
     }
   }
   .text-54 {
@@ -1839,7 +1843,7 @@ footer {
       margin-top: 24px;
     }
      .tab-label:after {
-      content: "+";
+      content: "";
       width: 24px;
       height: 24px;
       text-align: center;
@@ -1849,6 +1853,7 @@ footer {
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
+      background-image: url('../public/images/plus.svg');
   }
   }
 
@@ -2144,7 +2149,8 @@ Mobile and iPad Navigation
 }
 
 .category-card .tab-label:after {
-  content: "+";
+  content: "";
+  background-image: url('../public/images/plus.svg');
   width: 24px;
   height: 24px;
   text-align: center;
@@ -2157,7 +2163,8 @@ Mobile and iPad Navigation
 }
 
 .category-card .tab input:checked + .tab-label:after {
-  content: "-";
+  content: "";
+  background-image: url('../public/images/minus.svg');
   width: 24px;
   height: 24px;
   text-align: center;
