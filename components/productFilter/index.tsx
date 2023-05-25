@@ -5,7 +5,7 @@ function ProductFilter({
   handleCheckBox,
 }: any) {
   return (
-    <div className="border-r-2 pb-3 mb-2 mck-hn-filter-category">
+    <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
       {/* Left main category lists */}
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
@@ -60,7 +60,7 @@ function ProductFilter({
                             }
                             type="checkbox"
                             value="view all"
-                            className="w-4 h-4"
+                            className="w-4 h-4 accent-[#001A71]"
                             checked={
                               selectedFilterItems[
                                 leftfiltermaindata?.mainCategory?.value[0].id
@@ -101,7 +101,7 @@ function ProductFilter({
                                 id={leftfiltersubdata?.name}
                                 type="checkbox"
                                 value={leftfiltersubdata?.name}
-                                className="w-4 h-4"
+                                className="w-4 h-4 accent-[#001A71]"
                                 checked={
                                   selectedFilterItems[
                                     leftfiltermaindata?.mainCategory?.value[0]
