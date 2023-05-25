@@ -63,7 +63,7 @@ function PdpCarousel(prodViewData: any) {
     
      return (
         <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" tabIndex={0} role='slider'>
-            <div className="flex flex-col-reverse lg:flex-row pdp-carousel">
+            <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
                 <div className="pdp_images flex lg:grid relative">
                 <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
                 <img onClick={handleUpArrowClick} src="images\carousel_top.png" alt="img" className={`m-auto ${arrowClick === 0 ? 'opacity-25': ''}`} />

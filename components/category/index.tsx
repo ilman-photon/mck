@@ -54,7 +54,7 @@ export default function CategoryComponent({ sectionData }: any) {
             <div
               key={item?.data?.contentLink?.id}
               className={`mb-6 cursor-pointer ${
-                index < 4 ? "w-full lg:w-1/4" : "w-full lg:w-1/2"
+                index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
               }`}
             >
               <div

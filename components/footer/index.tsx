@@ -51,7 +51,7 @@ export default function FooterComponent() {
                 {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
                   (sociallink: any) => (
                     <Link
-                      className="text-sofia-reg text-lg text-mcknormalgrey"
+                      className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
                       rel="stylesheet"
                       href={sociallink?.socialMediaUrl?.value}
                       key={sociallink?.contentLink?.id}
@@ -63,6 +63,7 @@ export default function FooterComponent() {
                           sociallink?.socialMediaImage?.expandedValue?.thumbnail
                             ?.value?.url
                         }
+                        className="mx-auto"
                         alt={
                           sociallink?.socialMediaImage?.expandedValue?.altText
                             ?.value

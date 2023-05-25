@@ -96,12 +96,12 @@ function PdpLocation(props: any) {
 
     return isLoaded ? (
         <div className="row-span-2 lg:pt-[72px]">
-            <div className="relative mx-4 lg:mx-0">
+            <div className="relative mx-4 lg:mx-0 mt-6 lg:mt-0">
             <input type="text" value={textInput}
                 //  onChange={(e)=>setTextInput(e.target.value) }
                 placeholder="City, State or Zip code"
                 onKeyDown={(e) => handleKey(e)}
-                className="pl-9 flex flex-row rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue bg-[#F8F9FB] pl-9"  title="Search" role="combobox" />
+                className="pl-[46px] flex flex-row rounded-full lg:rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue text-mckgreyborder bg-[#F8F9FB] pl-9"  title="Search" role="combobox" />
                 <img src="images\search_btn.png" alt="img" className="absolute left-4 top-4" />
             </div>
             

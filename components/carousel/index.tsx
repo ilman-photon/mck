@@ -101,46 +101,47 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       id={item?.title?.value + "_" + current}
                       tabIndex={0}
                     />
-
-                    <div
-                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                      style={{
-                        backgroundColor:
-                          item?.title?.value || item?.description?.value
-                            ? item?.backgroundColor?.value
-                            : "",
-                      }}
-                    >
-                      <h2
-                        className="text-mcklightyellow lg:mb-3"
-                        id={item?.title?.value}
-                        tabIndex={0}
-                      >
-                        {item?.title?.value}
-                      </h2>
-                      <p
-                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                        dangerouslySetInnerHTML={{
-                          __html: item?.description?.value,
+                    {item?.title?.value && (
+                      <div
+                        className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                        style={{
+                          backgroundColor:
+                            item?.title?.value || item?.description?.value
+                              ? item?.backgroundColor?.value
+                              : "",
                         }}
-                        tabIndex={0}
-                        id={item?.description?.value}
-                      ></p>
-                      {item?.buttonText?.value && (
-                        <div
-                          id={item?.buttonText?.value + current}
-                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
-                          style={{
-                            backgroundColor: item?.ctaButtonColor?.value,
-                          }}
-                          onClick={() => handleCTABtn(item?.buttonUrl?.value)}
+                      >
+                        <h2
+                          className="text-mcklightyellow lg:mb-3"
+                          id={item?.title?.value}
                           tabIndex={0}
-                          role="button"
                         >
-                          {item?.buttonText?.value}
-                        </div>
-                      )}
-                    </div>
+                          {item?.title?.value}
+                        </h2>
+                        <p
+                          className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description?.value,
+                          }}
+                          tabIndex={0}
+                          id={item?.description?.value}
+                        ></p>
+                        {item?.buttonText?.value && (
+                          <div
+                            id={item?.buttonText?.value + current}
+                            className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                            style={{
+                              backgroundColor: item?.ctaButtonColor?.value,
+                            }}
+                            onClick={() => handleCTABtn(item?.buttonUrl?.value)}
+                            tabIndex={0}
+                            role="button"
+                          >
+                            {item?.buttonText?.value}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </animated.div>
               ))
@@ -161,44 +162,46 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     id={response[0]?.title?.value + "_" + current}
                     tabIndex={0}
                   />
-                  <div
-                    className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                    style={{
-                      backgroundColor: response[0]?.backgroundColor?.value,
-                    }}
-                  >
-                    <h2
-                      className="text-mcklightyellow lg:mb-3"
-                      id={response[0]?.title?.value}
-                      tabIndex={0}
-                    >
-                      {response[0]?.title?.value}
-                    </h2>
-                    <p
-                      className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                      dangerouslySetInnerHTML={{
-                        __html: response[0]?.description?.value,
+                  {response[0]?.title?.value && (
+                    <div
+                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                      style={{
+                        backgroundColor: response[0]?.backgroundColor?.value,
                       }}
-                      tabIndex={0}
-                      id={response[0]?.description?.value}
-                    ></p>
-                    {response[0]?.buttonText?.value && (
-                      <div
-                        id={response[0]?.buttonText?.value + current}
-                        className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
-                        style={{
-                          backgroundColor: response[0]?.ctaButtonColor?.value,
-                        }}
-                        onClick={() =>
-                          handleCTABtn(response[0]?.buttonUrl?.value)
-                        }
+                    >
+                      <h2
+                        className="text-mcklightyellow lg:mb-3"
+                        id={response[0]?.title?.value}
                         tabIndex={0}
-                        role="button"
                       >
-                        {response[0]?.buttonText?.value}
-                      </div>
-                    )}
-                  </div>
+                        {response[0]?.title?.value}
+                      </h2>
+                      <p
+                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                        dangerouslySetInnerHTML={{
+                          __html: response[0]?.description?.value,
+                        }}
+                        tabIndex={0}
+                        id={response[0]?.description?.value}
+                      ></p>
+                      {response[0]?.buttonText?.value && (
+                        <div
+                          id={response[0]?.buttonText?.value + current}
+                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                          style={{
+                            backgroundColor: response[0]?.ctaButtonColor?.value,
+                          }}
+                          onClick={() =>
+                            handleCTABtn(response[0]?.buttonUrl?.value)
+                          }
+                          tabIndex={0}
+                          role="button"
+                        >
+                          {response[0]?.buttonText?.value}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
