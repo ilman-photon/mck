@@ -46,7 +46,7 @@ function PdpDetail(pdpViewData: any) {
             
             <div tabIndex={0} className="tab lg:w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y relative mx-4 lg:mx-0">
                 <input type="checkbox" id="pdp_details_chck2" />
-                <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" htmlFor="pdp_details_chck2">Ingredients</label>
+                <label className="tab-label py-3 px-4 flex justify-between cursor-pointer lg:text-lg text-base" htmlFor="pdp_details_chck2">Ingredients</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: responceValue?.ingredients?.value, }} id="pdp_details_006"></p>
                 </div>
