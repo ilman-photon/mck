@@ -68,6 +68,7 @@
 @import "HealthNeeds.module.scss";
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
+@import "whyFT.module.scss";
 
 body {
   background-color: #FFFDFB;
@@ -2020,7 +2021,14 @@ Mobile and iPad Navigation
   .input-search:focus,
   .input-search:focus-visible,
   .input-search:visited {
-    top: -18px !important;
+    top: -20px !important;
+    right: -4px;
+  }
+  .search-box {
+    button {
+      top: -20px !important;
+      right: -4px;
+    }
   }
 }
 @media (max-width: 1025px) and (min-width: 1023px) {
