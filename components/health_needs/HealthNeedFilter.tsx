@@ -109,7 +109,7 @@ const HealthNeedFilter = ({
     fetchProductList("");
   };
   return (
-    <div className="container lg:mt-12 mt-6 px-4 lg:px-0">
+    <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
