@@ -45,26 +45,26 @@ function FaqComponent() {
                 <div className="shade-blue-border w-full lg:mt-6 mt-4 rounded-lg overflow-hidden">
                     <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_005">{faqData?.differentQuestionHeading?.value}</div>
                     <div className="shade-blue-border-top lg:p-6 p-4">
-                       tml <p className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium" id="faq_label_006">{faqData?.differentQuestionDetails?.value}</p>
-                        <button className="lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase" id="faq_btn_007">{faqData?.differentQuestionCTAText?.value}</button>
+                         <p className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium" id="faq_label_006">{faqData?.differentQuestionDetails?.value}</p>
+                        <a href="#" className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase" id="faq_btn_007">{faqData?.differentQuestionCTAText?.value}</a>
                     </div>
                 </div>
 
                 <div className="grid lg:grid-cols-2 lg:gap-4 mt-6">
-                    <div className="rounded-lg shade-blue-border overflow-hidden">
+                    <div className="rounded-lg shade-blue-border overflow-hidden faq-box">
                         <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_008">{faqData?.whatYouCanDoHeading?.value}</div>
                         <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_009" dangerouslySetInnerHTML={{ __html: faqData?.whatYouCanDoDeatils?.value, }}>
                         </div>
                     </div>
                     <div className="mt-6 lg:mt-0">
-                        <div className="rounded-lg shade-blue-border overflow-hidden">
+                        <div className="rounded-lg shade-blue-border overflow-hidden faq-box">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_010">{faqData?.speaktoAPharmacistHeading?.value}</div>
                             <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_011" dangerouslySetInnerHTML={{ __html: faqData?.speaktoAPharmacistDetail?.value, }}>
                             </div>
                         </div>
-                        <div className="rounded-lg shade-blue-border overflow-hidden mt-6">
+                        <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
                             <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_012">{faqData?.sendFeedBackHeading?.value}</div>
-                            <div className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline" id="faq_label_013" dangerouslySetInnerHTML={{ __html: faqData?.sendFeedBackDetails?.value, }}>    
+                            <div className="lg:pt-5 lg:pl-5 lg:pr-5 pt-4 pr-4 pl-4 pb-0 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg" id="faq_label_013" dangerouslySetInnerHTML={{ __html: faqData?.sendFeedBackDetails?.value, }}>    
                             </div>
                         </div>
                     </div>
