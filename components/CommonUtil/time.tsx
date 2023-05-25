@@ -8,7 +8,11 @@ export const GetTime = (time: any) => {
     const day = date.getDate();
     const year = date.getFullYear();
     const formattedDate = `${month} ${day},${year}`;
-    return formattedDate
+    if (time) {
+        return formattedDate
+    } else {
+        return ''
+    }
 
 }
 export const HandelURLToId = (string: any) => {
