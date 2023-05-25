@@ -136,10 +136,13 @@ module.exports = {
         24:"24px",
         32:"32px",
         30:"30px",
-        18:"18px",
+      },
+      borderWidth: {
+        '0.5': '0.5px',
       },
       border: {
         blue20: "#CCD1E3",
+
       },
       screens: {
         desktop: {'max': '1280px'},
