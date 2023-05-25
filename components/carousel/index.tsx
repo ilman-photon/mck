@@ -29,20 +29,25 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      infiniteScroll();
-    }, Number(sectionData[0].timeInterval?.value));
+    let interval: NodeJS.Timeout | null = null;
 
-    if (sectionData[0]?.autoRotate?.value && current >= response?.length - 1) {
-      clearInterval(interval);
+    if (sectionData[0]?.autoRotate?.value) {
+      interval = setInterval(() => {
+        infiniteScroll();
+      }, Number(sectionData[0]?.timeInterval?.value));
     }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [current]);
 
   function handleCarouselImage(index: number) {
     setCurrent(index);
   }
+
   function infiniteScroll() {
     if (current >= response?.length - 1) {
       setCurrent(0);
