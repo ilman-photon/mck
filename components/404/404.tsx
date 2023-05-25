@@ -31,7 +31,7 @@ console.log(notFoundData, "error")
                 <div className="text pb-6 font-medium text-2xl text-mckblue text-gtl-med" id="err-404-label-002" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.description.value}} tabIndex={0} aria-label={notFoundData?.data[0]?.description.value}></div>
                 <div className="table-container">
                     <div className="table-heading font-extrabold text-sofia-bold" id="err-404-label-003" tabIndex={0} aria-label={notFoundData?.data[0]?.contentArea.expandedValue[0].title.value}>{notFoundData?.data[0]?.contentArea.expandedValue[0].title.value}</div>
-                    <div className="normal-text p-6 text-sofia-reg font-normal lg:text-lg text-base" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}} tabIndex={0} aria-label={notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}></div>
+                    <div className="normal-text p-4 lg:p-6 text-sofia-reg font-normal lg:text-lg text-base" dangerouslySetInnerHTML={{ __html: notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}} tabIndex={0} aria-label={notFoundData?.data[0]?.contentArea.expandedValue[0].description.value}></div>
                 </div>
                 </div>
                 <div className="bg-logo-right overflow-hidden lg:relative absolute">

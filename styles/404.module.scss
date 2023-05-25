@@ -14,6 +14,10 @@
     line-height: 41px;
     font-family: "GTAlpina-Medium";
     padding-right: 65px;
+    @media (max-width: 1023px) {
+      font-size: 24px;
+      line-height: 27px;
+    }
   }
 
   .hint {
@@ -31,7 +35,9 @@
     border: 0.5px solid #ccd1e3;
     border-radius: 8px 8px;
     width: 416px;
-
+    @media (max-width: 1023px) {
+      width: auto;
+    }
     .table-heading {
       padding: 12px 16px;
       border: 0.5px solid #ccd1e3;
