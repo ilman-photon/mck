@@ -46,15 +46,13 @@ export default function CategoryComponent({ sectionData }: any) {
 
   return (
     <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
-      {loading && <p>Loading...</p>}
-
       {!loading && response && (
         <div className="flex flex-wrap justify-center">
           {response.map((item: any, index: number) => (
             <div
               key={item?.data?.contentLink?.id}
               className={`mb-6 cursor-pointer ${
-                index < 4 ? "w-full lg:w-1/4" : "w-full lg:w-1/2"
+                index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
               }`}
             >
               <div

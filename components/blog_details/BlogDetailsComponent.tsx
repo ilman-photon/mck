@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { useRouter } from "next/router"
 import axios, { AxiosError } from "axios";
 import ResentBlogListComponent from "./RecentBlogs";
@@ -7,22 +7,42 @@ import CommentComponent from './Comment'
 import { GetTime } from "../CommonUtil/time";
 import RelatedProducts from "./RelatedProducts";
 import SocialMediaIconComponent from './SocialMediaIcon'
-import useAxios from "@/hooks/useApi";
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import Image from "next/image";
+
 
 const BlogDetailsComponent = () => {
     const router = useRouter()
-    const {
-        query: { id },
-    } = router
-
-
-    const { response, error, loading } = useAxios({
-        method: "GET",
-        url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${id}/&expand=*`,
-        headers: {
-            "Accept-Language": "en",
-        },
-    });
+    const { id } = router.query;
+    const [response, setResponse] = useState<any>();
+    const [blogID, setblogID] = useState<any>();
+    const [loading, setIsLoading] = useState<boolean>(true);
+    useEffect(() => {
+        if (router.query) {
+            setblogID(id);
+        }
+    }, [router.query]);
+    function fetchBlogetails() {
+        return axios.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${id}/&expand=*`,
+            {
+                headers: { "Accept-Language": "en" },
+            }
+        );
+    }
+    useEffect(() => {
+        if (blogID) {
+            fetchBlogetails()
+                .then((res) => {
+                    setResponse(res)
+                    setIsLoading(false);
+                })
+                .catch((e: Error | AxiosError) => {
+                    console.log(e);
+                    setIsLoading(false);
+                });
+        }
+    }, [blogID]);
 
     useEffect(() => {
         // Set the lang attribute to "en" on the <html> element
@@ -35,8 +55,25 @@ const BlogDetailsComponent = () => {
     }, [JSON.stringify(response)]);
 
     return (
-        <>
-            <div className='container w-full lg:px-7 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
+        <>{loading ?
+            (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-75"></div>
+                    <div
+                        className="relative"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                    >
+                        <Image
+                            src={gifImage}
+                            alt="coba-image"
+                            width={400}
+                            height={400}
+                            loading="eager"
+                        />
+                    </div>
+                </div>
+            ) :
+            (<div className='container w-full lg:px-7 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
                     <img className='m-auto'
                         src={response?.data[0]?.image.expandedValue.url}
@@ -49,11 +86,11 @@ const BlogDetailsComponent = () => {
                     <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
-                                <h1 className='lg:text-54 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' >{response?.data[0]?.title.value}</h1>
+                                <h1 className='lg:text-54 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' >{response?.data[0]?.title?.value}</h1>
                                 <div className='grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-3 lg:pb-6 pb-4'>
                                     <div className='lg:pb-0 pb-4'>
-                                        <span className='text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid shade-grey-right-border' id='blog-label-001'>{GetTime(response?.data[0]?.startPublish)}</span>
-                                        <span className='text-mckblue text-sofia-reg font-normal text-base px-2 border-solid shade-grey-right-border' id='blog-label-002'>{response?.data[0]?.readMinute.value}</span>
+                                        <span className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${response?.data[0]?.readMinute?.value?'shade-grey-right-border':''}`} id='blog-label-001'>{GetTime(response?.data[0]?.startPublish)}</span>
+                                        <span className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${false?'shade-grey-right-border':''}`} id='blog-label-002'>{response?.data[0]?.readMinute?.value}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                                     </div>
                                     <div className='flex lg:justify-end'>
@@ -93,7 +130,7 @@ const BlogDetailsComponent = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </div>)}
         </>
     );
 }

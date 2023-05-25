@@ -64,6 +64,8 @@ module.exports = {
         52: '52px',
         57: '57px',
         480: '480px',
+        420: '420px',
+        450: '450px',
       },
       left: {
         36: '36px',
@@ -140,11 +142,16 @@ module.exports = {
         32:"32px",
         30:"30px",
       },
+      borderWidth: {
+        '0.5': '0.5px',
+      },
       border: {
         blue20: "#CCD1E3",
+
       },
       screens: {
         desktop: {'max': '1280px'},
+        mobile: {'max': '767px'},
       },
     },
   },

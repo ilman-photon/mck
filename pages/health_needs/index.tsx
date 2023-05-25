@@ -41,7 +41,6 @@ function HealthNeedsPage() {
     <>
       <GoogleTagManager />
       <HeaderComponent />
-      {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />

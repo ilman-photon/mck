@@ -68,6 +68,7 @@
 @import "HealthNeeds.module.scss";
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
+@import "whyFT.module.scss";
 
 body {
   background-color: #FFFDFB;
@@ -1703,7 +1704,7 @@ footer {
     }
     .tab-label:after {
       position: relative;
-      top: 0;
+      top: 6px;
     }
   }
   .text-54 {
@@ -2020,7 +2021,14 @@ Mobile and iPad Navigation
   .input-search:focus,
   .input-search:focus-visible,
   .input-search:visited {
-    top: -18px !important;
+    top: -20px !important;
+    right: -4px;
+  }
+  .search-box {
+    button {
+      top: -20px !important;
+      right: -4px;
+    }
   }
 }
 @media (max-width: 1025px) and (min-width: 1023px) {
@@ -2258,20 +2266,13 @@ Video Player Code
     background-image: url('../public/images/product-carousel-right.svg');
   }
 }
-.faq-box{
-  p{
-    a{
-      text-decoration: underline;
-    }
-    margin-bottom: 4px;
+.para-ellipsis-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  @media screen and (max-width: 1023px) {
+    -webkit-line-clamp: 4;
   }
 }
-.where-to-buy{
-  margin-bottom: -72px;
-}
-.location-box{
-  height: 97% !important;
-}
-
-
-  

@@ -316,19 +316,19 @@ function ProductListComponent() {
             <div className="flex-auto">
               {/* Product Listing Two Col banner section starts*/}
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-2 ml-6">
-                <div tabIndex={0} className="bg-[#EAF1F8;] lg:p-9 p-4">
-                  <div tabIndex={0} className="w-full mb-4">
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 lg:ml-6 pt-6 lg:pt-0">
+                <div tabIndex={0} className="bg-[#EAF1F8;] lg:p-9 p-4 md:mr-3 mb-4 lg:mb-0 md:mb-0">
+                  <div tabIndex={0} className="w-full lg:mb-4 mb-3">
                     <img
                       src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
                       id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/ft_logo_acute.png"
                       className="h-auto max-w-full"
                     />
                   </div>
-                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
+                  <div className="grid grid-cols-3 lg:grid-cols-3 my-auto text-justify">
                     <div
                       tabIndex={0}
-                      className="lg:h-60 object-contain col-span-1 lg:mr-6"
+                      className="lg:h-60 object-contain col-span-1 lg:mr-6 mr-4"
                     >
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
@@ -344,7 +344,7 @@ function ProductListComponent() {
                     >
                       <div
                         tabIndex={0}
-                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                        className="text-lg text-sofia-reg col-span-2 lg:text-left lg:pb-4 pb-3"
                       >
                         <p>
                           You’re in touch with your health, able to pinpoint
@@ -370,8 +370,8 @@ function ProductListComponent() {
                       className="h-auto max-w-full"
                     />
                   </div>
-                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
-                    <div className="lg:h-60 object-contain col-span-1 lg:mr-6">
+                  <div className="grid grid-cols-3 lg:grid-cols-3 my-auto text-justify">
+                    <div className="lg:h-60 object-contain col-span-1 lg:mr-6 mb-3 mr-4">
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png"
                         id="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/vitamin_d3.png"
@@ -380,7 +380,7 @@ function ProductListComponent() {
                       />
                     </div>
                     <div id="p-text" className="text-justify pr-0 col-span-2">
-                      <div className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4">
+                      <div className="text-lg text-sofia-reg col-span-2 lg:text-left lg:pb-4 pb-3">
                         <p>
                           Everybody deserves optimal health, and nobody is
                           immune to everything. With Foster &amp; Thrive, you
@@ -401,12 +401,12 @@ function ProductListComponent() {
               <div className="grid md:grid-cols-2 lg:grid-cols-1">
                 <div
                   tabIndex={0}
-                  className="bg-[#DBDFEB] lg:ml-6 mt-3 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
+                  className="bg-[#DBDFEB] lg:ml-6 mt-4 m-0 lg:p-9 p-4 mb-4 lg:mb-0 last:mb-0"
                 >
-                  <div className="grid grid-cols-none lg:grid-cols-3 my-auto text-justify">
+                  <div className="grid grid-cols-3 lg:grid-cols-3 my-auto text-justify">
                     <div
                       tabIndex={0}
-                      className="lg:h-56 object-contain col-span-1 lg:mr-6"
+                      className="lg:h-56 object-contain col-span-1 lg:mr-6 mr-4 mb-4"
                     >
                       <img
                         src="https://mcco02mstrub73kinte.dxcloud.episerver.net/globalassets/allergy_relief-.png"
@@ -422,7 +422,7 @@ function ProductListComponent() {
                     >
                       <div
                         tabIndex={0}
-                        className="text-lg text-sofia-reg text-center col-span-2 lg:text-left pb-4"
+                        className="text-lg text-sofia-reg col-span-2 lg:text-left pb-4"
                       >
                         <p>
                           You’re in touch with your health, able to pinpoint
@@ -435,7 +435,7 @@ function ProductListComponent() {
                   <div
                     tabIndex={0}
                     role="button"
-                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto"
+                    className="w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex  lg:ml-auto float-right lg:float-none"
                   >
                     WHERE TO BUY
                   </div>
@@ -443,24 +443,24 @@ function ProductListComponent() {
               </div>
 
               {/* Product items */}
-              <div className="flex gap-0.5 flex-wrap product-list-container">
+              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
                 {productListData?.data?.results.map((item: any) => {
                   return (
                     <div
-                      className="w-52 h-96 border-2 product-list-item"
+                      className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
                       key={item?.contentLink?.id}
                       onClick={() => handleProductClick(item)}
                     >
-                      <img src={item?.image?.value?.url} alt="" />
-                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
+                      <img src={item?.image?.value?.url} alt={item?.image?.value?.url} className="mx-auto" />
+                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>
-                      <div className="mckblue product-list-title">
+                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
                         {item?.name}
                       </div>
                       <div
                         id="my_text"
-                        className="mcknormalgrey product-list-description ellipsis"
+                        className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}

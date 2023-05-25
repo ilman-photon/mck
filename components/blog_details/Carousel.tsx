@@ -107,7 +107,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 fill="black"
               />
             </svg>
-            <h3>Hello</h3>
           </div>
           <div className="lg:hidden text-sofia-reg text-xl font-normal px-3">
             1/3

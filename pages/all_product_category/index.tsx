@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
 import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
-
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import Image from "next/image";
 function AllProductCategoryPage() {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
@@ -19,6 +20,7 @@ function AllProductCategoryPage() {
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [categoryProduct, setCategoryProduct] = useState<any>([]);
   const [carouselData, setCarouselData] = useState<any>();
+  let selectedCategoryName: any = [];
   let productName: any = [];
 
   function fetchProductList(filter: any) {
@@ -34,7 +36,7 @@ function AllProductCategoryPage() {
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -44,6 +46,12 @@ function AllProductCategoryPage() {
     promise
       .then((res) => {
         console.log("FetchProductList----- ", res);
+        selectedProduct.forEach((item: any) => {
+          if (selectedCategoryName.includes(item.item.name)) {
+            item.data = { ...item.data, ...res };
+          }
+        });
+        setSelectedProduct(selectedProduct);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -105,7 +113,7 @@ function AllProductCategoryPage() {
       productName?.map((item: any) => {
         axios
           .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}')`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}' and ContentType/any(t:t eq 'ProductDetailsPage'))`,
             {
               headers: {
                 "Accept-Language": "en",
@@ -119,17 +127,16 @@ function AllProductCategoryPage() {
               );
               if (itemExists) {
                 return prevSelectedProducts;
-              }     
+              }
               const newItem = { item: { name: item }, data: res.data };
               const updatedProducts = [...prevSelectedProducts, newItem];
               updatedProducts.sort((a: any, b: any) => {
-                const propertyName = 'name';
+                const propertyName = "name";
                 return a.item[propertyName].localeCompare(b.item[propertyName]);
               });
-            
+
               return updatedProducts;
             });
-            
           });
       });
     };
@@ -185,19 +192,25 @@ function AllProductCategoryPage() {
       let minSubCategoryCnt = 0;
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
+          const categoryName = selectedFilterItems[catId].categoryName;
+          selectedCategoryName.push(categoryName);
           if (lastCatId > 0 && lastCatId != catId) {
             queryParams += " or ";
           }
-          queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr = category.items.length === index + 1 ? "" : " or ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
+          selectedCategoryName.map((item: any, index: any) => {
+            queryParams += "(";
+            if (queryParams.includes(item)) {
+              const concatStr =
+                selectedCategoryName.length === index + 1 ? "" : " or ";
+              queryParams = `(${category.productType}/value/name eq '${item}' ) ${concatStr}`;
+            } else {
+              const concatStr =
+                selectedCategoryName.length === index + 1 ? "" : " or ";
+              queryParams += `${category.productType}/value/name eq '${item}') ${concatStr}`;
+            }
           });
 
           minSubCategoryCnt += category.items.length;
-          queryParams += `)`;
           lastCatId = catId;
         } else {
           minCategoryCnt += category.isCategoryChecked;
@@ -213,7 +226,6 @@ function AllProductCategoryPage() {
         }
       });
 
-      // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
         queryParams = "";
       }
@@ -272,8 +284,27 @@ function AllProductCategoryPage() {
     <>
       <GoogleTagManager />
       <HeaderComponent />
+      {!carouselData && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            <Image
+              src={gifImage}
+              alt="coba-image"
+              width={400}
+              height={400}
+              loading="eager"
+            />
+          </div>
+        </div>
+      )}
       {carouselData && <CarouselComponent sectionData={carouselData} />}
-      {categoryProduct.length  && <CategoryComponent sectionData={categoryProduct} />}
+      {categoryProduct.length && (
+        <CategoryComponent sectionData={categoryProduct} />
+      )}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1">
         <HealthNeedFilter
