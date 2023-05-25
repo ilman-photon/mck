@@ -40,7 +40,7 @@ function PdpCarousel(prodViewData: any) {
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
      const handleDownArrowClick =()=>{
-        if(lastIndex < prodResponse?.productImages?.value.length){
+        if(lastIndex < prodResponse?.productImages?.value?.length){
             setArrowClick(() => arrowClick + 1)
             setLastIndex(() => lastIndex + 1)
         }
@@ -93,15 +93,16 @@ function PdpCarousel(prodViewData: any) {
                     </ul>
                     {/* <button onClick={handleDownArrowClick}>Down arrow</button> */}
                     <div className="hidden lg:block cursor-pointer absolute bottom-[-13px] left-[36px]">   
-                    <img onClick={handleDownArrowClick} src='images\carousel_down.png' alt="img" className={`m-auto ${lastIndex === prodResponse?.productImages?.value.length  ? 'opacity-25': ''}`} />
+                    <img onClick={handleDownArrowClick} src='images\carousel_down.png' alt="img" className={`m-auto ${lastIndex === prodResponse?.productImages?.value?.length  ? 'opacity-25': ''}`} />
                     </div>
                                 
-            <div onClick={handleDownArrowClick} className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${lastIndex === prodResponse?.productImages?.value.length  ? 'opacity-25': ''}`}>
+            <div onClick={handleDownArrowClick} className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${lastIndex === prodResponse?.productImages?.value?.length  ? 'opacity-25': ''}`}>
             
                 <svg width="24" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"></path></svg></div>
                 </div>
                <div className={`lg:w-[526px] ${(deviceWidth < 1024 && deviceWidth !== 0) ? 'h-[300px]': ''} box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}>
-                  <img className="lg:w-[270px]" alt="img" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url} />
+               <img className="lg:w-[270px]" alt="img" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value && prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url} />
+                  {/* <img className="lg:w-[270px]" alt="img" id={"pdp_carousel_"+prodResponse?.productImages?.value?.imgdata?.id} src={prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url} /> */}
                </div>
             </div>
         </div>

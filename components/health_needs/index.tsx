@@ -308,10 +308,27 @@ const HealthNeedsComponent = () => {
             }
           )
           .then((res) => {
-            setSelectedProduct((prevSelectedProducts: any) => [
-              ...prevSelectedProducts,
-              { item, data: res.data },
-            ]);
+            setSelectedProduct((prevSelectedProducts :any) => {
+              const isDuplicate = prevSelectedProducts.some(
+                (selectedItem :any) => selectedItem.item.name === item.name
+              );
+              if (isDuplicate) {
+                return prevSelectedProducts;
+              }
+            
+              const updatedProducts = [
+                ...prevSelectedProducts.filter(
+                  (selectedItem : any) => selectedItem.item !== item
+                ),
+                { item, data: res.data }
+              ];
+              updatedProducts.sort((a: any, b: any) => {
+                const propertyName = 'name';
+                return a.item[propertyName].localeCompare(b.item[propertyName]);
+              });
+
+              return updatedProducts
+            });
           });
       });
     };

@@ -365,7 +365,7 @@ function HealthCareProfessionalComponent() {
                             >
                               <div
                                 key={customer?.customerName?.value}
-                                className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative"
+                                className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]"
                               >
                                 <div
                                   className="text-sofia-reg text-base font-normal text-mckblack pb-4"
