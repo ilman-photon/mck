@@ -46,7 +46,7 @@ const ProductComponent = ({ selectedProduct }: any) => {
                     >
                       <div
                           onClick={() => handleProductClick(item)}
-                          className="swiper-list-item w-[198px] min-h-480 rounded-lg border border-[#CCD1E3] mr-1 p-4"
+                          className="swiper-list-item w-[198px] lg:min-h-420 min-h-450 rounded-lg border border-[#CCD1E3] mr-1 p-4"
                       >
                         <img
                           src={item?.image?.value?.url}
@@ -65,14 +65,14 @@ const ProductComponent = ({ selectedProduct }: any) => {
                           }
                         </div>
                         <div
-                          className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl"
+                          className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate"
                           tabIndex={0}
                           id="hn_label_005_03"
                         >
                           {item?.name}
                         </div>
                         <div
-                          className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal"
+                          className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
                           tabIndex={0}
                           id="hn_label_005_03"
                           dangerouslySetInnerHTML={{

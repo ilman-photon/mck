@@ -1704,7 +1704,7 @@ footer {
     }
     .tab-label:after {
       position: relative;
-      top: 0;
+      top: 6px;
     }
   }
   .text-54 {
@@ -2264,5 +2264,15 @@ Video Player Code
   }
   .right-btn {
     background-image: url('../public/images/product-carousel-right.svg');
+  }
+}
+.para-ellipsis-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  @media screen and (max-width: 1023px) {
+    -webkit-line-clamp: 4;
   }
 }
