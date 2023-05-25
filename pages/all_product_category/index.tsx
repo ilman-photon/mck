@@ -119,12 +119,17 @@ function AllProductCategoryPage() {
               );
               if (itemExists) {
                 return prevSelectedProducts;
-              }
-              return [
-                ...prevSelectedProducts,
-                { item: { name: item }, data: res.data },
-              ];
+              }     
+              const newItem = { item: { name: item }, data: res.data };
+              const updatedProducts = [...prevSelectedProducts, newItem];
+              updatedProducts.sort((a: any, b: any) => {
+                const propertyName = 'name';
+                return a.item[propertyName].localeCompare(b.item[propertyName]);
+              });
+            
+              return updatedProducts;
             });
+            
           });
       });
     };
@@ -268,7 +273,7 @@ function AllProductCategoryPage() {
       <GoogleTagManager />
       <HeaderComponent />
       {carouselData && <CarouselComponent sectionData={carouselData} />}
-      {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
+      {categoryProduct.length  && <CategoryComponent sectionData={categoryProduct} />}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1">
         <HealthNeedFilter
