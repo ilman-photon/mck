@@ -1,5 +1,8 @@
 import ProductComponent from "./ProductListCarousel";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import Image from "next/image";
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 
 const HealthNeedFilter = ({
   activeFiltersData,
@@ -13,6 +16,7 @@ const HealthNeedFilter = ({
   fetchProductList,
 }: any) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -34,18 +38,19 @@ const HealthNeedFilter = ({
       if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
         selectedFilterItems[categoryId]["items"].push(filter);
       }
-      //existing code
+
+      setLoading(true);
       setActiveFilter([...activeFilter, filter]);
       selectedFilterItems[categoryId][subCategoryId].checked = true;
     } else {
       const index = selectedFilterItems[categoryId]["items"].indexOf(filter);
       selectedFilterItems[categoryId]["items"].splice(index, 1);
-      //existing code
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
         })
       );
+      fetchProductList("");
       selectedFilterItems[categoryId][subCategoryId].checked = false;
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
@@ -55,6 +60,7 @@ const HealthNeedFilter = ({
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
+    setLoading(true);
     if (e.target.checked) {
       if (selectedViewAllCateory.indexOf(categoryId) === -1) {
         selectedViewAllCateory.push(categoryId);
@@ -100,6 +106,7 @@ const HealthNeedFilter = ({
         pathname: "/health_needs",
       });
     }
+    fetchProductList("");
   };
   return (
     <div className="container lg:mt-12 mt-6 px-4 lg:px-0">
@@ -159,10 +166,11 @@ const HealthNeedFilter = ({
             </div>
           </div>
         </div>
-      </section>
-      {/* Health needs - Top Active Filter section starts */}
 
-      {/* Health needs - Left coloumn Filter section starts */}
+        <div className="text-mcknormalgrey" tabIndex={0} id="hn_label_003_3">
+          {activeFiltersData?.showResultsText?.value}
+        </div>
+      </section>
       <div className="lg:flex mt-6">
         <div className="lg:w-1/6 xl:w-1/6 w-full h-max">
           <div className="lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category">
@@ -306,21 +314,35 @@ const HealthNeedFilter = ({
                             )}
                           </ul>
                         </div>
-                        {/* Left filter sub category */}
                       </section>
                     </>
                   ))}
               </div>
             </div>
-            {/* Left main category lists */}
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          {/* Health needs - Right coloumn starts */}
           <div>
-            <ProductComponent selectedProduct={selectedProduct} />
+            {loading ? (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="fixed inset-0 bg-black opacity-50"></div>
+                <div
+                  className="relative"
+                  style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                >
+                  <Image
+                    src={gifImage}
+                    alt="coba-image"
+                    width={400}
+                    height={400}
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            ) : (
+              <ProductComponent selectedProduct={selectedProduct} />
+            )}
           </div>
-          {/* Health needs - Right coloumn Ends */}
         </div>
       </div>
     </div>

@@ -10,7 +10,8 @@ import useAxios from "@/hooks/useApi";
 import ImageVideoOrTextSection from "@/components/promotional_text";
 import RecommendationalProductComponent from "@/components/recommendational_product";
 import GoogleTagManager from "@/components/google_tag_manager";
-
+import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import Image from "next/image";
 export default function Home() {
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -28,34 +29,74 @@ export default function Home() {
     });
   }
 
+  // State untuk menunjukkan apakah komponen sedang dalam proses loading
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Mengatur status loading berdasarkan variabel loading dari useAxios
+  useEffect(() => {
+    setIsLoading(loading);
+  }, [loading]);
+
   return (
     <>
       <GoogleTagManager />
       <Head>
-        <html lang="en"/>
+        <html lang="en" />
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error.message}</p>}
-      {!loading && !error && response && (
-        <>
-          {/* <CookiesComponent /> */}
-          <HeaderComponent />
-          {response.data[0].blockArea?.expandedValue?.map((item: any, index: number) => (
+      <>
+        {/* <CookiesComponent /> */}
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-75"></div>
+            <div
+              className="relative"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
+              <Image
+                src={gifImage}
+                alt="coba-image"
+                width={400}
+                height={400}
+                loading="eager"
+              />
+            </div>
+          </div>
+        )}
+        <HeaderComponent />
+        {response?.data[0]?.blockArea?.expandedValue?.map(
+          (item: any, index: number) => (
             <React.Fragment key={index}>
-              {item?.contentType[1] === "CarouselBlock" ? <CarouselComponent sectionData={filteredData("CarouselBlock")} /> :
-                item?.contentType[1] === 'FourColumnBlock' ? <CategoryComponent sectionData={filteredData("FourColumnBlock")} /> :
-                  item?.contentType[1] === 'TwoCloumnBlock' ? <ImageVideoAndTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} /> :
-                    item?.contentType[1] === 'OneColumnBlock' ? <ImageVideoOrTextSection sectionData={response.data[0].blockArea?.expandedValue[index]} textAlignment={'text-center'} /> :
-                      item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null}
+              {item?.contentType[1] === "CarouselBlock" ? (
+                <CarouselComponent
+                  sectionData={filteredData("CarouselBlock")}
+                />
+              ) : item?.contentType[1] === "FourColumnBlock" ? (
+                <CategoryComponent
+                  sectionData={filteredData("FourColumnBlock")}
+                />
+              ) : item?.contentType[1] === "TwoCloumnBlock" ? (
+                <ImageVideoAndTextSection
+                  sectionData={response.data[0].blockArea?.expandedValue[index]}
+                />
+              ) : item?.contentType[1] === "OneColumnBlock" ? (
+                <ImageVideoOrTextSection
+                  sectionData={response.data[0].blockArea?.expandedValue[index]}
+                  textAlignment={"text-center"}
+                />
+              ) : item?.contentType[1] === "RecommendedProductBlock" ? (
+                <RecommendationalProductComponent
+                  sectionData={filteredData("RecommendedProductBlock")}
+                />
+              ) : null}
             </React.Fragment>
-          ))}
-          <FooterComponent />
-        </>
-      )}
+          )
+        )}
+        <FooterComponent />
+      </>
     </>
   );
 }
