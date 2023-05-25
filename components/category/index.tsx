@@ -46,8 +46,6 @@ export default function CategoryComponent({ sectionData }: any) {
 
   return (
     <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
-      {loading && <p>Loading...</p>}
-
       {!loading && response && (
         <div className="flex flex-wrap justify-center">
           {response.map((item: any, index: number) => (

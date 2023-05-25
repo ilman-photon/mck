@@ -115,7 +115,8 @@ const HealthNeedFilter = ({
         <div
           className="flex mb-2 items-center text-mckblue"
           tabIndex={0}
-          id="hn_label_003" aria-label={activeFiltersData?.activeFiltersText?.value}
+          id="hn_label_003"
+          aria-label={activeFiltersData?.activeFiltersText?.value}
         >
           {activeFiltersData?.activeFiltersText?.value}
           <img
@@ -160,7 +161,11 @@ const HealthNeedFilter = ({
                 className="mck-filter-clearall-icon"
                 alt="delete icon"
               />
-              <div className="underline" onClick={handleClearAll} aria-label={activeFiltersData?.clearAllText?.value}>
+              <div
+                className="underline"
+                onClick={handleClearAll}
+                aria-label={activeFiltersData?.clearAllText?.value}
+              >
                 {activeFiltersData?.clearAllText?.value}
               </div>
             </div>
@@ -212,7 +217,11 @@ const HealthNeedFilter = ({
                               htmlFor={
                                 leftfiltermaindata?.mainCategory?.value[0].name
                               }
-                              className="ml-2 filter-title" tabIndex={0} aria-label={leftfiltermaindata?.mainCategory?.value[0].name}
+                              className="ml-2 filter-title"
+                              tabIndex={0}
+                              aria-label={
+                                leftfiltermaindata?.mainCategory?.value[0].name
+                              }
                             >
                               {leftfiltermaindata?.mainCategory?.value[0].name}
                             </label>
@@ -241,7 +250,8 @@ const HealthNeedFilter = ({
                                   }
                                   type="checkbox"
                                   value="view all"
-                                  className="w-4 h-4 accent-[#001A71]" aria-label="view all"
+                                  className="w-4 h-4 accent-[#001A71]"
+                                  aria-label="view all"
                                   checked={
                                     selectedFilterItems[
                                       leftfiltermaindata?.mainCategory?.value[0]
@@ -288,7 +298,8 @@ const HealthNeedFilter = ({
                                       id={leftfiltersubdata?.name}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
-                                      className="w-4 h-4 accent-[#001A71]" aria-label={leftfiltersubdata?.name}
+                                      className="w-4 h-4 accent-[#001A71]"
+                                      aria-label={leftfiltersubdata?.name}
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
@@ -323,27 +334,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <div>
-            {loading ? (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="fixed inset-0 bg-black opacity-50"></div>
-                <div
-                  className="relative"
-                  style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                >
-                  <Image
-                    src={gifImage}
-                    alt="coba-image"
-                    width={400}
-                    height={400}
-                    loading="eager"
-                  />
-                </div>
-              </div>
-            ) : (
-              <ProductComponent selectedProduct={selectedProduct} />
-            )}
-          </div>
+          <ProductComponent selectedProduct={selectedProduct} />
         </div>
       </div>
     </div>
