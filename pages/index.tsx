@@ -78,7 +78,7 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-        <html lang="en" />
+        
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
