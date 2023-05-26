@@ -28,11 +28,15 @@ export default function Home() {
       });
     });
   }
-
-  // State untuk menunjukkan apakah komponen sedang dalam proses loading
   const [isLoading, setIsLoading] = useState(true);
+  const [showComponent, setShowComponent] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowComponent(false);
+    }, 1000);
 
-  // Mengatur status loading berdasarkan variabel loading dari useAxios
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     setIsLoading(loading);
   }, [loading]);
@@ -49,7 +53,7 @@ export default function Home() {
       </Head>
       <>
         {/* <CookiesComponent /> */}
-        {isLoading && (
+        {showComponent && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-75"></div>
             <div
@@ -66,6 +70,7 @@ export default function Home() {
             </div>
           </div>
         )}
+
         <HeaderComponent />
         {response?.data[0]?.blockArea?.expandedValue?.map(
           (item: any, index: number) => (
