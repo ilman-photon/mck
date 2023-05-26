@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 
+let tempCategoryName :any= []
 const HealthNeedFilter = ({
   activeFiltersData,
   activeFilter,
@@ -67,11 +68,15 @@ const HealthNeedFilter = ({
       }
       isCategoryChecked = true;
       subCategoryChecked = true;
+      tempCategoryName.push(selectedFilterItems[categoryId].categoryName + "- All")
     } else {
       const index = selectedViewAllCateory.indexOf(categoryId);
       selectedViewAllCateory.splice(index, 1);
       isCategoryChecked = false;
       subCategoryChecked = false;
+      const newArray = tempCategoryName.filter((item :any) => !item.includes(selectedFilterItems[categoryId].categoryName));
+       tempCategoryName = newArray;
+
     }
 
     selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
@@ -91,14 +96,19 @@ const HealthNeedFilter = ({
     });
 
     let selectedSubCat: any = [];
-    selectedFilterItems.map((category: any) => {
-      category.items.map((name: any) => {
-        if (selectedSubCat.indexOf(name) === -1) {
-          selectedSubCat.push(name);
-        }
-      });
-    });
-    setActiveFilter([...selectedSubCat]);
+    let selectedCategoryName : any =[];
+    tempCategoryName.map( (item :any) =>{
+      selectedCategoryName.push(item);
+    })
+    // selectedFilterItems.map((category: any) => {
+    //   category.items.map((name: any) => {
+    //     if (selectedSubCat.indexOf(name) === -1) {
+    //       selectedSubCat.push(name);
+    //     }
+    //   });
+    // });
+    // setActiveFilter([...selectedSubCat]);
+    setActiveFilter([...selectedCategoryName]);
     if (selectedViewAllCateory.length > 0) {
     } else {
       fetchProductList("");
