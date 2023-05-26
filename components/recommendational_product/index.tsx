@@ -61,7 +61,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
 
               return (
                 <div
-                  className={`bg-color p-4 sm:m-3 mb-4 ${colSpan} ${rowSpan} `}
+                  className={`bg-color lg:p-9 xl:p-9 p-4 sm:m-3 mb-4 ${colSpan} ${rowSpan} `}
                   key={ele?.data?.contentLink?.id}
                 >
                   <style jsx>{`
@@ -77,7 +77,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   >
                     <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
                       <img
-                        className="h-auto max-w-fit mx-auto w-56 lg:w-80 xl:w-80"
+                        className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                         src={ele?.data?.imageTitle?.value?.url}
                         alt={ele?.data?.imageTitle?.value?.url}
                         tabIndex={0}
@@ -94,6 +94,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                             tabIndex={0}
                             id={ele?.data?.image?.value?.url}
                             alt="promotion image"
+                            role="img"
                           />
                         </div>
                       </div>
