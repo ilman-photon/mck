@@ -79,8 +79,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
       >
         <div className="bg-gradient absolute"></div>
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
-          {loading && <p>Loading...</p>}
-
           {!loading &&
             (response.length > 1 ? (
               transitions((styles: any, item: any) => (

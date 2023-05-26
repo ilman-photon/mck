@@ -28,11 +28,7 @@ export default function Home() {
       });
     });
   }
-
-  // State untuk menunjukkan apakah komponen sedang dalam proses loading
   const [isLoading, setIsLoading] = useState(true);
-
-  // Mengatur status loading berdasarkan variabel loading dari useAxios
   useEffect(() => {
     setIsLoading(loading);
   }, [loading]);
@@ -49,23 +45,6 @@ export default function Home() {
       </Head>
       <>
         {/* <CookiesComponent /> */}
-        {isLoading && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="fixed inset-0 bg-black opacity-75"></div>
-            <div
-              className="relative"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            >
-              <Image
-                src={gifImage}
-                alt="coba-image"
-                width={400}
-                height={400}
-                loading="eager"
-              />
-            </div>
-          </div>
-        )}
         <HeaderComponent />
         {response?.data[0]?.blockArea?.expandedValue?.map(
           (item: any, index: number) => (
