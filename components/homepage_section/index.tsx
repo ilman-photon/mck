@@ -224,41 +224,43 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             tabIndex={0}
             className="w-full"
           />
-          <div className="lg:absolute top-0 left-0 right-0 bottom-0 bg-transparent-left lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
-            <h2
-              className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
-              id="wft_label_005"
-              tabIndex={0}
-              role="title"
-            >
-              {sectionData?.name}
-            </h2>
-            <p
-              className="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis"
-              dangerouslySetInnerHTML={{
-                __html:
-                  sectionData?.description?.value,
-              }}
-              id="wft_label_006"
-              tabIndex={0}
-            ></p>
-            {sectionData?.buttonUrl?.value && (
-              <button
-                onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
-                className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
-                id="wft_btn_007"
-                aria-label={
-                  sectionData?.buttonText?.value
-                }
-                style={{ backgroundColor: sectionData?.buttonColorCode?.value }}
+          <div className="container mx-auto position-relative bg-transparent-left">
+            <div className="lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
+              <h2
+                className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
+                id="wft_label_005"
+                tabIndex={0}
+                role="title"
               >
-                {sectionData?.buttonText?.value}
-              </button>
-            )}
+                {sectionData?.name}
+              </h2>
+              <p
+                className="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    sectionData?.description?.value,
+                }}
+                id="wft_label_006"
+                tabIndex={0}
+              ></p>
+              {sectionData?.buttonUrl?.value && (
+                <button
+                  onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
+                  className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
+                  id="wft_btn_007"
+                  aria-label={
+                    sectionData?.buttonText?.value
+                  }
+                  style={{ backgroundColor: sectionData?.buttonColorCode?.value }}
+                >
+                  {sectionData?.buttonText?.value}
+                </button>
+              )}
 
+            </div>
           </div>
         </div> :
-        <div className="relative lg:mb-12 mb-6">
+        <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6">
           <img src={sectionData?.backgroundImage?.expandedValue?.url} id="wft_img_009" tabIndex={0} alt="heal and thrive" />
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
             <h2
@@ -305,12 +307,12 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
         key={sectionData?.contentLink?.id}
       >
         <h3
-          className="text-2xl lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center" tabIndex={0} id={sectionData?.title?.value}
+          className="text-2xl lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3" tabIndex={0} id={sectionData?.title?.value}
         >
           {sectionData?.title?.value}
         </h3>
         <div
-          className={`mx-auto w-full lg:${'w-1/2'} px-3 text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt  `}
+          className={`mx-auto w-full lg:${'w-1/2'} px-3 text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt mainpage-styles`}
           dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }} tabIndex={0} id={sectionData?.description?.value}
         ></div>
       </div>}

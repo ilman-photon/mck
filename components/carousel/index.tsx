@@ -145,7 +145,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
               ))
             ) : (
               <div
-                className="container mx-auto block"
+                className="mx-auto block"
                 key={response[0]?.contentLink?.id}
               >
                 <div

@@ -27,6 +27,15 @@ function WhyFTComponent() {
     document.title =
       whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Default Title";
   }, [whyFTData]);
+
+  useEffect(() => {
+    const setPageNameAsClassName = () => {
+      const pageName: string = "whyft-component";
+      document.body.className = pageName;
+    };
+    setPageNameAsClassName();
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     fetchWhyFTDetails()
@@ -86,19 +95,32 @@ function WhyFTComponent() {
   };
 
   return (
-    <div className="four-oh-four why-FT container flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
+    <>
+    <div className="four-oh-four why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
       <React.Fragment>
         {whyFTData &&
           rearrangedData1().map((item: any, index: number) => (
             <>
               <React.Fragment key={index}>
                 {item?.contentType[1] === "CarouselBlock" ? (
-                  <div className="mb-76 mb-6">
+                  <div className="lg:mb-16">
                     <CarouselComponent
                       sectionData={filteredData("CarouselBlock")}
                     />{" "}
                   </div>
-                ) : item?.contentType[1] === "TwoCloumnBlock" ? (
+                ) : null}
+              </React.Fragment>
+            </>
+          ))}
+      </React.Fragment>
+    </div>
+    <div className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0">
+      <React.Fragment>
+        {whyFTData &&
+          rearrangedData1().map((item: any, index: number) => (
+            <>
+              <React.Fragment key={index}>
+                {item?.contentType[1] === "TwoCloumnBlock" ? (
                   <ImageVideoAndTextSection
                     sectionData={whyFTData.contentArea.expandedValue[index]}
                   />
@@ -114,6 +136,7 @@ function WhyFTComponent() {
           ))}
       </React.Fragment>
     </div>
+    </>
   );
 }
 export default WhyFTComponent;
