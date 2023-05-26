@@ -31,13 +31,16 @@ const ProductComponent = ({ selectedProduct ,recommendedProduct }: any) => {
     <>
       {selectedProduct?.map((product: any) => (
         <>
-         {selectedRecommendedProduct?.map((item :any) =>{
-          
-          if(item === product?.item?.name){
-          return <RecommendationalProductComponent sectionData={sectionData} />
-          }   
-
-        })} 
+        {selectedRecommendedProduct?.map((item: any, index: number) => {
+  if (item === product?.item?.name) {
+    return (
+      <RecommendationalProductComponent
+        key={index}
+        sectionData={sectionData}
+      />
+    );
+  }
+})}
           <section>
             <div
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
