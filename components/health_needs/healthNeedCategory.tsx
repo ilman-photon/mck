@@ -52,7 +52,7 @@ const HealthNeedCategory = ({
       <div
         className="health-needs-categories pt-9 px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
         tabIndex={0}
-        id="hn_label_002"
+        id="hn_label_0001"
       >
         <ul className="health-needs-categories-icons flex flex-wrap gap-4">
           {healthNeedData &&

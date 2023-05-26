@@ -10,7 +10,7 @@ function ProductFilter({
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
           {productCategoryData &&
-            productCategoryData?.map((leftfiltermaindata: any) => (
+            productCategoryData?.map((leftfiltermaindata: any,index:number) => (
               <>
                 {/* Left filter main category */}
 
@@ -29,7 +29,7 @@ function ProductFilter({
                       key={leftfiltermaindata?.contentLink?.id}
                     >
                       <img
-                        id={leftfiltermaindata?.mainCategory?.value[0].name}
+                        id={leftfiltermaindata?.mainCategory?.value[0].name+index}
                         src={
                           leftfiltermaindata?.categoryImage?.expandedValue?.url
                         } alt={leftfiltermaindata?.mainCategory?.value[0].name}
