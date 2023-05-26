@@ -1,6 +1,22 @@
 import React from 'react';
+import { useState, useEffect } from "react";
+
 
 function TermsComponent() {
+
+    const [ApiRespond, setApiRespond] = useState<any>();
+
+    useEffect(() => {
+        // Set the lang attribute to "en" on the <html> element
+        document.documentElement.lang = "en";
+    }, []);
+
+    useEffect(() => {
+        // Set the title of the document dynamically
+        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+    }, [ApiRespond]);
+    
+
     return (
         <>
             <div className="terms container flex flex-col lg:p-72 p-4 pt-6 pb-0 mx-auto lg:mt-36 mt-16">
