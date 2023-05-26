@@ -22,6 +22,17 @@ function TermsComponent() {
             })
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
+
+    useEffect(() => {
+        // Set the lang attribute to "en" on the <html> element
+        document.documentElement.lang = "en";
+    }, []);
+
+    useEffect(() => {
+        // Set the title of the document dynamically
+        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+    }, [ApiRespond]);
+    
     return (
         <div className="terms container flex flex-col lg:p-72 p-4 pt-6 pb-0 mx-auto lg:mt-36 mt-16">
             <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center">{ApiRespond?.data[0]?.title.value}</h1>
