@@ -368,8 +368,8 @@ function HealthCareProfessionalComponent() {
                                 className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]"
                               >
                                 <div
-                                  className="text-sofia-reg text-base font-normal text-mckblack mb-4 text-content-ellipsis"
-                                  role="conent"
+                                  className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:h-24 lg:overflow-auto textoverflow-scroll"
+                                  role="content"
                                   tabIndex={0}
                                   id={`hcp-label-000${idx}`}
                                   dangerouslySetInnerHTML={{
