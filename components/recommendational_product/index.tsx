@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-function RecommendationalProductComponent({ sectionData }: any) {
+function RecommendationalProductComponent({ sectionData, indexs }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
@@ -71,9 +71,8 @@ function RecommendationalProductComponent({ sectionData }: any) {
                   `}</style>
 
                   <div
-                    className={`grid h-full ${
-                      colSpan === "col-span-2" ? "place-items-center" : ""
-                    }`}
+                    className={`grid h-full ${colSpan === "col-span-2" ? "place-items-center" : ""
+                      }`}
                   >
                     <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
                       <img
@@ -81,7 +80,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                         src={ele?.data?.imageTitle?.value?.url}
                         alt={ele?.data?.imageTitle?.value?.url}
                         tabIndex={0}
-                        id={"home-product-image" + ele?.data?.contentLink?.id+index}
+                        id={"home-product-image" + indexs + index + 1}
                       />
                     </div>
 
@@ -92,7 +91,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                             className="mx-auto lg:my-auto"
                             src={ele?.data?.image?.value?.url}
                             tabIndex={0}
-                            id={ele?.data?.image?.value?.url}
+                            id={"home-product-image01" + indexs + index + 1}
                             alt="promotion image"
                             role="img"
                           />
@@ -100,12 +99,11 @@ function RecommendationalProductComponent({ sectionData }: any) {
                       </div>
 
                       <div
-                        id="p-text"
-                        className={`text-justify pr-0 lg:pr-9 col-span-2 ${
-                          colSpan === "col-span-2"
-                            ? "flex justify-center items-center"
-                            : ""
-                        }`}
+                        id={"p-text" + indexs + index + 1}
+                        className={`text-justify pr-0 lg:pr-9 col-span-2 ${colSpan === "col-span-2"
+                          ? "flex justify-center items-center"
+                          : ""
+                          }`}
                       >
                         <div
                           className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left pb-4"
@@ -113,7 +111,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                             __html: ele?.data?.description?.value,
                           }}
                           tabIndex={0}
-                          id={ele?.data?.description?.value}
+                          id={"p-text 01" + indexs + index + 1}
                         ></div>
                       </div>
                     </div>
@@ -126,7 +124,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                         }
                         tabIndex={0}
                         role="button"
-                        id={ele?.data?.buttonText?.value + index}
+                        id={"home-product-button" + indexs + index + 1}
                         style={{
                           backgroundColor: ele?.data?.buttonColor?.value,
                         }}

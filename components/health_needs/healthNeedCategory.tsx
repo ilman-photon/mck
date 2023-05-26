@@ -56,14 +56,15 @@ const HealthNeedCategory = ({
       >
         <ul className="health-needs-categories-icons flex flex-wrap gap-4">
           {healthNeedData &&
-            healthNeedData?.map((healthneedsdata: any) => (
+            healthNeedData?.map((healthneedsdata: any, index: number) => (
               <li
+                id={`Health_title+${index}`}
                 key={healthneedsdata?.contentLink?.id}
                 className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-9 ${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
-                }`}
+                  }`}
                 onClick={() =>
                   handleHealthNeedData(
                     healthneedsdata?.title.value,
@@ -72,6 +73,7 @@ const HealthNeedCategory = ({
                 }
               >
                 <img
+                  id={`hl-img+${index}`}
                   src={healthneedsdata?.image?.expandedValue?.url}
                   alt={healthneedsdata?.title.value}
                   className="mb-3 mx-auto w-auto"

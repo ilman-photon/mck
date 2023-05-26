@@ -31,11 +31,12 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
     <>
       {selectedProduct?.map((product: any, index: number) => (
         <>
-          {selectedRecommendedProduct?.map((item: any, index: number) => {
+          {selectedRecommendedProduct?.map((item: any, idx: number) => {
             if (item === product?.item?.name) {
               return (
                 <RecommendationalProductComponent
-                  key={index}
+                  indexs={index}
+                  key={idx}
                   sectionData={sectionData}
                 />
               );
@@ -62,13 +63,13 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
                 className="h-480"
 
               >
-                {product?.data?.results?.map((item: any, index: number) => {
+                {product?.data?.results?.map((item: any, idx: number) => {
                   return (
                     <SwiperSlide
                       key={item?.contentLink?.id}
                       className="swiper-slide-custom"
                     >
-                      <ProductCard cardData={item} product={product} indexs={index} />
+                      <ProductCard cardData={item} product={product} indexs={index+idx+1} />
                     </SwiperSlide>
                   );
                 })}

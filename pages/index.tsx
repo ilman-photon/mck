@@ -78,7 +78,7 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-        
+
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -140,6 +140,7 @@ export default function Home() {
               />
             ) : item?.contentType[1] === "RecommendedProductBlock" ? (
               <RecommendationalProductComponent
+                indexs={index}
                 sectionData={filteredData("RecommendedProductBlock")}
               />
             ) : null}
