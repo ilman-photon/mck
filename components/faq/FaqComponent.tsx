@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function FaqComponent() {
 
     const [faqData, SetFaqData] = useState<any>();
+    const [ApiRespond, setApiRespond] = useState<any>();
 
     function fetchFAQDetails() {
         return axios.get(
@@ -24,6 +25,15 @@ function FaqComponent() {
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
 
+    useEffect(() => {
+        
+        document.documentElement.lang = "en";
+         }, []);
+        
+         useEffect(() => {
+        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+         }, [ApiRespond]);
+
     return (
         <>
             <div className="four-oh-four faq-container container flex flex-col mx-auto px-0 lg:mt-36 lg:mt-16">
@@ -36,8 +46,8 @@ function FaqComponent() {
                         <label className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base" htmlFor={bdata?.contentLink?.id}>
                             {bdata?.question?.value}</label>
                         <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
-                            <ul dangerouslySetInnerHTML={{ __html: bdata?.answer?.value, }} id="faq_label_004">
-                            </ul>
+                            <div dangerouslySetInnerHTML={{ __html: bdata?.answer?.value, }} id="faq_label_004">
+                            </div>
                         </div>
                     </div>
                     ))}               
