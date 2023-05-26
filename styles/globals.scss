@@ -1696,6 +1696,7 @@ footer {
   }
   .tab input:checked ~ .tab-content {
     padding: 16px;
+    border: 0;
   }
   .tab {
     .tab-content ul,
@@ -2281,6 +2282,38 @@ Video Player Code
     margin-bottom: 4px;
     a{
       text-decoration: underline;
+    }
+  }
+}
+
+/*** search results accordion style ***/
+.search-results {
+  .mck-hn-accordion-title-check {
+    display: none;
+  }
+  .filter-title {
+    color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-bold";
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .tab-label {
+    display: flex;
+    align-items: end;
+  }
+  .tab-content {
+    margin: 0;
+  }
+  .filter-title {
+    @media screen and (max-width: 1023px) {
+      position: relative;
+      z-index: -1;
+    }
+  }
+  .tab input:checked ~ .tab-content {
+    @media screen and (max-width: 1023px) {
+      padding-top: 0;
     }
   }
 }

@@ -312,7 +312,7 @@ function ResultComponent() {
 
   return (
     <>
-      <div className="search-results lg:p-72 p-4 pb-0 container mx-auto lg:mt-36 mt-16">
+      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 lg:pt-0 pb-0 container mx-auto lg:mt-36">
         <div>
           <div
             className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1"
@@ -359,7 +359,7 @@ function ResultComponent() {
             {/* Health needs - Top Active Filter section starts */}
 
             {/* Health needs - Left coloumn Filter section starts */}
-            <div className="lg:flex md:flex sm-flex flex-none mt-8">
+            <div className="lg:flex md:flex sm-flex flex-none lg:mt-8 mt-6">
               <div className="flex-none h-max">
                 <ProductFilter
                   productCategoryData={productCategoryData}
@@ -377,23 +377,23 @@ function ResultComponent() {
                     {/* Health needs categories title & product carousel items starts */}
                     <section>
                       {/* Product items */}
-                      <div className="flex gap-0.5 flex-wrap product-list-container">
+                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
                         {productListData?.data?.results.map((item: any) => {
                           return (
                             <div
-                              className="w-52 h-96 border-2 product-list-item"
+                              className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
                               key={item?.contentLink?.id}
                               onClick={() => handleProductClick(item)}
                             >
-                              <img src={item?.image?.value?.url} alt="" />
-                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey">
+                              <img src={item?.image?.value?.url} alt={item?.image?.value?.url} className="mx-auto" />
+                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                                 {item?.form?.value[1]?.name}
                               </div>
-                              <div className="mckblue product-list-title">
+                              <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
                                 {item?.name}
                               </div>
                               <div
-                                className="mcknormalgrey product-list-description"
+                                className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
                                 dangerouslySetInnerHTML={{
                                   __html: item?.highlightDescription?.value,
                                 }}
