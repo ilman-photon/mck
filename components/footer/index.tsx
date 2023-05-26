@@ -121,7 +121,7 @@ export default function FooterComponent() {
           {footerMobileNav &&
             footerMobileNav.map((item: any) => {
               return (
-                <li>
+                <li key={item?.contentLink?.guidValue}>
                   <button
                     type="button"
                     className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${
