@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 export default function ImageVideoAndTextSection({ sectionData }: any) {
   const router = useRouter();
+  const [ApiRespond, setApiRespond] = useState<any>();
 
   const handleCTABtn = (url: string) => {
     router.push({
@@ -59,6 +60,18 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
     }
   };
 
+
+
+  useEffect(() => {
+    // Set the lang attribute to "en" on the <html> element
+    document.documentElement.lang = "en";
+  }, []);
+
+  useEffect(() => {
+      // Set the title of the document dynamically
+      document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+  }, [ApiRespond]);
+
   return (
     <div>
       {sectionData.video?.value?.url ? (
@@ -81,7 +94,9 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                   src={sectionData.video?.value?.url}
                   ref={videoRef}
                   controls={isPlaying}
-                />
+                >
+                  <track kind="captions" src="path/to/captions.vtt" label="Captions" default />
+                </video>
                 {!isPlaying && (
                   <div className="play-button-wrapper">
                     <div
@@ -175,7 +190,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               className={`${sectionData?.assetPosition?.value === "Right" 
               ? "mx-auto lg:text-left text-center"
               : "ml-0 text-left"
-              } lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt`}
+              } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
               tabIndex={0}
               id={sectionData?.title?.value}
             >
@@ -185,7 +200,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               className={`${sectionData?.assetPosition?.value === "Right"
               ? "mx-auto lg:text-left text-center"
               : "ml-0 text-left"
-              } jsx-290076256 text-lg font-normal text-sofia-reg lg:pb-6 pb-4 text-mcknormalgrey`}
+              } jsx-290076256 text-lg font-normal text-sofia-reg lg:mb-6 mb-4 text-mcknormalgrey text-content-ellipsis`}
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
