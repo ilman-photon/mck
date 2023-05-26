@@ -73,7 +73,7 @@ const HealthNeedCategoryMobile = ({
       <div
         className="health-needs-categories pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] mx-4 relative"
         tabIndex={0}
-        id="hn_label_002"
+        id="hn_label_0002"
       >
         <div className="health-needs-categories-icons">
           <div className="carousel-container grid grid-cols-3 md:grid-cols-2 gap-4 overflow-x-auto">

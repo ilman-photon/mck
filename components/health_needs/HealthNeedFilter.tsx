@@ -126,7 +126,7 @@ const HealthNeedFilter = ({
         <div
           className="flex mb-2 items-center text-mckblue"
           tabIndex={0}
-          id="hn_label_003"
+          id="hn_label_0003"
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
           {activeFiltersData?.activeFiltersText?.value}
@@ -194,7 +194,7 @@ const HealthNeedFilter = ({
             <div className="flex items-center my-px">
               <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
                 {productCategoryData &&
-                  productCategoryData?.map((leftfiltermaindata: any) => (
+                  productCategoryData?.map((leftfiltermaindata: any,index:number) => (
                     <>
                       {/* Left filter main category */}
 
@@ -214,7 +214,7 @@ const HealthNeedFilter = ({
                           >
                             <img
                               id={
-                                leftfiltermaindata?.mainCategory?.value[0].name
+                                leftfiltermaindata?.mainCategory?.value[0].name+index
                               }
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
