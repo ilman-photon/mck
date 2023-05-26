@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SignUpComponent from "../signup";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
@@ -9,29 +9,26 @@ function ProductDropComponent({ subMenuData }: Props) {
 
   useEffect(() => {
     if (subMenuData) {
-      getSubMenuData();
+      axios
+        .all(getSubMenuData())
+        .then((res) => {
+          setSubMenu(res);
+        })
+        .catch((e: Error | AxiosError) => console.log(e));
     }
   }, []);
 
-  const getIds = subMenuData?.map((item: any) => {
-    return item?.contentLink?.id;
-  });
-
   function getSubMenuData() {
-    axios
-      .get(
-        `${
-          process.env.API_URL
-        }/api/episerver/v3.0/content/?References=${getIds?.join(",")}&expand=*`,
+    return subMenuData?.map((item: any) => {
+      return axios.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/?References=${item?.contentLink?.id}&expand=*`,
         {
           headers: {
             "Accept-Language": "en",
           },
         }
-      )
-      .then((res) => {
-        setSubMenu(res?.data);
-      });
+      );
+    });
   }
 
   function updateUrl(path: String, type: string) {
@@ -53,23 +50,23 @@ function ProductDropComponent({ subMenuData }: Props) {
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                   href={{
-                    pathname: updateUrl(item?.menuItemUrl?.value, "0"),
+                    pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
                     query: {
-                      filter: updateUrl(item?.menuItemUrl?.value, "1"),
+                      filter: updateUrl(item?.data[0].menuItemUrl?.value, "1"),
                     },
                   }}
                   className="text-gtl-med text-2xl blue-txt text-left pl-2"
                 >
-                  {item?.menuItemName?.value}
+                  {item?.data[0].menuItemName?.value}
                 </Link>
                 <ul
                   className={`hidden submenu ${
-                    item?.subMenuContentBlockArea?.value === null
+                    item?.data[0].subMenuContentBlockArea?.value === null
                       ? "hidden"
                       : "group-hover:block"
                   }`}
                 >
-                  {item?.subMenuContentBlockArea?.expandedValue?.map(
+                  {item?.data[0].subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
                       return (
                         <li
