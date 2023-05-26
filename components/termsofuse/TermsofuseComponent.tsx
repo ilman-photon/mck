@@ -19,11 +19,11 @@ function TermsComponent() {
 
     return (
         <>
-            <div className="terms container flex flex-col lg:p-72 p-4 pt-6 pb-0 mx-auto lg:mt-36 mt-16">
+            <div className="terms container flex flex-col lg:p-72 p-4 pt-0 pb-0 mx-auto lg:mt-36 mt-6">
                 <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center" id='terms-label-001'>Foster & Thrive Terms of Use</h1>
                 <div className="text-center text-mckblue text-gtl-med lg:text-27 text-xl"  id='terms-label-001-01'>Last updated 07/22/2022</div>        
 
-                <div className="w-full">
+                <div className="w-full [&>*:last-child]:pb-0">
                     <div className="pt-6 pb-6 [&>*:last-child]:pb-0">
                         <h2 className="lg:pb-6 pb-4 lg:text-4xl text-27 text-base text-mckblue text-gtl-med font-medium"  id='terms-label-002'>Foster & Thrive Terms of Use</h2>
                         <p className="lg:pb-4 pb-2 lg:text-lg text-base grey-txt text-sofia-reg font-normal"  id='terms-label-002-01'>This website may provide information about medical conditions and their treatment. Haleon makes no representation that material in the site is appropriate or available for use outside of the territory of the intended audience. Those who choose to access this site from other locations do so on their own initiative and are responsible for compliance with local laws, if and to the extent that local laws are applicable. In addition, nothing on this website should be construed as providing any kind of medical advice or recommendation, and should not be relied on as the basis for any decision or action. Specific medical advice should always be sought from a qualified medical practitioner</p>
