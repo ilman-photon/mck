@@ -219,7 +219,7 @@ function AllProductCategoryPage() {
             const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
+              selectedViewAllCateory.length === minCategoryCnt ? "" : "or ";
             const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
             queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
           }
