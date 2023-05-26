@@ -17,6 +17,7 @@ const HealthNeedsComponent = () => {
   const [healthData, setHealthData] = useState(false);
   const [isLoading, setIsLoading] = useState(true); //
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
+  const [recommendedProduct , setRecommendedProduct] = useState<any>()
 
   function FetchProductFilter() {
     return axios.get(
@@ -247,6 +248,7 @@ const HealthNeedsComponent = () => {
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
       setHealthNeedData(healthNeedsCategoriesListData);
+      setRecommendedProduct(healthNeedsCategories?.data[0].contentArea)
 
       // Product Category setting - Filters data
       const activeFiltersData = await axios.get(
@@ -411,6 +413,7 @@ const HealthNeedsComponent = () => {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
+          recommendedProduct={recommendedProduct}
         />
       </div>
     </>

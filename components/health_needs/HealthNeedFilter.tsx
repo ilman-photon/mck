@@ -15,6 +15,7 @@ const HealthNeedFilter = ({
   setSelectedFilterItems,
   selectedViewAllCateory,
   fetchProductList,
+  recommendedProduct
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -344,7 +345,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <ProductComponent selectedProduct={selectedProduct} />
+          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}/>
         </div>
       </div>
     </div>
