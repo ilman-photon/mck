@@ -8,7 +8,7 @@ interface RelatedProductsProps {
 const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, title, OnRelatedProductClick }) => {
 
     return (
-        <div className='related-card'>
+        <div className='related-card [&>*:last-child]:mb-0'>
             <div className="text-mckblue text-sofia-bold font-extrabold text-lg mb-6" id='blog-label-010'>{title}</div>
             {BlogListingContent?.map((item: any, index: number) => (
                 <div

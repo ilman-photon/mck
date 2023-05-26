@@ -72,8 +72,8 @@ function BlogComponent() {
 
   return (
     <>
-      <div className="container grid grid-cols-3 gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16">
-        <div className="lg:col-span-2 col-start-1 col-end-7">
+      <div className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-36">
+        <div className="lg:w-966 w-full">
           <div
             id="search"
             className={`lg:${
@@ -122,7 +122,7 @@ function BlogComponent() {
             })()
           )}
         </div>
-        <div className="lg:col-span-1 col-start-1 col-end-7">
+        <div className="lg:w-306 w-full blogright-sidebar">
           {!ActiveSearch && (
             <div
               id="search"
