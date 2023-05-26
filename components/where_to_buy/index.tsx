@@ -60,7 +60,15 @@ function WhereComponent() {
   useEffect(() => {
     fetchLocationDetails();
   }, [latitude]);
-
+  useEffect(() => {
+    textInput = 75201;
+    fectchLatandLongDetails()
+      .then((res) => {
+        setLatitude(res.data.results[0].geometry.location["lat"]);
+        setLongitude(res.data.results[0].geometry.location["lng"]);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+  }, []);
   const fetchLocationDetails = () => {
     setLoading(true);
     fetchPDPLoctionDetails()
