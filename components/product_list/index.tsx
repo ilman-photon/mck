@@ -326,7 +326,7 @@ function ProductListComponent() {
                       key={item?.contentLink?.id}
                       onClick={() => handleProductClick(item)}
                     >
-                      <img src={item?.image?.value?.url} alt={item?.image?.value?.url} className="mx-auto" />
+                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto" />
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>

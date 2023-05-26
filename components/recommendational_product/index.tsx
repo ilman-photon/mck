@@ -81,7 +81,7 @@ function RecommendationalProductComponent({ sectionData }: any) {
                         src={ele?.data?.imageTitle?.value?.url}
                         alt={ele?.data?.imageTitle?.value?.url}
                         tabIndex={0}
-                        id={"home-product-image" + index}
+                        id={"home-product-image" + ele?.data?.contentLink?.id+index}
                       />
                     </div>
 
