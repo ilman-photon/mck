@@ -47,7 +47,6 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
               tabIndex={0}
               id={`hn_label_00${index}`}
               aria-label="100"
-              role="heading"
             >
               {
                 product?.item?.name
