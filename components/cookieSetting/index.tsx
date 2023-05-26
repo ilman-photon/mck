@@ -11,7 +11,7 @@ const CookieSetting = ({ onAccept, onReject }: typeCokkieSetting) => {
           <p className="p-1 pl-0 text-center lg:text-left lg:w-fit">
             We use cookies to enhance your browsing experience, serve
             personalized ads or content, and analyze our traffic. By clicking
-            "Accept", you consent to our use of cookies.
+            Accept, you consent to our use of cookies.
           </p>
           <div className="flex ml-5">
             <div
