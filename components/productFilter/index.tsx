@@ -5,7 +5,7 @@ function ProductFilter({
   handleCheckBox,
 }: any) {
   return (
-    <div className="lg:border-r-2 pb-3 mb-2 mck-hn-filter-category">
+    <div className="lg:border-r-2 lg:pb-3 lg:mb-2 mck-hn-filter-category">
       {/* Left main category lists */}
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
@@ -34,7 +34,7 @@ function ProductFilter({
                           leftfiltermaindata?.categoryImage?.expandedValue?.url
                         } alt={leftfiltermaindata?.mainCategory?.value[0].name}
                       />
-                      <label htmlFor="acute" className="ml-2 filter-title">
+                      <label htmlFor="acute" className="ml-2 filter-title" tabIndex={0} aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
@@ -71,11 +71,12 @@ function ProductFilter({
                                 leftfiltermaindata?.mainCategory?.value[0].id
                               ]?.isCategoryChecked
                             }
+                            aria-label="View All"
                           />
                           <label
                             htmlFor="mck-view-all"
                             className="ml-2 text-mcknormalgrey text-sm"
-                            id=""
+                            id="" tabIndex={0} aria-label="View All"
                           >
                             View All
                           </label>
@@ -114,10 +115,12 @@ function ProductFilter({
                                       .id
                                   ][leftfiltersubdata?.id]?.checked
                                 }
+                                aria-label={leftfiltersubdata?.name}
                               />
                               <label
                                 htmlFor={leftfiltersubdata?.name}
                                 className="ml-2 text-sm"
+                                aria-label={leftfiltersubdata?.name}
                               >
                                 {leftfiltersubdata?.name}
                               </label>
