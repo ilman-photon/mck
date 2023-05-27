@@ -159,7 +159,7 @@ function WhereComponent() {
                       src="images/health-mart.png"
                       alt="Health Mart"
                       tabIndex={0}
-                      id="wb-img-002"
+                      id={`wb-label-02${index}`}
                     />
                   </div>
                   <div className="flex flex-row justify-between pb-2">
@@ -168,28 +168,32 @@ function WhereComponent() {
                         className="font-extrabold"
                         tabIndex={0}
                         aria-label="ABC Pharmacy"
-                        id="wb-label-003"
+                        id={`wb-label-03${index}`}
+
                       >
                         {value.StoreName}
                       </p>
                       <p
                         tabIndex={0}
                         aria-label="1230 Lindon Ave"
-                        id="wb-label-004"
+                        id={`wb-label-04${index}`}
+
                       >
                         {value.Address},{" "}
                       </p>
                       <p
                         tabIndex={0}
                         aria-label="DENVER, CO. 80202"
-                        id="wb-label-005"
+                        id={`wb-label-05_0${index}`}
+
                       >
                         {value.City} {value.Zip}
                       </p>
                       <p
                         tabIndex={0}
                         aria-label="303-571-5314"
-                        id="wb-label-006"
+                        id={`wb-label-06_0${index}`}
+
                       >
                         {value.Phone}
                       </p>
@@ -198,7 +202,8 @@ function WhereComponent() {
                       className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey"
                       tabIndex={0}
                       aria-label=".3 mi"
-                      id="wb-label-007"
+                      id={`wb-label-07_0${index}`}
+                      
                     >
                       {Number(value.Distance).toFixed(1)} mi
                     </div>
@@ -208,7 +213,8 @@ function WhereComponent() {
                       className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
                       tabIndex={0}
                       role="link"
-                      id="wb-label-008"
+                      id={`wb-label-08_0${index}`}
+
                       onClick={() => showOnline(value.StoreUrl)}
                     >
                       View Online
@@ -219,13 +225,15 @@ function WhereComponent() {
                         alt="direction"
                         className="inline-block"
                         tabIndex={0}
-                        id="wb-img-009"
+                      id={`wb-label-09_0${index}`}
+
                       />
                       <button
                         className="inline-block relative top-1 cursor-pointer"
                         tabIndex={0}
                         role="link"
-                        id="wb-label-010"
+                      id={`wb-label-10_0${index}`}
+
                         onClick={() =>
                           showMapClicked(value.Lat, value.Lon, value.StoreName)
                         }
@@ -287,7 +295,7 @@ function WhereComponent() {
                               src="images/health-mart.png"
                               alt="Health Mart"
                               tabIndex={0}
-                              id="wb-img-002"
+                        id={`wb-img-002_0${index}`}
                             />
                           </div>
                           <div className="flex">

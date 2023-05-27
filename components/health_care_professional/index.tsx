@@ -4,11 +4,13 @@ import HeaderImage from "../../public/images/health-professional.png";
 import Quotes from "../../public/images/teamcarousel-quotes.png";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+
+SwiperCore.use([Navigation, Autoplay]);
 
 const tabStyle = [
   {
@@ -292,6 +294,21 @@ function HealthCareProfessionalComponent() {
     prevBtn.addEventListener("click", handlePrev, true);
   }
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 968);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -303,10 +320,10 @@ function HealthCareProfessionalComponent() {
           >
             <Image
               src={gifImage}
+              {...(gifImage ? { width: 400, height: 400 } : {})}
               alt="coba-image"
-              width={400}
-              height={400}
               loading="eager"
+              role="image"
             />
           </div>
         </div>
@@ -314,7 +331,7 @@ function HealthCareProfessionalComponent() {
         <div>
           {response && Object.keys(response).length > 0 && (
             <>
-              <div className="container mx-auto">
+              <div className="w-full mx-auto">
                 {carouselRelated && carouselRelated?.length > 0 && (
                   <div>
                     {carouselRelated?.length > 1 ? (
@@ -324,18 +341,21 @@ function HealthCareProfessionalComponent() {
                     ) : (
                       <Image
                         src={carouselRelated[0]?.image?.expandedValue?.url}
-                        height={500}
-                        width={500}
+                        {...(carouselRelated[0]?.image?.expandedValue?.url
+                          ? { height: 500, width: 500 }
+                          : {})}
                         alt="Health Care Header Banner"
                         className="w-full"
                         id="hcp-img-001"
                         tabIndex={0}
+                        role="image"
                       ></Image>
                     )}
+                    <div className="bg-gradient absolute"></div>
                   </div>
                 )}
               </div>
-              <div className="bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 lg:mt-18 mt-6">
+              <div className="bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6">
                 <div className="container mx-auto">
                   <h1
                     className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
@@ -345,13 +365,14 @@ function HealthCareProfessionalComponent() {
                     {" "}
                     {customerReviewTitle?.value}
                   </h1>
-                  <div className="relative lg:p-0 px-6 pb-6">
+                  <div className="relative lg:p-0 px-6">
                     <Swiper
-                      modules={[Navigation]}
+                      modules={[Navigation, Autoplay]}
                       spaceBetween={10}
-                      navigation
-                      slidesPerView={3}
-                      slidesPerGroup={3}
+                      navigation={isMobile ? false : true}
+                      autoplay={isMobile ? { delay: 3000 } : false}
+                      slidesPerView={isMobile ? 'auto' : 3}
+                      slidesPerGroup={isMobile ? 1 : 3}
                       className="h-auto"
                     >
                       {response &&
@@ -361,7 +382,7 @@ function HealthCareProfessionalComponent() {
                           return (
                             <SwiperSlide
                               key={idx}
-                              className="swiper-slide mb-18"
+                              className="swiper-slide lg:mb-18 mb-16"
                             >
                               <div
                                 key={customer?.customerName?.value}
@@ -377,9 +398,10 @@ function HealthCareProfessionalComponent() {
                                   }}
                                 ></div>
                                 <div
-                                  className="text-sofia-reg text-base font-medium text-mckblue"
+                                  className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
                                   tabIndex={0}
                                   id={`hcp-label-0000${idx}`}
+                                  role="content"
                                 >
                                   {customer.customerName.value} -{" "}
                                   {customer?.customerQualification?.value}{" "}
@@ -390,6 +412,7 @@ function HealthCareProfessionalComponent() {
                                     width="84"
                                     height="84"
                                     className="mx-auto shadow-circleshadow rounded-full"
+                                    role="image"
                                     viewBox="0 0 84 84"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -416,7 +439,7 @@ function HealthCareProfessionalComponent() {
                         })}
                     </Swiper>
                   </div>
-                  <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4 pt-18">
+                  <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
                     {reviewCount}/{Math.ceil(customers?.length / 3)}
                   </div>
                 </div>
@@ -451,17 +474,18 @@ function HealthCareProfessionalComponent() {
                               {tabStyle[idx]?.svg2}
                             </label>
                             <div className="tab py-6 px-6">
-                              <h3
+                              <h2
                                 className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
                                 tabIndex={idx}
-                                id="hcp-label-009"
+                                id={`hcp-label-0${idx}_09`}
                               >
                                 {tab?.title?.value}
-                              </h3>
+                              </h2>
                               <div
                                 className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
                                 tabIndex={idx}
-                                id="hcp-label-010"
+                                id={`hcp-label-0${idx}_10`}
+                                role="content"
                                 dangerouslySetInnerHTML={{
                                   __html: tab?.description?.value,
                                 }}

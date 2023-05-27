@@ -1,8 +1,14 @@
 import ProductComponent from "./ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+
+interface ISubCategory {
+  id: number;
+  name: string
+  description: string
+}
 
 let tempCategoryName :any= []
 const HealthNeedFilter = ({
@@ -29,6 +35,23 @@ const HealthNeedFilter = ({
     });
     fetchProductList("");
   };
+
+  const handleDelete = (activeFilter :any ,item :any) =>{
+    setActiveFilter(
+      activeFilter.filter(
+        (filterItem: any) => filterItem !== item
+      )
+    )
+    selectedFilterItems.map((category: any) => {
+      category.isCategoryChecked = false;
+      category.map((sub_category: any) => {
+        sub_category.checked = false;
+      });
+    });
+
+  }
+  
+
 
   const handleCheckBox = (
     e: any,
@@ -119,6 +142,17 @@ const HealthNeedFilter = ({
     }
     fetchProductList("");
   };
+
+  useEffect(() => {
+    if (productCategoryData) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
+              a.name.localeCompare(b.name)
+            )
+      });
+    }
+  }, [productCategoryData])
+
   return (
     <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
       {/* Health needs - Top Active Filter section starts */}
@@ -154,13 +188,8 @@ const HealthNeedFilter = ({
                     src="/images/hn-delete-icon.svg"
                     className="mck-filter-delete-icon cursor-pointer"
                     alt="delete icon"
-                    onClick={() => {
-                      setActiveFilter(
-                        activeFilter.filter(
-                          (filterItem: any) => filterItem !== item
-                        )
-                      );
-                    }}
+                    onClick={() => {handleDelete(activeFilter,item)}}
+
                   />
                 </div>
               );
@@ -213,9 +242,7 @@ const HealthNeedFilter = ({
                             key={leftfiltermaindata?.contentLink?.id}
                           >
                             <img
-                              id={
-                                leftfiltermaindata?.mainCategory?.value[0].name+index
-                              }
+                              id={'hn_image_'+index}
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
                                   ?.url
@@ -306,7 +333,7 @@ const HealthNeedFilter = ({
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name}
+                                      id={leftfiltersubdata?.name+index}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
