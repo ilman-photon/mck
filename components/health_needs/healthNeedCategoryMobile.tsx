@@ -69,14 +69,14 @@ const HealthNeedCategoryMobile = ({
 
   return (
     <div className="lg:hidden md:hidden">
-      <div className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med px-4 font-medium">Health Needs</div>
+      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med px-4 font-medium" tabIndex={0} aria-label="Health Needs">Health Needs</h1>
       <div
-        className="health-needs-categories pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] mx-4 relative"
+        className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] mx-4 relative"
         tabIndex={0}
         id="hn_label_0002"
       >
-        <div className="health-needs-categories-icons">
-          <div className="carousel-container grid grid-cols-3 md:grid-cols-2 gap-4 overflow-x-auto">
+        <div className="">
+          <div className="carousel-container grid grid-cols-3 md:grid-cols-2 gap-4 overflow-x-auto" tabIndex={0}>
             {healthNeedData &&
               healthNeedData
                 .slice(
@@ -86,19 +86,20 @@ const HealthNeedCategoryMobile = ({
                 .map((healthneedsdata: any) => (
                   <div
                     key={healthneedsdata?.contentLink?.id}
-                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
-                      activeIcon === healthneedsdata?.contentLink?.id
+                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${activeIcon === healthneedsdata?.contentLink?.id
                         ? "active"
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleHealthNeedData(
                         healthneedsdata?.title.value,
                         healthneedsdata
                       )
                     }
+                    tabIndex={0} aria-label={healthneedsdata?.title.value}
                   >
                     <img
+                      id={healthneedsdata?.title.value}
                       src={healthneedsdata?.image?.expandedValue?.url}
                       alt={healthneedsdata?.title.value}
                       className="mb-3 mx-auto w-auto"
@@ -108,15 +109,15 @@ const HealthNeedCategoryMobile = ({
                 ))}
           </div>
           {healthNeedData?.length > slidesPerRow * rowsPerPage && (
-            <div className="carousel-controls flex justify-center absolute top-[124px] w-full">
+            <div className="carousel-controls flex justify-center absolute top-[124px] w-full" tabIndex={0}>
               <button
                 className="left-btn left-[-18px] absolute"
-                onClick={handlePrev}
+                onClick={handlePrev} tabIndex={0} aria-label="Previous"
               >
               </button>
               <button
                 className="right-btn right-[-8px] absolute"
-                onClick={handleNext}
+                onClick={handleNext} tabIndex={0} aria-label="Next"
               >
               </button>
             </div>
