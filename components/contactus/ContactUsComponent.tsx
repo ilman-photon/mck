@@ -27,12 +27,12 @@ function ContactUsComponent() {
 
     return (
         <>
-            <div className="four-oh-four container flex flex-col mx-auto px-0 lg:mt-36 mt-2">
-                <div className="heading pb-6" id="cu_label_001">{contactUsData?.data[0]?.title?.value}</div>
-                <div className="grid lg:grid-cols-2 lg:gap-4">
+            <div className="lg:pt-72 lg:px-72 pt-6 px-4 container flex flex-col mx-auto lg:mt-36">
+                <h1 tabIndex={0} className="text-gtl-med pb-6 font-medium text-[27px] lg:leading-61 text-mckblue lg:text-[54px] leading-30" id="cu_label_001">{contactUsData?.data[0]?.title?.value}</h1>
+                <div className="grid lg:grid-cols-2 lg:gap-6">
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
-                        <div className="text-mckblue lg:py-3 lg:px-4 p-3 lg:text-lg text-base font-extrabold shade-blue-bg text-sofia-bold" id="cu_label_002">{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.contactInformationHeading?.value}</div>
-                        <div className="lg:p-6 p-4 contact-body">
+                        <div tabIndex={0} className="text-mckblue lg:py-3 lg:px-4 p-3 lg:text-lg text-base font-extrabold shade-blue-bg text-sofia-bold" id="cu_label_002">{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.contactInformationHeading?.value}</div>
+                        <div tabIndex={0} className="lg:p-6 p-4 contact-bodylg:p-6 p-4 contact-body lg:text-lg text-base font-normal text-mckblue text-sofia-reg para">
                             <p className="text-base font-normal text-mcknormalgrey pb-3 inquiry-text text-sofia-reg" id="cu_label_003" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.contactInformationDetail?.value, }}></p>
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex mb-1 lg:mb-0" id="cu_label_004">
@@ -56,12 +56,12 @@ function ContactUsComponent() {
                         </div>
                     </div>
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
-                        <div className="text-mckblue lg:py-3 lg:px-4 p-3 lg:text-lg text-base font-extrabold shade-blue-bg text-sofia-bold" id="cu_label_015">{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.whatWeCandoHeading?.value}</div>
-                        <div className="lg:p-6 p-4 contact-body lg:text-lg text-base font-normal text-mckblue text-sofia-reg" id="cu_link_016" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.whatWeCandoDetail?.value, }}>
+                        <div tabIndex={0} className="text-mckblue lg:py-3 lg:px-4 p-3 lg:text-lg text-base font-extrabold shade-blue-bg text-sofia-bold" id="cu_label_015">{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.whatWeCandoHeading?.value}</div>
+                        <div className="lg:p-6 p-4 contact-body lg:text-lg text-base font-normal text-mckblue text-sofia-reg mck-contact" id="cu_link_016" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.whatWeCandoDetail?.value, }}>
                         </div>
                     </div>
                 </div>
-                <p className="text-sofia-reg text-mcknormalgrey font-normal lg:text-base text-sm disclaimer" id="cu_label_017" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.disclaimer?.value, }}></p>
+                <p tabIndex={0} className="text-sofia-reg text-mcknormalgrey font-normal lg:text-base text-sm disclaimer" id="cu_label_017" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.disclaimer?.value, }}></p>
             </div>
         </>
     );

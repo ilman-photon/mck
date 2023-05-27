@@ -8,6 +8,9 @@ import GoogleTagManager from "@/components/google_tag_manager";
 import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+
+let sectionData: any = []
+  let selectedRecommendedProduct: any = []
 function AllProductCategoryPage() {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
@@ -20,10 +23,13 @@ function AllProductCategoryPage() {
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [categoryProduct, setCategoryProduct] = useState<any>([]);
   const [carouselData, setCarouselData] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [recommendedProduct , setRecommendedProduct] = useState<any>()
   let selectedCategoryName: any = [];
   let productName: any = [];
 
   function fetchProductList(filter: any) {
+    setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq 'Acute Care')`;
@@ -53,7 +59,10 @@ function AllProductCategoryPage() {
         });
         setSelectedProduct(selectedProduct);
       })
-      .catch((e: Error | AxiosError) => console.log(e));
+      .catch((e: Error | AxiosError) => console.log(e))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   // -------- Health needs page data fetch starts -------- //
@@ -105,6 +114,7 @@ function AllProductCategoryPage() {
         productLandingPage?.data[0].contentArea?.expandedValue[1]
           ?.contentBlockArea?.expandedValue;
       setProductCategory(productCategoryList);
+      setRecommendedProduct(productLandingPage?.data[0].contentArea)
       let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
       setCategoryProduct([tempObj]);
       productCategoryList?.map((item: any) => {
@@ -137,7 +147,12 @@ function AllProductCategoryPage() {
 
               return updatedProducts;
             });
-          });
+          })
+          .catch((e: Error | AxiosError) => console.log(e))
+      .finally(() => {
+        setIsLoading(false);
+      });
+          
       });
     };
 
@@ -280,11 +295,29 @@ function AllProductCategoryPage() {
     );
   }
 
+  useEffect(()=>{
+    recommendedProduct?.expandedValue?.map((id: any) => {
+      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map((item: any) => {
+        if (id?.recommendedProductCategory?.value &&
+          id.recommendedProductCategory.value[0].id === item.productCategoryType.value[0].id) {  
+          const productName = id.recommendedProductCategory.value[0].name
+        if (!selectedRecommendedProduct.includes(productName)) {
+          selectedRecommendedProduct.push(productName);
+        }
+        const isDuplicate = sectionData.some((item :any) => item.name === id.name);
+
+        if (!isDuplicate) {
+          sectionData.push(id);
+        }
+      }
+    });
+  });
+  },[recommendedProduct])
   return (
     <>
       <GoogleTagManager />
       <HeaderComponent />
-      {!carouselData && (
+      {!carouselData || isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div
@@ -317,6 +350,9 @@ function AllProductCategoryPage() {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
+          recommendedProduct={recommendedProduct}
+          sectionData={sectionData}
+          selectedRecommendedProduct={selectedRecommendedProduct}
         />
       </div>
       <FooterComponent />
