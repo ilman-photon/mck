@@ -323,7 +323,6 @@ function HealthCareProfessionalComponent() {
               {...(gifImage ? { width: 400, height: 400 } : {})}
               alt="coba-image"
               loading="eager"
-              role="image"
             />
           </div>
         </div>
@@ -348,7 +347,6 @@ function HealthCareProfessionalComponent() {
                         className="w-full"
                         id="hcp-img-001"
                         tabIndex={0}
-                        role="image"
                       ></Image>
                     )}
                     <div className="bg-gradient absolute"></div>
@@ -390,7 +388,6 @@ function HealthCareProfessionalComponent() {
                               >
                                 <div
                                   className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:h-24 lg:overflow-auto textoverflow-scroll"
-                                  role="content"
                                   tabIndex={0}
                                   id={`hcp-label-000${idx}`}
                                   dangerouslySetInnerHTML={{
@@ -401,7 +398,6 @@ function HealthCareProfessionalComponent() {
                                   className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
                                   tabIndex={0}
                                   id={`hcp-label-0000${idx}`}
-                                  role="content"
                                 >
                                   {customer.customerName.value} -{" "}
                                   {customer?.customerQualification?.value}{" "}
@@ -412,7 +408,6 @@ function HealthCareProfessionalComponent() {
                                     width="84"
                                     height="84"
                                     className="mx-auto shadow-circleshadow rounded-full"
-                                    role="image"
                                     viewBox="0 0 84 84"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -485,7 +480,6 @@ function HealthCareProfessionalComponent() {
                                 className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
                                 tabIndex={idx}
                                 id={`hcp-label-0${idx}_10`}
-                                role="content"
                                 dangerouslySetInnerHTML={{
                                   __html: tab?.description?.value,
                                 }}
