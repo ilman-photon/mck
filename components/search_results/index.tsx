@@ -313,7 +313,7 @@ function ResultComponent() {
   return (
     <>
       <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 lg:pt-0 pb-0 container mx-auto lg:mt-36">
-        <div>
+        <div className="desktop:px-6 mobile:px-0">
           <div
             className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1"
             tabIndex={0}
@@ -346,7 +346,7 @@ function ResultComponent() {
           </div>
         </div>
         <div className="mck-product-filter">
-          <div className="container max-w-7xl mt-8">
+          <div className="container lg:mt-8 mt-6 md:px-6 lg:px-6 xl:px-0">
             {/* Health needs - Top Active Filter section starts */}
             <section>
               <ActiveProductFilter
@@ -359,8 +359,8 @@ function ResultComponent() {
             {/* Health needs - Top Active Filter section starts */}
 
             {/* Health needs - Left coloumn Filter section starts */}
-            <div className="lg:flex md:flex sm-flex flex-none lg:mt-8 mt-6">
-              <div className="flex-none h-max">
+            <div className="lg:flex  lg:mt-8 mt-6">
+              <div className="flex-none h-max lg:w-1/6 xl:w-1/6 w-full">
                 <ProductFilter
                   productCategoryData={productCategoryData}
                   handleViewAllChange={handleViewAllChange}
@@ -369,7 +369,7 @@ function ResultComponent() {
                 />
               </div>
 
-              <div className="flex-auto">
+              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full">
                 {/* Health needs - Right coloumn starts */}
                 <div>
                   {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}

@@ -290,7 +290,7 @@ function ProductListComponent() {
       )}
 
       <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
-        <div className="container lg:mt-8 mt-6 px-4 lg:px-4 xl:px-0">
+        <div className="container lg:mt-18 mt-6 px-4 lg:px-4 xl:px-0 desktop:mt-6">
           {/* Health needs - Top Active Filter section starts */}
           <section>
             <ActiveProductFilter
@@ -330,7 +330,7 @@ function ProductListComponent() {
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>
-                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
+                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate leading-[23px]">
                         {item?.name}
                       </div>
                       <div
