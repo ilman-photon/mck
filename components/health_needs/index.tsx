@@ -7,6 +7,9 @@ import HealthNeedFilter from "./HealthNeedFilter";
 import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 import Image from "next/image";
 import gifImage from "./FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+
+let sectionData: any = []
+let selectedRecommendedProduct: any = []
 const HealthNeedsComponent = () => {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<any>([]);
@@ -18,6 +21,7 @@ const HealthNeedsComponent = () => {
   const [isLoading, setIsLoading] = useState(true); //
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
   const [recommendedProduct , setRecommendedProduct] = useState<any>()
+  const [data , setData] = useState(false)
 
   function FetchProductFilter() {
     return axios.get(
@@ -281,6 +285,29 @@ const HealthNeedsComponent = () => {
 
     fetchData();
   }, []);
+  
+
+  useEffect(()=>{
+
+    recommendedProduct?.expandedValue?.map((id: any) => {
+    return recommendedProduct?.expandedValue[1].healthNeedItem.expandedValue.map((item: any) => {
+      if (id?.recommendedProductCategory?.value &&
+        id.recommendedProductCategory.value[0].id === item.healthNeedCategory.value[0].id) {
+
+        const productName = id.recommendedProductCategory.value[0].name
+        if (!selectedRecommendedProduct.includes(productName)) {
+          selectedRecommendedProduct.push(productName);
+        }
+
+        const isDuplicate = sectionData.some((item :any) => item.name === id.name);
+
+        if (!isDuplicate) {
+          sectionData.push(id);
+        }
+      }
+    });
+  });
+  },[recommendedProduct])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -413,7 +440,9 @@ const HealthNeedsComponent = () => {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
-          recommendedProduct={recommendedProduct}
+          // recommendedProduct={recommendedProduct}
+          sectionData={sectionData}
+          selectedRecommendedProduct={selectedRecommendedProduct}
         />
       </div>
     </>
