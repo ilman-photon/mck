@@ -2430,3 +2430,17 @@ Video Player Code
 .contact-container .contact-body.mck-contact p a span {
   font-family: "sofia-pro-regular";
 }
+//PDP-images block center
+.pdp_images {
+  @media screen and (max-width: 1023px) {
+    justify-content: center;
+    ul {
+      li {
+        img {
+          height: 4rem;
+          width: 2.125rem;
+        }
+      }
+    }
+  }
+}
