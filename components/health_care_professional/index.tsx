@@ -361,7 +361,6 @@ function HealthCareProfessionalComponent() {
                     className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                     id="hcp-label-002"
                     tabIndex={0}
-                    role="title"
                   >
                     {" "}
                     {customerReviewTitle?.value}
@@ -475,14 +474,13 @@ function HealthCareProfessionalComponent() {
                               {tabStyle[idx]?.svg2}
                             </label>
                             <div className="tab py-6 px-6">
-                              <h3
+                              <h2
                                 className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
                                 tabIndex={idx}
                                 id={`hcp-label-0${idx}_09`}
-                                role="title"
                               >
                                 {tab?.title?.value}
-                              </h3>
+                              </h2>
                               <div
                                 className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
                                 tabIndex={idx}

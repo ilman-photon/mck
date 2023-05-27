@@ -242,9 +242,7 @@ const HealthNeedFilter = ({
                             key={leftfiltermaindata?.contentLink?.id}
                           >
                             <img
-                              id={
-                                leftfiltermaindata?.mainCategory?.value[0].name+index
-                              }
+                              id={'hn_image_'+index}
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
                                   ?.url
@@ -335,7 +333,7 @@ const HealthNeedFilter = ({
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name}
+                                      id={leftfiltersubdata?.name+index}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
