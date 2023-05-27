@@ -245,6 +245,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
                 id="wft_label_005"
                 tabIndex={0}
+                role="title"
               >
                 {sectionData?.name}
               </h2>
