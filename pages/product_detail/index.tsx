@@ -13,7 +13,7 @@ function ProductDetails() {
             <GoogleTagManager/>
             {/* <HeaderNoStickyComponent /> */}
             <HeaderComponent />
-            <div className="product-detail-page grid lg:grid-flow-col container lg:mx-4 lg:mx-auto mt-18">
+            <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 lg:mx-4 lg:mx-auto mt-18">
                 <div className="left-column overflow-hidden lg:overflow-visible">
                 <div className="pdp-slider">
                 <PdpCarousel/>
