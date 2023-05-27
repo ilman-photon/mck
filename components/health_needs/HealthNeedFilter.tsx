@@ -293,6 +293,7 @@ const HealthNeedFilter = ({
                                   value="view all"
                                   className="w-4 h-4 accent-[#001A71]"
                                   aria-label="view all"
+                                  role="checkbox"
                                   checked={
                                     selectedFilterItems[
                                       leftfiltermaindata?.mainCategory?.value[0]
@@ -341,6 +342,7 @@ const HealthNeedFilter = ({
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
                                       aria-label={leftfiltersubdata?.name}
+                                      role="checkbox"
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
