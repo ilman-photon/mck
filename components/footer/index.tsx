@@ -58,7 +58,7 @@ export default function FooterComponent() {
                         rel="stylesheet"
                         id={link?.contentLink?.id}
                         key={link?.contentLink?.id}
-                        href={link?.menuUrl?.value}
+                        href={link?.menuUrl?.value ? link?.menuUrl?.value : ''}
                       >
                         {link?.menuTitle?.value}
                       </Link>
@@ -71,7 +71,7 @@ export default function FooterComponent() {
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
                         rel="stylesheet"
-                        href={sociallink?.socialMediaUrl?.value}
+                        href={sociallink?.socialMediaUrl?.value ? sociallink?.socialMediaUrl?.value : ''}
                         key={sociallink?.contentLink?.id}
                         id={sociallink?.contentLink?.id}
                         aria-label={sociallink?.socialMediaUrl?.value}
@@ -102,7 +102,7 @@ export default function FooterComponent() {
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3 w-fit"
                         rel="stylesheet"
-                        href={slink?.menuUrl?.value}
+                        href={slink?.menuUrl && slink?.menuUrl?.value}
                         key={slink?.contentLink?.id}
                         id={slink?.contentLink?.id}
                       >
@@ -124,11 +124,10 @@ export default function FooterComponent() {
                 <li key={item?.contentLink?.guidValue}>
                   <button
                     type="button"
-                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${
-                      activeButton === item?.menuItemName?.value
-                        ? "border-t-4 border-mckblue bg-white"
-                        : ""
-                    }`}
+                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${activeButton === item?.menuItemName?.value
+                      ? "border-t-4 border-mckblue bg-white"
+                      : ""
+                      }`}
                     onClick={() =>
                       handleClick(
                         item?.menuItemName?.value,
@@ -145,11 +144,10 @@ export default function FooterComponent() {
                       />
                     </div>
                     <span
-                      className={`text-xs text-mckblue ${
-                        activeButton === item?.menuItemName?.value
-                          ? "text-sofia-bold font-extrabold"
-                          : "text-sofia-reg font-normal"
-                      }`}
+                      className={`text-xs text-mckblue ${activeButton === item?.menuItemName?.value
+                        ? "text-sofia-bold font-extrabold"
+                        : "text-sofia-reg font-normal"
+                        }`}
                     >
                       {item?.menuItemName?.value}
                     </span>
