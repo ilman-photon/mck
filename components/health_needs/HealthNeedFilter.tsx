@@ -1,16 +1,17 @@
-import ProductComponent from "./ProductListCarousel";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import { useRouter, } from 'next/router';
+import { useEffect, useState, lazy } from 'react';
+import Image from 'next/image';
+import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
+const ProductComponent = lazy(() => import('./ProductListCarousel'));
 
 interface ISubCategory {
   id: number;
-  name: string
-  description: string
+  name: string;
+  description: string;
 }
 
-let tempCategoryName :any= []
+let tempCategoryName: any = [];
+
 const HealthNeedFilter = ({
   activeFiltersData,
   activeFilter,
@@ -25,6 +26,7 @@ const HealthNeedFilter = ({
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isFilterShow, setIsFilterShow] = useState(true);
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -33,25 +35,20 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     });
-    fetchProductList("");
+    fetchProductList('');
   };
 
-  const handleDelete = (activeFilter :any ,item :any) =>{
+  const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
-      activeFilter.filter(
-        (filterItem: any) => filterItem !== item
-      )
-    )
+      activeFilter.filter((filterItem: any) => filterItem !== item)
+    );
     selectedFilterItems.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         sub_category.checked = false;
       });
     });
-
-  }
-  
-
+  };
 
   const handleCheckBox = (
     e: any,
@@ -60,22 +57,22 @@ const HealthNeedFilter = ({
     subCategoryId: any
   ) => {
     if (e.target.checked) {
-      if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
-        selectedFilterItems[categoryId]["items"].push(filter);
+      if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
+        selectedFilterItems[categoryId]['items'].push(filter);
       }
 
       setLoading(true);
       setActiveFilter([...activeFilter, filter]);
       selectedFilterItems[categoryId][subCategoryId].checked = true;
     } else {
-      const index = selectedFilterItems[categoryId]["items"].indexOf(filter);
-      selectedFilterItems[categoryId]["items"].splice(index, 1);
+      const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
+      selectedFilterItems[categoryId]['items'].splice(index, 1);
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
         })
       );
-      fetchProductList("");
+      fetchProductList('');
       selectedFilterItems[categoryId][subCategoryId].checked = false;
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
@@ -92,15 +89,19 @@ const HealthNeedFilter = ({
       }
       isCategoryChecked = true;
       subCategoryChecked = true;
-      tempCategoryName.push(selectedFilterItems[categoryId].categoryName + "- All")
+      tempCategoryName.push(
+        selectedFilterItems[categoryId].categoryName + '- All'
+      );
     } else {
       const index = selectedViewAllCateory.indexOf(categoryId);
       selectedViewAllCateory.splice(index, 1);
       isCategoryChecked = false;
       subCategoryChecked = false;
-      const newArray = tempCategoryName.filter((item :any) => !item.includes(selectedFilterItems[categoryId].categoryName));
-       tempCategoryName = newArray;
-
+      const newArray = tempCategoryName.filter(
+        (item: any) =>
+          !item.includes(selectedFilterItems[categoryId].categoryName)
+      );
+      tempCategoryName = newArray;
     }
 
     selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
@@ -108,22 +109,22 @@ const HealthNeedFilter = ({
     selectedFilterItems[categoryId].map((sub_category: any) => {
       sub_category.checked = subCategoryChecked;
       if (subCategoryChecked) {
-        selectedFilterItems[categoryId]["items"].push(sub_category.name);
+        selectedFilterItems[categoryId]['items'].push(sub_category.name);
       } else {
-        selectedFilterItems[categoryId]["items"] = [];
-        const index = selectedFilterItems[categoryId]["items"].indexOf(
+        selectedFilterItems[categoryId]['items'] = [];
+        const index = selectedFilterItems[categoryId]['items'].indexOf(
           sub_category.name
         );
-        selectedFilterItems[categoryId]["items"].splice(index, 1);
+        selectedFilterItems[categoryId]['items'].splice(index, 1);
       }
       // console.log(sub_category)
     });
 
     let selectedSubCat: any = [];
-    let selectedCategoryName : any =[];
-    tempCategoryName.map( (item :any) =>{
+    let selectedCategoryName: any = [];
+    tempCategoryName.map((item: any) => {
       selectedCategoryName.push(item);
-    })
+    });
     // selectedFilterItems.map((category: any) => {
     //   category.items.map((name: any) => {
     //     if (selectedSubCat.indexOf(name) === -1) {
@@ -135,74 +136,79 @@ const HealthNeedFilter = ({
     setActiveFilter([...selectedCategoryName]);
     if (selectedViewAllCateory.length > 0) {
     } else {
-      fetchProductList("");
+      fetchProductList('');
       router.push({
-        pathname: "/health_needs",
+        pathname: '/health_needs'
       });
     }
-    fetchProductList("");
+    fetchProductList('');
   };
 
   useEffect(() => {
     if (productCategoryData) {
       productCategoryData.map((filters: any) => {
-        return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
-              a.name.localeCompare(b.name)
-            )
+        return filters.subCategory.value.sort(
+          (a: ISubCategory, b: ISubCategory) => a.name.localeCompare(b.name)
+        );
       });
     }
-  }, [productCategoryData])
+  }, [productCategoryData]);
 
   return (
-    <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
+    <div className='container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6'>
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
-          className="flex mb-2 items-center text-mckblue"
+          className='flex mb-2 items-center text-mckblue'
           tabIndex={0}
-          id="hn_label_0003"
+          id='hn_label_0003'
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
           {activeFiltersData?.activeFiltersText?.value}
-          <img
+          <Image
             src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-            className="mr-2 ml-2"
+            className='mr-2 ml-2'
             tabIndex={0}
-            id="hn_label_003_1"
+            id='hn_label_003_1'
             alt={activeFiltersData?.activeFiltersText?.value}
+            width={24}
+            height={24}
           />
 
           <div
-            className="flex flex-wrap items-baseline"
+            className='flex flex-wrap items-baseline'
             tabIndex={0}
-            id="hn_label_003_2"
+            id='hn_label_003_2'
           >
             {activeFilter?.map((item: any) => {
               return (
                 <div
-                  className="flex rounded-full mck-hn-selected-value"
+                  className='flex rounded-full mck-hn-selected-value'
                   key={item}
                 >
                   {item}&nbsp;
-                  <img
-                    src="/images/hn-delete-icon.svg"
-                    className="mck-filter-delete-icon cursor-pointer"
-                    alt="delete icon"
-                    onClick={() => {handleDelete(activeFilter,item)}}
-
+                  <Image
+                    src='/images/hn-delete-icon.svg'
+                    className='mck-filter-delete-icon cursor-pointer'
+                    alt='delete icon'
+                    onClick={() => handleDelete(activeFilter, item)}
+                    width={12}
+                    height={10.5}
                   />
                 </div>
               );
             })}
-            <div className="flex cursor-pointer ml-2 items-baseline">
+            <div className='flex cursor-pointer ml-2 items-baseline'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
-              <img
-                src="/images/hn-delete-icon.svg"
-                className="mck-filter-clearall-icon"
-                alt="delete icon"
+              <Image
+                src='/images/hn-delete-icon.svg'
+                className='mck-filter-clearall-icon'
+                alt='delete icon'
+                width={12}
+                height={10.5}
               />
               <div
-                className="underline"
+                className='underline'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -211,168 +217,203 @@ const HealthNeedFilter = ({
             </div>
           </div>
         </div>
-
-        <div className="text-mcknormalgrey" tabIndex={0} id="hn_label_003_3">
+        <div className='block lg:hidden flex flex-row py-2 justify-between'>
+          <div className='flex'>
+            <span>FILTER</span>
+            <Image
+              src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
+              className='mr-2 ml-2'
+              tabIndex={0}
+              id='hn_label_003_1'
+              alt={activeFiltersData?.activeFiltersText?.value}
+              width={24}
+              height={24}
+            />
+          </div>
+          <div
+            className='cursor-pointer'
+            onClick={() => setIsFilterShow(!isFilterShow)}
+          >
+            {' '}
+            {isFilterShow ? 'Hide' : 'Open'}
+          </div>
+        </div>
+        <div className='text-mcknormalgrey' tabIndex={0} id='hn_label_003_3'>
           {activeFiltersData?.showResultsText?.value}
         </div>
       </section>
-      <div className="lg:flex mt-6">
-        <div className="lg:w-1/6 xl:w-1/6 w-full h-max">
-          <div className="lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category">
-            {/* Left main category lists */}
-            <div className="flex items-center my-px">
-              <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
-                {productCategoryData &&
-                  productCategoryData?.map((leftfiltermaindata: any,index:number) => (
-                    <>
-                      {/* Left filter main category */}
+      <div className='lg:flex mt-6'>
+        {isFilterShow ? (
+          <div className='lg:w-1/6 xl:w-1/6 w-full h-max'>
+            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category'>
+              {/* Left main category lists */}
+              <div className='flex items-center my-px'>
+                <div className='w-full border lg:border-0 rounded px-4 lg:px-0'>
+                  {productCategoryData &&
+                    productCategoryData?.map(
+                      (leftfiltermaindata: any, index: number) => (
+                        <>
+                          {/* Left filter main category */}
 
-                      <section className="mck-hn-mobile-accordion tab overflow-hidden">
-                        <input
-                          className="mck-hn-accordion-title-check"
-                          type="checkbox"
-                          id={leftfiltermaindata?.contentLink?.id}
-                        />
-                        <label
-                          className="tab-label p-4 lg:p-0"
-                          htmlFor={leftfiltermaindata?.contentLink?.id}
-                        >
-                          <div
-                            className="flex lg:mb-2 w-full lg:mt-2"
-                            key={leftfiltermaindata?.contentLink?.id}
-                          >
-                            <img
-                              id={'hn_image_'+index}
-                              src={
-                                leftfiltermaindata?.categoryImage?.expandedValue
-                                  ?.url
-                              }
-                              alt={
-                                leftfiltermaindata?.mainCategory?.value[0].name
-                              }
+                          <section className='mck-hn-mobile-accordion tab overflow-hidden'>
+                            <input
+                              className='mck-hn-accordion-title-check'
+                              type='checkbox'
+                              id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              htmlFor={
-                                leftfiltermaindata?.mainCategory?.value[0].name
-                              }
-                              className="ml-2 filter-title"
-                              tabIndex={0}
-                              aria-label={
-                                leftfiltermaindata?.mainCategory?.value[0].name
-                              }
+                              className='tab-label p-4 lg:p-0'
+                              htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
-                              {leftfiltermaindata?.mainCategory?.value[0].name}
-                            </label>
-                          </div>
-                        </label>
-                        {/* Left filter main category */}
-
-                        {/* Left filter sub category */}
-                        <div className="lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
-                          <ul>
-                            <li className="list-none">
                               <div
-                                className="flex items-center my-px"
-                                onClick={(e) =>
-                                  handleViewAllChange(
-                                    e,
-                                    leftfiltermaindata?.mainCategory?.value[0]
-                                      .id
-                                  )
-                                }
+                                className='flex lg:mb-2 w-full lg:mt-2'
+                                key={leftfiltermaindata?.contentLink?.id}
                               >
-                                <input
-                                  id={
+                                <Image
+                                  id={'hn_image_' + index}
+                                  src={
+                                    leftfiltermaindata?.categoryImage
+                                      ?.expandedValue?.url
+                                  }
+                                  alt={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                      .name
                                   }
-                                  type="checkbox"
-                                  value="view all"
-                                  className="w-4 h-4 accent-[#001A71]"
-                                  aria-label="view all"
-                                  checked={
-                                    selectedFilterItems[
-                                      leftfiltermaindata?.mainCategory?.value[0]
-                                        .id
-                                    ]?.isCategoryChecked
-                                  }
-                                  defaultChecked={
-                                    selectedFilterItems[
-                                      leftfiltermaindata?.mainCategory?.value[0]
-                                        .id
-                                    ]?.isCategoryChecked
-                                  }
+                                  width={24}
+                                  height={24}
                                 />
                                 <label
-                                  htmlFor="mck-view-all"
-                                  className="ml-2 text-mcknormalgrey text-sm"
-                                  id=""
+                                  htmlFor={
+                                    leftfiltermaindata?.mainCategory?.value[0]
+                                      .name
+                                  }
+                                  className='ml-2 filter-title'
+                                  tabIndex={0}
+                                  aria-label={
+                                    leftfiltermaindata?.mainCategory?.value[0]
+                                      .name
+                                  }
                                 >
-                                  View All
+                                  {
+                                    leftfiltermaindata?.mainCategory?.value[0]
+                                      .name
+                                  }
                                 </label>
                               </div>
-                            </li>
-                          </ul>
-                          <ul>
-                            {leftfiltermaindata?.subCategory?.value?.map(
-                              (leftfiltersubdata: any) => (
-                                <li
-                                  className="list-none"
-                                  key={leftfiltersubdata?.id}
-                                >
+                            </label>
+                            {/* Left filter main category */}
+
+                            {/* Left filter sub category */}
+                            <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
+                              <ul>
+                                <li className='list-none'>
                                   <div
-                                    className="flex items-center my-px"
+                                    className='flex items-center my-px'
                                     onClick={(e) =>
-                                      handleCheckBox(
+                                      handleViewAllChange(
                                         e,
-                                        leftfiltersubdata?.name,
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0].id,
-                                        leftfiltersubdata?.id
+                                          ?.value[0].id
                                       )
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name+index}
-                                      type="checkbox"
-                                      value={leftfiltersubdata?.name}
-                                      className="w-4 h-4 accent-[#001A71]"
-                                      aria-label={leftfiltersubdata?.name}
+                                      id={
+                                        leftfiltermaindata?.mainCategory
+                                          ?.value[0]?.name
+                                      }
+                                      type='checkbox'
+                                      value='view all'
+                                      className='w-4 h-4 accent-[#001A71]'
+                                      aria-label='view all'
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
                                             ?.value[0].id
-                                        ][leftfiltersubdata?.id]?.checked
+                                        ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
                                             ?.value[0].id
-                                        ][leftfiltersubdata?.id]?.checked
+                                        ]?.isCategoryChecked
                                       }
                                     />
                                     <label
-                                      htmlFor={leftfiltersubdata?.name}
-                                      className="ml-2 text-sm"
-                                      aria-label={leftfiltersubdata?.name}
+                                      htmlFor='mck-view-all'
+                                      className='ml-2 text-mcknormalgrey text-sm'
+                                      id=''
                                     >
-                                      {leftfiltersubdata?.name}
+                                      View All
                                     </label>
                                   </div>
                                 </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      </section>
-                    </>
-                  ))}
+                              </ul>
+                              <ul>
+                                {leftfiltermaindata?.subCategory?.value?.map(
+                                  (leftfiltersubdata: any) => (
+                                    <li
+                                      className='list-none'
+                                      key={leftfiltersubdata?.id}
+                                    >
+                                      <div
+                                        className='flex items-center my-px'
+                                        onClick={(e) =>
+                                          handleCheckBox(
+                                            e,
+                                            leftfiltersubdata?.name,
+                                            leftfiltermaindata?.mainCategory
+                                              ?.value[0].id,
+                                            leftfiltersubdata?.id
+                                          )
+                                        }
+                                      >
+                                        <input
+                                          id={leftfiltersubdata?.name + index}
+                                          type='checkbox'
+                                          value={leftfiltersubdata?.name}
+                                          className='w-4 h-4 accent-[#001A71]'
+                                          aria-label={leftfiltersubdata?.name}
+                                          checked={
+                                            selectedFilterItems[
+                                              leftfiltermaindata?.mainCategory
+                                                ?.value[0].id
+                                            ][leftfiltersubdata?.id]?.checked
+                                          }
+                                          defaultChecked={
+                                            selectedFilterItems[
+                                              leftfiltermaindata?.mainCategory
+                                                ?.value[0].id
+                                            ][leftfiltersubdata?.id]?.checked
+                                          }
+                                        />
+                                        <label
+                                          htmlFor={leftfiltersubdata?.name}
+                                          className='ml-2 text-sm'
+                                          aria-label={leftfiltersubdata?.name}
+                                        >
+                                          {leftfiltersubdata?.name}
+                                        </label>
+                                      </div>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          </section>
+                        </>
+                      )
+                    )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}/>
+        ) : null}
+        <div className='lg:w-10/12 xl:w-10/12 w-full'>
+          <ProductComponent
+            selectedProduct={selectedProduct}
+            recommendedProduct={recommendedProduct}
+          />
         </div>
       </div>
     </div>
