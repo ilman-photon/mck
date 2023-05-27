@@ -117,7 +117,7 @@ export default function FooterComponent() {
         </div>
       </footer>
       <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue lg:hidden xl:hidden">
-        <ul className="grid h-full max-w-lg grid-cols-4 mx-auto bg-beige-50">
+        <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
           {footerMobileNav &&
             footerMobileNav.map((item: any) => {
               return (

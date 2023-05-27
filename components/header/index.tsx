@@ -30,8 +30,8 @@ function HeaderComponent() {
       margin: 0,
       background: "#FFF6ED",
       color: "#001a71",
-      position: "absolute",
-      top: "0",
+      // position: "absolute",
+      // top: "0",
     };
 
     if (window.pageYOffset > elTopOffset + elHeight) {
@@ -141,41 +141,42 @@ function HeaderComponent() {
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        className="header flex lg:grid container sticky mx-auto blue-txt border-b bg-white lg:bg-transparent"
+        className="header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey"
+        style={!isMobile ? divHeight : undefined}
       >
-        
-        <div className="flex" style={!isMobile ? divHeight : undefined}>
-          {/* Hamburger menu starts */}
-          <div
-            className="hamburger-menu lg:hidden xl:hidden"
-            onClick = {()=>handleHamburgerClick()}
-          >
-            <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
+        <div className="container mx-auto lg:grid contents align-content-center">
+          <div className="flex">
+            {/* Hamburger menu starts */}
+            <div
+              className="hamburger-menu lg:hidden xl:hidden"
+              onClick = {()=>handleHamburgerClick()}
+            >
+              <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
+            </div>
           </div>
-        </div>
-        {/* Hambuger menu ends */}
+          {/* Hambuger menu ends */}
 
-        <div
-          ref={headerImgRef}
-          className="brand-logo"
-          onClick={handleOnClickLogo}
-        >
-          <img
-            id="logo-image"
-            tabIndex={0}
-            src={logoSrc}
-            alt="logo of Foster Thrive logo"
-            className="lg:mt-7"
-            style={isMobile ? undefined : imgWidth}
-            role="img"
-          />
-        </div>
-        <div
-          className="lg:w-full flex border-0 lg:border-b border-mcknormalgrey w-18 header-sticky"
-          style={!isMobile ? divHeight : undefined}
-        >
-          <NavBar menuData={menuData} isMobileMenuActive={isMobileMenuActive} />
-          <Search />
+          <div
+            ref={headerImgRef}
+            className="brand-logo"
+            onClick={handleOnClickLogo}
+          >
+            <img
+              id="logo-image"
+              tabIndex={0}
+              src={logoSrc}
+              alt="logo of Foster Thrive logo"
+              className="lg:mt-7"
+              style={isMobile ? undefined : imgWidth}
+              role="img"
+            />
+          </div>
+          <div
+            className="lg:w-full flex border-0 w-18 header-sticky"
+          >
+            <NavBar menuData={menuData} isMobileMenuActive={isMobileMenuActive} />
+            <Search />
+          </div>
         </div>
       </div>
     </>

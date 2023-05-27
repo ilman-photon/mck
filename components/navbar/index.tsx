@@ -19,12 +19,12 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
           {menuData?.map((item: any) => {
             return (
               <div
-                className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap"
+                className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
                 key={Math.random()}
               >
                 <Link
-                  className="text-lg text-sofia-reg text-center font-medium flex my-3 border-b-3 border-transparent hover:border-solid hover:border-mcklightyellow seperatemenu-hover lg:relative"
-                  href={item?.menuItemUrl?.value?item?.menuItemUrl?.value:''}
+                  className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative"
+                  href={item?.menuItemUrl?.value}
                 >
                   {item?.menuItemName?.value}
                   <span
