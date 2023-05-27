@@ -3,15 +3,18 @@ import React, { memo, useState } from "react";
 interface CatogaryComponentProps {
     placeholder: any;
     handleClick: (e: any, searchstring: any) => void;
+    handleLoading: (value: any) => void;
 }
 
-const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, handleClick }) => {
+const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, handleClick, handleLoading }) => {
     const [searchData, setSearchData] = useState<string>();
     const fetchSearchBlog = async () => {
+        handleLoading(true);
         const SearchResult = await axios.get(
             `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), ${searchData?.toLowerCase()}) or contains(tolower(description/value), ${searchData?.toLowerCase()}))&expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
         handleClick(SearchResult.data.results, searchData)
+        handleLoading(false);
     };
 
 
