@@ -10,7 +10,7 @@ interface ISubCategory {
   description: string
 }
 
-let tempCategoryName :any= []
+let tempCategoryName: any = []
 const HealthNeedFilter = ({
   activeFiltersData,
   activeFilter,
@@ -22,7 +22,7 @@ const HealthNeedFilter = ({
   selectedViewAllCateory,
   fetchProductList,
   recommendedProduct,
-  sectionData , selectedRecommendedProduct 
+  sectionData, selectedRecommendedProduct
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const HealthNeedFilter = ({
     fetchProductList("");
   };
 
-  const handleDelete = (activeFilter :any ,item :any) =>{
+  const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
       activeFilter.filter(
         (filterItem: any) => filterItem !== item
@@ -51,7 +51,7 @@ const HealthNeedFilter = ({
     });
 
   }
-  
+
 
 
   const handleCheckBox = (
@@ -99,8 +99,8 @@ const HealthNeedFilter = ({
       selectedViewAllCateory.splice(index, 1);
       isCategoryChecked = false;
       subCategoryChecked = false;
-      const newArray = tempCategoryName.filter((item :any) => !item.includes(selectedFilterItems[categoryId].categoryName));
-       tempCategoryName = newArray;
+      const newArray = tempCategoryName.filter((item: any) => !item.includes(selectedFilterItems[categoryId].categoryName));
+      tempCategoryName = newArray;
 
     }
 
@@ -121,8 +121,8 @@ const HealthNeedFilter = ({
     });
 
     let selectedSubCat: any = [];
-    let selectedCategoryName : any =[];
-    tempCategoryName.map( (item :any) =>{
+    let selectedCategoryName: any = [];
+    tempCategoryName.map((item: any) => {
       selectedCategoryName.push(item);
     })
     // selectedFilterItems.map((category: any) => {
@@ -148,8 +148,8 @@ const HealthNeedFilter = ({
     if (productCategoryData) {
       productCategoryData.map((filters: any) => {
         return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
-              a.name.localeCompare(b.name)
-            )
+          a.name.localeCompare(b.name)
+        )
       });
     }
   }, [productCategoryData])
@@ -178,7 +178,7 @@ const HealthNeedFilter = ({
             tabIndex={0}
             id="hn_label_003_2"
           >
-            {activeFilter?.map((item: any) => {
+            {activeFilter?.map((item: any, index: number) => {
               return (
                 <div
                   className="flex rounded-full mck-hn-selected-value"
@@ -186,10 +186,11 @@ const HealthNeedFilter = ({
                 >
                   {item}&nbsp;
                   <img
+                    id={`hn-001_0${index}`}
                     src="/images/hn-delete-icon.svg"
                     className="mck-filter-delete-icon cursor-pointer"
                     alt="delete icon"
-                    onClick={() => {handleDelete(activeFilter,item)}}
+                    onClick={() => { handleDelete(activeFilter, item) }}
 
                   />
                 </div>
@@ -198,6 +199,7 @@ const HealthNeedFilter = ({
             <div className="flex cursor-pointer ml-2 items-baseline">
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <img
+                id={`hn-001_0${'02'}`}
                 src="/images/hn-delete-icon.svg"
                 className="mck-filter-clearall-icon"
                 alt="delete icon"
@@ -224,7 +226,7 @@ const HealthNeedFilter = ({
             <div className="flex items-center my-px">
               <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
                 {productCategoryData &&
-                  productCategoryData?.map((leftfiltermaindata: any,index:number) => (
+                  productCategoryData?.map((leftfiltermaindata: any, index: number) => (
                     <>
                       {/* Left filter main category */}
 
@@ -243,7 +245,7 @@ const HealthNeedFilter = ({
                             key={leftfiltermaindata?.contentLink?.id}
                           >
                             <img
-                              id={'hn_image_'+index}
+                              id={'hn_image_' + index}
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
                                   ?.url
@@ -285,7 +287,7 @@ const HealthNeedFilter = ({
                                 <input
                                   id={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                      ?.name + 'View All'
                                   }
                                   type="checkbox"
                                   value="view all"
@@ -335,7 +337,7 @@ const HealthNeedFilter = ({
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name+index}
+                                      id={leftfiltersubdata?.name + index}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
@@ -375,9 +377,9 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct} 
-          sectionData={sectionData}
-          selectedRecommendedProduct={selectedRecommendedProduct}/>
+          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}
+            sectionData={sectionData}
+            selectedRecommendedProduct={selectedRecommendedProduct} />
         </div>
       </div>
     </div>

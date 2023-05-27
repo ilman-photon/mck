@@ -42,7 +42,7 @@ const HealthNeedCategory = ({
       selectedFilterItems[cat_id][sub_cat_id].checked = false;
     } else {
       selectedFilterItems[cat_id].items.push(data);
-      setActiveFilter([...activeFilter, selectedHealthNeed[data]?.key]);
+      setActiveFilter([...activeFilter, data]);
       selectedFilterItems[cat_id][sub_cat_id].checked = true;
     }
   };

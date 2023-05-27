@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 export default function Search() {
   const router = useRouter();
   let textInput: any;
+  const [searchString, setSearchString] = useState<string>();
 
   const handleKey = (e: any) => {
     if (e.key === "Enter") {
@@ -14,6 +15,16 @@ export default function Search() {
       });
     }
   };
+  const handleSearch = () => {
+    console.log("searchString",searchString)
+    router.push({
+      pathname: "/search_results",
+      query: { search: searchString },
+    });
+  };
+  const handleKeyUp = (e: any) => {
+    setSearchString(e.target.value);
+  };
 
   return (
     <>
@@ -21,11 +32,13 @@ export default function Search() {
         <button
           className="btn-search w-12 h-12 bg-transparent right-4 absolute cursor-pointer outline-none font-black border-0"
           aria-label="search-icon" 
+          onClick={() => handleSearch()}
         ></button>
 
         <input
           type={textInput}
           onKeyDown={(e) => handleKey(e)}
+          onKeyUp={(e) => handleKeyUp(e)}
           className="input-search outline-0 h-12 w-12 border-none text-sofia-reg placeholder:text-sofia-reg text-base placeholder:text-base font-normal placeholder:font-normal tracking-normal placeholder:tracking-normal rounded px-3 py-4 pr-10 bg-transparent absolute lg:inset-y-0 xl:inset-y-0 right-3.5 blue-txt lg:focus:w-80 xl:focus:w-80 focus:w-60 focus:bg-white focus:top-1 cursor-pointer"
           placeholder="Search..."
           aria-label="clikable search item list"

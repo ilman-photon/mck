@@ -86,11 +86,10 @@ const HealthNeedCategoryMobile = ({
                 .map((healthneedsdata: any) => (
                   <div
                     key={healthneedsdata?.contentLink?.id}
-                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
-                      activeIcon === healthneedsdata?.contentLink?.id
+                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${activeIcon === healthneedsdata?.contentLink?.id
                         ? "active"
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleHealthNeedData(
                         healthneedsdata?.title.value,
@@ -100,6 +99,7 @@ const HealthNeedCategoryMobile = ({
                     tabIndex={0} aria-label={healthneedsdata?.title.value}
                   >
                     <img
+                      id={healthneedsdata?.title.value}
                       src={healthneedsdata?.image?.expandedValue?.url}
                       alt={healthneedsdata?.title.value}
                       className="mb-3 mx-auto w-auto"
