@@ -1,4 +1,5 @@
 @import "variables.module.scss";
+@import "styles/google-map.scss";
 // @import url("https://use.typekit.net/hpz6zgl.css"); // sofia pro light
 // @import url("https://use.typekit.net/wqd6ivp.css"); // sofia pro regular
 // @import url("https://use.typekit.net/qce2qnp.css"); // sofia pro bold
@@ -1840,7 +1841,7 @@ footer {
     padding-bottom: 10px;
   }
   .product-detail-page{
-    margin-top: 210px;
+    margin-top: 250px;
     @media (max-width: 968px) {
       margin-top: 24px;
     }
