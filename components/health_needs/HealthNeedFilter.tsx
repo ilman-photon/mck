@@ -1,10 +1,16 @@
 import ProductComponent from "./ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 
-let tempCategoryName :any= []
+interface ISubCategory {
+  id: number;
+  name: string
+  description: string
+}
+
+let tempCategoryName: any = []
 const HealthNeedFilter = ({
   activeFiltersData,
   activeFilter,
@@ -15,7 +21,8 @@ const HealthNeedFilter = ({
   setSelectedFilterItems,
   selectedViewAllCateory,
   fetchProductList,
-  recommendedProduct
+  recommendedProduct,
+  sectionData, selectedRecommendedProduct
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -30,7 +37,7 @@ const HealthNeedFilter = ({
     fetchProductList("");
   };
 
-  const handleDelete = (activeFilter :any ,item :any) =>{
+  const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
       activeFilter.filter(
         (filterItem: any) => filterItem !== item
@@ -44,7 +51,7 @@ const HealthNeedFilter = ({
     });
 
   }
-  
+
 
 
   const handleCheckBox = (
@@ -92,8 +99,8 @@ const HealthNeedFilter = ({
       selectedViewAllCateory.splice(index, 1);
       isCategoryChecked = false;
       subCategoryChecked = false;
-      const newArray = tempCategoryName.filter((item :any) => !item.includes(selectedFilterItems[categoryId].categoryName));
-       tempCategoryName = newArray;
+      const newArray = tempCategoryName.filter((item: any) => !item.includes(selectedFilterItems[categoryId].categoryName));
+      tempCategoryName = newArray;
 
     }
 
@@ -114,8 +121,8 @@ const HealthNeedFilter = ({
     });
 
     let selectedSubCat: any = [];
-    let selectedCategoryName : any =[];
-    tempCategoryName.map( (item :any) =>{
+    let selectedCategoryName: any = [];
+    tempCategoryName.map((item: any) => {
       selectedCategoryName.push(item);
     })
     // selectedFilterItems.map((category: any) => {
@@ -136,12 +143,23 @@ const HealthNeedFilter = ({
     }
     fetchProductList("");
   };
+
+  useEffect(() => {
+    if (productCategoryData) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
+          a.name.localeCompare(b.name)
+        )
+      });
+    }
+  }, [productCategoryData])
+
   return (
     <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
-          className="flex mb-2 items-center text-mckblue"
+          className="flex flex-wrap relative lg:mb-2 items-center text-mckblue"
           tabIndex={0}
           id="hn_label_0003"
           aria-label={activeFiltersData?.activeFiltersText?.value}
@@ -156,32 +174,34 @@ const HealthNeedFilter = ({
           />
 
           <div
-            className="flex flex-wrap items-baseline"
+            className="flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto"
             tabIndex={0}
             id="hn_label_003_2"
           >
-            {activeFilter?.map((item: any) => {
+            {activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className="flex rounded-full mck-hn-selected-value"
+                  className="flex rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-3 ml-0 lg:mb-0 lg:mt-3"
                   key={item}
                 >
                   {item}&nbsp;
                   <img
+                    id={`hn-001_0${index}`}
                     src="/images/hn-delete-icon.svg"
                     className="mck-filter-delete-icon cursor-pointer"
                     alt="delete icon"
-                    onClick={() => {handleDelete(activeFilter,item)}}
+                    onClick={() => { handleDelete(activeFilter, item) }}
 
                   />
                 </div>
               );
             })}
-            <div className="flex cursor-pointer ml-2 items-baseline">
+            <div className="flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static">
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <img
+                id={`hn-001_0${'02'}`}
                 src="/images/hn-delete-icon.svg"
-                className="mck-filter-clearall-icon"
+                className="mck-filter-clearall-icon ml-0"
                 alt="delete icon"
               />
               <div
@@ -206,7 +226,7 @@ const HealthNeedFilter = ({
             <div className="flex items-center my-px">
               <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
                 {productCategoryData &&
-                  productCategoryData?.map((leftfiltermaindata: any,index:number) => (
+                  productCategoryData?.map((leftfiltermaindata: any, index: number) => (
                     <>
                       {/* Left filter main category */}
 
@@ -225,9 +245,7 @@ const HealthNeedFilter = ({
                             key={leftfiltermaindata?.contentLink?.id}
                           >
                             <img
-                              id={
-                                leftfiltermaindata?.mainCategory?.value[0].name+index
-                              }
+                              id={'hn_image_' + index}
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
                                   ?.url
@@ -269,12 +287,13 @@ const HealthNeedFilter = ({
                                 <input
                                   id={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                      ?.name + 'View All'
                                   }
                                   type="checkbox"
                                   value="view all"
                                   className="w-4 h-4 accent-[#001A71]"
                                   aria-label="view all"
+                                  role="checkbox"
                                   checked={
                                     selectedFilterItems[
                                       leftfiltermaindata?.mainCategory?.value[0]
@@ -318,11 +337,12 @@ const HealthNeedFilter = ({
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name}
+                                      id={leftfiltersubdata?.name + index}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
                                       aria-label={leftfiltersubdata?.name}
+                                      role="checkbox"
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
@@ -357,7 +377,9 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}/>
+          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}
+            sectionData={sectionData}
+            selectedRecommendedProduct={selectedRecommendedProduct} />
         </div>
       </div>
     </div>

@@ -19,12 +19,12 @@ function ProductDetails() {
                 <PdpCarousel/>
                 </div>
                 <div className="hidden lg:block">
-                <PdpLocation />    
+                <PdpLocation index={1}/>    
                 </div>
                 </div>
                 <PdpDetail/>
                 <div className="lg:hidden">
-                <PdpLocation />    
+                <PdpLocation index={2}/>    
                 </div>
             </div>
             <FooterComponent />

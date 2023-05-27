@@ -10,15 +10,15 @@ function ProductFilter({
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
           {productCategoryData &&
-            productCategoryData?.map((leftfiltermaindata: any,index:number) => (
+            productCategoryData?.map((leftfiltermaindata: any, index: number) => (
               <>
                 {/* Left filter main category */}
 
                 <section className="mck-hn-mobile-accordion tab overflow-hidden">
                   <input
+                    id={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                     className="mck-hn-accordion-title-check"
                     type="checkbox"
-                    id={leftfiltermaindata?.contentLink?.id}
                   />
                   <label
                     className="tab-label p-4 lg:p-0"
@@ -29,7 +29,7 @@ function ProductFilter({
                       key={leftfiltermaindata?.contentLink?.id}
                     >
                       <img
-                        id={leftfiltermaindata?.mainCategory?.value[0].name+index}
+                        id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                         src={
                           leftfiltermaindata?.categoryImage?.expandedValue?.url
                         } alt={leftfiltermaindata?.mainCategory?.value[0].name}
@@ -55,9 +55,7 @@ function ProductFilter({
                           }
                         >
                           <input
-                            id={
-                              leftfiltermaindata?.mainCategory?.value[0]?.name
-                            }
+                            id={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
                             type="checkbox"
                             value="view all"
                             className="w-4 h-4 accent-[#001A71]"
@@ -72,6 +70,7 @@ function ProductFilter({
                               ]?.isCategoryChecked
                             }
                             aria-label="View All"
+                            role="checkbox"
                           />
                           <label
                             htmlFor="mck-view-all"
@@ -99,7 +98,7 @@ function ProductFilter({
                               }
                             >
                               <input
-                                id={leftfiltersubdata?.name}
+                                id={`${leftfiltersubdata?.name}_${index}`}
                                 type="checkbox"
                                 value={leftfiltersubdata?.name}
                                 className="w-4 h-4 accent-[#001A71]"
@@ -116,6 +115,7 @@ function ProductFilter({
                                   ][leftfiltersubdata?.id]?.checked
                                 }
                                 aria-label={leftfiltersubdata?.name}
+                                role="checkbox"
                               />
                               <label
                                 htmlFor={leftfiltersubdata?.name}

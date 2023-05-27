@@ -126,7 +126,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         ></p>
                         {item?.buttonText?.value && (
                           <div
-                            id={item?.buttonText?.value + current+1}
+                            id={item?.contentLink.id}
                             className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                             style={{
                               backgroundColor: item?.ctaButtonColor?.value,

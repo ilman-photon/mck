@@ -4,6 +4,8 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import ActiveProductFilter from "../activeProductFilter";
 import ProductFilter from "../productFilter";
+import Image from "next/image";
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 
 function ResultComponent() {
   const router = useRouter();
@@ -13,6 +15,7 @@ function ResultComponent() {
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [productCount, setProductCount] = useState<any>(0);
+  const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [productSearch, setProductSearch] = useState<any>(router.query.search);
 
   function FetchProductFilter() {
@@ -28,6 +31,7 @@ function ResultComponent() {
 
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    setSearchLoading(true)
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq 'Acute Care')`;
@@ -49,6 +53,7 @@ function ResultComponent() {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
         SetProductListData(res);
+        setSearchLoading(false);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -313,14 +318,25 @@ function ResultComponent() {
   return (
     <>
       <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 lg:pt-0 pb-0 container mx-auto lg:mt-36">
-        <div>
+        <div className="desktop:px-6 mobile:px-0">
+         {searchLoading && 
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-30"></div>
+          <div className="relative">
+            <Image src={gifImage} alt="coba-image" />{" "}
+            </div>
+          </div>
+         }
+         {!searchLoading &&
           <div
             className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1"
             tabIndex={0}
             id="sr_label_001"
           >
+            
             {productCount + " results found for “" + productSearch + "”"}
           </div>
+          }
           <div
             className="lg:text-lg text-base text-sofia-reg text-black pb-1 font-normal"
             tabIndex={0}
@@ -346,7 +362,7 @@ function ResultComponent() {
           </div>
         </div>
         <div className="mck-product-filter">
-          <div className="container max-w-7xl mt-8">
+          <div className="container lg:mt-8 mt-6 md:px-6 lg:px-6 xl:px-0">
             {/* Health needs - Top Active Filter section starts */}
             <section>
               <ActiveProductFilter
@@ -359,8 +375,8 @@ function ResultComponent() {
             {/* Health needs - Top Active Filter section starts */}
 
             {/* Health needs - Left coloumn Filter section starts */}
-            <div className="lg:flex md:flex sm-flex flex-none lg:mt-8 mt-6">
-              <div className="flex-none h-max">
+            <div className="lg:flex  lg:mt-8 mt-6">
+              <div className="flex-none h-max lg:w-1/6 xl:w-1/6 w-full">
                 <ProductFilter
                   productCategoryData={productCategoryData}
                   handleViewAllChange={handleViewAllChange}
@@ -369,7 +385,7 @@ function ResultComponent() {
                 />
               </div>
 
-              <div className="flex-auto">
+              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full">
                 {/* Health needs - Right coloumn starts */}
                 <div>
                   {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
@@ -385,7 +401,9 @@ function ResultComponent() {
                               key={item?.contentLink?.id}
                               onClick={() => handleProductClick(item)}
                             >
-                              <img src={item?.image?.value?.url} alt={item?.image?.value?.url} className="mx-auto" />
+                              <div className="h-60 flex items-center justify-center">
+                              <img src={item?.image?.value?.url} alt={item?.image?.value?.url} className="mx-auto border-0" />
+                              </div>
                               <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                                 {item?.form?.value[1]?.name}
                               </div>
