@@ -46,7 +46,7 @@ function ContactUsComponent() {
                             </div>
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex" id="cu_label_010">
-                                {contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url && <img src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url} alt="email icon" id="cu_img_011" />}{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailTitle?.value}</span>
+                                <a className="flex" href = "mailto: #"> {contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url && <img src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url} alt="email icon" id="cu_img_011" />}{contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailTitle?.value}</a></span>
                             </div>
                             <div className="flex flex-col lg:flex-row">
                                 <span className="contact-number font-extrabold lg:text-lg text-base lg:mr-3 text-mckblue text-sofia-bold flex mb-1 lg:mb-0" id="cu_label_012">

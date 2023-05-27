@@ -69,14 +69,13 @@ export default function CategoryComponent({ sectionData }: any) {
                 `}</style>
                 <img
                   src={item?.data?.productCategoryImage?.value?.url}
-                  alt={`category_image_${index}`}
+                  alt={`category_${index}`}
                   id={item?.data?.productCategoryImage?.value?.url}
                   tabIndex={0}
                 />
               </div>
               <div
                 className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer"
-                tabIndex={0}
                 id={`category_name_0${index}`}
               >
                 <Link
@@ -85,12 +84,11 @@ export default function CategoryComponent({ sectionData }: any) {
                   {item?.data?.name}
                 </Link>
               </div>
-              <div
+              <div tabIndex={0}
                 className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
                 }}
-                tabIndex={0}
                 id={`category_Titel_0${index}`}
               ></div>
             </div>
