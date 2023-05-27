@@ -375,3 +375,10 @@
   }
   
 
+.allproductlist-page {
+  .filter-show-hide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
