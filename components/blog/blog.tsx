@@ -18,6 +18,7 @@ function BlogComponent() {
   const [RelatedBlog, setRelatedBlog] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
+  const [searchLoading, setSearchLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -55,12 +56,14 @@ function BlogComponent() {
   };
 
   const filterBlogList = async (data: any) => {
+    setSearchLoading(true)
     const response = await axios.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and tag/value/name eq '${data.name}' &expand=*`,
       { headers: { "Accept-Language": "en" } }
     );
     setFilterBlogList(response.data.results);
     setCurrentScreen("Filter");
+    setSearchLoading(false)
   };
 
   const HandelSearch = (data: any, searchString: any) => {
@@ -69,9 +72,23 @@ function BlogComponent() {
     setActiveSearch(true);
     setCurrentScreen("Search");
   };
+  const HandleSearchLoading = (value: any) => {
+    setSearchLoading(value)
+  };
 
   return (
     <>
+      {(loading) && 
+        <Image src={gifImage} alt="coba-image" />
+      }
+      {searchLoading && 
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-30"></div>
+          <div className="relative">
+            <Image src={gifImage} alt="coba-image" />{" "}
+            </div>
+          </div>
+      }
       <div className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-36">
         <div className="lg:w-966 w-full">
           <div
@@ -83,6 +100,7 @@ function BlogComponent() {
             <SearchComponent
               placeholder={response?.data[0].blogSearchPlaceholderText.value}
               handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
+              handleLoading={(value) => HandleSearchLoading(value)}
             />
           </div>
           {loading ? (
@@ -131,6 +149,7 @@ function BlogComponent() {
               <SearchComponent
                 placeholder={response?.data[0].blogSearchPlaceholderText.value}
                 handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
+                handleLoading={(value) => HandleSearchLoading(value)}
               />
             </div>
           )}

@@ -40,6 +40,9 @@ function BlogSearchComponent() {
     console.log(e, searchstring);
   };
 
+  const HandleSearchLoading = (value: any) => {
+    setIsLoading(value)
+  };
   // function handleKeyDown(e: any) {
   //     if (e.keyCode == 13) {
   //         console.log('e', e)
@@ -62,6 +65,7 @@ function BlogSearchComponent() {
                   BlogListingContent?.data[0].blogSearchPlaceholderText.value
                 }
                 handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
+                handleLoading={(value) => HandleSearchLoading(value)}
               />
             </div>
           </div>
@@ -658,6 +662,7 @@ function BlogSearchComponent() {
                   handleClick={(e, searchstring) =>
                     HandelSearch(e, searchstring)
                   }
+                  handleLoading={(value) => HandleSearchLoading(value)}
                 />
               </div>
               <CatogaryComponent
