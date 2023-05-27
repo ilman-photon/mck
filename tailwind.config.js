@@ -147,6 +147,7 @@ module.exports = {
       lineHeight:{
         linemax: "50px",
         24:"24px",
+        27:"27px",
         32:"32px",
         30:"30px",
       },

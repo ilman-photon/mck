@@ -73,9 +73,9 @@ const BlogDetailsComponent = () => {
                     </div>
                 </div>
             ) :
-            (<div className='container w-full lg:px-7 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
+            (<div className='container blog-details-container w-full lg:px-72 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
-                    <img className='m-auto'
+                    <img className='m-auto w-full'
                         src={response?.data[0]?.image.expandedValue.url}
                         alt={response?.data[0]?.image.expandedValue.name}
                         id={response?.data[0]?.image.expandedValue.name}
@@ -86,8 +86,8 @@ const BlogDetailsComponent = () => {
                     <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
-                                <h1 className='lg:text-54 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' >{response?.data[0]?.title?.value}</h1>
-                                <div className='grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-3 lg:pb-6 pb-4'>
+                                <h1 className='lg:text-54 text-32 leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001' >{response?.data[0]?.title?.value}</h1>
+                                <div className='grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-4 lg:pb-6 pb-4'>
                                     <div className='lg:pb-0 pb-4'>
                                         <span className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${response?.data[0]?.readMinute?.value?'shade-grey-right-border':''}`} id='blog-label-001'>{GetTime(response?.data[0]?.startPublish)}</span>
                                         <span className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${false?'shade-grey-right-border':''}`} id='blog-label-002'>{response?.data[0]?.readMinute?.value}</span>
@@ -107,7 +107,7 @@ const BlogDetailsComponent = () => {
                                     </div>
                                 </div>
 
-                                <div dangerouslySetInnerHTML={{ __html: response?.data[0]?.description.value }}></div>
+                                <div className="text-sofia-reg text-color text-lg leading-27" dangerouslySetInnerHTML={{ __html: response?.data[0]?.description.value }}></div>
                             </div>
                         </article>
                         <CarouselComponent
@@ -120,7 +120,7 @@ const BlogDetailsComponent = () => {
                     <div className='lg:col-span-1 col-start-1 col-end-7'>
                         <SocialMediaIconComponent />
                         <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
-                            <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg" id='blog-label-009'>Recent Blogs</div>
+                            <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
                             <ResentBlogListComponent />
                         </div>
                         <RelatedProducts
