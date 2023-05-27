@@ -43,7 +43,7 @@ function ProductDropComponent({ subMenuData }: Props) {
 
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
-      <ul className="lg:w-11/12 xl:w-11/12 lg:flex lg:mx-auto xl:flex xl:mx-auto ">
+      <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
         {subMenu?.map((item: any) => {
           return (
             <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
