@@ -33,16 +33,16 @@ const ProductComponent = ({ selectedProduct ,sectionData , selectedRecommendedPr
           return null;
         })}
           <section>
-            <div
+            <h1
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
               tabIndex={0}
               id={`hn_label_00_${index}`}
-              aria-label={product?.item?.name} role="heading"
+              aria-label={product?.item?.name}
             >
               {
                 product?.item?.name
               }
-            </div>
+            </h1>
             <div className="lg:pt-6 lg:pl-6 lg:pb-6">
               <Swiper
                 modules={[Navigation , Pagination]}
