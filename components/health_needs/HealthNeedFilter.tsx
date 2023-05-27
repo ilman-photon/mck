@@ -159,7 +159,7 @@ const HealthNeedFilter = ({
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
-          className="flex mb-2 items-center text-mckblue"
+          className="flex flex-wrap relative lg:mb-2 items-center text-mckblue"
           tabIndex={0}
           id="hn_label_0003"
           aria-label={activeFiltersData?.activeFiltersText?.value}
@@ -174,14 +174,14 @@ const HealthNeedFilter = ({
           />
 
           <div
-            className="flex flex-wrap items-baseline"
+            className="flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto"
             tabIndex={0}
             id="hn_label_003_2"
           >
             {activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className="flex rounded-full mck-hn-selected-value"
+                  className="flex rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-3 ml-0 lg:mb-0 lg:mt-3"
                   key={item}
                 >
                   {item}&nbsp;
@@ -196,12 +196,12 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
-            <div className="flex cursor-pointer ml-2 items-baseline">
+            <div className="flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static">
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <img
                 id={`hn-001_0${'02'}`}
                 src="/images/hn-delete-icon.svg"
-                className="mck-filter-clearall-icon"
+                className="mck-filter-clearall-icon ml-0"
                 alt="delete icon"
               />
               <div
