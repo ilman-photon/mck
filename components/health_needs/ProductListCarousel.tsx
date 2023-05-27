@@ -61,7 +61,7 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
                 navigation
                 slidesPerView={5}
                 slidesPerGroup={5}
-                pagination={{ clickable: true }}
+                pagination={{ clickable: true, type: "fraction" }}
                 className="h-480"
 
               >
