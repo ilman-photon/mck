@@ -1,8 +1,14 @@
 import ProductComponent from "./ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+
+interface ISubCategory {
+  id: number;
+  name: string
+  description: string
+}
 
 let tempCategoryName :any= []
 const HealthNeedFilter = ({
@@ -15,7 +21,8 @@ const HealthNeedFilter = ({
   setSelectedFilterItems,
   selectedViewAllCateory,
   fetchProductList,
-  recommendedProduct
+  recommendedProduct,
+  sectionData , selectedRecommendedProduct 
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -136,6 +143,17 @@ const HealthNeedFilter = ({
     }
     fetchProductList("");
   };
+
+  useEffect(() => {
+    if (productCategoryData) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
+              a.name.localeCompare(b.name)
+            )
+      });
+    }
+  }, [productCategoryData])
+
   return (
     <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
       {/* Health needs - Top Active Filter section starts */}
@@ -225,9 +243,7 @@ const HealthNeedFilter = ({
                             key={leftfiltermaindata?.contentLink?.id}
                           >
                             <img
-                              id={
-                                leftfiltermaindata?.mainCategory?.value[0].name+index
-                              }
+                              id={'hn_image_'+index}
                               src={
                                 leftfiltermaindata?.categoryImage?.expandedValue
                                   ?.url
@@ -318,7 +334,7 @@ const HealthNeedFilter = ({
                                     }
                                   >
                                     <input
-                                      id={leftfiltersubdata?.name}
+                                      id={leftfiltersubdata?.name+index}
                                       type="checkbox"
                                       value={leftfiltersubdata?.name}
                                       className="w-4 h-4 accent-[#001A71]"
@@ -357,7 +373,9 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className="lg:w-10/12 xl:w-10/12 w-full">
-          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct}/>
+          <ProductComponent selectedProduct={selectedProduct} recommendedProduct={recommendedProduct} 
+          sectionData={sectionData}
+          selectedRecommendedProduct={selectedRecommendedProduct}/>
         </div>
       </div>
     </div>

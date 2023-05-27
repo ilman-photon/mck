@@ -56,7 +56,7 @@ export default function CategoryComponent({ sectionData }: any) {
               }`}
             >
               <div
-                id="category"
+                id={`category_0${index}`}
                 className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
                 onClick={() =>
                   handleClickOnCategory(item?.data?.productCategoryUrl?.value)
@@ -69,7 +69,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 `}</style>
                 <img
                   src={item?.data?.productCategoryImage?.value?.url}
-                  alt="category image"
+                  alt={`category_image_${index}`}
                   id={item?.data?.productCategoryImage?.value?.url}
                   tabIndex={0}
                 />
@@ -77,7 +77,7 @@ export default function CategoryComponent({ sectionData }: any) {
               <div
                 className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer"
                 tabIndex={0}
-                id={item?.data?.name}
+                id={`category_name_0${index}`}
               >
                 <Link
                   href={`/selected_product_category?type=${item?.data?.productCategoryType.value[0].name}`}
@@ -91,7 +91,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   __html: item?.data?.productCategoryDescription?.value,
                 }}
                 tabIndex={0}
-                id={item?.data?.productCategoryDescription?.value}
+                id={`category_Titel_0${index}`}
               ></div>
             </div>
           ))}
