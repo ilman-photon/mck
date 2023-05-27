@@ -30,6 +30,23 @@ const HealthNeedFilter = ({
     fetchProductList("");
   };
 
+  const handleDelete = (activeFilter :any ,item :any) =>{
+    setActiveFilter(
+      activeFilter.filter(
+        (filterItem: any) => filterItem !== item
+      )
+    )
+    selectedFilterItems.map((category: any) => {
+      category.isCategoryChecked = false;
+      category.map((sub_category: any) => {
+        sub_category.checked = false;
+      });
+    });
+
+  }
+  
+
+
   const handleCheckBox = (
     e: any,
     filter: any,
@@ -154,13 +171,8 @@ const HealthNeedFilter = ({
                     src="/images/hn-delete-icon.svg"
                     className="mck-filter-delete-icon cursor-pointer"
                     alt="delete icon"
-                    onClick={() => {
-                      setActiveFilter(
-                        activeFilter.filter(
-                          (filterItem: any) => filterItem !== item
-                        )
-                      );
-                    }}
+                    onClick={() => {handleDelete(activeFilter,item)}}
+
                   />
                 </div>
               );
