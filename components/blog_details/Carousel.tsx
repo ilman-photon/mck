@@ -33,7 +33,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   return (
     <div className="lg:pb-0 lg:p-6 lg:pt-0 pt-0 p-4 px-0">
       <h1
-        className="text-gtl-med text-mckblue lg:text-32 sm:text-base font-medium lg:pb-6 pb-4"
+        className="text-gtl-med text-mckblue lg:text-32 sm:text-base font-medium lg:pb-6 pb-4" tabIndex={0}
         dangerouslySetInnerHTML={{ __html: title }}
       ></h1>
       <div className="grid lg:grid-cols-2 gap-4 lg:relative">
