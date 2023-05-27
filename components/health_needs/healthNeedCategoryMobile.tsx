@@ -69,7 +69,7 @@ const HealthNeedCategoryMobile = ({
 
   return (
     <div className="lg:hidden md:hidden">
-      <div className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med px-4 font-medium" tabIndex={0} role="heading" aria-label="Health Needs">Health Needs</div>
+      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med px-4 font-medium" tabIndex={0} aria-label="Health Needs">Health Needs</h1>
       <div
         className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] mx-4 relative"
         tabIndex={0}
@@ -86,11 +86,10 @@ const HealthNeedCategoryMobile = ({
                 .map((healthneedsdata: any) => (
                   <div
                     key={healthneedsdata?.contentLink?.id}
-                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
-                      activeIcon === healthneedsdata?.contentLink?.id
+                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${activeIcon === healthneedsdata?.contentLink?.id
                         ? "active"
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleHealthNeedData(
                         healthneedsdata?.title.value,
@@ -100,6 +99,7 @@ const HealthNeedCategoryMobile = ({
                     tabIndex={0} aria-label={healthneedsdata?.title.value}
                   >
                     <img
+                      id={healthneedsdata?.title.value}
                       src={healthneedsdata?.image?.expandedValue?.url}
                       alt={healthneedsdata?.title.value}
                       className="mb-3 mx-auto w-auto"

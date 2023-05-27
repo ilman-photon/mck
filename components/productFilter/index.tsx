@@ -70,6 +70,7 @@ function ProductFilter({
                               ]?.isCategoryChecked
                             }
                             aria-label="View All"
+                            role="checkbox"
                           />
                           <label
                             htmlFor="mck-view-all"
@@ -114,6 +115,7 @@ function ProductFilter({
                                   ][leftfiltersubdata?.id]?.checked
                                 }
                                 aria-label={leftfiltersubdata?.name}
+                                role="checkbox"
                               />
                               <label
                                 htmlFor={leftfiltersubdata?.name}

@@ -9,6 +9,8 @@ import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 
+let sectionData: any = []
+  let selectedRecommendedProduct: any = []
 function AllProductCategoryPage() {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
@@ -22,6 +24,7 @@ function AllProductCategoryPage() {
   const [categoryProduct, setCategoryProduct] = useState<any>([]);
   const [carouselData, setCarouselData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
+  const [recommendedProduct , setRecommendedProduct] = useState<any>()
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -111,6 +114,7 @@ function AllProductCategoryPage() {
         productLandingPage?.data[0].contentArea?.expandedValue[1]
           ?.contentBlockArea?.expandedValue;
       setProductCategory(productCategoryList);
+      setRecommendedProduct(productLandingPage?.data[0].contentArea)
       let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
       setCategoryProduct([tempObj]);
       productCategoryList?.map((item: any) => {
@@ -291,6 +295,24 @@ function AllProductCategoryPage() {
     );
   }
 
+  useEffect(()=>{
+    recommendedProduct?.expandedValue?.map((id: any) => {
+      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map((item: any) => {
+        if (id?.recommendedProductCategory?.value &&
+          id.recommendedProductCategory.value[0].id === item.productCategoryType.value[0].id) {  
+          const productName = id.recommendedProductCategory.value[0].name
+        if (!selectedRecommendedProduct.includes(productName)) {
+          selectedRecommendedProduct.push(productName);
+        }
+        const isDuplicate = sectionData.some((item :any) => item.name === id.name);
+
+        if (!isDuplicate) {
+          sectionData.push(id);
+        }
+      }
+    });
+  });
+  },[recommendedProduct])
   return (
     <>
       <GoogleTagManager />
@@ -328,6 +350,9 @@ function AllProductCategoryPage() {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
+          recommendedProduct={recommendedProduct}
+          sectionData={sectionData}
+          selectedRecommendedProduct={selectedRecommendedProduct}
         />
       </div>
       <FooterComponent />

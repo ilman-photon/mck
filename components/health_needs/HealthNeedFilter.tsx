@@ -1,8 +1,8 @@
-import { useRouter, } from 'next/router';
-import { useEffect, useState, lazy } from 'react';
+import ProductComponent from './ProductListCarousel';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
-const ProductComponent = lazy(() => import('./ProductListCarousel'));
 
 interface ISubCategory {
   id: number;
@@ -11,7 +11,6 @@ interface ISubCategory {
 }
 
 let tempCategoryName: any = [];
-
 const HealthNeedFilter = ({
   activeFiltersData,
   activeFilter,
@@ -22,7 +21,9 @@ const HealthNeedFilter = ({
   setSelectedFilterItems,
   selectedViewAllCateory,
   fetchProductList,
-  recommendedProduct
+  recommendedProduct,
+  sectionData,
+  selectedRecommendedProduct
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -145,7 +146,7 @@ const HealthNeedFilter = ({
   };
 
   useEffect(() => {
-    if (productCategoryData) {
+    if (productCategoryData?.length) {
       productCategoryData.map((filters: any) => {
         return filters.subCategory.value.sort(
           (a: ISubCategory, b: ISubCategory) => a.name.localeCompare(b.name)
@@ -159,7 +160,7 @@ const HealthNeedFilter = ({
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
-          className='flex mb-2 items-center text-mckblue'
+          className='flex flex-wrap relative lg:mb-2 items-center text-mckblue'
           tabIndex={0}
           id='hn_label_0003'
           aria-label={activeFiltersData?.activeFiltersText?.value}
@@ -176,14 +177,14 @@ const HealthNeedFilter = ({
           />
 
           <div
-            className='flex flex-wrap items-baseline'
+            className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
             tabIndex={0}
             id='hn_label_003_2'
           >
-            {activeFilter?.map((item: any) => {
+            {activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex rounded-full mck-hn-selected-value'
+                  className='flex rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-3 ml-0 lg:mb-0 lg:mt-3'
                   key={item}
                 >
                   {item}&nbsp;
@@ -194,18 +195,20 @@ const HealthNeedFilter = ({
                     onClick={() => handleDelete(activeFilter, item)}
                     width={12}
                     height={10.5}
+                    id={`hn-001_0${index}`}
                   />
                 </div>
               );
             })}
-            <div className='flex cursor-pointer ml-2 items-baseline'>
+            <div className='flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
-                className='mck-filter-clearall-icon'
+                className='mck-filter-delete-icon cursor-pointer'
                 alt='delete icon'
                 width={12}
                 height={10.5}
+                id={`hn-001_0${'02'}`}
               />
               <div
                 className='underline'
@@ -234,7 +237,6 @@ const HealthNeedFilter = ({
             className='cursor-pointer'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
-            {' '}
             {isFilterShow ? 'Hide' : 'Open'}
           </div>
         </div>
@@ -272,12 +274,11 @@ const HealthNeedFilter = ({
                                 <Image
                                   id={'hn_image_' + index}
                                   src={
-                                    leftfiltermaindata?.categoryImage
+                                    activeFiltersData?.activeFiltersImage
                                       ?.expandedValue?.url
                                   }
                                   alt={
-                                    leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                    activeFiltersData?.activeFiltersText?.value
                                   }
                                   width={24}
                                   height={24}
@@ -320,12 +321,13 @@ const HealthNeedFilter = ({
                                     <input
                                       id={
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.name
+                                          ?.value[0]?.name + 'View All'
                                       }
                                       type='checkbox'
                                       value='view all'
                                       className='w-4 h-4 accent-[#001A71]'
                                       aria-label='view all'
+                                      role='checkbox'
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
@@ -374,6 +376,7 @@ const HealthNeedFilter = ({
                                           value={leftfiltersubdata?.name}
                                           className='w-4 h-4 accent-[#001A71]'
                                           aria-label={leftfiltersubdata?.name}
+                                          role='checkbox'
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
@@ -409,10 +412,13 @@ const HealthNeedFilter = ({
             </div>
           </div>
         ) : null}
+
         <div className='lg:w-10/12 xl:w-10/12 w-full'>
           <ProductComponent
             selectedProduct={selectedProduct}
             recommendedProduct={recommendedProduct}
+            sectionData={sectionData}
+            selectedRecommendedProduct={selectedRecommendedProduct}
           />
         </div>
       </div>
