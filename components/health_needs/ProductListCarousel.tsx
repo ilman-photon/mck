@@ -46,7 +46,7 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
             <div
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
               tabIndex={0}
-              id={`hn_label_00${index}`}
+              id={`hn_label_00_${index}`}
               aria-label="100"
             >
               {
@@ -63,13 +63,13 @@ const ProductComponent = ({ selectedProduct, recommendedProduct }: any) => {
                 className="h-480"
 
               >
-                {product?.data?.results?.map((item: any, idx: number) => {
+                {product?.data?.results?.map((item: any, idxs: number) => {
                   return (
                     <SwiperSlide
                       key={item?.contentLink?.id}
                       className="swiper-slide-custom"
                     >
-                      <ProductCard cardData={item} product={product} indexs={index+idx+1} />
+                      <ProductCard cardData={item} product={product} indexs={idxs} mainIndex={index} />
                     </SwiperSlide>
                   );
                 })}
