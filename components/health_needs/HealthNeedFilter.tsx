@@ -1,8 +1,14 @@
 import ProductComponent from "./ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+
+interface ISubCategory {
+  id: number;
+  name: string
+  description: string
+}
 
 let tempCategoryName :any= []
 const HealthNeedFilter = ({
@@ -136,6 +142,17 @@ const HealthNeedFilter = ({
     }
     fetchProductList("");
   };
+
+  useEffect(() => {
+    if (productCategoryData) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort((a: ISubCategory, b: ISubCategory) =>
+              a.name.localeCompare(b.name)
+            )
+      });
+    }
+  }, [productCategoryData])
+
   return (
     <div className="container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6">
       {/* Health needs - Top Active Filter section starts */}

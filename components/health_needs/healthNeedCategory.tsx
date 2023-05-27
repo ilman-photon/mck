@@ -50,11 +50,11 @@ const HealthNeedCategory = ({
   return (
     <div className="hidden lg:flex md:flex desktop:px-6">
       <div
-        className="health-needs-categories pt-9 px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
+        className="pt-9 px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
         tabIndex={0}
         id="hn_label_0001"
       >
-        <ul className="health-needs-categories-icons flex flex-wrap gap-4">
+        <ul className="flex flex-wrap gap-4">
           {healthNeedData &&
             healthNeedData?.map((healthneedsdata: any, index: number) => (
               <li
@@ -71,6 +71,7 @@ const HealthNeedCategory = ({
                     healthneedsdata
                   )
                 }
+                tabIndex={0} aria-label={healthneedsdata?.title.value}
               >
                 <img
                   id={`hl-img+${index}`}
