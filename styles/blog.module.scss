@@ -11,3 +11,24 @@
         }
     }
 }
+
+.blog-details-container{
+    .OutlineElement{
+        p{
+            padding-bottom: 24px;
+            @media (max-width: 1023px) {
+                padding-bottom: 16px;
+            }
+            strong{
+                color: $heading-color;
+                font-family: "GTAlpina-Medium";
+                font-size: 32px;
+                line-height: 36px;
+                @media (max-width: 1023px) {
+                    font-size: 24px;
+                    line-height: 27px;
+                }
+            }
+        }
+    }
+}
