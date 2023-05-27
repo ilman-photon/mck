@@ -6,8 +6,8 @@ import HealthNeedCategory from "./healthNeedCategory";
 import HealthNeedFilter from "./HealthNeedFilter";
 import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 import Image from "next/image";
-import gifImage from "./FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 let sectionData: any = []
 let selectedRecommendedProduct: any = []
 const HealthNeedsComponent = () => {
