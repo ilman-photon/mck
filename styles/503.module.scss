@@ -74,7 +74,16 @@
       width: 100%;
     }
   }
-  
+  .err-page-503 { 
+    .bg-logo-right-503 {
+      position: absolute;
+      top: 54px;
+      right: 0;
+      width: 239px;
+      height: 307px;
+      z-index: -1;
+    }
+  }
 }
 
 @media (max-width: 641px) {
