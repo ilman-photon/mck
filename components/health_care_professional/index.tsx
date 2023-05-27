@@ -478,7 +478,7 @@ function HealthCareProfessionalComponent() {
                               <h3
                                 className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
                                 tabIndex={idx}
-                                id="hcp-label-009"
+                                id={`hcp-label-0${idx}_09`}
                                 role="title"
                               >
                                 {tab?.title?.value}
@@ -486,7 +486,7 @@ function HealthCareProfessionalComponent() {
                               <div
                                 className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
                                 tabIndex={idx}
-                                id="hcp-label-010"
+                                id={`hcp-label-0${idx}_10`}
                                 role="content"
                                 dangerouslySetInnerHTML={{
                                   __html: tab?.description?.value,
