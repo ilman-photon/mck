@@ -327,7 +327,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           {sectionData?.title?.value}
         </h3>
         <div
-          className={`mx-auto w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base text-center`}
+          className={`mx-auto w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
           dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }} tabIndex={0} id={sectionData?.description?.value}
         ></div>
       </div>}
