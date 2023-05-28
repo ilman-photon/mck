@@ -103,7 +103,7 @@ function WhyFTComponent() {
             <>
               <React.Fragment key={index}>
                 {item?.contentType[1] === "CarouselBlock" ? (
-                  <div className="lg:mb-16">
+                  <div className="lg:mb-76 md:mb-24 sm:mb-24">
                     <CarouselComponent
                       sectionData={filteredData("CarouselBlock")}
                     />{" "}

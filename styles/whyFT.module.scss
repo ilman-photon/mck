@@ -2,6 +2,9 @@
     .w-full.container.mx-auto{
         padding-top: 0px;
         padding-bottom: 48px;
+    @media screen and (max-width: 1023px) {
+        padding-bottom: 24px;
+    }
     }
     .page-heading-h3 {
         margin-top: 0px;
