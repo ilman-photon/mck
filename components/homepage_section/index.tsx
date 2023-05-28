@@ -142,7 +142,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
@@ -212,7 +212,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto lg:blue-bg lg:text-white`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
@@ -299,7 +299,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
