@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
+import { ImageComponent } from '../global/ImageComponent';
 
 interface ISubCategory {
   id: number;
@@ -38,7 +39,6 @@ const HealthNeedFilter = ({
     });
     fetchProductList('');
   };
-
   const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
@@ -166,16 +166,12 @@ const HealthNeedFilter = ({
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
           {activeFiltersData?.activeFiltersText?.value}
-          <Image
-            src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-            className='mr-2 ml-2'
-            tabIndex={0}
-            id='hn_label_003_1'
-            alt={activeFiltersData?.activeFiltersText?.value}
-            width={24}
-            height={24}
+          <ImageComponent
+            tabIndex = {0}
+            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            className = {'mr-2 ml-2'}
           />
-
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
             tabIndex={0}
@@ -271,18 +267,14 @@ const HealthNeedFilter = ({
                                 className='flex lg:mb-2 w-full lg:mt-2'
                                 key={leftfiltermaindata?.contentLink?.id}
                               >
-                                <Image
-                                  id={'hn_image_' + index}
-                                  src={
-                                    activeFiltersData?.activeFiltersImage
-                                      ?.expandedValue?.url
-                                  }
-                                  alt={
-                                    activeFiltersData?.activeFiltersText?.value
-                                  }
-                                  width={24}
-                                  height={24}
-                                />
+                                <ImageComponent 
+                                      src={activeFiltersData?.activeFiltersImage
+                                      ?.expandedValue?.url}
+                                      height={24}
+                                      width={24}
+                                      alt={activeFiltersData?.activeFiltersText?.value}
+                                      id={'hn_image_' + index}
+                                    />
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -344,9 +336,9 @@ const HealthNeedFilter = ({
                                     <label
                                       htmlFor='mck-view-all'
                                       className='ml-2 text-mcknormalgrey text-sm'
-                                      id=''
+                                      id={'mck-'+ activeFiltersData?.viewAllText?.value}
                                     >
-                                      View All
+                                      {activeFiltersData?.viewAllText?.value}
                                     </label>
                                   </div>
                                 </li>
