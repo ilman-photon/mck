@@ -115,8 +115,16 @@ function HealthCareProfessionalComponent() {
   }, []);
     
   useEffect(() => {
-      document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+      document.title = ApiRespond?.data[0]?.title.value || "Health Care Professional";
   }, [ApiRespond]);
+
+  useEffect(() => {
+    const setPageNameAsClassName = () => {
+      const pageName: string = "health-care-component";
+      document.body.className = pageName;
+    };
+    setPageNameAsClassName();
+  }, []);
 
   function filteredData(valueType: string) {
     return response?.contentArea?.expandedValue?.filter((ele: any) => {
@@ -203,11 +211,12 @@ function HealthCareProfessionalComponent() {
                   <div className="relative lg:p-0 px-6">
                     <Swiper
                       modules={[Navigation, Autoplay]}
-                      spaceBetween={10}
+                      spaceBetween={30}
                       navigation={isMobile ? false : true}
                       autoplay={isMobile ? { delay: 3000 } : false}
                       slidesPerView={isMobile ? 'auto' : 3}
                       slidesPerGroup={isMobile ? 1 : 3}
+                      loop={true}
                       className="h-auto"
                     >
                       {response &&

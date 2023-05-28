@@ -25,7 +25,7 @@ function WhyFTComponent() {
 
   useEffect(() => {
     document.title =
-      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Default Title";
+      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ function WhyFTComponent() {
             <>
               <React.Fragment key={index}>
                 {item?.contentType[1] === "CarouselBlock" ? (
-                  <div className="lg:mb-16">
+                  <div className="lg:mb-76 md:mb-24 sm:mb-24">
                     <CarouselComponent
                       sectionData={filteredData("CarouselBlock")}
                     />{" "}

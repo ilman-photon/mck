@@ -69,7 +69,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
 
   useEffect(() => {
       // Set the title of the document dynamically
-      document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+      document.title = ApiRespond?.data[0]?.title.value || "Home";
   }, [ApiRespond]);
 
   return (
@@ -142,7 +142,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
@@ -178,14 +178,14 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 pt-6 col-span-1`}
           >
             <img
-              className="w-full px-5 lg:px-0"
+              className="w-full lg:px-0"
               src={sectionData?.image?.value?.url}
               tabIndex={0}
               id={sectionData?.image?.value?.url}
               alt="learning image"
             />
           </div>
-          <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
+          <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2 mt-4">
             <h2
               className={`${sectionData?.assetPosition?.value === "Right" 
               ? "mx-auto lg:text-left text-center"
@@ -212,7 +212,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto lg:blue-bg lg:text-white`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
@@ -231,7 +231,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div>
       ) : sectionData.backgroundImage?.expandedValue?.url ? (sectionData.assetPosition?.value === 'Right' ?
-        <div className="relative lg:mb-12 mb-6">
+        <div className="relative lg:mb-12 mb-10">
           <img
             src={sectionData?.backgroundImage?.expandedValue?.url}
             alt={sectionData?.backgroundImage?.expandedValue?.url}
@@ -275,7 +275,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             </div>
           </div>
         </div> :
-        <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6">
+        <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6 lg:px-72">
           <img src={sectionData?.backgroundImage?.expandedValue?.url} id="wft_img_009" tabIndex={0} alt="heal and thrive" />
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
             <h2
@@ -299,7 +299,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-0`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value
@@ -318,16 +318,16 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div>
       ) : <div
-        className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto`}
+        className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto lg:px-72`}
         key={sectionData?.contentLink?.id}
       >
         <h3
-          className="text-2xl lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3" tabIndex={0} id={sectionData?.title?.value}
+          className="text-27 pb-4 lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3 lg:mb-7 md:mb-4 sm:mb-4" tabIndex={0} id={sectionData?.title?.value}
         >
           {sectionData?.title?.value}
         </h3>
         <div
-          className={`mx-auto w-full lg:${'w-1/2'} px-3 text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt mainpage-styles`}
+          className={`mx-auto w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
           dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }} tabIndex={0} id={sectionData?.description?.value}
         ></div>
       </div>}

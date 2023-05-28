@@ -21,7 +21,7 @@ const BlogListContainer = () => {
 
     useEffect(() => {
         // Set the title of the document dynamically
-        document.title = response?.data[0]?.title.value || "Default Title";
+        document.title = response?.data[0]?.title.value || "Blog Listing Page";
     }, [JSON.stringify(response)]);
     
     return (

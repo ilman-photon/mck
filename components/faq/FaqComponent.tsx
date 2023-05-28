@@ -34,7 +34,7 @@ function FaqComponent() {
     }, []);
         
     useEffect(() => {
-        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+        document.title = ApiRespond?.data[0]?.title.value || "Faq";
     }, [ApiRespond]);
 
     return (
