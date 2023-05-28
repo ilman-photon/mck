@@ -48,7 +48,7 @@ export default function FooterComponent() {
       <footer id="footer" className="bg-mcklightyellow lg:mb-0 mb-16">
         <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
-            <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-1 lg:mb-0 mb-6">
+            <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">
               <ul className="mb-0 list-none lg:py-0 px-0">
                 <li className="lg:my-0 grid">
                   {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
