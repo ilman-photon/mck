@@ -275,7 +275,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             </div>
           </div>
         </div> :
-        <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6">
+        <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6 lg:px-72">
           <img src={sectionData?.backgroundImage?.expandedValue?.url} id="wft_img_009" tabIndex={0} alt="heal and thrive" />
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
             <h2
@@ -318,7 +318,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div>
       ) : <div
-        className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto`}
+        className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto lg:px-72`}
         key={sectionData?.contentLink?.id}
       >
         <h3
