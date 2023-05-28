@@ -69,7 +69,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
 
   useEffect(() => {
       // Set the title of the document dynamically
-      document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+      document.title = ApiRespond?.data[0]?.title.value || "Home";
   }, [ApiRespond]);
 
   return (

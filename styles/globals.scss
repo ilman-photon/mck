@@ -2395,3 +2395,26 @@ Video Player Code
     }
   }
 }
+
+.health-care-component {
+  .swiper-initialized {
+    padding: 0 25px;
+    @media (max-width: 968px) {
+      padding: 0 0px;
+    }
+  }
+  .swiper-slide {
+    @media (max-width: 968px) {
+      width: 100%;
+    }
+  }
+  .swiper-button-next {
+    right: 0px;
+  } 
+  .swiper-button-prev {
+    left: 0px;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    top: 35%;
+  }
+}
