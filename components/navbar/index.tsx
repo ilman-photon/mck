@@ -24,7 +24,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
               >
                 <Link
                   className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative"
-                  href={item?.menuItemUrl?.value}
+                  href={item?.menuItemUrl?.value ?? ''}
                 >
                   {item?.menuItemName?.value}
                   <span
