@@ -213,6 +213,9 @@ function HealthCareProfessionalComponent() {
   const handleChage = (tabTitle: string) => {
     setTabSelected(tabTitle);
   };
+
+
+  const [ApiRespond, setApiRespond] = useState<any>();
   const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
 
   const fetchUrl = async () => {
@@ -282,6 +285,14 @@ function HealthCareProfessionalComponent() {
     }
   }, [response]);
 
+  useEffect(() => { 
+    document.documentElement.lang = "en";
+  }, []);
+    
+  useEffect(() => {
+      document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+  }, [ApiRespond]);
+
   function filteredData(valueType: string) {
     return response?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
@@ -346,26 +357,25 @@ function HealthCareProfessionalComponent() {
                           : {})}
                         alt="Health Care Header Banner"
                         className="w-full"
-                        id="hcp-img-001"
+                        id="hcp-img-2"
                         tabIndex={0}
-                        role="image"
                       ></Image>
                     )}
                     <div className="bg-gradient absolute"></div>
                   </div>
                 )}
               </div>
+              
               <div className="bg-mcklightyellow lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6">
                 <div className="container mx-auto">
-                  <h1
-                    className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
-                    id="hcp-label-002"
-                    tabIndex={0}
-                    role="title"
-                  >
+                      <h1
+                        className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
+                        id='hcp-label-1'
+                        tabIndex={0}
+                      >
                     {" "}
-                    {customerReviewTitle?.value}
-                  </h1>
+                        {customerReviewTitle?.value}
+                      </h1> 
                   <div className="relative lg:p-0 px-6">
                     <Swiper
                       modules={[Navigation, Autoplay]}
@@ -391,7 +401,6 @@ function HealthCareProfessionalComponent() {
                               >
                                 <div
                                   className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:h-24 lg:overflow-auto textoverflow-scroll"
-                                  role="content"
                                   tabIndex={0}
                                   id={`hcp-label-000${idx}`}
                                   dangerouslySetInnerHTML={{
@@ -402,7 +411,7 @@ function HealthCareProfessionalComponent() {
                                   className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
                                   tabIndex={0}
                                   id={`hcp-label-0000${idx}`}
-                                  role="content"
+                                  role="text"
                                 >
                                   {customer.customerName.value} -{" "}
                                   {customer?.customerQualification?.value}{" "}
@@ -413,7 +422,6 @@ function HealthCareProfessionalComponent() {
                                     width="84"
                                     height="84"
                                     className="mx-auto shadow-circleshadow rounded-full"
-                                    role="image"
                                     viewBox="0 0 84 84"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -475,19 +483,17 @@ function HealthCareProfessionalComponent() {
                               {tabStyle[idx]?.svg2}
                             </label>
                             <div className="tab py-6 px-6">
-                              <h3
+                              <h2
                                 className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
                                 tabIndex={idx}
-                                id="hcp-label-009"
-                                role="title"
+                                id={`hcp-label-0${idx}`}
                               >
                                 {tab?.title?.value}
-                              </h3>
+                              </h2>
                               <div
                                 className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
                                 tabIndex={idx}
-                                id="hcp-label-010"
-                                role="content"
+                                id={`hcp-label-00${idx}`}
                                 dangerouslySetInnerHTML={{
                                   __html: tab?.description?.value,
                                 }}

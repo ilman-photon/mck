@@ -5,6 +5,7 @@ import Image from 'next/image';
 function ContactUsComponent() {
 
     const [contactUsData, SetContactUsData] = useState<any>();
+    const [ApiRespond, setApiRespond] = useState<any>();
 
     function fetchContactUsDetails() {
         return axios.get(
@@ -24,6 +25,14 @@ function ContactUsComponent() {
             })
             .catch((e: Error | AxiosError) => console.log(e));
     }, []);
+
+    useEffect(() => {
+        document.documentElement.lang = "en";
+    }, []);
+        
+    useEffect(() => {
+        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+    }, [ApiRespond]);
 
     return (
         <>

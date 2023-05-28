@@ -120,7 +120,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               className={`${sectionData?.assetPosition?.value === "Right"
               ? "mx-auto lg:text-left text-center"
               : "ml-0 text-left"
-              } lg:pb-6 pb-4 text-2xl text-54 text-gtl-med text-left blue-txt`}
+              } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
               tabIndex={0}
               id={sectionData?.title?.value}
             >
@@ -130,7 +130,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               className={`${sectionData?.assetPosition?.value === "Right"
               ? "mx-auto lg:text-left text-center"
               : "ml-0 text-left"
-              } jsx-290076256 text-lg font-normal text-sofia-reg lg:pb-6 pb-4 text-mcknormalgrey`}
+              } jsx-290076256 text-lg font-normal text-sofia-reg lg:mb-6 mb-4 text-mcknormalgrey text-content-ellipsis`}
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
@@ -245,7 +245,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
                 id="wft_label_005"
                 tabIndex={0}
-                role="title"
+                role="text"
               >
                 {sectionData?.name}
               </h2>
