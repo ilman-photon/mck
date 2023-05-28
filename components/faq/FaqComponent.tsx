@@ -44,7 +44,7 @@ function FaqComponent() {
                         <div className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4" id={"faq_label_003"+bdata?.contentLink?.id} key={bdata?.contentLink?.id}>
                         <input type="checkbox" id={bdata?.contentLink?.id} />
                         <label className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base" htmlFor={bdata?.contentLink?.id}>
-                            {bdata?.question?.value}</label>
+                            <span>{bdata?.question?.value}</span></label>
                         <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
                             <div dangerouslySetInnerHTML={{ __html: bdata?.answer?.value, }} id="faq_label_004">
                             </div>
