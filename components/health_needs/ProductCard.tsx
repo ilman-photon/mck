@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { ImageComponent } from "../global/ImageComponent";
 
 const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
     const router = useRouter();
@@ -16,7 +17,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
             className="swiper-list-item w-[198px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4"
         >
             <div className="h-60 flex items-center justify-center">
-            <img
+            <ImageComponent 
                 src={cardData?.image?.value?.url}
                 alt={`${indexs}${cardData?.image?.value?.url}`}
                 tabIndex={0}
