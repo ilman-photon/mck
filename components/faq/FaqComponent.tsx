@@ -5,6 +5,7 @@ function FaqComponent() {
 
     const [faqData, SetFaqData] = useState<any>();
     const [ApiRespond, setApiRespond] = useState<any>();
+    const [ctaBgClr, setCtaBgClr] = useState<any>();
 
     function fetchFAQDetails() {
         return axios.get(
@@ -20,6 +21,8 @@ function FaqComponent() {
     useEffect(() => {
         fetchFAQDetails()
             .then((res) => {
+                let ctaBGClr = res.data[0]?.contentArea.expandedValue[0]?.differentQuestionCTAColorCode?.value ?? '#001a71';
+                setCtaBgClr(ctaBGClr);
                 SetFaqData(res.data[0]?.contentArea.expandedValue[0]);
             })
             .catch((e: Error | AxiosError) => console.log(e));
@@ -56,7 +59,12 @@ function FaqComponent() {
                     <div className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_005">{faqData?.differentQuestionHeading?.value}</div>
                     <div className="shade-blue-border-top lg:p-6 p-4">
                          <p className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium" id="faq_label_006">{faqData?.differentQuestionDetails?.value}</p>
-                        <a href="#" className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase" id="faq_btn_007">{faqData?.differentQuestionCTAText?.value}</a>
+                        {
+                           faqData?.differentQuestionCTALink?.value && <a style={{
+                            background: ctaBgClr
+                        }} href={faqData?.differentQuestionCTALink?.value} className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase" id="faq_btn_007">{faqData?.differentQuestionCTAText?.value}</a>
+                        }
+                        
                     </div>
                 </div>
 
