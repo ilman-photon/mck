@@ -8,10 +8,22 @@ import GoogleTagManager from "@/components/google_tag_manager";
 import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import Head from "next/head";
 
 let sectionData: any = []
-  let selectedRecommendedProduct: any = []
-function AllProductCategoryPage() {
+let selectedRecommendedProduct: any = []
+
+interface MyComponentProps {
+  Response: {
+    data: {
+      title: {
+        value: string;
+      };
+    }[];
+  };
+}
+
+function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElement {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
   const [productFilter, setProductFilter] = useState<any>();
@@ -313,8 +325,42 @@ function AllProductCategoryPage() {
     });
   });
   },[recommendedProduct])
+
+
+  useEffect(() => {
+    document.documentElement.lang = "en";
+  }, []);
+
+  useEffect(() => {
+    if (Response && Response.data && Response.data.length > 0 && Response.data[0].title && Response.data[0].title.value) {
+      fetch('https://api.example.com/data')
+        .then((response: Response) => {
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+          return response.json();
+        })
+        .then((data: any) => {
+          if (data && data.length > 0 && data[0].title && data[0].title.value) {
+            document.title = data[0].title.value;
+          } else {
+            document.title = "All Products";
+          }
+        })
+        .catch((error: Error) => {
+          console.log(error.message);
+          document.title = "All Products";
+        });
+    } else {
+      document.title = "All Product";
+    }
+  }, [JSON.stringify(Response)]);
+
   return (
     <>
+    <Head>
+        <title>Your Page Title</title>
+      </Head>
       <GoogleTagManager />
       <HeaderComponent />
       {!carouselData || isLoading && (

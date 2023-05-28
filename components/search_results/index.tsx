@@ -315,6 +315,16 @@ function ResultComponent() {
     });
   };
 
+    useEffect(() => {
+        
+        document.documentElement.lang = "en";
+    }, []);
+        
+    const [ApiRespond, setApiRespond] = useState<any>();
+    useEffect(() => {
+        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+    }, [ApiRespond]);
+
   return (
     <>
       <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 lg:pt-0 pb-0 container mx-auto lg:mt-36">

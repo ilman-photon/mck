@@ -170,7 +170,10 @@ const HealthNeedFilter = ({
             tabIndex = {0}
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
             src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
-            className = {'mr-2 ml-2'}
+            className='mr-2 ml-2'
+            alt={activeFiltersData?.activeFiltersText?.value}
+            width={24}
+            height={24}
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
