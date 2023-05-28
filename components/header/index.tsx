@@ -135,13 +135,34 @@ function HeaderComponent() {
     setLogoSrc("images/logo.svg");
   }
 
+
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      // Adjust the scroll position value as per your requirements
+      if (offset > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        className="header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey"
+        className={`header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${isSticky ? 'isStickyActive' : 'isNotSticky'}`}
         style={!isMobile ? divHeight : undefined}
       >
         <div className="container mx-auto lg:grid contents align-content-center">

@@ -61,6 +61,7 @@
   font-stretch: normal;
 }
 
+@import "Header.module.scss";
 @import "404.module.scss";
 @import "503.module.scss";
 @import "blog.module.scss";
@@ -2041,67 +2042,10 @@ Mobile and iPad Navigation
     top: 7px;
 }
 }
-@media (max-width: 1025px) and (min-width: 1023px) {
-  .isMobileUi {
-    margin-right: 4rem !important;
-    .mainmenu-items {
-      margin: 0 20px !important;
-      a {font-size: 16px;}
-    }
-  }
-}
-@media (max-width: 1299px) and (min-width: 1100px) {
-  .isMobileUi {
-    margin-right: 5rem !important;
-    .mainmenu-items {
-      margin: 0 25px !important;
-      a {font-size: 14px;}
-    }
-  }
-}
-@media (max-width: 1399px) and (min-width: 1300px) {
-  .isMobileUi {
-    margin-right: 10rem !important;
-    .mainmenu-items {
-      margin: 0 20px !important;
-      a {font-size: 16px;}
-    }
-  }
-}
-@media (max-width: 1400px) and (min-width:1300px) {
-  .header {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-  }
-  #nav-bar .container,
+
+@media (max-width: 1900px) and (min-width:1000px) {
   #carouselExampleCaptions .container {
     max-width: 100%;
-  }
-  .isMobileUi {
-    margin-right: 10rem !important;
-    .mainmenu-items {
-      margin: 0 25px !important;
-      a {font-size: 16px;}
-    }
-  }
-}
-@media (max-width: 1500px) and (min-width:1400px) {
-  .isMobileUi {
-    margin-right: 8rem !important;
-    .mainmenu-items {
-      margin: 0 25px !important;
-    }
-  }
-}
-@media (max-width: 1600px) and (min-width:1500px) {
-  .isMobileUi {
-    margin-right: 12rem !important;
-  }
-}
-@media (max-width: 1800px) and (min-width:1600px) {
-  .isMobileUi {
-    margin-right: 12rem !important;
   }
 }
 
