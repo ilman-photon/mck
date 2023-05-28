@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { useWindowResize } from "@/hooks/useWindowResize";
-import { HandleImageLoading } from "../health_needs/HealthNeedImageComponent";
+import { ImageComponent } from "../global/ImageComponent";
 
 function PdpCarousel(prodViewData: any) {
     const router = useRouter();
@@ -15,9 +15,7 @@ function PdpCarousel(prodViewData: any) {
 
     const [prodResponse, setProdResponse] = useState<any>();
 
-    // const url = `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`
     function fetchPDPCarouselDetails() {
-        // console.log("query data --> ", router, data)
         return axios.get(
             `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length && data }/&expand=*`,
             {
@@ -105,7 +103,7 @@ function PdpCarousel(prodViewData: any) {
                         <svg width="24" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"></path></svg></div>
                 </div>
                 <div className={`lg:w-[526px] ${(deviceWidth < 1024 && deviceWidth !== 0) ? 'h-[300px]' : ''} box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}>
-                    <HandleImageLoading 
+                    <ImageComponent 
                         src={prodResponse?.productImages?.value && prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url}
                         className="lg:w-[270px]"
                         alt='Image is not available'

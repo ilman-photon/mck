@@ -1,16 +1,16 @@
 import React, { CSSProperties } from "react";
 
 
-type HandleImageLoadingProps = {
+type ImageComponentProps = {
     src: any;
+    id: string;
     width?: number;
     height?: number;
     alt?: string;
     className?: any;
     tabIndex?: number;
-    id: string;
 } 
-export function HandleImageLoading({src, height, width, alt, className, tabIndex, id}: HandleImageLoadingProps) {
+export function ImageComponent({src, height, width, alt, className, tabIndex, id}: ImageComponentProps) {
     const [didLoad, setLoad] = React.useState(false);
   
     const style: CSSProperties = didLoad ? {} : {visibility: 'hidden', height: 0, width: 0};

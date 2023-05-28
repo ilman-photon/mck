@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
-import { HandleImageLoading } from './HealthNeedImageComponent';
+import { ImageComponent } from '../global/ImageComponent';
 
 interface ISubCategory {
   id: number;
@@ -166,16 +166,7 @@ const HealthNeedFilter = ({
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
           {activeFiltersData?.activeFiltersText?.value}
-          {/* <Image
-            src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-            className='mr-2 ml-2 bg-[red]'
-            tabIndex={0}
-            id='hn_label_003_1'
-            alt={activeFiltersData?.activeFiltersText?.value}
-            width={24}
-            height={24}
-          /> */}
-          <HandleImageLoading
+          <ImageComponent
             tabIndex = {0}
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
             src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
@@ -276,7 +267,7 @@ const HealthNeedFilter = ({
                                 className='flex lg:mb-2 w-full lg:mt-2'
                                 key={leftfiltermaindata?.contentLink?.id}
                               >
-                                <HandleImageLoading 
+                                <ImageComponent 
                                       src={activeFiltersData?.activeFiltersImage
                                       ?.expandedValue?.url}
                                       height={24}
