@@ -24,6 +24,19 @@ function ProductListPage() {
       });
     });
   }
+  useEffect(() => {
+    // Set the lang attribute to "en" on the <html> element
+    document.documentElement.lang = "en";
+  }, []);
+
+  useEffect(() => {
+    // Set the title of the document dynamically
+    if (response && response.data && response.data.length > 0 && response.data[0].title && response.data[0].title.value) {
+        document.title = response.data[0].title.value;
+    } else {
+        document.title = "Selected Product Page";
+    }
+  }, [JSON.stringify(response)]);
 
   return (
     <>

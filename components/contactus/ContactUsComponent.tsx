@@ -31,7 +31,7 @@ function ContactUsComponent() {
     }, []);
         
     useEffect(() => {
-        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+        document.title = ApiRespond?.data[0]?.title.value || "Contact Us";
     }, [ApiRespond]);
 
     return (

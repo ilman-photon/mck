@@ -4,6 +4,7 @@ import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
 import CarouselComponent from "@/components/carousel";
 import axios, { AxiosError } from "axios";
+import { useState, useEffect } from "react";
 import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
 
@@ -36,6 +37,20 @@ function HealthNeedsPage() {
       }
     );
   }
+
+  useEffect(() => {
+      // Set the lang attribute to "en" on the <html> element
+      document.documentElement.lang = "en";
+  }, []);
+
+  useEffect(() => {
+      // Set the title of the document dynamically
+      if (response && response.data && response.data.length > 0 && response.data[0].title && response.data[0].title.value) {
+          document.title = response.data[0].title.value;
+      } else {
+          document.title = "Health Needs";
+      }
+  }, [JSON.stringify(response)]);
 
   return (
     <>

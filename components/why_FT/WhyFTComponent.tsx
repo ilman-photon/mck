@@ -25,7 +25,7 @@ function WhyFTComponent() {
 
   useEffect(() => {
     document.title =
-      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Default Title";
+      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {
