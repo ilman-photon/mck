@@ -20,7 +20,6 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
             <ImageComponent 
                 src={cardData?.image?.value?.url}
                 alt={`${indexs}${cardData?.image?.value?.url}`}
-                tabIndex={0}
                 id={`hn_label_01_${indexs + 1}_${mainIndex + 1}`} className="h-fit mx-auto border-0"
             />
             </div>
