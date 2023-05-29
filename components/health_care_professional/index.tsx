@@ -194,7 +194,6 @@ function HealthCareProfessionalComponent() {
                         alt="Health Care Header Banner"
                         className="w-full"
                         id="hcp-img-2"
-                        tabIndex={0}
                       />
                     )}
                     <div className="bg-gradient absolute"></div>
