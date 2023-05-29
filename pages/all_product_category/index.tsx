@@ -63,13 +63,25 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
     );
     promise
       .then((res) => {
-        console.log("FetchProductList----- ", res);
-        selectedProduct.forEach((item: any) => {
-          if (selectedCategoryName.includes(item.item.name)) {
-            item.data = { ...item.data, ...res };
+        console.log("FetchProductList----- ", res.data);
+        let tempResults :any = {}
+        res.data.results.map((item :any) =>{
+          let name = item.productType.value[0].name
+          if(tempResults[name]){
+            let tempArray = tempResults[name]
+            tempArray.push(item)
+            tempResults[name] = tempArray
           }
-        });
-        setSelectedProduct(selectedProduct);
+          else{
+            tempResults[name] = [item]
+          }
+
+        })
+        Object.keys(tempResults).map(key =>{
+         let index= selectedProduct.findIndex((value :any) => value.item.name === key )
+          selectedProduct[index].data.results = tempResults[key]
+          selectedProduct[index].data.totalMatching = tempResults[key].length
+        })
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -222,22 +234,33 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
           const categoryName = selectedFilterItems[catId].categoryName;
           selectedCategoryName.push(categoryName);
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " or ";
+            queryParams += " and ";
           }
-          selectedCategoryName.map((item: any, index: any) => {
-            queryParams += "(";
-            if (queryParams.includes(item)) {
-              const concatStr =
-                selectedCategoryName.length === index + 1 ? "" : " or ";
-              queryParams = `(${category.productType}/value/name eq '${item}' ) ${concatStr}`;
-            } else {
-              const concatStr =
-                selectedCategoryName.length === index + 1 ? "" : " or ";
-              queryParams += `${category.productType}/value/name eq '${item}') ${concatStr}`;
-            }
-          });
 
-          minSubCategoryCnt += category.items.length;
+          queryParams += "(";
+          category.items.map((item: any, index: any) => {
+            const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURI(itemName);
+            // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
+            const concatStr = category.items.length === index + 1 ? "" : category.isBusinessVerticalCategory ? " or " : " and ";
+            queryParams += `${(category.isBusinessVerticalCategory ? (category.productType) : (category.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
+          });
+        minSubCategoryCnt += category.items.length;
+          queryParams += `)`;
+          // selectedCategoryName.map((item: any, index: any) => {
+          //   queryParams += "(";
+          //   if (queryParams.includes(item)) {
+          //     const concatStr =
+          //       selectedCategoryName.length === index + 1 ? "" : " or ";
+          //     queryParams = `(${category.productType}/value/name eq '${item}' ) ${concatStr}`;
+          //   } else {
+          //     const concatStr =
+          //       selectedCategoryName.length === index + 1 ? "" : " or ";
+          //     queryParams += `${category.productType}/value/name eq '${item}') ${concatStr}`;
+          //   }
+          // });
+
+          // minSubCategoryCnt += category.items.length;
           lastCatId = catId;
         } else {
           minCategoryCnt += category.isCategoryChecked;
@@ -246,7 +269,7 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
             const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "or ";
+              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
             const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
             queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
           }
