@@ -2450,3 +2450,28 @@ Video Player Code
     top: 35%;
   }
 }
+
+
+//where to buy Scroll
+.location-box{
+  
+}
+.location-box::-webkit-scrollbar {
+  width: 15px;
+  border: solid 0.5px #808CB8;
+  border-radius: 6px;
+  @media screen and (max-width: 1023px) {
+      padding-right: -16px;
+      left: -10px;
+      position: absolute;
+  }
+}
+
+.location-box::-webkit-scrollbar-thumb {
+  height: 248px;
+  background: #CCD1E3;
+  border-radius: 6px;
+}
+.location-box::-webkit-scrollbar-thumb:hover {
+  background: #CCD1E3;
+}
