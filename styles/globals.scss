@@ -2422,19 +2422,3 @@ Video Player Code
     top: 35%;
   }
 }
-.wtb-search{
-  label{
-    @media only screen and (min-width: 1536px) and (max-width: 1600px) {
-      width: 16%;
-    }
-    @media only screen and (min-width: 1280px) and (max-width: 1535px) {
-      width: 19%;
-    }
-    @media screen and (max-width: 1279px) {
-      width: 27%;
-    }
-    @media screen and (max-width: 1024px) {
-      width: 100%;
-    }
-  }
-}
