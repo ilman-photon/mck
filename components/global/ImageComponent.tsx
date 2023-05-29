@@ -4,8 +4,8 @@ import NoImageAvailable  from '../../public/images/No_image_available.png'
 type ImageComponentProps = {
     src: string;
     id: string;
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
     alt?: string;
     className?: any;
     tabIndex?: number;

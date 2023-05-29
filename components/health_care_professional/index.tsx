@@ -24,20 +24,23 @@ function HealthCareProfessionalComponent() {
   const [carouselRelated, setCarouselRelated] = useState<any>();
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
-  const [tabSelected1, setTabSelected1] = useState<any>({flag: false});
-  const [isTabOpen, setIsTabOpen] = useState(false)
+  const [tabClicked, setTabClicked] = useState<any[]>();
   const [nextBtn, setNextBtn] = useState<Element>();
   const [prevBtn, setPrevBtn] = useState<Element>();
   const [isMobile, setIsMobile] = useState(false);
  
-  const handleChange = (idx: any) => {
-    setIsTabOpen(!isTabOpen)
-    setTabSelected1({...tabRelated[idx], flag: tabRelated[idx]?.flag ? !tabRelated[idx]?.flag : !isTabOpen})
+  const handleTabClick = (idx: any, tabTitle: string) => {
+    setTabSelected(tabTitle)
+    const updated = tabClicked?.map((tab: any) => {
+      if(tab?.title?.value === tabTitle){
+        tab.flag = !tab.flag;
+      }else{
+        tab.flag = false
+      }
+      return tab;
+    })
+    setTabClicked(updated)
   };  
-  useEffect(() => {
-    setTabSelected1({...tabRelated[0], flag: true})
-  }, [response])
-
 
   const [ApiRespond, setApiRespond] = useState<any>();
   const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
@@ -86,6 +89,7 @@ function HealthCareProfessionalComponent() {
       setCustomerBackgroundColorCode(backgroundColorCode?.value)
       setDescriptionValue(descriptionValue);
       setTabRelated(tabRelated);
+      setTabClicked([...tabRelated?.map((a: any, idx: number) => ({...a, flag: idx === 0 ? true : false}))])
       setCarouselRelated(carouselRelated);
     }
   }, [response]);
@@ -182,16 +186,16 @@ function HealthCareProfessionalComponent() {
                         sectionData={filteredData("CarouselBlock")}
                       />
                     ) : (
-                      <Image
+                      <ImageComponent
                         src={carouselRelated[0]?.image?.expandedValue?.url}
                         {...(carouselRelated[0]?.image?.expandedValue?.url
-                          ? { height: 500, width: 500 }
+                          ? { width: "100%" }
                           : {})}
                         alt="Health Care Header Banner"
                         className="w-full"
                         id="hcp-img-2"
                         tabIndex={0}
-                      ></Image>
+                      />
                     )}
                     <div className="bg-gradient absolute"></div>
                   </div>
@@ -305,9 +309,11 @@ function HealthCareProfessionalComponent() {
                               type="radio"
                               name="tabs"
                               id={tab?.title?.value}
-                              checked={isMobile ? (tabSelected1?.flag && tab?.title?.value === tabSelected1?.title?.value) : tab?.title?.value === tabSelected1?.title?.value}
+                              checked={isMobile 
+                                  ? (tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected)
+                                  : tab?.title?.value === tabSelected}
                               onClick={
-                                () => handleChange(idx)
+                                () => handleTabClick(idx, tab?.title?.value )
                               }
                             />
                             <label
