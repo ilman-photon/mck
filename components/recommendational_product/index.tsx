@@ -106,7 +106,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                           }`}
                       >
                         <div
-                          className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left pb-4"
+                          className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left mb-4 text-sixcontent-ellipsis"
                           dangerouslySetInnerHTML={{
                             __html: ele?.data?.description?.value,
                           }}
