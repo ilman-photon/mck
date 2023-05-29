@@ -1721,7 +1721,7 @@ footer {
     font-size: 32px;
     line-height: 36px;
   }
-  .header {
+  .header{
     // background-color: #FFFAF6B2;
   }
 }
@@ -2416,5 +2416,21 @@ Video Player Code
   }
   .swiper-button-next, .swiper-button-prev {
     top: 35%;
+  }
+}
+.wtb-search{
+  label{
+    @media only screen and (min-width: 1536px) and (max-width: 1600px) {
+      width: 16%;
+    }
+    @media only screen and (min-width: 1280px) and (max-width: 1535px) {
+      width: 19%;
+    }
+    @media screen and (max-width: 1279px) {
+      width: 27%;
+    }
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 }
