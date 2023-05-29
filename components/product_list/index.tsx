@@ -322,7 +322,7 @@ function ProductListComponent() {
               <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
                 {productListData?.data?.results.map((item: any, idxs: number) => {
                   return (
-                    <ProductCard cardData={item} product={productListData} indexs={idxs} mainIndex={idxs} />
+                    <ProductCard key={`selected_product_results_${idxs}`} cardData={item} product={productListData} indexs={idxs} mainIndex={idxs} />
                   );
                 })}
               </div>

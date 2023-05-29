@@ -409,7 +409,7 @@ function ResultComponent() {
                       
                         {productListData?.data?.results.map((item: any, idxs: number) => {
                           return (
-                            <ProductCard cardData={item} product={productListData} indexs={idxs} mainIndex={idxs} />
+                            <ProductCard key={`search_results_${idxs}`} cardData={item} product={productListData} indexs={idxs} mainIndex={idxs} />
                           );
                         })}
                       </div>
