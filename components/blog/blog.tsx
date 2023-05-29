@@ -57,7 +57,10 @@ function BlogComponent() {
   const HandleSearchLoading = (value: any) => {
     setSearchLoading(value)
   };
-
+  const HandleSearchClose = () => {
+    setCurrentScreen('List')
+    setActiveSearch(false)
+  }
   return (
     <>
       {(loading) && 
@@ -80,6 +83,7 @@ function BlogComponent() {
             } block w-full relative flex items-center content-center mb-6`}
           >
             <SearchComponent
+              handleScreen={HandleSearchClose}
               placeholder={response?.data[0].blogSearchPlaceholderText.value}
               handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
               handleLoading={(value) => HandleSearchLoading(value)}
@@ -129,6 +133,7 @@ function BlogComponent() {
               className="lg:block hidden relative flex items-center content-center mb-6"
             >
               <SearchComponent
+                handleScreen={() => setCurrentScreen('List')}
                 placeholder={response?.data[0].blogSearchPlaceholderText.value}
                 handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
                 handleLoading={(value) => HandleSearchLoading(value)}
