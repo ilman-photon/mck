@@ -14,9 +14,6 @@ const SocialMediaIconComponent = () => {
             `${process.env.API_URL}/api/episerver/v3.0/content/268?expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
         setSocialMediaIcon(response.data.socialMediaLinkBlock);
-        console.table(response.data.socialMediaLinkBlock.expandedValue)
-
-
     };
 
     return (
