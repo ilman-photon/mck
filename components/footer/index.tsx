@@ -4,6 +4,7 @@ import SignUpComponent from "../signup";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { ImageComponent } from "../global/ImageComponent";
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function FooterComponent() {
     <>
       <footer id="footer" className="bg-mcklightyellow lg:mb-0 mb-16">
         <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">
               <ul className="mb-0 list-none lg:py-0 px-0">
                 <li className="lg:my-0 grid">
@@ -136,11 +137,12 @@ export default function FooterComponent() {
                     }
                   >
                     <div className="w-5 h-5 mb-2">
-                      <Image
+                      <ImageComponent
+                        id={item?.contentLink?.guidValue}
                         src={item?.menuIcon?.expandedValue?.url}
-                        width="21"
-                        height="18"
-                        alt=""
+                        width="21px"
+                        height="18px"
+                        alt={item?.menuIcon?.expandedValue?.name}
                       />
                     </div>
                     <span

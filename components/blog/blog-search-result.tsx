@@ -61,6 +61,7 @@ function BlogSearchComponent() {
               className="w-full relative flex items-center content-center"
             >
               <SearchComponent
+                handleScreen={() => { }}
                 placeholder={
                   BlogListingContent?.data[0].blogSearchPlaceholderText.value
                 }
@@ -656,6 +657,7 @@ function BlogSearchComponent() {
             <div className="lg:col-span-1 col-start-1 col-end-7">
               <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
                 <SearchComponent
+                  handleScreen={() => { }}
                   placeholder={
                     BlogListingContent?.data[0].blogSearchPlaceholderText.value
                   }

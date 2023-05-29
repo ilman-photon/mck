@@ -167,7 +167,6 @@ const HealthNeedFilter = ({
         >
           {activeFiltersData?.activeFiltersText?.value}
           <ImageComponent
-            tabIndex = {0}
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
             src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
             className='mr-2 ml-2'

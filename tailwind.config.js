@@ -52,7 +52,8 @@ module.exports = {
         550: '550px',
         212: '212px',
         270: '270px',
-        80: '80%'
+        80: '80%',
+        95: '95%'
       },
       height: {
         50: '50px',
@@ -94,6 +95,7 @@ module.exports = {
         11: '11px'
       },
       padding: {
+        18: '18px',
         72: "72px",
         54: "54px",
         36: "36px",
@@ -104,7 +106,9 @@ module.exports = {
       
       },
       margin: {
+        24: "24",
         72: "72px",
+        76: "76px",
       },
       paddingtop: {
         72: "72px",

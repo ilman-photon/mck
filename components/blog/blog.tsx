@@ -15,16 +15,11 @@ function BlogComponent() {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [ActiveSearch, setActiveSearch] = useState<boolean>(false);
   const [searchString, setSearchString] = useState<any>();
-  const [RelatedBlog, setRelatedBlog] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
 
   const router = useRouter();
-
-  useEffect(() => {
-    fetchRelatedProducts();
-  }, [ActiveSearch]);
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -33,19 +28,6 @@ function BlogComponent() {
       "Accept-Language": "en",
     },
   });
-
-  const fetchRelatedProducts = async () => {
-    const responseid = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
-
-    setRelatedBlog(responseid);
-  };
-
-  useEffect(() => {
-    fetchRelatedProducts();
-  }, []);
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -75,7 +57,10 @@ function BlogComponent() {
   const HandleSearchLoading = (value: any) => {
     setSearchLoading(value)
   };
-
+  const HandleSearchClose = () => {
+    setCurrentScreen('List')
+    setActiveSearch(false)
+  }
   return (
     <>
       {(loading) && 
@@ -98,6 +83,7 @@ function BlogComponent() {
             } block w-full relative flex items-center content-center mb-6`}
           >
             <SearchComponent
+              handleScreen={HandleSearchClose}
               placeholder={response?.data[0].blogSearchPlaceholderText.value}
               handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
               handleLoading={(value) => HandleSearchLoading(value)}
@@ -147,6 +133,7 @@ function BlogComponent() {
               className="lg:block hidden relative flex items-center content-center mb-6"
             >
               <SearchComponent
+                handleScreen={() => setCurrentScreen('List')}
                 placeholder={response?.data[0].blogSearchPlaceholderText.value}
                 handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
                 handleLoading={(value) => HandleSearchLoading(value)}
@@ -171,7 +158,7 @@ function BlogComponent() {
             OnRelatedProductClick={(e) => handleProductClick(e)}
             title={response?.data[0].relatedProductHeadingText.value}
             BlogListingContent={
-              RelatedBlog?.data[0].relatedProducts.expandedValue
+              response?.data[0].recommendedProducts?.expandedValue
             }
           />
         </div>

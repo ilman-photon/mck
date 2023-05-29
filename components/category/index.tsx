@@ -75,7 +75,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 />
               </div>
               <div
-                className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer"
+                className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
                 id={`category_name_0${index}`}
               >
                 <Link
@@ -85,7 +85,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 </Link>
               </div>
               <div tabIndex={0}
-                className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey"
+                className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
                 }}

@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from "react";
 import axios from "axios";
 import Link from "next/link"
+import { LinkComponent } from "../global/LinkComponent";
 const ResentBlogListComponent = () => {
 
     const [ResentBlogList, setResentBlogList] = useState<any>();
@@ -23,9 +24,10 @@ const ResentBlogListComponent = () => {
     return (
 
         <div className='m-4'>
-            {ResentBlogList?.map((item: any, index: number) => (
+            {ResentBlogList?.map((item: any, index: string) => (
                 <div key={index} className='border border-t-0 border-x-0 py-1'>
-                    <Link
+                    <LinkComponent
+                        key={index}
                         href={{
                             pathname: "/blog_details",
                             query: { id: `${HandelURLToId(item.contentLink.url)}` },
@@ -33,7 +35,7 @@ const ResentBlogListComponent = () => {
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
                         {item.title.value}
-                    </Link>
+                    </LinkComponent>
                 </div>
             ))}
         </div>
