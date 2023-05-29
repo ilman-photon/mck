@@ -23,7 +23,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
                 key={Math.random()}
               >
                 <Link
-                  className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative"
+                  className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                   href={item?.menuItemUrl?.value ?? ''}
                 >
                   {item?.menuItemName?.value}

@@ -42,7 +42,7 @@ function ProductDropComponent({ subMenuData }: Props) {
   }
 
   return (
-    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-3">
+    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
         {subMenu?.map((item: any) => {
           return (
@@ -55,12 +55,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                       filter: updateUrl(item?.data[0].menuItemUrl?.value, "1"),
                     },
                   }}
-                  className="text-gtl-med text-2xl blue-txt text-left pl-2"
+                  className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium "
                 >
                   {item?.data[0].menuItemName?.value}
                 </Link>
                 <ul
-                  className={`hidden submenu ${
+                  className={`hidden submenu megamenu-submenu ${
                     item?.data[0].subMenuContentBlockArea?.value === null
                       ? "hidden"
                       : "group-hover:block"
@@ -70,7 +70,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                     (ele: any) => {
                       return (
                         <li
-                          className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"
+                          className="blue-txt text-left text-sofia-reg pb-18 pl-2 hover:bg-beige-50"
                           key={Math.random()}
                         >
                           <Link
