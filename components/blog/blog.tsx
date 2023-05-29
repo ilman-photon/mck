@@ -15,16 +15,11 @@ function BlogComponent() {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [ActiveSearch, setActiveSearch] = useState<boolean>(false);
   const [searchString, setSearchString] = useState<any>();
-  const [RelatedBlog, setRelatedBlog] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
 
   const router = useRouter();
-
-  useEffect(() => {
-    fetchRelatedProducts();
-  }, [ActiveSearch]);
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -33,19 +28,6 @@ function BlogComponent() {
       "Accept-Language": "en",
     },
   });
-
-  const fetchRelatedProducts = async () => {
-    const responseid = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
-
-    setRelatedBlog(responseid);
-  };
-
-  useEffect(() => {
-    fetchRelatedProducts();
-  }, []);
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -171,7 +153,7 @@ function BlogComponent() {
             OnRelatedProductClick={(e) => handleProductClick(e)}
             title={response?.data[0].relatedProductHeadingText.value}
             BlogListingContent={
-              RelatedBlog?.data[0].relatedProducts.expandedValue
+              response?.data[0].recommendedProducts?.expandedValue
             }
           />
         </div>
