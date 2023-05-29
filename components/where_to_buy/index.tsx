@@ -134,15 +134,16 @@ function WhereComponent() {
         </div>
       ) : (
         <div className='container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy'>
-          <div className='p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box'>
-            <div
-              className='pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg'
+         <div>
+         <div
+              className='lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg'
               tabIndex={0}
               aria-label='Disclaimer'
               id='wb-label-001'
             >
               Disclaimer: Products are subject to availability
             </div>
+            <div className='pb-6 pl-6 lg:pr-6 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box'>
             {responseValue?.map((value: any, index: Number) => {
               return (
                 <div
@@ -247,6 +248,8 @@ function WhereComponent() {
               );
             })}
           </div>
+         </div>
+          
           <div className='lg:w-842 w-full relative h-500 lg:h-full'>
             <GoogleMap
               mapContainerClassName='map-container'
