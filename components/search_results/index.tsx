@@ -29,18 +29,16 @@ function ResultComponent() {
     );
   }
 
-  // Right section product carousel data
+  // Right section product filter data
   function fetchProductList(filter: any) {
     setSearchLoading(true)
     let queryParameter = "";
-    if (filter === "") {
-      queryParameter = `(productType/value/name eq 'Acute Care')`;
-    } else {
-      queryParameter = filter;
-    }
+    if (filter !== "") {
+      queryParameter = `(${filter}) and `;
+    } 
     const StringParam = router.query.search?.toString().toLowerCase();
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
 
       {
         headers: {
@@ -80,26 +78,30 @@ function ResultComponent() {
     categoryId: any,
     subCategoryId: any
   ) => {
+    let filterItems : any[] = [];
+    filterItems = selectedFilterItems;
     if (e.target.checked) {
-      if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
-        selectedFilterItems[categoryId]["items"].push(filter);
+      if (filterItems[categoryId]["items"].indexOf(filter) === -1) {
+        filterItems[categoryId]["items"].push(filter);
       }
       //existing code
       setActiveFilter([...activeFilter, filter]);
-      selectedFilterItems[categoryId][subCategoryId].checked = true;
+      filterItems[categoryId][subCategoryId].checked = true;
     } else {
-      const index = selectedFilterItems[categoryId]["items"].indexOf(filter);
-      selectedFilterItems[categoryId]["items"].splice(index, 1);
+      const index = filterItems[categoryId]["items"].indexOf(filter);
+      filterItems[categoryId]["items"].splice(index, 1);
       //existing code
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
         })
       );
-      selectedFilterItems[categoryId][subCategoryId].checked = false;
-      selectedFilterItems[categoryId].isCategoryChecked = false;
+      filterItems[categoryId][subCategoryId].checked = false;
+      if(filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0){
+        filterItems[categoryId].isCategoryChecked = false;
+      }
     }
-    setSelectedFilterItems(selectedFilterItems);
+    setSelectedFilterItems(() => filterItems);
   };
 
   const handleViewAllChange = (e: any, categoryId: any) => {
@@ -118,45 +120,35 @@ function ResultComponent() {
       subCategoryChecked = false;
     }
 
-    selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
+    let selectedFilterData : any[] = [];
+    selectedFilterData = selectedFilterItems;    
 
-    selectedFilterItems[categoryId].map((sub_category: any) => {
+    selectedFilterData[categoryId].isCategoryChecked = isCategoryChecked;
+
+    selectedFilterData[categoryId].map((sub_category: any) => {
       sub_category.checked = subCategoryChecked;
       if (subCategoryChecked) {
-        selectedFilterItems[categoryId]["items"].push(sub_category.name);
+        if(selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1){
+          selectedFilterData[categoryId]["items"].push(sub_category.name);
+        }     
       } else {
-        const index = selectedFilterItems[categoryId]["items"].indexOf(
+        const index = selectedFilterData[categoryId]["items"].indexOf(
           sub_category.name
         );
-        selectedFilterItems[categoryId]["items"].splice(index, 1);
+        selectedFilterData[categoryId]["items"].splice(index, 1);
       }
     });
 
     let selectedSubCat: any = [];
-    selectedFilterItems.map((category: any) => {
+    selectedFilterData.map((category: any) => {
       category.items.map((name: any) => {
         if (selectedSubCat.indexOf(name) === -1) {
           selectedSubCat.push(name);
         }
       });
     });
-    setActiveFilter([...selectedSubCat]);
-    if (selectedViewAllCateory.length > 0) {
-      // let queryParams = '';
-      // selectedViewAllCateory.map((catId: any, index: any) => {
-      //     if (selectedFilterItems[catId].isCategoryChecked) {
-      //         const categoryName = selectedFilterItems[catId].categoryName;
-      //         const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-      //         const encodeItemName = encodeURI(itemName);
-      //         const joinedCond = (selectedViewAllCateory.length === index + 1) ? '' : 'and ';
-      //         queryParams += `(${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond}`;
-      //     }
-      // })
-      // console.log(queryParams);
-      // fetchProductList(queryParams);
-    } else {
-      fetchProductList("");
-    }
+    setActiveFilter(() => selectedSubCat);
+    setSelectedFilterItems(() => selectedFilterData);
   };
 
   useEffect(() => {
@@ -166,45 +158,42 @@ function ResultComponent() {
   const createQueryParameters = () => {
     let queryParams = "";
     if (selectedFilterItems.length > 0) {
-      let lastCatId = 0;
-      let minCategoryCnt = 0;
-      let minSubCategoryCnt = 0;
+
+      let businessVerticalCategory :string[];
+      businessVerticalCategory = [];
+      let notBusinessVerticalCategory :string[];
+      notBusinessVerticalCategory = [];
+      
       selectedFilterItems.map((category: any, catId: any) => {
-        if (!category.isCategoryChecked && category.items.length > 0) {
-          if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " or ";
+        category.items.map((item: any, index: any) => {
+          let itemName = item.replace(/[^a-zA-Z ]/g, "");
+          let encodeItemName = encodeURI(itemName);
+          let categoryProductType = category.productType.toLowerCase();
+          let queryParam = `${categoryProductType}/value/name eq '${encodeItemName}'`;
+          if(category.isBusinessVerticalCategory){
+            businessVerticalCategory.push(queryParam);
+          }else{
+            notBusinessVerticalCategory.push(queryParam);
           }
-          queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr = category.items.length === index + 1 ? "" : " or ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
+        });
+    });
 
-          minSubCategoryCnt += category.items.length;
-          queryParams += `)`;
-          lastCatId = catId;
-        } else {
-          minCategoryCnt += category.isCategoryChecked;
-          if (category.isCategoryChecked) {
-            const categoryName = selectedFilterItems[catId].categoryName;
-            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-          }
-        }
-      });
+    let businessQueryParams : string = '';
+    let notBusinessQueryParams : string = '';
+    businessQueryParams = businessVerticalCategory.join(' or '); 
+    notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
 
-      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        queryParams = "";
+    if(businessQueryParams !== ''){
+      if(notBusinessQueryParams !== ''){
+        queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
+      }else{
+        queryParams = businessQueryParams;
       }
+    }else{
+      queryParams = notBusinessQueryParams;
     }
-
-    if (queryParams) fetchProductList(queryParams);
+  }
+    fetchProductList(queryParams);
   };
 
   // -------- Health needs page data fetch starts -------- //
@@ -287,24 +276,37 @@ function ResultComponent() {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
     );
-    selectedFilterItems.map((category: any) => {
+    let selectedFilterData : any[] =[];
+    selectedFilterData = selectedFilterItems;
+    selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         if (item == sub_category.name) {
           sub_category.checked = false;
         }
+        if(category["items"] && category["items"].indexOf(item) > -1){
+          category["items"].splice(category["items"].indexOf(item), 1);
+        }
       });
     });
+    setSelectedFilterItems(()=>selectedFilterData);
+
   }
 
   const handleClearAll = () => {
     setActiveFilter([]);
-    selectedFilterItems.map((category: any) => {
+    let selectedFilterData : any[] = []; 
+    selectedFilterData = selectedFilterItems;
+    selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         sub_category.checked = false;
+        if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+          category["items"].splice(category["items"].indexOf(sub_category.name), 1);
+        }
       });
     });
+    setSelectedFilterItems(()=>selectedFilterData);
     fetchProductList("");
   };
   const handleProductClick = (data: any) => {
