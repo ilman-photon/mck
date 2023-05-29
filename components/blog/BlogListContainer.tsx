@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { useEffect } from "react";
 import useAxios from "@/hooks/useApi";
 import Link from "next/link";
-import { GetTime, HandelURLToId } from "../CommonUtil/time";
+import { GetTime, HandelURLToId, handleBGColor } from "../CommonUtil/time";
 import HeroArticle from "./HeroArticle";
 
 const BlogListContainer = () => {
@@ -23,7 +23,7 @@ const BlogListContainer = () => {
         // Set the title of the document dynamically
         document.title = response?.data[0]?.title.value || "Blog Listing Page";
     }, [JSON.stringify(response)]);
-    
+
     return (
         <>
             <HeroArticle data={response?.data.results[0]} />
@@ -31,10 +31,10 @@ const BlogListContainer = () => {
                 {response?.data.results?.map((item: any, index: any) => (
                     <>
                         {index != 0 && <Link
-                            key={index}
+                            key={item?.contentLink?.id}
                             href={{
                                 pathname: "/blog_details",
-                                query: { id: `${HandelURLToId(item.contentLink.url)}` },
+                                query: { id: item.routeSegment },
                             }}
                             className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                         >
@@ -51,13 +51,12 @@ const BlogListContainer = () => {
                                             {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                         </div>
                                         <div className='flex flex-wrap lg:h-50 overflow-hidden'>
-                                            {item.tag.value.map((item: any, index: any) => (
-                                                <div key={index}
+                                            {item.tag.value.map((tagitem: any, idx: any) => (
+                                                <div key={idx}
                                                     style={{
-                                                        backgroundColor: item.recommendedProductButtonColor?.value,
-                                                        color: item.recommendedProductButtonText?.value
+                                                        backgroundColor: handleBGColor(idx, item.tagBackgroundColorCode?.value),
                                                     }}
-                                                    className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{item.description}</div>
+                                                    className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
                                             ))}
                                         </div>
                                     </div>

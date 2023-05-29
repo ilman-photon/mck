@@ -4,6 +4,7 @@ import SignUpComponent from "../signup";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { ImageComponent } from "../global/ImageComponent";
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -136,11 +137,12 @@ export default function FooterComponent() {
                     }
                   >
                     <div className="w-5 h-5 mb-2">
-                      <Image
+                      <ImageComponent
+                        id={item?.contentLink?.guidValue}
                         src={item?.menuIcon?.expandedValue?.url}
-                        width="21"
-                        height="18"
-                        alt=""
+                        width="21px"
+                        height="18px"
+                        alt={item?.menuIcon?.expandedValue?.name}
                       />
                     </div>
                     <span
