@@ -348,7 +348,7 @@ function WhereComponent() {
             <div className='flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]'>
               <label
                 htmlFor='fname'
-                className='flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]'
+                className='flex items-center whitespace-nowrap lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]'
                 id='wb-label-012'
               >
                 Where to buy
