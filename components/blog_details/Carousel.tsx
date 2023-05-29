@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import axios from "axios";
 import { GetTime } from "../CommonUtil/time";
 import Link from "next/link";
+import { LinkComponent } from "../global/LinkComponent";
 
 interface CarouselComponentProps {
   ProductList: any;
@@ -38,7 +39,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
       ></h1>
       <div className="grid lg:grid-cols-2 gap-4 lg:relative">
         {BlogListingContent?.data.results.map((item1: any, index: any) => (
-          <Link
+          <LinkComponent
             key={index}
             href={{
               pathname: "/blog_details",
@@ -89,7 +90,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 </div>
               </figcaption>
             </article>
-          </Link>
+          </LinkComponent>
         ))}
 
         <div className="carousel-button w-full lg:absolute flex items-center justify-center top-72">
