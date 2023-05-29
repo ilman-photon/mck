@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { GetTime, HandelURLToId } from "../CommonUtil/time";
+import { GetTime, HandelURLToId, handleBGColor } from "../CommonUtil/time";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import 'swiper/css/pagination';
@@ -36,17 +36,17 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           slidesPerGroup={1}
           pagination={{ clickable: true, type: "fraction" }}
         >
-          {relatedArticle?.map((item: any, index: number) => {
+          {relatedArticle?.map((item: any, index: any) => {
             return (
               <SwiperSlide
-                key={item?.contentLink?.id}
+                key={item?.contentLink?.id + index}
                 className="swiper-slide-custom"
               >
                 <div
-                  key={index}
                   className="swiper-list-item w-[326px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4"
                 >
                   <LinkComponent
+                    key={index}
                     href={{
                       pathname: "/blog_details",
                       query: { id: `${HandelURLToId(item.contentLink.url)}` },
@@ -79,15 +79,15 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
                           </div>
                           <div className="flex flex-wrap">
-                            {item.tag.value.map((item: any, index: any) => (
+                            {item.tag.value.map((tagitem: any, idx: any) => (
                               <div
                                 style={{
-                                  backgroundColor: item.tagBackgroundColorCode?.value,
+                                  backgroundColor: handleBGColor(idx, item.tagBackgroundColorCode.value)
                                 }}
-                                key={index}
+                                key={idx}
                                 className="mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                               >
-                                {item.description}
+                                {tagitem.description}
                               </div>
                             ))}
                           </div>

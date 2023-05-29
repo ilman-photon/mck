@@ -11,7 +11,6 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
   Catogarytitle,
   OnCatogarySelcete,
 }) => {
-  const handleClick = () => {};
 
   return (
     <div className="category-card shade-blue-border rounded-lg overflow-hidden pb-4 mb-6">
@@ -19,7 +18,7 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
         {Catogarytitle}
       </div>
       {CatogaryListing?.map((item1: any, index: number) => (
-        <div className="lg:px-6 px-2" key={index}>
+        <div className="lg:px-6 px-2" key={item1?.contentLink?.id + "" + index}>
           <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
             <React.Fragment>
               <input type="checkbox" id={item1.categoryDisplayName.value} className="hidden" />

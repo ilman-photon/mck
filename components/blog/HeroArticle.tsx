@@ -36,7 +36,7 @@ const HeroArticle = (data: any) => {
                                     {data.data?.tag?.value.map((item: any, index: any) => (
                                         <div key={index}
                                             style={{
-                                                backgroundColor: item.tagBackgroundColorCode?.value,
+                                                backgroundColor: data.data?.tagBackgroundColorCode?.value,
                                             }}
                                             className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit lg:mb-0 mb-2' id='blog-label-006'>
                                             {item.description}
