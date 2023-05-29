@@ -1939,6 +1939,18 @@ footer {
 Mobile and iPad Navigation
 -----------------------------
 **/
+.categoryname {
+  +.megamenu-submenu {
+    margin-top: 14px;
+    li {
+    &:first-child {
+      padding-top: 0px;
+    }
+    }
+  }
+}
+
+
 @media (max-width: 968px) {
   .container {
     max-width: 100%;
@@ -2328,6 +2340,14 @@ Video Player Code
     margin-right: 8px;
   }
 }
+
+.text-oneline-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .text-heading-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2352,8 +2372,16 @@ Video Player Code
   -webkit-box-orient: vertical;
 }
 
+.text-sixcontent-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
 @media (max-width: 968px) {
-  .text-heading-ellipsis, .text-p-ellipsis, .text-content-ellipsis {
+  .text-oneline-ellipsis,.text-heading-ellipsis, .text-p-ellipsis, .text-content-ellipsis, .text-sixcontent-ellipsis {
       -webkit-line-clamp: unset;
   }
 }

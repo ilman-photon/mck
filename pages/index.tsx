@@ -78,11 +78,23 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
+
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <div className={`hidden lg:flex md:flex ${isCookiesShow ? 'show-cookies' : ''}`}>
+        {isCookiesShow && <CookieSetting
+          onAccept={handleCookieManageShowAccept}
+          onReject={handleCookieShowCookies}
+        />}
+        {isCookiesManageShow && <CookiesComponent
+          onAccept={handleAcceptCookiesSetting}
+          onManageSettings={handleCookieManageShow}
+        />}
+      </div>
 
       {showComponent && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
