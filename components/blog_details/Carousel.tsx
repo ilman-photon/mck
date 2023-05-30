@@ -33,7 +33,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           spaceBetween={4}
           navigation
           slidesPerView={2}
-          slidesPerGroup={1}
+          slidesPerGroup={2}
           pagination={{ clickable: true, type: "fraction" }}
         >
           {relatedArticle?.map((item: any, index: any) => {
@@ -70,10 +70,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             {item.title.value}
                           </div>
                           <div className="pb-3 pt-3">
-                            <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border">
+                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.startPublish?'shade-grey-right-border':''}`}>
                               {GetTime(item.startPublish)}
                             </span>
-                            <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border">
+                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false?'shade-grey-right-border':''}`}>
                               {item.readMinute.value}
                             </span>
                             {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
