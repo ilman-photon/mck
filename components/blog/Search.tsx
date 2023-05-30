@@ -1,32 +1,51 @@
 import axios from "axios";
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 interface CatogaryComponentProps {
     placeholder: any;
+    searchData: string;
     handleClick: (e: any, searchstring: any) => void;
     handleLoading: (value: any) => void;
     handleScreen: (value: any) => void;
+    handleChnage: (e: any) => void;
 }
 
-const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, handleClick, handleLoading, handleScreen }) => {
-    const [searchData, setSearchData] = useState<string>();
-    const [searchResult, setsearchResult] = useState<boolean>(true);
+const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, handleClick, handleLoading, handleScreen, handleChnage, searchData }) => {
+    const [searchResult, setsearchResult] = useState<boolean>(searchData.length > 0 ? false : true);
+    const [error, setError] = useState<boolean>(false);
+
     const fetchSearchBlog = async () => {
         handleLoading(true);
-        const SearchResult = await axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), ${searchData?.toLowerCase()}) or contains(tolower(description/value), ${searchData?.toLowerCase()}))&expand=*`, { headers: { 'Accept-Language': 'en' } },
-        );
-        handleClick(SearchResult.data.results, searchData)
-        setsearchResult(false)
-        handleLoading(false);
+        try {
+            const SearchResult = await axios.get(
+                `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), ${searchData?.toString().toLowerCase()}) or contains(tolower(description/value), ${searchData?.toLowerCase().toString()}))&expand=*`, { headers: { 'Accept-Language': 'en' } },
+            );
+            handleClick(SearchResult.data.results, searchData)
+            setsearchResult(false)
+            handleLoading(false);
+            setError(false)
+
+        } catch (error) {
+            setError(true)
+            console.error(error);
+        } finally {
+            handleLoading(false);
+        }
+    };
+
+    const validateInput = (e: any) => {
+        const value = e.target.value
+        handleChnage(value.toString())
     };
 
 
     return (
         <>
             <input
+                style={{ border: error ? '2px solid red' : '' }}
                 className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue placeholder:text-opacity-50 pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
                 placeholder={placeholder}
-                onChange={(e) => setSearchData(e.target.value)}
+                value={searchData}
+                onChange={validateInput}
                 onKeyDown={(e: any) => e.keyCode === 13 && fetchSearchBlog()}
             />
             {searchResult ? <svg onClick={fetchSearchBlog} className="absolute top-4 right-4 z-8 cursor-pointer" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
