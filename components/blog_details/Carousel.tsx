@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from "swiper";
 import "swiper/css/navigation";
 import { LinkComponent } from "../global/LinkComponent";
+import { ImageComponent } from "../global/ImageComponent";
 
 interface CarouselComponentProps {
   title: string;
@@ -39,14 +40,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           {relatedArticle?.map((item: any, index: any) => {
             return (
               <SwiperSlide
-                key={item?.contentLink?.id + index}
+                key={item?.contentLink?.id}
                 className="swiper-slide-custom"
               >
                 <div
                   className="swiper-list-item w-[326px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4"
                 >
                   <LinkComponent
-                    key={index}
                     href={{
                       pathname: "/blog_details",
                       query: { id: `${HandelURLToId(item.contentLink.url)}` },
@@ -54,7 +54,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   >
                     <article onClick={(e: any) => OnRelatedArticleClick(item.contentLink.url)} >
                       <figure>
-                        <img
+                        <ImageComponent
                           src={item.image.value.url}
                           alt={item.image.value.id}
                           id={item.image.value.id}

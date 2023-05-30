@@ -24,7 +24,7 @@ const BlogDetailsComponent = () => {
     }, [router.query]);
     function fetchBlogetails() {
         return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${id}/&expand=*`,
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${blogID}/&expand=*`,
             {
                 headers: { "Accept-Language": "en" },
             }
@@ -40,7 +40,9 @@ const BlogDetailsComponent = () => {
                 .catch((e: Error | AxiosError) => {
                     console.log(e);
                     setIsLoading(false);
-                });
+                })
+        } else {
+            setIsLoading(false)
         }
     }, [blogID]);
 
