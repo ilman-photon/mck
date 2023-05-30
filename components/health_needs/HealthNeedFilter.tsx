@@ -37,7 +37,9 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     });
-    fetchProductList('');
+    const currentURL = window.location.href;
+  const updatedURL = currentURL.split('?')[0]; 
+  window.location.href = updatedURL;
   };
   const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
@@ -198,6 +200,7 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
+            {activeFilter.length > 0 &&
             <div className='flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
@@ -216,20 +219,20 @@ const HealthNeedFilter = ({
                 {activeFiltersData?.clearAllText?.value}
               </div>
             </div>
+}
           </div>
         </div>
         <div className='block lg:hidden flex flex-row py-2 justify-between'>
           <div className='flex'>
             <span>FILTER</span>
-            <Image
-              src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-              className='mr-2 ml-2'
-              tabIndex={0}
-              id='hn_label_003_1'
-              alt={activeFiltersData?.activeFiltersText?.value}
-              width={24}
-              height={24}
-            />
+            <ImageComponent
+            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            className='mr-2 ml-2'
+            alt={activeFiltersData?.activeFiltersText?.value}
+            width={24}
+            height={24}
+          />
           </div>
           <div
             className='cursor-pointer'
