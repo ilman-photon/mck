@@ -363,7 +363,7 @@ function ProductListComponent() {
                       onClick={() => handleProductClick(item)}
                     >
                       <div className="h-60 flex items-center justify-center">
-                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0" />
+                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 max-h-60" />
                       </div>
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
