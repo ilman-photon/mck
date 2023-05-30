@@ -2449,30 +2449,6 @@ Video Player Code
   }
 }
 
-.health-care-component {
-  .swiper-initialized {
-    padding: 10px 22px 0px;
-    @media (max-width: 968px) {
-      padding: 0 0px;
-    }
-  }
-  .swiper-slide {
-    @media (max-width: 968px) {
-      width: 100%;
-    }
-  }
-  .swiper-button-next {
-    right: 0px;
-  } 
-  .swiper-button-prev {
-    left: 0px;
-  }
-  .swiper-button-next, .swiper-button-prev {
-    top: 35%;
-  }
-}
-
-
 //where to buy Scroll
 .location-box{
   
@@ -2500,4 +2476,7 @@ Video Player Code
 video{
   border-radius: 10px;
   margin: 15px auto;
+}
+.blog-details-container img{
+  margin: auto;
 }
