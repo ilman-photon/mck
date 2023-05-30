@@ -101,7 +101,7 @@ const BlogDetailsComponent = () => {
                                         <span className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-label-002'>{response?.data[0]?.readMinute?.value}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                                     </div>
-                                    <div className='flex lg:flex-wrap '>
+                                    <div className='flex flex-wrap '>
                                         {response?.data[0]?.tag.value.map((item: any, index: any) => (
                                             <div
                                                 key={index}
