@@ -76,7 +76,7 @@ const HealthNeedsComponent = () => {
         queryParameter = filter;
       } else {
         queryParameter =
-          filter + " or ContentType/any(t:t eq 'ProductDetailsPage')";
+          filter + " and ContentType/any(t:t eq 'ProductDetailsPage')";
       }
     }
 
@@ -190,15 +190,15 @@ const HealthNeedsComponent = () => {
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " or ";
+            queryParams += " and ";
           }
           queryParams += "(";
           category.items.map((item: any, index: any) => {
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const concatStr =
-              category.items.length === index + 1 ? "" : " and ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
+              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
+            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
           });
 
           minSubCategoryCnt += category.items.length;
@@ -378,10 +378,11 @@ const HealthNeedsComponent = () => {
       tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
-        leftfiltermaindata?.isBusinessVerticalCategory?.value
-          ? "productType"
-          : leftfiltermaindata?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] = 
+      leftfiltermaindata?.name
+        // leftfiltermaindata?.isBusinessVerticalCategory?.value
+        //   ? leftfiltermaindata?.name
+        //   : leftfiltermaindata?.name;
       tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
         "isCategoryChecked"
       ] = false;

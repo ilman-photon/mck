@@ -24,9 +24,10 @@ const ResentBlogListComponent = () => {
     return (
 
         <div className='m-4'>
-            {ResentBlogList?.map((item: any, index: number) => (
+            {ResentBlogList?.map((item: any, index: string) => (
                 <div key={index} className='border border-t-0 border-x-0 py-1'>
                     <LinkComponent
+                        key={index}
                         href={{
                             pathname: "/blog_details",
                             query: { id: `${HandelURLToId(item.contentLink.url)}` },

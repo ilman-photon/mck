@@ -85,19 +85,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="hidden lg:flex md:flex">
-        {isCookiesShow && (
-          <CookieSetting
-            onAccept={handleCookieManageShowAccept}
-            onReject={handleCookieShowCookies}
-          />
-        )}
-        {isCookiesManageShow && (
-          <CookiesComponent
-            onAccept={handleAcceptCookiesSetting}
-            onManageSettings={handleCookieManageShow}
-          />
-        )}
+      <div className={`hidden lg:flex md:flex ${isCookiesShow ? 'show-cookies' : ''}`}>
+        {isCookiesShow && <CookieSetting
+          onAccept={handleCookieManageShowAccept}
+          onReject={handleCookieShowCookies}
+        />}
+        {isCookiesManageShow && <CookiesComponent
+          onAccept={handleAcceptCookiesSetting}
+          onManageSettings={handleCookieManageShow}
+        />}
       </div>
 
       {showComponent && (

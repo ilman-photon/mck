@@ -80,7 +80,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
               ? "flex-row-reverse text-center"
               : "text-left"
-            } container mx-auto grid lg:flex w-full lg:py-6 mb-6`}
+            } container mx-auto grid lg:flex w-full py-6 mb-6`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -165,7 +165,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            } w-full lg:py-6 mb-6`}
+            } w-full py-6 lg:px-0 px-4 mb-6`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -175,7 +175,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           : "text-left"
           } container mx-auto grid lg:flex`}>
           <div
-            className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 pt-6 col-span-1`}
+            className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0  col-span-1`}
           >
             <img
               className="w-full lg:px-0"
@@ -276,8 +276,8 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div> :
         <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6 lg:px-72">
-          <img src={sectionData?.backgroundImage?.expandedValue?.url} id="wft_img_009" tabIndex={0} alt="heal and thrive" />
-          <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0">
+          <img src={sectionData?.backgroundImage?.expandedValue?.url} className="w-full" id="wft_img_009" tabIndex={0} alt="heal and thrive" />
+          <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0 lg:hidden">
             <h2
               className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
               id="wft_label_010"

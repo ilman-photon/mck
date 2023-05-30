@@ -8,9 +8,8 @@ type ImageComponentProps = {
     height?: number | string;
     alt?: string;
     className?: any;
-    tabIndex?: number;
 } 
-export function ImageComponent({src, height, width, alt, className, tabIndex, id}: ImageComponentProps) {
+export function ImageComponent({src, height, width, alt, className, id}: ImageComponentProps) {
     const [didLoad, setLoad] = React.useState(false);
   
     const style: CSSProperties = didLoad ? {} : {visibility: 'hidden', height: 0, width: 0};
@@ -23,7 +22,6 @@ export function ImageComponent({src, height, width, alt, className, tabIndex, id
         src={src} 
         onLoad={() => setLoad(true)} 
         alt={alt || "Image is not available"}
-        tabIndex={tabIndex}
         id={id}
         onError={handleImageError}
     />;

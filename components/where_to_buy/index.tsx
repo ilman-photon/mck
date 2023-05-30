@@ -134,15 +134,16 @@ function WhereComponent() {
         </div>
       ) : (
         <div className='container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy'>
-          <div className='p-6 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box'>
-            <div
-              className='pb-6 text-mcknormalgrey text-sm font-normal text-sofia-reg'
+         <div>
+         <div
+              className='lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg'
               tabIndex={0}
               aria-label='Disclaimer'
               id='wb-label-001'
             >
               Disclaimer: Products are subject to availability
             </div>
+            <div className='pb-6 pl-6 lg:pr-6 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box'>
             {responseValue?.map((value: any, index: Number) => {
               return (
                 <div
@@ -247,6 +248,8 @@ function WhereComponent() {
               );
             })}
           </div>
+         </div>
+          
           <div className='lg:w-842 w-full relative h-500 lg:h-full'>
             <GoogleMap
               mapContainerClassName='map-container'
@@ -348,7 +351,7 @@ function WhereComponent() {
             <div className='flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]'>
               <label
                 htmlFor='fname'
-                className='flex items-center lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]'
+                className='flex items-center whitespace-nowrap lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]'
                 id='wb-label-012'
               >
                 Where to buy

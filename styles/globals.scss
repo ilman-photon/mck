@@ -1160,6 +1160,10 @@ Mobiles Menu
   font-size: 32px;
   line-height: 36px;
 }
+.text-32-line{
+  font-size: 54px;
+  line-height: 61px;
+}
 .text-36 {
   font-size: 36px;
   line-height: 40px;
@@ -1721,7 +1725,7 @@ footer {
     font-size: 32px;
     line-height: 36px;
   }
-  .header {
+  .header{
     // background-color: #FFFAF6B2;
   }
 }
@@ -1935,6 +1939,18 @@ footer {
 Mobile and iPad Navigation
 -----------------------------
 **/
+.categoryname {
+  +.megamenu-submenu {
+    margin-top: 14px;
+    li {
+    &:first-child {
+      padding-top: 0px;
+    }
+    }
+  }
+}
+
+
 @media (max-width: 968px) {
   .container {
     max-width: 100%;
@@ -2324,6 +2340,14 @@ Video Player Code
     margin-right: 8px;
   }
 }
+
+.text-oneline-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .text-heading-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2356,8 +2380,16 @@ Video Player Code
   -webkit-box-orient: vertical;
 }
 
+.text-sixcontent-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
 @media (max-width: 968px) {
-  .text-heading-ellipsis, .text-p-ellipsis, .text-content-ellipsis {
+  .text-oneline-ellipsis,.text-heading-ellipsis, .text-p-ellipsis, .text-content-ellipsis, .text-sixcontent-ellipsis {
       -webkit-line-clamp: unset;
   }
 }
@@ -2425,4 +2457,29 @@ Video Player Code
   .swiper-button-next, .swiper-button-prev {
     top: 35%;
   }
+}
+
+
+//where to buy Scroll
+.location-box{
+  
+}
+.location-box::-webkit-scrollbar {
+  width: 15px;
+  border: solid 0.5px #808CB8;
+  border-radius: 6px;
+  @media screen and (max-width: 1023px) {
+      padding-right: -16px;
+      left: -10px;
+      position: absolute;
+  }
+}
+
+.location-box::-webkit-scrollbar-thumb {
+  height: 248px;
+  background: #CCD1E3;
+  border-radius: 6px;
+}
+.location-box::-webkit-scrollbar-thumb:hover {
+  background: #CCD1E3;
 }
