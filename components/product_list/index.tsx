@@ -20,12 +20,14 @@ function ProductListComponent() {
     setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
-      queryParameter = `(productType/value/name eq '${router.query.filter}')`;
+      queryParameter = `(productType/value/name eq '${router.query.filter}') and`;
+    } else if(filter === "NA"){
+      queryParameter = "";
     } else {
-      queryParameter = filter;
+      queryParameter = `${filter} and`;
     }
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
           "Accept-Language": "en",
@@ -34,7 +36,6 @@ function ProductListComponent() {
     );
     promise
       .then((res) => {
-        // console.log("FetchProductList----- ", res);
         SetProductListData(res);
       })
       .catch((e: Error | AxiosError) => console.log(e))
@@ -44,7 +45,8 @@ function ProductListComponent() {
   }
 
   useEffect(() => {
-    fetchProductList("");
+    setActiveFilter([]);
+    fetchData();
   }, [router]);
 
   const handleCheckBox = (
@@ -53,26 +55,30 @@ function ProductListComponent() {
     categoryId: any,
     subCategoryId: any
   ) => {
+    let filterItems : any[] = [];
+    filterItems = selectedFilterItems;
     if (e.target.checked) {
-      if (selectedFilterItems[categoryId]["items"].indexOf(filter) === -1) {
-        selectedFilterItems[categoryId]["items"].push(filter);
+      if (filterItems[categoryId]["items"].indexOf(filter) === -1) {
+        filterItems[categoryId]["items"].push(filter);
       }
       //existing code
       setActiveFilter([...activeFilter, filter]);
-      selectedFilterItems[categoryId][subCategoryId].checked = true;
+      filterItems[categoryId][subCategoryId].checked = true;
     } else {
-      const index = selectedFilterItems[categoryId]["items"].indexOf(filter);
-      selectedFilterItems[categoryId]["items"].splice(index, 1);
+      const index = filterItems[categoryId]["items"].indexOf(filter);
+      filterItems[categoryId]["items"].splice(index, 1);
       //existing code
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
         })
       );
-      selectedFilterItems[categoryId][subCategoryId].checked = false;
-      selectedFilterItems[categoryId].isCategoryChecked = false;
+      filterItems[categoryId][subCategoryId].checked = false;
+      if(filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0){
+        filterItems[categoryId].isCategoryChecked = false;
+      }
     }
-    setSelectedFilterItems(selectedFilterItems);
+    setSelectedFilterItems(() => filterItems);
   };
 
   const handleViewAllChange = (e: any, categoryId: any) => {
@@ -91,36 +97,36 @@ function ProductListComponent() {
       subCategoryChecked = false;
     }
 
-    selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
+    let selectedFilterData : any[] = [];
+    selectedFilterData = selectedFilterItems;    
 
-    selectedFilterItems[categoryId].map((sub_category: any) => {
+    selectedFilterData[categoryId].isCategoryChecked = isCategoryChecked;
+
+    selectedFilterData[categoryId].map((sub_category: any) => {
       sub_category.checked = subCategoryChecked;
       if (subCategoryChecked) {
-        selectedFilterItems[categoryId]["items"].push(sub_category.name);
+        if(selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1){
+          selectedFilterData[categoryId]["items"].push(sub_category.name);
+        }     
       } else {
-        const index = selectedFilterItems[categoryId]["items"].indexOf(
+        const index = selectedFilterData[categoryId]["items"].indexOf(
           sub_category.name
         );
-        selectedFilterItems[categoryId]["items"].splice(index, 1);
+        selectedFilterData[categoryId]["items"].splice(index, 1);
       }
-      // console.log(sub_category)
     });
 
     let selectedSubCat: any = [];
-    selectedFilterItems.map((category: any) => {
+    selectedFilterData.map((category: any) => {
       category.items.map((name: any) => {
         if (selectedSubCat.indexOf(name) === -1) {
           selectedSubCat.push(name);
         }
       });
     });
-    setActiveFilter([...selectedSubCat]);
-    if (selectedViewAllCateory.length > 0) {
-    } else {
-      fetchProductList("");
-    }
+    setActiveFilter(() => selectedSubCat);
+    setSelectedFilterItems(() => selectedFilterData);
   };
-
   useEffect(() => {
     createQueryParameters();
   }, [activeFilter]);
@@ -128,50 +134,45 @@ function ProductListComponent() {
   const createQueryParameters = () => {
     let queryParams = "";
     if (selectedFilterItems.length > 0) {
-      let lastCatId = 0;
-      let minCategoryCnt = 0;
-      let minSubCategoryCnt = 0;
+
+      let businessVerticalCategory :string[];
+      businessVerticalCategory = [];
+      let notBusinessVerticalCategory :string[];
+      notBusinessVerticalCategory = [];
+      
       selectedFilterItems.map((category: any, catId: any) => {
-        if (!category.isCategoryChecked && category.items.length > 0) {
-          if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " or ";
+        category.items.map((item: any) => {
+          if(category.isBusinessVerticalCategory){
+            let categoryProductType = category.productType;
+            let queryParam = `${categoryProductType}/value/name eq '${item}'`;
+            businessVerticalCategory.push(queryParam);
+          }else{
+            let categoryProductType = category.productType ? category.productType.toLowerCase() : '';
+            let queryParam = `${categoryProductType}/value/name eq '${item}'`;
+            notBusinessVerticalCategory.push(queryParam);
           }
-          queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr = category.items.length === index + 1 ? "" : " or ";
-            queryParams += `${category.productType}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
+        });
+    });
 
-          minSubCategoryCnt += category.items.length;
-          queryParams += `)`;
-          lastCatId = catId;
-        } else {
-          minCategoryCnt += category.isCategoryChecked;
-          if (category.isCategoryChecked) {
-            const categoryName = selectedFilterItems[catId].categoryName;
-            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            //console.log(selectedViewAllCateory, minCategoryCnt)
-            const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-          }
-        }
-      });
+    let businessQueryParams : string = '';
+    let notBusinessQueryParams : string = '';
+    businessQueryParams = businessVerticalCategory.join(' or '); 
+    notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
 
-      // console.log(minCategoryCnt, minSubCategoryCnt, queryParams)
-      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        queryParams = "";
+    if(businessQueryParams !== ''){
+      if(notBusinessQueryParams !== ''){
+        queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
+      }else{
+        queryParams = `(${businessQueryParams})`;
       }
+    }else{
+      queryParams = notBusinessQueryParams;
     }
+    
+    queryParams = queryParams !== '' ? queryParams : 'NA';
 
-    // console.log(queryParams);
-    if (queryParams) {
-      fetchProductList(queryParams);
-    }
+  }
+    fetchProductList(queryParams);
   };
 
   // -------- Health needs page data fetch starts -------- //
@@ -180,30 +181,30 @@ function ProductListComponent() {
   const [productCategoryData, setproductCategoryData] = useState<any>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      // Product Category setting - Filters data
-      const activeFiltersData = await axios(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
-      );
-      const activeFiltersDataList = activeFiltersData?.data[0];
-      // console.log("activeFilters --- ", activeFiltersDataList);
-      setactiveFiltersData(activeFiltersDataList);
-
-      // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(
-        // `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
-      );
-      const productCategoryDataList =
-        productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-      // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
-      //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
-      setproductCategoryData(productCategoryDataList);
-      createTempFilterArr(productCategoryDataList);
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    // Product Category setting - Filters data
+    const activeFiltersData = await axios(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
+    );
+    const activeFiltersDataList = activeFiltersData?.data[0];
+    // console.log("activeFilters --- ", activeFiltersDataList);
+    setactiveFiltersData(activeFiltersDataList);
+
+    // Product Category Helath needs - Left side category lists
+    const productCategoryData = await axios(
+      // `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
+    );
+    const productCategoryDataList =
+      productCategoryData?.data[0]?.categoryFilter?.expandedValue;
+    // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
+    //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
+    setproductCategoryData(productCategoryDataList);
+    createTempFilterArr(productCategoryDataList);
+  };
 
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
@@ -235,32 +236,66 @@ function ProductListComponent() {
         ] = subItem.name;
       });
     });
-    setSelectedFilterItems(tempArr);
+
+    let selectedFilterData : any[] =[];
+    selectedFilterData = tempArr;
+    selectedFilterData.map((category: any) => {
+      category.map((sub_category: any) => {
+        if (router.query.filter === sub_category.name) {
+          sub_category.checked = true;
+          if(category["items"] && category["items"].indexOf(router.query.filter) === -1){
+            category["items"].push(router.query.filter);
+            setActiveFilter([...activeFilter, router.query.filter]);
+          }
+        } else {
+          if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+            category["items"].splice(category["items"].indexOf(sub_category.name), 1);
+          }
+          category.checked = false;
+        }
+      });
+    });
+
+    setSelectedFilterItems(selectedFilterData);
+
   };
 
   function handleClearOne(item: any) {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
     );
-    selectedFilterItems.map((category: any) => {
+    let selectedFilterData : any[] =[];
+    selectedFilterData = selectedFilterItems;
+    selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         if (item == sub_category.name) {
           sub_category.checked = false;
         }
+        if(category["items"] && category["items"].indexOf(item) > -1){
+          category["items"].splice(category["items"].indexOf(item), 1);
+        }
       });
     });
+    setSelectedFilterItems(()=>selectedFilterData);
+
   }
 
   const handleClearAll = () => {
     setActiveFilter([]);
-    selectedFilterItems.map((category: any) => {
+    let selectedFilterData : any[] = []; 
+    selectedFilterData = selectedFilterItems;
+    selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         sub_category.checked = false;
+        if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+          category["items"].splice(category["items"].indexOf(sub_category.name), 1);
+        }
       });
     });
-    fetchProductList("");
+    setSelectedFilterItems(()=>selectedFilterData);
+    fetchProductList("NA");
   };
 
   const handleProductClick = (data: any) => {
