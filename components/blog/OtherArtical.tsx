@@ -29,8 +29,8 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                             <div className='content lg:p-6 p-4'>
                                 <div className='lg:h-28'><a href="" className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</a></div>
                                 <div className='pb-3 pt-3'>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border'>{GetTime(item.startPublish)}</span>
-                                    <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border'>{item.readMinute.value}</span>
+                                    <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value?'shade-grey-right-border':''}`}>{GetTime(item.startPublish)}</span>
+                                    <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false?'shade-grey-right-border':''}`}>{item.readMinute.value}</span>
                                     {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                 </div>
                                 <div className='flex flex-wrap [&>*:nth-child(1)]:ml-0 min-h-52'>

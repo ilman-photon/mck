@@ -7,13 +7,26 @@ import ResentBlogListComponent from "../blog_details/RecentBlogs";
 import { useRouter } from "next/router";
 import SearchResult from "./SearchResult";
 import useAxios from "@/hooks/useApi";
-import BlogListContainer from "./BlogListContainer";
 import OtherArtical from "./OtherArtical";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
+
+const BlogList = dynamic(
+  () => import('./BlogListContainer'),
+  {
+    loading: () =>   <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black opacity-30"></div>
+    <div className="relative">
+      <Image src={gifImage} alt="coba-image" />{" "}
+    </div>
+  </div>,
+  },
+);
 function BlogComponent() {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [ActiveSearch, setActiveSearch] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>('');
   const [searchString, setSearchString] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
@@ -39,13 +52,19 @@ function BlogComponent() {
 
   const filterBlogList = async (data: any) => {
     setSearchLoading(true)
-    const response = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and tag/value/name eq '${data.name}' &expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
-    setFilterBlogList(response.data.results);
-    setCurrentScreen("Filter");
-    setSearchLoading(false)
+    try {
+      const response = await axios.get(
+        `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and tag/value/name eq '${data.name}' &expand=*`,
+        { headers: { "Accept-Language": "en" } }
+      );
+      setFilterBlogList(response.data.results);
+      setCurrentScreen("Filter");
+      setSearchLoading(false)
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSearchLoading(false);
+    }
   };
 
   const HandelSearch = (data: any, searchString: any) => {
@@ -60,29 +79,29 @@ function BlogComponent() {
   const HandleSearchClose = () => {
     setCurrentScreen('List')
     setActiveSearch(false)
+    setSearchText('')
   }
   return (
     <>
-      {(loading) && 
-        <Image src={gifImage} alt="coba-image" />
-      }
-      {searchLoading && 
-          <div className="fixed inset-0 flex items-center justify-center z-50">
+    
+      {searchLoading &&
+        <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-30"></div>
           <div className="relative">
             <Image src={gifImage} alt="coba-image" />{" "}
-            </div>
           </div>
+        </div>
       }
       <div className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-36">
         <div className="lg:w-966 w-full">
           <div
             id="search"
-            className={`lg:${
-              !ActiveSearch && "hidden"
-            } block w-full relative flex items-center content-center mb-6`}
+            className={`lg:${!ActiveSearch && "hidden"
+              } block w-full relative flex items-center content-center mb-6`}
           >
             <SearchComponent
+              searchData={searchText}
+              handleChnage={(e) => setSearchText(e)}
               handleScreen={HandleSearchClose}
               placeholder={response?.data[0].blogSearchPlaceholderText.value}
               handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
@@ -119,7 +138,7 @@ function BlogComponent() {
                 case "Filter":
                   return <OtherArtical ArticleList={FilterBlogList} />;
                 case "List":
-                  return <BlogListContainer />;
+                  return <BlogList />;
                 default:
                   return null;
               }
@@ -133,6 +152,8 @@ function BlogComponent() {
               className="lg:block hidden relative flex items-center content-center mb-6"
             >
               <SearchComponent
+                searchData={searchText}
+                handleChnage={(e) => setSearchText(e)}
                 handleScreen={() => setCurrentScreen('List')}
                 placeholder={response?.data[0].blogSearchPlaceholderText.value}
                 handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
