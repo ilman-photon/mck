@@ -19,7 +19,8 @@ function HealthCareProfessionalComponent() {
   const [customers, setCustomers] = useState<any>();
   const [customerReviewTitle, setCustomerReviewTitle] = useState<any>();
   const [reviewCount, setReviewCount] = useState<number>(1);
-  const [customerBackgroundColorCode, setCustomerBackgroundColorCode] = useState(); 
+  const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
+    useState();
   const [descriptionValue, setDescriptionValue] = useState<any>();
   const [carouselRelated, setCarouselRelated] = useState<any>();
   const [tabRelated, setTabRelated] = useState<any>([]);
@@ -28,19 +29,19 @@ function HealthCareProfessionalComponent() {
   const [nextBtn, setNextBtn] = useState<Element>();
   const [prevBtn, setPrevBtn] = useState<Element>();
   const [isMobile, setIsMobile] = useState(false);
- 
+
   const handleTabClick = (idx: any, tabTitle: string) => {
-    setTabSelected(tabTitle)
+    setTabSelected(tabTitle);
     const updated = tabClicked?.map((tab: any) => {
-      if(tab?.title?.value === tabTitle){
+      if (tab?.title?.value === tabTitle) {
         tab.flag = !tab.flag;
-      }else{
-        tab.flag = false
+      } else {
+        tab.flag = false;
       }
       return tab;
-    })
-    setTabClicked(updated)
-  };  
+    });
+    setTabClicked(updated);
+  };
 
   const [ApiRespond, setApiRespond] = useState<any>();
   const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
@@ -86,10 +87,15 @@ function HealthCareProfessionalComponent() {
       } = expandedValue[2];
       setCustomers(customers);
       setCustomerReviewTitle(customerReviewTitle);
-      setCustomerBackgroundColorCode(backgroundColorCode?.value)
+      setCustomerBackgroundColorCode(backgroundColorCode?.value);
       setDescriptionValue(descriptionValue);
       setTabRelated(tabRelated);
-      setTabClicked([...tabRelated?.map((a: any, idx: number) => ({...a, flag: idx === 0 ? true : false}))])
+      setTabClicked([
+        ...tabRelated?.map((a: any, idx: number) => ({
+          ...a,
+          flag: idx === 0 ? true : false,
+        })),
+      ]);
       setCarouselRelated(carouselRelated);
     }
   }, [response]);
@@ -114,12 +120,13 @@ function HealthCareProfessionalComponent() {
     }
   }, [response]);
 
-  useEffect(() => { 
+  useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
-    
+
   useEffect(() => {
-      document.title = ApiRespond?.data[0]?.title.value || "Health Care Professional";
+    document.title =
+      ApiRespond?.data[0]?.title.value || "Health Care Professional";
   }, [ApiRespond]);
 
   useEffect(() => {
@@ -141,7 +148,6 @@ function HealthCareProfessionalComponent() {
     nextBtn.addEventListener("click", handleNext, true);
     prevBtn.addEventListener("click", handlePrev, true);
   }
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -200,27 +206,27 @@ function HealthCareProfessionalComponent() {
                   </div>
                 )}
               </div>
-              
-              <div 
-                className={`lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6`} 
+
+              <div
+                className={`lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6`}
                 style={{ background: customerBackgroundColorCode }}
               >
                 <div className="container mx-auto">
-                      <h1
-                        className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
-                        id='hcp-label-1'
-                        tabIndex={0}
-                      >
+                  <h1
+                    className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
+                    id="hcp-label-1"
+                    tabIndex={0}
+                  >
                     {" "}
-                        {customerReviewTitle?.value}
-                      </h1> 
+                    {customerReviewTitle?.value}
+                  </h1>
                   <div className="relative lg:p-0 px-6">
                     <Swiper
                       modules={[Navigation, Autoplay]}
                       spaceBetween={48}
                       navigation={isMobile ? false : true}
                       autoplay={isMobile ? { delay: 3000 } : false}
-                      slidesPerView={isMobile ? 'auto' : 3}
+                      slidesPerView={isMobile ? "auto" : 3}
                       slidesPerGroup={isMobile ? 1 : 3}
                       className="h-auto"
                     >
@@ -293,7 +299,7 @@ function HealthCareProfessionalComponent() {
               </div>
               <div className="container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0">
                 <div
-              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
+                  className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                   tabIndex={0}
                   id="hcp-btn-007"
                   dangerouslySetInnerHTML={{ __html: descriptionValue }}
@@ -303,33 +309,44 @@ function HealthCareProfessionalComponent() {
                     {tabRelated &&
                       tabRelated.length > 0 &&
                       tabRelated?.map((tab: any, idx: number) => {
-                        const {value} = tab?.tabColorCode 
+                        const { value } = tab?.tabColorCode;
                         return (
                           <React.Fragment key={idx}>
                             <input
                               type="radio"
                               name="tabs"
                               id={tab?.title?.value}
-                              checked={isMobile 
-                                  ? (tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected)
-                                  : tab?.title?.value === tabSelected}
-                              onClick={
-                                () => handleTabClick(idx, tab?.title?.value )
+                              checked={
+                                isMobile
+                                  ? tabClicked &&
+                                    tabClicked[idx]?.flag &&
+                                    tab?.title?.value === tabSelected
+                                  : tab?.title?.value === tabSelected
+                              }
+                              onClick={() =>
+                                handleTabClick(idx, tab?.title?.value)
                               }
                             />
                             <label
                               htmlFor={tab?.title?.value}
-                              className = {`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
+                              className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                              style={{background: value}}
+                              style={{ background: value }}
                             >
-                              <ImageComponent 
-                                src={tab?.tabImage?.expandedValue?.url} 
-                                id={tab?.tabImage?.expandedValue?.url}
-                                className= 'mr-3' 
-                                alt = 'check' 
-                              />
-                                {tab?.tabTitle?.value}
+                              {tab?.tabImage?.expandedValue?.url ? (
+                                <ImageComponent
+                                  src={tab?.tabImage?.expandedValue?.url}
+                                  id={tab?.tabImage?.expandedValue?.url}
+                                  className="mr-3"
+                                  alt="check"
+                                />
+                              ) : (
+                                <div className="px-3 flex lg:hidden md:hidden">
+                                  &nbsp;
+                                </div>
+                              )}
+
+                              {tab?.tabTitle?.value}
                               <svg
                                 className="lg:hidden block absolute right-5"
                                 width="12"
