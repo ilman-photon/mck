@@ -201,7 +201,10 @@ function HealthCareProfessionalComponent() {
                 )}
               </div>
               
-              <div className={`bg-[${customerBackgroundColorCode}] lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6`}>
+              <div 
+                className={`lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6`} 
+                style={{ background: customerBackgroundColorCode }}
+              >
                 <div className="container mx-auto">
                       <h1
                         className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
@@ -214,12 +217,11 @@ function HealthCareProfessionalComponent() {
                   <div className="relative lg:p-0 px-6">
                     <Swiper
                       modules={[Navigation, Autoplay]}
-                      spaceBetween={30}
+                      spaceBetween={48}
                       navigation={isMobile ? false : true}
                       autoplay={isMobile ? { delay: 3000 } : false}
                       slidesPerView={isMobile ? 'auto' : 3}
                       slidesPerGroup={isMobile ? 1 : 3}
-                      loop={true}
                       className="h-auto"
                     >
                       {response &&
@@ -318,9 +320,8 @@ function HealthCareProfessionalComponent() {
                             <label
                               htmlFor={tab?.title?.value}
                               className = {`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
-                                bg-[${value}]
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-
+                              style={{background: value}}
                             >
                               <ImageComponent 
                                 src={tab?.tabImage?.expandedValue?.url} 
