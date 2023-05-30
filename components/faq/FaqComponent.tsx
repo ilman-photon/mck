@@ -40,7 +40,7 @@ function FaqComponent() {
     return (
         <>
             <div className="four-oh-four faq-container container flex flex-col mx-auto px-0 lg:mt-36 lg:mt-16">
-                <div className="heading pb-3 text-center" id="faq_label_001">{faqData?.name}</div>
+                <h1 tabIndex={0} className="heading pb-3 text-center" id="faq_label_001">{faqData?.name}</h1>
                 <div className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
                     dangerouslySetInnerHTML={{ __html: faqData?.description?.value, }} id="faq_label_002"></div>
                     {faqData?.blockArea?.expandedValue?.map((bdata: any) => (
