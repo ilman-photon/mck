@@ -246,7 +246,7 @@ function HealthCareProfessionalComponent() {
                                 key={customer?.customerName?.value}
                                 className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll">
                                   <div
-                                    className="text-sofia-reg text-base font-normal text-mckblack mb-4"
+                                    className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
                                     tabIndex={0}
                                     id={`hcp-label-000${idx}`}
                                     dangerouslySetInnerHTML={{
