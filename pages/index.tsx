@@ -58,8 +58,8 @@ export default function Home() {
   };
 
   const handleManageSettings = () => {
-    // Logika untuk mengatur pengaturan cookie
-    console.log("lert");
+    // Logic to manage cookie settings
+    console.log("alert");
   };
 
   useEffect(() => {
@@ -78,25 +78,13 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-
         <title>McKesson</title>
         <meta name="description" content="Created by Mckesson" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={`hidden lg:flex md:flex ${isCookiesShow ? 'show-cookies' : ''}`}>
-        {isCookiesShow && <CookieSetting
-          onAccept={handleCookieManageShowAccept}
-          onReject={handleCookieShowCookies}
-        />}
-        {isCookiesManageShow && <CookiesComponent
-          onAccept={handleAcceptCookiesSetting}
-          onManageSettings={handleCookieManageShow}
-        />}
-      </div>
-
-      {showComponent && (
+      {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
           <div
@@ -105,7 +93,7 @@ export default function Home() {
           >
             <Image
               src={gifImage}
-              alt="coba-image"
+              alt="loading-image"
               width={400}
               height={400}
               loading="eager"
@@ -116,35 +104,45 @@ export default function Home() {
 
       <HeaderComponent />
 
-      {response?.data[0]?.blockArea?.expandedValue?.map(
-        (item: any, index: number) => (
-          <React.Fragment key={index}>
-            {item?.contentType[1] === "CarouselBlock" ? (
-              <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-            ) : item?.contentType[1] === "FourColumnBlock" ? (
-              <CategoryComponent
-                sectionData={filteredData("FourColumnBlock")}
-              />
-            ) : item?.contentType[1] === "TwoCloumnBlock" ? (
-              <ImageVideoAndTextSection
-                sectionData={response.data[0].blockArea?.expandedValue[index]}
-              />
-            ) : item?.contentType[1] === "OneColumnBlock" ? (
-              <ImageVideoOrTextSection
-                sectionData={response.data[0].blockArea?.expandedValue[index]}
-                textAlignment={"text-center"}
-              />
-            ) : item?.contentType[1] === "RecommendedProductBlock" ? (
-              <RecommendationalProductComponent
-                indexs={index}
-                sectionData={filteredData("RecommendedProductBlock")}
-              />
-            ) : null}
-          </React.Fragment>
-        )
-      )}
+      {!isLoading && (
+        <>
+          {response?.data[0]?.blockArea?.expandedValue?.map(
+            (item: any, index: number) => (
+              <React.Fragment key={index}>
+                {item?.contentType[1] === "CarouselBlock" ? (
+                  <CarouselComponent
+                    sectionData={filteredData("CarouselBlock")}
+                  />
+                ) : item?.contentType[1] === "FourColumnBlock" ? (
+                  <CategoryComponent
+                    sectionData={filteredData("FourColumnBlock")}
+                  />
+                ) : item?.contentType[1] === "TwoCloumnBlock" ? (
+                  <ImageVideoAndTextSection
+                    sectionData={
+                      response.data[0].blockArea?.expandedValue[index]
+                    }
+                  />
+                ) : item?.contentType[1] === "OneColumnBlock" ? (
+                  <ImageVideoOrTextSection
+                    sectionData={
+                      response.data[0].blockArea?.expandedValue[index]
+                    }
+                    textAlignment={"text-center"}
+                  />
+                ) : item?.contentType[1] === "RecommendedProductBlock" ? (
+                  <RecommendationalProductComponent
+                    indexs={index}
+                    sectionData={filteredData("RecommendedProductBlock")}
+                  />
+                ) : null}
+              </React.Fragment>
+            )
+          )}
 
-      <FooterComponent />
+          <FooterComponent />
+        </>
+      )}
     </>
   );
 }

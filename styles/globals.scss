@@ -2364,6 +2364,14 @@ Video Player Code
   -webkit-box-orient: vertical;
 }
 
+.text-horiz-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: horizontal;
+}
+
 .text-content-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2430,7 +2438,7 @@ Video Player Code
 
 .health-care-component {
   .swiper-initialized {
-    padding: 0 25px;
+    padding: 10px 22px 0px;
     @media (max-width: 968px) {
       padding: 0 0px;
     }
@@ -2474,4 +2482,9 @@ Video Player Code
 }
 .location-box::-webkit-scrollbar-thumb:hover {
   background: #CCD1E3;
+}
+
+video{
+  border-radius: 10px;
+  margin: 15px auto;
 }

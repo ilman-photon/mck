@@ -355,10 +355,30 @@ function ProductListComponent() {
 
               {/* Product items */}
               <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
-                {productListData?.data?.results.map((item: any, idxs: number) => {
+                {productListData?.data?.results.map((item: any) => {
                   return (
-                    <ProductCard key={`selected_product_results_${idxs}`} cardData={item} product={productListData} indexs={idxs} mainIndex={idxs} />
-                  );
+                    <div
+                      className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
+                      key={item?.contentLink?.id}
+                      onClick={() => handleProductClick(item)}
+                    >
+                      <div className="h-60 flex items-center justify-center">
+                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0" />
+                      </div>
+                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
+                        {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
+                      </div>
+                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate leading-[23px]">
+                        {item?.name}
+                      </div>
+                      <div
+                        id="my_text"
+                        className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
+                        dangerouslySetInnerHTML={{
+                          __html: item?.highlightDescription?.value,
+                        }}
+                      ></div>
+                    </div>                  );
                 })}
               </div>
               {/* Product End */}

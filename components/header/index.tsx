@@ -2,19 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
-import NavDropComponent from "../navdrop";
 import axios, { AxiosError } from "axios";
 
 function HeaderComponent() {
-  const logogrey = "images/logo.png";
-  const logowhite = "images/logo_beige.png";
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSmall, setIsSmall] = useState(logogrey);
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
-  const [megaMenuShow, seMegaMenuShow] = useState(false);
   const [headerData, setHeaderData] = useState<any>();
   const [menuData, setMenuData] = useState<any>();
   const handleScroll = (elTopOffset: any, elHeight: any) => {
@@ -30,22 +24,18 @@ function HeaderComponent() {
       margin: 0,
       background: "#FFF6ED",
       color: "#001a71",
-      // position: "absolute",
-      // top: "0",
     };
 
     if (window.pageYOffset > elTopOffset + elHeight) {
       setImgWidth(style);
       setDivHeight(style1);
-      setIsSmall(logowhite);
     } else {
       setImgWidth({});
       setDivHeight({});
-      setIsSmall(logogrey);
     }
   };
   useEffect(() => {
-    var header = headerImgRef.current!.getBoundingClientRect();
+    let header = headerImgRef.current!.getBoundingClientRect();
     const handleScrollEvent = () => {
       handleScroll(header.top, header.height);
     };
@@ -75,23 +65,17 @@ function HeaderComponent() {
           res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
             .expandedValue
         );
+        setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
+        console.log("res.data[0]", res.data[0]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
-
-  function fetchHeaderMenu() {}
-
-  const handleClick = () => {
-    setIsVisible(!isVisible);
-  };
 
   function handleOnClickLogo() {
     router.push({
       pathname: "/",
     });
   }
-
-  ("react");
 
   // hamburger menu
   const [isBarAnimated, setIsBarAnimated] = useState(false);
@@ -100,17 +84,6 @@ function HeaderComponent() {
   function handleHamburgerClick() {
     setIsBarAnimated(!isBarAnimated);
     setIsMobileMenuActive(!isMobileMenuActive);
-  }
-
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isHealthNeedsOpen, setIsHealthNeedsOpen] = useState(false);
-
-  function handleProductsClick() {
-    setIsProductsOpen(!isProductsOpen);
-  }
-
-  function handleHealthNeedsClick() {
-    setIsHealthNeedsOpen(!isHealthNeedsOpen);
   }
 
   const [isMobile, setIsMobile] = useState(false);
@@ -125,16 +98,15 @@ function HeaderComponent() {
   }, []);
 
   // logo onhover
-  const [logoSrc, setLogoSrc] = useState("images/logo.svg");
+  const [logoSrc, setLogoSrc] = useState("");
   function handleHeaderMouseEnter() {
     if (!isMobile) {
-      setLogoSrc("images/logo_beige.svg");
+      setLogoSrc(headerData?.secondLogoImage?.expandedValue?.url);
     }
   }
   function handleHeaderMouseLeave() {
-    setLogoSrc("images/logo.svg");
+    setLogoSrc(headerData?.logoImage?.expandedValue?.url);
   }
-
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -149,10 +121,10 @@ function HeaderComponent() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -162,7 +134,9 @@ function HeaderComponent() {
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        className={`header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${isSticky ? 'isStickyActive' : 'isNotSticky'}`}
+        className={`header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
+          isSticky ? "isStickyActive" : "isNotSticky"
+        }`}
         style={!isMobile ? divHeight : undefined}
       >
         <div className="container mx-auto lg:grid contents align-content-center">
@@ -170,7 +144,7 @@ function HeaderComponent() {
             {/* Hamburger menu starts */}
             <div
               className="hamburger-menu lg:hidden xl:hidden"
-              onClick = {()=>handleHamburgerClick()}
+              onClick={() => handleHamburgerClick()}
             >
               <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
             </div>
@@ -186,16 +160,17 @@ function HeaderComponent() {
               id="logo-image"
               tabIndex={0}
               src={logoSrc}
-              alt="logo of Foster Thrive logo"
+              alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="lg:mt-7"
               style={isMobile ? undefined : imgWidth}
               role="img"
             />
           </div>
-          <div
-            className="lg:w-full flex border-0 w-18 header-sticky"
-          >
-            <NavBar menuData={menuData} isMobileMenuActive={isMobileMenuActive} />
+          <div className="lg:w-full flex border-0 w-18 header-sticky">
+            <NavBar
+              menuData={menuData}
+              isMobileMenuActive={isMobileMenuActive}
+            />
             <Search />
           </div>
         </div>

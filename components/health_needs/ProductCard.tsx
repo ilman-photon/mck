@@ -14,7 +14,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
     return (
         <div
             onClick={() => handleProductClick(cardData)}
-            className="swiper-list-item w-[198px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4"
+            className="swiper-list-item w-[198px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4 cursor-pointer"
         >
             <div className="h-60 flex items-center justify-center">
             <ImageComponent 
