@@ -441,7 +441,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   return (
     <div id="promotion-container" className="container mx-auto lg:px-14">
       <div className="pramotion-product-container">
-        <div className="grid grid-cols-2 grid-rows-2 ">
+        <div className="grid lg:grid-cols-2 lg:grid-rows-2 mt-4 lg:mt-0">
           {!loading &&
             tempResponse &&
             tempResponse.map((ele: any, index: number) => {
@@ -451,7 +451,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 colSpan = "col-span-2";
               } else if (tempResponse.length % 2 === 1 && index === 0) {
                 colSpan = "col-span-1";
-                rowSpan = "row-span-2";
+                // rowSpan = "row-span-2";
               }
               return (
                 <div
@@ -478,7 +478,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         id={"home-product-image" + indexs + index + 1}
                       />
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-3 my-auto text-justify">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-6 xl:gap-6 lg:pr-0 my-auto text-justify">
                       <div className="pb-4 lg:pb-0 col-span-1">
                         <div className="mx-auto my-auto lg:h-60 object-contain">
                           <img
@@ -494,7 +494,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
 
                       <div
                         id={"p-text" + indexs + index + 1}
-                        className={`text-justify pr-0 lg:pr-9 col-span-2 ${
+                        className={`text-justify pr-0 col-span-2 ${
                           colSpan === "col-span-2"
                             ? "flex justify-center items-center"
                             : ""
@@ -513,7 +513,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
 
                     {ele?.data?.buttonText?.value && (
                       <div
-                        className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-9 ml-auto"
+                        className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                         onClick={() =>
                           handleCTABtn(ele?.data?.buttonUrl?.value)
                         }
