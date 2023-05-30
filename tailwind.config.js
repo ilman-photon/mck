@@ -153,6 +153,7 @@ module.exports = {
         linemax: "50px",
         24:"24px",
         27:"27px",
+        36:"36px",
         32:"32px",
         30:"30px",
         61:"61px",
