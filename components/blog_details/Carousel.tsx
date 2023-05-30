@@ -64,7 +64,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       <figcaption>
                         <div className="content lg:p-6 p-4">
                           <div
-                            className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-xl text-gtl-med text-mckblue no-underline"
+                            className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-xl text-gtl-med text-mckblue no-underline text-p-ellipsis"
                             aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           >
                             {item.title.value}
@@ -78,7 +78,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             </span>
                             {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
                           </div>
-                          <div className="flex flex-wrap">
+                          <div className="flex flex-wrap lg:h-25 text-p-ellipsis">
                             {item.tag.value.map((tagitem: any, idx: any) => (
                               <div
                                 style={{
