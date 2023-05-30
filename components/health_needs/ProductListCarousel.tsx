@@ -44,7 +44,7 @@ const ProductComponent = ({ selectedProduct, sectionData, selectedRecommendedPro
                 product?.item?.name
               }
             </h1>
-            <div className="lg:pt-6 lg:pl-6 lg:pb-6">
+            <div className="lg:pt-6 lg:pl-6 lg:pb-12 pb-6">
               <Swiper
                 modules={[Navigation, Pagination]}
                 spaceBetween={4}

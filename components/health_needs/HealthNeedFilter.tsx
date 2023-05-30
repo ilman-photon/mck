@@ -248,7 +248,7 @@ const HealthNeedFilter = ({
       <div className='lg:flex mt-6'>
         {isFilterShow ? (
           <div className='lg:w-1/6 xl:w-1/6 w-full h-max'>
-            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category'>
+            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 mck-hn-filter-category'>
               {/* Left main category lists */}
               <div className='flex items-center my-px'>
                 <div className='w-full border lg:border-0 rounded px-4 lg:px-0'>
