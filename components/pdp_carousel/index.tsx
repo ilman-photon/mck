@@ -70,7 +70,7 @@ function PdpCarousel(prodViewData: any) {
                         <img onClick={handleUpArrowClick} src="images\carousel_top.png" alt="img" className={`m-auto ${arrowClick === 0 ? 'opacity-25' : ''}`} id="pdp-img-001" />
                     </div>
                     <div onClick={handleUpArrowClick} className={`carousel-prev -left-6 cursor-pointer lg:hidden flex items-center absolute left-[-10px] top-[27px] ${arrowClick === 0 ? 'opacity-25' : ''}`}>
-                        <svg width="28" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-005" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#4D5F9C"></circle><path d="M28.9401 18.7106L27.0601 16.8306L19.0601 24.8306L27.0601 32.8306L28.9401 30.9506L22.8334 24.8306L28.9401 18.7106Z" fill="#ffffff"></path></svg></div>
+                        <svg className="focus:outline-none" width="28" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-005" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#4D5F9C"></circle><path d="M28.9401 18.7106L27.0601 16.8306L19.0601 24.8306L27.0601 32.8306L28.9401 30.9506L22.8334 24.8306L28.9401 18.7106Z" fill="#ffffff"></path></svg></div>
                     {/* <button onClick={handleUpArrowClick}>Up arrow</button> */}
                     <ul className="3GnUWp flex lg:flex-col">
                         {prodResponse?.productImages?.value?.slice(arrowClick, lastIndex).map((imgdata: any, index: any) => {
@@ -100,7 +100,7 @@ function PdpCarousel(prodViewData: any) {
 
                     <div onClick={handleDownArrowClick} className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${lastIndex === prodResponse?.productImages?.value?.length ? 'opacity-25' : ''}`}>
 
-                        <svg width="24" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"></path></svg></div>
+                        <svg className="focus:outline-none" width="24" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-006" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M20.9401 16.8306L19.0601 18.7106L25.1667 24.8306L19.0601 30.9506L20.9401 32.8306L28.9401 24.8306L20.9401 16.8306Z" fill="#fff"></path></svg></div>
                 </div>
                 <div className={`lg:w-[526px] ${(deviceWidth < 1024 && deviceWidth !== 0) ? 'h-[300px]' : ''} box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}>
                     <ImageComponent 

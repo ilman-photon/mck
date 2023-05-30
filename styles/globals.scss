@@ -68,6 +68,7 @@
 @import "privacy.module.scss";
 @import "ProductSearchList.module.scss";
 @import "HealthNeeds.module.scss";
+@import "healthcare.module.scss";
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 @import "whyFT.module.scss";
@@ -1037,7 +1038,7 @@ Mobiles Menu
   }
 
   .pramotion-product-container {
-    padding: 0;
+    padding: 0 16px;
 
     .product-container {
       padding: 8px 16px;
@@ -2043,17 +2044,29 @@ Mobile and iPad Navigation
     top: 0;
     right:1.5rem;
   }
-  .input-search,
+  .input-search {
+    top: -20px !important;
+    right: -4px;
+  }
   .input-search:focus,
   .input-search:focus-visible,
   .input-search:visited {
-    top: -20px !important;
+    top: 35px !important;
     right: -4px;
+    width: 340px !important;
+    &+svg {
+      top: 50px !important;
+      right: 15px !important;
+    }
   }
   .search-box {
     button {
       top: -20px !important;
       right: -4px;
+      &:focus {
+        top:35px !important;
+        z-index: 999;
+      }
     }
     svg {
       top: -7px;
