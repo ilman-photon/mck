@@ -12,10 +12,10 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
     };
 
     return (
-        <div
-            onClick={() => handleProductClick(cardData)}
-            className="swiper-list-item w-[198px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4 cursor-pointer"
+        <div          
+            className="swiper-list-item w-[198px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4 "
         >
+            <div onClick={() => handleProductClick(cardData)} className="cursor-pointer">
             <div className="h-60 flex items-center justify-center">
             <ImageComponent 
                 src={cardData?.image?.value?.url}
@@ -39,6 +39,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
                 id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
             >
                 {cardData?.name}
+            </div>
             </div>
             <div
                 className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
