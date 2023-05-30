@@ -94,21 +94,21 @@ const BlogDetailsComponent = () => {
                     <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
-                                <h1 className='lg:text-54 text-32 leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001'>{response?.data[0]?.title?.value}</h1>
+                                <h1 className='lg:text-54 lg:text-32-line lg:leading-61 leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001'>{response?.data[0]?.title?.value}</h1>
                                 <div className='grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-4 lg:pb-6 pb-4'>
                                     <div className='lg:pb-0 pb-4'>
                                         <span className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${response?.data[0]?.readMinute?.value ? 'shade-grey-right-border' : ''}`} id='blog-label-001'>{GetTime(response?.data[0]?.startPublish)}</span>
                                         <span className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-label-002'>{response?.data[0]?.readMinute?.value}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                                     </div>
-                                    <div className='flex lg:justify-end'>
+                                    <div className='flex lg:flex-wrap '>
                                         {response?.data[0]?.tag.value.map((item: any, index: any) => (
                                             <div
                                                 key={index}
                                                 style={{
                                                     backgroundColor: response?.data[0]?.tagBackgroundColorCode.value,
                                                 }}
-                                                className='categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border'
+                                                className='categoryTag mb-1.5 text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border'
                                                 id='blog-label-006'>{item.description}</div>
 
                                         ))}
