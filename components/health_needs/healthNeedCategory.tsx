@@ -60,7 +60,7 @@ const HealthNeedCategory = ({
               <li
                 id={`Health_title+${index}`}
                 key={healthneedsdata?.contentLink?.id}
-                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-9 ${
+                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-9 cursor-pointer ${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
