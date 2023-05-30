@@ -35,7 +35,7 @@ function CookiesSetting() {
         </div>
       ) : (
         <>
-          <div>Welcome to Cookies Setting Page</div>
+      <div className="lg:mt-44">Welcome to Cookies Setting Page</div>
           <FooterComponent />
         </>
       )}

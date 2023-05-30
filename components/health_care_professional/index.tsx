@@ -240,25 +240,28 @@ function HealthCareProfessionalComponent() {
                               className="swiper-slide lg:mb-18 mb-16"
                             >
                               <div
-                                key={customer?.customerName?.value}
                                 className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]"
                               >
-                                <div
-                                  className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:h-24 lg:overflow-auto textoverflow-scroll"
-                                  tabIndex={0}
-                                  id={`hcp-label-000${idx}`}
-                                  dangerouslySetInnerHTML={{
-                                    __html: customer?.reviewComment.value,
-                                  }}
-                                ></div>
-                                <div
-                                  className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
-                                  tabIndex={0}
-                                  id={`hcp-label-0000${idx}`}
-                                  role="text"
-                                >
-                                  {customer.customerName.value} -{" "}
-                                  {customer?.customerQualification?.value}{" "}
+                                <div 
+                                key={customer?.customerName?.value}
+                                className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll">
+                                  <div
+                                    className="text-sofia-reg text-base font-normal text-mckblack mb-4"
+                                    tabIndex={0}
+                                    id={`hcp-label-000${idx}`}
+                                    dangerouslySetInnerHTML={{
+                                      __html: customer?.reviewComment.value,
+                                    }}
+                                  ></div>
+                                  <div
+                                    className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
+                                    tabIndex={0}
+                                    id={`hcp-label-0000${idx}`}
+                                    role="text"
+                                  >
+                                    {customer.customerName.value} -{" "}
+                                    {customer?.customerQualification?.value}{" "}
+                                  </div>
                                 </div>
 
                                 <div className="w-full absolute left-0 -bottom-11">
@@ -299,12 +302,12 @@ function HealthCareProfessionalComponent() {
               </div>
               <div className="container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0">
                 <div
-                  className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
+              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                   tabIndex={0}
                   id="hcp-btn-007"
                   dangerouslySetInnerHTML={{ __html: descriptionValue }}
                 />
-                <div className="NavTabs_Contain lg:px-0 px-4">
+                <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
                   <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
                     {tabRelated &&
                       tabRelated.length > 0 &&
@@ -329,9 +332,9 @@ function HealthCareProfessionalComponent() {
                             />
                             <label
                               htmlFor={tab?.title?.value}
-                              className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
+                              className = {`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                              style={{ background: value }}
+                              style={{background: value}}
                             >
                               {tab?.tabImage?.expandedValue?.url ? (
                                 <ImageComponent
@@ -361,7 +364,7 @@ function HealthCareProfessionalComponent() {
                                 />
                               </svg>
                             </label>
-                            <div className="tab py-6 px-6">
+                            <div className="tab py-6 px-6 lg:min-h-[700px]">
                               <h2
                                 className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
                                 tabIndex={idx}
@@ -370,7 +373,7 @@ function HealthCareProfessionalComponent() {
                                 {tab?.title?.value}
                               </h2>
                               <div
-                                className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6"
+                                className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6 key-description-wrapper"
                                 tabIndex={idx}
                                 id={`hcp-label-00${idx}`}
                                 dangerouslySetInnerHTML={{
