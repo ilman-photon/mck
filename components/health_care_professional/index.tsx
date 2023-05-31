@@ -286,9 +286,9 @@ function HealthCareProfessionalComponent() {
                   </div>
                 </div>
               </div>
-              <div className="container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0">
+              <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                 <div
-                  className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
+              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                   tabIndex={0}
                   id="hcp-btn-007"
                   dangerouslySetInnerHTML={{ __html: descriptionValue }}
@@ -318,9 +318,9 @@ function HealthCareProfessionalComponent() {
                             />
                             <label
                               htmlFor={tab?.title?.value}
-                              className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
+                              className = {`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                              style={{ background: value }}
+                              style={{background: value}}
                             >
                               {tab?.tabImage?.expandedValue?.url ? (
                                 <ImageComponent
