@@ -15,11 +15,7 @@ export const GetTime = (time: any) => {
     }
 
 }
-export const HandelURLToId = (string: any) => {
-    const expectedURL = string?.slice(string.indexOf("blog/") + 5, string.length - 1)
-    return expectedURL
-}
-export const handleBGColor = (index: number, MixedStyle: any) => {
+export const handleTagBackgroudColor = (index: number, MixedStyle: any) => {
     const array = MixedStyle.split(',');
     return array[index] === undefined ? array : array[index]
 } 

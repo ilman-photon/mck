@@ -3,7 +3,7 @@ import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
 import SearchComponent from "./Search";
 import ResentBlogListComponent from "../blog_details/RecentBlogs";
-import { GetTime } from "../CommonUtil/time";
+import { GetTime } from "../global/CommonUtil";
 import axios from "axios";
 
 function BlogSearchComponent() {
