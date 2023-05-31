@@ -33,7 +33,9 @@ function ProductFilter({
                       <ImageComponent
                         src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
                         alt={leftfiltermaindata?.mainCategory?.value[0].name}
-                        id={leftfiltermaindata?.mainCategory?.value[0].name + index} /> 
+                        id={leftfiltermaindata?.mainCategory?.value[0].name + index}
+                        height={24}
+                        width={24} /> 
                
                       <label htmlFor="acute" className="ml-2 filter-title" tabIndex={0} aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
