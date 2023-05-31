@@ -23,7 +23,7 @@ function ProductFilter({
                     type="checkbox"
                   />
                   <label
-                    className="tab-label p-4 lg:p-0 relative after:absolute after:top-5 after:content-['+'] after:right-4 lg:after:content-['']"
+                    className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                     htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
@@ -45,9 +45,9 @@ function ProductFilter({
                   {/* Left filter main category */}
 
                   {/* Left filter sub category */}
-                  <div className="lg:border-b-2 pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                  <div className="lg:border-b-2 lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                     <ul>
-                      <li className="list-none">
+                      <li className="list-none pb-1 lg:pb-0">
                         <div
                           className="flex items-center my-px"
                           onClick={(e) =>
@@ -88,7 +88,7 @@ function ProductFilter({
                     <ul>
                       {leftfiltermaindata?.subCategory?.value?.map(
                         (leftfiltersubdata: any) => (
-                          <li className="list-none" key={leftfiltersubdata?.id}>
+                          <li className="list-none pb-1 lg:pb-0" key={leftfiltersubdata?.id}>
                             <div
                               className="flex items-center my-px"
                               onClick={(e) =>
