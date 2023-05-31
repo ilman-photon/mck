@@ -85,7 +85,7 @@ export default function FooterComponent() {
                           className="mx-auto"
                           alt={
                             sociallink?.socialMediaImage?.expandedValue?.altText
-                              ?.value
+                              ?.value?.url
                           }
                         ></img>
                       </Link>
