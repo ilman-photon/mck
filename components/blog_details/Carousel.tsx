@@ -43,7 +43,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 className="swiper-slide-custom"
               >
                 <div
-                  className="swiper-list-item w-[326px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4"
+                  className="swiper-list-item w-[416px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
                 >
                   <LinkComponent
                     key={index}
@@ -54,12 +54,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   >
                     <article onClick={(e: any) => OnRelatedArticleClick(item.contentLink.url)} >
                       <figure>
+                        <div className="h-60">
                         <img
                           src={item.image.value.url}
                           alt={item.image.value.id}
                           id={item.image.value.id}
-                          className="w-full"
+                          className="w-full max-h-[240px]"
                         />
+                        </div>
                       </figure>
                       <figcaption>
                         <div className="content lg:p-6 p-4">
