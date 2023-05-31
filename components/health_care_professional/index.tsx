@@ -187,21 +187,9 @@ function HealthCareProfessionalComponent() {
               <div className="w-full mx-auto">
                 {carouselRelated && carouselRelated?.length > 0 && (
                   <div>
-                    {carouselRelated?.length > 1 ? (
-                      <CarouselComponent
-                        sectionData={filteredData("CarouselBlock")}
-                      />
-                    ) : (
-                      <ImageComponent
-                        src={carouselRelated[0]?.image?.expandedValue?.url}
-                        {...(carouselRelated[0]?.image?.expandedValue?.url
-                          ? { width: "100%" }
-                          : {})}
-                        alt="Health Care Header Banner"
-                        className="w-full"
-                        id="hcp-img-2"
-                      />
-                    )}
+                    <CarouselComponent
+                      sectionData={filteredData("CarouselBlock")}
+                    />
                     <div className="bg-gradient absolute"></div>
                   </div>
                 )}
@@ -217,7 +205,6 @@ function HealthCareProfessionalComponent() {
                     id="hcp-label-1"
                     tabIndex={0}
                   >
-                    {" "}
                     {customerReviewTitle?.value}
                   </h1>
                   <div className="relative lg:p-0 px-6">
@@ -239,12 +226,11 @@ function HealthCareProfessionalComponent() {
                               key={idx}
                               className="swiper-slide lg:mb-18 mb-16"
                             >
-                              <div
-                                className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]"
-                              >
-                                <div 
-                                key={customer?.customerName?.value}
-                                className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll">
+                              <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
+                                <div
+                                  key={customer?.customerName?.value}
+                                  className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
+                                >
                                   <div
                                     className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
                                     tabIndex={0}
@@ -302,7 +288,7 @@ function HealthCareProfessionalComponent() {
               </div>
               <div className="container mx-auto lg:p-72 lg:pt-12 pt-6 pb-0">
                 <div
-              className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
+                  className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                   tabIndex={0}
                   id="hcp-btn-007"
                   dangerouslySetInnerHTML={{ __html: descriptionValue }}
@@ -332,9 +318,9 @@ function HealthCareProfessionalComponent() {
                             />
                             <label
                               htmlFor={tab?.title?.value}
-                              className = {`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
+                              className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                              style={{background: value}}
+                              style={{ background: value }}
                             >
                               {tab?.tabImage?.expandedValue?.url ? (
                                 <ImageComponent
