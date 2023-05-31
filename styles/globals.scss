@@ -420,7 +420,7 @@ body {
 }
 
 .pramotion-product-container {
-  padding: 0;
+  padding: 12px 0;
   // padding: 12px 60px; for carouselin health needs
   .product-container {
     margin: 12px;
@@ -1038,7 +1038,7 @@ Mobiles Menu
   }
 
   .pramotion-product-container {
-    padding: 0;
+    padding: 0 16px;
 
     .product-container {
       padding: 8px 16px;
@@ -2190,8 +2190,8 @@ Mobile and iPad Navigation
 }
 
 .category-card .tab-label:after {
-  content: "";
-  background-image: url('../public/images/plus.svg');
+  content: "+";
+  // background-image: url('../public/images/plus.svg');
   width: 24px;
   height: 24px;
   text-align: center;
@@ -2449,6 +2449,30 @@ Video Player Code
   }
 }
 
+.health-care-component {
+  .swiper-initialized {
+    padding: 10px 22px 0px;
+    @media (max-width: 968px) {
+      padding: 0 0px;
+    }
+  }
+  .swiper-slide {
+    @media (max-width: 968px) {
+      width: 100%;
+    }
+  }
+  .swiper-button-next {
+    right: 0px;
+  } 
+  .swiper-button-prev {
+    left: 0px;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    top: 35%;
+  }
+}
+
+
 //where to buy Scroll
 .location-box{
   
@@ -2479,4 +2503,18 @@ video{
 }
 .blog-details-container img{
   margin: auto;
+}
+.category-card label{
+  color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-bold";
+    font-size: 16px;
+    line-height: 24px;
+}
+.category-card .tab-content{
+  color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-regular";
+    font-size: 16px;
+    line-height: 24px;
 }
