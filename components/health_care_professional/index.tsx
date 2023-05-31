@@ -283,7 +283,7 @@ function HealthCareProfessionalComponent() {
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{Math.ceil(customers?.length / 3)}
+                      {reviewCount}/{Math.floor(customers?.length / 3)}
                     </div>
                   </div>
                 </div>
