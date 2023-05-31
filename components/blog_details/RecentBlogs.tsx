@@ -14,10 +14,7 @@ const ResentBlogListComponent = () => {
         );
         setResentBlogList(response.data.results);
     };
-    const HandelURLToId = (data: any) => {
-        const expectedURL = data.slice(data.indexOf("blog/") + 5, data.length - 1)
-        return expectedURL
-    }
+
 
     return (
 
