@@ -265,7 +265,7 @@ const HealthNeedFilter = ({
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className="tab-label p-4 lg:p-0 relative after:absolute after:top-5 after:content-['+'] after:right-4 lg:after:content-['']"
+                              className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div
@@ -304,7 +304,7 @@ const HealthNeedFilter = ({
                             {/* Left filter sub category */}
                             <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
                               <ul>
-                                <li className='list-none'>
+                                <li className='list-none pb-1 lg:pb-0'>
                                   <div
                                     className='flex items-center my-px'
                                     onClick={(e) =>
@@ -352,7 +352,7 @@ const HealthNeedFilter = ({
                                 {leftfiltermaindata?.subCategory?.value?.map(
                                   (leftfiltersubdata: any) => (
                                     <li
-                                      className='list-none'
+                                      className='list-none pb-1 lg:pb-0'
                                       key={leftfiltersubdata?.id}
                                     >
                                       <div

@@ -1702,8 +1702,7 @@ footer {
     margin-top: 24px;
   }
   .tab input:checked ~ .tab-content {
-    padding: 16px;
-    border: 0;
+    padding: 4px 20px 20px;
   }
   .tab {
     .tab-content ul,

@@ -314,7 +314,7 @@
 
   &-content {
     max-height: 0;
-    padding: 0 1em;
+    // padding: 0 1em;
     transition: all 0.5s;
 
     ul,
@@ -337,8 +337,8 @@
 
     ~.tab-content {
       max-height: 100vh;
-      padding: 12px;
-      border-top: 0.5px solid #ccd1e3;
+      // padding: 12px;
+      // border-top: 0.5px solid #ccd1e3;
     }
   }
 }
