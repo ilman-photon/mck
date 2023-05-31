@@ -75,7 +75,7 @@ const HealthNeedFilter = ({
           return item !== filter;
         })
       );
-      fetchProductList('');
+      // fetchProductList('');
       selectedFilterItems[categoryId][subCategoryId].checked = false;
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
