@@ -359,7 +359,7 @@ function HealthCareProfessionalComponent() {
                                 {tab?.title?.value}
                               </h2>
                               <div
-                                className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-12 pb-6 key-description-wrapper"
+                                className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                 tabIndex={idx}
                                 id={`hcp-label-00${idx}`}
                                 dangerouslySetInnerHTML={{
