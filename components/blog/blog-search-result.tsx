@@ -55,7 +55,7 @@ function BlogSearchComponent() {
       ) : (
         <>
           {" "}
-          <div className="container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36 mt-16">
+          <div className="container grid grid-cols-1 gap-4 w-full lg:p-72 lg:px-9 lg:pb-0 p-4 pt-6 mx-auto lg:mt-36">
             <div
               id="search"
               className="w-full relative flex items-center content-center"
