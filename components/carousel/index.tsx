@@ -68,7 +68,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     leave: { opacity: 0, transform: "translateX(-100%)" },
     config: { duration: 1000 },
   });
-
   return (
     <div>
       <div
@@ -144,10 +143,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 </animated.div>
               ))
             ) : (
-              <div
-                className="mx-auto block"
-                key={response[0]?.contentLink?.id}
-              >
+              <div className="mx-auto block" key={response[0]?.contentLink?.id}>
                 <div
                   className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                   data-te-carousel-active
@@ -210,6 +206,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         >
           {!loading &&
             response &&
+            response != 1 &&
+            response.length > 1 &&
             response.map((item: any, index: number) => (
               <button
                 key={item?.contentLink?.id + "_" + index}
