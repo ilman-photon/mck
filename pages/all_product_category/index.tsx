@@ -10,8 +10,8 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import Head from "next/head";
 
-let sectionData: any = []
-let selectedRecommendedProduct: any = []
+let sectionData: any = [];
+let selectedRecommendedProduct: any = [];
 
 interface MyComponentProps {
   Response: {
@@ -23,7 +23,9 @@ interface MyComponentProps {
   };
 }
 
-function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElement {
+function AllProductCategoryPage({
+  Response,
+}: MyComponentProps): React.ReactElement {
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
   const [productFilter, setProductFilter] = useState<any>();
@@ -33,10 +35,10 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
 
   const [productCategory, setProductCategory] = useState<any>();
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
-  const [categoryProduct, setCategoryProduct] = useState<any>([]);
+  const [categoryProduct, setCategoryProduct] = useState<any>();
   const [carouselData, setCarouselData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
-  const [recommendedProduct , setRecommendedProduct] = useState<any>()
+  const [recommendedProduct, setRecommendedProduct] = useState<any>();
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -63,25 +65,24 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
     );
     promise
       .then((res) => {
-        console.log("FetchProductList----- ", res.data);
-        let tempResults :any = {}
-        res.data.results.map((item :any) =>{
-          let name = item.productType.value[0].name
-          if(tempResults[name]){
-            let tempArray = tempResults[name]
-            tempArray.push(item)
-            tempResults[name] = tempArray
+        let tempResults: any = {};
+        res.data.results.map((item: any) => {
+          let name = item.productType.value[0].name;
+          if (tempResults[name]) {
+            let tempArray = tempResults[name];
+            tempArray.push(item);
+            tempResults[name] = tempArray;
+          } else {
+            tempResults[name] = [item];
           }
-          else{
-            tempResults[name] = [item]
-          }
-
-        })
-        Object.keys(tempResults).map(key =>{
-         let index= selectedProduct.findIndex((value :any) => value.item.name === key )
-          selectedProduct[index].data.results = tempResults[key]
-          selectedProduct[index].data.totalMatching = tempResults[key].length
-        })
+        });
+        Object.keys(tempResults).map((key) => {
+          let index = selectedProduct.findIndex(
+            (value: any) => value.item.name === key
+          );
+          selectedProduct[index].data.results = tempResults[key];
+          selectedProduct[index].data.totalMatching = tempResults[key].length;
+        });
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -138,7 +139,7 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
         productLandingPage?.data[0].contentArea?.expandedValue[1]
           ?.contentBlockArea?.expandedValue;
       setProductCategory(productCategoryList);
-      setRecommendedProduct(productLandingPage?.data[0].contentArea)
+      setRecommendedProduct(productLandingPage?.data[0].contentArea);
       let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
       setCategoryProduct([tempObj]);
       productCategoryList?.map((item: any) => {
@@ -173,10 +174,9 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
             });
           })
           .catch((e: Error | AxiosError) => console.log(e))
-      .finally(() => {
-        setIsLoading(false);
-      });
-          
+          .finally(() => {
+            setIsLoading(false);
+          });
       });
     };
 
@@ -242,10 +242,19 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
-            const concatStr = category.items.length === index + 1 ? "" : category.isBusinessVerticalCategory ? " or " : " and ";
-            queryParams += `${(category.isBusinessVerticalCategory ? (category.productType) : (category.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
+            const concatStr =
+              category.items.length === index + 1
+                ? ""
+                : category.isBusinessVerticalCategory
+                ? " or "
+                : " and ";
+            queryParams += `${
+              category.isBusinessVerticalCategory
+                ? category.productType
+                : category.productType.toLowerCase()
+            }/value/name eq '${encodeItemName}' ${concatStr}`;
           });
-        minSubCategoryCnt += category.items.length;
+          minSubCategoryCnt += category.items.length;
           queryParams += `)`;
           // selectedCategoryName.map((item: any, index: any) => {
           //   queryParams += "(";
@@ -330,36 +339,48 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
     );
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map((item: any) => {
-        if (id?.recommendedProductCategory?.value &&
-          id.recommendedProductCategory.value[0].id === item.productCategoryType.value[0].id) {  
-          const productName = id.recommendedProductCategory.value[0].name
-        if (!selectedRecommendedProduct.includes(productName)) {
-          selectedRecommendedProduct.push(productName);
-        }
-        const isDuplicate = sectionData.some((item :any) => item.name === id.name);
+      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+        (item: any) => {
+          if (
+            id?.recommendedProductCategory?.value &&
+            id.recommendedProductCategory.value[0].id ===
+              item.productCategoryType.value[0].id
+          ) {
+            const productName = id.recommendedProductCategory.value[0].name;
+            if (!selectedRecommendedProduct.includes(productName)) {
+              selectedRecommendedProduct.push(productName);
+            }
+            const isDuplicate = sectionData.some(
+              (item: any) => item.name === id.name
+            );
 
-        if (!isDuplicate) {
-          sectionData.push(id);
+            if (!isDuplicate) {
+              sectionData.push(id);
+            }
+          }
         }
-      }
+      );
     });
-  });
-  },[recommendedProduct])
-
+  }, [recommendedProduct]);
 
   useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
 
   useEffect(() => {
-    if (Response && Response.data && Response.data.length > 0 && Response.data[0].title && Response.data[0].title.value) {
-      fetch('https://api.example.com/data')
+    if (
+      Response &&
+      Response.data &&
+      Response.data.length > 0 &&
+      Response.data[0].title &&
+      Response.data[0].title.value
+    ) {
+      fetch("https://api.example.com/data")
         .then((response: Response) => {
           if (!response.ok) {
-            throw new Error('Request failed');
+            throw new Error("Request failed");
           }
           return response.json();
         })
@@ -381,34 +402,33 @@ function AllProductCategoryPage({ Response }: MyComponentProps): React.ReactElem
 
   return (
     <>
-    <Head>
+      <Head>
         <title>Your Page Title</title>
       </Head>
       <GoogleTagManager />
       <HeaderComponent />
-      {!carouselData || isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50"></div>
-          <div
-            className="relative"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-          >
-            <Image
-              src={gifImage}
-              alt="coba-image"
-              width={400}
-              height={400}
-              loading="eager"
-            />
+      {!carouselData ||
+        (isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-50"></div>
+            <div
+              className="relative"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
+              <Image
+                src={gifImage}
+                alt="coba-image"
+                width={400}
+                height={400}
+                loading="eager"
+              />
+            </div>
           </div>
-        </div>
-      )}
+        ))}
       {carouselData && <CarouselComponent sectionData={carouselData} />}
-      {categoryProduct.length && (
-        <CategoryComponent sectionData={categoryProduct} />
-      )}
+      {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
-      <div className="allproductlist-page container w-full mx-auto grid grid-cols-1">
+      <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
         <HealthNeedFilter
           activeFiltersData={activeFiltersData}
           activeFilter={activeFilter}

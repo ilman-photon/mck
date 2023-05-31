@@ -10,6 +10,7 @@ import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 let sectionData: any = []
 let selectedRecommendedProduct: any = []
+let _temparray :any = []
 const HealthNeedsComponent = () => {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<any>([]);
@@ -67,21 +68,24 @@ const HealthNeedsComponent = () => {
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
 
+    let categoryArrayList =_temparray
+
     let queryParameter = "";
     if (filter === "") {
-      queryParameter = `(productType/value/name eq 'Acute Care')`;
+      // queryParameter = `(productType/value/name eq 'Acute Care')`;
       // queryParameter = `(healthNeeds/value/name eq 'Bone')`;
     } else {
       if (filter.includes("healthNeeds")) {
         queryParameter = filter;
-      } else {
-        queryParameter =
-          filter + " and ContentType/any(t:t eq 'ProductDetailsPage')";
+      } 
+      else {
+        queryParameter = filter 
+          // + " and ContentType/any(t:t eq 'ProductDetailsPage')";
       }
     }
 
     const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter})`,
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
       // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} or ContentType/any(t:t eq 'ProductDetailsPage'))`,
       {
         headers: {
@@ -96,8 +100,23 @@ const HealthNeedsComponent = () => {
         if (filter.includes("Health%20Needs")) {
           setHealthData(!healthData);
         } else {
+        let catArray :any =[]
           res.data.results.map((item: any) => {
-            values.map((key) => {
+
+            let temp = item.healthNeeds.value
+            temp.shift()
+
+            temp.map((value : any) => {
+              let key = value.name 
+              if(!catArray.includes(key)){
+              catArray.push(key)
+              }
+
+              if(categoryArrayList.length>0 && !categoryArrayList.includes(key)){
+                key =''
+
+              }
+
               let tempArray = item.healthNeeds.value.filter(
                 (healthNeeds: any) => healthNeeds.name === key
               );
@@ -114,7 +133,8 @@ const HealthNeedsComponent = () => {
             });
           });
           let productArray: any = [];
-          values.map((key) => {
+        const mapArray =  categoryArrayList.length > 0 ? categoryArrayList : catArray 
+        mapArray.map((key :any) => {
             productArray.push({
               item: { name: key },
               data: { results: tempObj[key] },
@@ -194,6 +214,11 @@ const HealthNeedsComponent = () => {
           }
           queryParams += "(";
           category.items.map((item: any, index: any) => {
+            if(category.productType === "healthNeeds"){
+            if (!_temparray.includes(item)) {
+              _temparray.push(item);
+            }
+            }
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const concatStr =
@@ -205,7 +230,8 @@ const HealthNeedsComponent = () => {
           queryParams += `)`;
           lastCatId = catId;
         } else {
-          minCategoryCnt += category.isCategoryChecked;
+          // minCategoryCnt += category.isCategoryChecked;
+          minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
             const categoryName = selectedFilterItems[catId].categoryName;
             const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
@@ -219,7 +245,10 @@ const HealthNeedsComponent = () => {
       });
 
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        queryParams = "";
+        // queryParams = "";
+        const currentURL = window.location.href;
+  const updatedURL = currentURL.split('?')[0]; 
+  window.location.href = updatedURL;
       }
     }
 

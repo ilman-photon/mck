@@ -108,7 +108,7 @@ function PdpLocation(props: any) {
             <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg mx-4 lg:mx-0" tabIndex={0} aria-label="Disclaimer" id={`wd-lb-${props.index}-01`}  >Disclaimer: Products are subject to availability</div>
             <div className="mb-6 h-[300px] mx-4 lg:mx-0" style={{ position: "relative" }}>
                 <GoogleMap
-                    mapContainerClassName="map-container"
+                    mapContainerClassName="map-container box-border border border-solid border-mckblue"
                     mapContainerStyle={style}
                     zoom={10}
                     center={{

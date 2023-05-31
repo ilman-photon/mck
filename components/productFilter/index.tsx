@@ -23,17 +23,19 @@ function ProductFilter({
                     type="checkbox"
                   />
                   <label
-                    className="tab-label p-4 lg:p-0"
-                    htmlFor={leftfiltermaindata?.contentLink?.id}
+                    className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                    htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
                       className="flex lg:mb-2 w-full lg:mt-2"
-                      key={leftfiltermaindata?.contentLink?.id}
+                      key={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                     >
                       <ImageComponent
                         src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
                         alt={leftfiltermaindata?.mainCategory?.value[0].name}
-                        id={leftfiltermaindata?.mainCategory?.value[0].name + index} /> 
+                        id={leftfiltermaindata?.mainCategory?.value[0].name + index}
+                        height={24}
+                        width={24} /> 
                
                       <label htmlFor="acute" className="ml-2 filter-title" tabIndex={0} aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
@@ -43,9 +45,9 @@ function ProductFilter({
                   {/* Left filter main category */}
 
                   {/* Left filter sub category */}
-                  <div className="lg:border-b-2 pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                  <div className="lg:border-b-2 lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                     <ul>
-                      <li className="list-none">
+                      <li className="list-none pb-1 lg:pb-0">
                         <div
                           className="flex items-center my-px"
                           onClick={(e) =>
@@ -86,7 +88,7 @@ function ProductFilter({
                     <ul>
                       {leftfiltermaindata?.subCategory?.value?.map(
                         (leftfiltersubdata: any) => (
-                          <li className="list-none" key={leftfiltersubdata?.id}>
+                          <li className="list-none pb-1 lg:pb-0" key={leftfiltersubdata?.id}>
                             <div
                               className="flex items-center my-px"
                               onClick={(e) =>

@@ -68,6 +68,7 @@
 @import "privacy.module.scss";
 @import "ProductSearchList.module.scss";
 @import "HealthNeeds.module.scss";
+@import "healthcare.module.scss";
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 @import "whyFT.module.scss";
@@ -1701,8 +1702,7 @@ footer {
     margin-top: 24px;
   }
   .tab input:checked ~ .tab-content {
-    padding: 16px;
-    border: 0;
+    padding: 4px 20px 20px;
   }
   .tab {
     .tab-content ul,
@@ -1710,15 +1710,15 @@ footer {
       margin-left: 8px;
     }
     .tab-label{
-      position: relative;
+      // position: relative;
       span{
         width: 95%;
       }
-      &::after{
-        position: absolute;
-        right: 15px;
-        top: 15px;
-      }
+      // &::after{
+      //   position: absolute;
+      //   right: 15px;
+      //   top: 15px;
+      // }
     }
   }
   .text-54 {
@@ -2047,12 +2047,25 @@ Mobile and iPad Navigation
   .input-search:focus,
   .input-search:focus-visible,
   .input-search:visited {
-    top: -20px !important;
+    top: -22px !important;
     right: -4px;
+  }
+  .input-search:focus,
+  .input-search:focus-visible,
+  .input-search:visited {
+    height: 47px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    width: 93vw !important;
+    padding-right: 3rem;
+    & + svg {
+      top: -5px !important;
+      right: 15px !important;
+    }
   }
   .search-box {
     button {
-      top: -20px !important;
+      top: -22px !important;
       right: -4px;
     }
     svg {
@@ -2177,8 +2190,8 @@ Mobile and iPad Navigation
 }
 
 .category-card .tab-label:after {
-  content: "";
-  background-image: url('../public/images/plus.svg');
+  content: "+";
+  // background-image: url('../public/images/plus.svg');
   width: 24px;
   height: 24px;
   text-align: center;
@@ -2436,30 +2449,6 @@ Video Player Code
   }
 }
 
-.health-care-component {
-  .swiper-initialized {
-    padding: 10px 22px 0px;
-    @media (max-width: 968px) {
-      padding: 0 0px;
-    }
-  }
-  .swiper-slide {
-    @media (max-width: 968px) {
-      width: 100%;
-    }
-  }
-  .swiper-button-next {
-    right: 0px;
-  } 
-  .swiper-button-prev {
-    left: 0px;
-  }
-  .swiper-button-next, .swiper-button-prev {
-    top: 35%;
-  }
-}
-
-
 //where to buy Scroll
 .location-box{
   
@@ -2487,4 +2476,21 @@ Video Player Code
 video{
   border-radius: 10px;
   margin: 15px auto;
+}
+.blog-details-container img{
+  margin: auto;
+}
+.category-card label{
+  color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-bold";
+    font-size: 16px;
+    line-height: 24px;
+}
+.category-card .tab-content{
+  color: #001a71;
+    font-weight: 800;
+    font-family: "sofia-pro-regular";
+    font-size: 16px;
+    line-height: 24px;
 }

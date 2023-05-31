@@ -66,7 +66,6 @@ function HeaderComponent() {
             .expandedValue
         );
         setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
-        console.log("res.data[0]", res.data[0]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }

@@ -37,7 +37,9 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     });
-    fetchProductList('');
+    const currentURL = window.location.href;
+  const updatedURL = currentURL.split('?')[0]; 
+  window.location.href = updatedURL;
   };
   const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
@@ -73,7 +75,7 @@ const HealthNeedFilter = ({
           return item !== filter;
         })
       );
-      fetchProductList('');
+      // fetchProductList('');
       selectedFilterItems[categoryId][subCategoryId].checked = false;
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
@@ -198,6 +200,7 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
+            {activeFilter.length > 0 &&
             <div className='flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
@@ -216,23 +219,23 @@ const HealthNeedFilter = ({
                 {activeFiltersData?.clearAllText?.value}
               </div>
             </div>
+}
           </div>
         </div>
-        <div className='block lg:hidden flex flex-row py-2 justify-between'>
+        <div className='block lg:hidden flex flex-row pb-4 justify-between'>
           <div className='flex'>
-            <span>FILTER</span>
-            <Image
-              src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-              className='mr-2 ml-2'
-              tabIndex={0}
-              id='hn_label_003_1'
-              alt={activeFiltersData?.activeFiltersText?.value}
-              width={24}
-              height={24}
-            />
+            <span className='text-sofia-bold text-base font-extrabold text-mckblue'>FILTER</span>
+            <ImageComponent
+            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            className='mr-2 ml-2'
+            alt={activeFiltersData?.activeFiltersText?.value}
+            width={24}
+            height={24}
+          />
           </div>
           <div
-            className='cursor-pointer'
+            className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
             {isFilterShow ? 'Hide' : 'Open'}
@@ -245,7 +248,7 @@ const HealthNeedFilter = ({
       <div className='lg:flex mt-6'>
         {isFilterShow ? (
           <div className='lg:w-1/6 xl:w-1/6 w-full h-max'>
-            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-category'>
+            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 mck-hn-filter-category'>
               {/* Left main category lists */}
               <div className='flex items-center my-px'>
                 <div className='w-full border lg:border-0 rounded px-4 lg:px-0'>
@@ -262,7 +265,7 @@ const HealthNeedFilter = ({
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className='tab-label p-4 lg:p-0'
+                              className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div
@@ -301,7 +304,7 @@ const HealthNeedFilter = ({
                             {/* Left filter sub category */}
                             <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
                               <ul>
-                                <li className='list-none'>
+                                <li className='list-none pb-1 lg:pb-0'>
                                   <div
                                     className='flex items-center my-px'
                                     onClick={(e) =>
@@ -349,7 +352,7 @@ const HealthNeedFilter = ({
                                 {leftfiltermaindata?.subCategory?.value?.map(
                                   (leftfiltersubdata: any) => (
                                     <li
-                                      className='list-none'
+                                      className='list-none pb-1 lg:pb-0'
                                       key={leftfiltersubdata?.id}
                                     >
                                       <div

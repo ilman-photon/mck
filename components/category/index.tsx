@@ -29,6 +29,7 @@ export default function CategoryComponent({ sectionData }: any) {
         setResponse(responses);
       })
       .catch((error) => {
+        console.log("error", error);
         setLoading(true);
       });
   }, []);
@@ -84,7 +85,8 @@ export default function CategoryComponent({ sectionData }: any) {
                   {item?.data?.name}
                 </Link>
               </div>
-              <div tabIndex={0}
+              <div
+                tabIndex={0}
                 className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,

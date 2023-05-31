@@ -29,8 +29,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             <div
                                 className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-01'
                                 style={{
-                                    backgroundColor: item.recommendedProductButtonColor.value,
-                                    color: item.recommendedProductButtonText.value
+                                    // backgroundColor: item.recommendedProductButtonColor.value,
+                                    // color: item.recommendedProductButtonText.value
                                 }}
                             >
                                 {item.productType.value[0].name}
