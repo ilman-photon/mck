@@ -96,46 +96,46 @@ function WhyFTComponent() {
 
   return (
     <>
-    <div className="four-oh-four why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
-      <React.Fragment>
-        {whyFTData &&
-          rearrangedData1().map((item: any, index: number) => (
-            <>
-              <React.Fragment key={index}>
-                {item?.contentType[1] === "CarouselBlock" ? (
-                  <div className="lg:mb-76 md:mb-24 sm:mb-24">
-                    <CarouselComponent
-                      sectionData={filteredData("CarouselBlock")}
-                    />{" "}
-                  </div>
-                ) : null}
-              </React.Fragment>
-            </>
-          ))}
-      </React.Fragment>
-    </div>
-    <div className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0">
-      <React.Fragment>
-        {whyFTData &&
-          rearrangedData1().map((item: any, index: number) => (
-            <>
-              <React.Fragment key={index}>
-                {item?.contentType[1] === "TwoCloumnBlock" ? (
-                  <ImageVideoAndTextSection
-                    sectionData={whyFTData.contentArea.expandedValue[index]}
-                  />
-                ) : item?.contentType[1] === "OneColumnBlock" ? (
-                  <ImageVideoOrTextSection
-                    sectionData={whyFTData.contentArea.expandedValue[index]}
-                    textAlignment={"text-left"}
-                  />
-                ) : null}
-                {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
-              </React.Fragment>
-            </>
-          ))}
-      </React.Fragment>
-    </div>
+      <div className="four-oh-four why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
+        <React.Fragment>
+          {whyFTData &&
+            rearrangedData1().map((item: any, index: number) => (
+              <>
+                <React.Fragment key={index}>
+                  {item?.contentType[1] === "CarouselBlock" ? (
+                    <div className="lg:mb-76 md:mb-24 sm:mb-24">
+                      <CarouselComponent
+                        sectionData={filteredData("CarouselBlock")}
+                      />
+                    </div>
+                  ) : null}
+                </React.Fragment>
+              </>
+            ))}
+        </React.Fragment>
+      </div>
+      <div className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0">
+        <React.Fragment>
+          {whyFTData &&
+            rearrangedData1().map((item: any, index: number) => (
+              <>
+                <React.Fragment key={index}>
+                  {item?.contentType[1] === "TwoCloumnBlock" ? (
+                    <ImageVideoAndTextSection
+                      sectionData={whyFTData.contentArea.expandedValue[index]}
+                    />
+                  ) : item?.contentType[1] === "OneColumnBlock" ? (
+                    <ImageVideoOrTextSection
+                      sectionData={whyFTData.contentArea.expandedValue[index]}
+                      textAlignment={"text-left"}
+                    />
+                  ) : null}
+                  {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
+                </React.Fragment>
+              </>
+            ))}
+        </React.Fragment>
+      </div>
     </>
   );
 }

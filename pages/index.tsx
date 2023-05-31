@@ -83,18 +83,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className={`hidden lg:flex md:flex ${isCookiesShow ? 'show-cookies' : ''}`}>
-        {isCookiesShow && <CookieSetting
-          onAccept={handleCookieManageShowAccept}
-          onReject={handleCookieShowCookies}
-        />}
-        {isCookiesManageShow && <CookiesComponent
-          onAccept={handleAcceptCookiesSetting}
-          onManageSettings={handleCookieManageShow}
-        />}
-      </div>
-
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
@@ -112,9 +100,7 @@ export default function Home() {
           </div>
         </div>
       )}
-
       <HeaderComponent />
-
       {!isLoading && (
         <>
           {response?.data[0]?.blockArea?.expandedValue?.map(
