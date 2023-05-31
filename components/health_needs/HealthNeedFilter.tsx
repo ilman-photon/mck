@@ -222,9 +222,9 @@ const HealthNeedFilter = ({
 }
           </div>
         </div>
-        <div className='block lg:hidden flex flex-row py-2 justify-between'>
+        <div className='block lg:hidden flex flex-row pb-4 justify-between'>
           <div className='flex'>
-            <span>FILTER</span>
+            <span className='text-sofia-bold text-base font-extrabold text-mckblue'>FILTER</span>
             <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
             src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
@@ -235,7 +235,7 @@ const HealthNeedFilter = ({
           />
           </div>
           <div
-            className='cursor-pointer'
+            className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
             {isFilterShow ? 'Hide' : 'Open'}
