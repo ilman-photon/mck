@@ -44,6 +44,7 @@ const ProductComponent = ({ selectedProduct, sectionData, selectedRecommendedPro
                 product?.item?.name
               }
             </h1>
+            {product?.data?.results?.length > 0 ? 
             <div className="lg:pt-6 lg:pl-6 lg:pb-12 pb-6">
               <Swiper
                 modules={[Navigation, Pagination]}
@@ -67,6 +68,7 @@ const ProductComponent = ({ selectedProduct, sectionData, selectedRecommendedPro
                 })}
               </Swiper>
             </div>
+            : <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">There are no products</div>}
           </section>
         </div>
       ))}
