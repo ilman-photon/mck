@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { InfoWindow, GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
 
 function PdpLocation(props: any) {
 
@@ -9,12 +10,12 @@ function PdpLocation(props: any) {
     const [longitude, setLongitude] = useState(-111.7256936)
     const [selectedStore, setSelectedStore] = useState(-1)
     let textInput: any
-    // const [textInput , setTextInput] = useState<any>()
-    const apiKey = "180A0FF6-6659-44EA-8E03-2BE22C2B27A3"
-    const googleApiKey = "AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk"
+    const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
+    const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk",
+        googleMapsApiKey: mapKey
     });
+
     const [selectedMarker, setSelectedMarker] = useState(null);
 
     const showMapClicked = (lat: any, long: any) => {
@@ -26,7 +27,7 @@ function PdpLocation(props: any) {
     }
     function fectchLatandLongDetails() {
         return axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?key=${googleApiKey}&${!isNaN(textInput) ? `components=postal_code:${Number(textInput)}` : `address=${textInput}`}`,
+            `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${!isNaN(textInput) ? `components=postal_code:${Number(textInput)}` : `address=${textInput}`}`,
             {
                 headers: {
                     "Accept-Language": "en",
@@ -38,7 +39,7 @@ function PdpLocation(props: any) {
 
     function fetchPDPLoctionDetails() {
         return axios.get(
-            `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${apiKey}`,
+            `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
             {
                 headers: {
                     "Accept-Language": "en",
@@ -98,7 +99,6 @@ function PdpLocation(props: any) {
         <div className="row-span-2 lg:pt-[72px]">
             <div className="relative mx-4 lg:mx-0 mt-6 lg:mt-0">
                 <input type="text" value={textInput}
-                    //  onChange={(e)=>setTextInput(e.target.value) }
                     placeholder="City, State or Zip code"
                     onKeyDown={(e) => handleKey(e)}
                     className="pl-[46px] flex flex-row rounded-full lg:rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue text-mckgreyborder bg-[#F8F9FB] pl-9" title="Search" />
