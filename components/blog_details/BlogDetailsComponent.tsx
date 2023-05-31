@@ -4,11 +4,11 @@ import axios, { AxiosError } from "axios";
 import ResentBlogListComponent from "./RecentBlogs";
 import CarouselComponent from "./Carousel";
 import CommentComponent from './Comment'
-import { GetTime, HandelURLToId } from "../CommonUtil/time";
 import RelatedProducts from "./RelatedProducts";
 import SocialMediaIconComponent from './SocialMediaIcon'
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import { GetTime } from "../global/CommonUtil";
 
 
 const BlogDetailsComponent = () => {
@@ -123,7 +123,7 @@ const BlogDetailsComponent = () => {
                         <CarouselComponent
                             title={response?.data[0]?.relatedArticleHeading.value}
                             relatedArticle={response?.data[0]?.relatedArticle.expandedValue}
-                            OnRelatedArticleClick={(e) => HandelURLToId(e)}
+                            OnRelatedArticleClick={(e) => console.log(e)}
                         />
                         {/* <CommentComponent /> */}
                     </div>

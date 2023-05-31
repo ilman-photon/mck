@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { useEffect } from "react";
 import useAxios from "@/hooks/useApi";
 import { LinkComponent } from "../global/LinkComponent";
-import { GetTime, HandelURLToId, handleBGColor } from "../CommonUtil/time";
 import HeroArticle from "./HeroArticle";
 import { ImageComponent } from "../global/ImageComponent";
+import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 
 const BlogListContainer = () => {
     const { response, error, loading } = useAxios({
@@ -55,7 +55,7 @@ const BlogListContainer = () => {
                                                 {item.tag.value.map((tagitem: any, idx: any) => (
                                                     <div key={idx}
                                                         style={{
-                                                            backgroundColor: handleBGColor(idx, item.tagBackgroundColorCode?.value),
+                                                            backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
                                                         }}
                                                         className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
                                                 ))}

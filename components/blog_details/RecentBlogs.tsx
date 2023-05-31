@@ -27,7 +27,7 @@ const ResentBlogListComponent = () => {
                     <LinkComponent
                         href={{
                             pathname: "/blog_details",
-                            query: { id: `${HandelURLToId(item.contentLink.url)}` },
+                            query: { id: item.routeSegment },
                         }}
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
