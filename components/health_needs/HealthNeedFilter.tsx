@@ -265,7 +265,7 @@ const HealthNeedFilter = ({
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className='tab-label p-4 lg:p-0'
+                              className="tab-label p-4 lg:p-0 relative after:absolute after:top-5 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div

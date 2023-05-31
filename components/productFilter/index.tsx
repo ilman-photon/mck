@@ -23,12 +23,12 @@ function ProductFilter({
                     type="checkbox"
                   />
                   <label
-                    className="tab-label p-4 lg:p-0"
-                    htmlFor={leftfiltermaindata?.contentLink?.id}
+                    className="tab-label p-4 lg:p-0 relative after:absolute after:top-5 after:content-['+'] after:right-4 lg:after:content-['']"
+                    htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
                       className="flex lg:mb-2 w-full lg:mt-2"
-                      key={leftfiltermaindata?.contentLink?.id}
+                      key={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                     >
                       <ImageComponent
                         src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
