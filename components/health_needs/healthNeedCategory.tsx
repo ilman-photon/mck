@@ -48,7 +48,7 @@ const HealthNeedCategory = ({
   };
 
   return (
-    <div className="hidden lg:flex md:flex desktop:px-6">
+    <div className="hidden lg:flex md:hidden desktop:px-6">
       <div
         className="pt-9 px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
         tabIndex={0}
