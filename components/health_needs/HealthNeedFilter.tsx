@@ -155,7 +155,7 @@ const HealthNeedFilter = ({
 
   const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
     
-    return accumulator + obj.data.results.length;
+    return accumulator + obj?.data?.results?.length;
   }, 0);
   return (
     <div className='container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6'>
