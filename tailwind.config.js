@@ -40,6 +40,7 @@ module.exports = {
         mckgreyborder: "#808CB8",
       },
       width: {
+        18: '18px',
         228: '228px',
         306 : '306px',
         338: '338px',
