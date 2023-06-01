@@ -24,7 +24,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
             />
             </div>
             <div
-                className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold"
+                className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px]"
                 tabIndex={0}
                 id={`hn_label_02_${indexs + 1}_${mainIndex + 1}`}
             >
