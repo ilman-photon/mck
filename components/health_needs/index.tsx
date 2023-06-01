@@ -230,16 +230,35 @@ const HealthNeedsComponent = () => {
           queryParams += `)`;
           lastCatId = catId;
         } else {
-          // minCategoryCnt += category.isCategoryChecked;
-          minSubCategoryCnt += category.items.length;
+          minCategoryCnt += category.isCategoryChecked;
+          // minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
-            const categoryName = selectedFilterItems[catId].categoryName;
-            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+            if (lastCatId > 0 && lastCatId != catId) {
+              queryParams += " and ";
+            }
+            queryParams += "(";
+          category.items.map((item: any, index: any) => {
+            if(category.productType === "healthNeeds"){
+            if (!_temparray.includes(item)) {   
+              _temparray.push(item);
+            }
+            }
+            const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
-            const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
+            const concatStr =
+              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
+            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
+          });
+          queryParams += `)`;
+          lastCatId = catId;
+            // const categoryName = selectedFilterItems[catId].categoryName;
+            // const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+            // const encodeItemName = encodeURI(itemName);
+            // const joinedCond =
+            //   selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
+            // const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
+            // console.log(categoryName,"categoryName",itemName,"itemName",joinedCond,"joinedCond",beforeCond,"beforeCond")
+            // queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
           }
         }
       });
