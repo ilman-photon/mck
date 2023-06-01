@@ -18,4 +18,13 @@ export const GetTime = (time: any) => {
 export const handleTagBackgroudColor = (index: number, MixedStyle: any) => {
     const array = MixedStyle.split(',');
     return array[index] === undefined ? array : array[index]
-} 
+}
+export const handlecategoryColorCode = (id: number, data: any) => {
+    if (data === undefined) {
+        return '#FFFFF'
+    }
+    else {
+        let obj = data.find((o: any) => o.categoryType.value[0].id === id);
+        return obj.categoryColorCode.value
+    }
+}
