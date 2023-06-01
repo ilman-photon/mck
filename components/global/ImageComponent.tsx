@@ -1,6 +1,8 @@
 import React, { CSSProperties, useEffect } from "react";
+import { useNoImage } from "./utils/constants/noImage";
 
-import NoImageAvailable from '../../public/images/No_image_available.png'
+
+
 type ImageComponentProps = {
     src: string;
     id: string;
@@ -12,7 +14,7 @@ type ImageComponentProps = {
 export function ImageComponent({ src, height, width, alt, className, id }: ImageComponentProps) {
     const [didLoad, setLoad] = React.useState(false);
     const [srcImage, setsrcImage] = React.useState<any>();
-
+    const noImageSrc = useNoImage()
     useEffect(() => {
         const img = new Image();
         img.src = src;
@@ -21,8 +23,8 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
             setsrcImage(src);
         };
 
-        const handleImageError = () => {
-            setsrcImage("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
+        const handleImageError = (e: any) => {
+            setsrcImage(noImageSrc);
         };
 
         img.addEventListener('load', handleImageLoad);
@@ -35,7 +37,6 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
     }, []);
 
     const style: CSSProperties = didLoad ? {} : { visibility: 'hidden', height: 0, width: 0 };
-
     return <img
         style={{ height, width, ...style, }}
         className={className}
