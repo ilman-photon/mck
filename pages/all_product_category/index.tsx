@@ -272,21 +272,41 @@ function AllProductCategoryPage({
           // minSubCategoryCnt += category.items.length;
           lastCatId = catId;
         } else {
-          minCategoryCnt += category.isCategoryChecked;
+          // minCategoryCnt += category.isCategoryChecked;
+          minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
-            const categoryName = selectedFilterItems[catId].categoryName;
-            const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+            if (lastCatId > 0 && lastCatId != catId) {
+              queryParams += " and ";
+            }
+            queryParams += "(";
+          category.items.map((item: any, index: any) => { 
+            const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
-            const joinedCond =
-              selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-            const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-            queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-          }
+            const concatStr =
+              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
+            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
+          });
+          queryParams += `)`;
+          lastCatId = catId;
+        }
+          // minCategoryCnt += category.isCategoryChecked;
+          // if (category.isCategoryChecked) {
+          //   const categoryName = selectedFilterItems[catId].categoryName;
+          //   const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
+          //   const encodeItemName = encodeURI(itemName);
+          //   const joinedCond =
+          //     selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
+          //   const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
+          //   queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
+          // }
         }
       });
 
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        queryParams = "";
+        // queryParams = "";
+        const currentURL = window.location.href;
+  const updatedURL = currentURL.split('?')[0]; 
+  window.location.href = updatedURL;
       }
     }
     if (queryParams) fetchProductList(queryParams);
