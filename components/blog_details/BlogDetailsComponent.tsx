@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, useCallback } from "react";
+import { useState, useEffect, memo, useCallback, useReducer } from "react";
 import { useRouter } from "next/router"
 import axios, { AxiosError } from "axios";
 import ResentBlogListComponent from "./RecentBlogs";
@@ -9,6 +9,7 @@ import SocialMediaIconComponent from './SocialMediaIcon'
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { GetTime } from "../global/CommonUtil";
+import { fetchApplicationSetting } from "../blog/BlogAPI";
 
 
 const BlogDetailsComponent = () => {
@@ -16,8 +17,10 @@ const BlogDetailsComponent = () => {
     const { id } = router.query;
     const [response, setResponse] = useState<any>();
     const [blogID, setblogID] = useState<any>();
+    const [AppSetting, setAppSetting] = useState<any>();
     const [loading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
+         HandleAppSetting()
         if (router.query) {
             setblogID(id);
         }
@@ -45,7 +48,17 @@ const BlogDetailsComponent = () => {
             setIsLoading(false)
         }
     }, [blogID]);
-
+    const HandleAppSetting = () => {
+        fetchApplicationSetting()
+            .then((res) => {
+                setAppSetting(res.data[0].categoryMapping.expandedValue)
+                setIsLoading(false);
+            })
+            .catch((e: Error | AxiosError) => {
+                console.log(e);
+                setIsLoading(false);
+            })
+    }
     const handleProductClick = (data: any) => {
         const title = data.routeSegment;
         router.push({
@@ -133,11 +146,12 @@ const BlogDetailsComponent = () => {
                             <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
                             <ResentBlogListComponent />
                         </div>
-                        <RelatedProducts
+                        {AppSetting &&<RelatedProducts
+                           AppSetting={AppSetting}
                             OnRelatedProductClick={(e) => handleProductClick(e)}
                             title={response?.data[0]?.relatedProductHeading.value}
                             BlogListingContent={response?.data[0]?.relatedProducts.expandedValue}
-                        />
+                        />}
                     </div>
                 </div>
             </div>)}

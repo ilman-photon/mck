@@ -139,13 +139,12 @@ function WhereComponent() {
           <div>
             <div
               className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg"
-              tabIndex={0}
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
+            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-665 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -162,7 +161,6 @@ function WhereComponent() {
                       <Image
                         src="/images/health-mart.png"
                         alt="Health Mart"
-                        tabIndex={0}
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -172,28 +170,25 @@ function WhereComponent() {
                       <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal">
                         <p
                           className="font-extrabold"
-                          tabIndex={0}
                           aria-label="ABC Pharmacy"
                           id={`wb-label-03${index}`}
                         >
                           {value.StoreName}
                         </p>
                         <p
-                          tabIndex={0}
                           aria-label="1230 Lindon Ave"
                           id={`wb-label-04${index}`}
                         >
                           {value.Address},{" "}
                         </p>
                         <p
-                          tabIndex={0}
                           aria-label="DENVER, CO. 80202"
                           id={`wb-label-05_0${index}`}
                         >
                           {value.City} {value.Zip}
                         </p>
                         <p
-                          tabIndex={0}
+                          className="text-mckblue"
                           aria-label="303-571-5314"
                           id={`wb-label-06_0${index}`}
                         >
@@ -202,7 +197,6 @@ function WhereComponent() {
                       </div>
                       <div
                         className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey"
-                        tabIndex={0}
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >
@@ -213,8 +207,8 @@ function WhereComponent() {
                       {value?.StoreUrl ? (
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
-                          tabIndex={0}
                           role="link"
+                          tabIndex={0}
                           id={`wb-label-08_0${index}`}
                           onClick={() => showOnline(value.StoreUrl)}
                         >
@@ -228,7 +222,6 @@ function WhereComponent() {
                           src="/images/directions_car_filled.svg"
                           alt="direction"
                           className="inline-block"
-                          tabIndex={0}
                           id={`wb-label-09_0${index}`}
                           width={24}
                           height={25}
@@ -256,7 +249,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-500 lg:h-full">
+          <div className="lg:w-842 w-full relative h-782 lg:h-full">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
@@ -305,20 +298,20 @@ function WhereComponent() {
                             <Image
                               src="/images/health-mart.png"
                               alt="Health Mart"
-                              tabIndex={0}
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}
                             />
                           </div>
                           <div className="flex">
-                            <span className="text-sofia-reg text-mcknormalgrey">
-                              <span>{value.Address}, </span>
-                              <div>
+                            <span className="text-sofia-reg text-mcknormalgrey mb-2.5">
+                              <span className="text-lg leading-5">
+                                {value.Address}, </span>
+                              <div className="text-lg leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
-                              <div className=" text-mckblue">{value.Phone}</div>
+                              <div className=" text-mckblue text-lg leading-5">{value.Phone}</div>
                             </span>
                             <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
@@ -328,7 +321,7 @@ function WhereComponent() {
                           <div className="flex mt-2">
                             {value?.StoreUrl ? (
                               <button
-                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer"
+                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
                                 onClick={() => showOnline(value.StoreUrl)}
                               >
                                 View Online
@@ -336,7 +329,7 @@ function WhereComponent() {
                             ) : null}
 
                             <button
-                              className="text-sofia-bold font-extrabold text-mckblue ml-auto cursor-pointer"
+                              className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
                               onClick={() =>
                                 showMapClicked(
                                   value.Lat,

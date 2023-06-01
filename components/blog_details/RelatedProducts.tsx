@@ -1,12 +1,15 @@
 import { memo } from "react";
 import { ImageComponent } from "../global/ImageComponent";
+import { handlecategoryColorCode } from "../global/CommonUtil";
 interface RelatedProductsProps {
+    AppSetting: any
     BlogListingContent: any;
     title: string;
     OnRelatedProductClick: (e: string) => void;
 }
 
-const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, title, OnRelatedProductClick }) => {
+const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, title, OnRelatedProductClick, AppSetting }) => {
+
 
     return (
         <div className='related-card [&>*:last-child]:mb-0'>
@@ -15,13 +18,13 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                 <div
                     onClick={() => OnRelatedProductClick(item)}
                     key={index}
-                    className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4">
-                    <figure className='w-full text-center'>
+                    className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4 lg:max-h-[377px] ">
+                    <figure className='w-full  text-center'>
                         <ImageComponent
                             src={item.image.expandedValue?.url}
                             id='blog-img-006'
                             alt='Allergy Relief Product'
-                            className="px-5 lg:px-0 m-auto lg:w-32"
+                            className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60"
                         />
                     </figure>
                     <figcaption>
@@ -29,20 +32,19 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             <div
                                 className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-01'
                                 style={{
-                                    // backgroundColor: item.recommendedProductButtonColor.value,
-                                    // color: item.recommendedProductButtonText.value
+                                    backgroundColor: handlecategoryColorCode(item.productType.value[0].id, AppSetting),
                                 }}
                             >
                                 {item.productType.value[0].name}
                             </div>
 
                             <a href=""
-                                className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
+                                className="articleTitle text-xl text-heading-ellipsis text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                                 id={`blog-label-010-` + index}>
                                 {item.name}
                             </a>
-                            <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>
+                            <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>
                         </div>
                     </figcaption>
                 </div>))}
