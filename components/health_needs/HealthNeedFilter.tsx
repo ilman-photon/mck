@@ -92,9 +92,6 @@ const HealthNeedFilter = ({
       }
       isCategoryChecked = true;
       subCategoryChecked = true;
-      tempCategoryName.push(
-        selectedFilterItems[categoryId].categoryName + '- All'
-      );
     } else {
       const index = selectedViewAllCateory.indexOf(categoryId);
       selectedViewAllCateory.splice(index, 1);
@@ -128,15 +125,14 @@ const HealthNeedFilter = ({
     tempCategoryName.map((item: any) => {
       selectedCategoryName.push(item);
     });
-    // selectedFilterItems.map((category: any) => {
-    //   category.items.map((name: any) => {
-    //     if (selectedSubCat.indexOf(name) === -1) {
-    //       selectedSubCat.push(name);
-    //     }
-    //   });
-    // });
-    // setActiveFilter([...selectedSubCat]);
-    setActiveFilter([...selectedCategoryName]);
+    selectedFilterItems.map((category: any) => {
+      category.items.map((name: any) => {
+        if (selectedSubCat.indexOf(name) === -1) {
+          selectedSubCat.push(name);
+        }
+      });
+    });
+    setActiveFilter([...selectedSubCat]);
     if (selectedViewAllCateory.length > 0) {
     } else {
       fetchProductList('');
@@ -157,6 +153,10 @@ const HealthNeedFilter = ({
     }
   }, [productCategoryData]);
 
+  const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
+    
+    return accumulator + obj?.data?.results?.length;
+  }, 0);
   return (
     <div className='container lg:mt-12 mt-6 px-4 lg:px-0 desktop:px-6'>
       {/* Health needs - Top Active Filter section starts */}
@@ -242,7 +242,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey' tabIndex={0} id='hn_label_003_3'>
-          {activeFiltersData?.showResultsText?.value}
+          {(activeFiltersData?.showResultsText?.value)?.replace (/#/, productsSum)}
         </div>
       </section>
       <div className='lg:flex mt-6'>

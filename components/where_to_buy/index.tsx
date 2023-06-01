@@ -135,7 +135,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy">
+        <div className="container flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy">
           <div>
             <div
               className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg"
@@ -145,7 +145,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-6 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
+            <div className="pb-6 pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -355,7 +355,7 @@ function WhereComponent() {
                 );
               })}
             </GoogleMap>
-            <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="flex lg:flex-row flex-col absolute top-4 left-6 right-6 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <label
                 htmlFor="fname"
                 className="flex items-center whitespace-nowrap lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]"
@@ -376,8 +376,8 @@ function WhereComponent() {
                 src="images/location_on.svg"
                 alt="location"
                 className="text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                width={24}
-                height={25}
+                width={20}
+                height={20}
               />
             </div>
             <div className="flex gap-2 divider-x lg:flex-row flex-col absolute bottom-2 left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">

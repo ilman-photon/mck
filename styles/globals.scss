@@ -72,6 +72,7 @@
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 @import "whyFT.module.scss";
+@import "termsofuse.module.scss";
 
 body {
   background-color: #FFFDFB;
@@ -420,7 +421,7 @@ body {
 }
 
 .pramotion-product-container {
-  padding: 12px 0;
+  padding: 0;
   // padding: 12px 60px; for carouselin health needs
   .product-container {
     margin: 12px;
@@ -1038,7 +1039,7 @@ Mobiles Menu
   }
 
   .pramotion-product-container {
-    padding: 0 16px;
+    padding: 0;
 
     .product-container {
       padding: 8px 16px;

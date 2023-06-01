@@ -422,7 +422,7 @@ function ResultComponent() {
                                 id={"sr-prod-img-001"+idx}
                               />
                               </div>
-                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px]">
+                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
                                 {item?.form?.value[1]?.name}
                               </div>
                               <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
