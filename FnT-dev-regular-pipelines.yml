@@ -39,6 +39,7 @@ stages:
         cliProjectKey: 'FosterandThrive-FE'
         cliSources: 'components, hooks, pages, public, styles'
         extraProperties: |
+           sonar.eslint.reportPaths=eslint-components-report.json
            sonar.javascript.lcov.reportPaths=output/coverage/lcov.info
 #          sonar.branch.name=$(Build.SourceBranch)
           
@@ -62,6 +63,21 @@ stages:
       inputs:
         script: 'npm install'
       displayName: 'npm install'
+    
+        - task: CmdLine@2
+      inputs:
+        script: |
+          npm i -g eslint
+          eslint --config .eslintrc.json components
+        workingDirectory: '$(Build.SourcesDirectory)'
+      displayName: 'Eslint configuration'
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+          eslint -f json --config .eslintrc.json -o eslint-components-report.json --format json components 
+        workingDirectory: '$(Build.SourcesDirectory)'
+      displayName: 'Eslint Report Generation'
 
     - task: CmdLine@2
       inputs:
