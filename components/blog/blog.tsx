@@ -10,7 +10,7 @@ import OtherArtical from "./OtherArtical";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
-import { fetchBlogFilter, fetchBlogSetting } from "./BlogAPI";
+import { fetchApplicationSetting, fetchBlogFilter, fetchBlogSetting } from "./BlogAPI";
 
 const BlogList = dynamic(
   () => import('./BlogListContainer'),
@@ -25,16 +25,24 @@ const BlogList = dynamic(
 );
 function BlogComponent() {
   const [ArticleContent, setArticleContent] = useState<any>();
-  const [ActiveSearch, setActiveSearch] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState<string>('');
-  const [searchString, setSearchString] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
+  const [ActiveSearch, setActiveSearch] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
   const [response, setResponse] = useState<any>();
   const [loading, setIsLoading] = useState<any>();
+  const [AppSetting, setAppSetting] = useState<any>();
+
+  const [searchInfo, setSeachInfo] = useState<any>({
+    ActiveSearch: true,
+    SearchString: '',
+    searchResult: [],
+    noSearchResult: false
+  });
   const router = useRouter();
 
   useEffect(() => {
+    HandleAppSetting()
+
     setIsLoading(true);
     fetchBlogSetting()
       .then((res) => {
@@ -47,7 +55,17 @@ function BlogComponent() {
         setIsLoading(false);
       })
   }, []);
-
+  const HandleAppSetting = () => {
+    fetchApplicationSetting()
+        .then((res) => {
+            setAppSetting(res.data[0].categoryMapping.expandedValue)
+            setIsLoading(false);
+        })
+        .catch((e: Error | AxiosError) => {
+            console.log(e);
+            setIsLoading(false);
+        })
+}
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -70,17 +88,28 @@ function BlogComponent() {
       })
   };
 
-  const HandelSearch = (data: any, searchString: any) => {
-    setSearchString(searchString);
+  const HandelSearch = (data: any, searchString: string) => {
+    setSeachInfo((prevState: any) => ({
+      ...prevState,
+      searchResult: data,
+      SearchString: searchString,
+      ActiveSearch: false
+    }));
+    setActiveSearch(true)
     setArticleContent(data);
-    setActiveSearch(true);
     setCurrentScreen("Search");
   };
   const HandleSearchClose = () => {
     setCurrentScreen('List')
+    setSeachInfo((prevState: any) => ({
+      ...prevState,
+      searchResult: [],
+      SearchString: '',
+      ActiveSearch: true
+    }));
     setActiveSearch(false)
-    setSearchText('')
   }
+
   return (
     <div className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-[170px]">
       <div className="lg:w-966 w-full">
@@ -90,12 +119,11 @@ function BlogComponent() {
             } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            searchData={searchText}
-            handleChnage={(e) => setSearchText(e)}
-            handleScreen={HandleSearchClose}
             placeholder={response?.data[0].blogSearchPlaceholderText.value}
-            handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
-            handleLoading={(value) => setIsLoading(value)}
+            searchText={searchInfo.SearchString}
+            ActiveSearch={searchInfo.ActiveSearch}
+            handleResponse={(e, str) => HandelSearch(e, str)}
+            handleClose={() => HandleSearchClose()}
           />
         </div>
         {loading ? (
@@ -122,7 +150,7 @@ function BlogComponent() {
                   <SearchResult
                     placeHolders={response?.data[0]}
                     ArticleContent={ArticleContent}
-                    searchString={searchString}
+                    searchString={searchInfo.SearchString}
                   />
                 );
               case "Filter":
@@ -142,12 +170,11 @@ function BlogComponent() {
             className="lg:block hidden relative flex items-center content-center mb-6"
           >
             <SearchComponent
-              searchData={searchText}
-              handleChnage={(e) => setSearchText(e)}
-              handleScreen={() => setCurrentScreen('List')}
               placeholder={response?.data[0].blogSearchPlaceholderText.value}
-              handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
-              handleLoading={(value) => setIsLoading(value)}
+              searchText={searchInfo.searchText}
+              ActiveSearch={searchInfo.ActiveSearch}
+              handleResponse={(e, str) => HandelSearch(e, str)}
+              handleClose={() => HandleSearchClose()}
             />
           </div>
         )}
@@ -166,6 +193,7 @@ function BlogComponent() {
           <ResentBlogListComponent />
         </div>
         <RelatedProducts
+          AppSetting={AppSetting}
           OnRelatedProductClick={(e) => handleProductClick(e)}
           title={response?.data[0].relatedProductHeadingText.value}
           BlogListingContent={response?.data[0].recommendedProducts?.expandedValue}
