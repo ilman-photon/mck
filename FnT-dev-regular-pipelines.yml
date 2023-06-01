@@ -38,8 +38,9 @@ stages:
         cliProjectKey: 'FosterandThrive-FE'
         cliSources: 'components, hooks, pages, public, styles'
         extraProperties: |
+           sonar.javascript.lcov.reportPaths=output/coverage/lcov.info
 #          sonar.branch.name=$(Build.SourceBranch)
-          sonar.javascript.lcov.reportPaths=output/coverage/lcov.info
+          
 
     - task: NodeTool@0
       inputs:
