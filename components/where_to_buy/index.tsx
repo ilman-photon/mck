@@ -144,7 +144,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
+            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-665 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -188,6 +188,7 @@ function WhereComponent() {
                           {value.City} {value.Zip}
                         </p>
                         <p
+                          className="text-mckblue"
                           aria-label="303-571-5314"
                           id={`wb-label-06_0${index}`}
                         >
@@ -248,7 +249,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-500 lg:h-full">
+          <div className="lg:w-842 w-full relative h-782 lg:h-full">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
@@ -303,13 +304,14 @@ function WhereComponent() {
                             />
                           </div>
                           <div className="flex">
-                            <span className="text-sofia-reg text-mcknormalgrey">
-                              <span>{value.Address}, </span>
-                              <div>
+                            <span className="text-sofia-reg text-mcknormalgrey mb-2.5">
+                              <span className="text-lg leading-5">
+                                {value.Address}, </span>
+                              <div className="text-lg leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
-                              <div className=" text-mckblue">{value.Phone}</div>
+                              <div className=" text-mckblue text-lg leading-5">{value.Phone}</div>
                             </span>
                             <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
@@ -319,7 +321,7 @@ function WhereComponent() {
                           <div className="flex mt-2">
                             {value?.StoreUrl ? (
                               <button
-                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer"
+                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
                                 onClick={() => showOnline(value.StoreUrl)}
                               >
                                 View Online
@@ -327,7 +329,7 @@ function WhereComponent() {
                             ) : null}
 
                             <button
-                              className="text-sofia-bold font-extrabold text-mckblue ml-auto cursor-pointer"
+                              className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
                               onClick={() =>
                                 showMapClicked(
                                   value.Lat,
