@@ -23,7 +23,7 @@ function ProductFilter({
                     type="checkbox"
                   />
                   <label
-                    className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                    className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                     htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
