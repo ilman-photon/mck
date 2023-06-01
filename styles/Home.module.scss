@@ -1,1 +1,10 @@
 @import "../styles/variables.module.scss";
+
+.home-component {
+    .learning-section {
+        padding: 36px 0px;
+        @media (max-width: 980px) {
+            padding: 24px 0px;
+        }
+    }
+}

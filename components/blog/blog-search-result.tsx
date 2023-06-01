@@ -61,14 +61,11 @@ function BlogSearchComponent() {
               className="w-full relative flex items-center content-center"
             >
               <SearchComponent
-                searchData={''}
-                handleChnage={(e) => { }}
-                handleScreen={() => { }}
-                placeholder={
-                  BlogListingContent?.data[0].blogSearchPlaceholderText.value
-                }
-                handleClick={(e, searchstring) => HandelSearch(e, searchstring)}
-                handleLoading={(value) => HandleSearchLoading(value)}
+                   searchText={''}
+                   ActiveSearch={true}
+                   handleResponse={(e) => { }}
+                   handleClose={() => { }}
+                   placeholder={BlogListingContent?.data[0].blogSearchPlaceholderText.value}
               />
             </div>
           </div>
@@ -659,16 +656,11 @@ function BlogSearchComponent() {
             <div className="lg:col-span-1 col-start-1 col-end-7">
               <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
                 <SearchComponent
-                  searchData={''}
-                  handleChnage={(e) => { }}
-                  handleScreen={() => { }}
-                  placeholder={
-                    BlogListingContent?.data[0].blogSearchPlaceholderText.value
-                  }
-                  handleClick={(e, searchstring) =>
-                    HandelSearch(e, searchstring)
-                  }
-                  handleLoading={(value) => HandleSearchLoading(value)}
+                  searchText={''}
+                  ActiveSearch={true}
+                  handleResponse={(e) => { }}
+                  handleClose={() => { }}
+                  placeholder={BlogListingContent?.data[0].blogSearchPlaceholderText.value}
                 />
               </div>
               <CatogaryComponent
@@ -690,6 +682,7 @@ function BlogSearchComponent() {
                 <ResentBlogListComponent />
               </div>
               <RelatedProducts
+              AppSetting={[]}
                 OnRelatedProductClick={(e) => console.log(e)}
                 title={
                   BlogListingContent?.data[0].relatedProductHeadingText.value

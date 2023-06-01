@@ -139,7 +139,6 @@ function WhereComponent() {
           <div>
             <div
               className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg"
-              tabIndex={0}
               aria-label="Disclaimer"
               id="wb-label-001"
             >
@@ -162,7 +161,6 @@ function WhereComponent() {
                       <Image
                         src="/images/health-mart.png"
                         alt="Health Mart"
-                        tabIndex={0}
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -172,28 +170,24 @@ function WhereComponent() {
                       <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal">
                         <p
                           className="font-extrabold"
-                          tabIndex={0}
                           aria-label="ABC Pharmacy"
                           id={`wb-label-03${index}`}
                         >
                           {value.StoreName}
                         </p>
                         <p
-                          tabIndex={0}
                           aria-label="1230 Lindon Ave"
                           id={`wb-label-04${index}`}
                         >
                           {value.Address},{" "}
                         </p>
                         <p
-                          tabIndex={0}
                           aria-label="DENVER, CO. 80202"
                           id={`wb-label-05_0${index}`}
                         >
                           {value.City} {value.Zip}
                         </p>
                         <p
-                          tabIndex={0}
                           aria-label="303-571-5314"
                           id={`wb-label-06_0${index}`}
                         >
@@ -202,7 +196,6 @@ function WhereComponent() {
                       </div>
                       <div
                         className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey"
-                        tabIndex={0}
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >
@@ -213,8 +206,8 @@ function WhereComponent() {
                       {value?.StoreUrl ? (
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
-                          tabIndex={0}
                           role="link"
+                          tabIndex={0}
                           id={`wb-label-08_0${index}`}
                           onClick={() => showOnline(value.StoreUrl)}
                         >
@@ -228,7 +221,6 @@ function WhereComponent() {
                           src="/images/directions_car_filled.svg"
                           alt="direction"
                           className="inline-block"
-                          tabIndex={0}
                           id={`wb-label-09_0${index}`}
                           width={24}
                           height={25}
@@ -305,7 +297,6 @@ function WhereComponent() {
                             <Image
                               src="/images/health-mart.png"
                               alt="Health Mart"
-                              tabIndex={0}
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}

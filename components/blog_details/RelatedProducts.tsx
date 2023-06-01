@@ -1,12 +1,15 @@
 import { memo } from "react";
 import { ImageComponent } from "../global/ImageComponent";
+import { handlecategoryColorCode } from "../global/CommonUtil";
 interface RelatedProductsProps {
+    AppSetting: any
     BlogListingContent: any;
     title: string;
     OnRelatedProductClick: (e: string) => void;
 }
 
-const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, title, OnRelatedProductClick }) => {
+const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, title, OnRelatedProductClick, AppSetting }) => {
+
 
     return (
         <div className='related-card [&>*:last-child]:mb-0'>
@@ -29,8 +32,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             <div
                                 className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='blog-label-010-01'
                                 style={{
-                                    // backgroundColor: item.recommendedProductButtonColor.value,
-                                    // color: item.recommendedProductButtonText.value
+                                    backgroundColor: handlecategoryColorCode(item.productType.value[0].id, AppSetting),
                                 }}
                             >
                                 {item.productType.value[0].name}

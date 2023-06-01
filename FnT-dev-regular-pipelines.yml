@@ -1,0 +1,123 @@
+# Pipeline to deploy the FnT Web app to the development environment. The FnT web app points to the Optimizely DXP Integration environment
+
+trigger:
+- none
+
+
+
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'foster-thrive-service-connection'
+  appProfile: 'FosterAndThrive-Web'
+  apiId: '93763420b32d1d60fc708debadbdeac5'
+  apiKey: '188b1f01fb3b2aa3a2ef055d9c795793ad3d0b57f654bdf276cccc81d015f3faf7926d3bb7fb46535dba00ee0c9c2f75eb060aaf40abfe9fe663e38bf9c99d19'
+  # Web app name
+  webAppName: 'foster-thrive-dev'
+  
+  # Environment name
+  environmentName: 'dev'
+
+  # Agent VM image name
+  vmImageName: 'windows-2019'
+
+stages:
+- stage: Build
+  displayName: Build UI Web App 
+  jobs:
+  - job: Build
+    timeoutInMinutes: 360
+    displayName: Build UI Web App
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+
+    - task: SonarQubePrepare@5
+      inputs:
+        SonarQube: 'SonarQube_Photon'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'FosterandThrive-FE'
+        cliSources: 'components, hooks, pages, public, styles'
+        extraProperties: |
+           sonar.javascript.lcov.reportPaths=output/coverage/lcov.info
+#          sonar.branch.name=$(Build.SourceBranch)
+          
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cat next.config.js
+          mv config/env.dev.next.config.js next.config.js
+          sleep 3s
+          printf "dev url updated"
+          cat next.config.js
+      displayName: 'Dev Url updation'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'npm install'
+      displayName: 'npm install'
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+          npm run test -- --coverage --coverageReporters=lcov --coverageDirectory=output/coverage
+      continueOnError: true
+      displayName: 'Report Coverage for SonarQube'
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+          npm run test -- --coverage --coverageReporters=cobertura --coverageDirectory=output/coverage
+      continueOnError: true
+      displayName: 'Report Coverage for cobertura(ADO)'
+    
+    - task: PublishCodeCoverageResults@1
+      displayName: "Publish code coverage"
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: "$(System.DefaultWorkingDirectory)/output/coverage/cobertura-coverage.xml"
+        reportDirectory: "$(System.DefaultWorkingDirectory)/output/coverage"
+        failIfCoverageEmpty: false
+        
+    - task: CmdLine@2
+      inputs:
+        script: 'npm run build'
+      displayName: 'npm build'    
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
+    - task: SonarQubeAnalyze@5
+    - task: SonarQubePublish@5
+      inputs:
+        pollingTimeoutSec: '300'
+
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      artifact: drop 
+      
+    - task: Veracode@3
+      inputs:
+        ConnectionDetailsSelection: 'Credentials'
+        apiId: '$(apiId)'
+        apiKey: $(apiKey)
+        veracodeAppProfile: 'FosterAndThrive-Web'
+        version: '$(build.buildNumber)'
+        filepath: '$(Build.ArtifactStagingDirectory)'
+        optargs: '-scanallnonfataltoplevelmodules true -toplevel'
+        importResults: true
+        failBuildOnPolicyFail: false
+        maximumWaitTime: '60'
+        createSandBox: true
+        sandboxName: 'Web1'
+
