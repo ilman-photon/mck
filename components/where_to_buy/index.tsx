@@ -145,7 +145,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-6 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
+            <div className="pb-6 pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-636 lg:h-full mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -376,8 +376,8 @@ function WhereComponent() {
                 src="images/location_on.svg"
                 alt="location"
                 className="text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                width={24}
-                height={25}
+                width={20}
+                height={20}
               />
             </div>
             <div className="flex gap-2 divider-x lg:flex-row flex-col absolute bottom-2 left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
