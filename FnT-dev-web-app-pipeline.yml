@@ -80,5 +80,5 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        ArtifactName: 'Artifact_Foster_Thrive'
+        ArtifactName: 'Artifact_Foster_ThriveDev'
         publishLocation: 'Container'
