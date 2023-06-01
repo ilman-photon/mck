@@ -6,7 +6,6 @@ trigger:
 
 
 variables:
-
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'foster-thrive-service-connection'
   appProfile: 'FosterAndThrive-Web'
@@ -89,7 +88,6 @@ stages:
         script: 'npm run build'
       displayName: 'npm build'    
 
-
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -98,6 +96,10 @@ stages:
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
+    - task: SonarQubeAnalyze@5
+    - task: SonarQubePublish@5
+      inputs:
+        pollingTimeoutSec: '300'
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop 
