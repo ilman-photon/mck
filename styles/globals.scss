@@ -1703,7 +1703,7 @@ footer {
     margin-top: 24px;
   }
   .tab input:checked ~ .tab-content {
-    padding: 4px 20px 20px;
+    padding: 4px 4px 20px;
   }
   .tab {
     .tab-content ul,
@@ -2511,9 +2511,9 @@ video{
   .text-xs {
     font-size: 0.875rem; /* 14px */
   }
-  .text-sm {
-    font-size: 1rem; /* 16px */
-  }
+  // .text-sm {
+  //   font-size: 1rem; /* 16px */
+  // }
   .text-base { 
     font-size: 1.125rem; /* 18px */
   }

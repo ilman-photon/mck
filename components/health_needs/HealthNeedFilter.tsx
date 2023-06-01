@@ -184,7 +184,7 @@ const HealthNeedFilter = ({
             {activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-3 ml-0 lg:mb-0 lg:mt-3'
+                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
                   key={item}
                 >
                   {item}&nbsp;
@@ -193,26 +193,26 @@ const HealthNeedFilter = ({
                     className='mck-filter-delete-icon cursor-pointer'
                     alt='delete icon'
                     onClick={() => handleDelete(activeFilter, item)}
-                    width={12}
-                    height={10.5}
+                    width={7}
+                    height={7}
                     id={`hn-001_0${index}`}
                   />
                 </div>
               );
             })}
             {activeFilter.length > 0 &&
-            <div className='flex cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
+            <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
                 className='mck-filter-delete-icon cursor-pointer'
                 alt='delete icon'
                 width={12}
-                height={10.5}
+                height={12}
                 id={`hn-001_0${'02'}`}
               />
               <div
-                className='underline'
+                className='underline text-sm lg:text-lg'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -222,7 +222,7 @@ const HealthNeedFilter = ({
 }
           </div>
         </div>
-        <div className='block lg:hidden flex flex-row pb-4 justify-between'>
+        <div className='lg:hidden flex flex-row pb-4 justify-between'>
           <div className='flex'>
             <span className='text-sofia-bold text-base font-extrabold text-mckblue'>FILTER</span>
             <ImageComponent
@@ -265,7 +265,7 @@ const HealthNeedFilter = ({
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className="tab-label p-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                              className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div
