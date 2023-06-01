@@ -77,21 +77,6 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop 
       
-    - task: Veracode@3
-      inputs:
-        ConnectionDetailsSelection: 'Credentials'
-        apiId: $(apiId)
-        apiKey: $(apiKey)
-        veracodeAppProfile: $(appProfile)
-        version: '$(build.buildID)'
-        filepath: '$(Build.ArtifactStagingDirectory)'
-        optargs: '-scanallnonfataltoplevelmodules true -toplevel'
-        importResults: true
-        failBuildOnPolicyFail: false
-        maximumWaitTime: '30'
-        createSandBox: true
-        sandboxName: 'Web'
-
 - stage: Deploy
   displayName: Deploy UI Web App stage to Dev environment
   dependsOn: Build

@@ -118,5 +118,5 @@ stages:
         failBuildOnPolicyFail: false
         maximumWaitTime: '60'
         createSandBox: true
-        sandboxName: 'Web'
+        sandboxName: 'Web1'
 
