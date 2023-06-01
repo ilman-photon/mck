@@ -6,6 +6,10 @@
       }
     }
     .swiper-slide {
+      @media (max-width: 1120px) and (min-width: 1000px) {
+        padding-bottom: 57px;
+        margin-bottom: 0px;
+      }
       @media (max-width: 968px) {
         width: 100%;
       }
