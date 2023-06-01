@@ -1,4 +1,4 @@
-.privacypolicy {
+.terms {
     h1 {
         font-size: 54px;
         line-height: 61px;
@@ -11,9 +11,10 @@
         font-style: normal;
         font-weight: 500;
         font-size: 36px;
-        line-height: 41px;
+        line-height: 40px;
         color: #001A71;
         margin: 20px 0px;
+        text-transform: capitalize;
     }
 
     a {
@@ -73,7 +74,7 @@
 }
 
 @media screen and (max-width: 576px) {
-    .privacypolicy {
+    .terms {
         h1 {
             font-size: 27px;
             line-height: 30px;
@@ -82,7 +83,7 @@
         }
         strong{
             font-size: 20px;
-            line-height: 26px;
+            line-height: 40px;
         }
         h3{
             font-size: 27px;
