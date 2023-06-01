@@ -25,6 +25,7 @@ stages:
   displayName: Build UI Web App 
   jobs:
   - job: Build
+    timeoutInMinutes: 360
     displayName: Build UI Web App
     pool:
       vmImage: $(vmImageName)
