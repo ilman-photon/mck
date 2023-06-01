@@ -135,7 +135,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container flex lg:flex-row flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy">
+        <div className="container flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy">
           <div>
             <div
               className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg"
@@ -355,7 +355,7 @@ function WhereComponent() {
                 );
               })}
             </GoogleMap>
-            <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="flex lg:flex-row flex-col absolute top-4 left-6 right-6 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <label
                 htmlFor="fname"
                 className="flex items-center whitespace-nowrap lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]"
