@@ -44,7 +44,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   };
 
   return (
-    <div id="promotion-container" className="container mx-auto lg:pl-6">
+    <div id="promotion-container" className="container mx-auto lg:pl-6 md:px-6">
       <div className="pramotion-product-container">
         <div className="md:grid lg:grid xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 [&>*:nth-last-child(1):nth-child(odd)]:col-span-2">
           {!loading &&
@@ -60,7 +60,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               }
               return (
                 <div
-                  className={`bg-color  lg:p-9 xl:p-9 p-4 sm:m-0 sm:mb-4 sm:last:mb-0 sm:ml-4 lg:m-0 lg:mb-6 lg:ml-6 mb-4 bg-red odd:ml-0 ${colSpan} ${rowSpan} `}
+                  className={`bg-color  lg:p-9 xl:p-9 p-4 sm:m-3 lg:m-0 lg:mb-6 lg:ml-6 mb-4 bg-red odd:ml-0 ${colSpan} ${rowSpan} `}
                   key={ele?.data?.contentLink?.id}
                 >
                   <style jsx>{`
