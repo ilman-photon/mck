@@ -225,7 +225,7 @@ function HealthCareProfessionalComponent() {
                             return (
                               <SwiperSlide
                                 key={idx}
-                                className="swiper-slide lg:mb-18 mb-16"
+                                className="swiper-slide lg:mb-18 md:mb-18 sm:mb-0 mb-0"
                               >
                                 <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
                                   <div

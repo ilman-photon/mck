@@ -55,7 +55,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                       filter: updateUrl(item?.data[0].menuItemUrl?.value, "1"),
                     },
                   }}
-                  className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium "
+                  className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium"
                 >
                   {item?.data[0].menuItemName?.value}
                 </Link>
@@ -70,7 +70,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                     (ele: any) => {
                       return (
                         <li
-                          className="blue-txt text-left text-sofia-reg pb-18 pl-2 hover:bg-beige-50"
+                          className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
                           key={Math.random()}
                         >
                           <Link

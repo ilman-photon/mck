@@ -2,7 +2,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment }: any) {
   return (
     <>
       <div
-        className={`w-full container lg:pb-6 pb-6 lg:pt-6 lg:px-72 ${textAlignment === 'text-center' && textAlignment} mx-auto`}
+        className={`w-full container lg:pb-6 pb-6 pt-6 lg:px-72 ${textAlignment === 'text-center' && textAlignment} mx-auto`}
         key={sectionData?.contentLink?.id}
       >
         <h3
