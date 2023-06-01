@@ -2104,7 +2104,10 @@ Mobile and iPad Navigation
 .swiper-button-prev:after {
   background-image: url('../public/images/product-carousel-left.svg') !important;
 }
-
+.swiper-button-next.swiper-button-disabled, 
+.swiper-button-prev.swiper-button-disabled {
+  pointer-events: inherit !important;
+}
 .input-search {
   // height: 50px;
   // width: 50px;
