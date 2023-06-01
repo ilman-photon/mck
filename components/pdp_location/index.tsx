@@ -151,9 +151,9 @@ function PdpLocation(props: any) {
                                             </div>
 
                                             <div className="flex mt-2">
-                                                <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
+                                                <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
 
-                                                <button className="text-sofia-bold font-extrabold text-mckblue ml-auto cursor-pointer" aria-pressed="true" onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</button>
+                                                <button className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 text-lg leading-5 cursor-pointer" aria-pressed="true" onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</button>
                                             </div>
                                         </div>
                                     </InfoWindow>
