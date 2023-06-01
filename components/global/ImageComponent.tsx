@@ -34,7 +34,7 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
             img.removeEventListener('load', handleImageLoad);
             img.removeEventListener('error', handleImageError);
         };
-    }, []);
+    }, [src]);
 
     const style: CSSProperties = didLoad ? {} : { visibility: 'hidden', height: 0, width: 0 };
     return <img
