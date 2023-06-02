@@ -192,6 +192,9 @@ module.exports = {
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
       },
+      maxWidth: {
+        170: "170px",
+      },
     },
   },
   plugins: [],
