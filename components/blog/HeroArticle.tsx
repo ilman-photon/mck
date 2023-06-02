@@ -26,7 +26,7 @@ const HeroArticle = ({ data }: any) => {
                 </figure>
             </LinkComponent>
             <figcaption>
-                <div className='content lg:p-6 p-4'>
+                <div className='content lg:p-6 p-4 lg:pt-4'>
                     <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                     <div className='pb-3 lg:pt-0 pt-3'>
                         <LinkComponent

@@ -30,7 +30,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                             </LinkComponent>
 
                             <figcaption>
-                                <div className='content lg:p-6 p-4'>
+                                <div className='content lg:p-6 p-4 lg:pt-4'>
                                     <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</p></div>
                                     <div className='pb-3 pt-3'>
                                         <LinkComponent
