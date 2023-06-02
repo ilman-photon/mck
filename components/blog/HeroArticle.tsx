@@ -30,7 +30,7 @@ const HeroArticle = ({ data }: any) => {
                             <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-label-002'>{data?.readMinute?.value}</span>
                             {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
                         </div>
-                        <div className='flex lg:flex-nowrap flex-wrap [&>*:nth-child(1)]:ml-0 '>
+                        <div className='flex lg:flex-wrap [&>*:nth-child(1)]:ml-0 '>
                             {data?.tag?.value.map((item: any, index: any) => (
                                 <div key={index}
                                     style={{
