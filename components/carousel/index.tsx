@@ -69,7 +69,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     config: { duration: 1000 },
   });
   return (
-    <div>
+    <div className="flex items-center justify-center">
       <div
         id="carouselExampleCaptions"
         className="relative"
