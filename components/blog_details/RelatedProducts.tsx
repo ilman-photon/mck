@@ -16,10 +16,12 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
             <div className="text-mckblue text-sofia-bold font-extrabold text-lg mb-6" id='blog-label-010'>{title}</div>
             {BlogListingContent?.map((item: any, index: number) => (
                 <div
-                    onClick={() => OnRelatedProductClick(item)}
+                   
                     key={index}
                     className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4 lg:max-h-[377px] ">
-                    <figure className='w-full  text-center'>
+                    <figure className='w-full  text-center'
+                     onClick={() => OnRelatedProductClick(item)}
+                    >
                         <ImageComponent
                             src={item.image.expandedValue?.url}
                             id='blog-img-006'
@@ -38,12 +40,13 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                                 {item.productType.value[0].name}
                             </div>
 
-                            <a href=""
+                            <p
+                             onClick={() => OnRelatedProductClick(item)}
                                 className="articleTitle text-xl text-heading-ellipsis text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                                 id={`blog-label-010-` + index}>
                                 {item.name}
-                            </a>
+                            </p>
                             <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>
                         </div>
                     </figcaption>
