@@ -60,6 +60,13 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
     }
   };
 
+  useEffect(() => {
+    const setPageNameAsClassName = () => {
+      const pageName: string = "home-component";
+      document.body.className = pageName;
+    };
+    setPageNameAsClassName();
+  }, []);
 
 
   useEffect(() => {
@@ -80,12 +87,12 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
               ? "flex-row-reverse text-center"
               : "text-left"
-            } container mx-auto grid lg:flex w-full py-6 mb-6`}
+            } container mx-auto grid lg:flex w-full lg:py-9 learning-section`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
           <div
-            className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 pt-6 col-span-1`}
+            className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
           >
             <div className="video-wrapper">
               <div className="video-container" id="video-container">
@@ -165,7 +172,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            } w-full py-6 lg:px-0 px-4 mb-6`}
+            } w-full lg:py-9 lg:px-0 py-6 px-4 learning-section`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -185,12 +192,12 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               alt="learning image"
             />
           </div>
-          <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2 mt-4">
+          <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
             <h2
               className={`${sectionData?.assetPosition?.value === "Right" 
-              ? "mx-auto lg:text-left text-center"
+              ? "mx-auto lg:text-left text-left"
               : "ml-0 text-left"
-              } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
+              } lg:mb-6 mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
               tabIndex={0}
               id={sectionData?.title?.value}
             >
@@ -198,7 +205,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             </h2>
             <div
               className={`${sectionData?.assetPosition?.value === "Right"
-              ? "mx-auto lg:text-left text-center"
+              ? "mx-auto lg:text-left text-left"
               : "ml-0 text-left"
               } jsx-290076256 text-lg font-normal text-sofia-reg lg:mb-6 mb-4 text-mcknormalgrey text-content-ellipsis`}
               dangerouslySetInnerHTML={{
@@ -210,9 +217,9 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             {sectionData?.buttonText?.value && (
               <div
                 className={`${sectionData?.assetPosition?.value === "Right"
-                  ? "mx-auto"
+                  ? "mr-auto "
                   : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto lg:blue-bg lg:text-white`}
+                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:mr-auto lg:blue-bg lg:text-white`}
                 style={{
                   backgroundColor: `${sectionData?.assetPosition?.value === "Right"
                     ? sectionData?.buttonColorCode?.value

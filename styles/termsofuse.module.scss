@@ -1,4 +1,4 @@
-.privacypolicy {
+.terms {
     h1 {
         font-size: 54px;
         line-height: 61px;
@@ -11,9 +11,10 @@
         font-style: normal;
         font-weight: 500;
         font-size: 36px;
-        line-height: 41px;
+        line-height: 40px;
         color: #001A71;
         margin: 20px 0px;
+        text-transform: capitalize;
     }
 
     a {
@@ -44,36 +45,12 @@
         color: #001A71;
     }
 
-    li {
-        list-style-type: circle;
-        list-style-position: inside;
-        font-family: "sofia-pro-regular";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 27px;
-        color: #3A3E41;
-    }
 
-    li::marker {
-        color: #001A71;
-
-        unicode-bidi: isolate;
-        font-variant-numeric: tabular-nums;
-        text-transform: none;
-        text-indent: 0px !important;
-        text-align: start !important;
-        text-align-last: start !important;
-    }
-
-    ul li>ul {
-        padding-left: 30px;
-    }
 
 }
 
 @media screen and (max-width: 576px) {
-    .privacypolicy {
+    .terms {
         h1 {
             font-size: 27px;
             line-height: 30px;
@@ -82,7 +59,7 @@
         }
         strong{
             font-size: 20px;
-            line-height: 26px;
+            line-height: 40px;
         }
         h3{
             font-size: 27px;

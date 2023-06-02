@@ -44,7 +44,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 className="swiper-slide-custom"
               >
                 <div
-                  className="swiper-list-item w-[416px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
+                  className="swiper-list-item w-[325px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
                 >
                   <LinkComponent
                     href={{

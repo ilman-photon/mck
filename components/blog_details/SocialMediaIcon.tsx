@@ -32,6 +32,7 @@ const SocialMediaIconComponent = () => {
                             src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url}
                             alt={item?.socialMediaImage?.expandedValue?.altText?.value}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
+                            className="socialimg"
                        />
                     </LinkComponent>
                 </React.Fragment>

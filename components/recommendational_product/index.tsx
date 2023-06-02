@@ -44,7 +44,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   };
 
   return (
-    <div id="promotion-container" className="container mx-auto lg:pl-6">
+    <div id="promotion-container" className="container mx-auto lg:pl-6 md:px-6">
       <div className="pramotion-product-container">
         <div className="md:grid lg:grid xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 [&>*:nth-last-child(1):nth-child(odd)]:col-span-2">
           {!loading &&

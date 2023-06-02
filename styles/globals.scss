@@ -60,7 +60,7 @@
   font-weight: 700;
   font-stretch: normal;
 }
-
+@import "Home.module.scss";
 @import "Header.module.scss";
 @import "404.module.scss";
 @import "503.module.scss";
@@ -72,6 +72,7 @@
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
 @import "whyFT.module.scss";
+@import "termsofuse.module.scss";
 
 body {
   background-color: #FFFDFB;
@@ -1038,7 +1039,7 @@ Mobiles Menu
   }
 
   .pramotion-product-container {
-    padding: 0 16px;
+    padding: 0;
 
     .product-container {
       padding: 8px 16px;
@@ -1258,9 +1259,6 @@ Mobiles Menu
 }
 .pd-12{
   padding: 12px;
-}
-footer {
-  margin-top: 72px;
 }
 .sticky {
   position: fixed;
@@ -1702,8 +1700,7 @@ footer {
     margin-top: 24px;
   }
   .tab input:checked ~ .tab-content {
-    padding: 16px;
-    border: 0;
+    padding: 4px 4px 20px;
   }
   .tab {
     .tab-content ul,
@@ -1836,7 +1833,7 @@ footer {
       display: block;
     }
       
-    @media (max-width: 45em) {
+    @media (max-width: 1000px) {
       .tabs .tab,
       .tabs label {
         order: initial;
@@ -1955,6 +1952,8 @@ Mobile and iPad Navigation
 @media (max-width: 968px) {
   .container {
     max-width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
   }
   .header {
     position: sticky;
@@ -2044,28 +2043,35 @@ Mobile and iPad Navigation
     top: 0;
     right:1.5rem;
   }
-  .input-search {
-    top: -20px !important;
+  .input-search,
+  .input-search:focus,
+  .input-search:focus-visible,
+  .input-search:visited {
+    top: -22px !important;
     right: -4px;
   }
   .input-search:focus,
   .input-search:focus-visible,
   .input-search:visited {
-    top: 35px !important;
-    right: -4px;
-    width: 340px !important;
-    &+svg {
-      top: 50px !important;
+    height: 47px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    width: 85vw !important;
+    padding-right: 3rem;
+    border: 1px solid #eee;
+    & + svg {
+      top: -5px !important;
       right: 15px !important;
     }
   }
   .search-box {
     button {
-      top: -20px !important;
+      top: -22px !important;
       right: -4px;
-      &:focus {
-        top:35px !important;
-        z-index: 999;
+      display: block;
+      z-index: 9;
+      &:focus + .input-search {
+        background: #fff;
       }
     }
     svg {
@@ -2103,7 +2109,10 @@ Mobile and iPad Navigation
 .swiper-button-prev:after {
   background-image: url('../public/images/product-carousel-left.svg') !important;
 }
-
+.swiper-button-next.swiper-button-disabled, 
+.swiper-button-prev.swiper-button-disabled {
+  pointer-events: inherit !important;
+}
 .input-search {
   // height: 50px;
   // width: 50px;
@@ -2449,30 +2458,6 @@ Video Player Code
   }
 }
 
-.health-care-component {
-  .swiper-initialized {
-    padding: 10px 22px 0px;
-    @media (max-width: 968px) {
-      padding: 0 0px;
-    }
-  }
-  .swiper-slide {
-    @media (max-width: 968px) {
-      width: 100%;
-    }
-  }
-  .swiper-button-next {
-    right: 0px;
-  } 
-  .swiper-button-prev {
-    left: 0px;
-  }
-  .swiper-button-next, .swiper-button-prev {
-    top: 35%;
-  }
-}
-
-
 //where to buy Scroll
 .location-box{
   
@@ -2499,7 +2484,7 @@ Video Player Code
 
 video{
   border-radius: 10px;
-  margin: 15px auto;
+  margin: 0px auto;
 }
 .blog-details-container img{
   margin: auto;
@@ -2517,4 +2502,22 @@ video{
     font-family: "sofia-pro-regular";
     font-size: 16px;
     line-height: 24px;
+}
+
+@media (max-width: 980px) and (min-width:768px) {
+  .text-xs {
+    font-size: 0.875rem; /* 14px */
+  }
+  // .text-sm {
+  //   font-size: 1rem; /* 16px */
+  // }
+  .text-base { 
+    font-size: 1.125rem; /* 18px */
+  }
+  .text-lg {
+    font-size: 1.25rem; /* 20px */
+  }
+  .text-xl {
+    font-size: 1.5rem; /* 24px */
+  }
 }
