@@ -153,10 +153,28 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-782 lg:mt-36 lg:mt-16 where-to-buy">
+        <div className="container pl-0 pr-0 flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-36 lg:mt-16 where-to-buy">
           <div>
+          <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                value={textInput}
+                onKeyDown={(e) => handleKey(e)}
+                placeholder="City, State or Zip code"
+                className="bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
+                />
+              <Image
+                src="images/location_on.svg"
+                alt="location"
+                className="text-mckgreyborder absolute lg:top-3 top-3 right-4 lg:top-3.5 lg:right-4"
+                width={20}
+                height={20}
+              />
+            </div>
             <div
-              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg"
+              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
@@ -265,6 +283,7 @@ function WhereComponent() {
                 );
               })}
             </div>
+            
           </div>
 
           <div className="lg:w-842 w-full relative h-782 lg:h-full">
@@ -366,34 +385,10 @@ function WhereComponent() {
                 );
               })}
             </GoogleMap>
-            <div className="flex lg:flex-row flex-col absolute top-4 left-6 right-6 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
-              <label
-                htmlFor="fname"
-                className="flex items-center whitespace-nowrap lg:justify-center justify-start text-xl font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]"
-                id="wb-label-012"
-              >
-                Where to buy
-              </label>
-              <input
-                type="text"
-                id="fname"
-                name="fname"
-                value={textInput}
-                onKeyDown={(e) => handleKey(e)}
-                placeholder="City, State or Zip code"
-                className="lg:w-83 bg-[#F8F9FB] pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
-                />
-              <Image
-                src="images/location_on.svg"
-                alt="location"
-                className="text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                width={20}
-                height={20}
-              />
-            </div>
-            <div className="flex gap-2 divider-x rounded lg:rounded-l-none lg:flex-row Lg:flex-col absolute bottom-2 left-1/2 ml-145 lg:ml-auto lg:left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            
+            <div className="flex gap-2 divider-x lg:flex-row flex-col absolute bottom-2 left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <div className="p-2">
-                <h2 className="font-medium text-sm text-gray-900 dark:text-white">
+                <h2 className="text-sm text-gray-900 dark:text-white">
                   Transit
                 </h2>
                 <h1 className="text-xs text-gray-600 dark:text-white">
