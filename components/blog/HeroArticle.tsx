@@ -23,7 +23,7 @@ const HeroArticle = ({ data }: any) => {
                     />
                 </figure>
                 <figcaption>
-                    <div className='content lg:p-6 p-4'>
+                    <div className='content lg:p-6 p-4 lg:pt-4'>
                         <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                         <div className='pb-3 lg:pt-0 pt-3'>
                             <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${data?.readMinute?.value ? 'shade-grey-right-border' : ''}`} id='blog-label-001'>{GetTime(data?.startPublish)}</span>

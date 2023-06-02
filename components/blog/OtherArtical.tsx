@@ -24,7 +24,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                 <ImageComponent src={item.image.expandedValue.url} className='w-full lg:h-414 object-cover' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
                             </figure>
                             <figcaption>
-                                <div className='content lg:p-6 p-4'>
+                                <div className='content lg:p-6 p-4 lg:pt-4'>
                                     <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</p></div>
                                     <div className='pb-3 pt-3'>
                                         <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>

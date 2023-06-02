@@ -54,7 +54,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   >
                     <article onClick={(e: any) => OnRelatedArticleClick(item.contentLink.url)} >
                       <figure>
-                        <div className="h-60">
+                        <div className="h-60 flex">
                         <ImageComponent
                           src={item.image.value.url}
                           alt={item.image.value.id}
@@ -64,7 +64,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         </div>
                       </figure>
                       <figcaption>
-                        <div className="content lg:p-6 p-4">
+                        <div className="content lg:p-6 p-4 lg:pt-4">
                           <div
                             className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-xl text-gtl-med text-mckblue no-underline text-p-ellipsis"
                             aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
