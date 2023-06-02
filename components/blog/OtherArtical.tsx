@@ -12,22 +12,36 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
         <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
             {ArticleList ? ArticleList?.map((item: any, index: any) => (
                 <div key={`{blog-article_${item.contentLink.id}}`}>
-                    <LinkComponent
-                        href={{
-                            pathname: "/blog_details",
-                            query: { id: item.routeSegment },
-                        }}
+                    <div
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
+
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6 overflow-hidden'>
-                            <figure className='lg:h-80 overflow-hidden'>
-                                <ImageComponent src={item.image.expandedValue.url} className='w-full lg:h-414 object-cover' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
-                            </figure>
+                            <LinkComponent
+                                href={{
+                                    pathname: "/blog_details",
+                                    query: { id: item.routeSegment },
+                                }}
+                            >
+                                <figure className='lg:h-80 overflow-hidden'>
+
+                                    <ImageComponent src={item.image.expandedValue.url} className='w-full lg:h-414 object-cover' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
+                                </figure>
+                            </LinkComponent>
+
                             <figcaption>
-                                <div className='content lg:p-6 p-4'>
+                                <div className='content lg:p-6 p-4 lg:pt-4'>
                                     <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</p></div>
                                     <div className='pb-3 pt-3'>
-                                        <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                        <LinkComponent
+                                            href={{
+                                                pathname: "/blog_details",
+                                                query: { id: item.routeSegment },
+                                            }}
+                                        >
+                                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                        </LinkComponent>
+
                                         <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>
@@ -44,7 +58,8 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                 </div>
                             </figcaption>
                         </article>
-                    </LinkComponent>
+                    </div>
+
                 </div>
 
             )) : null}

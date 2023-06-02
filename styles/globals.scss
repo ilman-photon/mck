@@ -2113,7 +2113,9 @@ Mobile and iPad Navigation
 .swiper-button-next.swiper-button-disabled, 
 .swiper-button-prev.swiper-button-disabled {
   pointer-events: inherit !important;
+  // opacity: inherit !important;
 }
+
 .input-search {
   // height: 50px;
   // width: 50px;
@@ -2522,6 +2524,19 @@ video{
     font-size: 1.5rem; /* 24px */
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .swiper-button-next, .swiper-button-prev {
+    top: var(--swiper-navigation-top-offset,47.5%) !important;
+  }
+  .swiper-pagination-fraction {
+    bottom: 66px !important;
+  }
+  .swiper {
+    position: inherit !important;
+  }
+}
+
 
 .socialimg{
   padding-right: 10px;
