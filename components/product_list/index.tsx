@@ -418,7 +418,7 @@ function ProductListComponent() {
                   return null;
                 })}
                 </>
-              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">         
+              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 break-words">         
                 {productListData?.data?.results.map((item: any) => {
                   return (
                     <div
@@ -427,7 +427,7 @@ function ProductListComponent() {
                       onClick={() => handleProductClick(item)}
                     >
                       <div className="lg:h-60 h-28 flex items-center justify-center">
-                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28" />
+                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}

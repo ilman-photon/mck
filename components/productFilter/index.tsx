@@ -7,7 +7,7 @@ function ProductFilter({
   handleCheckBox,
 }: any) {
   return (
-    <div className="lg:border-r-2 lg:pb-3 lg:mb-2 mck-hn-filter-category">
+    <div className="lg:border-r-2 lg:pb-0 lg:mb-2 mck-hn-filter-category">
       {/* Left main category lists */}
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
@@ -88,7 +88,7 @@ function ProductFilter({
                     <ul>
                       {leftfiltermaindata?.subCategory?.value?.map(
                         (leftfiltersubdata: any) => (
-                          <li className="list-none pb-1 lg:pb-0" key={leftfiltersubdata?.id}>
+                          <li className="list-none pb-1 lg:pb-0 lg:pr-3" key={leftfiltersubdata?.id}>
                             <div
                               className="flex items-center my-px"
                               onClick={(e) =>

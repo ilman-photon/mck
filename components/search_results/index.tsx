@@ -406,7 +406,7 @@ function ResultComponent() {
                     {/* Health needs categories title & product carousel items starts */}
                     <section>
                       {/* Product items */}
-                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
+                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 break-words">
                         {productListData?.data?.results.map((item: any, idx: number) => {
                           return (
                               <div
@@ -418,7 +418,7 @@ function ResultComponent() {
                               <ImageComponent
                                 src={item?.image?.value?.url} 
                                 alt={item?.image?.value?.url} 
-                                className="mx-auto border-0 lg:max-h-60 max-h-28"
+                                className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer"
                                 id={"sr-prod-img-001"+idx}
                               />
                               </div>
