@@ -1,4 +1,14 @@
 @import "variables.module.scss";
+.megamenu-row:focus,
+.megamenu-row:focus-visible,
+.megamenu-row:focus-within {
+    &+.secondmenu,
+    &+.secondmenu:focus,
+    &+.secondmenu:focus-visible,
+    &+.secondmenu:focus-within {
+        display: block !important;
+    }
+}
 
 .show-cookies {
     &+.header {
@@ -16,6 +26,33 @@
             margin: 0;
         }
     }
+}
+
+.mobile-overlay-wrapper {
+    top: 64px;
+    max-width: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9997;
+    overflow-y: auto;
+    padding-bottom: 65px;
+    background: #00000045;
+}
+
+.mobile-navwrapper {
+    top: 64px;
+    max-width: 75%;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9997;
+    overflow-y: auto;
+    transform: translateZ(205px);
+    transition: all 0.5s ease-in-out;
+    padding-bottom: 65px;
 }
 @media (max-width: 1025px) and (min-width: 1023px) {
     .isStickyActive{
