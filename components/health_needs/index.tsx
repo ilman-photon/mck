@@ -208,6 +208,7 @@ const HealthNeedsComponent = () => {
       let minCategoryCnt = 0;
       let minSubCategoryCnt = 0;
       selectedFilterItems.map((category: any, catId: any) => {
+        _temparray=[]
         if (!category.isCategoryChecked && category.items.length > 0) {
           if (lastCatId > 0 && lastCatId != catId) {
             queryParams += " and ";

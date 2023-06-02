@@ -115,6 +115,7 @@ module.exports = {
         9: '9px',
         15: '15px',
         18: '18px',
+        23: '23px',
         72: "72px",
         54: "54px",
         36: "36px",
@@ -122,26 +123,24 @@ module.exports = {
         11: "11px",
         46: "46px",
         120: "120px"
-      
       },
       margin: {
         24: "24",
         72: "72px",
         76: "76px",
+        100: "100px",
         170: "170px",
         169: "169px",
         73: "-73px",
         145: "-145px"
-      },
-      paddingtop: {
-        72: "72px",
       },
       fontSize: {
         32: "2rem",
         27: "1.688rem",
         54: "3.375rem",
         28: "28px",
-        20: "20px"   },
+        20: "20px", 
+       },
       borderWidth: {
         3: "3px",
       },
@@ -192,6 +191,9 @@ module.exports = {
         desktop: {'max': '1280px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
+      },
+      maxWidth: {
+        170: "170px",
       },
     },
   },

@@ -96,7 +96,7 @@ const BlogDetailsComponent = () => {
                     </div>
                 </div>
             ) :
-            (<div className='container blog-details-container w-full lg:px-72 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 md:mt-16'>
+            (<div className='container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-44 md:mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
                     <img className='m-auto w-full'
                         src={response?.data[0]?.image.expandedValue.url}
@@ -106,7 +106,7 @@ const BlogDetailsComponent = () => {
                     />
                 </div>
                 <div className='grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10'>
-                    <div className='lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
+                    <div className='lg:w-966 lg:col-span-2 col-start-1 col-end-7 lg:pl-4'>
                         <article className='mb-6'>
                             <div className='content lg:p-6 pb-0 p-4 px-0'>
                                 <h1 className='lg:text-54  lg:leading-61  max-[576px]:leading-9 text-32 text-gtl-med text-mckblue lg:pb-6 text-center' id='blog-link-001'>{response?.data[0]?.title?.value}</h1>
@@ -140,7 +140,7 @@ const BlogDetailsComponent = () => {
                         />
                         {/* <CommentComponent /> */}
                     </div>
-                    <div className='lg:col-span-1 col-start-1 col-end-7'>
+                    <div className='lg:w-306 lg:ml-100 lg:col-span-1 col-start-1 col-end-7'>
                         <SocialMediaIconComponent />
                         <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
                             <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
