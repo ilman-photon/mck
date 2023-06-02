@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
+import { deleteMultipleElements } from '../global/CommonUtil';
 
 interface ISubCategory {
   id: number;
@@ -29,6 +30,8 @@ const HealthNeedFilter = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isFilterShow, setIsFilterShow] = useState(true);
+  const [mainCategoryId, setMainCategoryId] = useState('')
+  const [alternateFlag, setAlternateFlag] = useState(false)
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -59,6 +62,7 @@ const HealthNeedFilter = ({
     categoryId: any,
     subCategoryId: any
   ) => {
+    setMainCategoryId(categoryId)
     if (e.target.checked) {
       if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
         selectedFilterItems[categoryId]['items'].push(filter);
@@ -80,7 +84,17 @@ const HealthNeedFilter = ({
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
     setSelectedFilterItems(selectedFilterItems);
+    setAlternateFlag(!alternateFlag)
   };
+  useEffect(() => {
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const subCategoryCount = selectedProductType?.subCategory?.value?.length
+    if(selectedFilterItems[mainCategoryId]?.items.length === subCategoryCount){
+      if(selectedFilterItems[mainCategoryId]){
+        selectedFilterItems[mainCategoryId].isCategoryChecked = true;
+      }
+    }
+  }, [activeFilter])
 
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
@@ -181,7 +195,7 @@ const HealthNeedFilter = ({
             tabIndex={0}
             id='hn_label_003_2'
           >
-            {activeFilter?.map((item: any, index: number) => {
+            {activeFilter.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
                   className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'

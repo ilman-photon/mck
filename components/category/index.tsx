@@ -80,7 +80,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 id={`category_name_0${index}`}
               >
                 <Link
-                  href={`/selected_product_category?type=${item?.data?.productCategoryType.value[0].name}`}
+                  href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
                 >
                   {item?.data?.name}
                 </Link>

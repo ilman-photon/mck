@@ -28,3 +28,9 @@ export const handlecategoryColorCode = (id: number, data: any) => {
         return obj.categoryColorCode.value
     }
 }
+
+export function deleteMultipleElements(arr: any[], elementsToDelete: any[], mainCategory: string ) {
+    arr = arr.reduce((acc, value, index) =>
+        elementsToDelete?.indexOf(value) == -1 ? [...acc ,value] : acc, [])
+    return arr;
+}
