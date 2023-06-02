@@ -57,6 +57,7 @@ module.exports = {
         80: '80%',
         95: '95%',
         202: '202px',
+        166: '166px',
       },
       height: {
         25: '25px',
@@ -76,6 +77,7 @@ module.exports = {
         502: '502px',
         544: '544px',
         22: '22px',
+        350: '350px',
       },
       minHeight: {
         50: '50px',
@@ -186,6 +188,7 @@ module.exports = {
       screens: {
         desktop: {'max': '1280px'},
         mobile: {'max': '767px'},
+        mobilelarge: {'max': '1023px'},
       },
     },
   },
