@@ -69,9 +69,9 @@ const HealthNeedCategoryMobile = ({
 
   return (
     <div className="lg:hidden">
-      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med px-4 font-medium" tabIndex={0} aria-label="Health Needs">Health Needs</h1>
+      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med lg:px-4 font-medium" tabIndex={0} aria-label="Health Needs">Health Needs</h1>
       <div
-        className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] mx-4 relative min-h-[300px]"
+        className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] lg:mx-4 relative min-h-[300px]"
         tabIndex={0}
         id="hn_label_0002"
       >

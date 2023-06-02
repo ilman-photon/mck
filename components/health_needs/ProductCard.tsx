@@ -13,18 +13,18 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
 
     return (
         <div          
-            className="swiper-list-item w-[202px] lg:min-h-[420px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 p-4 "
+            className="swiper-list-item lg:w-[202px] w-[166px] lg:min-h-[420px] min-h-[300px] rounded-lg border border-[#CCD1E3] mr-1 p-4 "
         >
             <div onClick={() => handleProductClick(cardData)} className="cursor-pointer">
-            <div className="h-60 flex items-center justify-center">
+            <div className="lg:h-60 h-28 flex items-center justify-center">
             <ImageComponent 
                 src={cardData?.image?.value?.url}
                 alt={`${indexs}${cardData?.image?.value?.url}`}
-                id={`hn_label_01_${indexs + 1}_${mainIndex + 1}`} className="h-fit mx-auto border-0 max-h-60"
+                id={`hn_label_01_${indexs + 1}_${mainIndex + 1}`} className="h-fit mx-auto border-0 lg:max-h-60 max-h-28"
             />
             </div>
             <div
-                className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold"
+                className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px]"
                 tabIndex={0}
                 id={`hn_label_02_${indexs + 1}_${mainIndex + 1}`}
             >
@@ -34,7 +34,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
                 }
             </div>
             <div
-                className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate"
+                className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate"
                 tabIndex={0}
                 id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
             >
@@ -42,7 +42,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
             </div>
             </div>
             <div
-                className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
+                className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3"
                 tabIndex={0}
                 id={`hn_label_04_${indexs + 1}_${mainIndex + 1}`}
                 dangerouslySetInnerHTML={{

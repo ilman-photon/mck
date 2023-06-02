@@ -2092,6 +2092,9 @@ Mobile and iPad Navigation
 .swiper-button-next, .swiper-button-prev {
   width: 48px !important;
   height: 48px !important;
+  @media screen and (max-width: 1023px) {
+    display: none !important;
+  } 
 }
 .swiper-button-next:after, .swiper-button-prev:after {
   font-size: 0 !important;

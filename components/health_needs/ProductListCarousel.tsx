@@ -53,7 +53,7 @@ const ProductComponent = ({ selectedProduct, sectionData, selectedRecommendedPro
                 slidesPerView={5}
                 slidesPerGroup={5}
                 pagination={{ clickable: true, type: "fraction" }}
-                className="h-480"
+                className="lg:h-480 h-350"
 
               >
                 {product?.data?.results?.map((item: any, idxs: number) => {
