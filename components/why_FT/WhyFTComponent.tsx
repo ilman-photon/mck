@@ -96,7 +96,7 @@ function WhyFTComponent() {
 
   return (
     <>
-      <div className="four-oh-four why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
+      <div className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0">
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (
