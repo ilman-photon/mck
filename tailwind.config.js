@@ -127,6 +127,7 @@ module.exports = {
         24: "24",
         72: "72px",
         76: "76px",
+        100: "100px",
         170: "170px",
         169: "169px",
         73: "-73px",
@@ -189,6 +190,9 @@ module.exports = {
         desktop: {'max': '1280px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
+      },
+      maxWidth: {
+        170: "170px",
       },
     },
   },
