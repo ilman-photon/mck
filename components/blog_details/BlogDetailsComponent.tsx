@@ -140,7 +140,7 @@ const BlogDetailsComponent = () => {
                         />
                         {/* <CommentComponent /> */}
                     </div>
-                    <div className='lg:w-306 lg:col-span-1 col-start-1 col-end-7'>
+                    <div className='lg:w-306 lg:ml-100 lg:col-span-1 col-start-1 col-end-7'>
                         <SocialMediaIconComponent />
                         <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
                             <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
