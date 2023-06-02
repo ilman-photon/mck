@@ -143,7 +143,7 @@ function AllProductCategoryPage({
       let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
       setCategoryProduct([tempObj]);
       productCategoryList?.map((item: any) => {
-        productName.push(item.productCategoryName.value);
+        productName.push(item.productCategoryName?.value);
       });
       productName?.map((item: any) => {
         axios
@@ -365,8 +365,8 @@ function AllProductCategoryPage({
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
-            id.recommendedProductCategory.value[0].id ===
-              item.productCategoryType.value[0].id
+            id.recommendedProductCategory?.value[0].id ===
+              item.productCategoryTyp?.value[0].id
           ) {
             const productName = id.recommendedProductCategory.value[0].name;
             if (!selectedRecommendedProduct.includes(productName)) {
