@@ -46,8 +46,16 @@ const HealthNeedCategoryMobile = ({
       );
       selectedFilterItems[cat_id][sub_cat_id].checked = false;
     } else {
+      selectedFilterItems[cat_id].items = [];   
       selectedFilterItems[cat_id].items.push(data);
-      setActiveFilter([...activeFilter, selectedHealthNeed[data]?.key]);
+      selectedFilterItems.map((category: any) => {
+        category.isCategoryChecked = false;
+        category.map((sub_category: any) => {
+          sub_category.checked = false;
+        });
+      });
+
+      setActiveFilter([data]);
       selectedFilterItems[cat_id][sub_cat_id].checked = true;
     }
   };
