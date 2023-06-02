@@ -6,6 +6,10 @@ import ActiveProductFilter from "@/components/activeProductFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import ProductCard from "../../components/health_needs/ProductCard";
+import RecommendationalProductComponent from "../recommendational_product";
+
+let sectionData: any = [];
+let selectedRecommendedProduct: any = [];
 function ProductListComponent() {
   const router = useRouter();
   const [productListData, SetProductListData] = useState<any>();
@@ -14,7 +18,8 @@ function ProductListComponent() {
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state variable
-
+  const [recommendedProduct, setRecommendedProduct] = useState<any>();
+  const [productName , setProductName] = useState<any>()
   // Right section product carousel data
   function fetchProductList(filter: any) {
     setIsLoading(true);
@@ -36,6 +41,7 @@ function ProductListComponent() {
     );
     promise
       .then((res) => {
+        setProductName(res.data.results[0].productType?.value[0].name )
         SetProductListData(res);
       })
       .catch((e: Error | AxiosError) => console.log(e))
@@ -200,6 +206,7 @@ function ProductListComponent() {
     );
     const productCategoryDataList =
       productCategoryData?.data[0]?.categoryFilter?.expandedValue;
+      setRecommendedProduct(productCategoryData?.data[0].contentArea);
     // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
     //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
     setproductCategoryData(productCategoryDataList);
@@ -305,6 +312,53 @@ function ProductListComponent() {
       query: { data: title },
     });
   };
+
+  useEffect(() => {
+    recommendedProduct?.expandedValue?.map((id: any) => {
+      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+        (item: any) => {
+          if (
+            id?.recommendedProductCategory?.value &&
+            id.recommendedProductCategory.value[0].id ===
+              item.productCategoryType.value[0].id
+          ) {
+            const productName = id.recommendedProductCategory.value[0].name;
+            if (!selectedRecommendedProduct.includes(productName)) {
+              selectedRecommendedProduct.push(productName);
+            }
+            const isDuplicate = sectionData.some(
+              (item: any) => item.name === id.name
+            );
+
+            if (!isDuplicate) {
+              sectionData.push(id);
+            }
+          }
+        }
+      );
+    });
+  }, [recommendedProduct]);
+
+  const handleProduct = (item: any, index: number) => {
+    const filteredSection = sectionData.filter((section : any) => {
+      const tempProductName = section?.recommendedProductCategory?.value[0]?.name
+      const itemName = tempProductName.toLowerCase().replace(/[^\w\s]/gi, '');
+      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, ''); 
+     
+      return itemName.includes(searchItem);
+    });
+
+    if (filteredSection.length > 0) {
+      return (
+        <RecommendationalProductComponent
+          indexs={index}
+          sectionData={filteredSection.map((section: any) => section)}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <>
       {isLoading && (
@@ -354,7 +408,17 @@ function ProductListComponent() {
 
 
               {/* Product items */}
-              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-6 lg:pl-6 break-words">
+              <>
+                 {selectedRecommendedProduct?.map((itemData: any, index: number) => {
+                  let correctItemValue = itemData?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
+                  let correctProductValue = productName?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
+                  if (correctItemValue === correctProductValue) {
+                    return handleProduct(productName, index);
+                  }
+                  return null;
+                })}
+                </>
+              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 break-words">         
                 {productListData?.data?.results.map((item: any) => {
                   return (
                     <div
@@ -363,7 +427,7 @@ function ProductListComponent() {
                       onClick={() => handleProductClick(item)}
                     >
                       <div className="lg:h-60 h-28 flex items-center justify-center">
-                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28" />
+                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
