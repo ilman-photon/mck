@@ -96,7 +96,7 @@ const BlogDetailsComponent = () => {
                     </div>
                 </div>
             ) :
-            (<div className='container blog-details-container w-full lg:px-72 lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-36 md:mt-16'>
+            (<div className='container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-44 md:mt-16'>
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'>
                     <img className='m-auto w-full'
                         src={response?.data[0]?.image.expandedValue.url}
@@ -140,7 +140,7 @@ const BlogDetailsComponent = () => {
                         />
                         {/* <CommentComponent /> */}
                     </div>
-                    <div className='lg:col-span-1 col-start-1 col-end-7'>
+                    <div className='lg:w-306 lg:col-span-1 col-start-1 col-end-7'>
                         <SocialMediaIconComponent />
                         <div className='category-card shade-blue-border rounded-lg overflow-hidden mb-6'>
                             <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
