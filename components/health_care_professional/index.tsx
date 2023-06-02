@@ -100,12 +100,26 @@ function HealthCareProfessionalComponent() {
     }
   }, [response]);
   const handleNext = () => {
-    setReviewCount(() => reviewCount + 1);
+    setReviewCount(() => {
+      if (reviewCount < Math.ceil(customers?.length / 3) - 1) {
+        return reviewCount + 1;
+      } else {
+        return Math.ceil(customers?.length / 3);
+      }
+    });
+
     nextBtn?.removeEventListener("click", handleNext, true);
     prevBtn?.removeEventListener("click", handlePrev, true);
   };
   const handlePrev = () => {
-    setReviewCount(() => reviewCount - 1);
+    setReviewCount(() => {
+      if (reviewCount > 1) {
+        return reviewCount - 1;
+      } else {
+        return 1;
+      }
+    });
+
     nextBtn?.removeEventListener("click", handleNext, true);
     prevBtn?.removeEventListener("click", handlePrev, true);
   };
@@ -210,7 +224,6 @@ function HealthCareProfessionalComponent() {
                     </h1>
                     <div className="relative lg:p-0 px-6">
                       <Swiper
-                        modules={[Navigation, Autoplay]}
                         spaceBetween={48}
                         navigation={isMobile ? false : true}
                         autoplay={isMobile ? { delay: 3000 } : false}
@@ -283,7 +296,7 @@ function HealthCareProfessionalComponent() {
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{Math.floor(customers?.length / 3)}
+                      {reviewCount}/{Math.ceil(customers?.length / 3)}
                     </div>
                   </div>
                 </div>

@@ -1,10 +1,11 @@
+import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 
 export default function ImageVideoAndTextSection({ sectionData }: any) {
   const router = useRouter();
   const [ApiRespond, setApiRespond] = useState<any>();
-
+  const [deviceWidth] = useWindowResize();
   const handleCTABtn = (url: string) => {
     router.push({
       pathname: url,
@@ -80,7 +81,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
   }, [ApiRespond]);
 
   return (
-    <div>
+    <div className={`${deviceWidth > 2160 && "container mx-auto lg:pl-6" }`}>
       {sectionData.video?.value?.url ? (
         <div
           id="learning-section"

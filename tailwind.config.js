@@ -57,6 +57,7 @@ module.exports = {
         80: '80%',
         95: '95%',
         202: '202px',
+        166: '166px',
       },
       height: {
         25: '25px',
@@ -76,6 +77,7 @@ module.exports = {
         502: '502px',
         544: '544px',
         22: '22px',
+        350: '350px',
       },
       minHeight: {
         50: '50px',
@@ -110,6 +112,7 @@ module.exports = {
       },
       padding: {
         9: '9px',
+        15: '15px',
         18: '18px',
         72: "72px",
         54: "54px",
@@ -126,7 +129,8 @@ module.exports = {
         76: "76px",
         170: "170px",
         169: "169px",
-        73: "-73px"
+        73: "-73px",
+        145: "-145px"
       },
       paddingtop: {
         72: "72px",
@@ -186,6 +190,10 @@ module.exports = {
       screens: {
         desktop: {'max': '1280px'},
         mobile: {'max': '767px'},
+        mobilelarge: {'max': '1023px'},
+      },
+      maxWidth: {
+        170: "170px",
       },
     },
   },

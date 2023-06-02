@@ -563,7 +563,6 @@ HAMBURGER MENU
 
 .hamburger-menu {
   padding-top: 20px;
-  width: 15%;
   height: 64px;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -1521,6 +1520,9 @@ Mobiles Menu
     }
     
   }
+  h1{
+    font-family: "GTAlpina-Medium";
+  }
 }
 
 .category-card {
@@ -1677,8 +1679,8 @@ Mobiles Menu
 /*** why FT, Faq Mobile styles ***/
 @media screen and (max-width: 1023px) {
   .four-oh-four {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
   .four-oh-four .heading {
     font-size: 27px;
@@ -1732,7 +1734,6 @@ Mobiles Menu
 @media (max-width: 768px) {
   .brand-logo {
     width: 183px;
-    margin-left: 10%;
   }
 }
 @media (min-width: 968px) {
@@ -1970,28 +1971,20 @@ Mobile and iPad Navigation
     border-color: #001a71;
   }
   .mobile-customenav {
-    top: 64px;
-    max-width: 75%;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 9997;
-    overflow-y: auto;
-    transform: translateZ(205px);
-    transition: all .5s ease-in-out;
-    padding-bottom: 65px;
     &.active {
       left: 0;
       transform: translateZ(0);
       transition: all .5s ease-in-out;
     }
     .isMobileUi {
-      padding: 0;
-      margin-top: 24px;
+      padding: 0 15px;
+      margin-top: 0px;
       width: 100%;
       height: 100vh;
       overflow-y: scroll;
+      .mainmenu-items {
+        padding: 0;
+      }
       div {
         overflow: hidden;
         padding: 5px 0 5px 0px;
@@ -2019,7 +2012,6 @@ Mobile and iPad Navigation
           }
         }
         &.seperatemenu-hover {
-          padding-left: 20px;
           &:hover {
             background: #fff;
             border-left: 4px solid #001a71;
@@ -2029,11 +2021,17 @@ Mobile and iPad Navigation
       }
       .submenu {
         padding: 5px 0 5px 20px;
+        margin-top: 0px;
         li {
           a {
-            font-family: sofia-pro-regular;
+            font-family: 'sofia-pro-regular',sans-serif;
           }
         }
+      }
+      &.active {
+        left: 0;
+        transform: translateZ(0);
+        transition: all .5s ease-in-out;
       }
     }
   }
@@ -2058,7 +2056,7 @@ Mobile and iPad Navigation
     padding-bottom: 6px;
     width: 85vw !important;
     padding-right: 3rem;
-    border: 1px solid #eee;
+    border: 1px solid #eee !important;
     & + svg {
       top: -5px !important;
       right: 15px !important;
@@ -2097,6 +2095,9 @@ Mobile and iPad Navigation
 .swiper-button-next, .swiper-button-prev {
   width: 48px !important;
   height: 48px !important;
+  @media screen and (max-width: 1023px) {
+    display: none !important;
+  } 
 }
 .swiper-button-next:after, .swiper-button-prev:after {
   font-size: 0 !important;
@@ -2508,9 +2509,9 @@ video{
   .text-xs {
     font-size: 0.875rem; /* 14px */
   }
-  // .text-sm {
-  //   font-size: 1rem; /* 16px */
-  // }
+  .text-sm {
+    font-size: 1rem; /* 16px */
+  }
   .text-base { 
     font-size: 1.125rem; /* 18px */
   }
@@ -2520,4 +2521,8 @@ video{
   .text-xl {
     font-size: 1.5rem; /* 24px */
   }
+}
+
+.socialimg{
+  padding-right: 10px;
 }

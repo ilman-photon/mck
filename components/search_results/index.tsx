@@ -414,11 +414,11 @@ function ResultComponent() {
                               key={item?.contentLink?.id}
                               onClick={() => handleProductClick(item)}
                               >
-                              <div className="h-60 flex items-center justify-center">
+                              <div className="lg:h-60 h-28 flex items-center justify-center">
                               <ImageComponent
                                 src={item?.image?.value?.url} 
                                 alt={item?.image?.value?.url} 
-                                className="mx-auto border-0 max-h-60"
+                                className="mx-auto border-0 lg:max-h-60 max-h-28"
                                 id={"sr-prod-img-001"+idx}
                               />
                               </div>

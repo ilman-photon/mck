@@ -50,7 +50,7 @@ const HealthNeedCategory = ({
   return (
     <div className="hidden lg:flex md:hidden desktop:px-6">
       <div
-        className="pt-9 px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
+        className="pt-[36px] px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
         tabIndex={0}
         id="hn_label_0001"
       >
@@ -60,7 +60,7 @@ const HealthNeedCategory = ({
               <li
                 id={`Health_title+${index}`}
                 key={healthneedsdata?.contentLink?.id}
-                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-9 cursor-pointer ${
+                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-[36px] cursor-pointer lg:max-w-[170px]${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
