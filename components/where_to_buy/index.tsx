@@ -7,21 +7,39 @@ import {
   Marker,
   useLoadScript,
   TransitLayer,
-} from "@react-google-maps/api";
-import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
-import Image from "next/image";
+} from '@react-google-maps/api';
+import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
+import Image from 'next/image';
+import { useWhereToBuyStore } from './Store/useWhereToBuyStore';
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
   const [latitude, setLatitude] = useState(33.2411354);
+  const [isCustomSearch, setIsCustomSearch] = useState(false) 
   const [longitude, setLongitude] = useState(-111.7256936);
   const [loading, setLoading] = useState(true); // Tambahkan state loading
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [searchState, setSearchState] = useState('')
   let textInput: any;
-  const apiKey = "180A0FF6-6659-44EA-8E03-2BE22C2B27A3";
-  const googleApiKey = "AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk";
+  /**
+   * @state creds key
+   */
+  const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
+  const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
+
+  /**
+   * @state initial zoom level of Map onRender
+   */
+  const initialZoomLevelMap = useWhereToBuyStore((state) => state.zoomLevel)
+
+  /**
+   * @state USA Coords 
+   */
+  const usaLon = useWhereToBuyStore(state => state.usaLon)
+  const usaLat = useWhereToBuyStore(state => state.usaLat)
+  
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk",
+    googleMapsApiKey: mapKey,
   });
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [showTransit] = useState<boolean>();
@@ -36,7 +54,7 @@ function WhereComponent() {
 
   function fectchLatandLongDetails() {
     return axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=${googleApiKey}&${
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
         !isNaN(textInput)
           ? `components=postal_code:${Number(textInput)}`
           : `address=${textInput}`
@@ -51,7 +69,7 @@ function WhereComponent() {
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${apiKey}`,
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
       {
         headers: {
           "Accept-Language": "en",
@@ -80,7 +98,6 @@ function WhereComponent() {
         setLoading(false);
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setLoading(false);
       });
   };
@@ -109,11 +126,12 @@ function WhereComponent() {
       textInput = e.target.value;
       fectchLatandLongDetails()
         .then((res) => {
-          setLatitude(res.data.results[0].geometry.location["lat"]);
-          setLongitude(res.data.results[0].geometry.location["lng"]);
+          setLatitude(res.data.results[0].geometry.location['lat']);
+          setLongitude(res.data.results[0].geometry.location['lng']);
+          setIsCustomSearch(true)
         })
         .catch((e: Error | AxiosError) => console.log(e));
-    }
+      }
   };
 
   return (
@@ -253,19 +271,19 @@ function WhereComponent() {
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
-              zoom={10}
+              zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
                 lat:
-                  responseValue?.length > 0
+                  responseValue?.length > 0 || isCustomSearch
                     ? responseValue[0]?.Lat
-                    : 33.2411354,
+                    :usaLat,
                 lng:
-                  responseValue?.length > 0
+                  responseValue?.length > 0 || isCustomSearch
                     ? responseValue[0]?.Lon
-                    : -111.7256936,
+                    :usaLon
               }}
             >
-              {showTransit ? <p /> : null}
+              <TransitLayer/>
               {responseValue?.map((value: any, index: any) => {
                 return (
                   <Marker
@@ -364,7 +382,7 @@ function WhereComponent() {
                 onKeyDown={(e) => handleKey(e)}
                 placeholder="City, State or Zip code"
                 className="lg:w-83 bg-[#F8F9FB] pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
-              />
+                />
               <Image
                 src="images/location_on.svg"
                 alt="location"
@@ -373,9 +391,9 @@ function WhereComponent() {
                 height={20}
               />
             </div>
-            <div className="flex gap-2 divider-x lg:flex-row flex-col absolute bottom-2 left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="flex gap-2 divider-x rounded lg:rounded-l-none lg:flex-row Lg:flex-col absolute bottom-2 left-1/2 ml-145 lg:ml-auto lg:left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <div className="p-2">
-                <h2 className="text-sm text-gray-900 dark:text-white">
+                <h2 className="font-medium text-sm text-gray-900 dark:text-white">
                   Transit
                 </h2>
                 <h1 className="text-xs text-gray-600 dark:text-white">

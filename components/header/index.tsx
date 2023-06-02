@@ -127,6 +127,29 @@ function HeaderComponent() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const hamburgerMenu = document.querySelector(".hamburger-menu");
+      const hamburgerMenuActive = document.querySelector(".hamburger-menu.active");
+
+      if (
+        hamburgerMenu &&
+        hamburgerMenuActive &&
+        !hamburgerMenu.contains(event.target as Node) &&
+        !hamburgerMenuActive.contains(event.target as Node)
+      ) {
+        setIsMobileMenuActive(false);
+        setIsBarAnimated(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -142,13 +165,15 @@ function HeaderComponent() {
           <div className="flex">
             {/* Hamburger menu starts */}
             <div
-              className="hamburger-menu lg:hidden xl:hidden"
+              className={`hamburger-menu lg:hidden xl:hidden ${
+                isMobileMenuActive ? "active" : ""
+              }`}
               onClick={() => handleHamburgerClick()}
             >
               <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
             </div>
+            {/* Hamburger menu ends */}
           </div>
-          {/* Hambuger menu ends */}
 
           <div
             ref={headerImgRef}

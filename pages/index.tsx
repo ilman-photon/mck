@@ -84,6 +84,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className={`hidden lg:flex md:flex ${isCookiesShow ? 'show-cookies' : ''}`}>
+        {isCookiesShow && <CookieSetting
+          onAccept={handleCookieManageShowAccept}
+          onReject={handleCookieShowCookies}
+        />}
+      </div>
+
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
