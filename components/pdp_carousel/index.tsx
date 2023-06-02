@@ -12,7 +12,6 @@ function PdpCarousel(prodViewData: any) {
     const [lastIndex, setLastIndex] = useState(0);
     const [arrowClick, setArrowClick] = useState(0);
 
-
     const [prodResponse, setProdResponse] = useState<any>();
 
     function fetchPDPCarouselDetails() {
@@ -29,7 +28,6 @@ function PdpCarousel(prodViewData: any) {
         setLastIndex(deviceWidth <= 400 ? 3 : (deviceWidth > 400 && deviceWidth <= 812) ? 4 : (deviceWidth > 812 && deviceWidth <= 1024) ? 5 : 6)
         setArrowClick(0);
     }, [deviceWidth])
-
 
 
     useEffect(() => {
@@ -67,10 +65,10 @@ function PdpCarousel(prodViewData: any) {
             <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
                 <div className="pdp_images flex lg:grid relative">
                     <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
-                        <img onClick={handleUpArrowClick} src="images\carousel_top.png" alt="img" className={`m-auto ${arrowClick === 0 ? 'opacity-25' : ''}`} id="pdp-img-001" />
+                        <img onClick={handleUpArrowClick} src="images\carousel_down.png" alt="img" className={`m-auto ${arrowClick === 0 ? 'opacity-25' : ''} rotate-180`} id="pdp-img-001" />
                     </div>
                     <div onClick={handleUpArrowClick} className={`carousel-prev -left-6 cursor-pointer lg:hidden flex items-center absolute left-[-10px] top-[27px] ${arrowClick === 0 ? 'opacity-25' : ''}`}>
-                        <svg className="focus:outline-none" width="28" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-005" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#4D5F9C"></circle><path d="M28.9401 18.7106L27.0601 16.8306L19.0601 24.8306L27.0601 32.8306L28.9401 30.9506L22.8334 24.8306L28.9401 18.7106Z" fill="#ffffff"></path></svg></div>
+                        <svg className="focus:outline-none" width="28" height="49" viewBox="0 0 48 49" tabIndex={0} id="hcp-btn-005" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24.8306" r="24" fill="#001A71"></circle><path d="M28.9401 18.7106L27.0601 16.8306L19.0601 24.8306L27.0601 32.8306L28.9401 30.9506L22.8334 24.8306L28.9401 18.7106Z" fill="#ffffff"></path></svg></div>
                     {/* <button onClick={handleUpArrowClick}>Up arrow</button> */}
                     <ul className="3GnUWp flex lg:flex-col">
                         {prodResponse?.productImages?.value?.slice(arrowClick, lastIndex).map((imgdata: any, index: any) => {
