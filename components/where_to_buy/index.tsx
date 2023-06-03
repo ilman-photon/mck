@@ -11,6 +11,7 @@ import {
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import Image from 'next/image';
 import { useWhereToBuyStore } from './Store/useWhereToBuyStore';
+import { mapConfigOptions } from "@/utils/MapConfig";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
@@ -290,6 +291,7 @@ function WhereComponent() {
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
+              options={mapConfigOptions}
               zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
                 lat:
