@@ -37,7 +37,7 @@ function ProductFilter({
                         height={24}
                         width={24} /> 
                
-                      <label htmlFor="acute" className="ml-2 filter-title" tabIndex={0} aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
+                      <label htmlFor="acute" className="ml-2 filter-title"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
@@ -78,7 +78,7 @@ function ProductFilter({
                           <label
                             htmlFor="mck-view-all"
                             className="ml-2 text-mcknormalgrey text-sm"
-                            id="" tabIndex={0} aria-label="View All"
+                            id=""  aria-label="View All"
                           >
                             View All
                           </label>

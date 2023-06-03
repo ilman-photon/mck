@@ -179,7 +179,7 @@ function HealthCareProfessionalComponent() {
                     <h1
                       className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                       id="hcp-label-1"
-                      tabIndex={0}
+                      
                     >
                       {customerReviewTitle?.value}
                     </h1>
@@ -211,7 +211,7 @@ function HealthCareProfessionalComponent() {
                                   >
                                     <div
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
-                                      tabIndex={0}
+                                      
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
                                         __html: customer?.reviewComment?.value,
@@ -219,7 +219,7 @@ function HealthCareProfessionalComponent() {
                                     ></div>
                                     <div
                                       className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
-                                      tabIndex={0}
+                                      
                                       id={`hcp-label-0000${idx}`}
                                       role="text"
                                     >
@@ -267,7 +267,7 @@ function HealthCareProfessionalComponent() {
                 <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
-                    tabIndex={0}
+                    
                     id="hcp-btn-007"
                     dangerouslySetInnerHTML={{ __html: descriptionValue }}
                   />

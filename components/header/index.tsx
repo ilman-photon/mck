@@ -182,7 +182,7 @@ function HeaderComponent() {
           >
             <img
               id="logo-image"
-              tabIndex={0}
+              
               src={logoSrc}
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="lg:mt-7"

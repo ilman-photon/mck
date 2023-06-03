@@ -103,7 +103,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       className="block w-full"
                       alt="Carousel Image"
                       id={item?.title?.value + "_" + current}
-                      tabIndex={0}
+                      
                     />
                     {carouselContent && (
                       <div
@@ -118,7 +118,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         <h2
                           className="text-mcklightyellow lg:mb-3"
                           id={item?.title?.value}
-                          tabIndex={0}
+                          
                         >
                           {item?.title?.value}
                         </h2>
@@ -127,7 +127,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           dangerouslySetInnerHTML={{
                             __html: item?.description?.value,
                           }}
-                          tabIndex={0}
+                          
                           id={item?.description?.value}
                         ></p>
                         {item?.buttonText?.value && (
@@ -138,7 +138,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               backgroundColor: item?.ctaButtonColor?.value,
                             }}
                             onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                            tabIndex={0}
+                            
                             role="button"
                           >
                             {item?.buttonText?.value}
@@ -166,7 +166,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         className="block w-full"
                         alt="Carousel Image"
                         id={firstResponse.title?.value + "_" + current}
-                        tabIndex={0}
+                        
                       />
                       {carouselContent && (
                         <div
@@ -179,7 +179,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           <h2
                             className="text-mcklightyellow lg:mb-3"
                             id={firstResponse.title?.value}
-                            tabIndex={0}
+                            
                           >
                             {firstResponse.title?.value}
                           </h2>
@@ -188,7 +188,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             dangerouslySetInnerHTML={{
                               __html: firstResponse.description?.value,
                             }}
-                            tabIndex={0}
+                            
                             id={firstResponse.description?.value}
                           ></p>
                           {firstResponse.buttonText?.value && (
@@ -202,7 +202,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               onClick={() =>
                                 handleCTABtn(firstResponse.buttonUrl?.value)
                               }
-                              tabIndex={0}
+                              
                               role="button"
                             >
                               {firstResponse.buttonText?.value}
@@ -223,7 +223,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 className={`indicator ${index === current ? "active" : ""}`}
                 key={index}
                 onClick={() => handleCarouselImage(index)}
-                tabIndex={0}
+                
                 role="button"
               ></li>
             ))}
