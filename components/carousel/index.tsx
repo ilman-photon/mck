@@ -44,17 +44,17 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     };
   }, [current]);
 
-  function handleCarouselImage(index: number) {
+  const handleCarouselImage = (index: number) => {
     setCurrent(index);
-  }
+  };
 
-  function infiniteScroll() {
+  const infiniteScroll = () => {
     if (current >= response?.length - 1) {
       setCurrent(0);
     } else {
       setCurrent(current + 1);
     }
-  }
+  };
 
   const handleCTABtn = (url: string) => {
     router.push({
@@ -68,6 +68,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     leave: { opacity: 0, transform: "translateX(-100%)" },
     config: { duration: 1000 },
   });
+
   return (
     <div className="flex items-center justify-center">
       <div
