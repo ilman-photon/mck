@@ -366,7 +366,7 @@ function AllProductCategoryPage({
           if (
             id?.recommendedProductCategory?.value &&
             id.recommendedProductCategory?.value[0].id ===
-              item.productCategoryTyp?.value[0].id
+              item.productCategoryType?.value[0].id
           ) {
             const productName = id.recommendedProductCategory.value[0].name;
             if (!selectedRecommendedProduct.includes(productName)) {
