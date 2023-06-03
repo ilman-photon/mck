@@ -79,10 +79,11 @@ function HealthCareProfessionalComponent() {
         backgroundColorCode,
         contentBlockArea: { expandedValue: customers },
       } = expandedValue[1];
-      const {
-        description: { value: descriptionValue },
-        contentBlockArea: { expandedValue: tabRelated },
-      } = expandedValue[2];
+      const descriptionValue =
+        expandedValue[2]?.description?.value || "Default Description Value";
+      const tabRelated =
+        expandedValue[2]?.contentBlockArea?.expandedValue || [];
+
       setCustomers(customers);
       setCustomerReviewTitle(customerReviewTitle);
       setCustomerBackgroundColorCode(backgroundColorCode?.value);
@@ -213,7 +214,7 @@ function HealthCareProfessionalComponent() {
                                       tabIndex={0}
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
-                                        __html: customer?.reviewComment.value,
+                                        __html: customer?.reviewComment?.value,
                                       }}
                                     ></div>
                                     <div
@@ -222,7 +223,7 @@ function HealthCareProfessionalComponent() {
                                       id={`hcp-label-0000${idx}`}
                                       role="text"
                                     >
-                                      {customer.customerName.value} -{" "}
+                                      {customer.customerName?.value} -{" "}
                                       {customer?.customerQualification?.value}{" "}
                                     </div>
                                   </div>
