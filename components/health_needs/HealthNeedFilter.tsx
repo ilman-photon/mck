@@ -25,8 +25,7 @@ const HealthNeedFilter = ({
   fetchProductList,
   recommendedProduct,
   sectionData,
-  selectedRecommendedProduct,
-  filterClicked
+  selectedRecommendedProduct
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -108,22 +107,23 @@ const HealthNeedFilter = ({
   }, [activeFilter])
   
   useEffect(() => {
-    const ad = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
-    if(ad && Object.keys(ad).length > 0){
-      const [selectedMainCatId, selectedSubCateIdCount] = [ad?.mainCatId, ad?.SubCateIds?.length]
+    const currentCategory = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
+    if(currentCategory && Object.keys(currentCategory).length > 0){
+      const [selectedMainCatId, selectedSubCateIdCount] = [currentCategory?.mainCatId, currentCategory?.SubCateIds?.length]
       const [value, count, name] = selectedProductType(productCategoryData, mainCategoryId);
-      console.log("value, count, name, ad --->", value, count, name, ad?.subCateIds?.length)
+      console.log("value, count, name, ad --->", value, count, name, currentCategory?.subCateIds?.length)
       console.log("cool idx 00 1 3 -->", group)
-      if(count === ad?.subCateIds?.length){
+      if(count === currentCategory?.subCateIds?.length){
         console.log("value, count, name, ad active if 1 --> ", mainCatNames, name)
         setMainCatNames([...mainCatNames, name])
         // work to do filter siubIds which are not in the current cat from activeFilter
-        const onlyOtherSubCateIds = activeFilter?.filter((af: any) => !ad?.subCateIds?.includes(af))
+        // const onlyOtherSubCateIds = activeFilter?.filter((af: any) => !ad?.subCateIds?.includes(af))
+        // console.log("**ly other subcateids -->", onlyOtherSubCateIds)
         setActiveFilter(Array.from(new Set([...mainCatNames, name])).filter(Boolean))
         // setActiveFilter(deleteMultipleElements(Array.from(new Set([...mainCatNames, name, ...activeFilter])), [ad?.subCateIds]))//[...mainCatNames, name])
         // return;
       }else{
-        if(mainCategoryId === ad?.mainCatId){
+        if(mainCategoryId === currentCategory?.mainCatId){
           if(mainCatNames?.includes(name)){
             console.log("**SD -->before", mainCatNames, activeFilter)
             const findIndex = mainCatNames?.findIndex((item: any) => item === name)
@@ -135,9 +135,8 @@ const HealthNeedFilter = ({
             if(findCommonIndex>=0){
               common?.splice(findCommonIndex, 1)
             }
-            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex)
-            if(activeFilter?.find((a: any) => mainCatNames?.includes(a)))
-            setActiveFilter(Array.from(new Set([...common.filter((a: any)  => !Array.isArray(a)), ...ad?.subCateIds])))
+            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex, currentCategory?.subCateIds)
+            setActiveFilter(Array.from(new Set([...common.filter((a: any)  => !Array.isArray(a)), ...currentCategory?.subCateIds])))
           }
         }else{
           setActiveFilter(Array.from(new Set([...activeFilter])))
@@ -146,7 +145,7 @@ const HealthNeedFilter = ({
     }
   }, [alternateFlag])
 
-
+  console.log("** active filter -->", activeFilter)
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
@@ -337,16 +336,16 @@ const HealthNeedFilter = ({
                             >
                               <div
                                 className='flex lg:mb-2 w-full lg:mt-2'
-                                key={`${leftfiltermaindata?.contentLink?.id}_${index}`}
+                                key={leftfiltermaindata?.contentLink?.id}
                               >
-                                {leftfiltermaindata?.categoryImage?.expandedValue ? 
-                                <ImageComponent
-                                  src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
-                                  alt={leftfiltermaindata?.mainCategory?.value[0].name}
-                                  id={leftfiltermaindata?.mainCategory?.value[0].name + index}
-                                  height={24}
-                                  width={24} />
-                                  : null} 
+                                <ImageComponent 
+                                      src={activeFiltersData?.activeFiltersImage
+                                      ?.expandedValue?.url}
+                                      height={24}
+                                      width={24}
+                                      alt={activeFiltersData?.activeFiltersText?.value}
+                                      id={'hn_image_' + index}
+                                    />
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -483,7 +482,6 @@ const HealthNeedFilter = ({
             recommendedProduct={recommendedProduct}
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
-            filterClicked={filterClicked}
           />
         </div>
       </div>
