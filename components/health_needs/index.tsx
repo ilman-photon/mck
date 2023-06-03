@@ -23,7 +23,8 @@ const HealthNeedsComponent = () => {
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
   const [recommendedProduct , setRecommendedProduct] = useState<any>()
   const [filterClicked , setFilterClicked] = useState(false)
-
+  const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
+    useState();
 
   function FetchProductFilter() {
     return axios.get(
@@ -302,6 +303,7 @@ const HealthNeedsComponent = () => {
         healthNeedsCategoriesList.length > 0
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
+      setCustomerBackgroundColorCode(healthNeedsCategoriesList[0].backgroundColorCode?.value);
       setHealthNeedData(healthNeedsCategoriesListData);
       setRecommendedProduct(healthNeedsCategories?.data[0].contentArea)
 
@@ -470,6 +472,7 @@ const HealthNeedsComponent = () => {
           productCategoryData={
             productCategoryData?.length && productCategoryData[0]
           }
+          customerBackgroundColorCode={customerBackgroundColorCode}
         />
         <HealthNeedCategoryMobile
           healthNeedData={healthNeedData}
@@ -480,6 +483,7 @@ const HealthNeedsComponent = () => {
           productCategoryData={
             productCategoryData?.length && productCategoryData[0]
           }
+          customerBackgroundColorCode={customerBackgroundColorCode}
         />
 
         <HealthNeedFilter
