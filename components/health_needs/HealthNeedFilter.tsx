@@ -25,7 +25,8 @@ const HealthNeedFilter = ({
   fetchProductList,
   recommendedProduct,
   sectionData,
-  selectedRecommendedProduct
+  selectedRecommendedProduct,
+  filterClicked
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -336,16 +337,16 @@ const HealthNeedFilter = ({
                             >
                               <div
                                 className='flex lg:mb-2 w-full lg:mt-2'
-                                key={leftfiltermaindata?.contentLink?.id}
+                                key={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                               >
-                                <ImageComponent 
-                                      src={activeFiltersData?.activeFiltersImage
-                                      ?.expandedValue?.url}
-                                      height={24}
-                                      width={24}
-                                      alt={activeFiltersData?.activeFiltersText?.value}
-                                      id={'hn_image_' + index}
-                                    />
+                                {leftfiltermaindata?.categoryImage?.expandedValue ? 
+                                <ImageComponent
+                                  src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
+                                  alt={leftfiltermaindata?.mainCategory?.value[0].name}
+                                  id={leftfiltermaindata?.mainCategory?.value[0].name + index}
+                                  height={24}
+                                  width={24} />
+                                  : null} 
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -482,6 +483,7 @@ const HealthNeedFilter = ({
             recommendedProduct={recommendedProduct}
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
+            filterClicked={filterClicked}
           />
         </div>
       </div>

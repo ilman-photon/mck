@@ -70,6 +70,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   });
 
   const firstResponse = response?.[0];
+  const carouselContent =
+    firstResponse?.title?.value ||
+    firstResponse?.description?.value ||
+    firstResponse?.buttonText?.value;
 
   return (
     <div className="flex items-center justify-center">
@@ -101,7 +105,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       id={item?.title?.value + "_" + current}
                       tabIndex={0}
                     />
-                    {item?.title?.value && (
+                    {carouselContent && (
                       <div
                         className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                         style={{
@@ -164,7 +168,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         id={firstResponse.title?.value + "_" + current}
                         tabIndex={0}
                       />
-                      {firstResponse.title?.value && (
+                      {carouselContent && (
                         <div
                           className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                           style={{

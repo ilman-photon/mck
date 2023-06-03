@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { InfoWindow, GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
+import { mapConfigOptions } from "@/utils/MapConfig";
 
 function PdpLocation(props: any) {
 
@@ -110,6 +111,7 @@ function PdpLocation(props: any) {
                     mapContainerClassName="map-container box-border border border-solid border-mckblue"
                     mapContainerStyle={style}
                     zoom={10}
+                    options={mapConfigOptions}
                     center={{
                         lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                         lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,
