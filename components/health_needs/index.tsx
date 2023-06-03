@@ -22,7 +22,8 @@ const HealthNeedsComponent = () => {
   const [isLoading, setIsLoading] = useState(true); //
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
   const [recommendedProduct , setRecommendedProduct] = useState<any>()
-  const [data , setData] = useState(false)
+  const [filterClicked , setFilterClicked] = useState(false)
+
 
   function FetchProductFilter() {
     return axios.get(
@@ -95,7 +96,8 @@ const HealthNeedsComponent = () => {
     );
     promise
       .then((res) => {
-        console.log("FetchProductList----- ", res);
+        console.log("FetchProductList----- ", res);       
+        setFilterClicked(true)
         let tempObj: any = {};
         if (filter.includes("Health%20Needs")) {
           setHealthData(!healthData);
@@ -493,6 +495,7 @@ const HealthNeedsComponent = () => {
           // recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
+          filterClicked={filterClicked}
         />
       </div>
     </>

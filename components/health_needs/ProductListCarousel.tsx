@@ -11,6 +11,7 @@ const ProductComponent = ({
   selectedProduct,
   sectionData,
   selectedRecommendedProduct,
+  filterClicked
 }: any) => {
   const handleProduct = (item: any, index: number) => {
     const filteredSection = sectionData.filter((section: any) =>
@@ -44,42 +45,34 @@ const ProductComponent = ({
               id={`hn_label_00_${index}`}
               aria-label={product?.item?.name}
             >
-              {product?.item?.name}
+              {product?.data?.results?.length > 0 ? product?.item?.name : filterClicked ? product?.item?.name :null }  
             </h1>
 
-            {product?.data?.results?.length > 0 ? (
-              <div className="lg:pt-6 lg:px-6 lg:pb-12 pb-6">
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={4}
-                  navigation
-                  slidesPerView={5}
-                  slidesPerGroup={5}
-                  pagination={{ clickable: true, type: "fraction" }}
-                  className="lg:h-480 h-350"
-                >
-                  {product?.data?.results?.map((item: any, idxs: number) => {
-                    return (
-                      <SwiperSlide
-                        key={item?.contentLink?.id}
-                        className="swiper-slide-custom"
-                      >
-                        <ProductCard
-                          cardData={item}
-                          product={product}
-                          indexs={idxs}
-                          mainIndex={index}
-                        />
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </div>
-            ) : (
-              <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
-                There are no products
-              </div>
-            )}
+          {product?.data?.results?.length > 0 ? 
+            <div className="lg:pt-6 lg:pl-6 lg:pb-12 pb-6">
+              <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={4}
+                navigation
+                slidesPerView={5}
+                slidesPerGroup={5}
+                pagination={{ clickable: true, type: "fraction" }}
+                className="lg:h-480 h-350"
+
+              >
+                {product?.data?.results?.map((item: any, idxs: number) => {
+                  return (
+                    <SwiperSlide
+                      key={item?.contentLink?.id}
+                      className="swiper-slide-custom"
+                    >
+                      <ProductCard cardData={item} product={product} indexs={idxs} mainIndex={index} />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </div>
+            : <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">{filterClicked ? "There are no products" : null }</div>} 
           </section>
         </div>
       ))}
