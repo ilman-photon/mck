@@ -41,7 +41,7 @@ const ProductComponent = ({
           <section className="relative">
             <h1
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
-              tabIndex={0}
+              
               id={`hn_label_00_${index}`}
               aria-label={product?.item?.name}
             >

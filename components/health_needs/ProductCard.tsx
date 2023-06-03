@@ -27,14 +27,14 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
         </div>
         <div
           className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px]"
-          tabIndex={0}
+          
           id={`hn_label_02_${indexs + 1}_${mainIndex + 1}`}
         >
           {cardData?.productType?.value[0]?.name}
         </div>
         <div
           className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate"
-          tabIndex={0}
+          
           id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
         >
           {cardData?.name}
@@ -42,7 +42,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
       </div>
       <div
         className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3"
-        tabIndex={0}
+        
         id={`hn_label_04_${indexs + 1}_${mainIndex + 1}`}
         dangerouslySetInnerHTML={{
           __html: cardData?.highlightDescription?.value,

@@ -72,7 +72,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   src={item?.data?.productCategoryImage?.value?.url}
                   alt={`category_${index}`}
                   id={item?.data?.productCategoryImage?.value?.url}
-                  tabIndex={0}
+                  
                 />
               </div>
               <div
@@ -86,7 +86,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 </Link>
               </div>
               <div
-                tabIndex={0}
+                
                 className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
                 dangerouslySetInnerHTML={{
                   __html: item?.data?.productCategoryDescription?.value,
