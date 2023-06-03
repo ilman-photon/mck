@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
-import { customAdd, deleteMultipleElements, handleCateFilter, selectedProductType } from '../global/CommonUtil';
+import { customAdd, deleteMultipleElements, selectedProductType } from '../global/CommonUtil';
 
 interface ISubCategory {
   id: number;
