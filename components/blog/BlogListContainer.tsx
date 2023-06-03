@@ -32,22 +32,28 @@ const BlogListContainer = () => {
                 {response?.data.results?.map((item: any, index: any) => (
                     <React.Fragment key={item?.contentLink?.id}>
                         {index != 0 &&
-                            <LinkComponent
-                                href={{
-                                    pathname: "/blog_details",
-                                    query: { id: item.routeSegment },
-                                }}
-                                className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
+                            <div
+                                className='articletitle-link max-h-620 w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                             >
                                 <article className='shadow-md rounded-lg lg:mb-12 mb-6' >
                                     <figure>
-                                        <ImageComponent src={item.image.value.url} className='w-full' alt={item.image.value.url} id={item.image.value.id} />
+                                    <div className="h-314 flex">
+                                        <ImageComponent src={item.image.value.url} className='max-h-314 w-full' alt={item.image.value.url} id={item.image.value.id} />
+                                    </div>
                                     </figure>
-                                    <figcaption>
-                                        <div className='content lg:p-6 p-4'>
+                                    <figcaption className="h-260">
+                                        <div className='content lg:p-6 p-4 lg:pt-4'>
                                             <p  className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-32 text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
                                             <div className='pb-3 pt-3'>
-                                                <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                                <LinkComponent
+                                                    href={{
+                                                        pathname: "/blog_details",
+                                                        query: { id: item.routeSegment },
+                                                    }}
+                                                >
+                                                    <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                                </LinkComponent>
+
                                                 <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                                 {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                             </div>
@@ -63,7 +69,8 @@ const BlogListContainer = () => {
                                         </div>
                                     </figcaption>
                                 </article>
-                            </LinkComponent>
+                            </div>
+
                         }
                     </React.Fragment >
                 ))}

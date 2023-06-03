@@ -26,8 +26,6 @@ function HealthCareProfessionalComponent() {
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [nextBtn, setNextBtn] = useState<Element>();
-  const [prevBtn, setPrevBtn] = useState<Element>();
   const [isMobile, setIsMobile] = useState(false);
 
   const handleTabClick = (idx: any, tabTitle: string) => {
@@ -99,40 +97,6 @@ function HealthCareProfessionalComponent() {
       setCarouselRelated(carouselRelated);
     }
   }, [response]);
-  const handleNext = () => {
-    setReviewCount(() => {
-      if (reviewCount < Math.ceil(customers?.length / 3) - 1) {
-        return reviewCount + 1;
-      } else {
-        return Math.ceil(customers?.length / 3);
-      }
-    });
-
-    nextBtn?.removeEventListener("click", handleNext, true);
-    prevBtn?.removeEventListener("click", handlePrev, true);
-  };
-  const handlePrev = () => {
-    setReviewCount(() => {
-      if (reviewCount > 1) {
-        return reviewCount - 1;
-      } else {
-        return 1;
-      }
-    });
-
-    nextBtn?.removeEventListener("click", handleNext, true);
-    prevBtn?.removeEventListener("click", handlePrev, true);
-  };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const nextBtn_ = document.getElementsByClassName("swiper-button-next")[0];
-      const prevBtn_ = document.getElementsByClassName("swiper-button-prev")[0];
-      if (nextBtn_ && prevBtn_ && !nextBtn && !prevBtn) {
-        setNextBtn(nextBtn_);
-        setPrevBtn(prevBtn_);
-      }
-    }
-  }, [response]);
 
   useEffect(() => {
     document.documentElement.lang = "en";
@@ -157,10 +121,6 @@ function HealthCareProfessionalComponent() {
         return arrEle == valueType;
       });
     });
-  }
-  if (nextBtn && prevBtn) {
-    nextBtn.addEventListener("click", handleNext, true);
-    prevBtn.addEventListener("click", handlePrev, true);
   }
 
   useEffect(() => {
@@ -230,6 +190,9 @@ function HealthCareProfessionalComponent() {
                         slidesPerView={isMobile ? "auto" : 3}
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
+                        onSlideChange={(swiper) => {
+                          setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+                        }}
                       >
                         {response &&
                           customers &&

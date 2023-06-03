@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
-import { deleteMultipleElements } from '../global/CommonUtil';
+import { customAdd, deleteMultipleElements, handleCateFilter, selectedProductType } from '../global/CommonUtil';
 
 interface ISubCategory {
   id: number;
@@ -32,6 +32,9 @@ const HealthNeedFilter = ({
   const [isFilterShow, setIsFilterShow] = useState(true);
   const [mainCategoryId, setMainCategoryId] = useState('')
   const [alternateFlag, setAlternateFlag] = useState(false)
+  const [group, setGroup] = useState<any>()
+  const [mainCatNames, setMainCatNames] = useState<any>();
+
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -62,11 +65,12 @@ const HealthNeedFilter = ({
     categoryId: any,
     subCategoryId: any
   ) => {
-    setMainCategoryId(categoryId)
+    setMainCategoryId(categoryId);
     if (e.target.checked) {
       if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
         selectedFilterItems[categoryId]['items'].push(filter);
       }
+      setGroup(customAdd(categoryId, filter))
 
       setLoading(true);
       setActiveFilter([...activeFilter, filter]);
@@ -74,6 +78,12 @@ const HealthNeedFilter = ({
     } else {
       const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
       selectedFilterItems[categoryId]['items'].splice(index, 1);
+      const subIds = group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds //?.splice(index, 1)
+      const idx = subIds?.indexOf(filter);
+      const a = subIds?.splice(idx, 1);
+      group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds
+      console.log("cool idx 00 1", "idx -->", idx, "a -->", a)
+      setGroup(group)
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
@@ -95,10 +105,60 @@ const HealthNeedFilter = ({
       }
     }
   }, [activeFilter])
+  // useEffect(()=>{
+  //   // const activeFilter = [...activeFilter]
+  //   const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+  //   const subCategoryValues = selectedProductType?.subCategory?.value ?? []
+  //   const subCategoryCount = subCategoryValues?.length ?? ""
+  //   const selectedtItems =  selectedFilterItems[mainCategoryId]?.items ?? "";
+  //   console.log("updated 2 sub  --->", subCategoryValues, activeFilter, "a --->", selectedtItems, 'subcategory count --->', subCategoryCount )  
+  //   let restoreFilters;
+  //   let mainCateStore = [];
+    // const allSelectedCheck = subCategoryValues?.every((val: any)=> selectedtItems.includes(val.name))
+  //   // if(selectedtItems?.length === subCategoryCount){
+  //   if(allSelectedCheck){
+  //     restoreFilters = activeFilter;
+  //     const updated = deleteMultipleElements(activeFilter, selectedtItems)
+  //     console.log("updated 1  --restore->", restoreFilters, "updated -->", updated, "acFilter_ -->", activeFilter, "a-->", selectedtItems) 
+  //     if(!(activeFilter?.includes(selectedProductType?.name))){
+  //       mainCateStore.push(selectedProductType?.name)
+  //       setActiveFilter([selectedProductType?.name, ...updated])
+  //     } 
+  //   }
+  //   else if(selectedtItems?.length !== subCategoryCount){
+  //     const updated = deleteMultipleElements(activeFilter, selectedtItems)
+  //     console.log("updated 1  --->", updated, activeFilter, selectedtItems ) 
+  //       setActiveFilter(selectedtItems)
+  //   }
+  // }, [alternateFlag]);
+  useEffect(() => {
+    const ad = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
+    if(ad && Object.keys(ad).length > 0){
+      const [selectedMainCatId, selectedSubCateIdCount] = [ad?.mainCatId, ad?.SubCateIds?.length]
+      const [value, count, name] = selectedProductType(productCategoryData, mainCategoryId);
+      console.log("value, count, name, ad --->", value, count, name, ad?.subCateIds?.length)
+      console.log("cool idx 00 1 3 -->", group)
+      if(count === ad?.subCateIds?.length){
+        console.log("value, count, name, ad active if --> ", selectedSubCateIdCount, count, selectedMainCatId, activeFilter)
+        setActiveFilter([name])
+        setMainCatNames([...name])
+      }else{
+        console.log("value, count, name, ad active elsse --> ", ad?.subCateIds?.length, count, activeFilter)
+        if(mainCatNames?.length>0){
+          setActiveFilter([...mainCatNames, ad?.subCateIds])
+        }
+        setActiveFilter([...ad?.subCateIds])
+      }
+    }
+  }, [alternateFlag])
+  // console.log("value, count, name, ad active filli --> ", activeFilter)
+
 
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
+    setMainCategoryId(categoryId);
+    setAlternateFlag(!alternateFlag);
     setLoading(true);
     if (e.target.checked) {
       if (selectedViewAllCateory.indexOf(categoryId) === -1) {
@@ -195,7 +255,7 @@ const HealthNeedFilter = ({
             tabIndex={0}
             id='hn_label_003_2'
           >
-            {activeFilter.length > 0 && activeFilter?.map((item: any, index: number) => {
+            {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
                   className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
@@ -214,7 +274,7 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
-            {activeFilter.length > 0 &&
+            {activeFilter?.length > 0 &&
             <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
