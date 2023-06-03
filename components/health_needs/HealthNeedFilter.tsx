@@ -33,7 +33,7 @@ const HealthNeedFilter = ({
   const [mainCategoryId, setMainCategoryId] = useState('')
   const [alternateFlag, setAlternateFlag] = useState(false)
   const [group, setGroup] = useState<any>()
-  const [mainCatNames, setMainCatNames] = useState<any>();
+  const [mainCatNames, setMainCatNames] = useState<any>([]);
 
   const handleClearAll = () => {
     setActiveFilter([]);
@@ -105,32 +105,7 @@ const HealthNeedFilter = ({
       }
     }
   }, [activeFilter])
-  // useEffect(()=>{
-  //   // const activeFilter = [...activeFilter]
-  //   const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
-  //   const subCategoryValues = selectedProductType?.subCategory?.value ?? []
-  //   const subCategoryCount = subCategoryValues?.length ?? ""
-  //   const selectedtItems =  selectedFilterItems[mainCategoryId]?.items ?? "";
-  //   console.log("updated 2 sub  --->", subCategoryValues, activeFilter, "a --->", selectedtItems, 'subcategory count --->', subCategoryCount )  
-  //   let restoreFilters;
-  //   let mainCateStore = [];
-    // const allSelectedCheck = subCategoryValues?.every((val: any)=> selectedtItems.includes(val.name))
-  //   // if(selectedtItems?.length === subCategoryCount){
-  //   if(allSelectedCheck){
-  //     restoreFilters = activeFilter;
-  //     const updated = deleteMultipleElements(activeFilter, selectedtItems)
-  //     console.log("updated 1  --restore->", restoreFilters, "updated -->", updated, "acFilter_ -->", activeFilter, "a-->", selectedtItems) 
-  //     if(!(activeFilter?.includes(selectedProductType?.name))){
-  //       mainCateStore.push(selectedProductType?.name)
-  //       setActiveFilter([selectedProductType?.name, ...updated])
-  //     } 
-  //   }
-  //   else if(selectedtItems?.length !== subCategoryCount){
-  //     const updated = deleteMultipleElements(activeFilter, selectedtItems)
-  //     console.log("updated 1  --->", updated, activeFilter, selectedtItems ) 
-  //       setActiveFilter(selectedtItems)
-  //   }
-  // }, [alternateFlag]);
+  
   useEffect(() => {
     const ad = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
     if(ad && Object.keys(ad).length > 0){
@@ -139,19 +114,36 @@ const HealthNeedFilter = ({
       console.log("value, count, name, ad --->", value, count, name, ad?.subCateIds?.length)
       console.log("cool idx 00 1 3 -->", group)
       if(count === ad?.subCateIds?.length){
-        console.log("value, count, name, ad active if --> ", selectedSubCateIdCount, count, selectedMainCatId, activeFilter)
-        setActiveFilter([name])
-        setMainCatNames([...name])
+        console.log("value, count, name, ad active if 1 --> ", mainCatNames, name)
+        setMainCatNames([...mainCatNames, name])
+        // work to do filter siubIds which are not in the current cat from activeFilter
+        const onlyOtherSubCateIds = activeFilter?.filter((af: any) => !ad?.subCateIds?.includes(af))
+        setActiveFilter(Array.from(new Set([...mainCatNames, name])).filter(Boolean))
+        // setActiveFilter(deleteMultipleElements(Array.from(new Set([...mainCatNames, name, ...activeFilter])), [ad?.subCateIds]))//[...mainCatNames, name])
+        // return;
       }else{
-        console.log("value, count, name, ad active elsse --> ", ad?.subCateIds?.length, count, activeFilter)
-        if(mainCatNames?.length>0){
-          setActiveFilter([...mainCatNames, ad?.subCateIds])
+        if(mainCategoryId === ad?.mainCatId){
+          if(mainCatNames?.includes(name)){
+            console.log("**SD -->before", mainCatNames, activeFilter)
+            const findIndex = mainCatNames?.findIndex((item: any) => item === name)
+            const findMainCatNameIndex = activeFilter?.flat().findIndex((item: any) => item === name);
+            mainCatNames.splice(findIndex, 1);
+            activeFilter.splice(findMainCatNameIndex, 1);
+            const common = Array.from(new Set([...mainCatNames, ...activeFilter]))
+            const findCommonIndex = common?.flat().findIndex((item: any) => item === name);
+            if(findCommonIndex>=0){
+              common?.splice(findCommonIndex, 1)
+            }
+            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex)
+            if(activeFilter?.find((a: any) => mainCatNames?.includes(a)))
+            setActiveFilter(Array.from(new Set([...common.filter((a: any)  => !Array.isArray(a)), ...ad?.subCateIds])))
+          }
+        }else{
+          setActiveFilter(Array.from(new Set([...activeFilter])))
         }
-        setActiveFilter([...ad?.subCateIds])
       }
     }
   }, [alternateFlag])
-  // console.log("value, count, name, ad active filli --> ", activeFilter)
 
 
   const handleViewAllChange = (e: any, categoryId: any) => {

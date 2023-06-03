@@ -29,7 +29,7 @@ export const handlecategoryColorCode = (id: number, data: any) => {
     }
 }
 
-export function deleteMultipleElements(arr: any[], elementsToDelete: any[] ) {
+export function deleteMultipleElements(arr: any[], elementsToDelete: any[]) {
     arr = arr.reduce((acc, value, index) =>
         elementsToDelete?.indexOf(value) == -1 ? [...acc ,value] : acc, [])
     return arr;
@@ -78,16 +78,12 @@ const coolStore: any[] = []
 // }
 
 export function customAdd(mainCatId: any, filter: any){
-    console.log("cool -->", coolStore)
     if((coolStore?.findIndex((a:any) => a.mainCatId === mainCatId) === -1)){
         coolStore.push({mainCatId, subCateIds: [filter]})
-        console.log("coolstore 0 --> ", coolStore)
         return coolStore;
     }else{
         const idx = coolStore?.map((c: any) => c.mainCatId).indexOf(mainCatId);
-        // return [...coolStore[idx]?.subCateIds, filter]
         coolStore[idx].subCateIds = [...coolStore[idx]?.subCateIds, filter]
-        // const s = coolStore && coolStore[idx]?.subCateIds ? coolStore[idx].subCateIds = filter : 'q'
         return coolStore
     }
 }
