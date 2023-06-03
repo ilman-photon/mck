@@ -22,12 +22,12 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
 
   return (
-    <div className="lg:pb-0 lg:p-6 lg:pt-0 pt-0 p-4">
+    <div className="lg:p-6 px-0">
       <h1
-        className="text-gtl-med text-mckblue text-32 font-medium lg:pb-6"
+        className="text-gtl-med text-mckblue text-32 font-medium pb-6"
         dangerouslySetInnerHTML={{ __html: title }}
       ></h1>
-      <div className="lg:pt-6 lg:pl-6 lg:pb-6">
+      <div className="lg:pt-6 lg:px-2 lg:pb-6">
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -44,7 +44,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 className="swiper-slide-custom"
               >
                 <div
-                  className="swiper-list-item w-[325px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
+                  className="swiper-list-item mb-[60px] w-[325px] lg:w-[438px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
                 >
                   <LinkComponent
                     href={{
@@ -54,12 +54,12 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   >
                     <article onClick={(e: any) => OnRelatedArticleClick(item.contentLink.url)} >
                       <figure>
-                        <div className="h-60 flex">
+                        <div className="h-240 lg:h-276 flex">
                         <ImageComponent
                           src={item.image.value.url}
                           alt={item.image.value.id}
                           id={item.image.value.id}
-                          className="w-full max-h-[240px]"
+                          className="w-full max-h-[240px] lg:max-h-[276px]"
                         />
                         </div>
                       </figure>
