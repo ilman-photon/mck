@@ -44,17 +44,17 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     };
   }, [current]);
 
-  function handleCarouselImage(index: number) {
+  const handleCarouselImage = (index: number) => {
     setCurrent(index);
-  }
+  };
 
-  function infiniteScroll() {
+  const infiniteScroll = () => {
     if (current >= response?.length - 1) {
       setCurrent(0);
     } else {
       setCurrent(current + 1);
     }
-  }
+  };
 
   const handleCTABtn = (url: string) => {
     router.push({
@@ -68,6 +68,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     leave: { opacity: 0, transform: "translateX(-100%)" },
     config: { duration: 1000 },
   });
+
+  const firstResponse = response?.[0];
+
   return (
     <div className="flex items-center justify-center">
       <div
@@ -79,7 +82,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         <div className="bg-gradient absolute"></div>
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           {!loading &&
-            (response.length > 1 ? (
+            (response?.length > 1 ? (
               transitions((styles: any, item: any) => (
                 <animated.div
                   className={`w-full mx-auto ${item ? "block" : "hidden"}`}
@@ -143,87 +146,85 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 </animated.div>
               ))
             ) : (
-              <div className="mx-auto block" key={response[0]?.contentLink?.id}>
+              <div
+                className="mx-auto block"
+                key={firstResponse?.contentLink?.id}
+              >
                 <div
                   className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                   data-te-carousel-active
                   data-te-carousel-item
                 >
-                  <img
-                    src={response[0]?.image?.value.url}
-                    className="block w-full"
-                    alt="Carousel Image"
-                    id={response[0]?.title?.value + "_" + current}
-                    tabIndex={0}
-                  />
-                  {response[0]?.title?.value && (
-                    <div
-                      className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                      style={{
-                        backgroundColor: response[0]?.backgroundColor?.value,
-                      }}
-                    >
-                      <h2
-                        className="text-mcklightyellow lg:mb-3"
-                        id={response[0]?.title?.value}
+                  {firstResponse && (
+                    <>
+                      <img
+                        src={firstResponse.image?.value.url}
+                        className="block w-full"
+                        alt="Carousel Image"
+                        id={firstResponse.title?.value + "_" + current}
                         tabIndex={0}
-                      >
-                        {response[0]?.title?.value}
-                      </h2>
-                      <p
-                        className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                        dangerouslySetInnerHTML={{
-                          __html: response[0]?.description?.value,
-                        }}
-                        tabIndex={0}
-                        id={response[0]?.description?.value}
-                      ></p>
-                      {response[0]?.buttonText?.value && (
+                      />
+                      {firstResponse.title?.value && (
                         <div
-                          id={response[0]?.buttonText?.value + current}
-                          className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                          className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                           style={{
-                            backgroundColor: response[0]?.ctaButtonColor?.value,
+                            backgroundColor:
+                              firstResponse.backgroundColor?.value,
                           }}
-                          onClick={() =>
-                            handleCTABtn(response[0]?.buttonUrl?.value)
-                          }
-                          tabIndex={0}
-                          role="button"
                         >
-                          {response[0]?.buttonText?.value}
+                          <h2
+                            className="text-mcklightyellow lg:mb-3"
+                            id={firstResponse.title?.value}
+                            tabIndex={0}
+                          >
+                            {firstResponse.title?.value}
+                          </h2>
+                          <p
+                            className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                            dangerouslySetInnerHTML={{
+                              __html: firstResponse.description?.value,
+                            }}
+                            tabIndex={0}
+                            id={firstResponse.description?.value}
+                          ></p>
+                          {firstResponse.buttonText?.value && (
+                            <div
+                              id={firstResponse.contentLink.id}
+                              className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                              style={{
+                                backgroundColor:
+                                  firstResponse.ctaButtonColor?.value,
+                              }}
+                              onClick={() =>
+                                handleCTABtn(firstResponse.buttonUrl?.value)
+                              }
+                              tabIndex={0}
+                              role="button"
+                            >
+                              {firstResponse.buttonText?.value}
+                            </div>
+                          )}
                         </div>
                       )}
-                    </div>
+                    </>
                   )}
                 </div>
               </div>
             ))}
         </div>
-        <div
-          className="absolute right-0 bottom-0 left-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
-          data-te-carousel-indicators
-        >
-          {!loading &&
-            response &&
-            response != 1 &&
-            response.length > 1 &&
-            response.map((item: any, index: number) => (
-              <button
-                key={item?.contentLink?.id + "_" + index}
-                type="button"
+        {!loading && response?.length > 1 && (
+          <ul className="list-unstyled indicators">
+            {response?.map((item: any, index: number) => (
+              <li
+                className={`indicator ${index === current ? "active" : ""}`}
+                key={index}
                 onClick={() => handleCarouselImage(index)}
-                data-te-target="#carouselExampleCaptions"
-                data-te-slide-to="0"
-                data-te-carousel-active
-                className={`mx-[3px] box-content lg:w-4 xl:w-4 lg:h-4 xl:h-4 w-2 h-2 flex-initial cursor-pointer border-0 border-transparent rounded-full  bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none ${
-                  index === current ? "bg-mckblue" : "bg-mckthingrey"
-                }`}
-                aria-current={index === current ? "true" : undefined}
-                aria-label={`Slide ${index + 1}`}
-              ></button>
+                tabIndex={0}
+                role="button"
+              ></li>
             ))}
-        </div>
+          </ul>
+        )}
       </div>
     </div>
   );
