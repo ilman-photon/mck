@@ -32,6 +32,7 @@ function AllProductCategoryPage({
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
+  const [allProductCategoryList, setAllProductCategoryList] = useState<any>([])
 
   const [productCategory, setProductCategory] = useState<any>();
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
@@ -118,6 +119,7 @@ function AllProductCategoryPage({
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
+      console.log("activeFiltersData list -->", activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
       const productCategoryData = await axios(
@@ -128,7 +130,8 @@ function AllProductCategoryPage({
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
       setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
-
+      console.log("product catedata list --> ", productCategoryDataList)
+      setAllProductCategoryList(productCategoryDataList)
       // Four column block area
       const productLandingPage = await axios(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
@@ -454,6 +457,7 @@ function AllProductCategoryPage({
           activeFilter={activeFilter}
           setActiveFilter={setActiveFilter}
           productCategoryData={productCategoryData}
+          allProductCategoryList={allProductCategoryList}
           selectedFilterItems={selectedFilterItems}
           selectedProduct={selectedProduct}
           setSelectedFilterItems={setSelectedFilterItems}

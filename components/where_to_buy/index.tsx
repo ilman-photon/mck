@@ -25,19 +25,19 @@ function WhereComponent() {
   /**
    * @state creds key
    */
-  const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
-  const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
+  const mapKey = useWhereToBuyStore((state:any) => state.mapsApiKey)
+  const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
 
   /**
    * @state initial zoom level of Map onRender
    */
-  const initialZoomLevelMap = useWhereToBuyStore((state) => state.zoomLevel)
+  const initialZoomLevelMap = useWhereToBuyStore((state: any) => state.zoomLevel)
 
   /**
    * @state USA Coords 
    */
-  const usaLon = useWhereToBuyStore(state => state.usaLon)
-  const usaLat = useWhereToBuyStore(state => state.usaLat)
+  const usaLon = useWhereToBuyStore((state: any) => state.usaLon)
+  const usaLat = useWhereToBuyStore((state: any) => state.usaLat)
   
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,

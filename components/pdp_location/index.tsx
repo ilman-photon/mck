@@ -11,8 +11,8 @@ function PdpLocation(props: any) {
     const [longitude, setLongitude] = useState(-111.7256936)
     const [selectedStore, setSelectedStore] = useState(-1)
     let textInput: any
-    const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
-    const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
+    const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey)
+    const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: mapKey
     });

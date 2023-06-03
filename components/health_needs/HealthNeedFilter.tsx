@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
+import { customAdd, deleteMultipleElements, selectedProductType } from '../global/CommonUtil';
 
 interface ISubCategory {
   id: number;
@@ -30,6 +31,11 @@ const HealthNeedFilter = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isFilterShow, setIsFilterShow] = useState(true);
+  const [mainCategoryId, setMainCategoryId] = useState('')
+  const [alternateFlag, setAlternateFlag] = useState(false)
+  const [group, setGroup] = useState<any>()
+  const [mainCatNames, setMainCatNames] = useState<any>([]);
+
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -60,10 +66,12 @@ const HealthNeedFilter = ({
     categoryId: any,
     subCategoryId: any
   ) => {
+    setMainCategoryId(categoryId);
     if (e.target.checked) {
       if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
         selectedFilterItems[categoryId]['items'].push(filter);
       }
+      setGroup(customAdd(categoryId, filter))
 
       setLoading(true);
       setActiveFilter([...activeFilter, filter]);
@@ -71,6 +79,12 @@ const HealthNeedFilter = ({
     } else {
       const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
       selectedFilterItems[categoryId]['items'].splice(index, 1);
+      const subIds = group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds //?.splice(index, 1)
+      const idx = subIds?.indexOf(filter);
+      const a = subIds?.splice(idx, 1);
+      group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds
+      console.log("cool idx 00 1", "idx -->", idx, "a -->", a)
+      setGroup(group)
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
@@ -81,11 +95,63 @@ const HealthNeedFilter = ({
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
     setSelectedFilterItems(selectedFilterItems);
+    setAlternateFlag(!alternateFlag)
   };
+  useEffect(() => {
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const subCategoryCount = selectedProductType?.subCategory?.value?.length
+    if(selectedFilterItems[mainCategoryId]?.items.length === subCategoryCount){
+      if(selectedFilterItems[mainCategoryId]){
+        selectedFilterItems[mainCategoryId].isCategoryChecked = true;
+      }
+    }
+  }, [activeFilter])
+  
+  useEffect(() => {
+    const ad = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
+    if(ad && Object.keys(ad).length > 0){
+      const [selectedMainCatId, selectedSubCateIdCount] = [ad?.mainCatId, ad?.SubCateIds?.length]
+      const [value, count, name] = selectedProductType(productCategoryData, mainCategoryId);
+      console.log("value, count, name, ad --->", value, count, name, ad?.subCateIds?.length)
+      console.log("cool idx 00 1 3 -->", group)
+      if(count === ad?.subCateIds?.length){
+        console.log("value, count, name, ad active if 1 --> ", mainCatNames, name)
+        setMainCatNames([...mainCatNames, name])
+        // work to do filter siubIds which are not in the current cat from activeFilter
+        const onlyOtherSubCateIds = activeFilter?.filter((af: any) => !ad?.subCateIds?.includes(af))
+        setActiveFilter(Array.from(new Set([...mainCatNames, name])).filter(Boolean))
+        // setActiveFilter(deleteMultipleElements(Array.from(new Set([...mainCatNames, name, ...activeFilter])), [ad?.subCateIds]))//[...mainCatNames, name])
+        // return;
+      }else{
+        if(mainCategoryId === ad?.mainCatId){
+          if(mainCatNames?.includes(name)){
+            console.log("**SD -->before", mainCatNames, activeFilter)
+            const findIndex = mainCatNames?.findIndex((item: any) => item === name)
+            const findMainCatNameIndex = activeFilter?.flat().findIndex((item: any) => item === name);
+            mainCatNames.splice(findIndex, 1);
+            activeFilter.splice(findMainCatNameIndex, 1);
+            const common = Array.from(new Set([...mainCatNames, ...activeFilter]))
+            const findCommonIndex = common?.flat().findIndex((item: any) => item === name);
+            if(findCommonIndex>=0){
+              common?.splice(findCommonIndex, 1)
+            }
+            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex)
+            if(activeFilter?.find((a: any) => mainCatNames?.includes(a)))
+            setActiveFilter(Array.from(new Set([...common.filter((a: any)  => !Array.isArray(a)), ...ad?.subCateIds])))
+          }
+        }else{
+          setActiveFilter(Array.from(new Set([...activeFilter])))
+        }
+      }
+    }
+  }, [alternateFlag])
+
 
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
+    setMainCategoryId(categoryId);
+    setAlternateFlag(!alternateFlag);
     setLoading(true);
     if (e.target.checked) {
       if (selectedViewAllCateory.indexOf(categoryId) === -1) {
@@ -182,7 +248,7 @@ const HealthNeedFilter = ({
             tabIndex={0}
             id='hn_label_003_2'
           >
-            {activeFilter?.map((item: any, index: number) => {
+            {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
                   className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
@@ -201,7 +267,7 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
-            {activeFilter.length > 0 &&
+            {activeFilter?.length > 0 &&
             <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
