@@ -2108,12 +2108,13 @@ Mobile and iPad Navigation
   background-repeat: no-repeat;
 }
 .swiper-button-prev:after {
-  background-image: url('../public/images/product-carousel-left.svg') !important;
+  // background-image: url('../public/images/product-carousel-left.svg') !important;
+  transform: rotate(180deg);
 }
 .swiper-button-next.swiper-button-disabled, 
 .swiper-button-prev.swiper-button-disabled {
   pointer-events: inherit !important;
-  // opacity: inherit !important;
+  opacity: 0.65 !important;
 }
 
 .input-search {
