@@ -24,7 +24,8 @@ const HealthNeedFilter = ({
   fetchProductList,
   recommendedProduct,
   sectionData,
-  selectedRecommendedProduct
+  selectedRecommendedProduct,
+  filterClicked
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -416,6 +417,7 @@ const HealthNeedFilter = ({
             recommendedProduct={recommendedProduct}
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
+            filterClicked={filterClicked}
           />
         </div>
       </div>
