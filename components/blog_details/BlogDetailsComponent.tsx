@@ -20,7 +20,7 @@ const BlogDetailsComponent = () => {
     const [AppSetting, setAppSetting] = useState<any>();
     const [loading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
-         HandleAppSetting()
+        HandleAppSetting()
         if (router.query) {
             setblogID(id);
         }
@@ -133,12 +133,14 @@ const BlogDetailsComponent = () => {
                                 <div className="text-sofia-reg text-color text-lg leading-27" dangerouslySetInnerHTML={{ __html: response?.data[0]?.description.value }}></div>
                             </div>
                         </article>
-                        <CarouselComponent
-                            title={response?.data[0]?.relatedArticleHeading.value}
-                            relatedArticle={response?.data[0]?.relatedArticle.expandedValue}
-                            OnRelatedArticleClick={(e) => console.log(e)}
-                        />
-                        {/* <CommentComponent /> */}
+                        <div className="relative">
+                            <CarouselComponent
+                                title={response?.data[0]?.relatedArticleHeading.value}
+                                relatedArticle={response?.data[0]?.relatedArticle.expandedValue}
+                                OnRelatedArticleClick={(e) => console.log(e)}
+                            />
+                            {/* <CommentComponent /> */}
+                        </div>
                     </div>
                     <div className='lg:w-306 lg:ml-100 lg:col-span-1 col-start-1 col-end-7'>
                         <SocialMediaIconComponent />
@@ -146,8 +148,8 @@ const BlogDetailsComponent = () => {
                             <div className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27" id='blog-label-009'>Recent Blogs</div>
                             <ResentBlogListComponent />
                         </div>
-                        {AppSetting &&<RelatedProducts
-                           AppSetting={AppSetting}
+                        {AppSetting && <RelatedProducts
+                            AppSetting={AppSetting}
                             OnRelatedProductClick={(e) => handleProductClick(e)}
                             title={response?.data[0]?.relatedProductHeading.value}
                             BlogListingContent={response?.data[0]?.relatedProducts.expandedValue}

@@ -206,12 +206,26 @@ function ProductListComponent() {
     );
     const productCategoryDataList =
       productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-      setRecommendedProduct(productCategoryData?.data[0].contentArea);
+      // setRecommendedProduct(productCategoryData?.data[0].contentArea);
     // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
     //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
     setproductCategoryData(productCategoryDataList);
     createTempFilterArr(productCategoryDataList);
   };
+
+
+  const fetchRecommandedProductData = async () =>{
+    const tempName = productName?.replace(/ /g, "-")
+    const recommendedCategoryData = await axios(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
+    );
+    const response = recommendedCategoryData?.data[0]?.contentArea
+    setRecommendedProduct(response)
+  }
+  useEffect(()=>{
+    fetchRecommandedProductData()
+   
+  },[productName])
 
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
@@ -318,9 +332,10 @@ function ProductListComponent() {
       return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
         (item: any) => {
           if (
-            id?.recommendedProductCategory?.value &&
-            id.recommendedProductCategory.value[0].id ===
-              item.productCategoryType.value[0].id
+            id?.recommendedProductCategory?.value 
+            // &&
+            // id.recommendedProductCategory.value[0].id ===
+            //   item.productCategoryType.value[0].id
           ) {
             const productName = id.recommendedProductCategory.value[0].name;
             if (!selectedRecommendedProduct.includes(productName)) {

@@ -11,6 +11,7 @@ import {
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import Image from 'next/image';
 import { useWhereToBuyStore } from './Store/useWhereToBuyStore';
+import { mapConfigOptions } from "@/utils/MapConfig";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
@@ -24,19 +25,19 @@ function WhereComponent() {
   /**
    * @state creds key
    */
-  const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
-  const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
+  const mapKey = useWhereToBuyStore((state:any) => state.mapsApiKey)
+  const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
 
   /**
    * @state initial zoom level of Map onRender
    */
-  const initialZoomLevelMap = useWhereToBuyStore((state) => state.zoomLevel)
+  const initialZoomLevelMap = useWhereToBuyStore((state: any) => state.zoomLevel)
 
   /**
    * @state USA Coords 
    */
-  const usaLon = useWhereToBuyStore(state => state.usaLon)
-  const usaLat = useWhereToBuyStore(state => state.usaLat)
+  const usaLon = useWhereToBuyStore((state: any) => state.usaLon)
+  const usaLat = useWhereToBuyStore((state: any) => state.usaLat)
   
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
@@ -244,7 +245,7 @@ function WhereComponent() {
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
                           role="link"
-                          tabIndex={0}
+                          
                           id={`wb-label-08_0${index}`}
                           onClick={() => showOnline(value.StoreUrl)}
                         >
@@ -264,7 +265,7 @@ function WhereComponent() {
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"
-                          tabIndex={0}
+                          
                           role="link"
                           id={`wb-label-10_0${index}`}
                           onClick={() =>
@@ -290,6 +291,7 @@ function WhereComponent() {
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
+              options={mapConfigOptions}
               zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
                 lat:

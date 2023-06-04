@@ -129,7 +129,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               ? "mx-auto lg:text-left text-center"
               : "ml-0 text-left"
               } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
-              tabIndex={0}
+              
               id={sectionData?.title?.value}
             >
               {sectionData?.title?.value}
@@ -142,7 +142,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
-              tabIndex={0}
+              
               id={sectionData?.description?.value}
             ></div>
             {sectionData?.buttonText?.value && (
@@ -157,7 +157,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                     : sectionData?.buttonColorCode?.value
                     }`,
                 }}
-                tabIndex={0}
+                
                 id={sectionData?.buttonText?.value}
                 role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
@@ -188,7 +188,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             <img
               className="w-full lg:px-0"
               src={sectionData?.image?.value?.url}
-              tabIndex={0}
+              
               id={sectionData?.image?.value?.url}
               alt="learning image"
             />
@@ -199,7 +199,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               ? "mx-auto lg:text-left text-left"
               : "ml-0 text-left"
               } lg:mb-6 mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
-              tabIndex={0}
+              
               id={sectionData?.title?.value}
             >
               {sectionData?.title?.value}
@@ -212,7 +212,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               dangerouslySetInnerHTML={{
                 __html: sectionData?.description?.value,
               }}
-              tabIndex={0}
+              
               id={sectionData?.description?.value}
             ></div>
             {sectionData?.buttonText?.value && (
@@ -227,7 +227,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                     : sectionData?.buttonColorCode?.value
                     }`,
                 }}
-                tabIndex={0}
+                
                 id={sectionData?.buttonText?.value}
                 role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
@@ -244,7 +244,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
             src={sectionData?.backgroundImage?.expandedValue?.url}
             alt={sectionData?.backgroundImage?.expandedValue?.url}
             id="wft_img_004"
-            tabIndex={0}
+            
             className="w-full"
           />
           <div className="container mx-auto position-relative bg-transparent-left">
@@ -252,7 +252,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               <h2
                 className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
                 id="wft_label_005"
-                tabIndex={0}
+                
                 role="text"
               >
                 {sectionData?.name}
@@ -264,7 +264,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                     sectionData?.description?.value,
                 }}
                 id="wft_label_006"
-                tabIndex={0}
+                
               ></p>
               {sectionData?.buttonUrl?.value && (
                 <button
@@ -284,19 +284,19 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div> :
         <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6 lg:px-72">
-          <img src={sectionData?.backgroundImage?.expandedValue?.url} className="w-full" id="wft_img_009" tabIndex={0} alt="heal and thrive" />
+          <img src={sectionData?.backgroundImage?.expandedValue?.url} className="w-full" id="wft_img_009"  alt="heal and thrive" />
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0 lg:hidden">
             <h2
               className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
               id="wft_label_010"
-              tabIndex={0}
+              
             >
               {sectionData?.name}
             </h2>
             <p
               className="pb-6 text-sofia-reg lg:text-lg font-normal text-mcknormalgrey text-base"
               id="wft_label_011"
-              tabIndex={0}
+              
               dangerouslySetInnerHTML={{
                 __html:
                   sectionData?.description?.value,
@@ -314,7 +314,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                     : sectionData?.buttonColorCode?.value
                     }`,
                 }}
-                tabIndex={0}
+                
                 id={sectionData?.buttonText?.value}
                 role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
@@ -330,13 +330,13 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
         key={sectionData?.contentLink?.id}
       >
         <h3
-          className="text-27 pb-4 lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3 lg:mb-7 md:mb-4 sm:mb-4" tabIndex={0} id={sectionData?.title?.value}
+          className="text-27 pb-4 lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3 lg:mb-7 md:mb-4 sm:mb-4"  id={sectionData?.title?.value}
         >
           {sectionData?.title?.value}
         </h3>
         <div
           className={`mx-auto w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
-          dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }} tabIndex={0} id={sectionData?.description?.value}
+          dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }}  id={sectionData?.description?.value}
         ></div>
       </div>}
     </div>

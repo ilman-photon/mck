@@ -29,7 +29,7 @@ exports[`renders correctly 1`] = `
       className="lg:mt-7"
       id="logo-image"
       src="images/logo.png"
-      tabIndex={0}
+      
       style={{}}
     />
   </div>

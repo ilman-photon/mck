@@ -66,7 +66,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
                     alt={ele?.data?.imageTitle?.value?.url}
-                    tabIndex={0}
+                    
                     id={"home-product-image" + indexs + index + 1}
                   />
                 </div>
@@ -77,7 +77,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       <img
                         className="mx-auto lg:my-auto"
                         src={ele?.data?.image?.value?.url}
-                        tabIndex={0}
+                        
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
                         role="img"
@@ -95,7 +95,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       dangerouslySetInnerHTML={{
                         __html: ele?.data?.description?.value,
                       }}
-                      tabIndex={0}
+                      
                       id={"p-text 01" + indexs + index + 1}
                     ></div>
                   </div>
@@ -105,7 +105,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div
                     className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                    tabIndex={0}
+                    
                     role="button"
                     id={"home-product-button" + indexs + index + 1}
                     style={{
@@ -144,7 +144,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
                     alt={ele?.data?.imageTitle?.value?.url}
-                    tabIndex={0}
+                    
                     id={"home-product-image" + indexs + index + 1}
                   />
                 </div>
@@ -155,7 +155,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       <img
                         className="mx-auto lg:my-auto"
                         src={ele?.data?.image?.value?.url}
-                        tabIndex={0}
+                        
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
                         role="img"
@@ -173,7 +173,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       dangerouslySetInnerHTML={{
                         __html: ele?.data?.description?.value,
                       }}
-                      tabIndex={0}
+                      
                       id={"p-text 01" + indexs + index + 1}
                     ></div>
                   </div>
@@ -183,7 +183,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div
                     className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                    tabIndex={0}
+                    
                     role="button"
                     id={"home-product-button" + indexs + index + 1}
                     style={{
@@ -222,7 +222,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
                   alt={ele?.data?.imageTitle?.value?.url}
-                  tabIndex={0}
+                  
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
@@ -233,7 +233,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     <img
                       className="mx-auto lg:my-auto"
                       src={ele?.data?.image?.value?.url}
-                      tabIndex={0}
+                      
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
                       role="img"
@@ -251,7 +251,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     dangerouslySetInnerHTML={{
                       __html: ele?.data?.description?.value,
                     }}
-                    tabIndex={0}
+                    
                     id={"p-text 01" + indexs + index + 1}
                   ></div>
                 </div>
@@ -261,7 +261,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <div
                   className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                   onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                  tabIndex={0}
+                  
                   role="button"
                   id={"home-product-button" + indexs + index + 1}
                   style={{
@@ -303,7 +303,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
                   alt={ele?.data?.imageTitle?.value?.url}
-                  tabIndex={0}
+                  
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
@@ -314,7 +314,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     <img
                       className="mx-auto lg:my-auto"
                       src={ele?.data?.image?.value?.url}
-                      tabIndex={0}
+                      
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
                       role="img"
@@ -332,7 +332,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     dangerouslySetInnerHTML={{
                       __html: ele?.data?.description?.value,
                     }}
-                    tabIndex={0}
+                    
                     id={"p-text 01" + indexs + index + 1}
                   ></div>
                 </div>
@@ -342,7 +342,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <div
                   className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                   onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                  tabIndex={0}
+                  
                   role="button"
                   id={"home-product-button" + indexs + index + 1}
                   style={{

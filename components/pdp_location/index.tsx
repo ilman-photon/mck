@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { InfoWindow, GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
+import { mapConfigOptions } from "@/utils/MapConfig";
 
 function PdpLocation(props: any) {
 
@@ -10,8 +11,8 @@ function PdpLocation(props: any) {
     const [longitude, setLongitude] = useState(-111.7256936)
     const [selectedStore, setSelectedStore] = useState(-1)
     let textInput: any
-    const mapKey = useWhereToBuyStore((state => state.mapsApiKey))
-    const healthApiKey = useWhereToBuyStore((state) => state.healthMartApiKey)
+    const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey)
+    const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: mapKey
     });
@@ -110,6 +111,7 @@ function PdpLocation(props: any) {
                     mapContainerClassName="map-container box-border border border-solid border-mckblue"
                     mapContainerStyle={style}
                     zoom={10}
+                    options={mapConfigOptions}
                     center={{
                         lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
                         lng: responseValue?.length > 0 ? responseValue[0]?.Lon : -111.7256936,
@@ -178,10 +180,10 @@ function PdpLocation(props: any) {
                             <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 leading-[32px] pr-4" aria-label=".3 mi" id={`pdp-distance_${props.index}-${index}`}>{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer" tabIndex={0} role="link" id={`pdp-view_${props.index}-${index}`} onClick={() => showOnline(value.StoreUrl)} >View Online</div>
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"  role="link" id={`pdp-view_${props.index}-${index}`} onClick={() => showOnline(value.StoreUrl)} >View Online</div>
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 pr-4">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" id={`pdp-directionimg_${props.index}-${index}`} />
-                                <p className="inline-block relative top-1 cursor-pointer" tabIndex={0} role="link" id={`pdp-location_${props.index}-${index}`} onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</p>
+                                <p className="inline-block relative top-1 cursor-pointer"  role="link" id={`pdp-location_${props.index}-${index}`} onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</p>
                             </div>
                         </div>
                     </div>

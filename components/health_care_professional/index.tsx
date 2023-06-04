@@ -26,8 +26,6 @@ function HealthCareProfessionalComponent() {
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [nextBtn, setNextBtn] = useState<Element>();
-  const [prevBtn, setPrevBtn] = useState<Element>();
   const [isMobile, setIsMobile] = useState(false);
 
   const handleTabClick = (idx: any, tabTitle: string) => {
@@ -81,10 +79,11 @@ function HealthCareProfessionalComponent() {
         backgroundColorCode,
         contentBlockArea: { expandedValue: customers },
       } = expandedValue[1];
-      const {
-        description: { value: descriptionValue },
-        contentBlockArea: { expandedValue: tabRelated },
-      } = expandedValue[2];
+      const descriptionValue =
+        expandedValue[2]?.description?.value || "Default Description Value";
+      const tabRelated =
+        expandedValue[2]?.contentBlockArea?.expandedValue || [];
+
       setCustomers(customers);
       setCustomerReviewTitle(customerReviewTitle);
       setCustomerBackgroundColorCode(backgroundColorCode?.value);
@@ -97,40 +96,6 @@ function HealthCareProfessionalComponent() {
         })),
       ]);
       setCarouselRelated(carouselRelated);
-    }
-  }, [response]);
-  const handleNext = () => {
-    setReviewCount(() => {
-      if (reviewCount < Math.ceil(customers?.length / 3) - 1) {
-        return reviewCount + 1;
-      } else {
-        return Math.ceil(customers?.length / 3);
-      }
-    });
-
-    nextBtn?.removeEventListener("click", handleNext, true);
-    prevBtn?.removeEventListener("click", handlePrev, true);
-  };
-  const handlePrev = () => {
-    setReviewCount(() => {
-      if (reviewCount > 1) {
-        return reviewCount - 1;
-      } else {
-        return 1;
-      }
-    });
-
-    nextBtn?.removeEventListener("click", handleNext, true);
-    prevBtn?.removeEventListener("click", handlePrev, true);
-  };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const nextBtn_ = document.getElementsByClassName("swiper-button-next")[0];
-      const prevBtn_ = document.getElementsByClassName("swiper-button-prev")[0];
-      if (nextBtn_ && prevBtn_ && !nextBtn && !prevBtn) {
-        setNextBtn(nextBtn_);
-        setPrevBtn(prevBtn_);
-      }
     }
   }, [response]);
 
@@ -157,10 +122,6 @@ function HealthCareProfessionalComponent() {
         return arrEle == valueType;
       });
     });
-  }
-  if (nextBtn && prevBtn) {
-    nextBtn.addEventListener("click", handleNext, true);
-    prevBtn.addEventListener("click", handlePrev, true);
   }
 
   useEffect(() => {
@@ -218,7 +179,7 @@ function HealthCareProfessionalComponent() {
                     <h1
                       className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                       id="hcp-label-1"
-                      tabIndex={0}
+                      
                     >
                       {customerReviewTitle?.value}
                     </h1>
@@ -230,6 +191,9 @@ function HealthCareProfessionalComponent() {
                         slidesPerView={isMobile ? "auto" : 3}
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
+                        onSlideChange={(swiper) => {
+                          setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+                        }}
                       >
                         {response &&
                           customers &&
@@ -247,19 +211,19 @@ function HealthCareProfessionalComponent() {
                                   >
                                     <div
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
-                                      tabIndex={0}
+                                      
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
-                                        __html: customer?.reviewComment.value,
+                                        __html: customer?.reviewComment?.value,
                                       }}
                                     ></div>
                                     <div
                                       className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
-                                      tabIndex={0}
+                                      
                                       id={`hcp-label-0000${idx}`}
                                       role="text"
                                     >
-                                      {customer.customerName.value} -{" "}
+                                      {customer.customerName?.value} -{" "}
                                       {customer?.customerQualification?.value}{" "}
                                     </div>
                                   </div>
@@ -303,7 +267,7 @@ function HealthCareProfessionalComponent() {
                 <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
-                    tabIndex={0}
+                    
                     id="hcp-btn-007"
                     dangerouslySetInnerHTML={{ __html: descriptionValue }}
                   />

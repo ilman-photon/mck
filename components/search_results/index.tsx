@@ -343,7 +343,7 @@ function ResultComponent() {
          {!searchLoading &&
           <div
             className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1"
-            tabIndex={0}
+            
             id="sr_label_001"
           >
             
@@ -352,7 +352,7 @@ function ResultComponent() {
           }
           <div
             className="lg:text-lg text-base text-sofia-reg text-black pb-1 font-normal"
-            tabIndex={0}
+            
             id="sr_label_002"
           >
             Showing results for
@@ -360,7 +360,7 @@ function ResultComponent() {
           </div>
           <div
             className="lg:text-base text-sm text-sofia-reg text-black lg:pb-5 pb-3 font-normal"
-            tabIndex={0}
+            
             id="sr_label_003"
           >
             Search for
@@ -368,7 +368,7 @@ function ResultComponent() {
           </div>
           <div
             className="lg:text-lg text-base pb-1.5 text-sofia-reg font-normal textmcknormalgrey lg:pb-11 border-b-[#CCD1E3]"
-            tabIndex={0}
+            
             id="sr_label_004"
           >
             Showing {productCount} results

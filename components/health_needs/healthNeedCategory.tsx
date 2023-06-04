@@ -8,6 +8,7 @@ const HealthNeedCategory = ({
   setActiveFilter,
   activeFilter,
   productCategoryData,
+  customerBackgroundColorCode
 }: any) => {
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState(null);
@@ -58,9 +59,10 @@ const HealthNeedCategory = ({
   return (
     <div className="hidden lg:flex md:hidden desktop:px-6">
       <div
-        className="pt-[36px] px-1.5 mt-[72px] pb-0 bg-[#f2f4f9]"
-        tabIndex={0}
+        className="pt-[36px] px-1.5 mt-[72px] pb-0"
+        
         id="hn_label_0001"
+        style={{ background: customerBackgroundColorCode }}
       >
         <ul className="flex flex-wrap gap-4">
           {healthNeedData &&
@@ -79,7 +81,7 @@ const HealthNeedCategory = ({
                     healthneedsdata
                   )
                 }
-                tabIndex={0} aria-label={healthneedsdata?.title.value}
+                 aria-label={healthneedsdata?.title.value}
               >
                 <img
                   id={`hl-img+${index}`}

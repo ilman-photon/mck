@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
+import { customAdd, deleteMultipleElements, selectedProductType } from '../global/CommonUtil';
 
 interface ISubCategory {
   id: number;
@@ -29,6 +30,11 @@ const HealthNeedFilter = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isFilterShow, setIsFilterShow] = useState(true);
+  const [mainCategoryId, setMainCategoryId] = useState('')
+  const [alternateFlag, setAlternateFlag] = useState(false)
+  const [group, setGroup] = useState<any>()
+  const [mainCatNames, setMainCatNames] = useState<any>([]);
+
   const handleClearAll = () => {
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
@@ -59,10 +65,12 @@ const HealthNeedFilter = ({
     categoryId: any,
     subCategoryId: any
   ) => {
+    setMainCategoryId(categoryId);
     if (e.target.checked) {
       if (selectedFilterItems[categoryId]['items'].indexOf(filter) === -1) {
         selectedFilterItems[categoryId]['items'].push(filter);
       }
+      setGroup(customAdd(categoryId, filter))
 
       setLoading(true);
       setActiveFilter([...activeFilter, filter]);
@@ -70,6 +78,12 @@ const HealthNeedFilter = ({
     } else {
       const index = selectedFilterItems[categoryId]['items'].indexOf(filter);
       selectedFilterItems[categoryId]['items'].splice(index, 1);
+      const subIds = group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds //?.splice(index, 1)
+      const idx = subIds?.indexOf(filter);
+      const a = subIds?.splice(idx, 1);
+      group?.find((c: any) => c.mainCatId === categoryId)?.subCateIds
+      console.log("cool idx 00 1", "idx -->", idx, "a -->", a)
+      setGroup(group)
       setActiveFilter(
         activeFilter.filter((item: any) => {
           return item !== filter;
@@ -80,11 +94,63 @@ const HealthNeedFilter = ({
       selectedFilterItems[categoryId].isCategoryChecked = false;
     }
     setSelectedFilterItems(selectedFilterItems);
+    setAlternateFlag(!alternateFlag)
   };
+  useEffect(() => {
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const subCategoryCount = selectedProductType?.subCategory?.value?.length
+    if(selectedFilterItems[mainCategoryId]?.items.length === subCategoryCount){
+      if(selectedFilterItems[mainCategoryId]){
+        selectedFilterItems[mainCategoryId].isCategoryChecked = true;
+      }
+    }
+  }, [activeFilter])
+  
+  useEffect(() => {
+    const currentCategory = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
+    if(currentCategory && Object.keys(currentCategory).length > 0){
+      const [selectedMainCatId, selectedSubCateIdCount] = [currentCategory?.mainCatId, currentCategory?.SubCateIds?.length]
+      const [value, count, name] = selectedProductType(productCategoryData, mainCategoryId);
+      console.log("value, count, name, ad --->", value, count, name, currentCategory?.subCateIds?.length)
+      console.log("cool idx 00 1 3 -->", group)
+      if(count === currentCategory?.subCateIds?.length){
+        console.log("value, count, name, ad active if 1 --> ", mainCatNames, name)
+        setMainCatNames([...mainCatNames, name])
+        // work to do filter siubIds which are not in the current cat from activeFilter
+        // const onlyOtherSubCateIds = activeFilter?.filter((af: any) => !ad?.subCateIds?.includes(af))
+        // console.log("**ly other subcateids -->", onlyOtherSubCateIds)
+        setActiveFilter(Array.from(new Set([...mainCatNames, name])).filter(Boolean))
+        // setActiveFilter(deleteMultipleElements(Array.from(new Set([...mainCatNames, name, ...activeFilter])), [ad?.subCateIds]))//[...mainCatNames, name])
+        // return;
+      }else{
+        if(mainCategoryId === currentCategory?.mainCatId){
+          if(mainCatNames?.includes(name)){
+            console.log("**SD -->before", mainCatNames, activeFilter)
+            const findIndex = mainCatNames?.findIndex((item: any) => item === name)
+            const findMainCatNameIndex = activeFilter?.flat().findIndex((item: any) => item === name);
+            mainCatNames.splice(findIndex, 1);
+            activeFilter.splice(findMainCatNameIndex, 1);
+            const common = Array.from(new Set([...mainCatNames, ...activeFilter]))
+            const findCommonIndex = common?.flat().findIndex((item: any) => item === name);
+            if(findCommonIndex>=0){
+              common?.splice(findCommonIndex, 1)
+            }
+            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex, currentCategory?.subCateIds)
+            setActiveFilter(Array.from(new Set([...common.filter((a: any)  => !Array.isArray(a)), ...currentCategory?.subCateIds])))
+          }
+        }else{
+          setActiveFilter(Array.from(new Set([...activeFilter])))
+        }
+      }
+    }
+  }, [alternateFlag])
 
+  console.log("** active filter -->", activeFilter)
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
+    setMainCategoryId(categoryId);
+    setAlternateFlag(!alternateFlag);
     setLoading(true);
     if (e.target.checked) {
       if (selectedViewAllCateory.indexOf(categoryId) === -1) {
@@ -163,7 +229,7 @@ const HealthNeedFilter = ({
       <section>
         <div
           className='flex flex-wrap relative lg:mb-2 items-center text-mckblue'
-          tabIndex={0}
+          
           id='hn_label_0003'
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
@@ -178,10 +244,10 @@ const HealthNeedFilter = ({
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
-            tabIndex={0}
+            
             id='hn_label_003_2'
           >
-            {activeFilter?.map((item: any, index: number) => {
+            {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
                   className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
@@ -200,7 +266,7 @@ const HealthNeedFilter = ({
                 </div>
               );
             })}
-            {activeFilter.length > 0 &&
+            {activeFilter?.length > 0 &&
             <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
@@ -241,7 +307,7 @@ const HealthNeedFilter = ({
             {isFilterShow ? 'Hide' : 'Open'}
           </div>
         </div>
-        <div className='text-mcknormalgrey' tabIndex={0} id='hn_label_003_3'>
+        <div className='text-mcknormalgrey'  id='hn_label_003_3'>
           {(activeFiltersData?.showResultsText?.value)?.replace (/#/, productsSum)}
         </div>
       </section>
@@ -286,7 +352,7 @@ const HealthNeedFilter = ({
                                       .name
                                   }
                                   className='ml-2 filter-title'
-                                  tabIndex={0}
+                                  
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
                                       .name
