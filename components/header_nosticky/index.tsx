@@ -79,7 +79,7 @@ function HeaderNoStickyComponent() {
             onClick={handleOnCLickLogo}
           >
             <img
-              tabIndex={0}
+              
               src={isSmall}
               alt="logo"
               className="mt-1 lg:mt-7 ml-3"

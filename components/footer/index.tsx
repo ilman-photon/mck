@@ -46,7 +46,7 @@ export default function FooterComponent() {
 
   return (
     <>
-      <footer id="footer" role="contentinfo" className="bg-mcklightyellow lg:mb-0 mb-16">
+      <footer id="footer" role="contentinfo" className="bg-mcklightyellow lg:mb-0 mb-16 mt-18">
         <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">

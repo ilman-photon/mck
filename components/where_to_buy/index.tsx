@@ -245,7 +245,7 @@ function WhereComponent() {
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
                           role="link"
-                          tabIndex={0}
+                          
                           id={`wb-label-08_0${index}`}
                           onClick={() => showOnline(value.StoreUrl)}
                         >
@@ -265,7 +265,7 @@ function WhereComponent() {
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"
-                          tabIndex={0}
+                          
                           role="link"
                           id={`wb-label-10_0${index}`}
                           onClick={() =>

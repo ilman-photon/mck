@@ -77,14 +77,14 @@ const HealthNeedCategoryMobile = ({
 
   return (
     <div className="lg:hidden">
-      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med lg:px-4 font-medium" tabIndex={0} aria-label="Health Needs">Health Needs</h1>
+      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med lg:px-4 font-medium"  aria-label="Health Needs">Health Needs</h1>
       <div
         className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] lg:mx-4 relative min-h-[300px]"
-        tabIndex={0}
+        
         id="hn_label_0002"
       >
         <div className="">
-          <div className="carousel-container grid grid-cols-3 md:grid-cols-3 gap-4 overflow-x-auto" tabIndex={0}>
+          <div className="carousel-container grid grid-cols-3 md:grid-cols-3 gap-4 overflow-x-auto" >
             {healthNeedData &&
               healthNeedData
                 .slice(
@@ -104,7 +104,7 @@ const HealthNeedCategoryMobile = ({
                         healthneedsdata
                       )
                     }
-                    tabIndex={0} aria-label={healthneedsdata?.title.value}
+                     aria-label={healthneedsdata?.title.value}
                   >
                     <img
                       id={healthneedsdata?.title.value}
@@ -117,15 +117,15 @@ const HealthNeedCategoryMobile = ({
                 ))}
           </div>
           {healthNeedData?.length > slidesPerRow * rowsPerPage && (
-            <div className="carousel-controls flex justify-center absolute top-[124px] w-full" tabIndex={0}>
+            <div className="carousel-controls flex justify-center absolute top-[124px] w-full" >
               <button
                 className="left-btn left-[-18px] absolute"
-                onClick={handlePrev} tabIndex={0} aria-label="Previous"
+                onClick={handlePrev}  aria-label="Previous"
               >
               </button>
               <button
                 className="right-btn right-[-8px] absolute"
-                onClick={handleNext} tabIndex={0} aria-label="Next"
+                onClick={handleNext}  aria-label="Next"
               >
               </button>
             </div>

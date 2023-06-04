@@ -235,7 +235,7 @@ const HealthNeedFilter = ({
       <section>
         <div
           className='flex flex-wrap relative lg:mb-2 items-center text-mckblue'
-          tabIndex={0}
+          
           id='hn_label_0003'
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
@@ -250,7 +250,7 @@ const HealthNeedFilter = ({
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
-            tabIndex={0}
+            
             id='hn_label_003_2'
           >
             {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
@@ -313,7 +313,7 @@ const HealthNeedFilter = ({
             {isFilterShow ? 'Hide' : 'Open'}
           </div>
         </div>
-        <div className='text-mcknormalgrey' tabIndex={0} id='hn_label_003_3'>
+        <div className='text-mcknormalgrey'  id='hn_label_003_3'>
           {(activeFiltersData?.showResultsText?.value)?.replace (/#/, productsSum)}
         </div>
       </section>
@@ -358,7 +358,7 @@ const HealthNeedFilter = ({
                                       .name
                                   }
                                   className='ml-2 filter-title'
-                                  tabIndex={0}
+                                  
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
                                       .name
