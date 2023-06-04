@@ -123,12 +123,14 @@ const HealthNeedFilter = ({
   useEffect(() => {
     const currentCategory = group?.find((gr: any) => gr.mainCatId === mainCategoryId);
     if(currentCategory && Object.keys(currentCategory).length > 0){
-      console.log("current category ***--->", currentCategory)
       const [value, count, name] = selectedProductType(productCategoryData, mainCategoryId);
       if(count === currentCategory?.subCateIds?.length){
-        console.log("value, count, name, ad active if 1 --> ", mainCatNames, name)
         setMainCatNames([...mainCatNames, name])
-        setActiveFilter(Array.from(new Set([...mainCatNames, name])).filter(Boolean))
+          const catIds = [...mainCatNames, name]?.map((mcn: any) => extractMainCategoryId(productCategoryData, mcn)) 
+            const process = catIds?.map((cId: any) =>selectedProductType_(productCategoryData, cId))
+            const subCateNames =  process.flat()?.map((p: any) => p.name)
+            const onlyOtherSubCateIds = deleteMultipleElements(activeFilter, subCateNames)
+        setActiveFilter([...Array.from(new Set([...mainCatNames, name])).filter(Boolean), ...onlyOtherSubCateIds])
       }else{
         if(mainCategoryId === currentCategory?.mainCatId){
           if(mainCatNames?.includes(name)){
@@ -144,9 +146,9 @@ const HealthNeedFilter = ({
             }
             console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex, currentCategory?.subCateIds)
             const catIds = mainCatNames?.map((mcn: any) => extractMainCategoryId(productCategoryData, mcn)) 
-            const process1 = catIds?.map((cId: any) =>selectedProductType_(productCategoryData, cId))
-            const subCateIds_ =  process1.flat()?.map((p: any) => p.name)
-            const common1 = deleteMultipleElements(common, subCateIds_)
+            const process = catIds?.map((cId: any) =>selectedProductType_(productCategoryData, cId))
+            const subCateNames =  process.flat()?.map((p: any) => p.name)
+            const common1 = deleteMultipleElements(common, subCateNames)
             setActiveFilter(Array.from(new Set([...common1.filter((a: any)  => !Array.isArray(a)), ...currentCategory?.subCateIds])))
           }
         }else{
@@ -183,7 +185,9 @@ const HealthNeedFilter = ({
 
       // empty subcates 
       const currentCategoryIndex = group?.findIndex((gr: any) => gr.mainCatId === categoryId);
-      group[currentCategoryIndex].subCateIds = []
+      if(group[currentCategoryIndex]){
+        group[currentCategoryIndex].subCateIds = []
+      }
     }
 
     selectedFilterItems[categoryId].isCategoryChecked = isCategoryChecked;
@@ -199,7 +203,6 @@ const HealthNeedFilter = ({
         );
         selectedFilterItems[categoryId]['items'].splice(index, 1);
       }
-      // console.log(sub_category)
     });
 
     let selectedSubCat: any = [];
