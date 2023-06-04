@@ -46,17 +46,26 @@ const HealthNeedFilter = ({
   const updatedURL = currentURL.split('?')[0]; 
   window.location.href = updatedURL;
   };
-  const handleDelete = (activeFilter: any, item: any, mainCateId = '') => {
+  const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
     );
+    
     const mainCatId = extractMainCategoryId(productCategoryData, item)
     if(selectedFilterItems[mainCatId]){
       selectedFilterItems[mainCatId].isCategoryChecked = false;
       console.log("selectedFilterItems[mainCateId] -->", group, selectedFilterItems[mainCatId]?.isCategoryChecked)
       selectedFilterItems[mainCatId].map((sub_category: any) => {
-          sub_category.checked = false;
+        sub_category.checked = false;
       });
+    }else{
+      selectedFilterItems.map((category: any) => {
+        category.map((sub_category: any) => {
+          if(sub_category.name === item){
+            sub_category.checked = false;
+          }
+        })
+      })
     }
   };
 
