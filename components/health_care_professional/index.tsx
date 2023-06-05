@@ -190,7 +190,7 @@ function HealthCareProfessionalComponent() {
                 </div>
 
                 <div
-                  className={`lg:p-72 lg:pt-12 pt-6 lg:pb-16 pb-4 lg:mt-18 mt-6`}
+                  className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[170px] lg:pt-[72px] mt-6`}
                   style={{ background: customerBackgroundColorCode }}
                 >
                   <div className="container mx-auto">
