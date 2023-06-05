@@ -188,7 +188,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               className="w-full lg:px-0"
               src={sectionData?.image?.value?.url}              
               id={sectionData?.image?.value?.url}
-              alt="learning image"
+              alt={sectionData?.image?.expandedValue?.altText?.value}
             />
           </div>
           <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
@@ -239,7 +239,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
         <div className="relative lg:mb-12 mb-10">
           <img
             src={sectionData?.backgroundImage?.expandedValue?.url}
-            alt={sectionData?.backgroundImage?.expandedValue?.url}
+            alt={sectionData?.image?.expandedValue?.altText?.value}
             id="wft_img_004"            
             className="w-full"
           />
@@ -278,7 +278,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </div>
         </div> :
         <div className="container mx-auto bg-transparent-left relative lg:mb-12 mb-6 lg:px-72">
-          <img src={sectionData?.backgroundImage?.expandedValue?.url} className="w-full" id="wft_img_009"  alt="heal and thrive" />
+          <img src={sectionData?.backgroundImage?.expandedValue?.url} alt={sectionData?.backgroundImage?.expandedValue?.altText?.value}  className="w-full" id="wft_img_009"/>
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0 lg:hidden">
             <h2
               className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
