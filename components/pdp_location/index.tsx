@@ -10,7 +10,8 @@ function PdpLocation(props: any) {
     const [latitude, setLatitude] = useState(33.2411354)
     const [longitude, setLongitude] = useState(-111.7256936)
     const [selectedStore, setSelectedStore] = useState(-1)
-    let textInput: any
+    // let textInput: any
+    const [textInput,setTextInput] = useState<any>('')
     const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey)
     const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
     const { isLoaded } = useLoadScript({
@@ -81,9 +82,9 @@ function PdpLocation(props: any) {
             element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
-    const handleKey = (e: any) => {
-        if (e.key === 'Enter') {
-            textInput = e.target.value
+    const handleKey = () => {
+        // if (e.key === 'Enter') {
+            // textInput = e.target.value
             // setTextInput(e.target.value)
             fectchLatandLongDetails()
                 .then((res) => {
@@ -92,17 +93,21 @@ function PdpLocation(props: any) {
 
                 })
                 .catch((e: Error | AxiosError) => console.log(e));
-        }
+        // }
     }
 
     return isLoaded ? (
         <div className="row-span-2 lg:pt-[72px]">
             <div className="relative mx-4 lg:mx-0 mt-6 lg:mt-0">
-                <input type="text" value={textInput}
+                <input type="text" 
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
                     placeholder="City, State or Zip code"
-                    onKeyDown={(e) => handleKey(e)}
+                    onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
                     className="pl-[46px] flex flex-row rounded-full lg:rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue text-mckgreyborder bg-[#F8F9FB] pl-9" title="Search" />
+                <div onClick={handleKey} className="cursor-pointer">
                 <img src="images\search_btn.png" alt="img" className="absolute left-4 top-4" />
+                </div>
             </div>
 
             <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg mx-4 lg:mx-0" aria-label="Disclaimer" id={`wd-lb-${props.index}-01`}  >Disclaimer: Products are subject to availability</div>
