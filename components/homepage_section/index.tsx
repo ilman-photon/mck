@@ -95,10 +95,10 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           <div
             className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
           >
-            <div className="video-wrapper">
-              <div className="video-container" id="video-container">
+            <div className="w-full h-full flex justify-center items-center">
+              <div className="w-full mx-auto relative flex flex-col justify-center lg:px-0 px-10" id="video-container">
                 <video
-                  className="w-full lg:px-0"
+                  className="w-full h-full rounded-10 lg:px-0"
                   src={sectionData.video?.value?.url}
                   ref={videoRef}
                   controls={isPlaying}
@@ -106,15 +106,15 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                   <track kind="captions" src="path/to/captions.vtt" label="Captions" default />
                 </video>
                 {!isPlaying && (
-                  <div className="play-button-wrapper">
+                  <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center w-full h-auto pointer-events-none">
                     <div
                       title="Play video"
-                      className={`play-gif ${isPlaying ? 'hidden' : 'visible'}`}
+                      className={`play-gif cursor-pointer pointer-events-auto ${isPlaying ? 'hidden' : 'visible'}`}
                       id="circle-play-b"
                       onClick={handleTogglePlay}
                       ref={circlePlayButtonRef}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <svg className="w-100 h-100 fill-white stroke-white cursor-pointer bg-overlaygrey rounded-50 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
                         <path d="M40 0a40 40 0 1040 40A40 40 0 0040 0zM26 61.56V18.44L64 40z" />
                       </svg>
                     </div>
@@ -327,7 +327,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           {sectionData?.title?.value}
         </h3>
         <div
-          className={`mx-auto w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
+          className={`w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
           dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }}  id={sectionData?.description?.value}
         ></div>
       </div>}

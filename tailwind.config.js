@@ -41,6 +41,7 @@ module.exports = {
       },
       width: {
         18: '18px',
+        100: '100px',
         197: '197px',
         228: '228px',
         306 : '306px',
@@ -64,6 +65,7 @@ module.exports = {
       height: {
         25: '25px',
         50: '50px',
+        100: '100px',
         110: '110px',
         136: '136px',
         225: '225px',
@@ -128,6 +130,7 @@ module.exports = {
       },
       padding: {
         9: '9px',
+        10: '10px',
         15: '15px',
         18: '18px',
         23: '23px',
@@ -157,9 +160,6 @@ module.exports = {
         28: "28px",
         20: "20px", 
        },
-      borderWidth: {
-        3: "3px",
-      },
       spacing: {
         18: "72px",
         14:"14px",
@@ -182,6 +182,7 @@ module.exports = {
         'acuteblue': '#CCD1E3',
         'everydayblue': '#A7C8E9',
         'shadesblue': '#F2F4F9',
+        'overlaygrey': "#0003",
       }),
       boxShadow: {
         'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
@@ -198,10 +199,15 @@ module.exports = {
       },
       borderWidth: {
         '0.5': '0.5px',
+        3: "3px",
       },
       border: {
         blue20: "#CCD1E3",
 
+      },
+      borderRadius: {
+        10: '10px',
+        50: '50%',
       },
       screens: {
         desktop: {'max': '1280px'},
