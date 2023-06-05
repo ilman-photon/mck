@@ -247,10 +247,7 @@ function AllProductCategoryPage({
             // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
             const concatStr =
               category.items.length === index + 1
-                ? ""
-                : category.isBusinessVerticalCategory
-                ? " or "
-                : " and ";
+                ? "":" or ";
             queryParams += `${
               category.isBusinessVerticalCategory
                 ? category.productType
@@ -286,7 +283,7 @@ function AllProductCategoryPage({
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const concatStr =
-              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
+              category.items.length === index + 1 ? "" : " or ";;
             queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
           });
           queryParams += `)`;

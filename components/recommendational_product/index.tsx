@@ -42,7 +42,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
     router.push(desiredURL);
   };
-  console.log("hello", response);
 
   const oneItemD = response?.length == 1 && (
     <>
