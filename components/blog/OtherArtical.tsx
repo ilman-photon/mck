@@ -31,17 +31,17 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
 
                             <figcaption>
                                 <div className='content lg:p-6 p-4 lg:pt-4'>
-                                    <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</p></div>
-                                    <div className='pb-3 pt-3'>
-                                        <LinkComponent
-                                            href={{
-                                                pathname: "/blog_details",
-                                                query: { id: item.routeSegment },
-                                            }}
-                                        >
-                                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                        </LinkComponent>
+                                    <LinkComponent
+                                        href={{
+                                            pathname: "/blog_details",
+                                            query: { id: item.routeSegment },
+                                        }}
+                                    >
+                                        <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 h-36' aria-labelledby={item.title.value}>{item.title.value}</p></div>
+                                    </LinkComponent>
 
+                                    <div className='pb-3 pt-3'>
+                                        <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
                                         <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>
