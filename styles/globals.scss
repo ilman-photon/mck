@@ -2496,3 +2496,27 @@ video{
 .socialimg{
   padding-right: 10px;
 }
+
+
+a.skip-main {
+  left:-999px;
+  position:absolute;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  z-index:-999;
+}
+a.skip-main:focus, a.skip-main:active {
+  color: #fff;
+  background-color:#000;
+  left: auto;
+  top: 0;
+  width: 100%;
+  height: auto;
+  overflow:auto;
+  padding:5px;
+  text-align:center;
+  font-size:1.2em;
+  z-index:999;
+}
