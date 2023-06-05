@@ -228,10 +228,7 @@ const HealthNeedsComponent = () => {
             const encodeItemName = encodeURI(itemName);
             const concatStr =
               category.items.length === index + 1
-                ? ""
-                : category.isBusinessVerticalCategory
-                ? " or "
-                : " and ";
+                ? "":" or ";
             queryParams += `${
               category?.isBusinessVerticalCategory
                 ? category?.productType
@@ -260,10 +257,7 @@ const HealthNeedsComponent = () => {
               const encodeItemName = encodeURI(itemName);
               const concatStr =
                 category.items.length === index + 1
-                  ? ""
-                  : category.isBusinessVerticalCategory
-                  ? " or "
-                  : " and ";
+                  ? "":" or ";
               queryParams += `${
                 category?.isBusinessVerticalCategory
                   ? category?.productType
