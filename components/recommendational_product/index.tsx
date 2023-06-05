@@ -79,7 +79,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
-                        role="img"
                       />
                     </div>
                   </div>
@@ -101,18 +100,16 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 </div>
 
                 {ele?.data?.buttonText?.value && (
-                  <div
+                  <button
                     className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                    
-                    role="button"
                     id={"home-product-button" + indexs + index + 1}
                     style={{
                       backgroundColor: ele?.data?.buttonColor?.value,
                     }}
                   >
                     {ele?.data?.buttonText?.value}
-                  </div>
+                  </button>
                 )}
               </div>
             </div>
@@ -157,7 +154,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
-                        role="img"
                       />
                     </div>
                   </div>
@@ -179,18 +175,16 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 </div>
 
                 {ele?.data?.buttonText?.value && (
-                  <div
+                  <button
                     className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                     onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                    
-                    role="button"
                     id={"home-product-button" + indexs + index + 1}
                     style={{
                       backgroundColor: ele?.data?.buttonColor?.value,
                     }}
                   >
                     {ele?.data?.buttonText?.value}
-                  </div>
+                  </button>
                 )}
               </div>
             </div>
@@ -235,7 +229,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
-                      role="img"
                     />
                   </div>
                 </div>
@@ -257,18 +250,16 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               </div>
 
               {ele?.data?.buttonText?.value && (
-                <div
+                <button
                   className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                   onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                  
-                  role="button"
                   id={"home-product-button" + indexs + index + 1}
                   style={{
                     backgroundColor: ele?.data?.buttonColor?.value,
                   }}
                 >
                   {ele?.data?.buttonText?.value}
-                </div>
+                </button>
               )}
             </div>
           </div>
@@ -316,7 +307,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
-                      role="img"
                     />
                   </div>
                 </div>
@@ -338,18 +328,16 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               </div>
 
               {ele?.data?.buttonText?.value && (
-                <div
+                <button
                   className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
                   onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                  
-                  role="button"
                   id={"home-product-button" + indexs + index + 1}
                   style={{
                     backgroundColor: ele?.data?.buttonColor?.value,
                   }}
                 >
                   {ele?.data?.buttonText?.value}
-                </div>
+                </button>
               )}
             </div>
           </div>

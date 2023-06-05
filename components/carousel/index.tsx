@@ -131,18 +131,16 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           id={item?.description?.value}
                         ></p>
                         {item?.buttonText?.value && (
-                          <div
+                          <button
                             id={item?.contentLink.id}
                             className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                             style={{
                               backgroundColor: item?.ctaButtonColor?.value,
                             }}
                             onClick={() => handleCTABtn(item?.buttonUrl?.value)}
-                            
-                            role="button"
                           >
                             {item?.buttonText?.value}
-                          </div>
+                          </button>
                         )}
                       </div>
                     )}
@@ -192,7 +190,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             id={firstResponse.description?.value}
                           ></p>
                           {firstResponse.buttonText?.value && (
-                            <div
+                            <button
                               id={firstResponse.contentLink.id}
                               className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                               style={{
@@ -202,11 +200,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               onClick={() =>
                                 handleCTABtn(firstResponse.buttonUrl?.value)
                               }
-                              
-                              role="button"
                             >
                               {firstResponse.buttonText?.value}
-                            </div>
+                            </button>
                           )}
                         </div>
                       )}
@@ -222,8 +218,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
               <li
                 className={`indicator ${index === current ? "active" : ""}`}
                 key={index}
-                onClick={() => handleCarouselImage(index)}
-                
+                onClick={() => handleCarouselImage(index)}                
                 role="button"
               ></li>
             ))}

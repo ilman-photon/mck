@@ -329,7 +329,7 @@ function ProductListComponent() {
 
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+      return recommendedProduct?.expandedValue[1]?.contentBlockArea.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value

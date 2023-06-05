@@ -50,7 +50,6 @@ export default function Search() {
           height="19"
           viewBox="0 0 18 19"
           xmlns="http://www.w3.org/2000/svg"
-          role="img"
           aria-label="search-icon"
         >
           <path
