@@ -388,7 +388,7 @@ function WhereComponent() {
               })}
             </GoogleMap>
             
-            <div className="flex gap-2 divider-x lg:flex-row flex-col absolute bottom-2 left-0 rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="flex gap-2 divider-x lg:flex-row left-1/2 absolute bottom-2 ml-145 lg:ml-auto lg:left-0 rounded-tl rounded-bl lg:rounded-tl-none lg:rounded-bl-none rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <div className="p-2">
                 <h2 className="text-sm text-gray-900 dark:text-white">
                   Transit
