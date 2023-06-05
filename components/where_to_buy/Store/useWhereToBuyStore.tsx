@@ -74,7 +74,7 @@ export const useWhereToBuyStore = create<WhereToBuy.Controller>((set,get) => ({
     /**
      * @state initial zoom level of Map onRender
      */
-    zoomLevel:4,
+    zoomLevel:10,
     /**
      * @description USA coords 
      */

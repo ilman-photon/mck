@@ -73,16 +73,34 @@ function HealthCareProfessionalComponent() {
       const {
         contentBlockArea: { expandedValue: carouselRelated },
       } = expandedValue[0];
-      const {
-        name: customerReview,
-        title: customerReviewTitle,
-        backgroundColorCode,
-        contentBlockArea: { expandedValue: customers },
-      } = expandedValue[1];
-      const descriptionValue =
-        expandedValue[2]?.description?.value || "Default Description Value";
-      const tabRelated =
-        expandedValue[2]?.contentBlockArea?.expandedValue || [];
+      var customerReview: string = "";
+      var customerReviewTitle: string = "";
+      var backgroundColorCode: any = {};
+      var customers: any = {};
+      var descriptionValue: string = "";
+      var tabRelated: any = [];
+
+      expandedValue.map((item: any, index: number) => {
+        if (item.contentType[1] == "CustomerReviewBlock") {
+          const {
+            name,
+            title,
+            backgroundColorCode: backgroundColor,
+            contentBlockArea: { expandedValue: customersReviewContent },
+          } = expandedValue[index];
+
+          customerReview = name;
+          customerReviewTitle = title;
+          backgroundColorCode = backgroundColor;
+          customers = customersReviewContent;
+        } else if (item.contentType[1] == "CategoryFeatureBlock") {
+          descriptionValue =
+            expandedValue[index]?.description?.value ||
+            "Default Description Value";
+          tabRelated =
+            expandedValue[index]?.contentBlockArea?.expandedValue || [];
+        }
+      });
 
       setCustomers(customers);
       setCustomerReviewTitle(customerReviewTitle);
@@ -179,7 +197,6 @@ function HealthCareProfessionalComponent() {
                     <h1
                       className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                       id="hcp-label-1"
-                      
                     >
                       {customerReviewTitle?.value}
                     </h1>
@@ -211,7 +228,6 @@ function HealthCareProfessionalComponent() {
                                   >
                                     <div
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
-                                      
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
                                         __html: customer?.reviewComment?.value,
@@ -219,7 +235,6 @@ function HealthCareProfessionalComponent() {
                                     ></div>
                                     <div
                                       className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
-                                      
                                       id={`hcp-label-0000${idx}`}
                                     >
                                       {customer.customerName?.value} -{" "}
@@ -266,7 +281,6 @@ function HealthCareProfessionalComponent() {
                 <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
-                    
                     id="hcp-btn-007"
                     dangerouslySetInnerHTML={{ __html: descriptionValue }}
                   />

@@ -20,8 +20,8 @@ function WhereComponent() {
   const [longitude, setLongitude] = useState(-111.7256936);
   const [loading, setLoading] = useState(true); // Tambahkan state loading
   const [selectedStore, setSelectedStore] = useState(-1);
-  const [searchState, setSearchState] = useState("");
-  let textInput: any;
+  // let textInput: any;
+  let [textInput, setTextInput] = useState<any>('')
   /**
    * @state creds key
    */
@@ -87,19 +87,23 @@ function WhereComponent() {
     fetchLocationDetails();
   }, [latitude]);
   useEffect(() => {
-    textInput = 75201;
+    // textInput = 75201;
+    if(!isCustomSearch){
+      setTextInput(75201)
+    }
+    // setTextInput('75201')
     fectchLatandLongDetails()
       .then((res) => {
-        setLatitude(res.data.results[0].geometry.location["lat"]);
-        setLongitude(res.data.results[0].geometry.location["lng"]);
+        setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
+        setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
-  }, []);
+  }, [isCustomSearch]);
   const fetchLocationDetails = () => {
     setLoading(true);
     fetchPDPLoctionDetails()
       .then((res) => {
-        setResponseValue(res.data);
+        setResponseValue(res?.data);
         setLoading(false);
       })
       .catch((e: Error | AxiosError) => {
@@ -126,17 +130,14 @@ function WhereComponent() {
       element.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };
-  const handleKey = (e: any) => {
-    if (e.key === "Enter") {
-      textInput = e.target.value;
+  const handleKey = () => {
       fectchLatandLongDetails()
         .then((res) => {
-          setLatitude(res.data.results[0].geometry.location["lat"]);
-          setLongitude(res.data.results[0].geometry.location["lng"]);
-          setIsCustomSearch(true);
+          setLatitude(res?.data?.results[0]?.geometry.location['lat']);
+          setLongitude(res?.data?.results[0]?.geometry.location['lng']);
+          setIsCustomSearch(true)
         })
         .catch((e: Error | AxiosError) => console.log(e));
-    }
   };
 
   return (
@@ -158,40 +159,46 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container pl-0 pr-0 flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-36 lg:mt-16 where-to-buy">
+        <div className="container pl-0 pr-0 flex lg:flex-row pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
           <div>
-            <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+          <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
                 name="fname"
-                value={textInput}
-                onKeyDown={(e) => handleKey(e)}
+                onChange={(e) => setTextInput(e.target.value)}
+                value={!isCustomSearch ? undefined : textInput}
+                onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
                 placeholder="City, State or Zip code"
                 className="bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
+              <div onClick={handleKey} className="cursor-pointer">
               <Image
                 src="images/location_on.svg"
                 alt="location"
-                className="text-mckgreyborder absolute lg:top-3 top-3 right-4 lg:top-3.5 lg:right-4"
+                // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
+                // width={24}
+                // height={25}
+                className="text-mckgreyborder absolute top-[12px] right-5"
                 width={20}
                 height={20}
               />
+              </div>
             </div>
             <div
-              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0"
+              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-665 mr-6 location-box">
+            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
                     className={
                       index === selectedStore
-                        ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue "
+                        ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue"
                         : "text-mckthingrey border rounded-lg p-4 mb-4"
                     }
                     key={value.id}
@@ -237,7 +244,7 @@ function WhereComponent() {
                         </p>
                       </div>
                       <div
-                        className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey"
+                        className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey"
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >
@@ -286,7 +293,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-782 lg:h-full">
+          <div className="lg:w-842 w-full relative h-782 lg:h-598 mt-2 lg:mt-0">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
@@ -425,6 +432,32 @@ function WhereComponent() {
                 />
               </div>
             </div>
+            {/* <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+              <label
+                htmlFor="fname"
+                className="flex items-center lg:justify-center justify-start text-[20px] font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]"
+                id="wb-label-012"
+              >
+                Where to buy
+              </label>
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                value={!isCustomSearch ? undefined : textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
+                placeholder="City, State or Zip code"
+                className="lg:w-83 bg-white pl-3 py-3 pr-10 border border-[#001A71] rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
+              />
+              <div onClick={handleKey} className="cursor-pointer">
+              <img
+                src="images/location_on.svg"
+                alt="location"
+                className="text-mckgreyborder absolute lg:top-7 top-16 right-8"
+              />
+              </div>
+            </div> */}
           </div>
         </div>
       )}

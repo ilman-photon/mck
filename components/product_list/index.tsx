@@ -329,7 +329,7 @@ function ProductListComponent() {
 
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+      return recommendedProduct?.expandedValue[1]?.contentBlockArea.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value
@@ -445,17 +445,17 @@ function ProductListComponent() {
                         className="lg:h-60 h-28 flex items-center justify-center">
                         <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
-                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
+                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>
                       <div
                         onClick={() => handleProductClick(item)}
-                        className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px]">
+                        className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px] cursor-pointer">
                         {item?.name}
                       </div>
                       <div
                         id="my_text"
-                        className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3"
+                        className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3 cursor-pointer"
                         dangerouslySetInnerHTML={{
                           __html: item?.highlightDescription?.value,
                         }}
