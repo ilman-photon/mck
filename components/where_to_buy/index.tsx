@@ -159,7 +159,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container pl-0 pr-0 flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-36 lg:mt-16 where-to-buy">
+        <div className="container pl-0 pr-0 flex lg:flex-row pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
           <div>
           <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
@@ -186,19 +186,19 @@ function WhereComponent() {
               </div>
             </div>
             <div
-              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2"
+              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll h-665 mr-6 location-box">
+            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
                     className={
                       index === selectedStore
-                        ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue "
+                        ? "text-mckthingrey border rounded-lg p-4 mb-4 bg-shadesblue"
                         : "text-mckthingrey border rounded-lg p-4 mb-4"
                     }
                     key={value.id}
@@ -244,7 +244,7 @@ function WhereComponent() {
                         </p>
                       </div>
                       <div
-                        className="lg:text-28 leading-8 font-extrabold text-mcknormalgrey"
+                        className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey"
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >
@@ -293,7 +293,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-782 lg:h-full mt-2">
+          <div className="lg:w-842 w-full relative h-782 lg:h-598 mt-2 lg:mt-0">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
