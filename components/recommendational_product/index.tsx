@@ -79,7 +79,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
-                        role="img"
                       />
                     </div>
                   </div>
@@ -155,7 +154,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         
                         id={"home-product-image01" + indexs + index + 1}
                         alt="promotion image"
-                        role="img"
                       />
                     </div>
                   </div>
@@ -231,7 +229,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
-                      role="img"
                     />
                   </div>
                 </div>
@@ -310,7 +307,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       
                       id={"home-product-image01" + indexs + index + 1}
                       alt="promotion image"
-                      role="img"
                     />
                   </div>
                 </div>
