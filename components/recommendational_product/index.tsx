@@ -11,7 +11,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}?expand=*`,
         {
           headers: {
             "Accept-Language": "en",
@@ -20,6 +20,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       );
     });
   }
+
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -42,6 +43,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
     router.push(desiredURL);
   };
+  
+  
 
   const oneItemD = response?.length == 1 && (
     <>
@@ -50,7 +53,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         response.map((ele: any, index: number) => {
           return (
             <div
-              className={`bg-color  lg:p-9 xl:p-9 p-4 sm:m-3 lg:m-0 lg:mb-6 lg:ml-6 mb-4 bg-red col-span-2`}
+              className={`bg-color col-span-2 p-4 lg:p-[36px]`}
               key={ele?.data?.contentLink?.id}
             >
               <style jsx>{`
@@ -64,7 +67,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <img
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
-                    alt={ele?.data?.imageTitle?.value?.url}
+                    alt={ele?.data?.image?.expandedValue?.altText?.value}
                     
                     id={"home-product-image" + indexs + index + 1}
                   />
@@ -74,11 +77,11 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div className="pb-4 lg:pb-0 col-span-1">
                     <div className="mx-auto my-auto lg:h-60 object-contain">
                       <img
-                        className="mx-auto lg:my-auto"
+                        className="mx-auto lg:my-auto max-h-200"
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
-                        alt="promotion image"
+                        alt={ele?.data?.image?.expandedValue?.altText?.value}
                       />
                     </div>
                   </div>
@@ -125,7 +128,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           let oddItemSpan = index == 0 && "row-span-2";
           return (
             <div
-              className={`bg-color m-3  ${oddItemSpan} `}
+              className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${oddItemSpan} `}
               key={ele?.data?.contentLink?.id}
             >
               <style jsx>{`
@@ -139,21 +142,21 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <img
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
-                    alt={ele?.data?.imageTitle?.value?.url}
+                    alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                     
                     id={"home-product-image" + indexs + index + 1}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-0 my-auto text-justify">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
                   <div className="pb-4 lg:pb-0 col-span-1">
-                    <div className="mx-auto my-auto lg:h-60 object-contain">
+                    <div className="mx-auto my-auto lg:h-40 object-contain">
                       <img
-                        className="mx-auto lg:my-auto"
+                        className="mx-auto lg:my-auto max-h-160"
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
-                        alt="promotion image"
+                        alt={ele?.data?.image?.expandedValue?.altText?.value}
                       />
                     </div>
                   </div>
@@ -200,7 +203,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       return (
         <>
           <div
-            className={`bg-color  lg:p-9 xl:p-9 p-4 sm:m-3 lg:m-0 lg:mb-6 lg:ml-6 mb-4 bg-red odd:ml-0`}
+            className={`bg-color p-4 lg:p-[36px] odd:ml-0`}
             key={ele?.data?.contentLink?.id}
           >
             <style jsx>{`
@@ -210,17 +213,17 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             `}</style>
 
             <div className={`grid h-full`}>
-              <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
+              <div className="w-full lg:mb-8 mb-6 lg:min-h-57">
                 <img
-                  className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
+                  className="h-auto lg:max-w-fit lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
-                  alt={ele?.data?.imageTitle?.value?.url}
+                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                   
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-0 my-auto text-justify">
+              <div className="grid grid-cols-3 lg:gap-4 gap-4 lg:pr-0 my-auto text-justify">
                 <div className="pb-4 lg:pb-0 col-span-1">
                   <div className="mx-auto my-auto lg:h-60 object-contain">
                     <img
@@ -228,7 +231,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       src={ele?.data?.image?.value?.url}
                       
                       id={"home-product-image01" + indexs + index + 1}
-                      alt="promotion image"
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
                   </div>
                 </div>
@@ -278,7 +281,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       return (
         <>
           <div
-            className={`bg-color  lg:p-9 xl:p-9 p-4 sm:m-3 lg:m-0 lg:mb-6 lg:ml-6 mb-4 bg-red odd:ml-0 ${newcolSpan}`}
+            className={`bg-color p-4 lg:p-[36px] sm:m-3 lg:m-0 mb-4 bg-red odd:ml-0 ${newcolSpan}`}
             key={ele?.data?.contentLink?.id}
           >
             <style jsx>{`
@@ -292,13 +295,13 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <img
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
-                  alt={ele?.data?.imageTitle?.value?.url}
+                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                   
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 lg:gap-4 xl:gap-4 lg:pr-0 my-auto text-justify">
+              <div className="grid grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
                 <div className="pb-4 lg:pb-0 col-span-1">
                   <div className="mx-auto my-auto lg:h-60 object-contain">
                     <img
@@ -306,7 +309,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       src={ele?.data?.image?.value?.url}
                       
                       id={"home-product-image01" + indexs + index + 1}
-                      alt="promotion image"
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
                   </div>
                 </div>
@@ -345,9 +348,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       );
     });
   return (
-    <div id="promotion-container" className="container mx-auto lg:pl-6 md:px-6">
-      <div className="pramotion-product-container">
-        <div className="md:grid lg:grid xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+    <div id="promotion-container" className="mx-auto">
+      <div className="promotion-product-container lg:mb-12">
+        <div className="md:grid lg:grid lg:gap-4 xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
           {oneItemD}
           {threeDisplay}
           {moreDisplay}

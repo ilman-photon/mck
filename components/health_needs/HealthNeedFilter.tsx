@@ -496,7 +496,7 @@ const HealthNeedFilter = ({
           </div>
         ) : null}
 
-        <div className='lg:w-10/12 xl:w-10/12 w-full'>
+        <div className='lg:w-10/12 xl:w-10/12 w-full lg:pl-6'>
           <ProductComponent
             selectedProduct={selectedProduct}
             recommendedProduct={recommendedProduct}

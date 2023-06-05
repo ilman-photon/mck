@@ -27,7 +27,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         className="text-gtl-med text-mckblue text-32 font-medium pb-6"
         dangerouslySetInnerHTML={{ __html: title }}
       ></h1>
-      <div className="lg:pt-6 lg:px-2 lg:pb-6">
+      <div className="lg:pt-6 lg:px-2 lg:pb-6 blockDetailsCarousel">
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -44,7 +44,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                 className="swiper-slide-custom"
               >
                 <div
-                  className="swiper-list-item mb-[60px] w-[325px] lg:w-[438px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
+                  className="swiper-list-item mb-[60px] w-[360px] lg:w-[438px] lg:max-h-[544px] min-h-[450px] rounded-lg border border-[#CCD1E3] mr-1 "
                 >
                   <LinkComponent
                     href={{
@@ -66,21 +66,21 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       <figcaption>
                         <div className="content lg:p-6 p-4 lg:pt-4">
                           <div
-                            className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-xl text-gtl-med text-mckblue no-underline text-p-ellipsis"
+                            className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-3xl text-gtl-med text-mckblue no-underline text-p-ellipsis"
                             aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           >
                             {item.title.value}
                           </div>
                           <div className="pb-3 pt-3">
-                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.startPublish ? 'shade-grey-right-border' : ''}`}>
+                            <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.startPublish ? 'shade-grey-right-border' : ''}`}>
                               {GetTime(item.startPublish)}
                             </span>
-                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>
+                            <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>
                               {item.readMinute.value}
                             </span>
                             {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
                           </div>
-                          <div className="flex flex-wrap lg:h-25 text-p-ellipsis">
+                          <div className="flex flex-wrap lg:h-25 h-25 overflow-hidden">
                             {item.tag.value.map((tagitem: any, idx: any) => (
                               <div
                                 style={{

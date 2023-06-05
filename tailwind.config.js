@@ -41,8 +41,10 @@ module.exports = {
       },
       width: {
         18: '18px',
+        100: '100px',
         197: '197px',
         228: '228px',
+        200: '200px',
         306 : '306px',
         325 : '325px',
         338: '338px',
@@ -60,12 +62,16 @@ module.exports = {
         95: '95%',
         202: '202px',
         166: '166px',
+        498: '498px'
       },
       height: {
         25: '25px',
         50: '50px',
+        100: '100px',
+        200: '200px',
         110: '110px',
         136: '136px',
+        225: '225px',
         240: '240px',
         260: '260px',
         276: '276px',
@@ -86,6 +92,7 @@ module.exports = {
         350: '350px',
         598: '598px',
         530: '530px',
+        689: '689px'
       },
       minHeight: {
         50: '50px',
@@ -99,6 +106,8 @@ module.exports = {
         300: '300px',
       },
       maxHeight:{
+        160: '160px',
+        200: '200px',
         314: '314px',
         540: '540px',
         260: '260px',
@@ -116,20 +125,25 @@ module.exports = {
         124: '124px',
         63: '63px',
         11: '11px',
-        105: '105px'
+        105: '105px',
+        81: '81px',
+        29: '29px'
       },
       bottom: {
         13: '-13px',
       },
       right: {
         8: '-8px',
-        11: '11px'
+        11: '11px',
+        28: '28px'
       },
       padding: {
         9: '9px',
+        10: '10px',
         15: '15px',
         18: '18px',
         23: '23px',
+        36: '36px',
         72: "72px",
         54: "54px",
         36: "36px",
@@ -156,9 +170,6 @@ module.exports = {
         28: "28px",
         20: "20px", 
        },
-      borderWidth: {
-        3: "3px",
-      },
       spacing: {
         18: "72px",
         14:"14px",
@@ -181,6 +192,7 @@ module.exports = {
         'acuteblue': '#CCD1E3',
         'everydayblue': '#A7C8E9',
         'shadesblue': '#F2F4F9',
+        'overlaygrey': "#0003",
       }),
       boxShadow: {
         'whatpeoplesaying': '0px 4px 12px rgba(0, 0, 0, 0.25)',
@@ -197,10 +209,15 @@ module.exports = {
       },
       borderWidth: {
         '0.5': '0.5px',
+        3: "3px",
       },
       border: {
         blue20: "#CCD1E3",
 
+      },
+      borderRadius: {
+        10: '10px',
+        50: '50%',
       },
       screens: {
         desktop: {'max': '1280px'},
@@ -209,8 +226,11 @@ module.exports = {
       },
       maxWidth: {
         170: "170px",
-        160: "160px",
+        160: "160px"
       },
+      zIndex: {
+        1: '1',
+      }
     },
   },
   plugins: [],

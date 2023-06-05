@@ -28,7 +28,7 @@ const BlogListContainer = () => {
     return (
         <>
             <HeroArticle data={response?.data.results[0]} />
-            <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
+            <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1' id="carouselExampleCaptions">
                 {response?.data.results?.map((item: any, index: any) => (
                     <React.Fragment key={item?.contentLink?.id}>
                         {index != 0 &&
@@ -48,7 +48,7 @@ const BlogListContainer = () => {
                                             </div>
                                         </LinkComponent>
                                     </figure>
-                                    <figcaption className="h-260">
+                                    <figcaption className="lg:h-260 h-225">
                                         <div className='content lg:p-6 p-4 lg:pt-4'>
                                             <LinkComponent
                                                 href={{
@@ -56,20 +56,20 @@ const BlogListContainer = () => {
                                                     query: { id: item.routeSegment },
                                                 }}
                                             >
-                                                <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-32 text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
+                                                <p className='articleTitle lg:text-32 text-3xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-32 h-28 text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
                                             </LinkComponent>
                                             <div className='pb-3 pt-3'>
-                                                <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                                <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                                 {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                             </div>
-                                            <div className='flex flex-wrap lg:h-50 overflow-hidden'>
+                                            <div className='flex flex-wrap h-25 overflow-hidden'>
                                                 {item.tag.value.map((tagitem: any, idx: any) => (
                                                     <div key={idx}
                                                         style={{
                                                             backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
                                                         }}
-                                                        className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
+                                                        className='mb-1 categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
                                                 ))}
                                             </div>
                                         </div>

@@ -103,7 +103,7 @@ function PdpCarousel(prodViewData: any) {
                 <div className={`lg:w-[526px] ${(deviceWidth < 1024 && deviceWidth !== 0) ? 'h-[300px]' : ''} box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}>
                     <ImageComponent 
                         src={prodResponse?.productImages?.value && prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url}
-                        className="lg:w-[270px]"
+                        className="lg:w-[270px] max-w-[200px]"
                         alt='Image is not available'
                         id={"pdp_carousel_" + prodResponse?.productImages?.value?.imgdata?.id}
                     />
