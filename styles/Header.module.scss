@@ -78,7 +78,15 @@
     }
 }
 
-@media (max-width: 1100px) and (min-width: 1000px) {
+@media (max-width: 1030px) and (min-width: 1000px) {
+    .isStickyActive{
+        .isMobileUi {
+        padding-left: 8vw !important;
+        }
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 1024px) {
     .isStickyActive{
         .isMobileUi {
         padding-left: 2vw;

@@ -1838,7 +1838,7 @@ Mobiles Menu
       display: block;
     }
       
-    @media (max-width: 1000px) {
+    @media (max-width: 1023px) {
       .tabs .tab,
       .tabs label {
         order: initial;
@@ -1965,8 +1965,12 @@ Mobile and iPad Navigation
     padding: 0 19px;
   }
   .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {
-      background-color: rgba(255, 250, 246, 0.6980392157) !important;
+      background-color: rgb(255 250 246);
       color: #001a71 !important;
+  }
+
+  .isStickyActive {
+    background: rgb(255, 246, 237) !important;
   }
   .header:hover .search-icon path {
     fill: #001a71 !important;

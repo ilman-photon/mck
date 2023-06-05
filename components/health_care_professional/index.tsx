@@ -219,7 +219,7 @@ function HealthCareProfessionalComponent() {
                             return (
                               <SwiperSlide
                                 key={idx}
-                                className="swiper-slide lg:mb-18 md:mb-18 sm:mb-0 mb-0"
+                                className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
                                 <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
                                   <div
@@ -343,14 +343,14 @@ function HealthCareProfessionalComponent() {
                               </label>
                               <div className="tab py-6 px-6 lg:min-h-[700px]">
                                 <h2
-                                  className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12"
+                                  className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
                                   tabIndex={idx}
                                   id={`hcp-label-0${idx}`}
                                 >
                                   {tab?.title?.value}
                                 </h2>
                                 <div
-                                  className="text-sofia-reg lg:text-32 text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
+                                  className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                   tabIndex={idx}
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
