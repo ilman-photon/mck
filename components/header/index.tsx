@@ -187,7 +187,6 @@ function HeaderComponent() {
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="lg:mt-7"
               style={isMobile ? undefined : imgWidth}
-              role="img"
             />
           </div>
           <div className="lg:w-full flex border-0 w-18 header-sticky">
