@@ -186,13 +186,13 @@ function WhereComponent() {
               </div>
             </div>
             <div
-              className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
+              className="lg:w-598 max-w-[498px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 lg:w-598 w-full overflow-y-scroll lg:h-689 mr-6 location-box">
+            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
