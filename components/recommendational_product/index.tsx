@@ -11,7 +11,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}?expand=*`,
         {
           headers: {
             "Accept-Language": "en",
@@ -20,6 +20,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       );
     });
   }
+
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -42,6 +43,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
     router.push(desiredURL);
   };
+  
+  
 
   const oneItemD = response?.length == 1 && (
     <>
@@ -64,7 +67,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <img
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
-                    alt={ele?.data?.imageTitle?.value?.url}
+                    alt={ele?.data?.image?.expandedValue?.altText?.value}
                     
                     id={"home-product-image" + indexs + index + 1}
                   />
@@ -78,7 +81,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
-                        alt="promotion image"
+                        alt={ele?.data?.image?.expandedValue?.altText?.value}
                       />
                     </div>
                   </div>
@@ -139,7 +142,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <img
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
-                    alt={ele?.data?.imageTitle?.value?.url}
+                    alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                     
                     id={"home-product-image" + indexs + index + 1}
                   />
@@ -153,7 +156,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
-                        alt="promotion image"
+                        alt={ele?.data?.image?.expandedValue?.altText?.value}
                       />
                     </div>
                   </div>
@@ -214,7 +217,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <img
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
-                  alt={ele?.data?.imageTitle?.value?.url}
+                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                   
                   id={"home-product-image" + indexs + index + 1}
                 />
@@ -228,7 +231,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       src={ele?.data?.image?.value?.url}
                       
                       id={"home-product-image01" + indexs + index + 1}
-                      alt="promotion image"
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
                   </div>
                 </div>
@@ -292,7 +295,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <img
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
-                  alt={ele?.data?.imageTitle?.value?.url}
+                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
                   
                   id={"home-product-image" + indexs + index + 1}
                 />
@@ -306,7 +309,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       src={ele?.data?.image?.value?.url}
                       
                       id={"home-product-image01" + indexs + index + 1}
-                      alt="promotion image"
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
                   </div>
                 </div>
