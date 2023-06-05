@@ -40,7 +40,7 @@ const ProductComponent = ({
           })}
           <section className="relative">
             <h1
-              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pl-6 lg:pb-0 pb-4 pt-6 lg:pt-0"
+              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-6 lg:pt-0"
               
               id={`hn_label_00_${index}`}
               aria-label={product?.item?.name}
@@ -49,7 +49,7 @@ const ProductComponent = ({
             </h1>
 
           {product?.data?.results?.length > 0 ? 
-            <div className="lg:pt-6 lg:pl-6 lg:pb-12 pb-6">
+            <div className="lg:pt-6 lg:pb-12 pb-6">
               <Swiper
                 modules={[Navigation, Pagination]}
                 spaceBetween={4}

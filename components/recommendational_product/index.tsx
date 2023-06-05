@@ -77,7 +77,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div className="pb-4 lg:pb-0 col-span-1">
                     <div className="mx-auto my-auto lg:h-60 object-contain">
                       <img
-                        className="mx-auto lg:my-auto"
+                        className="mx-auto lg:my-auto max-h-200"
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
@@ -148,11 +148,11 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
                   <div className="pb-4 lg:pb-0 col-span-1">
                     <div className="mx-auto my-auto lg:h-40 object-contain">
                       <img
-                        className="mx-auto lg:my-auto"
+                        className="mx-auto lg:my-auto max-h-160"
                         src={ele?.data?.image?.value?.url}
                         
                         id={"home-product-image01" + indexs + index + 1}
