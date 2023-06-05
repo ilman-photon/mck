@@ -152,6 +152,7 @@ function HeaderComponent() {
 
   return (
     <>
+    <a className="skip-main" href="#carouselExampleCaptions">Skip to main content</a>
       <div
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}

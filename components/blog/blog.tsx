@@ -111,7 +111,7 @@ function BlogComponent() {
   }
 
   return (
-    <div className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-[170px]">
+    <div id="carouselExampleCaptions" className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-[170px]">
       <div className="lg:w-966 w-full">
         <div
           id="search"
