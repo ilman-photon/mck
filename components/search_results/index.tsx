@@ -7,6 +7,7 @@ import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import ProductCard from "../../components/health_needs/ProductCard";
 import { ImageComponent } from "../global/ImageComponent";
+import { fetchBlogSetting } from "../blog/BlogAPI";
 
 function ResultComponent() {
   const router = useRouter();
@@ -18,6 +19,7 @@ function ResultComponent() {
   const [productCount, setProductCount] = useState<any>(0);
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [productSearch, setProductSearch] = useState<any>(router.query.search);
+  const [placeHolders, setSearchplaceHolders] = useState<any>();
 
   function FetchProductFilter() {
     return axios.get(
@@ -79,7 +81,7 @@ function ResultComponent() {
     categoryId: any,
     subCategoryId: any
   ) => {
-    let filterItems : any[] = [];
+    let filterItems: any[] = [];
     filterItems = selectedFilterItems;
     if (e.target.checked) {
       if (filterItems[categoryId]["items"].indexOf(filter) === -1) {
@@ -98,7 +100,7 @@ function ResultComponent() {
         })
       );
       filterItems[categoryId][subCategoryId].checked = false;
-      if(filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0){
+      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0) {
         filterItems[categoryId].isCategoryChecked = false;
       }
     }
@@ -121,17 +123,17 @@ function ResultComponent() {
       subCategoryChecked = false;
     }
 
-    let selectedFilterData : any[] = [];
-    selectedFilterData = selectedFilterItems;    
+    let selectedFilterData: any[] = [];
+    selectedFilterData = selectedFilterItems;
 
     selectedFilterData[categoryId].isCategoryChecked = isCategoryChecked;
 
     selectedFilterData[categoryId].map((sub_category: any) => {
       sub_category.checked = subCategoryChecked;
       if (subCategoryChecked) {
-        if(selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1){
+        if (selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1) {
           selectedFilterData[categoryId]["items"].push(sub_category.name);
-        }     
+        }
       } else {
         const index = selectedFilterData[categoryId]["items"].indexOf(
           sub_category.name
@@ -160,40 +162,40 @@ function ResultComponent() {
     let queryParams = "";
     if (selectedFilterItems.length > 0) {
 
-      let businessVerticalCategory :string[];
+      let businessVerticalCategory: string[];
       businessVerticalCategory = [];
-      let notBusinessVerticalCategory :string[];
+      let notBusinessVerticalCategory: string[];
       notBusinessVerticalCategory = [];
-      
+
       selectedFilterItems.map((category: any, catId: any) => {
         category.items.map((item: any, index: any) => {
           let itemName = item.replace(/[^a-zA-Z ]/g, "");
           let encodeItemName = encodeURI(itemName);
           let categoryProductType = category.productType.toLowerCase();
           let queryParam = `${categoryProductType}/value/name eq '${encodeItemName}'`;
-          if(category.isBusinessVerticalCategory){
+          if (category.isBusinessVerticalCategory) {
             businessVerticalCategory.push(queryParam);
-          }else{
+          } else {
             notBusinessVerticalCategory.push(queryParam);
           }
         });
-    });
+      });
 
-    let businessQueryParams : string = '';
-    let notBusinessQueryParams : string = '';
-    businessQueryParams = businessVerticalCategory.join(' or '); 
-    notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
+      let businessQueryParams: string = '';
+      let notBusinessQueryParams: string = '';
+      businessQueryParams = businessVerticalCategory.join(' or ');
+      notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
 
-    if(businessQueryParams !== ''){
-      if(notBusinessQueryParams !== ''){
-        queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
-      }else{
-        queryParams = businessQueryParams;
+      if (businessQueryParams !== '') {
+        if (notBusinessQueryParams !== '') {
+          queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
+        } else {
+          queryParams = businessQueryParams;
+        }
+      } else {
+        queryParams = notBusinessQueryParams;
       }
-    }else{
-      queryParams = notBusinessQueryParams;
     }
-  }
     fetchProductList(queryParams);
   };
 
@@ -277,7 +279,7 @@ function ResultComponent() {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
     );
-    let selectedFilterData : any[] =[];
+    let selectedFilterData: any[] = [];
     selectedFilterData = selectedFilterItems;
     selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
@@ -285,29 +287,29 @@ function ResultComponent() {
         if (item == sub_category.name) {
           sub_category.checked = false;
         }
-        if(category["items"] && category["items"].indexOf(item) > -1){
+        if (category["items"] && category["items"].indexOf(item) > -1) {
           category["items"].splice(category["items"].indexOf(item), 1);
         }
       });
     });
-    setSelectedFilterItems(()=>selectedFilterData);
+    setSelectedFilterItems(() => selectedFilterData);
 
   }
 
   const handleClearAll = () => {
     setActiveFilter([]);
-    let selectedFilterData : any[] = []; 
+    let selectedFilterData: any[] = [];
     selectedFilterData = selectedFilterItems;
     selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         sub_category.checked = false;
-        if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+        if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
           category["items"].splice(category["items"].indexOf(sub_category.name), 1);
         }
       });
     });
-    setSelectedFilterItems(()=>selectedFilterData);
+    setSelectedFilterItems(() => selectedFilterData);
     fetchProductList("");
   };
   const handleProductClick = (data: any) => {
@@ -318,61 +320,49 @@ function ResultComponent() {
     });
   };
 
-    useEffect(() => {
-        
-        document.documentElement.lang = "en";
-    }, []);
-        
-    const [ApiRespond, setApiRespond] = useState<any>();
-    useEffect(() => {
-        document.title = ApiRespond?.data[0]?.title.value || "Default Title";
-    }, [ApiRespond]);
+  useEffect(() => {
+    fetchBlogSetting()
+      .then((res) => {
+        setSearchplaceHolders(res.data[0])
+
+      })
+      .catch((e: Error | AxiosError) => {
+        console.log(e);
+      })
+    document.documentElement.lang = "en";
+  }, []);
+
+  const [ApiRespond, setApiRespond] = useState<any>();
+  useEffect(() => {
+    document.title = ApiRespond?.data[0]?.title.value || "Default Title";
+  }, [ApiRespond]);
 
   return (
     <>
       <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:mt-[170px] lg:pt-[72px]">
         <div className="desktop:px-6 mobile:px-0">
-         {searchLoading && 
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-30"></div>
-          <div className="relative">
-            <Image src={gifImage} alt="coba-image" />{" "}
+          {searchLoading &&
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black opacity-30"></div>
+              <div className="relative">
+                <Image src={gifImage} alt="coba-image" />{" "}
+              </div>
             </div>
-          </div>
-         }
-         {!searchLoading &&
-          <div
-            className="text-54 font-medium text-gtl-med text-mckblue lg:pb-12 pb-1"
-            
-            id="sr_label_001"
-          >
-            
-            {productCount + " results found for “" + productSearch + "”"}
-          </div>
           }
-          <div
-            className="lg:text-lg text-base text-sofia-reg text-black pb-1 font-normal"
-            
-            id="sr_label_002"
-          >
-            Showing results for
-            <span className="text-mckblue italic"> {productSearch}</span>
-          </div>
-          <div
-            className="lg:text-base text-sm text-sofia-reg text-black lg:pb-5 pb-3 font-normal"
-            
-            id="sr_label_003"
-          >
-            Search for
-            <span className="text-mckred italic"> {productSearch}</span>
-          </div>
-          <div
-            className="lg:text-lg text-base pb-1.5 text-sofia-reg font-normal textmcknormalgrey lg:pb-11 border-b-[#CCD1E3]"
-            
-            id="sr_label_004"
-          >
-            Showing {productCount} results
-          </div>
+          {productCount===0 ? <div className='lg:col-span-2 col-start-1 col-end-7'>
+            < div className='w-full lg:pb-11 pb-5' >
+              <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${placeHolders?.noMatchFoundText.value} “${productSearch}”`} </h1>
+              <div className="text-base text-sofia-reg text-mckback font-normal lg:pb-px pb-3" id="srnf-label-001">{placeHolders?.searchForText.value} <strong className='text-mckred'><i>{productSearch}</i></strong></div>
+              <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, 0)}</div>
+            </div >
+          </div > :
+            <>
+              <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}“`} </h1>
+              <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">{placeHolders?.showingResultsText.value} <strong className='text-mckblue'><i>{productSearch}</i></strong></div>
+              <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div>
+              <br />
+            </>}
+
         </div>
         <div className="mck-product-filter">
           <div className="container lg:mt-8 mt-6 md:px-6 lg:px-6 xl:px-0">
@@ -409,18 +399,18 @@ function ResultComponent() {
                       <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 break-words">
                         {productListData?.data?.results.map((item: any, idx: number) => {
                           return (
-                              <div
+                            <div
                               className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
                               key={item?.contentLink?.id}
                               onClick={() => handleProductClick(item)}
-                              >
+                            >
                               <div className="lg:h-60 h-28 flex items-center justify-center">
-                              <ImageComponent
-                                src={item?.image?.value?.url} 
-                                alt={item?.image?.value?.url} 
-                                className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer"
-                                id={"sr-prod-img-001"+idx}
-                              />
+                                <ImageComponent
+                                  src={item?.image?.value?.url}
+                                  alt={item?.image?.value?.url}
+                                  className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer"
+                                  id={"sr-prod-img-001" + idx}
+                                />
                               </div>
                               <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
                                 {item?.form?.value[1]?.name}

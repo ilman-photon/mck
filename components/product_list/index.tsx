@@ -19,14 +19,14 @@ function ProductListComponent() {
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state variable
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
-  const [productName , setProductName] = useState<any>()
+  const [productName, setProductName] = useState<any>()
   // Right section product carousel data
   function fetchProductList(filter: any) {
     setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq '${router.query.filter}') and`;
-    } else if(filter === "NA"){
+    } else if (filter === "NA") {
       queryParameter = "";
     } else {
       queryParameter = `${filter} and`;
@@ -41,7 +41,7 @@ function ProductListComponent() {
     );
     promise
       .then((res) => {
-        setProductName(res.data.results[0].productType?.value[0].name )
+        setProductName(res.data.results[0].productType?.value[0].name)
         SetProductListData(res);
       })
       .catch((e: Error | AxiosError) => console.log(e))
@@ -61,7 +61,7 @@ function ProductListComponent() {
     categoryId: any,
     subCategoryId: any
   ) => {
-    let filterItems : any[] = [];
+    let filterItems: any[] = [];
     filterItems = selectedFilterItems;
     if (e.target.checked) {
       if (filterItems[categoryId]["items"].indexOf(filter) === -1) {
@@ -80,7 +80,7 @@ function ProductListComponent() {
         })
       );
       filterItems[categoryId][subCategoryId].checked = false;
-      if(filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0){
+      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0) {
         filterItems[categoryId].isCategoryChecked = false;
       }
     }
@@ -103,17 +103,17 @@ function ProductListComponent() {
       subCategoryChecked = false;
     }
 
-    let selectedFilterData : any[] = [];
-    selectedFilterData = selectedFilterItems;    
+    let selectedFilterData: any[] = [];
+    selectedFilterData = selectedFilterItems;
 
     selectedFilterData[categoryId].isCategoryChecked = isCategoryChecked;
 
     selectedFilterData[categoryId].map((sub_category: any) => {
       sub_category.checked = subCategoryChecked;
       if (subCategoryChecked) {
-        if(selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1){
+        if (selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1) {
           selectedFilterData[categoryId]["items"].push(sub_category.name);
-        }     
+        }
       } else {
         const index = selectedFilterData[categoryId]["items"].indexOf(
           sub_category.name
@@ -141,43 +141,43 @@ function ProductListComponent() {
     let queryParams = "";
     if (selectedFilterItems.length > 0) {
 
-      let businessVerticalCategory :string[];
+      let businessVerticalCategory: string[];
       businessVerticalCategory = [];
-      let notBusinessVerticalCategory :string[];
+      let notBusinessVerticalCategory: string[];
       notBusinessVerticalCategory = [];
-      
+
       selectedFilterItems.map((category: any, catId: any) => {
         category.items.map((item: any) => {
-          if(category.isBusinessVerticalCategory){
+          if (category.isBusinessVerticalCategory) {
             let categoryProductType = category.productType;
             let queryParam = `${categoryProductType}/value/name eq '${item}'`;
             businessVerticalCategory.push(queryParam);
-          }else{
+          } else {
             let categoryProductType = category.productType ? category.productType.toLowerCase() : '';
             let queryParam = `${categoryProductType}/value/name eq '${item}'`;
             notBusinessVerticalCategory.push(queryParam);
           }
         });
-    });
+      });
 
-    let businessQueryParams : string = '';
-    let notBusinessQueryParams : string = '';
-    businessQueryParams = businessVerticalCategory.join(' or '); 
-    notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
+      let businessQueryParams: string = '';
+      let notBusinessQueryParams: string = '';
+      businessQueryParams = businessVerticalCategory.join(' or ');
+      notBusinessQueryParams = notBusinessVerticalCategory.join(' and ');
 
-    if(businessQueryParams !== ''){
-      if(notBusinessQueryParams !== ''){
-        queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
-      }else{
-        queryParams = `(${businessQueryParams})`;
+      if (businessQueryParams !== '') {
+        if (notBusinessQueryParams !== '') {
+          queryParams = `(${businessQueryParams}) and (${notBusinessQueryParams})`;
+        } else {
+          queryParams = `(${businessQueryParams})`;
+        }
+      } else {
+        queryParams = notBusinessQueryParams;
       }
-    }else{
-      queryParams = notBusinessQueryParams;
-    }
-    
-    queryParams = queryParams !== '' ? queryParams : 'NA';
 
-  }
+      queryParams = queryParams !== '' ? queryParams : 'NA';
+
+    }
     fetchProductList(queryParams);
   };
 
@@ -206,7 +206,7 @@ function ProductListComponent() {
     );
     const productCategoryDataList =
       productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-      // setRecommendedProduct(productCategoryData?.data[0].contentArea);
+    // setRecommendedProduct(productCategoryData?.data[0].contentArea);
     // console.log("MAIN productCategoryDataList --- ", productCategoryDataList);
     //console.log("maincategorydata?.categoryImage?.expandedValue?.url--- ",productCategoryDataList[0]?.categoryImage?.expandedValue?.url);
     setproductCategoryData(productCategoryDataList);
@@ -214,7 +214,7 @@ function ProductListComponent() {
   };
 
 
-  const fetchRecommandedProductData = async () =>{
+  const fetchRecommandedProductData = async () => {
     const tempName = productName?.replace(/ /g, "-")
     const recommendedCategoryData = await axios(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
@@ -222,10 +222,10 @@ function ProductListComponent() {
     const response = recommendedCategoryData?.data[0]?.contentArea
     setRecommendedProduct(response)
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchRecommandedProductData()
-   
-  },[productName])
+
+  }, [productName])
 
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
@@ -258,18 +258,18 @@ function ProductListComponent() {
       });
     });
 
-    let selectedFilterData : any[] =[];
+    let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
           sub_category.checked = true;
-          if(category["items"] && category["items"].indexOf(router.query.filter) === -1){
+          if (category["items"] && category["items"].indexOf(router.query.filter) === -1) {
             category["items"].push(router.query.filter);
             setActiveFilter([...activeFilter, router.query.filter]);
           }
         } else {
-          if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+          if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
             category["items"].splice(category["items"].indexOf(sub_category.name), 1);
           }
           category.checked = false;
@@ -285,7 +285,7 @@ function ProductListComponent() {
     setActiveFilter(
       activeFilter.filter((filterItem: any) => filterItem !== item)
     );
-    let selectedFilterData : any[] =[];
+    let selectedFilterData: any[] = [];
     selectedFilterData = selectedFilterItems;
     selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
@@ -293,29 +293,29 @@ function ProductListComponent() {
         if (item == sub_category.name) {
           sub_category.checked = false;
         }
-        if(category["items"] && category["items"].indexOf(item) > -1){
+        if (category["items"] && category["items"].indexOf(item) > -1) {
           category["items"].splice(category["items"].indexOf(item), 1);
         }
       });
     });
-    setSelectedFilterItems(()=>selectedFilterData);
+    setSelectedFilterItems(() => selectedFilterData);
 
   }
 
   const handleClearAll = () => {
     setActiveFilter([]);
-    let selectedFilterData : any[] = []; 
+    let selectedFilterData: any[] = [];
     selectedFilterData = selectedFilterItems;
     selectedFilterData.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
         sub_category.checked = false;
-        if(category["items"] && category["items"].indexOf(sub_category.name) > -1){
+        if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
           category["items"].splice(category["items"].indexOf(sub_category.name), 1);
         }
       });
     });
-    setSelectedFilterItems(()=>selectedFilterData);
+    setSelectedFilterItems(() => selectedFilterData);
     fetchProductList("NA");
   };
 
@@ -332,7 +332,7 @@ function ProductListComponent() {
       return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
         (item: any) => {
           if (
-            id?.recommendedProductCategory?.value 
+            id?.recommendedProductCategory?.value
             // &&
             // id.recommendedProductCategory.value[0].id ===
             //   item.productCategoryType.value[0].id
@@ -355,11 +355,11 @@ function ProductListComponent() {
   }, [recommendedProduct]);
 
   const handleProduct = (item: any, index: number) => {
-    const filteredSection = sectionData.filter((section : any) => {
+    const filteredSection = sectionData.filter((section: any) => {
       const tempProductName = section?.recommendedProductCategory?.value[0]?.name
       const itemName = tempProductName.toLowerCase().replace(/[^\w\s]/gi, '');
-      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, ''); 
-     
+      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, '');
+
       return itemName.includes(searchItem);
     });
 
@@ -424,7 +424,7 @@ function ProductListComponent() {
 
               {/* Product items */}
               <>
-                 {selectedRecommendedProduct?.map((itemData: any, index: number) => {
+                {selectedRecommendedProduct?.map((itemData: any, index: number) => {
                   let correctItemValue = itemData?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
                   let correctProductValue = productName?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
                   if (correctItemValue === correctProductValue) {
@@ -432,22 +432,25 @@ function ProductListComponent() {
                   }
                   return null;
                 })}
-                </>
-              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 lg:mb-12 break-words">         
+              </>
+              <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 lg:mb-12 break-words">
                 {productListData?.data?.results.map((item: any) => {
                   return (
                     <div
                       className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
                       key={item?.contentLink?.id}
-                      onClick={() => handleProductClick(item)}
                     >
-                      <div className="lg:h-60 h-28 flex items-center justify-center">
-                      <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
+                      <div
+                        onClick={() => handleProductClick(item)}
+                        className="lg:h-60 h-28 flex items-center justify-center">
+                        <img src={item?.image?.value?.url} alt={`${item?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
                         {/* {healthcategorytitle?.healthNeedCategory?.value[0]?.name} */}
                       </div>
-                      <div className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px]">
+                      <div
+                        onClick={() => handleProductClick(item)}
+                        className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px]">
                         {item?.name}
                       </div>
                       <div
@@ -457,7 +460,7 @@ function ProductListComponent() {
                           __html: item?.highlightDescription?.value,
                         }}
                       ></div>
-                    </div>                  );
+                    </div>);
                 })}
               </div>
               {/* Product End */}
