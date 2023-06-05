@@ -33,7 +33,8 @@ const ProductComponent = ({
       {selectedProduct?.map((product: any, index: number) => (
         <div key={index}>
           {selectedRecommendedProduct?.map((item: any, idx: number) => {
-            if (item === product?.item?.name) {
+            // console.log(item,"item",selectedProduct)
+            if (item === product?.item?.name && item.length >0) {
               return handleProduct(item, index);
             }
             return null;
