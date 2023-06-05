@@ -27,17 +27,18 @@ const HeroArticle = ({ data }: any) => {
             </LinkComponent>
             <figcaption>
                 <div className='content lg:p-6 p-4 lg:pt-4'>
-                    <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
-                    <div className='pb-3 lg:pt-0 pt-3'>
-                        <LinkComponent
+                <LinkComponent
                             href={{
                                 pathname: "/blog_details",
                                 query: { id: data?.routeSegment },
                             }}
                             className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                         >
+                    <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
+                    </LinkComponent>
+                    <div className='pb-3 lg:pt-0 pt-3'>
+                      
                             <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${data?.readMinute?.value ? 'shade-grey-right-border' : ''}`} id='blog-label-001'>{GetTime(data?.startPublish)}</span>
-                        </LinkComponent>
 
                         <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-label-002'>{data?.readMinute?.value}</span>
                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
