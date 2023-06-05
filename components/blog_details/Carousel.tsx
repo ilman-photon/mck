@@ -72,10 +72,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             {item.title.value}
                           </div>
                           <div className="pb-3 pt-3">
-                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.startPublish ? 'shade-grey-right-border' : ''}`}>
+                            <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.startPublish ? 'shade-grey-right-border' : ''}`}>
                               {GetTime(item.startPublish)}
                             </span>
-                            <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>
+                            <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>
                               {item.readMinute.value}
                             </span>
                             {/* <span className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2">2.3K views</span> */}
