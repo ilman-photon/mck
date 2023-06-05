@@ -7,38 +7,42 @@ import {
   Marker,
   useLoadScript,
   TransitLayer,
-} from '@react-google-maps/api';
-import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
-import Image from 'next/image';
-import { useWhereToBuyStore } from './Store/useWhereToBuyStore';
+} from "@react-google-maps/api";
+import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import Image from "next/image";
+import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
   const [latitude, setLatitude] = useState(33.2411354);
-  const [isCustomSearch, setIsCustomSearch] = useState(false) 
+  const [isCustomSearch, setIsCustomSearch] = useState(false);
   const [longitude, setLongitude] = useState(-111.7256936);
   const [loading, setLoading] = useState(true); // Tambahkan state loading
   const [selectedStore, setSelectedStore] = useState(-1);
-  const [searchState, setSearchState] = useState('')
+  const [searchState, setSearchState] = useState("");
   let textInput: any;
   /**
    * @state creds key
    */
-  const mapKey = useWhereToBuyStore((state:any) => state.mapsApiKey)
-  const healthApiKey = useWhereToBuyStore((state: any) => state.healthMartApiKey)
+  const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey);
+  const healthApiKey = useWhereToBuyStore(
+    (state: any) => state.healthMartApiKey
+  );
 
   /**
    * @state initial zoom level of Map onRender
    */
-  const initialZoomLevelMap = useWhereToBuyStore((state: any) => state.zoomLevel)
+  const initialZoomLevelMap = useWhereToBuyStore(
+    (state: any) => state.zoomLevel
+  );
 
   /**
-   * @state USA Coords 
+   * @state USA Coords
    */
-  const usaLon = useWhereToBuyStore((state: any) => state.usaLon)
-  const usaLat = useWhereToBuyStore((state: any) => state.usaLat)
-  
+  const usaLon = useWhereToBuyStore((state: any) => state.usaLon);
+  const usaLat = useWhereToBuyStore((state: any) => state.usaLat);
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
   });
@@ -127,12 +131,12 @@ function WhereComponent() {
       textInput = e.target.value;
       fectchLatandLongDetails()
         .then((res) => {
-          setLatitude(res.data.results[0].geometry.location['lat']);
-          setLongitude(res.data.results[0].geometry.location['lng']);
-          setIsCustomSearch(true)
+          setLatitude(res.data.results[0].geometry.location["lat"]);
+          setLongitude(res.data.results[0].geometry.location["lng"]);
+          setIsCustomSearch(true);
         })
         .catch((e: Error | AxiosError) => console.log(e));
-      }
+    }
   };
 
   return (
@@ -156,7 +160,7 @@ function WhereComponent() {
       ) : (
         <div className="container pl-0 pr-0 flex lg:flex-row lg:pt-6 pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-36 lg:mt-16 where-to-buy">
           <div>
-          <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
@@ -165,7 +169,7 @@ function WhereComponent() {
                 onKeyDown={(e) => handleKey(e)}
                 placeholder="City, State or Zip code"
                 className="bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
-                />
+              />
               <Image
                 src="images/location_on.svg"
                 alt="location"
@@ -244,8 +248,6 @@ function WhereComponent() {
                       {value?.StoreUrl ? (
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
-                          role="link"
-                          
                           id={`wb-label-08_0${index}`}
                           onClick={() => showOnline(value.StoreUrl)}
                         >
@@ -265,8 +267,6 @@ function WhereComponent() {
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"
-                          
-                          role="link"
                           id={`wb-label-10_0${index}`}
                           onClick={() =>
                             showMapClicked(
@@ -284,7 +284,6 @@ function WhereComponent() {
                 );
               })}
             </div>
-            
           </div>
 
           <div className="lg:w-842 w-full relative h-782 lg:h-full">
@@ -297,14 +296,14 @@ function WhereComponent() {
                 lat:
                   responseValue?.length > 0 || isCustomSearch
                     ? responseValue[0]?.Lat
-                    :usaLat,
+                    : usaLat,
                 lng:
                   responseValue?.length > 0 || isCustomSearch
                     ? responseValue[0]?.Lon
-                    :usaLon
+                    : usaLon,
               }}
             >
-              <TransitLayer/>
+              <TransitLayer />
               {responseValue?.map((value: any, index: any) => {
                 return (
                   <Marker
@@ -345,12 +344,15 @@ function WhereComponent() {
                           <div className="flex">
                             <span className="text-sofia-reg text-mcknormalgrey mb-2.5">
                               <span className="text-lg leading-5">
-                                {value.Address}, </span>
+                                {value.Address},{" "}
+                              </span>
                               <div className="text-lg leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
-                              <div className=" text-mckblue text-lg leading-5">{value.Phone}</div>
+                              <div className=" text-mckblue text-lg leading-5">
+                                {value.Phone}
+                              </div>
                             </span>
                             <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
@@ -387,7 +389,7 @@ function WhereComponent() {
                 );
               })}
             </GoogleMap>
-            
+
             <div className="flex gap-2 divider-x lg:flex-row left-1/2 absolute bottom-2 ml-145 lg:ml-auto lg:left-0 rounded-tl rounded-bl lg:rounded-tl-none lg:rounded-bl-none rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <div className="p-2">
                 <h2 className="text-sm text-gray-900 dark:text-white">
