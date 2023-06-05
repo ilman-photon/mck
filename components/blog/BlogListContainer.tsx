@@ -28,7 +28,7 @@ const BlogListContainer = () => {
     return (
         <>
             <HeroArticle data={response?.data.results[0]} />
-            <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
+            <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1' id="carouselExampleCaptions">
                 {response?.data.results?.map((item: any, index: any) => (
                     <React.Fragment key={item?.contentLink?.id}>
                         {index != 0 &&
