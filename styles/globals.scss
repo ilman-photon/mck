@@ -2483,6 +2483,19 @@ video{
   }
 }
 
+.swiper-button-prev {
+  left: var(--swiper-navigation-sides-offset,-10px) !important;
+}
+.swiper-button-next {
+  right: var(--swiper-navigation-sides-offset,-10px) !important;
+}
+.blockDetailsCarousel .swiper-button-prev {
+  left: var(--swiper-navigation-sides-offset,10px) !important;
+}
+.blockDetailsCarousel .swiper-button-next {
+  right: var(--swiper-navigation-sides-offset,10px) !important;
+}
+
 @media screen and (min-width: 1024px) {
   .swiper-button-next, .swiper-button-prev {
     top: var(--swiper-navigation-top-offset,47.5%) !important;

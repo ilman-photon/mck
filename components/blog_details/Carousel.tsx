@@ -27,7 +27,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         className="text-gtl-med text-mckblue text-32 font-medium pb-6"
         dangerouslySetInnerHTML={{ __html: title }}
       ></h1>
-      <div className="lg:pt-6 lg:px-2 lg:pb-6">
+      <div className="lg:pt-6 lg:px-2 lg:pb-6 blockDetailsCarousel">
 
         <Swiper
           modules={[Navigation, Pagination]}
