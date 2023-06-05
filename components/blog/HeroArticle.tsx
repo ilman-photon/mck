@@ -34,7 +34,7 @@ const HeroArticle = ({ data }: any) => {
                             }}
                             className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                         >
-                    <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
+                    <h1 className='lg:text-32 text-3xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                     </LinkComponent>
                     <div className='pb-3 lg:pt-0 pt-3'>
                       
@@ -43,7 +43,7 @@ const HeroArticle = ({ data }: any) => {
                         <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-label-002'>{data?.readMinute?.value}</span>
                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
-                    <div className='flex lg:flex-wrap [&>*:nth-child(1)]:ml-0 '>
+                    <div className='flex flex-wrap mb-2.5 h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 '>
                         {data?.tag?.value.map((item: any, index: any) => (
                             <div key={index}
                                 style={{

@@ -28,7 +28,7 @@ const ResentBlogListComponent = () => {
                         }}
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
-                       <div key={index}> {`${item.title.value}`}</div>
+                       <div className='text-mcknormalgrey' key={index}> {`${item.title.value}`}</div>
                     </LinkComponent>
                 </div>
             ))}

@@ -2419,7 +2419,11 @@ Video Player Code
       -webkit-line-clamp: unset;
   }
 }
-
+@media (max-width: 576px) {
+  .text-p-ellipsis{
+      -webkit-line-clamp: 3;
+  }
+}
 .textoverflow-scroll::-webkit-scrollbar {
   width: 7px
 }
@@ -2490,9 +2494,9 @@ video{
   border-radius: 10px;
   margin: 0px auto;
 }
-.blog-details-container img{
-  margin: auto;
-}
+// .blog-details-container img{
+//   margin: auto;
+// }
 .category-card label{
   color: #001a71;
     font-weight: 800;
