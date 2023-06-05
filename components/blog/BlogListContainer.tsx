@@ -59,8 +59,8 @@ const BlogListContainer = () => {
                                                 <p className='articleTitle lg:text-32 text-3xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-32 h-28 text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
                                             </LinkComponent>
                                             <div className='pb-3 pt-3'>
-                                                <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                                <span className={`text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                                 {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                             </div>
                                             <div className='flex flex-wrap h-25 overflow-hidden'>
@@ -69,7 +69,7 @@ const BlogListContainer = () => {
                                                         style={{
                                                             backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
                                                         }}
-                                                        className='mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
+                                                        className='mb-1 categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
                                                 ))}
                                             </div>
                                         </div>

@@ -159,9 +159,9 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-        <div className="container pl-0 pr-0 flex lg:flex-row pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
+      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
           <div>
-          <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+          <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
@@ -170,17 +170,17 @@ function WhereComponent() {
                 value={!isCustomSearch ? undefined : textInput}
                 onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
                 placeholder="City, State or Zip code"
-                className="bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
+                className="border-mckblue bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
               <div onClick={handleKey} className="cursor-pointer">
               <Image
-                src="images/location_on.svg"
+                src="images/Vector-nw.svg"
                 alt="location"
                 // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
                 // width={24}
                 // height={25}
-                className="text-mckgreyborder absolute top-[12px] right-5"
-                width={20}
+                className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
+                width={15}
                 height={20}
               />
               </div>
@@ -293,7 +293,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-782 lg:h-598 mt-2 lg:mt-0">
+          <div className="lg:w-842 w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
