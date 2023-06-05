@@ -59,6 +59,8 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     }else{
+      const index = selectedFilterItems[mainCategoryId]?.['items'].indexOf(item);
+      selectedFilterItems[mainCategoryId]['items'].splice(index, 1);
       selectedFilterItems.map((category: any) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
