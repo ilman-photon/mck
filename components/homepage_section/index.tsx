@@ -146,7 +146,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               id={sectionData?.description?.value}
             ></div>
             {sectionData?.buttonText?.value && (
-              <div
+              <button
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
@@ -159,11 +159,10 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 }}
                 
                 id={sectionData?.buttonText?.value}
-                role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
               >
                 {sectionData?.buttonText?.value}
-              </div>
+              </button>
             )}
           </div>
         </div>
@@ -187,14 +186,13 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           >
             <img
               className="w-full lg:px-0"
-              src={sectionData?.image?.value?.url}
-              
+              src={sectionData?.image?.value?.url}              
               id={sectionData?.image?.value?.url}
               alt="learning image"
             />
           </div>
           <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
-            <h2
+            <h3
               className={`${sectionData?.assetPosition?.value === "Right" 
               ? "mx-auto lg:text-left text-left"
               : "ml-0 text-left"
@@ -203,7 +201,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               id={sectionData?.title?.value}
             >
               {sectionData?.title?.value}
-            </h2>
+            </h3>
             <div
               className={`${sectionData?.assetPosition?.value === "Right"
               ? "mx-auto lg:text-left text-left"
@@ -216,7 +214,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               id={sectionData?.description?.value}
             ></div>
             {sectionData?.buttonText?.value && (
-              <div
+              <button
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mr-auto "
                   : "ml-0"
@@ -229,11 +227,10 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 }}
                 
                 id={sectionData?.buttonText?.value}
-                role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
               >
                 {sectionData?.buttonText?.value}
-              </div>
+              </button>
             )}
           </div>
           </div>
@@ -243,8 +240,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           <img
             src={sectionData?.backgroundImage?.expandedValue?.url}
             alt={sectionData?.backgroundImage?.expandedValue?.url}
-            id="wft_img_004"
-            
+            id="wft_img_004"            
             className="w-full"
           />
           <div className="container mx-auto position-relative bg-transparent-left">
@@ -252,8 +248,6 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               <h2
                 className="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
                 id="wft_label_005"
-                
-                role="text"
               >
                 {sectionData?.name}
               </h2>
@@ -288,8 +282,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           <div className="lg:absolute top-0 right-0 bottom-0 bg-transparent-right lg:pr-11 lg:pl-6 w-540 float-right flex flex-col justify-center lg:items-end pt-8 lg:pt-0 lg:hidden">
             <h2
               className="text-mckblue text-gtl-med heading font-medium lg:pb-6 pb-4"
-              id="wft_label_010"
-              
+              id="wft_label_010"              
             >
               {sectionData?.name}
             </h2>
@@ -303,7 +296,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               }}
             ></p>
             {sectionData?.buttonText?.value && (
-              <div
+              <button
                 className={`${sectionData?.assetPosition?.value === "Right"
                   ? "mx-auto"
                   : "ml-0"
@@ -316,11 +309,10 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 }}
                 
                 id={sectionData?.buttonText?.value}
-                role="button"
                 onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
               >
                 {sectionData?.buttonText?.value}
-              </div>
+              </button>
             )}
 
           </div>

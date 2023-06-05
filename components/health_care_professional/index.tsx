@@ -221,7 +221,6 @@ function HealthCareProfessionalComponent() {
                                       className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
                                       
                                       id={`hcp-label-0000${idx}`}
-                                      role="text"
                                     >
                                       {customer.customerName?.value} -{" "}
                                       {customer?.customerQualification?.value}{" "}
