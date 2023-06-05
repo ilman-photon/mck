@@ -26,7 +26,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             src={item.image.expandedValue?.url}
                             id='blog-img-006'
                             alt='Allergy Relief Product'
-                            className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60"
+                            className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px]"
                         />
                     </figure>
                     <figcaption>

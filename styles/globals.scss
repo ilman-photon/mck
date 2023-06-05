@@ -2365,8 +2365,11 @@ Mobile and iPad Navigation
 }
 
 @media (max-width: 968px) {
-  .text-oneline-ellipsis,.text-heading-ellipsis, .text-p-ellipsis, .text-content-ellipsis, .text-sixcontent-ellipsis {
+  .text-oneline-ellipsis,.text-heading-ellipsis,.text-content-ellipsis, .text-sixcontent-ellipsis {
       -webkit-line-clamp: unset;
+  }
+  .text-p-ellipsis{
+    -webkit-line-clamp: 3;
   }
 }
 @media (max-width: 576px) {
