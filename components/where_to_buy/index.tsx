@@ -161,27 +161,30 @@ function WhereComponent() {
       ) : (
         <div className="container pl-0 pr-0 flex lg:flex-row pt-6 px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
           <div>
-          {/* <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+          <div className="absolute lg:relative top-[105px] z-0 left-6 right-6 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
                 name="fname"
-                value={textInput}
-                onKeyDown={(e) => handleKey(e)}
+                onChange={(e) => setTextInput(e.target.value)}
+                value={!isCustomSearch ? undefined : textInput}
+                onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
                 placeholder="City, State or Zip code"
                 className="bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
+              <div onClick={handleKey} className="cursor-pointer">
               <Image
                 src="images/location_on.svg"
                 alt="location"
                 // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
                 // width={24}
                 // height={25}
-                className="text-mckgreyborder absolute lg:top-7 top-[20px] right-5"
+                className="text-mckgreyborder absolute top-[12px] right-5"
                 width={20}
                 height={20}
               />
-            </div> */}
+              </div>
+            </div>
             <div
               className="lg:w-598 w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
@@ -429,7 +432,7 @@ function WhereComponent() {
                 />
               </div>
             </div>
-            <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            {/* <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <label
                 htmlFor="fname"
                 className="flex items-center lg:justify-center justify-start text-[20px] font-extrabold text-sofia-bold text-mckblue lg:mr-3 mb-3 lg:mb-0 leading-[24px]"
@@ -437,7 +440,6 @@ function WhereComponent() {
               >
                 Where to buy
               </label>
-              {/* <div className="flex flex-1 absolute"> */}
               <input
                 type="text"
                 id="fname"
@@ -455,8 +457,7 @@ function WhereComponent() {
                 className="text-mckgreyborder absolute lg:top-7 top-16 right-8"
               />
               </div>
-              {/* </div> */}
-            </div>
+            </div> */}
           </div>
         </div>
       )}
