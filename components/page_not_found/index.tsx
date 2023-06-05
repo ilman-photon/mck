@@ -22,13 +22,13 @@ function PageNotFound() {
         <div className="border-[#CCD1E3] border rounded-lg overflow-hidden lg:mr-6 mb-4 lg:mb-0">
             <div className="px-4 py-3 text-lg font-extrabold text-sofia-bold text-mckblue bg-[#F8F9FB] border-b"  id="pnf_label_006">Speak to a Specialist</div>
             <div className="p-6 text-lg text-sofia-reg text-mckblue">
-                <p><a href=""  id="pnf_label_006_01" role="link" aria-label="Find a store">Find a store</a></p>
+                <p><a href=""  id="pnf_label_006_01" aria-label="Find a store">Find a store</a></p>
             </div>
         </div>
         <div className="border-[#CCD1E3] border rounded-lg overflow-hidden">
             <div className="px-4 py-3 text-lg font-extrabold text-sofia-bold text-mckblue bg-[#F8F9FB] border-b"  id="pnf_label_007">Send Feedback</div>
             <div className="p-6 text-lg text-sofia-reg text-mckblue">
-                <p >Help us make our search better <a href=""  id="pnf_label_007_01" role="link" aria-label="Send feedback">Send feedback</a></p>
+                <p >Help us make our search better <a href=""  id="pnf_label_007_01" aria-label="Send feedback">Send feedback</a></p>
             </div>
         </div>
         </div>

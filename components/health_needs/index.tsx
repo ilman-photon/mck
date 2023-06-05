@@ -8,9 +8,9 @@ import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 import Image from "next/image";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
-let sectionData: any = []
-let selectedRecommendedProduct: any = []
-let _temparray :any = []
+let sectionData: any = [];
+let selectedRecommendedProduct: any = [];
+let _temparray: any = [];
 const HealthNeedsComponent = () => {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<any>([]);
@@ -21,8 +21,8 @@ const HealthNeedsComponent = () => {
   const [healthData, setHealthData] = useState(false);
   const [isLoading, setIsLoading] = useState(true); //
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
-  const [recommendedProduct , setRecommendedProduct] = useState<any>()
-  const [filterClicked , setFilterClicked] = useState(false)
+  const [recommendedProduct, setRecommendedProduct] = useState<any>();
+  const [filterClicked, setFilterClicked] = useState(false);
   const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
     useState();
 
@@ -70,7 +70,7 @@ const HealthNeedsComponent = () => {
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
 
-    let categoryArrayList =_temparray
+    let categoryArrayList = _temparray;
 
     let queryParameter = "";
     if (filter === "") {
@@ -79,10 +79,9 @@ const HealthNeedsComponent = () => {
     } else {
       if (filter.includes("healthNeeds")) {
         queryParameter = filter;
-      } 
-      else {
-        queryParameter = filter 
-          // + " and ContentType/any(t:t eq 'ProductDetailsPage')";
+      } else {
+        queryParameter = filter;
+        // + " and ContentType/any(t:t eq 'ProductDetailsPage')";
       }
     }
 
@@ -97,27 +96,28 @@ const HealthNeedsComponent = () => {
     );
     promise
       .then((res) => {
-        console.log("FetchProductList----- ", res);       
-        setFilterClicked(true)
+        console.log("FetchProductList----- ", res);
+        setFilterClicked(true);
         let tempObj: any = {};
         if (filter.includes("Health%20Needs")) {
           setHealthData(!healthData);
         } else {
-        let catArray :any =[]
+          let catArray: any = [];
           res.data.results.map((item: any) => {
+            let temp = item.healthNeeds.value;
+            temp.shift();
 
-            let temp = item.healthNeeds.value
-            temp.shift()
-
-            temp.map((value : any) => {
-              let key = value.name 
-              if(!catArray.includes(key)){
-              catArray.push(key)
+            temp.map((value: any) => {
+              let key = value.name;
+              if (!catArray.includes(key)) {
+                catArray.push(key);
               }
 
-              if(categoryArrayList.length>0 && !categoryArrayList.includes(key)){
-                key =''
-
+              if (
+                categoryArrayList.length > 0 &&
+                !categoryArrayList.includes(key)
+              ) {
+                key = "";
               }
 
               let tempArray = item.healthNeeds.value.filter(
@@ -136,8 +136,9 @@ const HealthNeedsComponent = () => {
             });
           });
           let productArray: any = [];
-        const mapArray =  categoryArrayList.length > 0 ? categoryArrayList : catArray 
-        mapArray.map((key :any) => {
+          const mapArray =
+            categoryArrayList.length > 0 ? categoryArrayList : catArray;
+          mapArray.map((key: any) => {
             productArray.push({
               item: { name: key },
               data: { results: tempObj[key] },
@@ -211,23 +212,28 @@ const HealthNeedsComponent = () => {
       let minCategoryCnt = 0;
       let minSubCategoryCnt = 0;
       selectedFilterItems.map((category: any, catId: any) => {
-        _temparray=[]
+        _temparray = [];
         if (!category.isCategoryChecked && category.items.length > 0) {
           if (lastCatId > 0 && lastCatId != catId) {
             queryParams += " and ";
           }
           queryParams += "(";
           category.items.map((item: any, index: any) => {
-            if(category.productType === "healthNeeds"){
-            if (!_temparray.includes(item)) {
-              _temparray.push(item);
-            }
+            if (category.productType === "healthNeeds") {
+              if (!_temparray.includes(item)) {
+                _temparray.push(item);
+              }
             }
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
             const concatStr =
-              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
-            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
+              category.items.length === index + 1
+                ? "":" or ";
+            queryParams += `${
+              category?.isBusinessVerticalCategory
+                ? category?.productType
+                : (category?.productType).toLowerCase()
+            }/value/name eq '${encodeItemName}' ${concatStr}`;
           });
 
           minSubCategoryCnt += category.items.length;
@@ -241,20 +247,25 @@ const HealthNeedsComponent = () => {
               queryParams += " and ";
             }
             queryParams += "(";
-          category.items.map((item: any, index: any) => {
-            if(category.productType === "healthNeeds"){
-            if (!_temparray.includes(item)) {   
-              _temparray.push(item);
-            }
-            }
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr =
-              category.items.length === index + 1 ? "" :  category.isBusinessVerticalCategory ? " or " : " and ";;
-            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
-          queryParams += `)`;
-          lastCatId = catId;
+            category.items.map((item: any, index: any) => {
+              if (category.productType === "healthNeeds") {
+                if (!_temparray.includes(item)) {
+                  _temparray.push(item);
+                }
+              }
+              const itemName = item.replace(/[^a-zA-Z ]/g, "");
+              const encodeItemName = encodeURI(itemName);
+              const concatStr =
+                category.items.length === index + 1
+                  ? "":" or ";
+              queryParams += `${
+                category?.isBusinessVerticalCategory
+                  ? category?.productType
+                  : (category?.productType).toLowerCase()
+              }/value/name eq '${encodeItemName}' ${concatStr}`;
+            });
+            queryParams += `)`;
+            lastCatId = catId;
             // const categoryName = selectedFilterItems[catId].categoryName;
             // const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
             // const encodeItemName = encodeURI(itemName);
@@ -270,8 +281,8 @@ const HealthNeedsComponent = () => {
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
         // queryParams = "";
         const currentURL = window.location.href;
-  const updatedURL = currentURL.split('?')[0]; 
-  window.location.href = updatedURL;
+        const updatedURL = currentURL.split("?")[0];
+        window.location.href = updatedURL;
       }
     }
 
@@ -303,9 +314,11 @@ const HealthNeedsComponent = () => {
         healthNeedsCategoriesList.length > 0
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
-      setCustomerBackgroundColorCode(healthNeedsCategoriesList[0].backgroundColorCode?.value);
+      setCustomerBackgroundColorCode(
+        healthNeedsCategoriesList[0].backgroundColorCode?.value
+      );
       setHealthNeedData(healthNeedsCategoriesListData);
-      setRecommendedProduct(healthNeedsCategories?.data[0].contentArea)
+      setRecommendedProduct(healthNeedsCategories?.data[0].contentArea);
 
       // Product Category setting - Filters data
       const activeFiltersData = await axios.get(
@@ -338,29 +351,33 @@ const HealthNeedsComponent = () => {
 
     fetchData();
   }, []);
-  
 
-  useEffect(()=>{
-
+  useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-    return recommendedProduct?.expandedValue[1].healthNeedItem.expandedValue.map((item: any) => {
-      if (id?.recommendedProductCategory?.value &&
-        id.recommendedProductCategory.value[0].id === item.healthNeedCategory.value[0].id) {
+      return recommendedProduct?.expandedValue[1].healthNeedItem?.expandedValue.map(
+        (item: any) => {
+          if (
+            id?.recommendedProductCategory?.value &&
+            id.recommendedProductCategory.value[0].id ===
+              item.healthNeedCategory.value[0].id
+          ) {
+            const productName = id.recommendedProductCategory.value[0].name;
+            if (!selectedRecommendedProduct.includes(productName)) {
+              selectedRecommendedProduct.push(productName);
+            }
 
-        const productName = id.recommendedProductCategory.value[0].name
-        if (!selectedRecommendedProduct.includes(productName)) {
-          selectedRecommendedProduct.push(productName);
+            const isDuplicate = sectionData.some(
+              (item: any) => item.name === id.name
+            );
+
+            if (!isDuplicate) {
+              sectionData.push(id);
+            }
+          }
         }
-
-        const isDuplicate = sectionData.some((item :any) => item.name === id.name);
-
-        if (!isDuplicate) {
-          sectionData.push(id);
-        }
-      }
+      );
     });
-  });
-  },[recommendedProduct])
+  }, [recommendedProduct]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -390,26 +407,26 @@ const HealthNeedsComponent = () => {
             }
           )
           .then((res) => {
-            setSelectedProduct((prevSelectedProducts :any) => {
+            setSelectedProduct((prevSelectedProducts: any) => {
               const isDuplicate = prevSelectedProducts.some(
-                (selectedItem :any) => selectedItem.item.name === item.name
+                (selectedItem: any) => selectedItem.item.name === item.name
               );
               if (isDuplicate) {
                 return prevSelectedProducts;
               }
-            
+
               const updatedProducts = [
                 ...prevSelectedProducts.filter(
-                  (selectedItem : any) => selectedItem.item !== item
+                  (selectedItem: any) => selectedItem.item !== item
                 ),
-                { item, data: res.data }
+                { item, data: res.data },
               ];
               updatedProducts.sort((a: any, b: any) => {
-                const propertyName = 'name';
+                const propertyName = "name";
                 return a.item[propertyName].localeCompare(b.item[propertyName]);
               });
 
-              return updatedProducts
+              return updatedProducts;
             });
           });
       });
@@ -431,11 +448,11 @@ const HealthNeedsComponent = () => {
       tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] = 
-      leftfiltermaindata?.name
-        // leftfiltermaindata?.isBusinessVerticalCategory?.value
-        //   ? leftfiltermaindata?.name
-        //   : leftfiltermaindata?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
+        leftfiltermaindata?.name;
+      // leftfiltermaindata?.isBusinessVerticalCategory?.value
+      //   ? leftfiltermaindata?.name
+      //   : leftfiltermaindata?.name;
       tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
         "isCategoryChecked"
       ] = false;

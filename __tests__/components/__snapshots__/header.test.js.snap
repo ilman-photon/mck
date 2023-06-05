@@ -63,7 +63,6 @@ exports[`renders correctly 1`] = `
         aria-label="search-icon"
         className="search-icon absolute lg:top-4 -top-1 lg:right-6 right-2 "
         height="19"
-        role="img"
         viewBox="0 0 18 19"
         width="18"
         xmlns="http://www.w3.org/2000/svg"
