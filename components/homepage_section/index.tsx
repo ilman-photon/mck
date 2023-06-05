@@ -103,7 +103,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                   className="w-full h-full rounded-10 lg:px-0"
                   src={sectionData.video?.value?.url}
                   ref={videoRef}
-                  controls={isPlaying}
+                  controls
                 >
                   <track
                     kind="captions"
