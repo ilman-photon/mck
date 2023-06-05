@@ -321,11 +321,11 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
         className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto lg:px-72`}
         key={sectionData?.contentLink?.id}
       >
-        <h3
+        <h1
           className="text-27 pb-4 lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3 lg:mb-7 md:mb-4 sm:mb-4"  id={sectionData?.title?.value}
         >
           {sectionData?.title?.value}
-        </h3>
+        </h1>
         <div
           className={`w-full lg:${'w-1/2'} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center`}
           dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }}  id={sectionData?.description?.value}
