@@ -89,6 +89,7 @@ module.exports = {
         350: '350px',
         598: '598px',
         530: '530px',
+        689: '689px'
       },
       minHeight: {
         50: '50px',
@@ -119,14 +120,17 @@ module.exports = {
         124: '124px',
         63: '63px',
         11: '11px',
-        105: '105px'
+        105: '105px',
+        81: '81px',
+        29: '29px'
       },
       bottom: {
         13: '-13px',
       },
       right: {
         8: '-8px',
-        11: '11px'
+        11: '11px',
+        28: '28px'
       },
       padding: {
         9: '9px',
@@ -218,6 +222,9 @@ module.exports = {
         170: "170px",
         160: "160px",
       },
+      zIndex: {
+        1: '1',
+      }
     },
   },
   plugins: [],
