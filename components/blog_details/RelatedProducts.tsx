@@ -42,7 +42,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
 
                             <p
                              onClick={() => OnRelatedProductClick(item)}
-                                className="articleTitle text-xl text-heading-ellipsis text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
+                                className="articleTitle text-xl text-heading-ellipsis sm:leading-9 text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                                 id={`blog-label-010-` + index}>
                                 {item.name}
