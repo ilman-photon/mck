@@ -192,7 +192,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 lg:pl-6 lg:pr-4 pr-4 pr-2 w-95 max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
+            <div className="pb-6 pl-6 lg:pr-4 pr-4 lg:max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -335,7 +335,7 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className=""
+                          className="pt-1 pr-2 pb-2 pl-1"
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
@@ -349,11 +349,11 @@ function WhereComponent() {
                             />
                           </div>
                           <div className="flex">
-                            <span className="text-sofia-reg text-mcknormalgrey mb-2.5">
-                              <span className="text-lg leading-5">
+                            <span className="text-mcknormalgrey mb-2.5">
+                              <span className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 leading-5">
                                 {value.Address},{" "}
                               </span>
-                              <div className="text-lg leading-5">
+                              <div className="text-sofia-reg lg:text-lg text-base font-normal leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
@@ -361,7 +361,7 @@ function WhereComponent() {
                                 {value.Phone}
                               </div>
                             </span>
-                            <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">
+                            <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>
