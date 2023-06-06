@@ -7,7 +7,7 @@ function ProductFilter({
   handleCheckBox,
 }: any) {
   return (
-    <div className="lg:border-r-2 lg:pb-0 lg:mb-2 mck-hn-filter-category">
+    <div className="lg:border-r lg:pb-0 lg:mb-2 mck-hn-filter-category">
       {/* Left main category lists */}
       <div className="flex items-center my-px">
         <div className="w-full border lg:border-0 rounded px-4 lg:px-0">
@@ -45,7 +45,7 @@ function ProductFilter({
                   {/* Left filter main category */}
 
                   {/* Left filter sub category */}
-                  <div className="lg:border-b-2 lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                  <div className="lg:border-b lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
                     <ul>
                       <li className="list-none pb-1 lg:pb-0">
                         <div

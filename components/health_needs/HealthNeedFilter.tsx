@@ -55,15 +55,16 @@ const HealthNeedFilter = ({
     if(selectedFilterItems[mainCatId]){
       selectedFilterItems[mainCatId].isCategoryChecked = false;
       console.log("selectedFilterItems[mainCateId] -->", group, selectedFilterItems[mainCatId]?.isCategoryChecked)
-      selectedFilterItems[mainCatId].map((sub_category: any) => {
+      selectedFilterItems[mainCatId].map((sub_category: any ,idx :number  ) => {
         sub_category.checked = false;
+        const tempLength = selectedFilterItems[mainCategoryId]['items'].length
+        selectedFilterItems[mainCategoryId]['items'].splice(0, tempLength);
       });
     }else{
-      const index = selectedFilterItems[mainCategoryId]?.['items'].indexOf(item);
-      selectedFilterItems[mainCategoryId]['items'].splice(index, 1);
-      selectedFilterItems.map((category: any) => {
+      selectedFilterItems.map((category: any ,idx :number) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
+            selectedFilterItems[idx]['items'].splice(0, 1);
             sub_category.checked = false;
           }
         })
