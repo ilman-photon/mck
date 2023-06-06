@@ -121,13 +121,13 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-004-01"
                           >
                             {GetTime(ArticleContent?.data[0].startPublish)}
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-004-02"
                           >
                             65 min read
@@ -136,19 +136,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-diagnosticgreen text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-004-04"
                           >
                             Diagnostic Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-004-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-004-06"
                           >
                             Sample Tag 3
@@ -182,19 +182,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-005-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-005-01"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pl-2"
                             id="sr-label-005-01"
                           >
                             220 views
@@ -202,19 +202,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-acuteblue text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-005-04"
                           >
                             Acute Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-005-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-005-06"
                           >
                             Sample Tag 3
@@ -248,34 +248,34 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-006-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-006-01"
                           >
                             65 min read
                           </span>
-                          {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-006-03">1.3K views</span> */}
+                          {/* <span className='text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pl-2' id="sr-label-006-03">1.3K views</span> */}
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-diagnosticgreen text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-006-04"
                           >
                             Diagnostic Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-006-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-006-06"
                           >
                             Sample Tag 3
@@ -300,7 +300,7 @@ function BlogSearchComponent() {
                       <div className="content lg:p-6 p-4">
                         <a
                           href=""
-                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline"
+                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mcknormalgrey pb-3 no-underline"
                           aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           id="sr-link-007"
                         >
@@ -309,19 +309,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-007-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-007-02"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pl-2"
                             id="sr-label-007-03"
                           >
                             220 views
@@ -329,19 +329,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-acuteblue text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-007-04"
                           >
                             Acute Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-007-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-007-06"
                           >
                             Sample Tag 3
@@ -366,7 +366,7 @@ function BlogSearchComponent() {
                       <div className="content lg:p-6 p-4">
                         <a
                           href=""
-                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline"
+                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mcknormalgrey pb-3 no-underline"
                           aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           id="sr-link-008"
                         >
@@ -375,19 +375,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-008-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-008-02"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pl-2"
                             id="sr-label-008-03"
                           >
                             15.5K views
@@ -395,19 +395,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-preventiveyellow text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-008-04"
                           >
                             Preventive Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-008-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-008-06"
                           >
                             Sample Tag 3
@@ -432,7 +432,7 @@ function BlogSearchComponent() {
                       <div className="content lg:p-6 p-4">
                         <a
                           href=""
-                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline"
+                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mcknormalgrey pb-3 no-underline"
                           aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           id="sr-link-009"
                         >
@@ -441,19 +441,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl pr-2 border-solid shade-grey-right-border"
                             id="sr-label-009-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl px-2 border-solid shade-grey-right-border"
                             id="sr-label-009-01"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl pl-2"
                             id="sr-label-009-03"
                           >
                             223K views
@@ -461,19 +461,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-everydayblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-everydayblue text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-009-04"
                           >
                             Everyday Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-009-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-009-06"
                           >
                             Sample Tag 3
@@ -507,19 +507,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid shade-grey-right-border"
                             id="sr-label-010-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid shade-grey-right-border"
                             id="sr-label-010-02"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pl-2"
                             id="sr-label-010-03"
                           >
                             15.5K views
@@ -527,19 +527,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-preventiveyellow text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-010-04"
                           >
                             Preventive Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-010-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-010-06"
                           >
                             Sample Tag 3
@@ -564,7 +564,7 @@ function BlogSearchComponent() {
                       <div className="content lg:p-6 p-4">
                         <a
                           href=""
-                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline"
+                          className="articleTitle lg:text-32 text-xl text-gtl-med text-mcknormalgrey pb-3 no-underline"
                           aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                           id="sr-link-011"
                         >
@@ -573,19 +573,19 @@ function BlogSearchComponent() {
                         </a>
                         <div className="pb-3 lg:pt-0 pt-3">
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl pr-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl pr-2 border-solid shade-grey-right-border"
                             id="sr-label-011-01"
                           >
                             February 18, 2022
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl px-2 border-solid shade-grey-right-border"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl px-2 border-solid shade-grey-right-border"
                             id="sr-label-011-02"
                           >
                             65 min read
                           </span>
                           <span
-                            className="text-mckblue text-sofia-reg font-normal lg:text-base text-xl pl-2"
+                            className="text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-xl pl-2"
                             id="sr-label-011-03"
                           >
                             223K views
@@ -593,19 +593,19 @@ function BlogSearchComponent() {
                         </div>
                         <div className="flex">
                           <div
-                            className="bg-everydayblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
+                            className="bg-everydayblue text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2"
                             id="sr-label-011-04"
                           >
                             Everyday Care
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-011-05"
                           >
                             Sample Tag 1
                           </div>
                           <div
-                            className="categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
+                            className="categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
                             id="sr-label-011-06"
                           >
                             Sample Tag 3
@@ -620,7 +620,7 @@ function BlogSearchComponent() {
               <div className="lg:col-span-2 col-start-1 col-end-7">
                 <div className="w-full lg:pb-11 pb-5">
                   <h1
-                    className="lg:text-54 text-32 text-gtl-med text-mckblue font-medium lg:pb-12 pb-1"
+                    className="lg:text-54 text-32 text-gtl-med text-mcknormalgrey font-medium lg:pb-12 pb-1"
                     id="srnf-label-001"
                   >
                     No Matches Found for “CoverMyMeds”
@@ -630,7 +630,7 @@ function BlogSearchComponent() {
                     id="srnf-label-002"
                   >
                     Showing results for{" "}
-                    <strong className="text-mckblue">
+                    <strong className="text-mcknormalgrey">
                       <i>CoverMyMeds</i>
                     </strong>
                   </div>
@@ -654,7 +654,7 @@ function BlogSearchComponent() {
             )}
 
             <div className="lg:col-span-1 col-start-1 col-end-7">
-              <div className="tab text-mckblue w-full overflow-hidden lg:border-none border-none">
+              <div className="tab text-mcknormalgrey w-full overflow-hidden lg:border-none border-none">
                 <SearchComponent
                   searchText={''}
                   ActiveSearch={true}
@@ -674,7 +674,7 @@ function BlogSearchComponent() {
               />
               <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
                 <div
-                  className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
+                  className="text-mcknormalgrey shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
                   id="blog-label-009"
                 >
                   {BlogListingContent?.data[0].trendingBlogHeadingText.value}
