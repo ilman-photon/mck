@@ -28,7 +28,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="relative search-box lg:w-auto w-64">
+      <div className="relative search-box lg:w-auto w-64" role="search">
         <button
           className="btn-search w-12 h-12 bg-transparent right-4 absolute cursor-pointer outline-none font-black border-0"
           aria-label="search-icon" 

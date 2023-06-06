@@ -1786,9 +1786,9 @@ Mobiles Menu
   .header:hover .search-icon path {
     fill: #fff;
   }
-  // .brand-logo {
-  //   padding-left: 32px;
-  // }
+  .brand-logo {
+    padding-left: 16px;
+  }
   .signup-form {
     width: 27%;
   }
@@ -2539,4 +2539,9 @@ a.skip-main:focus, a.skip-main:active {
   text-align:center;
   font-size:1.2em;
   z-index:999;
+}
+
+button.gm-ui-hover-effect {
+  top: 12px !important;
+  right: 8px !important;
 }
