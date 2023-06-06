@@ -126,6 +126,10 @@ body {
   align-items: center;
 }
 
+.header {
+  z-index: 20 !important;
+}
+
 .brand-logo {
   cursor: pointer;
   z-index: 9999;
@@ -1782,9 +1786,9 @@ Mobiles Menu
   .header:hover .search-icon path {
     fill: #fff;
   }
-  // .brand-logo {
-  //   padding-left: 32px;
-  // }
+  .brand-logo {
+    padding-left: 16px;
+  }
   .signup-form {
     width: 27%;
   }

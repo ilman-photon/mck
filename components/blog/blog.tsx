@@ -167,6 +167,7 @@ function BlogComponent() {
         {!ActiveSearch && (
           <div
             id="search"
+            role="search"
             className="lg:block hidden relative flex items-center content-center mb-6"
           >
             <SearchComponent

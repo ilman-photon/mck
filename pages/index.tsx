@@ -131,10 +131,12 @@ export default function Home() {
                     textAlignment={"text-center"}
                   />
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
+                  <div className="mx-4 lg:mx-18">
                   <RecommendationalProductComponent
                     indexs={index}
                     sectionData={filteredData("RecommendedProductBlock")}
                   />
+                  </div>
                 ) : null}
               </React.Fragment>
             )
