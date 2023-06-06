@@ -7,7 +7,8 @@ export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
-
+  const [isNull,setIsNull] = useState(false)
+  
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axios.get(
@@ -45,58 +46,66 @@ export default function CategoryComponent({ sectionData }: any) {
     });
   }
 
+
   return (
-    <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
-      {!loading && response && (
+    <>
+    {!loading && response && !isNull && (
+      <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
         <div className="flex flex-wrap justify-center">
-          {response.map((item: any, index: number) => (
-            <div
-              key={item?.data?.contentLink?.id}
-              className={`mb-6 cursor-pointer ${
-                index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
-              }`}
-            >
+          {response.map((item: any, index: number) =>{
+            if(!item?.data?.productCategoryImage?.value?.url){
+               setIsNull(true)
+            }
+            return (
               <div
-                id={`category_0${index}`}
-                className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
-                onClick={() =>
-                  handleClickOnCategory(item?.data?.productCategoryUrl?.value)
-                }
+                key={item?.data?.contentLink?.id}
+                className={`mb-6 cursor-pointer ${
+                  index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
+                }`}
               >
-                <style jsx>{`
-                  .border {
-                    border: 2px solid ${item?.data?.backgroundColor?.value};
+                <div
+                  id={`category_0${index}`}
+                  className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
+                  onClick={() =>
+                    handleClickOnCategory(item?.data?.productCategoryUrl?.value)
                   }
-                `}</style>
-                <img
-                  src={item?.data?.productCategoryImage?.value?.url}
-                  alt={`category_${index}`}
-                  id={item?.data?.productCategoryImage?.value?.url}
-                  
-                />
-              </div>
-              <div
-                className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
-                id={`category_name_0${index}`}
-              >
-                <Link
-                  href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
                 >
-                  {item?.data?.name}
-                </Link>
+                  <style jsx>{`
+                    .border {
+                      border: 2px solid ${item?.data?.backgroundColor?.value};
+                    }
+                  `}</style>
+                  <img
+                    src={item?.data?.productCategoryImage?.value?.url}
+                    alt={`category_${index}`}
+                    id={item?.data?.productCategoryImage?.value?.url}
+                    
+                  />
+                </div>
+                <div
+                  className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
+                  id={`category_name_0${index}`}
+                >
+                  <Link
+                    href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
+                  >
+                    {item?.data?.name}
+                  </Link>
+                </div>
+                <div
+                  
+                  className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
+                  dangerouslySetInnerHTML={{
+                    __html: item?.data?.productCategoryDescription?.value,
+                  }}
+                  id={`category_Titel_0${index}`}
+                ></div>
               </div>
-              <div
-                
-                className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
-                dangerouslySetInnerHTML={{
-                  __html: item?.data?.productCategoryDescription?.value,
-                }}
-                id={`category_Titel_0${index}`}
-              ></div>
-            </div>
-          ))}
+            )
+          } )}
         </div>
-      )}
     </div>
+      )}
+    </>
   );
 }
