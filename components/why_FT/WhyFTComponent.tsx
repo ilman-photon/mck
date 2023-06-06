@@ -122,10 +122,12 @@ function WhyFTComponent() {
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "TwoCloumnBlock" ? (
                     <ImageVideoAndTextSection
+                      index={`wfnt_0${index}`}
                       sectionData={whyFTData.contentArea.expandedValue[index]}
                     />
                   ) : item?.contentType[1] === "OneColumnBlock" ? (
                     <ImageVideoOrTextSection
+                      index={`wfnt_0${index}`}
                       sectionData={whyFTData.contentArea.expandedValue[index]}
                       textAlignment={"text-left"}
                     />
