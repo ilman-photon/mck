@@ -1,6 +1,7 @@
 # Pipeline to deploy the FnT Web app to the stage environment. The FnT web app points to the Optimizely DXP Integration environment
 
 
+
 trigger:
 - QA_Sprint4.0
 
