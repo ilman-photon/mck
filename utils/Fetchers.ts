@@ -16,10 +16,12 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
   const { isMultipart = false, method = 'post', isBlob = false } = options || {};
 
   const headers: {
+    'Accept-Language': string
     'Content-Type': string;
     Authorization?: string;
   } = {
     'Content-Type': isMultipart ? 'multipart/form-data' : 'application/json',
+    "Accept-Language":'en'
   };
 
   const axiosProps: AxiosRequestConfig = {
