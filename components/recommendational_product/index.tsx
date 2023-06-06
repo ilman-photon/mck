@@ -43,8 +43,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const desiredURL = `/selected_product_category?filter=${encodedValue}/${encodedValue}`;
     router.push(desiredURL);
   };
-  
-  
+
+
 
   const oneItemD = response?.length == 1 && (
     <>
@@ -68,7 +68,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                     src={ele?.data?.imageTitle?.value?.url}
                     alt={ele?.data?.image?.expandedValue?.altText?.value}
-                    
+
                     id={"home-product-image" + indexs + index + 1}
                   />
                 </div>
@@ -79,7 +79,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       <img
                         className="mx-auto lg:my-auto max-h-200"
                         src={ele?.data?.image?.value?.url}
-                        
+
                         id={"home-product-image01" + indexs + index + 1}
                         alt={ele?.data?.image?.expandedValue?.altText?.value}
                       />
@@ -96,7 +96,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       dangerouslySetInnerHTML={{
                         __html: ele?.data?.description?.value,
                       }}
-                      
+
                       id={"p-text 01" + indexs + index + 1}
                     ></div>
                   </div>
@@ -125,73 +125,140 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       {!loading &&
         response &&
         response.map((ele: any, index: number) => {
-          let oddItemSpan = index == 0 && "row-span-2";
+
+
           return (
-            <div
-              className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${oddItemSpan} `}
-              key={ele?.data?.contentLink?.id}
-            >
-              <style jsx>{`
+            index == 0 ?
+              <div
+                className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] row-span-2`}
+                key={ele?.data?.contentLink?.id}
+              >
+                <style jsx>{`
                 .bg-color {
                   background-color: ${ele?.data?.backgroundColor?.value};
                 }
               `}</style>
 
-              <div className={`grid h-full`}>
-                <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
-                  <img
-                    className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
-                    src={ele?.data?.imageTitle?.value?.url}
-                    alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-                    
-                    id={"home-product-image" + indexs + index + 1}
-                  />
-                </div>
+                <div className={`grid h-full w-full lg:w-[338px]`}>
+                  <div className="w-full lg:mb-0 mb-6 lg:min-h-57 text-left">
+                    <img
+                      className="h-auto lg:max-w-fit mx-auto lg:m-0 lg:w-338 w-270"
+                      src={ele?.data?.imageTitle?.value?.url}
+                      alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
-                  <div className="pb-4 lg:pb-0 col-span-1">
-                    <div className="mx-auto my-auto lg:h-40 object-contain">
-                      <img
-                        className="mx-auto lg:my-auto max-h-160"
-                        src={ele?.data?.image?.value?.url}
-                        
-                        id={"home-product-image01" + indexs + index + 1}
-                        alt={ele?.data?.image?.expandedValue?.altText?.value}
-                      />
+                      id={"home-product-image" + indexs + index + 1}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
+                    <div className="pb-4 lg:pb-0 col-span-1">
+                      <div className="mx-auto my-auto lg:h-40 object-contain">
+                        <img
+                          className="mx-auto lg:my-auto max-h-160"
+                          src={ele?.data?.image?.value?.url}
+
+                          id={"home-product-image01" + indexs + index + 1}
+                          alt={ele?.data?.image?.expandedValue?.altText?.value}
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      id={"p-text" + indexs + index + 1}
+                      className={`text-justify pr-0 lg:pr-0 col-span-2 
+                }`}
+                    >
+                      <div
+                        className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left mb-4 text-sixcontent-ellipsis"
+                        dangerouslySetInnerHTML={{
+                          __html: ele?.data?.description?.value,
+                        }}
+
+                        id={"p-text 01" + indexs + index + 1}
+                      ></div>
+                      {ele?.data?.buttonText?.value && (
+                        <button
+                          className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
+                          onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
+                          id={"home-product-button" + indexs + index + 1}
+                          style={{
+                            backgroundColor: ele?.data?.buttonColor?.value,
+                          }}
+                        >
+                          {ele?.data?.buttonText?.value}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div aria-hidden="true">&nbsp;</div>
+
+                </div>
+              </div> : <div
+                className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px]`}
+                key={ele?.data?.contentLink?.id}
+              >
+                <style jsx>{`
+                .bg-color {
+                  background-color: ${ele?.data?.backgroundColor?.value};
+                }
+              `}</style>
+
+                <div className={`grid h-full`}>
+                  <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
+                    <img
+                      className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
+                      src={ele?.data?.imageTitle?.value?.url}
+                      alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
+
+                      id={"home-product-image" + indexs + index + 1}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
+                    <div className="pb-4 lg:pb-0 col-span-1">
+                      <div className="mx-auto my-auto lg:h-40 object-contain">
+                        <img
+                          className="mx-auto lg:my-auto max-h-160"
+                          src={ele?.data?.image?.value?.url}
+
+                          id={"home-product-image01" + indexs + index + 1}
+                          alt={ele?.data?.image?.expandedValue?.altText?.value}
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      id={"p-text" + indexs + index + 1}
+                      className={`text-justify pr-0 lg:pr-0 col-span-2 
+                }`}
+                    >
+                      <div
+                        className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left mb-4 text-sixcontent-ellipsis"
+                        dangerouslySetInnerHTML={{
+                          __html: ele?.data?.description?.value,
+                        }}
+
+                        id={"p-text 01" + indexs + index + 1}
+                      ></div>
                     </div>
                   </div>
 
-                  <div
-                    id={"p-text" + indexs + index + 1}
-                    className={`text-justify pr-0 lg:pr-0 col-span-2 
-                }`}
-                  >
-                    <div
-                      className="text-lg text-sofia-reg text-mcknormalgrey font-normal text-left mb-4 text-sixcontent-ellipsis"
-                      dangerouslySetInnerHTML={{
-                        __html: ele?.data?.description?.value,
+                  {ele?.data?.buttonText?.value && (
+                    <button
+                      className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
+                      onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
+                      id={"home-product-button" + indexs + index + 1}
+                      style={{
+                        backgroundColor: ele?.data?.buttonColor?.value,
                       }}
-                      
-                      id={"p-text 01" + indexs + index + 1}
-                    ></div>
-                  </div>
+                    >
+                      {ele?.data?.buttonText?.value}
+                    </button>
+                  )}
                 </div>
-
-                {ele?.data?.buttonText?.value && (
-                  <button
-                    className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
-                    onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-                    id={"home-product-button" + indexs + index + 1}
-                    style={{
-                      backgroundColor: ele?.data?.buttonColor?.value,
-                    }}
-                  >
-                    {ele?.data?.buttonText?.value}
-                  </button>
-                )}
               </div>
-            </div>
           );
+
         })}
     </>
   );
@@ -218,18 +285,18 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   className="h-auto lg:max-w-fit lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
                   alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-                  
+
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
 
-              <div className="grid grid-cols-3 lg:gap-4 gap-4 lg:pr-0 my-auto text-justify">
+              <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 gap-4 lg:pr-0 my-auto text-justify">
                 <div className="pb-4 lg:pb-0 col-span-1">
                   <div className="mx-auto my-auto lg:h-60 object-contain">
                     <img
                       className="mx-auto lg:my-auto"
                       src={ele?.data?.image?.value?.url}
-                      
+
                       id={"home-product-image01" + indexs + index + 1}
                       alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
@@ -246,7 +313,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     dangerouslySetInnerHTML={{
                       __html: ele?.data?.description?.value,
                     }}
-                    
+
                     id={"p-text 01" + indexs + index + 1}
                   ></div>
                 </div>
@@ -296,18 +363,18 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   className="h-auto lg:max-w-fit mx-auto lg:w-338 w-270"
                   src={ele?.data?.imageTitle?.value?.url}
                   alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-                  
+
                   id={"home-product-image" + indexs + index + 1}
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
                 <div className="pb-4 lg:pb-0 col-span-1">
                   <div className="mx-auto my-auto lg:h-60 object-contain">
                     <img
                       className="mx-auto lg:my-auto"
                       src={ele?.data?.image?.value?.url}
-                      
+
                       id={"home-product-image01" + indexs + index + 1}
                       alt={ele?.data?.image?.expandedValue?.altText?.value}
                     />
@@ -324,7 +391,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     dangerouslySetInnerHTML={{
                       __html: ele?.data?.description?.value,
                     }}
-                    
+
                     id={"p-text 01" + indexs + index + 1}
                   ></div>
                 </div>
