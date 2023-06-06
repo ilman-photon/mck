@@ -46,7 +46,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                   }`}
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
-                    (ele: ExpandedValueData) => {
+                    (ele: any) => {
                       return (
                         <li
                           className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"

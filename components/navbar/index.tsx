@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useState,useLayoutEffect } from "react";
 import ProductDropComponent from "../productdrop";
-import AboutDropComponent from "../aboutdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 
 function NavBar({ isMobileMenuActive }: Props) {

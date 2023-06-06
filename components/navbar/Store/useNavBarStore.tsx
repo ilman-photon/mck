@@ -1,7 +1,6 @@
 import { callAPI } from "@/utils/Fetchers"
 import { create } from "zustand"
-
-
+import { NavBarData } from "../Model/NavBarModel"
 
 interface ControllerNavBar {
     getData:() => void

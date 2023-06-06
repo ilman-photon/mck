@@ -191,8 +191,6 @@ function HeaderComponent() {
           </div>
           <div className="lg:w-full flex border-0 w-18 header-sticky">
             <NavBar
-              // menuData={menuData}
-              // menuData={}
               isMobileMenuActive={isMobileMenuActive}
             />
             <Search />
