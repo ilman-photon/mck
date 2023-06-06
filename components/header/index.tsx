@@ -183,10 +183,9 @@ function HeaderComponent() {
           >
             <img
               id="logo-image"
-              
               src={logoSrc}
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
-              className="lg:mt-7"
+              className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}
             />
           </div>
