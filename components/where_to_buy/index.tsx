@@ -166,6 +166,7 @@ function WhereComponent() {
                 type="text"
                 id="fname"
                 name="fname"
+                role="search"
                 onChange={(e) => setTextInput(e.target.value)}
                 value={!isCustomSearch ? undefined : textInput}
                 onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
