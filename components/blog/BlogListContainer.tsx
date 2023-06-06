@@ -44,7 +44,7 @@ const BlogListContainer = () => {
                                             }}
                                         >
                                             <div className="lg:h-314 h-240 flex">
-                                                <ImageComponent src={item.image.value.url} className='lg:max-h-314 max-h-240 w-full' alt={item.image.value.url} id={item.image.value.id} />
+                                                <ImageComponent src={item.image.value.url} className='lg:max-h-314 max-h-240 w-full object-cover' alt={item.image.value.url} id={item.image.value.id} />
                                             </div>
                                         </LinkComponent>
                                     </figure>
