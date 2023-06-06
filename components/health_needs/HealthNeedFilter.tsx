@@ -25,7 +25,8 @@ const HealthNeedFilter = ({
   fetchProductList,
   recommendedProduct,
   sectionData,
-  selectedRecommendedProduct
+  selectedRecommendedProduct,
+  productSum
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -55,15 +56,16 @@ const HealthNeedFilter = ({
     if(selectedFilterItems[mainCatId]){
       selectedFilterItems[mainCatId].isCategoryChecked = false;
       console.log("selectedFilterItems[mainCateId] -->", group, selectedFilterItems[mainCatId]?.isCategoryChecked)
-      selectedFilterItems[mainCatId].map((sub_category: any) => {
+      selectedFilterItems[mainCatId].map((sub_category: any ,idx :number  ) => {
         sub_category.checked = false;
+        const tempLength = selectedFilterItems[mainCategoryId]['items'].length
+        selectedFilterItems[mainCategoryId]['items'].splice(0, tempLength);
       });
     }else{
-      const index = selectedFilterItems[mainCategoryId]?.['items'].indexOf(item);
-      selectedFilterItems[mainCategoryId]['items'].splice(index, 1);
-      selectedFilterItems.map((category: any) => {
+      selectedFilterItems.map((category: any ,idx :number) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
+            selectedFilterItems[idx]['items'].splice(0, 1);
             sub_category.checked = false;
           }
         })
@@ -239,10 +241,10 @@ const HealthNeedFilter = ({
       });
     }
   }, [productCategoryData]);
-  const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
+  // const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
     
-    return accumulator + obj?.data?.results?.length;
-  }, 0);
+  //   return accumulator + obj?.data?.results?.length;
+  // }, 0);
   return (
     <div className='lg:mt-12 mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
       {/* Health needs - Top Active Filter section starts */}
@@ -328,7 +330,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
-          {(activeFiltersData?.showResultsText?.value)?.replace (/#/, productsSum)}
+          {productSum && (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
       <div className='lg:flex mt-6'>

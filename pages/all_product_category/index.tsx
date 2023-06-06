@@ -12,7 +12,7 @@ import Head from "next/head";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
-
+let mainCatId:any =[]
 interface MyComponentProps {
   Response: {
     data: {
@@ -40,6 +40,7 @@ function AllProductCategoryPage({
   const [carouselData, setCarouselData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
+  const [productSum , setProductSum] = useState<any>()
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -67,7 +68,14 @@ function AllProductCategoryPage({
     promise
       .then((res) => {
         let tempResults: any = {};
+        if(res.data.results.length === 0){
+        mainCatId.map((id :any) =>{ 
+          tempResults[selectedFilterItems[id].categoryName] = [];
+        })
+      }
+        
         res.data.results.map((item: any) => {
+          setProductSum(res.data.totalMatching)
           let name = item.productType.value[0].name;
           if (tempResults[name]) {
             let tempArray = tempResults[name];
@@ -77,13 +85,13 @@ function AllProductCategoryPage({
             tempResults[name] = [item];
           }
         });
-        Object.keys(tempResults).map((key) => {
-          let index = selectedProduct.findIndex(
-            (value: any) => value.item.name === key
-          );
-          selectedProduct[index].data.results = tempResults[key];
-          selectedProduct[index].data.totalMatching = tempResults[key].length;
+        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
+          return {
+            item: { name: key },
+            data: { results: value }
+          };
         });
+        setSelectedProduct(transformedArray)
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -151,7 +159,7 @@ function AllProductCategoryPage({
       productName?.map((item: any) => {
         axios
           .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(productType/value/name eq '${item}' and ContentType/any(t:t eq 'ProductDetailsPage'))`,
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`,
             {
               headers: {
                 "Accept-Language": "en",
@@ -159,22 +167,25 @@ function AllProductCategoryPage({
             }
           )
           .then((res) => {
-            setSelectedProduct((prevSelectedProducts: any) => {
-              const itemExists = prevSelectedProducts.some(
-                (product: any) => product.item.name === item
-              );
-              if (itemExists) {
-                return prevSelectedProducts;
-              }
-              const newItem = { item: { name: item }, data: res.data };
-              const updatedProducts = [...prevSelectedProducts, newItem];
-              updatedProducts.sort((a: any, b: any) => {
-                const propertyName = "name";
-                return a.item[propertyName].localeCompare(b.item[propertyName]);
-              });
-
-              return updatedProducts;
-            });
+            setProductSum(res.data.totalMatching)
+            let tempResults: any = [];       
+           res.data.results.map((item: any) => {
+          let name = item?.productCategory?.value[0]?.name;
+          if (tempResults[name]) {
+            let tempArray = tempResults[name];
+            tempArray.push(item);
+            tempResults[name] = tempArray;
+          } else {
+            tempResults[name] = [item];
+          }
+        });
+        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
+          return {
+            item: { name: key },
+            data: { results: value }
+          };
+        });
+        setSelectedProduct(transformedArray)
           })
           .catch((e: Error | AxiosError) => console.log(e))
           .finally(() => {
@@ -232,12 +243,20 @@ function AllProductCategoryPage({
       let lastCatId = 0;
       let minCategoryCnt = 0;
       let minSubCategoryCnt = 0;
+      let tempId = false
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
+          if (!mainCatId.includes(catId)) {
+            mainCatId.push(catId);
+          }
           const categoryName = selectedFilterItems[catId].categoryName;
           selectedCategoryName.push(categoryName);
+          if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+            tempId = true
+          }
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " and ";
+            queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
           }
 
           queryParams += "(";
@@ -247,7 +266,8 @@ function AllProductCategoryPage({
             // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
             const concatStr =
               category.items.length === index + 1
-                ? "":" or ";
+                ? ""
+                :category.isBusinessVerticalCategory ? " or " : " and ";
             queryParams += `${
               category.isBusinessVerticalCategory
                 ? category.productType
@@ -275,8 +295,13 @@ function AllProductCategoryPage({
           // minCategoryCnt += category.isCategoryChecked;
           minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
+            if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+              tempId = true
+            }
             if (lastCatId > 0 && lastCatId != catId) {
-              queryParams += " and ";
+              // queryParams += " and ";
+              queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
             }
             queryParams += "(";
           category.items.map((item: any, index: any) => { 
@@ -463,6 +488,7 @@ function AllProductCategoryPage({
           recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
+          productSum ={productSum}
         />
       </div>
       <FooterComponent />

@@ -159,7 +159,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy">
+      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy" id="carouselExampleCaptions">
           <div>
           <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input

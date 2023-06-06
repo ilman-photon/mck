@@ -339,7 +339,7 @@ function ResultComponent() {
 
   return (
     <>
-      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:mt-[170px] lg:pt-[72px]">
+      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:mt-[170px] lg:pt-[72px] lg:pb-0">
         <div className="desktop:px-6 mobile:px-0">
           {searchLoading &&
             <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -388,7 +388,7 @@ function ResultComponent() {
                 />
               </div>
 
-              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full">
+              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full lg:pl-6">
                 {/* Health needs - Right coloumn starts */}
                 <div>
                   {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
@@ -396,7 +396,7 @@ function ResultComponent() {
                     {/* Health needs categories title & product carousel items starts */}
                     <section>
                       {/* Product items */}
-                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-6 break-words">
+                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-0 break-words">
                         {productListData?.data?.results.map((item: any, idx: number) => {
                           return (
                             <div

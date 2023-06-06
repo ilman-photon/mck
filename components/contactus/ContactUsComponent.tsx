@@ -45,7 +45,7 @@ function ContactUsComponent() {
                             <p className="text-base font-normal text-mcknormalgrey pb-3 inquiry-text text-sofia-reg" id="cu_label_003" dangerouslySetInnerHTML={{ __html: contactUsData?.data[0]?.contentArea?.expandedValue[0]?.contactInformationDetail?.value, }}></p>
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex mb-1 lg:mb-0" id="cu_label_004">
-                                    <div className="w-18 mr-4">
+                                    <div className="w-18 mr-4" aria-hidden={true}>
                                     {<ImageComponent 
                                         src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.phoneImage?.expandedValue?.url} 
                                         alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.phoneImage?.expandedValue?.altText?.value || "Cell Icon"} 
@@ -57,7 +57,7 @@ function ContactUsComponent() {
                             </div>
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex mb-1 lg:mb-0" id="cu_label_007">
-                                <div className="w-18 mr-4">
+                                <div className="w-18 mr-4" aria-hidden={true}>
                                 {<ImageComponent 
                                     src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.operationHourImage?.expandedValue?.url} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.operationHourImage?.expandedValue?.altText?.value || "timer icon"} 
@@ -70,7 +70,7 @@ function ContactUsComponent() {
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex" id="cu_label_010">
                                 <a className="flex" href = "mailto: #"> 
-                                <div className="w-18 mr-4">
+                                <div className="w-18 mr-4" aria-hidden={true}>
                                     {<ImageComponent 
                                     src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.altText?.value || "email icon"} 
@@ -81,7 +81,7 @@ function ContactUsComponent() {
                             </div>
                             <div className="flex flex-col lg:flex-row">
                                 <span className="contact-number font-extrabold lg:text-lg text-base lg:mr-3 text-mckblue text-sofia-bold flex mb-1 lg:mb-0" id="cu_label_012">
-                                <div className="w-18 mr-4">
+                                <div className="w-18 mr-4" aria-hidden={true}>
                                 {<ImageComponent 
                                     src={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.locationIcon?.expandedValue?.url} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.locationIcon?.expandedValue?.altText?.value || 'alt="location icon"'} 

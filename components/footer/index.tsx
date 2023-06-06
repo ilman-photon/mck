@@ -11,8 +11,10 @@ export default function FooterComponent() {
   const [footerData, setFooterData] = useState<any>();
   const [footerSecondData, setFooterSecondData] = useState<any>();
   const [footerMobileNav, setFooterMobileNav] = useState<any>();
-
-  const [activeButton, setActiveButton] = useState<string>("home");
+  const checkEnableButton = () => {
+    return router.pathname;
+  };
+  const [activeButton, setActiveButton] = useState<string>("Home");
 
   const handleClick = (buttonName: string, url: string) => {
     setActiveButton(buttonName);
@@ -33,12 +35,21 @@ export default function FooterComponent() {
       { headers: { "Accept-Language": "en" } }
     );
 
+    const footerMobileNav =
+      response?.data[0]?.mobileMenuNavigation?.expandedValue[0]
+        ?.contentBlockArea?.expandedValue;
+
+    let buttonActive: string = "Home";
+
+    footerMobileNav.map((item: any) => {
+      if (item?.menuItemUrl?.value == checkEnableButton()) {
+        buttonActive = item?.menuItemName?.value;
+      }
+    });
     setFooterData(response);
     setFooterSecondData(responseid);
-    setFooterMobileNav(
-      response?.data[0]?.mobileMenuNavigation?.expandedValue[0]
-        ?.contentBlockArea?.expandedValue
-    );
+    setFooterMobileNav(footerMobileNav);
+    setActiveButton(buttonActive);
   };
   useEffect(() => {
     getData();
@@ -46,7 +57,11 @@ export default function FooterComponent() {
 
   return (
     <>
-      <footer id="footer" role="contentinfo" className="bg-mcklightyellow lg:mb-0 mb-16 mt-18">
+      <footer
+        id="footer"
+        role="contentinfo"
+        className="bg-mcklightyellow lg:mb-0 mb-16 mt-18"
+      >
         <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">
@@ -59,7 +74,7 @@ export default function FooterComponent() {
                         rel="stylesheet"
                         id={link?.contentLink?.id}
                         key={link?.contentLink?.id}
-                        href={link?.menuUrl?.value ? link?.menuUrl?.value : ''}
+                        href={link?.menuUrl?.value ? link?.menuUrl?.value : ""}
                       >
                         {link?.menuTitle?.value}
                       </Link>
@@ -72,7 +87,11 @@ export default function FooterComponent() {
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
                         rel="stylesheet"
-                        href={sociallink?.socialMediaUrl?.value ? sociallink?.socialMediaUrl?.value : ''}
+                        href={
+                          sociallink?.socialMediaUrl?.value
+                            ? sociallink?.socialMediaUrl?.value
+                            : ""
+                        }
                         key={sociallink?.contentLink?.id}
                         id={sociallink?.contentLink?.id}
                         aria-label={sociallink?.socialMediaUrl?.value}
@@ -125,10 +144,17 @@ export default function FooterComponent() {
                 <li key={item?.contentLink?.guidValue}>
                   <button
                     type="button"
-                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${activeButton === item?.menuItemName?.value
-                      ? "border-t-4 border-mckblue bg-white"
-                      : ""
-                      }`}
+                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${
+                      activeButton === item?.menuItemName?.value
+                        ? "bg-white"
+                        : ""
+                    }`}
+                    style={{
+                      borderTop:
+                        activeButton === item?.menuItemName?.value
+                          ? "solid 4px #001a71"
+                          : "",
+                    }}
                     onClick={() =>
                       handleClick(
                         item?.menuItemName?.value,
@@ -146,10 +172,11 @@ export default function FooterComponent() {
                       />
                     </div>
                     <span
-                      className={`text-xs text-mckblue ${activeButton === item?.menuItemName?.value
-                        ? "text-sofia-bold font-extrabold"
-                        : "text-sofia-reg font-normal"
-                        }`}
+                      className={`text-xs text-mckblue ${
+                        activeButton === item?.menuItemName?.value
+                          ? "text-sofia-bold font-extrabold"
+                          : "text-sofia-reg font-normal"
+                      }`}
                     >
                       {item?.menuItemName?.value}
                     </span>
