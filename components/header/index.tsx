@@ -10,7 +10,7 @@ function HeaderComponent() {
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
   const [headerData, setHeaderData] = useState<any>();
-  const [menuData, setMenuData] = useState<any>();
+  // const [menuData, setMenuData] = useState<any>();
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -61,10 +61,10 @@ function HeaderComponent() {
       )
       .then((res) => {
         setHeaderData(res.data[0]);
-        setMenuData(
-          res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
-            .expandedValue
-        );
+        // setMenuData(
+        //   res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
+        //     .expandedValue
+        // );
         setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
       })
       .catch((e: Error | AxiosError) => console.log(e));
@@ -191,7 +191,8 @@ function HeaderComponent() {
           </div>
           <div className="lg:w-full flex border-0 w-18 header-sticky">
             <NavBar
-              menuData={menuData}
+              // menuData={menuData}
+              // menuData={}
               isMobileMenuActive={isMobileMenuActive}
             />
             <Search />

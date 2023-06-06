@@ -1,11 +1,21 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState,useLayoutEffect } from "react";
 import ProductDropComponent from "../productdrop";
-import { useRouter } from "next/router";
+import AboutDropComponent from "../aboutdrop";
+import { useHeaderStore } from "./Store/useNavBarStore";
 
-function NavBar({ menuData, isMobileMenuActive }: Props) {
-  const router = useRouter();
-  const [active, setActive] = useState(null);
+function NavBar({ isMobileMenuActive }: Props) {
+
+  const [active, setActive] = useState(null)
+
+  const getHeaderData = useHeaderStore(state => state.getData)
+  
+  const menuData = useHeaderStore(state => state.headerData)
+
+  useLayoutEffect(() => {
+    getHeaderData()
+  },[])
+
   return (
     <>
       <div
@@ -67,7 +77,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
                   }`}
                 >
                   <ProductDropComponent
-                    subMenuData={item?.subMenuContentBlockArea?.value}
+                    subMenuData={item.subMenuContentBlockArea.value}
                   />
                 </div>
               </div>
@@ -80,7 +90,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
 }
 
 type Props = {
-  menuData: any;
+  menuData?: any;
   isMobileMenuActive: any;
 };
 

@@ -1,73 +1,52 @@
-import { useEffect, useState } from "react";
-import SignUpComponent from "../signup";
-import axios, { AxiosError } from "axios";
+import { useState } from "react";
 import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
-  const [subMenu, setSubMenu] = useState<any>();
   const [active, setActive] = useState(null);
-
-  useEffect(() => {
-    if (subMenuData) {
-      axios
-        .all(getSubMenuData())
-        .then((res) => {
-          setSubMenu(res);
-        })
-        .catch((e: Error | AxiosError) => console.log(e));
-    }
-  }, []);
-
-  function getSubMenuData() {
-    return subMenuData?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?References=${item?.contentLink?.id}&expand=*`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
-    });
-  }
 
   function updateUrl(path: String, type: string) {
     let f = "?filter=";
     let splitPath = path !== null ? path?.split(f) : "";
     if (type === "1") {
-      return splitPath[1];
+      return splitPath?.[1];
     } else {
-      return splitPath[0];
+      return splitPath?.[0];
     }
   }
 
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
-        {subMenu?.map((item: any) => {
+        {subMenuData?.map(({response} :any) => {
           return (
             <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                   href={{
-                    pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
-                    query: {
-                      filter: updateUrl(item?.data[0].menuItemUrl?.value, "1"),
-                    },
+                    // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
+                    pathname:updateUrl(response?.menuItemUrl?.value,'0'),
+                    // query: {
+                    //   filter: updateUrl(item?.data[0]?.menuItemUrl?.value, "1"),
+                    // },
+                    query:{
+                      filter:updateUrl(response?.menuItemUrl?.value, "1"),
+                    }
                   }}
                   className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium"
                 >
-                  {item?.data[0].menuItemName?.value}
+                  {/* {item?.data[0]?.menuItemName?.value} */}
+                  {response?.menuItemName?.value}
                 </Link>
                 <ul
                   className={`hidden submenu megamenu-submenu ${
-                    item?.data[0].subMenuContentBlockArea?.value === null
+                    // item?.data[0].subMenuContentBlockArea?.value === null
+                    response?.subMenuContentBlockArea?.value === null
                       ? "hidden"
                       : "group-hover:block"
                   }`}
                 >
-                  {item?.data[0].subMenuContentBlockArea?.expandedValue?.map(
-                    (ele: any) => {
+                  {response?.subMenuContentBlockArea?.expandedValue?.map(
+                    (ele: ExpandedValueData) => {
                       return (
                         <li
                           className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
@@ -90,12 +69,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                   )}
                 </ul>
                 <span
-                  onClick={() => setActive(item)}
+                  onClick={() => setActive(response)}
                   className={`${
-                    item?.subMenuContentBlockArea?.value == null
+                    response?.subMenuContentBlockArea?.value == null
                       ? "lg:hidden xl:hidden"
                       : "icon-arrow lg:hidden xl:hidden"
-                  } ${active == item ? "open" : ""}`}
+                  } ${active == response ? "open" : ""}`}
                 >
                   {" "}
                 </span>
@@ -122,7 +101,7 @@ function ProductDropComponent({ subMenuData }: Props) {
 }
 
 type Props = {
-  subMenuData: any;
+  subMenuData: any
 };
 
 export default ProductDropComponent;
