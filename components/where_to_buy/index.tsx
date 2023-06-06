@@ -351,14 +351,17 @@ function WhereComponent() {
                           </div>
                           <div className="flex">
                             <span className="text-mcknormalgrey mb-2.5">
-                              <span className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 leading-5">
+                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold font-normal lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                                {value.StoreName}
+                              </span>
+                              <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
                                 {value.Address},{" "}
                               </span>
-                              <div className="text-sofia-reg lg:text-lg text-base font-normal leading-5">
+                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
-                              <div className=" text-mckblue text-lg leading-5">
+                              <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5">
                                 {value.Phone}
                               </div>
                             </span>
@@ -367,7 +370,7 @@ function WhereComponent() {
                             </h2>
                           </div>
 
-                          <div className="flex mt-2">
+                          <div className="flex mt-2 mb-4">
                             {value?.StoreUrl ? (
                               <button
                                 className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
