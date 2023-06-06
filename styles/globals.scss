@@ -126,6 +126,10 @@ body {
   align-items: center;
 }
 
+.header {
+  z-index: 20 !important;
+}
+
 .brand-logo {
   cursor: pointer;
   z-index: 9999;
@@ -1783,7 +1787,7 @@ Mobiles Menu
     fill: #fff;
   }
   .brand-logo {
-    padding-left: 32px;
+    padding-left: 16px;
   }
   .signup-form {
     width: 27%;
