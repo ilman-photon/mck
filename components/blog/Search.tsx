@@ -40,6 +40,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({ placeholder, search
                 style={{ border: error ? '2px solid red' : '1px solid #001A71' }}
                 className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue placeholder:text-opacity-50 pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded" type="text"
                 placeholder={placeholder}
+                role="search"
                 value={search}
                 onChange={HandleChange}
                 onKeyDown={(e: any) => e.keyCode === 13 && fetchSearchBlog()}
