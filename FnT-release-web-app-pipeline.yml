@@ -1,0 +1,75 @@
+# Pipeline to deploy the FnT Web app to the development environment. The FnT web app points to the Optimizely DXP Integration environment
+
+trigger:
+- Release*
+
+pr: # Trigger on pull requests towards branches
+- Release*
+
+variables:
+
+  # Agent VM image name
+  vmImageName: 'windows-2019'
+
+stages:
+- stage: Build
+  displayName: Build UI Web App stage
+  jobs:
+  - job: Build
+    displayName: Build UI Web App
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cat next.config.js
+          mv config/env.prod.next.config.js next.config.js
+          sleep 3s
+          printf "dev url updated"
+          cat next.config.js
+      displayName: 'Prod Url updation'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'npm install'
+      displayName: 'npm install'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'npm run build'
+      displayName: 'npm build'    
+
+    #- task: CmdLine@2
+    #  inputs:
+    #    script: 'npm run test --if-present'
+    #  displayName: 'npm test'
+    
+    #- script: |
+    #    npm install
+    #    npm run build:dev
+    #    npm run test --if-present
+    #  displayName: 'npm install, build and test'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
+
+#    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+#      artifact: drop 
+      
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        ArtifactName: 'Artifact_Foster_ThriveProd'
+        publishLocation: 'Container'
