@@ -25,7 +25,8 @@ const HealthNeedFilter = ({
   fetchProductList,
   recommendedProduct,
   sectionData,
-  selectedRecommendedProduct
+  selectedRecommendedProduct,
+  productSum
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -240,10 +241,10 @@ const HealthNeedFilter = ({
       });
     }
   }, [productCategoryData]);
-  const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
+  // const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
     
-    return accumulator + obj?.data?.results?.length;
-  }, 0);
+  //   return accumulator + obj?.data?.results?.length;
+  // }, 0);
   return (
     <div className='lg:mt-12 mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
       {/* Health needs - Top Active Filter section starts */}
@@ -329,7 +330,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
-          {(activeFiltersData?.showResultsText?.value)?.replace (/#/, productsSum)}
+          {productSum && (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
       <div className='lg:flex mt-6'>

@@ -40,6 +40,7 @@ function AllProductCategoryPage({
   const [carouselData, setCarouselData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
+  const [productSum , setProductSum] = useState<any>()
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -74,6 +75,7 @@ function AllProductCategoryPage({
       }
         
         res.data.results.map((item: any) => {
+          setProductSum(res.data.totalMatching)
           let name = item.productType.value[0].name;
           if (tempResults[name]) {
             let tempArray = tempResults[name];
@@ -165,6 +167,7 @@ function AllProductCategoryPage({
             }
           )
           .then((res) => {
+            setProductSum(res.data.totalMatching)
             let tempResults: any = [];       
            res.data.results.map((item: any) => {
           let name = item?.productCategory?.value[0]?.name;
@@ -485,6 +488,7 @@ function AllProductCategoryPage({
           recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
+          productSum ={productSum}
         />
       </div>
       <FooterComponent />
