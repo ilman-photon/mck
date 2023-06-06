@@ -20,7 +20,7 @@ const HealthNeedsComponent = () => {
   const [selectedHealthNeed, setSelectedHealthNeed] = useState<any>([]);
   const [healthData, setHealthData] = useState(false);
   const [isLoading, setIsLoading] = useState(true); //
-  const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [filterClicked, setFilterClicked] = useState(false);
   const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
@@ -231,9 +231,7 @@ const HealthNeedsComponent = () => {
             }
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
-            const concatStr =
-              category.items.length === index + 1
-                ? "":" or ";
+            const concatStr = category.items.length === index + 1 ? "" : " or ";
             queryParams += `${
               category?.isBusinessVerticalCategory
                 ? category?.productType
@@ -265,8 +263,7 @@ const HealthNeedsComponent = () => {
               const itemName = item.replace(/[^a-zA-Z ]/g, "");
               const encodeItemName = encodeURI(itemName);
               const concatStr =
-                category.items.length === index + 1
-                  ? "":" or ";
+                category.items.length === index + 1 ? "" : " or ";
               queryParams += `${
                 category?.isBusinessVerticalCategory
                   ? category?.productType
@@ -303,14 +300,12 @@ const HealthNeedsComponent = () => {
     }
   };
 
-  // -------- Health needs page data fetch starts -------- //
   const [healthNeedData, setHealthNeedData] = useState<any>();
   const [activeFiltersData, setactiveFiltersData] = useState<any>();
   const [productCategoryData, setproductCategoryData] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      // Health needs Categories List
       const healthNeedsCategories = await axios.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
