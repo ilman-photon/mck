@@ -2,10 +2,8 @@
 
 
 trigger:
-- QA_Sprint4.0
+- none
 
-pr: # Trigger on pull requests towards branches
-- QA_Sprint4.0
 
 #schedules:
 #- cron: "30 11 * * 0-6"
