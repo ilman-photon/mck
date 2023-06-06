@@ -193,7 +193,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-4 pr-4 lg:max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-530 mr-6 location-box">
+            <div className="pb-6 pl-6 lg:pr-4 pr-4 lg:max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-760 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
