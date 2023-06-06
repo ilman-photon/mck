@@ -119,6 +119,7 @@ export default function Home() {
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
                   <ImageVideoAndTextSection
+                    index={`hp_0${index}`}
                     sectionData={
                       response.data[0].blockArea?.expandedValue[index]
                     }
@@ -129,13 +130,14 @@ export default function Home() {
                       response.data[0].blockArea?.expandedValue[index]
                     }
                     textAlignment={"text-center"}
+                    index={`hp_0${index}`}
                   />
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
                   <div className="mx-4 lg:mx-18">
-                  <RecommendationalProductComponent
-                    indexs={index}
-                    sectionData={filteredData("RecommendedProductBlock")}
-                  />
+                    <RecommendationalProductComponent
+                      indexs={`hp_0${index}`}
+                      sectionData={filteredData("RecommendedProductBlock")}
+                    />
                   </div>
                 ) : null}
               </React.Fragment>
