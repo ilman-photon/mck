@@ -1,5 +1,5 @@
 
-interface NavBarData {
+export interface NavBarData {
     name:string
     menuItemName:{
         value:string,
