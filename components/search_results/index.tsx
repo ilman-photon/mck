@@ -416,7 +416,7 @@ function ResultComponent() {
                                 {item?.form?.value[1]?.name}
                               </div>
                               <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
-                                {item?.name}
+                                {item?.highlightDescription.value}
                               </div>
                               <div
                                 className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
