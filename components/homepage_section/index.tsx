@@ -86,7 +86,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full lg:py-9 learning-section`}
+            }  w-full lg:py-9 mb-6 lg:mb-12`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -123,7 +123,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
                 </div>
               </div>
             </div>
-            <div className="lg:p-5 p-4 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
+            <div className="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2">
               <h2
                 className={`${sectionData?.assetPosition?.value === "Right"
                     ? "mx-auto lg:text-left text-center"
@@ -171,7 +171,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
               ? "flex-row-reverse text-center"
               : "text-left"
-            } w-full lg:py-9 lg:px-0 py-6 px-4 learning-section`}
+            } w-full lg:py-8 lg:px-0 py-6 px-4 mb-6 lg:mb-12`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -318,17 +318,17 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
         )
       ) : (
         <div
-          className={`w-full container lg:pb-6 pb-6 lg:pt-6 mx-auto lg:px-72`}
+          className={`w-full p-6 mx-auto lg:p-72`}
           key={sectionData?.contentLink?.id}
         >
           <h1
-            className="text-27 pb-4 lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center page-heading-h3 lg:mb-7 md:mb-4 sm:mb-4"
+            className="text-27 lg:text-5xl text-gtl-med blue-txt lg:mb-5 text-center lg:text-left page-heading-h3 md:mb-4 sm:mb-4"
             id={`${index}_lbl_001`}
           >
             {sectionData?.title?.value}
           </h1>
           <div
-            className={`w-full lg:${"w-1/2"} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center ${sectionData?.buttonText?.value ? "mb-3" : ""
+            className={`w-full lg:${"w-1/2"} text-sofia-reg grey-txt text-base lg:text-left sm:text-center ${sectionData?.buttonText?.value ? "mb-3" : ""
               }
           `}
             dangerouslySetInnerHTML={{
@@ -338,7 +338,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
           ></div>
           {sectionData?.buttonText?.value && (
             <button
-              className={`jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
+              className={`jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex mx-auto lg:mx-0`}
               style={{
                 backgroundColor: `${sectionData?.buttonColorCode?.value}`,
               }}
