@@ -86,10 +86,11 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
               ? "flex-row-reverse text-center"
               : "text-left"
-            } container mx-auto grid lg:flex w-full lg:py-9 learning-section`}
+            }  w-full lg:py-9 learning-section`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
+          <div className="container mx-auto grid lg:flex">
           <div
             className={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
           >
@@ -164,6 +165,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
               </button>
             )}
           </div>
+          </div>
         </div>
       ) : sectionData?.image?.value?.url ? (
         <div
@@ -193,7 +195,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 alt={sectionData?.image?.expandedValue?.altText?.value}
               />
             </div>
-            <div className="lg:p-5 lg:pr-9 lg:pl-9 my-auto col-span-1 w-full lg:w-1/2">
+            <div className="lg:p-5 lg:pr-9 lg:pl-8 my-auto col-span-1 w-full lg:w-1/2">
               <h3
                 className={`${
                   sectionData?.assetPosition?.value === "Right"
@@ -221,7 +223,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                     sectionData?.assetPosition?.value === "Right"
                       ? "mr-auto "
                       : "ml-0"
-                  } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:mr-auto lg:blue-bg lg:text-white`}
+                  } jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:mr-auto lg:blue-bg lg:text-white`}
                   style={{
                     backgroundColor: `${
                       sectionData?.assetPosition?.value === "Right"
@@ -265,7 +267,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
                 {sectionData?.buttonUrl?.value && (
                   <button
                     onClick={() => handleCTABtn(sectionData?.buttonUrl?.value)}
-                    className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right lg:block hidden"
+                    className="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit"
                     id="wft_btn_007"
                     aria-label={sectionData?.buttonText?.value}
                     style={{
@@ -325,7 +327,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
         )
       ) : (
         <div
-          className={`w-full container lg:pb-6 pb-6 lg:pt-6  mx-auto lg:px-72`}
+          className={`w-full container lg:pb-6 pb-6 lg:pt-6 mx-auto lg:px-72`}
           key={sectionData?.contentLink?.id}
         >
           <h1
@@ -336,7 +338,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           </h1>
           <div
             className={`w-full lg:${"w-1/2"} text-sofia-reg grey-txt mainpage-styles text-base lg:text-left sm:text-center ${
-              sectionData?.buttonText?.value ? "lg:mb-3" : ""
+              sectionData?.buttonText?.value ? "mb-3" : ""
             }
           `}
             dangerouslySetInnerHTML={{
@@ -346,7 +348,7 @@ export default function ImageVideoAndTextSection({ sectionData }: any) {
           ></div>
           {sectionData?.buttonText?.value && (
             <button
-              className={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
+              className={`jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
               style={{
                 backgroundColor: `${sectionData?.buttonColorCode?.value}`,
               }}
