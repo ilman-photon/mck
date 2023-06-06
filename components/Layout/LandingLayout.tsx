@@ -4,19 +4,17 @@ import HeaderComponent from "@/components/header";
 import GoogleTagManager from "@/components/google_tag_manager";
 
 interface CatogaryComponentProps {
-    children: ReactElement;
+  children: ReactElement;
 }
 
 const LandingLayout: React.FC<CatogaryComponentProps> = ({ children }) => {
-
-    return (
-        <Fragment>
-            <GoogleTagManager />
-            <HeaderComponent />
-            {children}
-            <FooterComponent />
-        </Fragment>
-
-    )
-}
+  return (
+    <Fragment>
+      <GoogleTagManager />
+      <HeaderComponent />
+      {children}
+      <FooterComponent />
+    </Fragment>
+  );
+};
 export default memo(LandingLayout);

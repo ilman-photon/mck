@@ -6,7 +6,10 @@ import ImageVideoOrTextSection from "../promotional_text";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-function WhyFTComponent() {
+type WhyFTComponentType = {
+  isCarusolAvaibleProps?: boolean;
+};
+function WhyFTComponent({ isCarusolAvaibleProps }: WhyFTComponentType) {
   const [whyFTData, SetWhyFTData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
@@ -93,28 +96,37 @@ function WhyFTComponent() {
     );
     return rearrangedData;
   };
-
+  whyFTData.contentArea.expandedValue[0].name == "Carousel" &&
+    isCarusolAvaibleProps(true);
   return (
     <>
-      <div className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0" role="main">
+      <div
+        className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0"
+        role="main"
+      >
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "CarouselBlock" ? (
-                    <div className="lg:mb-76 md:mb-24 sm:mb-24">
-                      <CarouselComponent
-                        sectionData={filteredData("CarouselBlock")}
-                      />
-                    </div>
+                    <>
+                      <div className="lg:mb-76 md:mb-24 sm:mb-24">
+                        <CarouselComponent
+                          sectionData={filteredData("CarouselBlock")}
+                        />
+                      </div>
+                    </>
                   ) : null}
                 </React.Fragment>
               </>
             ))}
         </React.Fragment>
       </div>
-      <div className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
+      <div
+        className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0"
+        role="main"
+      >
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (

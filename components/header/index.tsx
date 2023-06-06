@@ -4,7 +4,10 @@ import NavBar from "../navbar";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 
-function HeaderComponent() {
+type HeaderComponentType = {
+  isCarusolAvaible?: boolean;
+};
+function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   const router = useRouter();
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
@@ -76,7 +79,6 @@ function HeaderComponent() {
     });
   }
 
-  // hamburger menu
   const [isBarAnimated, setIsBarAnimated] = useState(false);
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
@@ -112,7 +114,6 @@ function HeaderComponent() {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      // Adjust the scroll position value as per your requirements
       if (offset > 100) {
         setIsSticky(true);
       } else {
@@ -130,7 +131,9 @@ function HeaderComponent() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const hamburgerMenu = document.querySelector(".hamburger-menu");
-      const hamburgerMenuActive = document.querySelector(".hamburger-menu.active");
+      const hamburgerMenuActive = document.querySelector(
+        ".hamburger-menu.active"
+      );
 
       if (
         hamburgerMenu &&
@@ -156,8 +159,11 @@ function HeaderComponent() {
       <div
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
-        id="header" role="banner"
-        className={`header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
+        id="header"
+        role="banner"
+        className={`header ${
+          isCarusolAvaible ? "sticky" : isSticky ? "sticky" : "relative z-40"
+        }  mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
@@ -175,7 +181,6 @@ function HeaderComponent() {
             </div>
             {/* Hamburger menu ends */}
           </div>
-
           <div
             ref={headerImgRef}
             className="brand-logo"
