@@ -59,7 +59,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           src={item.image.value.url}
                           alt={item.image.value.id}
                           id={item.image.value.id}
-                          className="w-full max-h-[240px] lg:max-h-[276px]"
+                          className="w-full max-h-[240px] lg:max-h-[276px] object-cover"
                         />
                         </div>
                       </figure>
