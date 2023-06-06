@@ -114,7 +114,7 @@ function WhyFTComponent() {
             ))}
         </React.Fragment>
       </div>
-      <div className="four-oh-four why-FT flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
+      <div className="flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (
@@ -126,11 +126,13 @@ function WhyFTComponent() {
                       sectionData={whyFTData.contentArea.expandedValue[index]}
                     />
                   ) : item?.contentType[1] === "OneColumnBlock" ? (
-                    <ImageVideoOrTextSection
-                      index={`wfnt_0${index}`}
-                      sectionData={whyFTData.contentArea.expandedValue[index]}
-                      textAlignment={"text-left"}
-                    />
+                    <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
+                      <ImageVideoOrTextSection
+                        index={`wfnt_0${index}`}
+                        sectionData={whyFTData.contentArea.expandedValue[index]}
+                        textAlignment={"text-left"}
+                      /></div>
+
                   ) : null}
                   {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
                 </React.Fragment>
