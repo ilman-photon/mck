@@ -451,7 +451,7 @@ function ProductListComponent() {
                       <div
                         onClick={() => handleProductClick(item)}
                         className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px] cursor-pointer">
-                        {item?.name}
+                        {item?.highlightDescription.value}
                       </div>
                       <div
                         id="my_text"

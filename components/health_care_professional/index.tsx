@@ -190,7 +190,7 @@ function HealthCareProfessionalComponent() {
                 </div>
 
                 <div
-                  className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[170px] lg:pt-[72px] mt-6`}
+                  className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6`}
                   style={{ background: customerBackgroundColorCode }}
                 >
                   <div className="container mx-auto">
@@ -344,14 +344,12 @@ function HealthCareProfessionalComponent() {
                               <div className="tab py-6 px-6 lg:min-h-[700px]">
                                 <h2
                                   className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
-                                  tabIndex={idx}
                                   id={`hcp-label-0${idx}`}
                                 >
                                   {tab?.title?.value}
                                 </h2>
                                 <div
                                   className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
-                                  tabIndex={idx}
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
                                     __html: tab?.description?.value,

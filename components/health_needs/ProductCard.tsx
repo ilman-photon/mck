@@ -37,7 +37,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
           
           id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
         >
-          {cardData?.name}
+          {cardData?.highlightDescription.value}
         </div>
       </div>
       <div

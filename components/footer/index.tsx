@@ -96,7 +96,9 @@ export default function FooterComponent() {
                         id={sociallink?.contentLink?.id}
                         aria-label={sociallink?.socialMediaUrl?.value}
                       >
-                        <img
+                        <ImageComponent
+                          id={sociallink?.socialMediaImage?.expandedValue?.altText
+                            ?.value}
                           src={
                             sociallink?.socialMediaImage?.expandedValue
                               ?.thumbnail?.value?.url
@@ -106,7 +108,7 @@ export default function FooterComponent() {
                             sociallink?.socialMediaImage?.expandedValue?.altText
                               ?.value
                           }
-                        ></img>
+                        />
                       </Link>
                     )
                   )}
@@ -144,11 +146,10 @@ export default function FooterComponent() {
                 <li key={item?.contentLink?.guidValue}>
                   <button
                     type="button"
-                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${
-                      activeButton === item?.menuItemName?.value
-                        ? "bg-white"
-                        : ""
-                    }`}
+                    className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${activeButton === item?.menuItemName?.value
+                      ? "bg-white"
+                      : ""
+                      }`}
                     style={{
                       borderTop:
                         activeButton === item?.menuItemName?.value
@@ -172,11 +173,10 @@ export default function FooterComponent() {
                       />
                     </div>
                     <span
-                      className={`text-xs text-mckblue ${
-                        activeButton === item?.menuItemName?.value
-                          ? "text-sofia-bold font-extrabold"
-                          : "text-sofia-reg font-normal"
-                      }`}
+                      className={`text-xs text-mckblue ${activeButton === item?.menuItemName?.value
+                        ? "text-sofia-bold font-extrabold"
+                        : "text-sofia-reg font-normal"
+                        }`}
                     >
                       {item?.menuItemName?.value}
                     </span>
