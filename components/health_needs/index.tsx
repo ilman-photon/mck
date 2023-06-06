@@ -207,6 +207,7 @@ const HealthNeedsComponent = () => {
 
   const createQueryParameters = () => {
     let queryParams = "";
+    let tempId = false
     if (selectedFilterItems.length > 0) {
       let lastCatId = 0;
       let minCategoryCnt = 0;
@@ -214,8 +215,12 @@ const HealthNeedsComponent = () => {
       selectedFilterItems.map((category: any, catId: any) => {
         _temparray = [];
         if (!category.isCategoryChecked && category.items.length > 0) {
+          if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+            tempId = true
+          }
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " and ";
+            queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
           }
           queryParams += "(";
           category.items.map((item: any, index: any) => {
@@ -243,8 +248,12 @@ const HealthNeedsComponent = () => {
           minCategoryCnt += category.isCategoryChecked;
           // minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
+            if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+              tempId = true
+            }
             if (lastCatId > 0 && lastCatId != catId) {
-              queryParams += " and ";
+              queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
             }
             queryParams += "(";
             category.items.map((item: any, index: any) => {

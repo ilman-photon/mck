@@ -12,7 +12,7 @@ import Head from "next/head";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
-
+let mainCatId:any =[]
 interface MyComponentProps {
   Response: {
     data: {
@@ -67,6 +67,12 @@ function AllProductCategoryPage({
     promise
       .then((res) => {
         let tempResults: any = {};
+        if(res.data.results.length === 0){
+        mainCatId.map((id :any) =>{ 
+          tempResults[selectedFilterItems[id].categoryName] = [];
+        })
+      }
+        
         res.data.results.map((item: any) => {
           let name = item.productType.value[0].name;
           if (tempResults[name]) {
@@ -232,12 +238,20 @@ function AllProductCategoryPage({
       let lastCatId = 0;
       let minCategoryCnt = 0;
       let minSubCategoryCnt = 0;
+      let tempId = false
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
+          if (!mainCatId.includes(catId)) {
+            mainCatId.push(catId);
+          }
           const categoryName = selectedFilterItems[catId].categoryName;
           selectedCategoryName.push(categoryName);
+          if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+            tempId = true
+          }
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += " and ";
+            queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
           }
 
           queryParams += "(";
@@ -247,7 +261,8 @@ function AllProductCategoryPage({
             // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
             const concatStr =
               category.items.length === index + 1
-                ? "":" or ";
+                ? ""
+                :category.isBusinessVerticalCategory ? " or " : " and ";
             queryParams += `${
               category.isBusinessVerticalCategory
                 ? category.productType
@@ -275,8 +290,13 @@ function AllProductCategoryPage({
           // minCategoryCnt += category.isCategoryChecked;
           minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
+            if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
+              tempId = true
+            }
             if (lastCatId > 0 && lastCatId != catId) {
-              queryParams += " and ";
+              // queryParams += " and ";
+              queryParams += tempId ? " and " : " or " 
+            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
             }
             queryParams += "(";
           category.items.map((item: any, index: any) => { 
