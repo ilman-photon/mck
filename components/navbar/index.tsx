@@ -11,7 +11,7 @@ function NavBar({ menuData, isMobileMenuActive }: Props) {
   return (
     <>
       <div
-        id="nav-bar"
+        id="nav-bar" role="navigation"
         className={`md:flex container lg:flex ml-auto mobile-customenav ${isMobileMenuActive ? "mobile-overlay-wrapper" :""}`}
       >
         <div className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent ${isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""}`}>

@@ -103,7 +103,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       className="block w-full"
                       alt={item?.image?.expandedValue?.altText?.value}
                       id={item?.title?.value + "_" + current}
-                      aria-hidden="true"
+                      aria-hidden={true}
                       
                     />
                     {carouselContent && (
@@ -165,7 +165,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         className="block w-full"                        
                         alt={firstResponse?.image?.expandedValue?.altText?.value}
                         id={firstResponse.title?.value + "_" + current}
-                        aria-hidden="true"
+                        aria-hidden={true}
                       />
                       {carouselContent && (
                         <div

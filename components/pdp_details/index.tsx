@@ -29,8 +29,8 @@ function PdpDetail(pdpViewData: any) {
     return (
 
         <div className="lg:row-span-3 lg:ml-[72px] pdp-details-heading">
-            <p className="text-gtl-med text-mckblue font-medium mb-6 mx-4 lg:mx-0 mt-3 lg:mt-0" id="pdp_details_001"
-                dangerouslySetInnerHTML={{ __html: responceValue?.title.value, }}></p>
+            <h1 className="text-gtl-med text-mckblue font-medium mb-6 mx-4 lg:mx-0 mt-3 lg:mt-0" id="pdp_details_001"
+                dangerouslySetInnerHTML={{ __html: responceValue?.title.value, }}></h1>
             <h2 className="text-gtl-med text-mcknormalgrey text-2xl lg:text-4xl font-medium mb-2 mx-4 lg:mx-0" id="pdp_details_002"
                 dangerouslySetInnerHTML={{ __html: responceValue?.subTitle?.value, }}></h2>
             <p className="text-gtl-med text-mcknormalgrey text-2xl lg:text-4xl font-medium mb-6 mx-4 lg:mx-0" id="pdp_details_003"
