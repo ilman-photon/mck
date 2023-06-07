@@ -351,19 +351,19 @@ function WhereComponent() {
                           </div>
                           <div className="flex">
                             <span className="text-mcknormalgrey mb-2.5">
-                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold font-normal lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                              <p className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
                                 {value.StoreName}
-                              </span>
-                              <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
                                 {value.Address},{" "}
-                              </span>
-                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
                                 {" "}
                                 {value.City} {value.Zip}
-                              </div>
-                              <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
                                 {value.Phone}
-                              </div>
+                              </p>
                             </span>
                             <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi

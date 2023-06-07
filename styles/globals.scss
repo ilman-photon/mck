@@ -1751,6 +1751,7 @@ Mobiles Menu
     background: #001a71 !important;
     color: #fff !important;
   }
+  .header:hover .icon-arrow,
   .header-sticky:hover .icon-arrow,
   .brand-logo:hover + .header-sticky .icon-arrow {
     border-color: #fff;
@@ -1960,11 +1961,9 @@ Mobile and iPad Navigation
     position: sticky;
     padding: 0 19px;
   }
-  .header:hover,
-  .header-sticky:hover,
-  .brand-logo:hover + .header-sticky {
-    background-color: rgb(255 250 246);
-    color: #001a71 !important;
+  .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {
+      background-color: rgb(255 250 246);
+      color: #001a71 !important;
   }
 
   .isStickyActive {
