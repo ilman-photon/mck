@@ -2218,13 +2218,13 @@ Mobile and iPad Navigation
 }
 
 .category-card .tab input:checked + .tab-label:after {
-  content: "";
-  background-image: url("../public/images/minus.svg");
+  content: "-";
+  // background-image: url("../public/images/minus.svg");
   width: 24px;
   height: 24px;
   text-align: center;
   transition: all 1s;
-  color: #001a71;
+  color: #3a3e41;
   font-size: 30px;
   display: flex;
   align-items: flex-end;
