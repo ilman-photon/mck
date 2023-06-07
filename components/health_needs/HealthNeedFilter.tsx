@@ -67,7 +67,8 @@ const HealthNeedFilter = ({
         category.map((sub_category: any) => {
           if(sub_category.name === item){
             console.log(selectedFilterItems[idx]['items'],"before items")
-            selectedFilterItems[idx]['items'].splice(0, 1);
+            const index = selectedFilterItems[idx]?.['items'].indexOf(item);
+            selectedFilterItems[idx]['items'].splice(index, 1);
             sub_category.checked = false;
             console.log(selectedFilterItems[idx]['items'],"after items")
           }
