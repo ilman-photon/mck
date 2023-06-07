@@ -17,7 +17,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
         onClick={() => handleProductClick(cardData)}
         className="cursor-pointer"
       >
-        <div className="lg:h-60 h-28 flex items-center justify-center">
+        <div className="lg:h-60 h-28 flex items-center justify-center" aria-hidden="true">
           <ImageComponent
             src={cardData?.image?.value?.url}
             alt={`${indexs}${cardData?.image?.value?.url}`}
