@@ -336,7 +336,6 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className="pt-1 pr-2 pb-2 pl-1"
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
@@ -350,7 +349,7 @@ function WhereComponent() {
                             />
                           </div>
                           <div className="flex">
-                            <span className="text-mcknormalgrey mb-2.5">
+                            <span className="text-mcknormalgrey mb-1">
                               <p className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
                                 {value.StoreName}
                               </p>
@@ -370,7 +369,7 @@ function WhereComponent() {
                             </h2>
                           </div>
 
-                          <div className="flex flex-row justify-between mt-2 mb-4">
+                          <div className="flex flex-row justify-between mt-2">
                             {value?.StoreUrl ? (
                               <button
                                 className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
