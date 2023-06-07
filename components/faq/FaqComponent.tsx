@@ -39,7 +39,7 @@ function FaqComponent() {
 
     return (
         <>
-            <div role="main" className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0 lg:mt-169 lg:mt-16">
+            <div role="main" className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0 ">
                 <h1 className="text-mckblue text-54 heading pb-3 text-center" id="faq_label_001">{faqData?.name}</h1>
                 <div className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
                     dangerouslySetInnerHTML={{ __html: faqData?.description?.value, }} id="faq_label_002"></div>

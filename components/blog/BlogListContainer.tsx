@@ -56,7 +56,7 @@ const BlogListContainer = () => {
                                                     query: { id: item.routeSegment },
                                                 }}
                                             >
-                                                <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-32  text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
+                                                <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-28  text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
                                             </LinkComponent>
                                             <div className='pb-3 pt-3'>
                                                 <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>

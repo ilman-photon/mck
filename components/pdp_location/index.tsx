@@ -113,7 +113,7 @@ function PdpLocation(props: any) {
             <div className="pb-6 pt-6 text-mcknormalgrey text-sm font-normal text-sofia-reg mx-4 lg:mx-0" aria-label="Disclaimer" id={`wd-lb-${props.index}-01`}  >Disclaimer: Products are subject to availability</div>
             <div className="mb-6 h-[300px] mx-4 lg:mx-0" style={{ position: "relative" }}>
                 <GoogleMap
-                    mapContainerClassName="map-container box-border border border-solid border-mckblue"
+                    mapContainerClassName="map-container product-detail-map box-border border border-solid border-mckblue"
                     mapContainerStyle={style}
                     zoom={10}
                     options={mapConfigOptions}
@@ -149,15 +149,15 @@ function PdpLocation(props: any) {
                                             <div className="pb-2 cursor-pointer">
                                                 <img src="images/health-mart.png" alt="Health Mart" id={`pdp-img-00` + index} /></div>
                                             <div className="flex">
-                                                <span className="text-sofia-reg text-mcknormalgrey" >
-                                                    <span >{value.Address}, </span>
-                                                    <div> {value.City} {value.Zip}</div>
-                                                    <div className=" text-mckblue">{value.Phone}</div>
+                                                <span className="text-sofia-reg text-mcknormalgrey mb-1">
+                                                    <div className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5">{value.Address}, </div>
+                                                    <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2"> {value.City} {value.Zip}</div>
+                                                    <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 leading-[20px]">{value.Phone}</div>
                                                 </span>
-                                                <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
+                                                <h2 className="text-sofia-reg lg:text-20 text-base font-extrabold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
                                             </div>
 
-                                            <div className="flex mt-2">
+                                            <div className="flex mt-2 flex-row justify-between">
                                                 <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
 
                                                 <button className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 text-lg leading-5 cursor-pointer" aria-pressed="true" onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</button>
@@ -171,22 +171,22 @@ function PdpLocation(props: any) {
                 </GoogleMap>
             </div>
 
-            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100 mx-4 lg:mx-0">
+            <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100 mx-4 lg:mx-0 location-box lg:pr-4 pr-4">
                 {responseValue?.map((value: any, index: Number) => {
-                    return <div className={index === selectedStore ? "text-mckthingrey rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
+                    return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
                         <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" id={`pdp-img_${props.index}-${index}`} /></div>
 
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
-                                <p aria-label="1230 Lindon Ave" className="leading-5" id={`pdp-address_${props.index}-${index}`}>{value.Address}, </p>
-                                <p aria-label="DENVER, CO. 80202" id={`pdp-address_${props.index}-00${index}`} className="leading-5">{value.City} {value.Zip}</p>
-                                <p aria-label="303-571-5314" id={`pdp-address_${props.index}-000${index}`} className="leading-5">{value.Phone}</p>
+                                <p aria-label="1230 Lindon Ave" className="font-extrabold leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.Address}, </p>
+                                <p aria-label="DENVER, CO. 80202" id={`pdp-address_${props.index}-00${index}`} className="leading-5 mb-2">{value.City} {value.Zip}</p>
+                                <p aria-label="303-571-5314" id={`pdp-address_${props.index}-000${index}`} className="text-mckblue leading-5">{value.Phone}</p>
                             </div>
-                            <div className="lg:text-28 font-extrabold text-mcknormalgrey leading-7 leading-[32px] pr-4" aria-label=".3 mi" id={`pdp-distance_${props.index}-${index}`}>{Number(value.Distance).toFixed(1)} mi</div>
+                            <div className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey" aria-label=".3 mi" id={`pdp-distance_${props.index}-${index}`}>{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
-                        <div className="flex flex-row justify-between">
+                        <div className="flex flex-row justify-between mt-1">
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"  role="link" id={`pdp-view_${props.index}-${index}`} onClick={() => showOnline(value.StoreUrl)} >View Online</div>
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 pr-4">
+                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" id={`pdp-directionimg_${props.index}-${index}`} />
                                 <p className="inline-block relative top-1 cursor-pointer"  role="link" id={`pdp-location_${props.index}-${index}`} onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</p>
                             </div>

@@ -6,7 +6,12 @@ import ImageVideoOrTextSection from "../promotional_text";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-function WhyFTComponent() {
+import { WhyFTComponentType } from "./WhyFTComponent.type";
+function WhyFTComponent(
+  { isCarusolAvaibleProps }: WhyFTComponentType = {
+    isCarusolAvaibleProps: null,
+  }
+) {
   const [whyFTData, SetWhyFTData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
@@ -94,9 +99,15 @@ function WhyFTComponent() {
     return rearrangedData;
   };
 
+  whyFTData.contentArea.expandedValue.map(
+    (item: any) => item.name == "Carousel" && isCarusolAvaibleProps(true)
+  );
   return (
     <>
-      <div className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0" role="main">
+      <div
+        className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0"
+        role="main"
+      >
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (
@@ -131,8 +142,8 @@ function WhyFTComponent() {
                         index={`wfnt_0${index}`}
                         sectionData={whyFTData.contentArea.expandedValue[index]}
                         textAlignment={"text-left"}
-                      /></div>
-
+                      />
+                    </div>
                   ) : null}
                   {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
                 </React.Fragment>

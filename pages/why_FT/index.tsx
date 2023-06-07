@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import WhyFTComponent from "@/components/why_FT/WhyFTComponent";
-import LandingLayout from "@/components/Layout/LandingLayout";
+import GoogleTagManager from "@/components/google_tag_manager";
+import HeaderComponent from "@/components/header";
+import FooterComponent from "@/components/footer";
 
 function FTComponent() {
-    return (
-        <LandingLayout>
-            <WhyFTComponent />
-        </LandingLayout>
-    )
+  const [isCarusonAvible, setisCarusonAvible] = useState<boolean>(false);
 
+  return (
+    <>
+      <GoogleTagManager />
+      <HeaderComponent isCarusolAvaible={isCarusonAvible} />
+      <WhyFTComponent isCarusolAvaibleProps={setisCarusonAvible} />
+      <FooterComponent />
+    </>
+  );
 }
 export default FTComponent;
