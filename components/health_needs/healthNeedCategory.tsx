@@ -70,6 +70,7 @@ const HealthNeedCategory = ({
               <li
                 id={`Health_title+${index}`}
                 key={healthneedsdata?.contentLink?.id}
+                tabIndex={0}
                 className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-[36px] cursor-pointer lg:max-w-[170px] active:lg:max-w-[170px]${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
@@ -88,6 +89,7 @@ const HealthNeedCategory = ({
                   src={healthneedsdata?.image?.expandedValue?.url}
                   alt={healthneedsdata?.title.value}
                   className="mb-3 mx-auto w-auto"
+                  aria-hidden="true"
                 />
                 {healthneedsdata?.title.value}
               </li>

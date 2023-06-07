@@ -26,7 +26,8 @@ const HealthNeedFilter = ({
   recommendedProduct,
   sectionData,
   selectedRecommendedProduct,
-  productSum
+  productSum,
+  productSearchCard
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -65,8 +66,10 @@ const HealthNeedFilter = ({
       selectedFilterItems.map((category: any ,idx :number) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
+            console.log(selectedFilterItems[idx]['items'],"before items")
             selectedFilterItems[idx]['items'].splice(0, 1);
             sub_category.checked = false;
+            console.log(selectedFilterItems[idx]['items'],"after items")
           }
         })
       })
@@ -262,7 +265,8 @@ const HealthNeedFilter = ({
             className='mr-2 ml-2'
             alt={activeFiltersData?.activeFiltersText?.value}
             width={24}
-            height={24}
+            height={24}                   
+            aria-hidden="true"
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
@@ -504,6 +508,7 @@ const HealthNeedFilter = ({
             recommendedProduct={recommendedProduct}
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
+            productSearchCard={productSearchCard}
           />
         </div>
       </div>
