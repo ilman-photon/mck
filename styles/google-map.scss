@@ -2,19 +2,16 @@
     .gm-style {
           &-iw {
             width: 30.375rem;
-            height: 189px;
+            min-height: 189px;
             padding: 16px 16px 16px !important;
             &-d{
               overflow: hidden;
               max-height: unset;
             } 
           }
- }
+     .gm-style-iw {
+    height: auto !important;
+  }
+}
  }
 
-@media (max-width: 576px) {
-.map-container{
-  height: 100%!important;
-  width: 100%!important;
-}
-}
