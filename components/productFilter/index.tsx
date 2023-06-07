@@ -35,9 +35,9 @@ function ProductFilter({
                         alt={leftfiltermaindata?.mainCategory?.value[0].name}
                         id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                         height={24}
-                        width={24} /> 
+                        width={24} className="mr-2" /> 
                
-                      <label htmlFor="acute" className="ml-2 filter-title"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
+                      <label htmlFor="acute" className="filter-title"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
