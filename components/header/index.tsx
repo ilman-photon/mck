@@ -156,7 +156,7 @@ function HeaderComponent() {
       <div
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
-        id="header" role="banner"
+        id="header"
         className={`header sticky mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
@@ -179,6 +179,7 @@ function HeaderComponent() {
           <div
             ref={headerImgRef}
             className="brand-logo"
+            role="banner"
             onClick={handleOnClickLogo}
           >
             <img
