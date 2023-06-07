@@ -149,15 +149,15 @@ function PdpLocation(props: any) {
                                             <div className="pb-2 cursor-pointer">
                                                 <img src="images/health-mart.png" alt="Health Mart" id={`pdp-img-00` + index} /></div>
                                             <div className="flex">
-                                                <span className="text-sofia-reg text-mcknormalgrey" >
-                                                    <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">{value.Address}, </span>
+                                                <span className="text-sofia-reg text-mcknormalgrey mb-1">
+                                                    <div className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5">{value.Address}, </div>
                                                     <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2"> {value.City} {value.Zip}</div>
-                                                    <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">{value.Phone}</div>
+                                                    <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 leading-[20px]">{value.Phone}</div>
                                                 </span>
-                                                <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
+                                                <h2 className="text-sofia-reg lg:text-20 text-base font-extrabold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
                                             </div>
 
-                                            <div className="flex mt-2">
+                                            <div className="flex mt-2 flex-row justify-between">
                                                 <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
 
                                                 <button className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 text-lg leading-5 cursor-pointer" aria-pressed="true" onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</button>
