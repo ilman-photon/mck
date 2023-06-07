@@ -42,14 +42,14 @@ const ProductComponent = ({
             return null;
           })}
           <section className="relative">
-            <h1
+            <h2
               className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-6 lg:pt-0"
               
               id={`hn_label_00_${index}`}
               aria-label={product?.item?.name}
             >
               {product?.data?.results?.length > 0 ? product?.item?.name : filterClicked ? product?.item?.name :null }  
-            </h1>
+            </h2>
 
           {product?.data?.results?.length > 0 ?
           
