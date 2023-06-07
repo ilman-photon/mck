@@ -262,7 +262,8 @@ const HealthNeedFilter = ({
             className='mr-2 ml-2'
             alt={activeFiltersData?.activeFiltersText?.value}
             width={24}
-            height={24}
+            height={24}                   
+            aria-hidden="true"
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
