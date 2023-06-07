@@ -1483,7 +1483,6 @@ Mobiles Menu
       ul,
       ol {
         list-style: disc;
-        margin-left: 16px;
       }
       ol {
         list-style: auto;
@@ -1706,7 +1705,7 @@ Mobiles Menu
   .tab {
     .tab-content ul,
     ol {
-      margin-left: 8px;
+      margin-left: 0;
     }
     .tab-label {
       // position: relative;
