@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
+import { LinkComponent } from "../global/LinkComponent";
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -83,33 +84,31 @@ export default function FooterComponent() {
                 </li>
                 <li className="lg:my-2 flex">
                   {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
-                    (sociallink: any) => (
-                      <Link
-                        className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
-                        rel="stylesheet"
-                        href={
-                          sociallink?.socialMediaUrl?.value
-                            ? sociallink?.socialMediaUrl?.value
-                            : ""
-                        }
-                        key={sociallink?.contentLink?.id}
-                        id={sociallink?.contentLink?.id}
-                        aria-label={sociallink?.socialMediaUrl?.value}
-                      >
-                        <ImageComponent
-                          id={sociallink?.socialMediaImage?.expandedValue?.altText
-                            ?.value}
-                          src={
-                            sociallink?.socialMediaImage?.expandedValue
-                              ?.thumbnail?.value?.url
-                          }
-                          className="mx-auto"
-                          alt={
-                            sociallink?.socialMediaImage?.expandedValue?.altText
-                              ?.value
-                          }
-                        />
-                      </Link>
+                    (sociallink: any, index: number) => (
+                      <>
+                        {sociallink?.socialMediaUrl?.value && <LinkComponent
+                          className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
+                          rel="stylesheet"
+                          href={sociallink?.socialMediaUrl?.value}
+                          key={sociallink?.contentLink?.id}
+                          id={`sl-00${index}`}
+                          aria-label={sociallink?.socialMediaUrl?.value}
+                        >
+                          <ImageComponent
+                            id={sociallink?.socialMediaImage?.expandedValue?.altText
+                              ?.value}
+                            src={
+                              sociallink?.socialMediaImage?.expandedValue
+                                ?.thumbnail?.value?.url
+                            }
+                            className="mx-auto"
+                            alt={
+                              sociallink?.socialMediaImage?.expandedValue?.altText
+                                ?.value
+                            }
+                          />
+                        </LinkComponent>}
+                      </>
                     )
                   )}
                 </li>
