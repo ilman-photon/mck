@@ -1,6 +1,7 @@
 import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
+import ReactPlayer from "react-player";
 
 export default function ImageVideoAndTextSection({ sectionData, index }: any) {
   const router = useRouter();
@@ -13,52 +14,39 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
   };
 
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  const videoRef = useRef<ReactPlayer>(null);
   const circlePlayButtonRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    const handlePlaying = () => {
-      setIsPlaying(true);
-    };
-
-    const handlePause = () => {
-      setIsPlaying(false);
-    };
-
-    if (video) {
-      video.addEventListener('playing', handlePlaying);
-      video.addEventListener('pause', handlePause);
-
-      return () => {
-        video.removeEventListener('playing', handlePlaying);
-        video.removeEventListener('pause', handlePause);
-      };
-    }
-  }, []);
 
   const handleTogglePlay = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setIsPlaying(!isPlaying)
 
     const video = videoRef.current;
 
     if (video) {
       if (isPlaying) {
-        video.pause();
+        video.getInternalPlayer().play();
+      } else {
+        video.getInternalPlayer().pause();
+      }
+    }
+
+    if (video) {
+      if (isPlaying) {
+        video.getInternalPlayer().pause();
         setIsPlaying(false);
       } else {
-        const currentTime = video.currentTime;
+        const currentTime = video.getInternalPlayer().currentTime;
         const targetTime = 10; // Replace with the desired time in seconds
         if (currentTime < targetTime) {
-          video.currentTime = targetTime;
+          video.getInternalPlayer().currentTime = targetTime;
         }
-        video.play();
+        video.getInternalPlayer().play();
         setIsPlaying(true);
       }
     }
-  };
+  };  
 
   useEffect(() => {
     const setPageNameAsClassName = () => {
@@ -78,9 +66,12 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
     document.title = ApiRespond?.data[0]?.title.value || "Home";
   }, [ApiRespond]);
 
+  const isInternalSource = sectionData?.video?.value?.url
+  const isInternalSourceMatchAPI = isInternalSource?.includes(`${process?.env?.API_URL}`)
+
   return (
     <div className={`${deviceWidth > 2160 && "container mx-auto lg:pl-6"}`}>
-      {sectionData.video?.value?.url ? (
+      {sectionData.video?.value?.url || sectionData?.videoUrl?.value ? (
         <div
           id="learning-section"
           className={`${sectionData?.assetPosition?.value === "Right"
@@ -96,16 +87,24 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
             >
               <div className="w-full h-full flex justify-center items-center">
                 <div className="w-full mx-auto relative flex flex-col justify-center lg:px-0 px-10" id="video-container">
-                  <video
+                  <div className='player-wrapper'>
+                  <ReactPlayer
+                    className='react-player'
+                    url={sectionData?.video?.value?.url || sectionData?.videoUrl?.value}
                     id={`${index}_vid_001`}
-                    className="w-full h-full rounded-10 lg:px-0"
-                    src={sectionData.video?.value?.url}
-                    ref={videoRef}
                     controls={isPlaying}
-                  >
-                    <track kind="captions" src="path/to/captions.vtt" label="Captions" default />
-                  </video>
-                  {!isPlaying && (
+                    width='100%'
+                    height='100%'
+                    ref={videoRef}
+                    playing={isPlaying}
+                    onSeek={() => setIsPlaying(true)}
+                    onStart={() => setIsPlaying(true)}
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                    pip={true}
+                  />
+                  </div>
+                  {!isPlaying && isInternalSourceMatchAPI ? (
                     <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center w-full h-auto pointer-events-none">
                       <div
                         title="Play video"
@@ -119,7 +118,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
                         </svg>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
