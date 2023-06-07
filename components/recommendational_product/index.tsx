@@ -63,12 +63,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
 
           <div className={`grid h-full`}>
             <div className={`w-full lg:mb-8 mb-6 lg:min-h-57`}>
-              <img
-                className={`h-auto lg:max-w-fit lg:w-338 w-270`}
-                src={ele?.data?.imageTitle?.value?.url}
-                alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-                id={`home-product-image${indexs}${index + 1}`}
-              />
+              {ele?.data?.imageTitle?.value?.url && (
+                <img
+                  className={`h-auto lg:max-w-fit lg:w-338 w-270`}
+                  src={ele?.data?.imageTitle?.value?.url}
+                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
+                  id={`home-product-image${indexs}${index + 1}`}
+                />
+              )}
             </div>
 
             <div
@@ -76,12 +78,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             >
               <div className={`pb-4 lg:pb-0 col-span-1`}>
                 <div className={`mx-auto my-auto lg:h-60 object-contain`}>
-                  <img
-                    className={`mx-auto lg:my-auto`}
-                    src={ele?.data?.image?.value?.url}
-                    id={`home-product-image01${indexs}${index + 1}`}
-                    alt={ele?.data?.image?.expandedValue?.altText?.value}
-                  />
+                  {ele?.data?.imageTitle?.value?.url && (
+                    <img
+                      className={`mx-auto lg:my-auto`}
+                      src={ele?.data?.image?.value?.url}
+                      id={`home-product-image01${indexs}${index + 1}`}
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -134,7 +138,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     response?.length % 2 !== 0 &&
     response?.length !== 1 &&
     response?.map((ele: any, index: number) => {
-      const renderImage = (
+      const renderImage = ele?.data?.imageTitle?.value?.url && (
         <img
           className={`h-auto lg:max-w-fit mx-auto lg:w-338 w-270 ${
             index == 0 && "lg:absolute"
