@@ -38,7 +38,7 @@ function TermsComponent() {
   }, [apiRespond]);
 
   return (
-    <div className="terms container flex flex-col lg:p-72 p-4 pt-0 pb-0 mx-auto lg:mt-36 mt-16">
+    <div className="terms container flex flex-col lg:p-72 p-4  pb-0 mx-auto lg:mt-0 pt-6">
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
