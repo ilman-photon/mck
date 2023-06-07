@@ -102,8 +102,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 ></div>
               </div>
             </div>
-
-            {ele?.data?.buttonText?.value && (
+            {ele?.data?.buttonText?.value && ele?.data?.buttonUrl?.value && (
               <button
                 className={`lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto`}
                 onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
@@ -167,18 +166,19 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         </div>
       );
 
-      const renderButton = ele?.data?.buttonText?.value && (
-        <button
-          className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
-          onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
-          id={`home-product-button${indexs}${index + 1}`}
-          style={{
-            backgroundColor: ele?.data?.buttonColor?.value,
-          }}
-        >
-          {ele?.data?.buttonText?.value}
-        </button>
-      );
+      const renderButton = ele?.data?.buttonText?.value &&
+        ele?.data?.buttonUrl?.value && (
+          <button
+            className="lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto"
+            onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
+            id={`home-product-button${indexs}${index + 1}`}
+            style={{
+              backgroundColor: ele?.data?.buttonColor?.value,
+            }}
+          >
+            {ele?.data?.buttonText?.value}
+          </button>
+        );
       let isDesktopNow = isDesktopView()
         ? ele?.data?.backgroundImage?.value?.url
         : "";
@@ -206,12 +206,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
               <div className={`pb-4 lg:pb-0 col-span-1`}>
                 <div className="mx-auto my-auto lg:h-40 object-contain lg:py-48">
-                  <img
-                    className={`mx-auto lg:my-auto max-h-160`}
-                    src={ele?.data?.image?.value?.url}
-                    id={`home-product-image01${indexs}${index + 1}`}
-                    alt={ele?.data?.image?.expandedValue?.altText?.value}
-                  />
+                  {ele?.data?.image?.value?.url && (
+                    <img
+                      className={`mx-auto lg:my-auto max-h-160`}
+                      src={ele?.data?.image?.value?.url}
+                      id={`home-product-image01${indexs}${index + 1}`}
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -245,12 +247,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
               <div className="pb-4 lg:pb-0 col-span-1">
                 <div className="mx-auto my-auto lg:h-40 object-contain">
-                  <img
-                    className="mx-auto lg:my-auto max-h-160"
-                    src={ele?.data?.image?.value?.url}
-                    id={`home-product-image01${indexs}${index + 1}`}
-                    alt={ele?.data?.image?.expandedValue?.altText?.value}
-                  />
+                  {ele?.data?.image?.value?.url && (
+                    <img
+                      className="mx-auto lg:my-auto max-h-160"
+                      src={ele?.data?.image?.value?.url}
+                      id={`home-product-image01${indexs}${index + 1}`}
+                      alt={ele?.data?.image?.expandedValue?.altText?.value}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -262,7 +266,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         </div>
       );
     });
-
+  console.log("response", response);
   return (
     <div id="promotion-container" className="mx-auto">
       <div className="promotion-product-container lg:mb-12">
