@@ -161,7 +161,6 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
-        role="banner"
         className={`header ${
           isCarusolAvaible ? "sticky" : isSticky ? "sticky" : "relative z-40"
         }  mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
@@ -186,6 +185,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
           <div
             ref={headerImgRef}
             className="brand-logo"
+            role="banner"
             onClick={handleOnClickLogo}
           >
             <img
