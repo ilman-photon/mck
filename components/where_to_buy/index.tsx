@@ -360,11 +360,11 @@ function WhereComponent() {
                                 {" "}
                                 {value.City} {value.Zip}
                               </p>
-                              <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
+                              <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 leading-[20px]">
                                 {value.Phone}
                               </p>
                             </span>
-                            <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
+                            <h2 className="text-sofia-reg lg:text-20 text-base font-extrabold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>
