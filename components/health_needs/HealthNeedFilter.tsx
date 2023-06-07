@@ -26,7 +26,8 @@ const HealthNeedFilter = ({
   recommendedProduct,
   sectionData,
   selectedRecommendedProduct,
-  productSum
+  productSum,
+  productSearchCard
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -43,9 +44,14 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     });
+    if(!productSearchCard){
     const currentURL = window.location.href;
   const updatedURL = currentURL.split('?')[0]; 
   window.location.href = updatedURL;
+    }
+    else{
+      fetchProductList('')
+    }
   };
   const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
@@ -65,8 +71,11 @@ const HealthNeedFilter = ({
       selectedFilterItems.map((category: any ,idx :number) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
-            selectedFilterItems[idx]['items'].splice(0, 1);
+            console.log(selectedFilterItems[idx]['items'],"before items")
+            const index = selectedFilterItems[idx]?.['items'].indexOf(item);
+            selectedFilterItems[idx]['items'].splice(index, 1);
             sub_category.checked = false;
+            console.log(selectedFilterItems[idx]['items'],"after items")
           }
         })
       })
@@ -225,9 +234,9 @@ const HealthNeedFilter = ({
     if (selectedViewAllCateory.length > 0) {
     } else {
       fetchProductList('');
-      router.push({
-        pathname: '/health_needs'
-      });
+      // router.push({
+      //   pathname: '/health_needs'
+      // });
     }
     fetchProductList('');
   };
@@ -273,13 +282,13 @@ const HealthNeedFilter = ({
             {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
+                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]'
                   key={item}
                 >
                   {extractMainCategoryName(productCategoryData)?.includes(item)?`${item}-All` : `${item}`}
                   <Image
                     src='/images/hn-delete-icon.svg'
-                    className='mck-filter-delete-icon cursor-pointer'
+                    className='cursor-pointer mt-0.5'
                     alt='delete icon'
                     onClick={() => handleDelete(activeFilter, item)}
                     width={7}
@@ -290,11 +299,11 @@ const HealthNeedFilter = ({
               );
             })}
             {activeFilter?.length > 0 &&
-            <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
+            <div className='flex gap-0 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
-                className='mck-filter-delete-icon cursor-pointer'
+                className='w-3 cursor-pointer mr-1'
                 alt='delete icon'
                 width={12}
                 height={12}
@@ -331,7 +340,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
-          {productSum && (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
+          { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
       <div className='lg:flex mt-6'>
@@ -367,14 +376,14 @@ const HealthNeedFilter = ({
                                   alt={leftfiltermaindata?.mainCategory?.value[0].name}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
-                                  width={24} />
+                                  width={24} className="mr-2" />
                                   : null} 
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
                                       .name
                                   }
-                                  className='ml-2 filter-title'
+                                  className='filter-title'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -392,7 +401,7 @@ const HealthNeedFilter = ({
 
                             {/* Left filter sub category */}
                             <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
-                              <ul>
+                              <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
                                     className='flex items-center my-px'
@@ -505,6 +514,7 @@ const HealthNeedFilter = ({
             recommendedProduct={recommendedProduct}
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
+            productSearchCard={productSearchCard}
           />
         </div>
       </div>

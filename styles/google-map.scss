@@ -1,19 +1,17 @@
-.map-container {
-  height: 930px!important;
-  width: 829px!important;
-  .gm-style {
-    &-iw {
-      width: 30.375rem;
-      height: 12.125rem;
-
-      // Use to write the css code for pushpins alignments
-    }
+ .map-container {
+    .gm-style {
+          &-iw {
+            width: 30.375rem;
+            min-height: 189px;
+            padding: 16px 16px 16px !important;
+            &-d{
+              overflow: hidden !important;
+              max-height: unset;
+            } 
+          }
+     .gm-style-iw {
+    height: auto !important;
   }
 }
+ }
 
-@media (max-width: 576px) {
-.map-container{
-  height: 100%!important;
-  width: 100%!important;
-}
-}

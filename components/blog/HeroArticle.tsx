@@ -49,7 +49,7 @@ const HeroArticle = ({ data }: any) => {
                                 style={{
                                     backgroundColor: handleTagBackgroudColor(index, data?.tagBackgroundColorCode?.value),
                                 }}
-                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit lg:mb-0 mb-2' id='blog-label-006'>
+                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit  mb-2' id='blog-label-006'>
                                 {item.description}
                             </div>
                         ))}

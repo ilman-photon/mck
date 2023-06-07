@@ -41,7 +41,7 @@ function PrivacyComponent() {
   }, [apiRespond]);
 
   return (
-    <div className="privacypolicy container flex flex-col lg:p-72 lg:pb-0 p-4 pt-6 pb-0 mx-auto lg:mt-36">
+    <div className="privacypolicy container flex flex-col lg:p-72 lg:pb-0 p-4 pt-6 pb-0 mx-auto">
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>

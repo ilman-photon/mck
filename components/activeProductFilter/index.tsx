@@ -15,21 +15,21 @@ function ActiveProductFilter({
       <div className="flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto">
         {activeFilter?.map((item: any) => {
           return (
-            <div className="flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0" key={item}>
+            <div className="flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]" key={item}>
               {item}&nbsp;
               <img
                 src="/images/hn-delete-icon.svg"
-                className="mck-filter-delete-icon cursor-pointer"
+                className="cursor-pointer mt-0.5"
                 alt="delete icon"
                 onClick={() => handleClearOne(item)}
               />
             </div>
           );
         })}
-        <div className="flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static">
+        <div className="flex gap-0 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static">
           <img
             src="/images/hn-delete-icon.svg"
-            className="mck-filter-clearall-icon ml-0"
+            className="w-3 ml-0 mr-1"
             alt="delete icon"
           />
           <div className="underline" onClick={handleClearAll}  aria-label={activeFiltersData?.clearAllText?.value}>

@@ -79,7 +79,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     <div className="flex items-center justify-center">
       <div
         id="carouselExampleCaptions"
-        className="relative"
+        className="w-full relative"
         data-te-carousel-init
         data-te-carousel-slide
       >
@@ -104,7 +104,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       alt={item?.image?.expandedValue?.altText?.value}
                       id={item?.title?.value + "_" + current}
                       aria-hidden={true}
-                      
                     />
                     {carouselContent && (
                       <div
@@ -119,7 +118,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         <h2
                           className="text-mcklightyellow lg:mb-3"
                           id={item?.title?.value}
-                          
                         >
                           {item?.title?.value}
                         </h2>
@@ -128,7 +126,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           dangerouslySetInnerHTML={{
                             __html: item?.description?.value,
                           }}
-                          
                           id={item?.description?.value}
                         ></p>
                         {item?.buttonText?.value && (
@@ -162,8 +159,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     <>
                       <img
                         src={firstResponse.image?.value.url}
-                        className="block w-full"                        
-                        alt={firstResponse?.image?.expandedValue?.altText?.value}
+                        className="block w-full"
+                        alt={
+                          firstResponse?.image?.expandedValue?.altText?.value
+                        }
                         id={firstResponse.title?.value + "_" + current}
                         aria-hidden={true}
                       />
@@ -178,7 +177,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           <h2
                             className="text-mcklightyellow lg:mb-3"
                             id={firstResponse.title?.value}
-                            
                           >
                             {firstResponse.title?.value}
                           </h2>
@@ -187,7 +185,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                             dangerouslySetInnerHTML={{
                               __html: firstResponse.description?.value,
                             }}
-                            
                             id={firstResponse.description?.value}
                           ></p>
                           {firstResponse.buttonText?.value && (
@@ -201,7 +198,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               onClick={() =>
                                 handleCTABtn(firstResponse.buttonUrl?.value)
                               }
-                              
                               role="button"
                             >
                               {firstResponse.buttonText?.value}
@@ -216,13 +212,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             ))}
         </div>
         {!loading && response?.length > 1 && (
-          <ul className="list-unstyled indicators">
+          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 indicators">
             {response?.map((item: any, index: number) => (
               <li
-                className={`indicator ${index === current ? "active" : ""}`}
+                className={`indicator content-center ${
+                  index === current ? "active" : ""
+                }`}
                 key={index}
                 onClick={() => handleCarouselImage(index)}
-                
                 role="button"
               ></li>
             ))}

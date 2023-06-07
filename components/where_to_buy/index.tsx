@@ -159,7 +159,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy" id="carouselExampleCaptions">
+      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy" id="carouselExampleCaptions">
           <div>
           <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
@@ -187,13 +187,13 @@ function WhereComponent() {
               </div>
             </div>
             <div
-              className="lg:w-598 max-w-[498px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
+              className="lg:w-[640px] lg:desktop:w-[400px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-4 pr-4 lg:max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-760 mr-6 location-box">
+            <div className="lg:w-[640px] lg:desktop:w-[400px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -294,7 +294,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-842 w-full relative h-782 lg:h-854">
+          <div className="lg:w-[800px] lg:desktop:w-[640px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
@@ -336,7 +336,6 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className="pt-1 pr-2 pb-2 pl-1"
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
@@ -350,27 +349,27 @@ function WhereComponent() {
                             />
                           </div>
                           <div className="flex">
-                            <span className="text-mcknormalgrey mb-2.5">
-                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold font-normal lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                            <span className="text-mcknormalgrey mb-1">
+                              <p className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
                                 {value.StoreName}
-                              </span>
-                              <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
                                 {value.Address},{" "}
-                              </span>
-                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
                                 {" "}
                                 {value.City} {value.Zip}
-                              </div>
-                              <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
                                 {value.Phone}
-                              </div>
+                              </p>
                             </span>
                             <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>
 
-                          <div className="flex mt-2 mb-4">
+                          <div className="flex flex-row justify-between mt-2">
                             {value?.StoreUrl ? (
                               <button
                                 className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
