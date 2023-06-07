@@ -159,7 +159,7 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy" id="carouselExampleCaptions">
+      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy" id="carouselExampleCaptions">
           <div>
           <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
@@ -336,7 +336,7 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className="pt-1 pr-2 pb-2 pl-1"
+                          className=""
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
@@ -351,13 +351,13 @@ function WhereComponent() {
                           </div>
                           <div className="flex">
                             <span className="text-mcknormalgrey mb-2.5">
-                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold font-normal lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
                                 {value.StoreName}
                               </span>
                               <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
                                 {value.Address},{" "}
                               </span>
-                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
+                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </div>
