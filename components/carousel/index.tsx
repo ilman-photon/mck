@@ -88,78 +88,62 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           {!loading &&
             (response?.length > 1 ? (
               transitions((styles: any, item: any) => (
-                <div>
-                  <animated.div
-                    className={`w-full mx-auto ${item ? "block" : "hidden"}`}
-                    style={styles}
-                    key={item?.contentLink?.id + "_" + current}
+                <animated.div
+                  className={`w-full mx-auto ${item ? "block" : "hidden"}`}
+                  style={styles}
+                  key={item?.contentLink?.id + "_" + current}
+                >
+                  <div
+                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                    data-te-carousel-active
+                    data-te-carousel-item
                   >
-                    <div
-                      className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                      data-te-carousel-active
-                      data-te-carousel-item
-                    >
-                      <img
-                        src={item?.image?.value.url}
-                        className="block w-full"
-                        alt={item?.image?.expandedValue?.altText?.value}
-                        id={item?.title?.value + "_" + current}
-                        aria-hidden={true}
-                      />
-                      {carouselContent && (
-                        <div
-                          className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
-                          style={{
-                            backgroundColor:
-                              item?.title?.value || item?.description?.value
-                                ? item?.backgroundColor?.value
-                                : "",
-                          }}
+                    <img
+                      src={item?.image?.value.url}
+                      className="block w-full"
+                      alt={item?.image?.expandedValue?.altText?.value}
+                      id={item?.title?.value + "_" + current}
+                      aria-hidden={true}
+                    />
+                    {carouselContent && (
+                      <div
+                        className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                        style={{
+                          backgroundColor:
+                            item?.title?.value || item?.description?.value
+                              ? item?.backgroundColor?.value
+                              : "",
+                        }}
+                      >
+                        <h2
+                          className="text-mcklightyellow lg:mb-3"
+                          id={item?.title?.value}
                         >
-                          <h2
-                            className="text-mcklightyellow lg:mb-3"
-                            id={item?.title?.value}
-                          >
-                            {item?.title?.value}
-                          </h2>
-                          <p
-                            className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                            dangerouslySetInnerHTML={{
-                              __html: item?.description?.value,
+                          {item?.title?.value}
+                        </h2>
+                        <p
+                          className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description?.value,
+                          }}
+                          id={item?.description?.value}
+                        ></p>
+                        {item?.buttonText?.value && (
+                          <button
+                            id={item?.contentLink.id}
+                            className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                            style={{
+                              backgroundColor: item?.ctaButtonColor?.value,
                             }}
-                            id={item?.description?.value}
-                          ></p>
-                          {item?.buttonText?.value && (
-                            <button
-                              id={item?.contentLink.id}
-                              className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
-                              style={{
-                                backgroundColor: item?.ctaButtonColor?.value,
-                              }}
-                              onClick={() =>
-                                handleCTABtn(item?.buttonUrl?.value)
-                              }
-                            >
-                              {item?.buttonText?.value}
-                            </button>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </animated.div>
-                  <ul className="list-unstyled lg:absolute text-center left-0 right-0 bottom-1 indicators">
-                    {response?.map((item: any, index: number) => (
-                      <li
-                        className={`indicator content-center ${
-                          index === current ? "active" : ""
-                        }`}
-                        key={index}
-                        onClick={() => handleCarouselImage(index)}
-                        role="button"
-                      ></li>
-                    ))}
-                  </ul>
-                </div>
+                            onClick={() => handleCTABtn(item?.buttonUrl?.value)}
+                          >
+                            {item?.buttonText?.value}
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </animated.div>
               ))
             ) : (
               <div
@@ -227,6 +211,20 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
               </div>
             ))}
         </div>
+        {!loading && response?.length > 1 && (
+          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 indicators">
+            {response?.map((item: any, index: number) => (
+              <li
+                className={`indicator content-center ${
+                  index === current ? "active" : ""
+                }`}
+                key={index}
+                onClick={() => handleCarouselImage(index)}
+                role="button"
+              ></li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
