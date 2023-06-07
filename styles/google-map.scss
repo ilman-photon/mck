@@ -9,7 +9,10 @@
               max-height: unset;
             } 
           }
- }
+  .gm-style-iw {
+    height: auto !important;
+  }
+}
  }
 
 @media (max-width: 576px) {
