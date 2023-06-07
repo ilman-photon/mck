@@ -6,12 +6,14 @@ import { Navigation, Pagination } from "swiper";
 import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
+import ProductSearchCard from "../product_list/ProductSearchCard";
 
 const ProductComponent = ({
   selectedProduct,
   sectionData,
   selectedRecommendedProduct,
-  filterClicked
+  filterClicked,
+  productSearchCard
 }: any) => {
   const handleProduct = (item: any, index: number) => {
     const filteredSection = sectionData.filter((section: any) =>
@@ -49,7 +51,21 @@ const ProductComponent = ({
               {product?.data?.results?.length > 0 ? product?.item?.name : filterClicked ? product?.item?.name :null }  
             </h1>
 
-          {product?.data?.results?.length > 0 ? 
+          {product?.data?.results?.length > 0 ?
+          
+        <>
+
+        {productSearchCard ?
+          <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:mb-0 break-words">          
+      {product?.data?.results?.map((item: any, idxs: number) => {
+                  return (
+                    
+                      <ProductSearchCard cardData={item} product={product} indexs={idxs} mainIndex={index} />
+                 
+                  );
+                })}
+          </div>
+          :
             <div className="lg:pt-6 lg:pb-12 pb-6">
               <Swiper
                 modules={[Navigation, Pagination]}
@@ -73,7 +89,10 @@ const ProductComponent = ({
                 })}
               </Swiper>
             </div>
-            : <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">{filterClicked ? "There are no products" : null }</div>} 
+          }
+          </>
+            : <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
+              {filterClicked ? "There are no products" : null }</div>} 
           </section>
         </div>
       ))}

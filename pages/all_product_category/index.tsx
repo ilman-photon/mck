@@ -41,6 +41,7 @@ function AllProductCategoryPage({
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [productSum , setProductSum] = useState<any>()
+  const productSearchCard = false
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -489,6 +490,7 @@ function AllProductCategoryPage({
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
           productSum ={productSum}
+          productSearchCard={productSearchCard}
         />
       </div>
       <FooterComponent />
