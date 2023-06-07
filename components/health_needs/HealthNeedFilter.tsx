@@ -277,13 +277,13 @@ const HealthNeedFilter = ({
             {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0'
+                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]'
                   key={item}
                 >
                   {extractMainCategoryName(productCategoryData)?.includes(item)?`${item}-All` : `${item}`}
                   <Image
                     src='/images/hn-delete-icon.svg'
-                    className='mck-filter-delete-icon cursor-pointer'
+                    className='cursor-pointer mt-0.5'
                     alt='delete icon'
                     onClick={() => handleDelete(activeFilter, item)}
                     width={7}
@@ -294,11 +294,11 @@ const HealthNeedFilter = ({
               );
             })}
             {activeFilter?.length > 0 &&
-            <div className='flex gap-2 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
+            <div className='flex gap-0 cursor-pointer ml-2 items-baseline absolute left-auto right-0 top-0 lg:static'>
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
-                className='mck-filter-delete-icon cursor-pointer'
+                className='w-3 cursor-pointer mr-1'
                 alt='delete icon'
                 width={12}
                 height={12}

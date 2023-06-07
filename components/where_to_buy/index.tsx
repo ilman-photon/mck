@@ -336,7 +336,7 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className=""
+                          className="pt-1 pr-2 pb-2 pl-1"
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
@@ -365,7 +365,7 @@ function WhereComponent() {
                                 {value.Phone}
                               </p>
                             </span>
-                            <h2 className="text-sofia-reg lg:text-20 text-base font-extrabold ml-auto">
+                            <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>

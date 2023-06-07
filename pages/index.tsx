@@ -118,12 +118,14 @@ export default function Home() {
                     sectionData={filteredData("FourColumnBlock")}
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
+                  <div className="container mx-auto px-5">
                   <ImageVideoAndTextSection
                     index={`hp_0${index}`}
                     sectionData={
                       response.data[0].blockArea?.expandedValue[index]
                     }
                   />
+                  </div>
                 ) : item?.contentType[1] === "OneColumnBlock" ? (
                   <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
                     <ImageVideoOrTextSection
@@ -136,10 +138,12 @@ export default function Home() {
                   </div>
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
                   <div className="mx-4 lg:mx-18">
-                    <RecommendationalProductComponent
-                      indexs={`hp_0${index}`}
-                      sectionData={filteredData("RecommendedProductBlock")}
-                    />
+                    <div className="container mx-auto px-5">
+                      <RecommendationalProductComponent
+                        indexs={`hp_0${index}`}
+                        sectionData={filteredData("RecommendedProductBlock")}
+                      />
+                    </div>
                   </div>
                 ) : null}
               </React.Fragment>

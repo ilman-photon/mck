@@ -8,10 +8,10 @@
               overflow: hidden;
               max-height: unset;
             } 
-            @media (max-width: 576px) {
-              max-width: 312px;  
-            }
           }
-    }
+     .gm-style-iw {
+    height: auto !important;
+  }
+}
  }
 
