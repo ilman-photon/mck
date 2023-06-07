@@ -44,9 +44,14 @@ const HealthNeedFilter = ({
         sub_category.checked = false;
       });
     });
+    if(!productSearchCard){
     const currentURL = window.location.href;
   const updatedURL = currentURL.split('?')[0]; 
   window.location.href = updatedURL;
+    }
+    else{
+      fetchProductList('')
+    }
   };
   const handleDelete = (activeFilter: any, item: any) => {
     setActiveFilter(
@@ -229,9 +234,9 @@ const HealthNeedFilter = ({
     if (selectedViewAllCateory.length > 0) {
     } else {
       fetchProductList('');
-      router.push({
-        pathname: '/health_needs'
-      });
+      // router.push({
+      //   pathname: '/health_needs'
+      // });
     }
     fetchProductList('');
   };
@@ -335,7 +340,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
-          {productSum && (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
+          { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
       <div className='lg:flex mt-6'>

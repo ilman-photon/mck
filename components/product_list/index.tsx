@@ -48,7 +48,11 @@ function ProductListComponent() {
       .then((res) => {
         if(res.data.results.length === 0){
           setProductSum(res.data.totalMatching)
-        SetProductListData( [])
+          // setProductName(res.data.results[0]?.productType?.value[0].name)
+          SetProductListData( [
+            {item: {name: "" }},
+            {data: {results: ""}},
+          ])
         }
         setFilterClicked(true);
         setProductName(res.data.results[0].productType?.value[0].name)
@@ -152,9 +156,7 @@ function ProductListComponent() {
 
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
         // queryParams = "";
-        const currentURL = window.location.href;
-  const updatedURL = currentURL.split('?')[0]; 
-  window.location.href = updatedURL;
+        fetchProductList('')
       }
     }
     fetchProductList(queryParams);
@@ -296,25 +298,7 @@ function ProductListComponent() {
     });
   }, [recommendedProduct]);
 
-  const handleProduct = (item: any, index: number) => {
-    const filteredSection = sectionData.filter((section: any) => {
-      const tempProductName = section?.recommendedProductCategory?.value[0]?.name
-      const itemName = tempProductName.toLowerCase().replace(/[^\w\s]/gi, '');
-      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, '');
 
-      return itemName.includes(searchItem);
-    });
-
-    if (filteredSection.length > 0) {
-      return (
-        <RecommendationalProductComponent
-          indexs={index}
-          sectionData={filteredSection.map((section: any) => section)}
-        />
-      );
-    }
-    return null;
-  };
 
   return (
     <>
