@@ -150,11 +150,11 @@ function PdpLocation(props: any) {
                                                 <img src="images/health-mart.png" alt="Health Mart" id={`pdp-img-00` + index} /></div>
                                             <div className="flex">
                                                 <span className="text-sofia-reg text-mcknormalgrey" >
-                                                    <span >{value.Address}, </span>
-                                                    <div> {value.City} {value.Zip}</div>
-                                                    <div className=" text-mckblue">{value.Phone}</div>
+                                                    <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">{value.Address}, </span>
+                                                    <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2"> {value.City} {value.Zip}</div>
+                                                    <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">{value.Phone}</div>
                                                 </span>
-                                                <h2 className="text-sofia-reg text-mckblue text-27 font-bold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
+                                                <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">{Number(value.Distance).toFixed(1)} mi</h2>
                                             </div>
 
                                             <div className="flex mt-2">

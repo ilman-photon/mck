@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";

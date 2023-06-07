@@ -339,7 +339,7 @@ function ResultComponent() {
 
   return (
     <>
-      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:mt-[170px] lg:pt-[72px] lg:pb-0">
+      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:pt-[72px] lg:pb-0">
         <div className="desktop:px-6 mobile:px-0">
           {searchLoading &&
             <div className="fixed inset-0 flex items-center justify-center z-50">

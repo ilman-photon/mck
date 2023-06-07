@@ -376,14 +376,14 @@ const HealthNeedFilter = ({
                                   alt={leftfiltermaindata?.mainCategory?.value[0].name}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
-                                  width={24} />
+                                  width={24} className="mr-2" />
                                   : null} 
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
                                       .name
                                   }
-                                  className='ml-2 filter-title'
+                                  className='filter-title'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -401,7 +401,7 @@ const HealthNeedFilter = ({
 
                             {/* Left filter sub category */}
                             <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
-                              <ul>
+                              <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
                                     className='flex items-center my-px'
