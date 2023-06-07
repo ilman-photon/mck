@@ -60,7 +60,7 @@ const ProductComponent = ({
       {product?.data?.results?.map((item: any, idxs: number) => {
                   return (
                     
-                      <ProductSearchCard cardData={item} product={product} indexs={idxs} mainIndex={index} />
+                      <ProductSearchCard cardData={item} key={item.id} product={product} indexs={idxs} mainIndex={index} />
                  
                   );
                 })}
