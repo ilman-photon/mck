@@ -19,22 +19,22 @@ const nextConfig = {
 
   env: {
     API_URL: dev
-      ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
+      ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
       : test
-      ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
-      : "https://mcco02mstrub73kinte.dxcloud.episerver.net",
+      ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
+      : "https://mcco02mstrub73kprep.dxcloud.episerver.net",
   },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mcco02mstrub73kinte.dxcloud.episerver.net',
+        hostname: 'mcco02mstrub73kprep.dxcloud.episerver.net',
         port: '',
         pathname: '/globalassets/**',
       },
       {
         protocol: 'https',
-        hostname: 'mcco02mstrub73kinte.dxcloud.episerver.net',
+        hostname: 'mcco02mstrub73kprep.dxcloud.episerver.net',
         port: '',
         pathname: '/contentassets/**',
       },
