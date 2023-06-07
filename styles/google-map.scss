@@ -5,7 +5,7 @@
             min-height: 189px;
             padding: 16px 16px 16px !important;
             &-d{
-              overflow: hidden;
+              overflow: hidden !important;
               max-height: unset;
             } 
           }
