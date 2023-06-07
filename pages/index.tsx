@@ -118,9 +118,10 @@ export default function Home() {
                     sectionData={filteredData("FourColumnBlock")}
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
-                  <div className="container mx-auto px-5">
+                  <div>
                   <ImageVideoAndTextSection
                     index={`hp_0${index}`}
+                    customStyleClass={'lg:px-5'}
                     sectionData={
                       response.data[0].blockArea?.expandedValue[index]
                     }

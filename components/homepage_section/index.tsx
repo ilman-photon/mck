@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 
-export default function ImageVideoAndTextSection({ sectionData, index }: any) {
+export default function ImageVideoAndTextSection({ sectionData, index, customStyleClass='' }: any) {
   const router = useRouter();
   const [ApiRespond, setApiRespond] = useState<any>();
   const [deviceWidth] = useWindowResize();
@@ -77,7 +77,7 @@ export default function ImageVideoAndTextSection({ sectionData, index }: any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full lg:py-9 mb-6 lg:mb-12`}
+            }  ${customStyleClass} w-full lg:py-9 mb-6 lg:mb-12`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
