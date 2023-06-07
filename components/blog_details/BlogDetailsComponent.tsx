@@ -72,7 +72,7 @@ const BlogDetailsComponent = () => {
                     </div>
                 </div>
             ) :
-            (<div className='container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto lg:mt-44 md:mt-16' id="carouselExampleCaptions" >
+            (<div className='container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto ' id="carouselExampleCaptions" >
                 <div className='col-start-1 col-end-7 rounded-lg overflow-hidden'
                     style={{ display: BlogInfo.image.expandedValue.url ? 'block' : 'none' }}
                 >
