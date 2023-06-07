@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
+import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
 
-export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
+export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any) {
   const router = useRouter();
   const [ApiRespond, setApiRespond] = useState<any>();
+  const [deviceWidth] = useWindowResize();
   const handleCTABtn = (url: string) => {
     router.push({
       pathname: url,
@@ -71,7 +73,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
 
   const VideoAndTextComponent = () => {
     return(
-    <div
+        <div
           id="learning-section"
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"

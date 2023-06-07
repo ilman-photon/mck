@@ -7,6 +7,7 @@ import ImageVideoOrTextSection from "../promotional_text";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
+import WhyFTImageVideoAndTextSection from "./WhyFTImageVideoAndTextSection";
 function WhyFTComponent(
   { isCarusolAvaibleProps }: WhyFTComponentType = {
     isCarusolAvaibleProps: null,
@@ -132,7 +133,7 @@ function WhyFTComponent(
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "TwoCloumnBlock" ? (
-                    <ImageVideoAndTextSection
+                    <WhyFTImageVideoAndTextSection
                       index={`wfnt_0${index}`}
                       sectionData={whyFTData.contentArea.expandedValue[index]}
                     />
