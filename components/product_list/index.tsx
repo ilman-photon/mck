@@ -54,7 +54,7 @@ function ProductListComponent() {
         setProductName(res.data.results[0].productType?.value[0].name)
         setProductSum(res.data.totalMatching)
         SetProductListData( [
-          {item: {name: ""}},
+          {item: {name: res.data.results[0].productType?.value[0].name }},
           {data: {results: res.data.results}},
         ])
       })
