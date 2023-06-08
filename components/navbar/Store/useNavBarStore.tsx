@@ -6,6 +6,8 @@ interface ControllerNavBar {
     getData:() => void
     headerData:any
     subHeaderData:NavBarData[] | null
+    onClickEachCategory: (parentCat:any) => void
+    selectedCategory:string
 }
   
 export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
@@ -35,4 +37,8 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
     },
     headerData:null,
     subHeaderData:null,
+    onClickEachCategory:(parentCat) => {
+      set({selectedCategory:parentCat})
+    },
+    selectedCategory:''
 }))
