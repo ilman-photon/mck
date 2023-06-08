@@ -115,7 +115,7 @@ function WhyFTComponent(
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "CarouselBlock" ? (
-                    <div className="lg:mb-76 md:mb-24 sm:mb-24">
+                    <div className="lg:mb-12">
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
@@ -138,7 +138,7 @@ function WhyFTComponent(
                       sectionData={item}
                     />
                   ) : item?.contentType[1] === "OneColumnBlock" ? (
-                    <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
+                    <div className="py-6 lg:p-0 text-center mb-6 lg:mb-12">
                       <ImageVideoOrTextSection
                         index={`wfnt_0${index}`}
                         sectionData={item}
