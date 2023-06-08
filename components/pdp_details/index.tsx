@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
+import axiosInstance from "@/utils/axiosInstance";
 
 function PdpDetail(pdpViewData: any) {
   const router = useRouter();
@@ -8,14 +9,8 @@ function PdpDetail(pdpViewData: any) {
     const [responceValue, setResponceValue] = useState<any>();
 
     function fetchPDPDetails() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
+        return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length ? data : "vitamin-d3-50-mcg-2000"}/&expand=*`);
     }
 
     useEffect(() => {

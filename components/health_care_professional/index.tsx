@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "../global/ImageComponent";
+import axiosInstance from "@/utils/axiosInstance";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -53,7 +54,7 @@ function HealthCareProfessionalComponent({
   const fetchUrl = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(url, {
+      const res = await axiosInstance.get(url, {
         headers: { "Accept-Language": "en" },
       });
       if (Object.keys(res?.data).length > 0) {

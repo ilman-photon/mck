@@ -1,3 +1,4 @@
+import axiosInstance from "@/utils/axiosInstance";
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 
@@ -5,14 +6,8 @@ function FourOhFourCoumponent() {
     const [notFoundData, SetNotFoundData] = useState<any>();
 
     function fetchNotFoundDetails() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/page-not-found/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
+        return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/page-not-found/&expand=*`);
     }
 console.log(notFoundData, "error")
     useEffect(() => {

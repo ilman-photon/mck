@@ -8,6 +8,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
 import WhyFTImageVideoAndTextSection from "./WhyFTImageVideoAndTextSection";
+import axiosInstance from "@/utils/axiosInstance";
 function WhyFTComponent(
   { isCarusolAvaibleProps }: WhyFTComponentType = {
     isCarusolAvaibleProps: null,
@@ -16,14 +17,8 @@ function WhyFTComponent(
   const [whyFTData, SetWhyFTData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`);
   }
   useEffect(() => {
     document.documentElement.lang = "en";

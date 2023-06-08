@@ -15,11 +15,12 @@ import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated 
 import Image from "next/image";
 
 export default function Home() {
+  
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
     headers: {
-      "Accept-Language": "en",
+      "Accept-Language": "en"
     },
   });
 
@@ -63,11 +64,13 @@ export default function Home() {
   };
 
   useEffect(() => {
+
     const timer = setTimeout(() => {
       setShowComponent(false);
     }, 1000);
 
     return () => clearTimeout(timer);
+    
   }, []);
 
   useEffect(() => {
