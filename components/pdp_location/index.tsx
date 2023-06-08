@@ -159,7 +159,11 @@ function PdpLocation(props: any) {
                                             </div>
 
                                             <div className="flex flex-row justify-between mb-1">
+                                                <div>
+                                               {value?.StoreUrl ? (
                                                 <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-md leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
+                                               ) : null} 
+                                               </div>
                                                 <div>
                                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block mr-1" id={`pdp-directionimg_${props.index}-${index}`} />
                                                 <button className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 text-md leading-5 cursor-pointer" aria-pressed="true" onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</button>
@@ -188,7 +192,11 @@ function PdpLocation(props: any) {
                             <div className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey" aria-label=".3 mi" id={`pdp-distance_${props.index}-${index}`}>{Number(value.Distance).toFixed(1)} mi</div>
                         </div>
                         <div className="flex flex-row justify-between mt-1">
-                            <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"  role="link" id={`pdp-view_${props.index}-${index}`} onClick={() => showOnline(value.StoreUrl)} >View Online</div>
+                            <div>
+                            {value?.StoreUrl ? (
+                                < div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"  role="link" id={`pdp-view_${props.index}-${index}`} onClick={() => showOnline(value.StoreUrl)} >View Online</div>
+                            ) : null}
+                            </div>
                             <div className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5">
                                 <img src="images/directions_car_filled.svg" alt="direction" className="inline-block" id={`pdp-directionimg_${props.index}-${index}`} />
                                 <p className="inline-block relative top-1 cursor-pointer"  role="link" id={`pdp-location_${props.index}-${index}`} onClick={() => showMapClicked(value.Lat, value.Lon)}>Get Directions</p>
