@@ -49,7 +49,7 @@ function ProductFilter({
                     <ul>
                       <li className="list-none pb-1 lg:pb-0">
                         <div
-                          className="flex items-center my-px"
+                          className="flex items-center my-px lg:pl-[5px] cursor-pointer"
                           onClick={(e) =>
                             handleViewAllChange(
                               e,
@@ -61,7 +61,7 @@ function ProductFilter({
                             id={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
                             type="checkbox"
                             value="view all"
-                            className="w-4 h-4 accent-[#001A71]"
+                            className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                             checked={
                               selectedFilterItems[
                                 leftfiltermaindata?.mainCategory?.value[0].id
@@ -76,8 +76,8 @@ function ProductFilter({
                             role="checkbox"
                           />
                           <label
-                            htmlFor="mck-view-all"
-                            className="ml-2 text-mcknormalgrey text-sm"
+                            htmlFor={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
+                            className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                             id=""  aria-label="View All"
                           >
                             View All
@@ -90,7 +90,7 @@ function ProductFilter({
                         (leftfiltersubdata: any) => (
                           <li className="list-none pb-1 lg:pb-0 lg:pr-3" key={leftfiltersubdata?.id}>
                             <div
-                              className="flex items-center my-px"
+                              className="flex items-center my-px lg:pl-[5px] cursor-pointer"
                               onClick={(e) =>
                                 handleCheckBox(
                                   e,
@@ -104,7 +104,7 @@ function ProductFilter({
                                 id={`${leftfiltersubdata?.name}_${index}`}
                                 type="checkbox"
                                 value={leftfiltersubdata?.name}
-                                className="w-4 h-4 accent-[#001A71]"
+                                className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                 checked={
                                   selectedFilterItems[
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -121,8 +121,8 @@ function ProductFilter({
                                 role="checkbox"
                               />
                               <label
-                                htmlFor={leftfiltersubdata?.name}
-                                className="ml-2 text-sm"
+                                htmlFor={`${leftfiltersubdata?.name}_${index}`}
+                                className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                                 aria-label={leftfiltersubdata?.name}
                               >
                                 {leftfiltersubdata?.name}
