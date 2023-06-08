@@ -9,11 +9,15 @@ axiosInstance.interceptors.request.use(
     const url:any = config.url;
     let accesstoken:any = "";
     if(url.indexOf("ContentUrl") != -1 || url.indexOf("References") != -1 || url.indexOf("expand") != -1 || url.indexOf("content") != -1){
-        accesstoken = localStorage.getItem("token")
+        if (typeof window !== 'undefined') {
+               accesstoken = localStorage.getItem("token")
+        }
       
      }
     if(url.indexOf("filter") != -1){
+        if (typeof window !== 'undefined') {
        accesstoken = localStorage.getItem("searchtoken")
+        }
        
       
      }

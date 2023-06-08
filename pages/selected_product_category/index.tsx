@@ -29,8 +29,6 @@ function ProductListPage() {
   useEffect(() => {
     // Set the lang attribute to "en" on the <html> element
     document.documentElement.lang = "en";
-    const token:any = localStorage.getItem("token");
-    setToken(token);
   }, []);
 
   useEffect(() => {

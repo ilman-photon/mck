@@ -15,10 +15,11 @@ interface CallAPI {
 
 export const callAPI: CallAPI = async (url, requestData, options) => {
   const { isMultipart = false, method = 'post', isBlob = false } = options || {};
-  const gettoken = localStorage.getItem("token");
-  const expiry:any = localStorage.getItem("expiry");
-  const searchtoken = localStorage.getItem("searchtoken");
-  const searchexpiry:any = localStorage.getItem("expiry");
+  if (typeof window !== 'undefined') {
+    const gettoken = localStorage.getItem("token");
+    const expiry:any = localStorage.getItem("expiry");
+    const searchtoken = localStorage.getItem("searchtoken");
+    const searchexpiry:any = localStorage.getItem("expiry");
   
   const now:any = new Date();
   if (now.getTime() > expiry) {
@@ -37,7 +38,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
     console.log("started");
     await generatecontenttoken("epi_content_search_api");
   }
-  
+}
   function generatecontenttoken(scope:any) {
     return new Promise((resolve, reject) => {
       // Perform some asynchronous operation
@@ -66,12 +67,14 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       axios.request(config)
       .then((response) => {
         const now:any = new Date();
-        if(scope === "epi_content_delivery"){
-          localStorage.setItem("token",response.data.access_token);
-          localStorage.setItem("expiry",now.getTime() + response.data.expires_in * 1000);
-        }else if(scope === "epi_content_search_api"){
-          localStorage.setItem("searchtoken",response.data.access_token);
-          localStorage.setItem("searchexpiry",now.getTime() + response.data.expires_in * 1000);
+        if (typeof window !== 'undefined') {
+          if(scope === "epi_content_delivery"){
+            localStorage.setItem("token",response.data.access_token);
+            localStorage.setItem("expiry",now.getTime() + response.data.expires_in * 1000);
+          }else if(scope === "epi_content_search_api"){
+            localStorage.setItem("searchtoken",response.data.access_token);
+            localStorage.setItem("searchexpiry",now.getTime() + response.data.expires_in * 1000);
+          }
         }
       
         resolve(response.data.accesstoken);
