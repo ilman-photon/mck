@@ -175,9 +175,9 @@ function PdpLocation(props: any) {
                 {responseValue?.map((value: any, index: Number) => {
                     return <div className={index === selectedStore ? "text-mckthingrey border rounded-lg p-3 mb-4 bg-shadesblue " : "text-mckthingrey border rounded-lg p-3 mb-3"} key={value.id} onClick={() => handleLocationClick(index, value)} id={"store-item" + index}>
                         <div className="pb-2 cursor-pointer"><img src="images/health-mart.png" alt="Health Mart" id={`pdp-img_${props.index}-${index}`} /></div>
-
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
+                                <p aria-label="MEDMETRICS PHARMACY" className="font-extrabold leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.StoreName}</p>
                                 <p aria-label="1230 Lindon Ave" className="font-extrabold leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.Address}, </p>
                                 <p aria-label="DENVER, CO. 80202" id={`pdp-address_${props.index}-00${index}`} className="leading-5 mb-2">{value.City} {value.Zip}</p>
                                 <p aria-label="303-571-5314" id={`pdp-address_${props.index}-000${index}`} className="text-mckblue leading-5">{value.Phone}</p>
