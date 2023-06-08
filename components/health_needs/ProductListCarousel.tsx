@@ -18,8 +18,8 @@ const ProductComponent = ({
   const handleProduct = (item: any, index: number) => {
     const filteredSection = sectionData.filter((section : any) => {
       const tempName = section?.recommendedProductCategory?.value[0]?.name
-      const itemName = tempName.toLowerCase().replace(/[^\w\s]/gi, '');
-      const searchItem = item.toLowerCase().replace(/[^\w\s]/gi, ''); 
+      const itemName = tempName?.toLowerCase().replace(/[^\w\s]/gi, '');
+      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, ''); 
       return itemName.includes(searchItem);
     });
 
@@ -40,7 +40,7 @@ const ProductComponent = ({
         <div key={index}>
          {selectedRecommendedProduct?.map((item: any, idx: number) => {
             let correctItemValue = item?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
-            let correctProductValue = (product?.item?.name).toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
+            let correctProductValue = (product?.item?.name)?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
             if (correctItemValue === correctProductValue) {
               return handleProduct(item, index);
             }
