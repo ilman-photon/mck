@@ -58,14 +58,12 @@ function HealthNeedsPage() {
     }
   }, [JSON.stringify(response)]);
   const [isCarusonAvible, setisCarusonAvible] = useState<boolean>(false);
-  console.log("hello", response?.data[0].contentArea?.expandedValue);
-
   return (
     <>
       <GoogleTagManager />
       <HeaderComponent
         isCarusolAvaible={
-          response?.data[0].contentArea?.expandedValue[0].name == "Carousel"
+          response?.data[0].contentArea.expandedValue[0].name == "Carousel"
             ? true
             : false
         }
