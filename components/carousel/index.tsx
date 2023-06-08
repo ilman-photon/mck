@@ -13,7 +13,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
-
+  const [isPause, setPaused] = useState(false);
   const dataFetchedRef = useRef(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
     if (sectionData[0]?.autoRotate?.value) {
       interval = setInterval(() => {
-        infiniteScroll();
+        !isPause && infiniteScroll();
       }, Number(sectionData[0]?.timeInterval?.value));
     }
 
@@ -45,6 +45,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   }, [current]);
 
   const handleCarouselImage = (index: number) => {
+    setPaused((prevState) => !prevState);
     setCurrent(index);
   };
 
@@ -66,7 +67,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     from: { opacity: 0, transform: "translateX(100%)" },
     enter: { opacity: 1, transform: "translateX(0%)" },
     leave: { opacity: 0, transform: "translateX(-100%)" },
-    config: { duration: 1000 },
+    config: { duration: 2500 },
   });
 
   const firstResponse = response?.[0];
@@ -74,7 +75,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     firstResponse?.title?.value ||
     firstResponse?.description?.value ||
     firstResponse?.buttonText?.value;
-
+  console.log("status", isPause ? "benar" : "salah");
   return (
     <div className="flex items-center justify-center">
       <div
