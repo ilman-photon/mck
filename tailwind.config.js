@@ -20,6 +20,7 @@ module.exports = {
         mckblue: "#001a71",
         "mckblue-90": "#1A317F",
         "beige-50": "#FFFAF6",
+        mckbeige: "#FFF6ED",
         mcklightblue: "#e6e8f1",
         mckyellow: "#FFEABC",
         mcklightyellow: "#FFF6ED",
