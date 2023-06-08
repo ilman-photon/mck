@@ -19,7 +19,7 @@ module.exports = {
         current: "currentColor",
         mckblue: "#001a71",
         "mckblue-90": "#1A317F",
-        "beige-50": "#FFFAF6",
+        beige50: "#FFFAF6",
         mckbeige: "#FFF6ED",
         mcklightblue: "#e6e8f1",
         mckyellow: "#FFEABC",
@@ -189,6 +189,7 @@ module.exports = {
         lightblue: "#EAF1F8",
         acuteblue: "#DBDFEB",
         mckblue70: "#4D5F9C",
+        beigetransparent: "rgba(255, 250, 246, 0.7)",
       },
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
