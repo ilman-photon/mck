@@ -49,7 +49,7 @@ const BlogDetailsComponent = () => {
   const handleBlogClick = (rout: any) => {
     router.push({
       pathname: "/blog_details",
-      query: { data: rout },
+      query: { id: rout },
     });
   };
 
