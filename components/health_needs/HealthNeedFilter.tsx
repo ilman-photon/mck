@@ -117,7 +117,7 @@ const HealthNeedFilter = ({
     setAlternateFlag(!alternateFlag)
   };
   useEffect(() => {
-    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0]?.id === mainCategoryId);
     const subCategoryValues = Array.from(new Set([selectedProductType?.subCategory?.value])).filter(Boolean);
     if(selectedFilterItems[mainCategoryId]){
       selectedFilterItems[mainCategoryId].items =  customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items);
@@ -381,18 +381,18 @@ const HealthNeedFilter = ({
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                   className='filter-title'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 >
                                   {
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 </label>
                               </div>
@@ -404,7 +404,7 @@ const HealthNeedFilter = ({
                               <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
-                                    className='flex items-center my-px'
+                                    className='flex items-center my-px lg:pl-[5px] cursor-pointer'
                                     
                                   >
                                     <input
@@ -421,25 +421,28 @@ const HealthNeedFilter = ({
                                       }
                                       type='checkbox'
                                       value='view all'
-                                      className='w-4 h-4 accent-[#001A71]'
+                                      className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                       aria-label='view all'
                                       role='checkbox'
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                     />
                                     <label
-                                      htmlFor='mck-view-all'
-                                      className='ml-2 text-mcknormalgrey text-sm'
+                                      htmlFor={
+                                        leftfiltermaindata?.mainCategory
+                                          ?.value[0]?.name + 'View All'
+                                      }
+                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                                       id={'mck-'+ activeFiltersData?.viewAllText?.value}
                                     >
                                       {activeFiltersData?.viewAllText?.value}
@@ -455,7 +458,7 @@ const HealthNeedFilter = ({
                                       key={leftfiltersubdata?.id}
                                     >
                                       <div
-                                        className='flex items-center my-px'
+                                        className='flex items-center my-px lg:pl-[5px] cursor-pointer'
                                        
                                       >
                                         <input
@@ -471,25 +474,25 @@ const HealthNeedFilter = ({
                                           id={leftfiltersubdata?.name + index}
                                           type='checkbox'
                                           value={leftfiltersubdata?.name}
-                                          className='w-4 h-4 accent-[#001A71]'
+                                          className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                           aria-label={leftfiltersubdata?.name}
                                           role='checkbox'
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
                                         <label
-                                          htmlFor={leftfiltersubdata?.name}
-                                          className='ml-2 text-sm'
+                                          htmlFor={leftfiltersubdata?.name + index}
+                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                                           aria-label={leftfiltersubdata?.name}
                                         >
                                           {leftfiltersubdata?.name}

@@ -20,6 +20,7 @@ module.exports = {
         mckblue: "#001a71",
         "mckblue-90": "#1A317F",
         "beige-50": "#FFFAF6",
+        mckbeige: "#FFF6ED",
         mcklightblue: "#e6e8f1",
         mckyellow: "#FFEABC",
         mcklightyellow: "#FFF6ED",
@@ -38,6 +39,7 @@ module.exports = {
         mckblack: "#000000",
         mckred: "#DC2E21",
         mckgreyborder: "#808CB8",
+        mckopacityblue: "#001a712e",
       },
       width: {
         18: '18px',
