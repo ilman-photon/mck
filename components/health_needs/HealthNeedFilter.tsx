@@ -405,6 +405,9 @@ const HealthNeedFilter = ({
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
                                     className='flex items-center my-px'
+                                    
+                                  >
+                                    <input
                                     onClick={(e) =>
                                       handleViewAllChange(
                                         e,
@@ -412,8 +415,6 @@ const HealthNeedFilter = ({
                                           ?.value[0].id
                                       )
                                     }
-                                  >
-                                    <input
                                       id={
                                         leftfiltermaindata?.mainCategory
                                           ?.value[0]?.name + 'View All'
@@ -455,7 +456,10 @@ const HealthNeedFilter = ({
                                     >
                                       <div
                                         className='flex items-center my-px'
-                                        onClick={(e) =>
+                                       
+                                      >
+                                        <input
+                                         onClick={(e) =>
                                           handleCheckBox(
                                             e,
                                             leftfiltersubdata?.name,
@@ -464,8 +468,6 @@ const HealthNeedFilter = ({
                                             leftfiltersubdata?.id
                                           )
                                         }
-                                      >
-                                        <input
                                           id={leftfiltersubdata?.name + index}
                                           type='checkbox'
                                           value={leftfiltersubdata?.name}
