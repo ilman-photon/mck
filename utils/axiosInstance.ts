@@ -24,6 +24,8 @@ axiosInstance.interceptors.request.use(
     const headers:any = { ...config.headers };
     headers['Authorization'] = `Bearer ${accesstoken}`;
     headers['Accept-Language'] = "en";
+    headers['Access-Control-Allow-Origin'] = "*";
+    
     return { ...config, headers };
     
   },

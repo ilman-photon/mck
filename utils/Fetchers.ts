@@ -99,10 +99,12 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
     'Accept-Language': string
     'Content-Type': string;
     'Authorization': string;
+    'Access-Control-Allow-Origin':string;
   } = {
     'Content-Type': isMultipart ? 'multipart/form-data' : 'application/json',
     "Accept-Language":'en',
-    "Authorization":`Bearer ${accesstoken}`
+    "Authorization":`Bearer ${accesstoken}`,
+    "Access-Control-Allow-Origin":"*"
   };  
  
   
