@@ -163,7 +163,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         id="header"
         className={`header ${
           isCarusolAvaible ? "sticky" : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
+        }  mx-auto blue-txt border-b bg-mcklightyellow lg:bg-mcklightyellow lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
