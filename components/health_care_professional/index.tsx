@@ -13,8 +13,14 @@ import { ImageComponent } from "../global/ImageComponent";
 import { useWindowResize } from "@/hooks/useWindowResize";
 
 SwiperCore.use([Navigation, Autoplay]);
-
-function HealthCareProfessionalComponent() {
+type HealthCareProfessionalComponentType = {
+  isCarusolAvaible?: any;
+  isCarusolAvaibleProps?: any;
+};
+function HealthCareProfessionalComponent({
+  isCarusolAvaible,
+  isCarusolAvaibleProps,
+}: HealthCareProfessionalComponentType) {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState<any>();
   const [customers, setCustomers] = useState<any>();
