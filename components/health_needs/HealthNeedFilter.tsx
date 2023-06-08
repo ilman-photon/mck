@@ -117,7 +117,7 @@ const HealthNeedFilter = ({
     setAlternateFlag(!alternateFlag)
   };
   useEffect(() => {
-    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0]?.id === mainCategoryId);
     const subCategoryValues = Array.from(new Set([selectedProductType?.subCategory?.value])).filter(Boolean);
     if(selectedFilterItems[mainCategoryId]){
       selectedFilterItems[mainCategoryId].items =  customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items);
@@ -381,18 +381,18 @@ const HealthNeedFilter = ({
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                   className='filter-title'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 >
                                   {
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 </label>
                               </div>
@@ -427,13 +427,13 @@ const HealthNeedFilter = ({
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                     />
@@ -481,13 +481,13 @@ const HealthNeedFilter = ({
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
                                         <label
