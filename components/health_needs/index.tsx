@@ -87,6 +87,14 @@ const HealthNeedsComponent = () => {
             item?.healthNeeds?.value.forEach((value :any) => {
               if (value.name !== "Health Needs" && 
               categoryArrayList.some((element : any) => value.name.includes(element))) { 
+                
+                if (!tempResults[value.name]) {
+                  tempResults[value.name] = [];
+                }
+                tempResults[value.name].push(item);
+              }
+              else if (value.name !== "Health Needs" && categoryArrayList.length == 0)
+              {
                 if (!tempResults[value.name]) {
                   tempResults[value.name] = [];
                 }
@@ -94,7 +102,7 @@ const HealthNeedsComponent = () => {
               }
             });
         });
-        console.log(tempResults,"tempResults")
+        
         const transformedArray = Object.entries(tempResults).map(([key, value]) => {
           return {
             item: { name: key },
@@ -293,8 +301,14 @@ const HealthNeedsComponent = () => {
   }, []);
 
   useEffect(() => {
+    let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter
+      ((item :any) => {
+        if (item && item?.title && item?.title?.value === "Health Needs Highlights") {
+          return item
+        }
+      });
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].healthNeedItem?.expandedValue.map(
+      return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
@@ -450,7 +464,7 @@ const HealthNeedsComponent = () => {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
-          // recommendedProduct={recommendedProduct}
+          recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
           filterClicked={filterClicked}
