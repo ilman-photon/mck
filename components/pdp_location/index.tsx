@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { InfoWindow, GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import axiosInstance from "@/utils/axiosInstance";
 
 function PdpLocation(props: any) {
 
@@ -28,7 +29,7 @@ function PdpLocation(props: any) {
         window.open(url, '_blank');
     }
     function fectchLatandLongDetails() {
-        return axios.get(
+        return axiosInstance.get(
             `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${!isNaN(textInput) ? `components=postal_code:${Number(textInput)}` : `address=${textInput}`}`,
             {
                 headers: {
@@ -40,7 +41,7 @@ function PdpLocation(props: any) {
     }
 
     function fetchPDPLoctionDetails() {
-        return axios.get(
+        return axiosInstance.get(
             `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
             {
                 headers: {

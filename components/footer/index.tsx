@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import { LinkComponent } from "../global/LinkComponent";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -25,16 +26,12 @@ export default function FooterComponent() {
   };
 
   const getData = async () => {
-    const response = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
+    const response = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`);
 
     const secondBlock = response.data[0].footer.expandedValue[0].contentLink.id;
-    const responseid = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
+    const responseid = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`);
 
     const footerMobileNav =
       response?.data[0]?.mobileMenuNavigation?.expandedValue[0]

@@ -9,6 +9,7 @@ import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import Head from "next/head";
+import axiosInstance from "@/utils/axiosInstance";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -58,14 +59,8 @@ function AllProductCategoryPage({
     const regex = /'([^']+)'/g;
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         let tempResults: any = {};
@@ -108,7 +103,7 @@ function AllProductCategoryPage({
   useEffect(() => {
     const fetchData = async () => {
       // Health needs Categories List
-      const healthNeedsCategories = await axios(
+      const healthNeedsCategories = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -123,7 +118,7 @@ function AllProductCategoryPage({
       setHealthNeedData(healthNeedsCategoriesListData);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios(
+      const activeFiltersData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
@@ -131,7 +126,7 @@ function AllProductCategoryPage({
       console.log("activeFiltersData list -->", activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(
+      const productCategoryData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
       const productCategoryDataList =
@@ -142,7 +137,7 @@ function AllProductCategoryPage({
       console.log("product catedata list --> ", productCategoryDataList)
       setAllProductCategoryList(productCategoryDataList)
       // Four column block area
-      const productLandingPage = await axios(
+      const productLandingPage = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
 
@@ -158,15 +153,9 @@ function AllProductCategoryPage({
         productName.push(item.productCategoryName?.value);
       });
       productName?.map((item: any) => {
-        axios
+        axiosInstance
           .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`,
-            {
-              headers: {
-                "Accept-Language": "en",
-              },
-            }
-          )
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`)
           .then((res) => {
             setProductSum(res.data.totalMatching)
             let tempResults: any = [];       
@@ -342,7 +331,7 @@ function AllProductCategoryPage({
     fetchCategoryId()
       .then((res) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
-        return axios.get(
+        return axiosInstance.get(
           `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
           {
             headers: {
@@ -364,25 +353,13 @@ function AllProductCategoryPage({
   }, []);
 
   function fetchCategoryId() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`);
   }
 
   function FetchProductFilter() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`);
   }
 
   useEffect(() => {

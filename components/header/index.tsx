@@ -4,6 +4,7 @@ import NavBar from "../navbar";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
+import axiosInstance from "@/utils/axiosInstance";
 function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   const router = useRouter();
   const headerImgRef = useRef<HTMLDivElement>(null);
@@ -50,15 +51,9 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   }, []);
 
   function fetchHeaderData() {
-    axios
+    axiosInstance
       .get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      )
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`)
       .then((res) => {
         setHeaderData(res.data[0]);
         // setMenuData(

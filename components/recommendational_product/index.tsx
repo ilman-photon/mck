@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import axiosInstance from "@/utils/axiosInstance";
 
 function RecommendationalProductComponent({ sectionData, indexs }: any) {
   const router = useRouter();
@@ -10,14 +11,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
 
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}?expand=*`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
+      return axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}?expand=*`);
     });
   }
 
@@ -266,7 +261,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         </div>
       );
     });
-  console.log("response", response);
   return (
     <div id="promotion-container" className="mx-auto">
       <div className="promotion-product-container lg:mb-12">

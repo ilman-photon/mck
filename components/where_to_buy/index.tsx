@@ -12,6 +12,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import axiosInstance from "@/utils/axiosInstance";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
@@ -58,29 +59,17 @@ function WhereComponent() {
   };
 
   function fectchLatandLongDetails() {
-    return axios.get(
+    return axiosInstance.get(
       `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
         !isNaN(textInput)
           ? `components=postal_code:${Number(textInput)}`
           : `address=${textInput}`
-      }`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+      }`);
   }
 
   function fetchPDPLoctionDetails() {
-    return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`);
   }
 
   useEffect(() => {

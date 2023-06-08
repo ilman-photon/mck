@@ -8,6 +8,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import ProductCard from "../../components/health_needs/ProductCard";
 import { ImageComponent } from "../global/ImageComponent";
 import { fetchBlogSetting } from "../blog/BlogAPI";
+import axiosInstance from "@/utils/axiosInstance";
 
 function ResultComponent() {
   const router = useRouter();
@@ -22,14 +23,8 @@ function ResultComponent() {
   const [placeHolders, setSearchplaceHolders] = useState<any>();
 
   function FetchProductFilter() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
   }
 
   // Right section product filter data
@@ -40,7 +35,7 @@ function ResultComponent() {
       queryParameter = `(${filter}) and `;
     } 
     const StringParam = router.query.search?.toString().toLowerCase();
-    const promise = axios.get(
+    const promise = axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
 
       {
@@ -207,7 +202,7 @@ function ResultComponent() {
   useEffect(() => {
     const fetchData = async () => {
       // Health needs Categories List
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -222,7 +217,7 @@ function ResultComponent() {
       setHealthNeedData(healthNeedsCategoriesListData);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios.get(
+      const activeFiltersData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
@@ -230,7 +225,7 @@ function ResultComponent() {
       setactiveFiltersData(activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(
+      const productCategoryData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-search-result/&expand=*`
       );
       const productCategoryDataList =

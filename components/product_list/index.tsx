@@ -8,6 +8,7 @@ import Image from "next/image";
 import ProductCard from "../../components/health_needs/ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
 import HealthNeedFilter from "../health_needs/HealthNeedFilter";
+import axiosInstance from "@/utils/axiosInstance";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -36,14 +37,8 @@ function ProductListComponent() {
     } else {
       queryParameter = `${filter} and`;
     }
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         if(res.data.results.length === 0){
@@ -173,7 +168,7 @@ function ProductListComponent() {
 
   const fetchData = async () => {
     // Product Category setting - Filters data
-    const activeFiltersData = await axios(
+    const activeFiltersData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
     );
     const activeFiltersDataList = activeFiltersData?.data[0];
@@ -197,7 +192,7 @@ function ProductListComponent() {
 
   const fetchRecommandedProductData = async () => {
     const tempName = productName?.replace(/ /g, "-")
-    const recommendedCategoryData = await axios(
+    const recommendedCategoryData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
     );
     const response = recommendedCategoryData?.data[0]?.contentArea
