@@ -1,6 +1,19 @@
+import { ImageComponent } from "../Shared";
+
+
 function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
+
   return (
     <>
+    {sectionData?.backgroundImage?.expandedValue?.url ? (
+      <ImageComponent
+      imageContainerStyle=""
+      imageSource={sectionData?.backgroundImage?.expandedValue?.url}
+      imageStyle="w-full"
+      alt={`${index}_img_001`}
+      id={`${index}_img_001`}
+      />
+    ) : ( 
       <div
         className={`w-full ${textAlignment === 'text-center' && textAlignment} mx-auto`}
         key={sectionData?.contentLink?.id}
@@ -19,6 +32,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
           id={`${index}_dis_001`}
         ></div>
       </div>
+    )}
     </>
   );
 }
