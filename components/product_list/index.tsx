@@ -213,29 +213,29 @@ function ProductListComponent() {
     console.log("in createTempFilterArr")
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["items"] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        leftfiltermaindata?.subCategory?.value[0].id
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["items"] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
+        leftfiltermaindata?.subCategory?.value[0]?.id
       ] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["categoryName"] =
-        leftfiltermaindata?.mainCategory?.value[0].name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["categoryName"] =
+        leftfiltermaindata?.mainCategory?.value[0]?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["productType"] =
         leftfiltermaindata?.isBusinessVerticalCategory?.value
           ? "productType"
           : leftfiltermaindata?.name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isCategoryChecked"
       ] = false;
       leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] = [];
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "checked"
         ] = false;
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "name"
         ] = subItem.name;
       });

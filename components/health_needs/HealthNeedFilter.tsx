@@ -117,7 +117,7 @@ const HealthNeedFilter = ({
     setAlternateFlag(!alternateFlag)
   };
   useEffect(() => {
-    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0]?.id === mainCategoryId);
     const subCategoryValues = Array.from(new Set([selectedProductType?.subCategory?.value])).filter(Boolean);
     if(selectedFilterItems[mainCategoryId]){
       selectedFilterItems[mainCategoryId].items =  customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items);
@@ -336,7 +336,45 @@ const HealthNeedFilter = ({
             className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
-            {isFilterShow ? 'Hide' : 'Open'}
+           {isFilterShow ? (
+              <div className="flex">
+                <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                  Hide
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-1"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.54498 5.96173H19.715V3.96173H7.54498L9.54498 5.96173ZM14.545 10.9617H16.715V8.96173H12.545L14.545 10.9617ZM12.715 14.7917V15.9617H8.71498V13.9617H11.885L8.88498 10.9617H4.71498V8.96173H6.88498L3.88498 5.96173H1.71498V3.96173H1.88498L0.10498 2.18173L1.51498 0.771729L19.895 19.1517L18.485 20.5617L12.715 14.7917Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            ) : (
+              <div className="flex">
+                     <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                     Open
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-2"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 12.6667H11V10.6667H7V12.6667ZM0 0.666748V2.66675H18V0.666748H0ZM3 7.66675H15V5.66675H3V7.66675Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            )}
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
@@ -381,18 +419,18 @@ const HealthNeedFilter = ({
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                   className='filter-title'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 >
                                   {
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 </label>
                               </div>
@@ -404,7 +442,10 @@ const HealthNeedFilter = ({
                               <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
-                                    className='flex items-center my-px'
+                                    className='flex items-center my-px lg:pl-[5px] cursor-pointer'
+                                    
+                                  >
+                                    <input
                                     onClick={(e) =>
                                       handleViewAllChange(
                                         e,
@@ -412,33 +453,34 @@ const HealthNeedFilter = ({
                                           ?.value[0].id
                                       )
                                     }
-                                  >
-                                    <input
                                       id={
                                         leftfiltermaindata?.mainCategory
                                           ?.value[0]?.name + 'View All'
                                       }
                                       type='checkbox'
                                       value='view all'
-                                      className='w-4 h-4 accent-[#001A71]'
+                                      className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                       aria-label='view all'
                                       role='checkbox'
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                     />
                                     <label
-                                      htmlFor='mck-view-all'
-                                      className='ml-2 text-mcknormalgrey text-sm'
+                                      htmlFor={
+                                        leftfiltermaindata?.mainCategory
+                                          ?.value[0]?.name + 'View All'
+                                      }
+                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                                       id={'mck-'+ activeFiltersData?.viewAllText?.value}
                                     >
                                       {activeFiltersData?.viewAllText?.value}
@@ -454,8 +496,11 @@ const HealthNeedFilter = ({
                                       key={leftfiltersubdata?.id}
                                     >
                                       <div
-                                        className='flex items-center my-px'
-                                        onClick={(e) =>
+                                        className='flex items-center my-px lg:pl-[5px] cursor-pointer'
+                                       
+                                      >
+                                        <input
+                                         onClick={(e) =>
                                           handleCheckBox(
                                             e,
                                             leftfiltersubdata?.name,
@@ -464,30 +509,28 @@ const HealthNeedFilter = ({
                                             leftfiltersubdata?.id
                                           )
                                         }
-                                      >
-                                        <input
                                           id={leftfiltersubdata?.name + index}
                                           type='checkbox'
                                           value={leftfiltersubdata?.name}
-                                          className='w-4 h-4 accent-[#001A71]'
+                                          className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                           aria-label={leftfiltersubdata?.name}
                                           role='checkbox'
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
                                         <label
-                                          htmlFor={leftfiltersubdata?.name}
-                                          className='ml-2 text-sm'
+                                          htmlFor={leftfiltersubdata?.name + index}
+                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
                                           aria-label={leftfiltersubdata?.name}
                                         >
                                           {leftfiltersubdata?.name}

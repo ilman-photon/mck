@@ -157,8 +157,8 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky" : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
+          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70" : isSticky ? "sticky" : "relative z-40"
+        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
