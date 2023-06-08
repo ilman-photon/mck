@@ -336,7 +336,45 @@ const HealthNeedFilter = ({
             className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
-            {isFilterShow ? 'Hide' : 'Open'}
+           {isFilterShow ? (
+              <div className="flex">
+                <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                  Hide
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-1"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.54498 5.96173H19.715V3.96173H7.54498L9.54498 5.96173ZM14.545 10.9617H16.715V8.96173H12.545L14.545 10.9617ZM12.715 14.7917V15.9617H8.71498V13.9617H11.885L8.88498 10.9617H4.71498V8.96173H6.88498L3.88498 5.96173H1.71498V3.96173H1.88498L0.10498 2.18173L1.51498 0.771729L19.895 19.1517L18.485 20.5617L12.715 14.7917Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            ) : (
+              <div className="flex">
+                     <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                     Open
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-2"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 12.6667H11V10.6667H7V12.6667ZM0 0.666748V2.66675H18V0.666748H0ZM3 7.66675H15V5.66675H3V7.66675Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            )}
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
