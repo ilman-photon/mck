@@ -13,8 +13,8 @@ import { ImageComponent } from "../global/ImageComponent";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
-  isCarusolAvaible?: boolean;
-  isCarusolAvaibleProps?: boolean;
+  isCarusolAvaible?: any;
+  isCarusolAvaibleProps?: any;
 };
 function HealthCareProfessionalComponent({
   isCarusolAvaible,
@@ -161,7 +161,7 @@ function HealthCareProfessionalComponent({
     };
   }, []);
   if (carouselRelated?.length > 0) {
-    isCarusolAvaibleProps((prevState) => !prevState);
+    isCarusolAvaibleProps((prevState: any) => !prevState);
   }
   return (
     <>
