@@ -10,10 +10,17 @@ import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "../global/ImageComponent";
+import { useWindowResize } from "@/hooks/useWindowResize";
 
 SwiperCore.use([Navigation, Autoplay]);
-
-function HealthCareProfessionalComponent() {
+type HealthCareProfessionalComponentType = {
+  isCarusolAvaible?: any;
+  isCarusolAvaibleProps?: any;
+};
+function HealthCareProfessionalComponent({
+  isCarusolAvaible,
+  isCarusolAvaibleProps,
+}: HealthCareProfessionalComponentType) {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState<any>();
   const [customers, setCustomers] = useState<any>();
@@ -26,7 +33,12 @@ function HealthCareProfessionalComponent() {
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth] = useWindowResize()
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true)
+  }, [windowWidth])
 
   const handleTabClick = (idx: any, tabTitle: string) => {
     setTabSelected(tabTitle);
@@ -141,19 +153,16 @@ function HealthCareProfessionalComponent() {
       });
     });
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 968);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const handleOnSlideChange = (swiper: any) => {
+    if(isMobile){
+      swiper.autoplay.running = true
+      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
+    }
+    else{
+      swiper.autoplay.running = false
+      setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
+    }
+  }
   return (
     <>
       {loading ? (
@@ -209,7 +218,7 @@ function HealthCareProfessionalComponent() {
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
                         onSlideChange={(swiper) => {
-                          setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+                          handleOnSlideChange(swiper);
                         }}
                       >
                         {response &&
@@ -274,7 +283,7 @@ function HealthCareProfessionalComponent() {
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{Math.ceil(customers?.length / 3)}
+                      {reviewCount}/{isMobile ? Math.ceil(customers?.length) : Math.ceil(customers?.length / 3)}
                     </div>
                   </div>
                 </div>
