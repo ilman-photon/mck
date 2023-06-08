@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "../global/ImageComponent";
+import { useWindowResize } from "@/hooks/useWindowResize";
 
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -26,7 +27,12 @@ function HealthCareProfessionalComponent() {
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth] = useWindowResize()
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true)
+  }, [windowWidth])
 
   const handleTabClick = (idx: any, tabTitle: string) => {
     setTabSelected(tabTitle);
@@ -143,24 +149,14 @@ function HealthCareProfessionalComponent() {
   }
   const handleOnSlideChange = (swiper: any) => {
     if(isMobile){
-      setReviewCount(Math.ceil(swiper.activeIndex) + 1);
+      swiper.autoplay.running = true
+      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
     }
     else{
-      setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+      swiper.autoplay.running = false
+      setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   }
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 968);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <>
       {loading ? (
@@ -216,7 +212,6 @@ function HealthCareProfessionalComponent() {
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
                         onSlideChange={(swiper) => {
-                          console.log("swiper active index 1 --> ", swiper)
                           handleOnSlideChange(swiper);
                         }}
                       >
