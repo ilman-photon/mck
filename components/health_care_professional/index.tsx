@@ -141,7 +141,14 @@ function HealthCareProfessionalComponent() {
       });
     });
   }
-
+  const handleOnSlideChange = (swiper: any) => {
+    if(isMobile){
+      setReviewCount(Math.ceil(swiper.activeIndex) + 1);
+    }
+    else{
+      setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+    }
+  }
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 968);
@@ -209,7 +216,8 @@ function HealthCareProfessionalComponent() {
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
                         onSlideChange={(swiper) => {
-                          setReviewCount(Math.ceil(swiper.activeIndex / 3) + 1);
+                          console.log("swiper active index 1 --> ", swiper)
+                          handleOnSlideChange(swiper);
                         }}
                       >
                         {response &&
@@ -274,7 +282,7 @@ function HealthCareProfessionalComponent() {
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{Math.ceil(customers?.length / 3)}
+                      {reviewCount}/{isMobile ? Math.ceil(customers?.length) : Math.ceil(customers?.length / 3)}
                     </div>
                   </div>
                 </div>
