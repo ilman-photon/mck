@@ -12,8 +12,14 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import { ImageComponent } from "../global/ImageComponent";
 
 SwiperCore.use([Navigation, Autoplay]);
-
-function HealthCareProfessionalComponent() {
+type HealthCareProfessionalComponentType = {
+  isCarusolAvaible?: any;
+  isCarusolAvaibleProps?: any;
+};
+function HealthCareProfessionalComponent({
+  isCarusolAvaible,
+  isCarusolAvaibleProps,
+}: HealthCareProfessionalComponentType) {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState<any>();
   const [customers, setCustomers] = useState<any>();
@@ -154,6 +160,9 @@ function HealthCareProfessionalComponent() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  if (carouselRelated?.length > 0) {
+    isCarusolAvaibleProps((prevState: any) => !prevState);
+  }
   return (
     <>
       {loading ? (

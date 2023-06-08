@@ -102,7 +102,14 @@ export default function Home() {
         </div>
       )}
 
-      <HeaderComponent />
+      <HeaderComponent
+        isCarusolAvaible={
+          response?.data[0]?.blockArea?.expandedValue[0]?.contentType[1] ===
+          "CarouselBlock"
+            ? true
+            : false
+        }
+      />
 
       {!isLoading && (
         <>
@@ -119,13 +126,13 @@ export default function Home() {
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
                   <div>
-                  <ImageVideoAndTextSection
-                    index={`hp_0${index}`}
-                    customStyleClass={'lg:px-5'}
-                    sectionData={
-                      response.data[0].blockArea?.expandedValue[index]
-                    }
-                  />
+                    <ImageVideoAndTextSection
+                      index={`hp_0${index}`}
+                      customStyleClass={"lg:px-5"}
+                      sectionData={
+                        response.data[0].blockArea?.expandedValue[index]
+                      }
+                    />
                   </div>
                 ) : item?.contentType[1] === "OneColumnBlock" ? (
                   <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
