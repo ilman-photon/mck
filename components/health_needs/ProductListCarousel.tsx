@@ -16,9 +16,13 @@ const ProductComponent = ({
   productSearchCard
 }: any) => {
   const handleProduct = (item: any, index: number) => {
-    const filteredSection = sectionData.filter((section: any) =>
-      section.name.includes(item)
-    );
+    const filteredSection = sectionData.filter((section : any) => {
+      const tempName = section?.recommendedProductCategory?.value[0]?.name
+      const itemName = tempName.toLowerCase().replace(/[^\w\s]/gi, '');
+      const searchItem = item.toLowerCase().replace(/[^\w\s]/gi, ''); 
+      return itemName.includes(searchItem);
+    });
+
     if (filteredSection.length > 0) {
       return (
         <RecommendationalProductComponent
@@ -34,9 +38,10 @@ const ProductComponent = ({
     <>
       {selectedProduct?.map((product: any, index: number) => (
         <div key={index}>
-          {selectedRecommendedProduct?.map((item: any, idx: number) => {
-            // console.log(item,"item",selectedProduct)
-            if (item === product?.item?.name && item.length >0) {
+         {selectedRecommendedProduct?.map((item: any, idx: number) => {
+            let correctItemValue = item?.toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
+            let correctProductValue = (product?.item?.name).toLowerCase().replace(/[^\w\s]/gi, "").replace(/\s+/g, "");
+            if (correctItemValue === correctProductValue) {
               return handleProduct(item, index);
             }
             return null;

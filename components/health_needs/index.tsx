@@ -85,34 +85,37 @@ const HealthNeedsComponent = ({
         // if (filter.includes("Health%20Needs")) {
         //   setHealthData(!healthData);
         // } else {
-        let catArray: any = [];
-        let tempResults: any = [];
-        setProductSum(res.data.totalMatching);
-        res.data.results.map((item: any) => {
-          item?.healthNeeds?.value.forEach((value: any) => {
-            if (
-              value.name !== "Health Needs" &&
-              categoryArrayList.some((element: any) =>
-                value.name.includes(element)
-              )
-            ) {
-              if (!tempResults[value.name]) {
-                tempResults[value.name] = [];
+          let catArray: any = [];
+          let tempResults :any =[]
+          setProductSum(res.data.totalMatching)
+          res.data.results.map((item: any) => {
+
+            item?.healthNeeds?.value.forEach((value :any) => {
+              if (value.name !== "Health Needs" && 
+              categoryArrayList.some((element : any) => value.name.includes(element))) { 
+                
+                if (!tempResults[value.name]) {
+                  tempResults[value.name] = [];
+                }
+                tempResults[value.name].push(item);
               }
-              tempResults[value.name].push(item);
-            }
-          });
+              else if (value.name !== "Health Needs" && categoryArrayList.length == 0)
+              {
+                if (!tempResults[value.name]) {
+                  tempResults[value.name] = [];
+                }
+                tempResults[value.name].push(item);
+              }
+            });
         });
-        console.log(tempResults, "tempResults");
-        const transformedArray = Object.entries(tempResults).map(
-          ([key, value]) => {
-            return {
-              item: { name: key },
-              data: { results: value },
-            };
-          }
-        );
-        setSelectedProduct(transformedArray);
+        
+        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
+          return {
+            item: { name: key },
+            data: { results: value }
+          };
+        });
+        setSelectedProduct(transformedArray)
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -305,8 +308,14 @@ const HealthNeedsComponent = ({
   }, []);
 
   useEffect(() => {
+    let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter
+      ((item :any) => {
+        if (item && item?.title && item?.title?.value === "Health Needs Highlights") {
+          return item
+        }
+      });
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].healthNeedItem?.expandedValue.map(
+      return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
@@ -463,7 +472,7 @@ const HealthNeedsComponent = ({
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
-          // recommendedProduct={recommendedProduct}
+          recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
           filterClicked={filterClicked}
