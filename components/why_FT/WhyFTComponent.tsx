@@ -129,19 +129,19 @@ function WhyFTComponent(
       <div className="flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
         <React.Fragment>
           {whyFTData &&
-            rearrangedData1().map((item: any, index: number) => (
+            whyFTData?.contentArea?.expandedValue.map((item: any, index: number) => (
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "TwoCloumnBlock" ? (
                     <WhyFTImageVideoAndTextSection
                       index={`wfnt_0${index}`}
-                      sectionData={whyFTData.contentArea.expandedValue[index]}
+                      sectionData={item}
                     />
                   ) : item?.contentType[1] === "OneColumnBlock" ? (
                     <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
                       <ImageVideoOrTextSection
                         index={`wfnt_0${index}`}
-                        sectionData={whyFTData.contentArea.expandedValue[index]}
+                        sectionData={item}
                         textAlignment={"text-left"}
                       />
                     </div>
