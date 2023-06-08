@@ -37,7 +37,7 @@ function PdpCarousel(prodViewData: any) {
             })
             .catch((e: Error | AxiosError) => console.log(e));
     }, [prodResponse?.routeSegment, data]);
-    console.log("response ---> ", prodResponse)
+    
     const handleDownArrowClick = () => {
         if (lastIndex < prodResponse?.productImages?.value?.length) {
             setArrowClick(() => arrowClick + 1)
@@ -59,7 +59,7 @@ function PdpCarousel(prodViewData: any) {
     const handleMouseOver = (id: number) => {
         setSelectedItemIndex(id)
     }
-
+    
     return (
         <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0"   id="pdp-01">
             <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
@@ -102,7 +102,7 @@ function PdpCarousel(prodViewData: any) {
                 </div>
                 <div className={`lg:w-[526px] ${(deviceWidth < 1024 && deviceWidth !== 0) ? 'h-[300px]' : ''} box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}>
                     <ImageComponent 
-                        src={prodResponse?.productImages?.value && prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url}
+                        src={prodResponse?.productImages?.value && prodResponse?.productImages?.value[selectedItemIndex + arrowClick]?.url ||  prodResponse?.image?.expandedValue?.url || prodResponse?.image?.value?.url}
                         className="lg:w-[270px] max-w-[200px]"
                         alt='Image is not available'
                         id={"pdp_carousel_" + prodResponse?.productImages?.value?.imgdata?.id}
