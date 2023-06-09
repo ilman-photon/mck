@@ -1,17 +1,24 @@
- .map-container {
-    .gm-style {
-          &-iw {
-            width: 30.375rem;
-            min-height: 189px;
-            padding: 16px 16px 16px !important;
-            &-d{
-              overflow: hidden !important;
-              max-height: unset !important;
-            } 
-          }
-     .gm-style-iw {
-    height: auto !important;
+.map-container {
+  .gm-style {
+    &-iw {
+      width: 30.375rem;
+      min-height: 189px;
+      padding: 16px 16px 16px !important;
+      &-d {
+        overflow: hidden !important;
+        max-height: unset !important;
+      }
+    }
+    .gm-style-iw {
+      height: auto !important;
+    }
   }
 }
- }
 
+.gm-style-iw + div {
+  display: none;
+}
+
+button.gm-ui-hover-effect {
+  visibility: hidden;
+}
