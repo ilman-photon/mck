@@ -33,13 +33,7 @@ function BlogSearchComponent() {
   useEffect(() => {
     fetchBlogListing();
   }, []);
-  const HandelSearch = (e: any, searchstring: any) => {
-    console.log(e, searchstring);
-  };
 
-  const HandleSearchLoading = (value: any) => {
-    setIsLoading(value)
-  };
   // function handleKeyDown(e: any) {
   //     if (e.keyCode == 13) {
   //         console.log('e', e)
@@ -667,7 +661,7 @@ function BlogSearchComponent() {
                 Catogarytitle={
                   BlogListingContent?.data[0].categoryHeadingText.value
                 }
-                OnCatogarySelcete={(e) => console.log(e)}
+                OnCatogarySelcete={(e) => null}
               />
               <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
                 <div
@@ -680,7 +674,7 @@ function BlogSearchComponent() {
               </div>
               <RelatedProducts
               AppSetting={[]}
-                OnRelatedProductClick={(e) => console.log(e)}
+                OnRelatedProductClick={(e) => null}
                 title={
                   BlogListingContent?.data[0].relatedProductHeadingText.value
                 }

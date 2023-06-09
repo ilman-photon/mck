@@ -13,7 +13,6 @@ function ServiceUnavailableCoumponent() {
     useEffect(() => {
         fetchServiceUnavailableDetails()
             .then((res) => {
-                console.log(res)
                 SetServiceErrorData(res);               
             })
             .catch((e: Error | AxiosError) => console.log(e));
