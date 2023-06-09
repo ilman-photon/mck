@@ -185,7 +185,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             {ele?.data?.buttonText?.value}
           </button>
         );
-      let isDesktopNow = isDesktopView()
+      let isDesktopNow = ele?.data?.backgroundImage?.value?.url
         ? ele?.data?.backgroundImage?.value?.url
         : "";
       const renderContent = (
@@ -193,11 +193,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
             index === 0
               ? "bg-no-repeat row-span-2 bg-center bg-cover bg-[url('" +
-                isDesktopNow +
+                ele?.data?.backgroundImage?.value?.url +
                 "')]"
               : ""
           }`}
           key={ele?.data?.contentLink?.id}
+          style={{
+            backgroundImage: `url(${ele?.data?.backgroundImage?.value?.url})`,
+          }}
         >
           <style jsx>{`
             .bg-color {
@@ -236,9 +239,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         renderContent
       ) : (
         <div
-          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-[url('${
-            ele?.data?.backgroundImage?.expandedValue?.url || ""
-          }')] `}
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center `}
           key={ele?.data?.contentLink?.id}
         >
           <style jsx>{`
