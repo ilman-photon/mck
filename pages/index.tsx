@@ -33,45 +33,6 @@ export default function Home() {
   }
 
   const [isLoading, setIsLoading] = useState(true);
-  const [showComponent, setShowComponent] = useState(true);
-  const [cookiesAccepted, setCookiesAccepted] = useState(false);
-  const [isCookiesShow, setCookiesShow] = useState(true);
-  const [isCookiesManageShow, setCookiesManageShow] = useState(false);
-
-  const handleCookieManageShow = () => {
-    setCookiesManageShow(false);
-  };
-
-  const handleCookieManageShowAccept = () => {
-    setCookiesManageShow(true);
-  };
-
-  const handleCookieShowCookies = () => {
-    setCookiesShow(false);
-  };
-
-  const handleAcceptCookies = () => {
-    setCookiesAccepted(true);
-  };
-
-  const handleAcceptCookiesSetting = () => {
-    setCookiesManageShow(false);
-  };
-
-  const handleManageSettings = () => {
-    // Logic to manage cookie settings
-    console.log("alert");
-  };
-
-  useEffect(() => {
-
-    const timer = setTimeout(() => {
-      setShowComponent(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-    
-  }, []);
 
   useEffect(() => {
     setIsLoading(loading);
@@ -112,9 +73,10 @@ export default function Home() {
             ? true
             : false
         }
-      />
-
-      {!isLoading && (
+        
+      >
+        <>
+        {!isLoading && (
         <>
           {response?.data[0]?.blockArea?.expandedValue?.map(
             (item: any, index: number) => (
@@ -160,10 +122,13 @@ export default function Home() {
               </React.Fragment>
             )
           )}
-
           <FooterComponent />
         </>
       )}
+        </>
+      </HeaderComponent>
+
+      
     </>
   );
 }
