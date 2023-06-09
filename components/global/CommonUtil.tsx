@@ -120,3 +120,15 @@ export const extractMainCategoryId = (productCategoryData: any, mainCatName: any
     });
     return requiredId;
 }  
+export const extractMainCateName = (productCategoryData: any, mainCatId: any) => {
+    let requiredName = ''
+    productCategoryData?.forEach((ele: any) => {
+        if(ele?.mainCategory?.value[0]?.id === mainCatId){
+            requiredName = ele?.name;
+        }
+    });
+    return requiredName;
+}  
+export const customFindIndex = (arr: any, item: any) => {
+    return arr?.findIndex((a: any) => a === item)
+}
