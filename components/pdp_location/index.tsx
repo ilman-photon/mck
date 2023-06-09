@@ -29,7 +29,7 @@ function PdpLocation(props: any) {
         window.open(url, '_blank');
     }
     function fectchLatandLongDetails() {
-        return axiosInstance.get(
+        return axios.get(
             `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${!isNaN(textInput) ? `components=postal_code:${Number(textInput)}` : `address=${textInput}`}`,
             {
                 headers: {
@@ -41,7 +41,7 @@ function PdpLocation(props: any) {
     }
 
     function fetchPDPLoctionDetails() {
-        return axiosInstance.get(
+        return axios.get(
             `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
             {
                 headers: {
@@ -162,6 +162,7 @@ function PdpLocation(props: any) {
                                             <div className="flex flex-row justify-between mb-1">
                                                 <div>
                                                {value?.StoreUrl ? (
+                                                
                                                 <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-md leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
                                                ) : null} 
                                                </div>
