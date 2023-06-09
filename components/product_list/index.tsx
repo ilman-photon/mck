@@ -213,8 +213,8 @@ function ProductListComponent() {
   }
   useEffect(() => {
     fetchRecommandedProductData()
+  }, [router]) 
 
-  }, [productItemName])
 
   const createTempFilterArr = (results: any) => {
     console.log("in createTempFilterArr")
@@ -257,7 +257,7 @@ function ProductListComponent() {
           sub_category.checked = true;
           if (category["items"] && category["items"].indexOf(router.query.filter) === -1) {
             category["items"].push(router.query.filter);
-            setActiveFilter([...activeFilter, router.query.filter]);
+            setActiveFilter([router.query.filter]);
           }
         } else {
           if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
