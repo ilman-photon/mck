@@ -152,7 +152,7 @@ function PdpLocation(props: any) {
                                             <div className="flex">
                                                 <span className="text-sofia-reg text-mcknormalgrey mb-1">
                                                     <div className="text-sofia-reg lg:text-sm text-base font-extrabold lg:mb-1 lg:leading-5">{value.StoreName}, </div>
-                                                    <div className="text-sofia-reg lg:text-sm text-base font-extrabold lg:mb-1 lg:leading-5">{value.Address}, </div>
+                                                    <div className="text-sofia-reg lg:text-sm text-base font-normal lg:mb-1 lg:leading-5">{value.Address}, </div>
                                                     <div className="text-sofia-reg lg:text-sm text-base font-normal lg:leading-5 lg:mb-1"> {value.City} {value.Zip}</div>
                                                     <div className="text-sofia-reg text-mckblue lg:text-sm text-base font-normal lg:leading-5 leading-[20px]">{value.Phone}</div>
                                                 </span>
@@ -187,7 +187,7 @@ function PdpLocation(props: any) {
                         <div className="flex flex-row justify-between pb-2">
                             <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal" >
                                 <p aria-label="MEDMETRICS PHARMACY" className="font-extrabold leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.StoreName}</p>
-                                <p aria-label="1230 Lindon Ave" className="font-extrabold leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.Address}, </p>
+                                <p aria-label="1230 Lindon Ave" className="font-normal leading-5 mb-2" id={`pdp-address_${props.index}-${index}`}>{value.Address}, </p>
                                 <p aria-label="DENVER, CO. 80202" id={`pdp-address_${props.index}-00${index}`} className="leading-5 mb-2">{value.City} {value.Zip}</p>
                                 <p aria-label="303-571-5314" id={`pdp-address_${props.index}-000${index}`} className="text-mckblue leading-5">{value.Phone}</p>
                             </div>
