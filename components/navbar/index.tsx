@@ -45,7 +45,6 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
     setIsOpen(check);
     setMenuData_(a);
   };
-  console.log(isOpen)
 
   return (
     <>
