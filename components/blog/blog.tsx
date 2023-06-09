@@ -51,7 +51,6 @@ const BlogComponent = () => {
 
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       })
   }, []);
@@ -62,7 +61,6 @@ const BlogComponent = () => {
             setIsLoading(false);
         })
         .catch((e: Error | AxiosError) => {
-            console.log(e);
             setIsLoading(false);
         })
 }
@@ -83,7 +81,6 @@ const BlogComponent = () => {
         setIsLoading(false)
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       })
   };

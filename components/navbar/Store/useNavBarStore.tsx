@@ -6,6 +6,11 @@ interface ControllerNavBar {
     getData:() => void
     headerData:any
     subHeaderData:NavBarData[] | null
+    logoSrc1:string
+    logoSrc2:string
+    setLogoSrc:() => void
+    onMouseEnter:() => void
+    currentusedLogo:string
 }
   
 export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
@@ -13,6 +18,7 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
       const callApiHeader = callAPI<any, any>(`${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,null,{
         method:'GET'
       }).then(async res => {
+        set({logoSrc1:res?.data?.[0]?.logoImage?.expandedValue?.url,logoSrc2:res?.data?.[0]?.secondLogoImage?.expandedValue?.url})
         set({headerData:res?.data[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea?.expandedValue})
   
         const {headerData} = get()
@@ -35,4 +41,21 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
     },
     headerData:null,
     subHeaderData:null,
+    setLogoSrc:() => {
+      const {logoSrc1} = get()
+      if(logoSrc1){
+        set({
+          currentusedLogo:logoSrc1
+        })
+      }
+    },
+    logoSrc1:'',
+    logoSrc2:'',
+    currentusedLogo:'',
+    onMouseEnter:() => {
+      const {logoSrc2} = get()
+      set({
+        currentusedLogo:logoSrc2
+      })
+    }
 }))

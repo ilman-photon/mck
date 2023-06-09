@@ -75,7 +75,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     firstResponse?.title?.value ||
     firstResponse?.description?.value ||
     firstResponse?.buttonText?.value;
-  console.log("status", isPause ? "benar" : "salah");
+
   return (
     <div className="flex items-center justify-center">
       <div
