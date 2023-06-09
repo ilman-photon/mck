@@ -384,7 +384,7 @@ const HealthNeedFilter = ({
       <div className='lg:flex mt-6'>
         {isFilterShow ? (
           <div className='lg:w-1/6 xl:w-1/6 w-full h-max'>
-            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 mck-hn-filter-category'>
+            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 last:pb-0 last:mb-0'>
               {/* Left main category lists */}
               <div className='flex items-center my-px'>
                 <div className='w-full border lg:border-0 rounded px-4 lg:px-0'>
@@ -394,14 +394,14 @@ const HealthNeedFilter = ({
                         <>
                           {/* Left filter main category */}
 
-                          <section className='mck-hn-mobile-accordion tab overflow-hidden'>
+                          <section className='tab overflow-hidden border-b-[0.5px] border-[#ccd1e3] lg:border-b-0'>
                             <input
-                              className='mck-hn-accordion-title-check'
+                              className='hidden'
                               type='checkbox'
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                              className="tab-label flex items-end py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div
@@ -421,7 +421,7 @@ const HealthNeedFilter = ({
                                     leftfiltermaindata?.mainCategory?.value[0]
                                       ?.name
                                   }
-                                  className='filter-title'
+                                  className='text-base font-extrabold text-sofia-bold text-mckblue z-[-1]'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -438,7 +438,7 @@ const HealthNeedFilter = ({
                             {/* Left filter main category */}
 
                             {/* Left filter sub category */}
-                            <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
+                            <div className='lg:border-b lg:border-[#CCD1E3] mb-2 pb-0 last:m-0 tab-content lg:max-h-none lg:px-0'>
                               <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
@@ -551,7 +551,7 @@ const HealthNeedFilter = ({
           </div>
         ) : null}
 
-        <div className='lg:w-10/12 xl:w-10/12 w-full lg:pl-6'>
+        <div className='lg:w-10/12 xl:w-10/12 w-full lg:pl-6 pt-4 lg:pt-0'>
           <ProductComponent
             selectedProduct={selectedProduct}
             recommendedProduct={recommendedProduct}
