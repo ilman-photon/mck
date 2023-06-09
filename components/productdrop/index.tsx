@@ -3,6 +3,7 @@ import Link from "next/link";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [active, setActive] = useState(null);
+  console.log("subMenuData -->", subMenuData);
 
   function updateUrl(path: String, type: string) {
     let f = "?filter=";
@@ -38,11 +39,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                   {response?.menuItemName?.value}
                 </Link>
                 <ul
-                  className={`hidden submenu megamenu-submenu ${
+                  className={` submenu megamenu-submenu ${
                     // item?.data[0].subMenuContentBlockArea?.value === null
                     response?.subMenuContentBlockArea?.value === null
                       ? "hidden"
-                      : "group-hover:block"
+                      : "group-active:block hover-active:block"
+                      // : "block"
                   }`}
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
@@ -70,11 +72,11 @@ function ProductDropComponent({ subMenuData }: Props) {
                 </ul>
                 <span
                   onClick={() => setActive(response)}
-                  className={`${
-                    response?.subMenuContentBlockArea?.value == null
-                      ? "lg:hidden xl:hidden"
-                      : "icon-arrow lg:hidden xl:hidden"
-                  } ${active == response ? "open" : ""}`}
+                  // className={`${
+                  //   response?.subMenuContentBlockArea?.value == null
+                  //     ? "lg:hidden xl:hidden"
+                  //     : "icon-arrow lg:hidden xl:hidden"
+                  // } ${active == response ? "open" : ""}`}
                 >
                   {" "}
                 </span>

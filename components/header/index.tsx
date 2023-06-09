@@ -133,6 +133,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
       const hamburgerMenuActive = document.querySelector(
         ".hamburger-menu.active"
       );
+      const a = document.getElementById('nav-bar')?.firstChild;
 
       if (
         hamburgerMenu &&
@@ -140,9 +141,12 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         !hamburgerMenu.contains(event.target as Node) &&
         !hamburgerMenuActive.contains(event.target as Node)
       ) {
-        setIsMobileMenuActive(false);
+        // setIsMobileMenuActive(false);
         setIsBarAnimated(false);
       }
+      // if(a?.contains(event.target as Node)){
+      //   setIsMobileMenuActive(false);
+      // }
     };
 
     window.addEventListener("click", handleClickOutside);
@@ -197,7 +201,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
             />
           </div>
           <div className="lg:w-full flex border-0 w-18 header-sticky">
-            <NavBar isMobileMenuActive={isMobileMenuActive} />
+            <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
             <Search />
           </div>
         </div>
