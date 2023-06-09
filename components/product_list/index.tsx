@@ -8,6 +8,8 @@ import Image from "next/image";
 import ProductCard from "../../components/health_needs/ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
 import HealthNeedFilter from "../health_needs/HealthNeedFilter";
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+
 import axiosInstance from "@/utils/axiosInstance";
 
 let sectionData: any = [];
@@ -15,7 +17,15 @@ let selectedRecommendedProduct: any = [];
 function ProductListComponent() {
   const router = useRouter();
   const [productListData, SetProductListData] = useState<any>();
-
+  /**
+   * @description you can use the state here as well eventho it is called by diff component
+   * 
+   * @access `Suharika`
+   */
+  const productItemName = useHeaderStore(state => state.selectedCategory)
+  /**
+   * @end
+   */
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
@@ -68,16 +78,13 @@ function ProductListComponent() {
     setActiveFilter([]);
     fetchData();
   }, [router]);
-
- 
-
   
   useEffect(() => {
     createQueryParameters();
     console.log("in useffect")
   }, [activeFilter]);
 
- 
+
 
   const createQueryParameters = () => {
     let queryParams = "";
@@ -315,7 +322,6 @@ function ProductListComponent() {
         </div>
       )}
 
-{console.log(productCategoryData,"productCategoryData")}
 <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
 <HealthNeedFilter
           activeFiltersData={activeFiltersData}

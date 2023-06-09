@@ -1,9 +1,24 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [active, setActive] = useState(null);
+  console.log("subMenuData -->", subMenuData);
 
+  /**
+   * @description onClickEachCategory is a func to set the state selected to the selectedCategory
+   */
+  const selectCategory = useHeaderStore(state => state.onClickEachCategory)
+
+  /**
+   * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
+   * 
+   * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
+   * 
+   */
+ 
+   
   function updateUrl(path: String, type: string) {
     let f = "?filter=";
     let splitPath = path !== null ? path?.split(f) : "";
@@ -22,6 +37,9 @@ function ProductDropComponent({ subMenuData }: Props) {
             <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
+                  onClick={() =>{ 
+                      selectCategory(response?.menuItemName?.value)
+                  }}
                   href={{
                     // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
                     pathname:updateUrl(response?.menuItemUrl?.value,'0'),
@@ -38,11 +56,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                   {response?.menuItemName?.value}
                 </Link>
                 <ul
-                  className={`hidden submenu megamenu-submenu ${
+                  className={` submenu megamenu-submenu ${
                     // item?.data[0].subMenuContentBlockArea?.value === null
                     response?.subMenuContentBlockArea?.value === null
                       ? "hidden"
-                      : "group-hover:block"
+                      : "group-active:block hover-active:block"
+                      // : "block"
                   }`}
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
@@ -51,6 +70,16 @@ function ProductDropComponent({ subMenuData }: Props) {
                         <li
                           className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
                           key={Math.random()}
+                          onClick={() => {
+                            /**
+                             * @description refer to this as well because Health Needs doesn't have a `parent`
+                             */
+                            if(response?.menuItemName?.value){
+                              selectCategory(response?.menuItemName?.value)
+                            }else{
+                              selectCategory(updateUrl(ele?.menuItemUrl?.value,'1'))
+                            }
+                          }}
                         >
                           <Link
                             href={{
@@ -70,11 +99,11 @@ function ProductDropComponent({ subMenuData }: Props) {
                 </ul>
                 <span
                   onClick={() => setActive(response)}
-                  className={`${
-                    response?.subMenuContentBlockArea?.value == null
-                      ? "lg:hidden xl:hidden"
-                      : "icon-arrow lg:hidden xl:hidden"
-                  } ${active == response ? "open" : ""}`}
+                  // className={`${
+                  //   response?.subMenuContentBlockArea?.value == null
+                  //     ? "lg:hidden xl:hidden"
+                  //     : "icon-arrow lg:hidden xl:hidden"
+                  // } ${active == response ? "open" : ""}`}
                 >
                   {" "}
                 </span>
