@@ -8,7 +8,17 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
   const dataFetchedRef = useRef(false);
-
+  const [urlImgDynamic, setUrlImgDynamic] = useState("");
+  const getImageDynamic = async (imageUrl: string) => {
+    // Simulate asynchronous image loading
+    try {
+      const imageResponse = await axios.get(imageUrl);
+      const imageData = imageResponse.data;
+      setUrlImgDynamic(imageData.url);
+    } catch (error) {
+      console.error("Failed to load image:", error);
+    }
+  };
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axiosInstance.get(
@@ -202,7 +212,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
               <div className={`pb-4 lg:pb-0 col-span-1`}>
                 <div className="mx-auto my-auto lg:h-40 object-contain lg:py-48">
-                  {false && (
+                  {ele?.data?.image?.value?.url && (
                     <img
                       className={`mx-auto lg:my-auto max-h-160`}
                       src={ele?.data?.image?.value?.url}
@@ -226,7 +236,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         renderContent
       ) : (
         <div
-          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px]`}
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-[url('${
+            ele?.data?.backgroundImage?.expandedValue?.url || ""
+          }')] `}
           key={ele?.data?.contentLink?.id}
         >
           <style jsx>{`
@@ -234,7 +246,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               background-color: ${ele?.data?.backgroundColor?.value};
             }
           `}</style>
-
+          {console.log("hello", ele?.data?.backgroundImage?.expandedValue?.url)}
           <div className={`grid h-full`}>
             <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
               {renderImage}
@@ -262,6 +274,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         </div>
       );
     });
+  console.log("response", response);
   return (
     <div id="promotion-container" className="mx-auto">
       <div className="promotion-product-container lg:mb-12">
