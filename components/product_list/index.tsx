@@ -198,7 +198,7 @@ function ProductListComponent() {
 
 
   const fetchRecommandedProductData = async () => {
-    const tempName = productName?.replace(/ /g, "-")
+    const tempName = productItemName?.replace(/ /g, "-")
     const recommendedCategoryData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
     );
@@ -214,7 +214,7 @@ function ProductListComponent() {
   useEffect(() => {
     fetchRecommandedProductData()
 
-  }, [productName])
+  }, [productItemName])
 
   const createTempFilterArr = (results: any) => {
     console.log("in createTempFilterArr")
