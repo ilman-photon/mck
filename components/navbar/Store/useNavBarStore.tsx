@@ -6,6 +6,8 @@ interface ControllerNavBar {
     getData:() => void
     headerData:any
     subHeaderData:NavBarData[] | null
+    onClickEachCategory: (parentCat:any) => void
+    selectedCategory:string
     logoSrc1:string
     logoSrc2:string
     setLogoSrc:() => void
@@ -41,6 +43,10 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
     },
     headerData:null,
     subHeaderData:null,
+    onClickEachCategory:(parentCat) => {
+      set({selectedCategory:parentCat})
+    },
+    selectedCategory:'',
     setLogoSrc:() => {
       const {logoSrc1} = get()
       if(logoSrc1){
