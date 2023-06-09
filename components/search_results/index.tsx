@@ -9,6 +9,7 @@ import ProductCard from "../../components/health_needs/ProductCard";
 import { ImageComponent } from "../global/ImageComponent";
 import { fetchBlogSetting } from "../blog/BlogAPI";
 import axiosInstance from "@/utils/axiosInstance";
+import HealthNeedFilter from "../health_needs/HealthNeedFilter";
 
 function ResultComponent() {
   const router = useRouter();
@@ -21,6 +22,8 @@ function ResultComponent() {
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [productSearch, setProductSearch] = useState<any>(router.query.search);
   const [placeHolders, setSearchplaceHolders] = useState<any>();
+  const productSearchCard = true
+  const [productSum , setProductSum] = useState<any>()
 
   function FetchProductFilter() {
     return axiosInstance.get(
@@ -48,8 +51,12 @@ function ResultComponent() {
       .then((res) => {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
-        SetProductListData(res);
         setSearchLoading(false);
+        setProductSum(res.data.totalMatching)
+        SetProductListData( [
+          {item: {name: res.data.results[0].productType?.value[0].name }},
+          {data: {results: res.data.results}},
+        ])
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -360,75 +367,19 @@ function ResultComponent() {
 
         </div>
         <div className="mck-product-filter">
-          <div className="container lg:mt-8 mt-6 md:px-6 lg:px-6 xl:px-0">
-            {/* Health needs - Top Active Filter section starts */}
-            <section>
-              <ActiveProductFilter
-                activeFiltersData={activeFiltersData}
-                activeFilter={activeFilter}
-                handleClearOne={handleClearOne}
-                handleClearAll={handleClearAll}
-              />
-            </section>
-            {/* Health needs - Top Active Filter section starts */}
-
-            {/* Health needs - Left coloumn Filter section starts */}
-            <div className="lg:flex  lg:mt-8 mt-6">
-              <div className="flex-none h-max lg:w-1/6 xl:w-1/6 w-full">
-                <ProductFilter
-                  productCategoryData={productCategoryData}
-                  handleViewAllChange={handleViewAllChange}
-                  selectedFilterItems={selectedFilterItems}
-                  handleCheckBox={handleCheckBox}
-                />
-              </div>
-
-              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full lg:pl-6">
-                {/* Health needs - Right coloumn starts */}
-                <div>
-                  {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
-                  <>
-                    {/* Health needs categories title & product carousel items starts */}
-                    <section>
-                      {/* Product items */}
-                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-0 break-words">
-                        {productListData?.data?.results.map((item: any, idx: number) => {
-                          return (
-                            <div
-                              className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
-                              key={item?.contentLink?.id}
-                              onClick={() => handleProductClick(item)}
-                            >
-                              <div className="lg:h-60 h-28 flex items-center justify-center">
-                                <ImageComponent
-                                  src={item?.image?.value?.url}
-                                  alt={item?.image?.value?.url}
-                                  className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer"
-                                  id={"sr-prod-img-001" + idx}
-                                />
-                              </div>
-                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
-                                {item?.form?.value[1]?.name}
-                              </div>
-                              <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
-                                {item?.highlightDescription.value}
-                              </div>
-                              <div
-                                className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
-                                dangerouslySetInnerHTML={{
-                                  __html: item?.highlightDescription?.value,
-                                }}
-                              ></div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  </>
-                </div>
-              </div>
-            </div>
-          </div>
+        <HealthNeedFilter
+          activeFiltersData={activeFiltersData}
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+          productCategoryData={productCategoryData}
+          selectedFilterItems={selectedFilterItems}
+          selectedProduct={productListData}
+          setSelectedFilterItems={setSelectedFilterItems}
+          selectedViewAllCateory={selectedViewAllCateory}
+          fetchProductList={fetchProductList}
+          productSum={productSum}
+          productSearchCard={productSearchCard}
+        />
         </div>
       </div>
     </>
