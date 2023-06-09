@@ -196,7 +196,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
 
           <div
             ref={headerImgRef}
-            className="brand-logo"
+            className="brand-logo lg:max-w-[300px]"
             role="banner"
             onClick={handleOnClickLogo}
           >
