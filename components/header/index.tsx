@@ -7,7 +7,7 @@ import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
-function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
+function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
@@ -18,6 +18,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   const firstLogo = useHeaderStore(state => state.logoSrc1)
   const setLogo = useHeaderStore(state => state.setLogoSrc)
   const onMouseEnterToHeader = useHeaderStore(state => state.onMouseEnter)
+  const isDataExist = useHeaderStore(state => state.headerData)
   
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
@@ -59,8 +60,10 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   }, []);
 
   useEffect(() => {
-    fetchHeaderData();
-  }, []);
+    if(isDataExist === null){
+      fetchHeaderData();
+    }
+  }, [isDataExist]);
 
   function fetchHeaderData() {
     axiosInstance
@@ -216,6 +219,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
           </div>
         </div>
       </div>
+      {children}
     </>
   );
 }

@@ -14,39 +14,18 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   const [menuData_, setMenuData_] = useState(menuData ?? []);
 
   useLayoutEffect(() => {
-    getHeaderData();
-  }, []);
+    if(menuData === null){
+      getHeaderData();
+    }
+  }, [menuData]);
 
   useEffect(() => {
-    const a = menuData?.map((m: any) => ({ ...m, flag: false }));
-    setMenuData_(a);
+    if(menuData !== null){
+      const a = menuData?.map((m: any) => ({ ...m, flag: false }));
+      setMenuData_(a);
+    }
   }, [menuData]);
-  // I'm using "click" but it works with any event
-  // const handleOutsideClick = () => {
-  //   if(typeof document !== 'undefined'){
-  //     const specifiedElement = document?.getElementById('nav-bar')?.firstChild!
-  //     const arrowClasses = document?.getElementsByClassName('icon-arrow')
-
-  //     const a = [event?.target, arrowClasses[0], arrowClasses[1]]
-  //         const isClickInside = a?.filter((c:any) => specifiedElement.contains(c))
-  //         console.log("is click inside --->", isClickInside)
-  //         if (!isClickInside) {
-  //           setIsMobileMenuActive(true)
-  //         }
-  //       }
-  // }
-  // useEffect(() => {
-  //   if(typeof document !== 'undefined'){
-  //     const specifiedElement = document?.getElementById('nav-bar')?.firstChild!
-  //     if(specifiedElement){
-  //       document.addEventListener('click', handleOutsideClick, true)
-  //     }
-  //   }
-  //   return () => {
-  //     document.removeEventListener('click', handleOutsideClick, true )
-  //   }
-
-  // }, [])
+ 
   const handleMenuOpen = (idx: number, value: any, item: any) => {
     const findex = menuData?.findIndex(
       (md: any) => md?.menuItemName?.value === value
@@ -64,9 +43,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
       });
     const check = a?.some((aa: any) => aa.flag);
     setIsOpen(check);
-    console.log("idx a -->", a);
     setMenuData_(a);
-    // window.alert(isOpen)
   };
 
   return (
