@@ -30,7 +30,7 @@ const ProductSearchCard = ({ cardData }: any) => {
                       </div>
                       <div
                         id="my_text"
-                        className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3 cursor-pointer"
+                        className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3"
                         dangerouslySetInnerHTML={{
                           __html: cardData?.highlightDescription?.value,
                         }}

@@ -414,7 +414,7 @@ const HealthNeedFilter = ({
                                   alt={leftfiltermaindata?.mainCategory?.value[0].name}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
-                                  width={24} className="mr-2 lg:ml-[1px]" />
+                                  width={24} className="mr-2" />
                                   : null} 
                                 <label
                                   htmlFor={
