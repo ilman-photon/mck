@@ -108,7 +108,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     />
                     {carouselContent && (
                       <div
-                        className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                        className="px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                         style={{
                           backgroundColor:
                             item?.title?.value || item?.description?.value
@@ -169,7 +169,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       />
                       {carouselContent && (
                         <div
-                          className="lg:pl-18 px-4 lg:px-0 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
+                          className=" px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                           style={{
                             backgroundColor:
                               firstResponse.backgroundColor?.value,
