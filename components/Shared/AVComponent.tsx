@@ -47,7 +47,7 @@ export default function AVComponent (props:MediaComponentProps) {
             className='react-player'
             url={videoSource}
             id={`${idComponent}_vid_001`}
-            controls={videoControls}
+            controls
             width='100%'
             height='100%'
             ref={videoComponentRef}
