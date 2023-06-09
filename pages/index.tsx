@@ -123,9 +123,9 @@ export default function Home() {
                   <CarouselComponent
                     sectionData={filteredData("CarouselBlock")}
                   />
-                ) : item?.contentType[1] === "FourColumnBlock" ? (
+                ) : item?.contentType[1] === "ProductCategoryBlock" ? (
                   <CategoryComponent
-                    sectionData={filteredData("FourColumnBlock")}
+                    sectionData={filteredData("ProductCategoryBlock")}
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
                   <div>

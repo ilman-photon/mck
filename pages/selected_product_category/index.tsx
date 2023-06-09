@@ -5,13 +5,15 @@ import HeaderComponent from "@/components/header";
 import CarouselComponent from "@/components/carousel";
 import ProductListComponent from "@/components/product_list";
 import GoogleTagManager from "@/components/google_tag_manager";
+import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 
 function ProductListPage() {
-  // Loading
+  const selectedCategory = useHeaderStore(state => state.selectedCategory)
+  const categoryName=selectedCategory?.replace(/ /g, "-")
   const [token, setToken] = useState(null);
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`,
+    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`,
     headers: {
       "Accept-Language": "en",
    //   "Authorization":`Bearer ${localStorage.getItem("token")}`
