@@ -113,7 +113,7 @@ function PdpLocation(props: any) {
           onChange={(e) => setTextInput(e.target.value)}
           placeholder="City, State or Zip code"
           onKeyDown={(e) => (e.key === "Enter" ? handleKey() : null)}
-          className="pl-[46px] flex flex-row rounded-full lg:rounded border border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue text-mckgreyborder bg-[#F8F9FB] pl-9"
+          className="pl-[46px] flex flex-row rounded-full lg:rounded border placeholder-mckblue70 border-solid border-mcklggrey items-center gap-2 w-full h-12 bg-blue text-mckgreyborder bg-[#F8F9FB] pl-9"
           title="Search"
         />
         <div onClick={handleKey} className="cursor-pointer">
