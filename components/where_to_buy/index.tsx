@@ -22,7 +22,7 @@ function WhereComponent() {
   const [loading, setLoading] = useState(true); // Tambahkan state loading
   const [selectedStore, setSelectedStore] = useState(-1);
   // let textInput: any;
-  let [textInput, setTextInput] = useState<any>('')
+  let [textInput, setTextInput] = useState<any>("");
   /**
    * @state creds key
    */
@@ -64,7 +64,8 @@ function WhereComponent() {
         !isNaN(textInput)
           ? `components=postal_code:${Number(textInput)}`
           : `address=${textInput}`
-      }`);
+      }`
+    );
   }
 
   function fetchPDPLoctionDetails() {
@@ -77,8 +78,8 @@ function WhereComponent() {
   }, [latitude]);
   useEffect(() => {
     // textInput = 75201;
-    if(!isCustomSearch){
-      setTextInput(75201)
+    if (!isCustomSearch) {
+      setTextInput(75201);
     }
     // setTextInput('75201')
     fectchLatandLongDetails()
@@ -120,13 +121,13 @@ function WhereComponent() {
     }
   };
   const handleKey = () => {
-      fectchLatandLongDetails()
-        .then((res) => {
-          setLatitude(res?.data?.results[0]?.geometry.location['lat']);
-          setLongitude(res?.data?.results[0]?.geometry.location['lng']);
-          setIsCustomSearch(true)
-        })
-        .catch((e: Error | AxiosError) => console.log(e));
+    fectchLatandLongDetails()
+      .then((res) => {
+        setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
+        setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        setIsCustomSearch(true);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
   };
 
   return (
@@ -148,9 +149,12 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy" id="carouselExampleCaptions">
+        <div
+          className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
+          id="carouselExampleCaptions"
+        >
           <div>
-          <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
@@ -158,21 +162,21 @@ function WhereComponent() {
                 role="search"
                 onChange={(e) => setTextInput(e.target.value)}
                 value={!isCustomSearch ? undefined : textInput}
-                onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
+                onKeyDown={(e) => (e.key === "Enter" ? handleKey() : null)}
                 placeholder="City, State or Zip code"
                 className="border-mckblue bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
               <div onClick={handleKey} className="cursor-pointer">
-              <Image
-                src="images/Vector-nw.svg"
-                alt="location"
-                // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                // width={24}
-                // height={25}
-                className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
-                width={15}
-                height={20}
-              />
+                <Image
+                  src="images/Vector-nw.svg"
+                  alt="location"
+                  // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
+                  // width={24}
+                  // height={25}
+                  className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
+                  width={15}
+                  height={20}
+                />
               </div>
             </div>
             <div
@@ -337,15 +341,18 @@ function WhereComponent() {
                               height={39}
                             />
                           </div>
-                          <div className="flex">
+                          <div className="flex mb-1.5">
                             <span className="text-mcknormalgrey mb-1">
-                              <p className="text-sofia-reg lg:text-lg text-base font-extrabold lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                              <p
+                                className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5"
+                                id={`wb-label-003${index}`}
+                              >
                                 {value.StoreName}
                               </p>
-                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-1 lg:leading-5">
                                 {value.Address},{" "}
                               </p>
-                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5 lg:mb-2">
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
                               </p>
@@ -353,33 +360,44 @@ function WhereComponent() {
                                 {value.Phone}
                               </p>
                             </span>
-                            <h2 className="text-sofia-reg lg:text-20 text-base font-extrabold ml-auto">
+                            <h2 className="text-sofia-bold text-xl font-extrabold ml-auto text-mcknormalgrey">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>
 
-                          <div className="flex flex-row justify-between mt-2">
-                            {value?.StoreUrl ? (
+                          <div className="flex flex-row mt-2">
+                            <div className="items-center justify-center">
+                              {value?.StoreUrl ? (
+                                <button
+                                  className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
+                                  onClick={() => showOnline(value.StoreUrl)}
+                                >
+                                  View Online
+                                </button>
+                              ) : null}
+                            </div>
+                            <div>
+                              <Image
+                                src="/images/directions_car_filled.svg"
+                                alt="direction"
+                                className="inline-block mr-1"
+                                id={`wb-label-09_0${index}`}
+                                width={24}
+                                height={25}
+                              />
                               <button
-                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
-                                onClick={() => showOnline(value.StoreUrl)}
+                                className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
+                                onClick={() =>
+                                  showMapClicked(
+                                    value.Lat,
+                                    value.Lon,
+                                    value.StoreName
+                                  )
+                                }
                               >
-                                View Online
+                                Get Directions
                               </button>
-                            ) : null}
-
-                            <button
-                              className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
-                              onClick={() =>
-                                showMapClicked(
-                                  value.Lat,
-                                  value.Lon,
-                                  value.StoreName
-                                )
-                              }
-                            >
-                              Get Directions
-                            </button>
+                            </div>
                           </div>
                         </div>
                       </InfoWindow>

@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import DOMPurify from 'isomorphic-dompurify';
 
 interface CatogaryComponentProps {
   CatogaryListing: any;
@@ -26,8 +27,8 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
                 {item.categoryImage.expandedValue?.url && (
                   <img
                     className="mr-3"
-                    src={item.categoryImage.expandedValue.url}
-                    alt={item.categoryImage.expandedValue.name}
+                    src={DOMPurify.sanitize(item.categoryImage.expandedValue.url)}
+                    alt={DOMPurify.sanitize(item.categoryImage.expandedValue.name)}
                     id={item.categoryImage.expandedValue.name}
                   />
                 )}

@@ -4,21 +4,19 @@ import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 function ProductDropComponent({ subMenuData }: Props) {
   const [active, setActive] = useState(null);
-  console.log("subMenuData -->", subMenuData);
 
   /**
    * @description onClickEachCategory is a func to set the state selected to the selectedCategory
    */
-  const selectCategory = useHeaderStore(state => state.onClickEachCategory)
+  const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
 
   /**
    * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
-   * 
+   *
    * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
-   * 
+   *
    */
- 
-   
+
   function updateUrl(path: String, type: string) {
     let f = "?filter=";
     let splitPath = path !== null ? path?.split(f) : "";
@@ -32,23 +30,23 @@ function ProductDropComponent({ subMenuData }: Props) {
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
-        {subMenuData?.map(({response} :any) => {
+        {subMenuData?.map(({ response }: any) => {
           return (
             <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
-                  onClick={() =>{ 
-                      selectCategory(response?.menuItemName?.value)
+                  onClick={() => {
+                    selectCategory(response?.menuItemName?.value);
                   }}
                   href={{
                     // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
-                    pathname:updateUrl(response?.menuItemUrl?.value,'0'),
+                    pathname: updateUrl(response?.menuItemUrl?.value, "0"),
                     // query: {
                     //   filter: updateUrl(item?.data[0]?.menuItemUrl?.value, "1"),
                     // },
-                    query:{
-                      filter:updateUrl(response?.menuItemUrl?.value, "1"),
-                    }
+                    query: {
+                      filter: updateUrl(response?.menuItemUrl?.value, "1"),
+                    },
                   }}
                   className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium"
                 >
@@ -61,7 +59,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                     response?.subMenuContentBlockArea?.value === null
                       ? "hidden"
                       : "group-active:block hover-active:block"
-                      // : "block"
+                    // : "block"
                   }`}
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
@@ -74,10 +72,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
-                            if(response?.menuItemName?.value){
-                              selectCategory(response?.menuItemName?.value)
-                            }else{
-                              selectCategory(updateUrl(ele?.menuItemUrl?.value,'1'))
+                            if (response?.menuItemName?.value) {
+                              selectCategory(response?.menuItemName?.value);
+                            } else {
+                              selectCategory(
+                                updateUrl(ele?.menuItemUrl?.value, "1")
+                              );
                             }
                           }}
                         >
@@ -130,7 +130,7 @@ function ProductDropComponent({ subMenuData }: Props) {
 }
 
 type Props = {
-  subMenuData: any
+  subMenuData: any;
 };
 
 export default ProductDropComponent;

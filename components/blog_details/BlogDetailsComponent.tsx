@@ -11,6 +11,7 @@ import { GetTime } from "../global/CommonUtil";
 import { fetchApplicationSetting, fetchBlogDetails } from "../blog/BlogAPI";
 import { ImageComponent } from "../global/ImageComponent";
 import TagsComponent from "../blog/Tags";
+import DOMPurify from 'isomorphic-dompurify';
 
 const BlogDetailsComponent = () => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const BlogDetailsComponent = () => {
     // Set the lang attribute to "en" on the <html> element
     // Set the title of the document dynamically
     document.documentElement.lang = "en";
-    document.title = BlogInfo?.title.value || "Blog Details Page";
+    document.title = DOMPurify.sanitize(BlogInfo?.title.value) || "Blog Details Page";
   }, []);
 
   return (
@@ -104,7 +105,7 @@ const BlogDetailsComponent = () => {
                     className="lg:text-54  lg:leading-61  max-[576px]:leading-9 text-32 text-gtl-med text-mckblue lg:pb-6 text-center"
                     id="blog-link-001"
                   >
-                    {BlogInfo.title?.value}
+                    {DOMPurify.sanitize(BlogInfo.title?.value)}
                   </h1>
                   <div className="grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-4 lg:pb-6 pb-4">
                     <div className="lg:pb-0 pb-4">
@@ -124,7 +125,7 @@ const BlogDetailsComponent = () => {
                         }`}
                         id="blog-label-002"
                       >
-                        {BlogInfo.readMinute?.value}
+                        {DOMPurify.sanitize(BlogInfo.readMinute?.value)}
                       </span>
                       {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
@@ -134,7 +135,7 @@ const BlogDetailsComponent = () => {
                   <div
                     className="text-sofia-reg text-color text-lg leading-27"
                     dangerouslySetInnerHTML={{
-                      __html: BlogInfo.description.value,
+                      __html: DOMPurify.sanitize(BlogInfo.description.value),
                     }}
                   ></div>
                 </div>

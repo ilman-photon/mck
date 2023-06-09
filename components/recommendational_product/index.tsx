@@ -8,7 +8,17 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState(true);
   const dataFetchedRef = useRef(false);
-
+  const [urlImgDynamic, setUrlImgDynamic] = useState("");
+  const getImageDynamic = async (imageUrl: string) => {
+    // Simulate asynchronous image loading
+    try {
+      const imageResponse = await axios.get(imageUrl);
+      const imageData = imageResponse.data;
+      setUrlImgDynamic(imageData.url);
+    } catch (error) {
+      console.error("Failed to load image:", error);
+    }
+  };
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
       return axiosInstance.get(
@@ -137,11 +147,11 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       const renderImage = ele?.data?.imageTitle?.value?.url && (
         <img
           className={`h-auto lg:max-w-fit mx-auto lg:w-338 w-270 ${
-            index == 0 && "lg:absolute"
+            index === 0 && "lg:absolute"
           }`}
           src={ele?.data?.imageTitle?.value?.url}
           alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-          id={`home-product-image ${indexs} ${index + 1}`}
+          id={`home-product-image${indexs}${index + 1}`}
         />
       );
 
@@ -175,7 +185,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             {ele?.data?.buttonText?.value}
           </button>
         );
-      let isDesktopNow = isDesktopView()
+      let isDesktopNow = ele?.data?.backgroundImage?.value?.url
         ? ele?.data?.backgroundImage?.value?.url
         : "";
       const renderContent = (
@@ -183,11 +193,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
             index === 0
               ? "bg-no-repeat row-span-2 bg-center bg-cover bg-[url('" +
-                isDesktopNow +
+                ele?.data?.backgroundImage?.value?.url +
                 "')]"
               : ""
           }`}
           key={ele?.data?.contentLink?.id}
+          style={{
+            backgroundImage: `url(${ele?.data?.backgroundImage?.value?.url})`,
+          }}
         >
           <style jsx>{`
             .bg-color {
@@ -202,7 +215,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
               <div className={`pb-4 lg:pb-0 col-span-1`}>
                 <div className="mx-auto my-auto lg:h-40 object-contain lg:py-48">
-                  {false && (
+                  {ele?.data?.image?.value?.url && (
                     <img
                       className={`mx-auto lg:my-auto max-h-160`}
                       src={ele?.data?.image?.value?.url}
@@ -225,41 +238,40 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       return index === 0 ? (
         renderContent
       ) : (
-        <div
-          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px]`}
-          key={ele?.data?.contentLink?.id}
-        >
-          <style jsx>{`
-            .bg-color {
-              background-color: ${ele?.data?.backgroundColor?.value};
-            }
-          `}</style>
-
-          <div className={`grid h-full`}>
-            <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
-              {renderImage}
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
-              <div className="pb-4 lg:pb-0 col-span-1">
-                <div className="mx-auto my-auto lg:h-40 object-contain">
-                  {ele?.data?.image?.value?.url && (
-                    <img
-                      className="mx-auto lg:my-auto max-h-160"
-                      src={ele?.data?.image?.value?.url}
-                      id={`home-product-image01${indexs}${index + 1}`}
-                      alt={ele?.data?.image?.expandedValue?.altText?.value}
-                    />
-                  )}
-                </div>
+        <>
+          <div
+            className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center `}
+          >
+            <style jsx>{`
+              .bg-color {
+                background-color: ${ele?.data?.backgroundColor?.value};
+              }
+            `}</style>
+            <div className={`grid h-full`}>
+              <div className="w-full lg:w-44 lg:mb-8 mb-6 lg:min-h-57">
+                {renderImage}
               </div>
 
-              {renderDescription}
-            </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
+                <div className="pb-4 lg:pb-0 col-span-1">
+                  <div className="mx-auto my-auto lg:h-40 object-contain">
+                    {ele?.data?.image?.value?.url && (
+                      <img
+                        className="mx-auto lg:my-auto max-h-160"
+                        src={ele?.data?.image?.value?.url}
+                        id={`home-product-image01${indexs}${index + 1}`}
+                        alt={ele?.data?.image?.expandedValue?.altText?.value}
+                      />
+                    )}
+                  </div>
+                </div>
 
-            {renderButton}
+                {renderDescription}
+              </div>
+              {renderButton}
+            </div>
           </div>
-        </div>
+        </>
       );
     });
   return (
