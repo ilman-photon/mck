@@ -185,21 +185,21 @@ function PdpLocation(props: any) {
                       </div>
                       <div className="flex mb-1.5">
                         <span className="text-sofia-reg text-mcknormalgrey mb-1">
-                          <div className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
+                          <p className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
                             {value.StoreName},{" "}
-                          </div>
-                          <div className="text-sofia-reg text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
+                          </p>
+                          <p className="text-sofia-reg text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
                             {value.Address},{" "}
-                          </div>
-                          <div className="text-sofia-reg text-lg text-base font-normal lg:leading-5 lg:mb-1">
+                          </p>
+                          <p className="text-sofia-reg text-lg text-base font-normal lg:leading-5 lg:mb-1">
                             {" "}
                             {value.City} {value.Zip}
-                          </div>
-                          <div className="text-sofia-reg text-mckblue text-lg text-base font-normal lg:leading-5 leading-[20px]">
+                          </p>
+                          <p className="text-sofia-reg text-mckblue text-lg text-base font-normal lg:leading-5 leading-[20px]">
                             {value.Phone}
-                          </div>
+                          </p>
                         </span>
-                        <h2 className="text-sofia-bold text-xl text-xl font-extrabold ml-auto text-mcknormalgrey">
+                        <h2 className="text-sofia-bold text-xl font-extrabold ml-auto text-mcknormalgrey">
                           {Number(value.Distance).toFixed(1)} mi
                         </h2>
                       </div>

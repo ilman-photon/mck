@@ -1,27 +1,26 @@
 import Link from "next/link";
-import { useState,useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import ProductDropComponent from "../productdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 
 function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
+  const [active, setActive] = useState(null);
 
-  const [active, setActive] = useState(null)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [isOpen, setIsOpen] = useState(false)
- 
-  const getHeaderData = useHeaderStore(state => state.getData)
-  
-  const menuData = useHeaderStore(state => state.headerData)
-  const [menuData_, setMenuData_] = useState(menuData ?? [])
+  const getHeaderData = useHeaderStore((state) => state.getData);
+
+  const menuData = useHeaderStore((state) => state.headerData);
+  const [menuData_, setMenuData_] = useState(menuData ?? []);
 
   useLayoutEffect(() => {
-    getHeaderData()
-  },[])
+    getHeaderData();
+  }, []);
 
   useEffect(() => {
-    const a = menuData?.map((m: any) => ({...m, flag: false}))
-    setMenuData_(a)
-  }, [menuData])
+    const a = menuData?.map((m: any) => ({ ...m, flag: false }));
+    setMenuData_(a);
+  }, [menuData]);
   // I'm using "click" but it works with any event
   // const handleOutsideClick = () => {
   //   if(typeof document !== 'undefined'){
@@ -48,38 +47,41 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   //   }
 
   // }, [])
-  const handleMenuOpen = (idx: number, value: any, item: any ) => {
-    const findex = menuData?.findIndex((md: any) => md?.menuItemName?.value === value)
-    console.log("idx 001 22 --->")
-    setActive(item)
-    const a = menuData_.length > 0 && menuData_.map((m: any, idx: number) => {
-      if(findex === idx){ 
-        console.log("idx 001 true ", idx, findex)
-        m.flag = !m.flag
-      }else {
-        console.log("idx 002 false", idx, menuData_)
-        m.flag = false; 
-      }
-      return m
-    })
-    const check = a?.some((aa: any) => aa.flag)
-    setIsOpen(check)
-    console.log('idx a -->', a)
-    setMenuData_(a)
+  const handleMenuOpen = (idx: number, value: any, item: any) => {
+    const findex = menuData?.findIndex(
+      (md: any) => md?.menuItemName?.value === value
+    );
+    setActive(item);
+    const a =
+      menuData_.length > 0 &&
+      menuData_.map((m: any, idx: number) => {
+        if (findex === idx) {
+          m.flag = !m.flag;
+        } else {
+          m.flag = false;
+        }
+        return m;
+      });
+    const check = a?.some((aa: any) => aa.flag);
+    setIsOpen(check);
+    console.log("idx a -->", a);
+    setMenuData_(a);
     // window.alert(isOpen)
-  }
-  {console.log('is open *1*--->', isOpen)}
+  };
 
   return (
     <>
       <div
-        id="nav-bar" role="navigation"
-        className={`md:flex container lg:flex ml-auto mobile-customenav ${isMobileMenuActive ? "mobile-overlay-wrapper" :""}`}
+        id="nav-bar"
+        role="navigation"
+        className={`md:flex container lg:flex ml-auto mobile-customenav ${
+          isMobileMenuActive ? "mobile-overlay-wrapper" : ""
+        }`}
       >
         <div
           // onMouseLeave={() => setIsMobileMenuActive(false)}
           className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent ${
-            (isMobileMenuActive ) ? "active bg-mcklightyellow text-mckblue" : ""
+            isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""
           }`}
         >
           {isMobileMenuActive && (
@@ -115,35 +117,44 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     {item?.menuItemName?.value}
                   </Link>
                   <span
-                    onClick={() => { handleMenuOpen(idx, item?.menuItemName?.value, item)}}
-                    
+                    onClick={() => {
+                      handleMenuOpen(idx, item?.menuItemName?.value, item);
+                    }}
                     className={`${
                       item?.subMenuContentBlockArea?.value == null
                         ? "lg:hidden xl:hidden"
                         : "icon-arrow hidden lg:block xl:block lg:-right-5 lg:top-2.5"
                     } 
-                    ${menuData_ && menuData_[idx] && menuData_[idx].flag ? 'open': ''}
+                    ${
+                      menuData_ && menuData_[idx] && menuData_[idx].flag
+                        ? "open"
+                        : ""
+                    }
                     `}
                     aria-hidden={true}
                   ></span>
                 </div>
                 <div
-                  className={`${menuData_ && menuData_[idx] && menuData_[idx].flag ? 'block': 'hidden'} secondmenu ${
+                  className={`${
+                    menuData_ && menuData_[idx] && menuData_[idx].flag
+                      ? "block"
+                      : "hidden"
+                  } secondmenu ${
                     item?.subMenuContentBlockArea?.value == null
                       ? "hidden"
-                      :'group-hover:block'}
+                      : "group-hover:block"
+                  }
                   `}
                 >
-                  { 
-                  menuData_ && menuData_[idx] && menuData_[idx].flag ?
-                  <ProductDropComponent
-                    subMenuData={item.subMenuContentBlockArea.value}
-                  />
-                  :
-                  <ProductDropComponent
-                  subMenuData={item.subMenuContentBlockArea.value}
-                />
-                  }
+                  {menuData_ && menuData_[idx] && menuData_[idx].flag ? (
+                    <ProductDropComponent
+                      subMenuData={item.subMenuContentBlockArea.value}
+                    />
+                  ) : (
+                    <ProductDropComponent
+                      subMenuData={item.subMenuContentBlockArea.value}
+                    />
+                  )}
                 </div>
               </div>
             );
