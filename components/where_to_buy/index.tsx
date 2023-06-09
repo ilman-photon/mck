@@ -182,7 +182,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="lg:w-[640px] lg:desktop:w-[400px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
+            <div className="lg:w-[640px] lg:desktop:w-[500px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -283,7 +283,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-[800px] lg:desktop:w-[640px] w-full relative h-782 lg:h-854">
+          <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
