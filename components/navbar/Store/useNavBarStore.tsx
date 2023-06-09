@@ -46,7 +46,7 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
     onClickEachCategory:(parentCat) => {
       set({selectedCategory:parentCat})
     },
-    selectedCategory:''
+    selectedCategory:'',
     setLogoSrc:() => {
       const {logoSrc1} = get()
       if(logoSrc1){
