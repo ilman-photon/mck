@@ -90,7 +90,7 @@ const ProductComponent = ({
                     })}
                   </div>
                 ) : (
-                  <div className="lg:pt-6 lg:pb-12 pb-6">
+                  <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-2">
                     <Swiper
                       modules={[Navigation, Pagination]}
                       spaceBetween={4}
