@@ -1,3 +1,4 @@
+import axiosInstance from "@/utils/axiosInstance";
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 
@@ -5,20 +6,13 @@ function ServiceUnavailableCoumponent() {
     const [serviceErrorData, SetServiceErrorData] = useState<any>();
 
     function fetchServiceUnavailableDetails() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/server-error/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
+        return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/server-error/&expand=*`);
     }
 
     useEffect(() => {
         fetchServiceUnavailableDetails()
             .then((res) => {
-                console.log(res)
                 SetServiceErrorData(res);               
             })
             .catch((e: Error | AxiosError) => console.log(e));

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAxios from "@/hooks/useApi";
 import FooterComponent from "@/components/footer";
 import HeaderComponent from "@/components/header";
@@ -8,11 +8,13 @@ import GoogleTagManager from "@/components/google_tag_manager";
 
 function ProductListPage() {
   // Loading
+  const [token, setToken] = useState(null);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`,
     headers: {
       "Accept-Language": "en",
+   //   "Authorization":`Bearer ${localStorage.getItem("token")}`
     },
   });
 
@@ -36,6 +38,8 @@ function ProductListPage() {
     } else {
         document.title = "Selected Product Page";
     }
+
+    
   }, [JSON.stringify(response)]);
 
   return (

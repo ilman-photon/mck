@@ -8,6 +8,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
 import WhyFTImageVideoAndTextSection from "./WhyFTImageVideoAndTextSection";
+import axiosInstance from "@/utils/axiosInstance";
 function WhyFTComponent(
   { isCarusolAvaibleProps }: WhyFTComponentType = {
     isCarusolAvaibleProps: null,
@@ -16,14 +17,8 @@ function WhyFTComponent(
   const [whyFTData, SetWhyFTData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`);
   }
   useEffect(() => {
     document.documentElement.lang = "en";
@@ -115,7 +110,7 @@ function WhyFTComponent(
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "CarouselBlock" ? (
-                    <div className="lg:mb-76 md:mb-24 sm:mb-24">
+                    <div className="lg:mb-12">
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
@@ -129,19 +124,19 @@ function WhyFTComponent(
       <div className="flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
         <React.Fragment>
           {whyFTData &&
-            rearrangedData1().map((item: any, index: number) => (
+            whyFTData?.contentArea?.expandedValue.map((item: any, index: number) => (
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "TwoCloumnBlock" ? (
                     <WhyFTImageVideoAndTextSection
                       index={`wfnt_0${index}`}
-                      sectionData={whyFTData.contentArea.expandedValue[index]}
+                      sectionData={item}
                     />
                   ) : item?.contentType[1] === "OneColumnBlock" ? (
-                    <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
+                    <div className="py-6 lg:p-0 text-center mb-6 lg:mb-12">
                       <ImageVideoOrTextSection
                         index={`wfnt_0${index}`}
-                        sectionData={whyFTData.contentArea.expandedValue[index]}
+                        sectionData={item}
                         textAlignment={"text-left"}
                       />
                     </div>

@@ -2,19 +2,14 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import axiosInstance from "@/utils/axiosInstance";
 function TermsComponent() {
   const [apiRespond, setApiRespond] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
 
   function fetchTermsAndCondition() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/Terms-of-Use/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/Terms-of-Use/&expand=*`);
   }
 
   useEffect(() => {

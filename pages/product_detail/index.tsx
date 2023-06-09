@@ -58,7 +58,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
           }
         })
         .catch((error: Error) => {
-          console.log(error.message);
+          // console.log(error.message);
           document.title = "Product Details Page";
         });
     } else {

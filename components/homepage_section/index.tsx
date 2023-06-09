@@ -83,7 +83,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
           <div className="container mx-auto grid lg:flex">
             <AVComponent
             isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            videoContainerStyle={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
+            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
             videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
             idComponent={index} 
             videoControls={isPlaying} 

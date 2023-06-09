@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import { LinkComponent } from "../global/LinkComponent";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -25,16 +26,12 @@ export default function FooterComponent() {
   };
 
   const getData = async () => {
-    const response = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
+    const response = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`);
 
     const secondBlock = response.data[0].footer.expandedValue[0].contentLink.id;
-    const responseid = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
+    const responseid = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`);
 
     const footerMobileNav =
       response?.data[0]?.mobileMenuNavigation?.expandedValue[0]
@@ -137,7 +134,7 @@ export default function FooterComponent() {
           </div>
         </div>
       </footer>
-      <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue lg:hidden xl:hidden">
+      <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue bg-beige50 lg:hidden xl:hidden">
         <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
           {footerMobileNav &&
             footerMobileNav.map((item: any) => {

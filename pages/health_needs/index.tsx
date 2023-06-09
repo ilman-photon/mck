@@ -7,14 +7,17 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
+import axiosInstance from "@/utils/axiosInstance";
 
 function HealthNeedsPage() {
   // Loading
+  const [token, setToken] = useState(null);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
     headers: {
       "Accept-Language": "en",
+    //  "Authorization":`Bearer ${localStorage.getItem("token")}`
     },
   });
 
@@ -28,19 +31,14 @@ function HealthNeedsPage() {
   }
 
   function FetchProductFilter() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`);
   }
 
   useEffect(() => {
     // Set the lang attribute to "en" on the <html> element
     document.documentElement.lang = "en";
+  
   }, []);
 
   useEffect(() => {
