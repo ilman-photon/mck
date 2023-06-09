@@ -25,11 +25,12 @@
     text-decoration: underline;
   }
 
-  .bg-logo-right-503 {
-    top: -70px;
-    right: -150px;
-    width: 744px;
-    height: 530px;
+ 
+}
+
+.bg-logo-right-503 {
+  @media (min-width: 1281px) {
+    right: -70px;
   }
 }
 
