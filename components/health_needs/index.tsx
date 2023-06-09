@@ -8,6 +8,7 @@ import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 import Image from "next/image";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import axiosInstance from "@/utils/axiosInstance";
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 let _temparray: any = [];
@@ -69,14 +70,8 @@ const HealthNeedsComponent = ({
       }
     }
 
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         console.log("FetchProductList----- ", res);
@@ -257,7 +252,7 @@ const HealthNeedsComponent = ({
   useEffect(() => {
     const fetchData = async () => {
       // Health needs Categories List
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -276,14 +271,14 @@ const HealthNeedsComponent = ({
       setRecommendedProduct(healthNeedsCategories?.data[0].contentArea);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios.get(
+      const activeFiltersData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios.get(
+      const productCategoryData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const productCategoryDataList =
@@ -342,7 +337,7 @@ const HealthNeedsComponent = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -355,16 +350,10 @@ const HealthNeedsComponent = ({
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
 
-      axios
+      axiosInstance
         .get(
           // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
-          `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
-        )
+          `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`)
         .then((res) => {
           setProductSum(res.data.totalMatching);
           let tempResults: any = [];
@@ -397,30 +386,30 @@ const HealthNeedsComponent = ({
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["items"] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        leftfiltermaindata?.subCategory?.value[0].id
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["items"] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
+        leftfiltermaindata?.subCategory?.value[0]?.id
       ] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["categoryName"] =
-        leftfiltermaindata?.mainCategory?.value[0].name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["categoryName"] =
+        leftfiltermaindata?.mainCategory?.value[0]?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["productType"] =
         leftfiltermaindata?.name;
       // leftfiltermaindata?.isBusinessVerticalCategory?.value
       //   ? leftfiltermaindata?.name
       //   : leftfiltermaindata?.name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isCategoryChecked"
       ] = false;
       leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] = [];
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "checked"
         ] = false;
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "name"
         ] = subItem.name;
       });

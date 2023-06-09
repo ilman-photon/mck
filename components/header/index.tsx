@@ -1,16 +1,24 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
+import axiosInstance from "@/utils/axiosInstance";
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+
 function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   const router = useRouter();
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
   const [headerData, setHeaderData] = useState<any>();
-  // const [menuData, setMenuData] = useState<any>();
+  
+  const logoSrc = useHeaderStore(state => state.currentusedLogo)
+  const firstLogo = useHeaderStore(state => state.logoSrc1)
+  const setLogo = useHeaderStore(state => state.setLogoSrc)
+  const onMouseEnterToHeader = useHeaderStore(state => state.onMouseEnter)
+  
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -34,6 +42,11 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
       setDivHeight({});
     }
   };
+
+  useLayoutEffect(() => {
+      setLogo()
+  },[])
+
   useEffect(() => {
     let header = headerImgRef.current!.getBoundingClientRect();
     const handleScrollEvent = () => {
@@ -50,22 +63,17 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
   }, []);
 
   function fetchHeaderData() {
-    axios
+    axiosInstance
       .get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      )
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`)
       .then((res) => {
         setHeaderData(res.data[0]);
         // setMenuData(
         //   res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
         //     .expandedValue
         // );
-        setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
+        // console.log(res?.data[0])
+        // setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -84,7 +92,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
     setIsBarAnimated(!isBarAnimated);
     setIsMobileMenuActive(!isMobileMenuActive);
   }
-
+  
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
@@ -96,15 +104,15 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // logo onhover
-  const [logoSrc, setLogoSrc] = useState("");
+ 
   function handleHeaderMouseEnter() {
     if (!isMobile) {
-      setLogoSrc(headerData?.secondLogoImage?.expandedValue?.url);
+      onMouseEnterToHeader()
     }
   }
+
   function handleHeaderMouseLeave() {
-    setLogoSrc(headerData?.logoImage?.expandedValue?.url);
+    setLogo()
   }
 
   const [isSticky, setIsSticky] = useState(false);
@@ -133,6 +141,7 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
       const hamburgerMenuActive = document.querySelector(
         ".hamburger-menu.active"
       );
+      const a = document.getElementById('nav-bar')?.firstChild;
 
       if (
         hamburgerMenu &&
@@ -140,9 +149,12 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         !hamburgerMenu.contains(event.target as Node) &&
         !hamburgerMenuActive.contains(event.target as Node)
       ) {
-        setIsMobileMenuActive(false);
+        // setIsMobileMenuActive(false);
         setIsBarAnimated(false);
       }
+      // if(a?.contains(event.target as Node)){
+      //   setIsMobileMenuActive(false);
+      // }
     };
 
     window.addEventListener("click", handleClickOutside);
@@ -162,8 +174,8 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky" : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-white lg:bg-transparent lg:border-b border-mcknormalgrey ${
+          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70" : isSticky ? "sticky" : "relative z-40"
+        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
@@ -190,14 +202,14 @@ function HeaderComponent({ isCarusolAvaible }: HeaderComponentType) {
           >
             <img
               id="logo-image"
-              src={logoSrc}
+              src={logoSrc || firstLogo}
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}
             />
           </div>
           <div className="lg:w-full flex border-0 w-18 header-sticky">
-            <NavBar isMobileMenuActive={isMobileMenuActive} />
+            <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
             <Search />
           </div>
         </div>

@@ -12,6 +12,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+// import axiosInstance from "@/utils/axiosInstance";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
@@ -63,24 +64,12 @@ function WhereComponent() {
         !isNaN(textInput)
           ? `components=postal_code:${Number(textInput)}`
           : `address=${textInput}`
-      }`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+      }`);
   }
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`);
   }
 
   useEffect(() => {
@@ -193,7 +182,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="lg:w-[640px] lg:desktop:w-[400px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
+            <div className="lg:w-[640px] lg:desktop:w-[500px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -294,7 +283,7 @@ function WhereComponent() {
             </div>
           </div>
 
-          <div className="lg:w-[800px] lg:desktop:w-[640px] w-full relative h-782 lg:h-854">
+          <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}

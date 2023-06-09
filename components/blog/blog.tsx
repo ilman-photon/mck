@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { AxiosError } from "axios";
 import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
@@ -23,7 +23,7 @@ const BlogList = dynamic(
     </div>,
   },
 );
-function BlogComponent() {
+const BlogComponent = () => {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [ActiveSearch, setActiveSearch] = useState<any>(false);
@@ -51,7 +51,6 @@ function BlogComponent() {
 
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       })
   }, []);
@@ -62,7 +61,6 @@ function BlogComponent() {
             setIsLoading(false);
         })
         .catch((e: Error | AxiosError) => {
-            console.log(e);
             setIsLoading(false);
         })
 }
@@ -83,7 +81,6 @@ function BlogComponent() {
         setIsLoading(false)
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       })
   };
@@ -203,5 +200,4 @@ function BlogComponent() {
     </div>
   );
 }
-
-export default BlogComponent;
+export default memo(BlogComponent);

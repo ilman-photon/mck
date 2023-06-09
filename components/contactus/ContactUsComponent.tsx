@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 import { ImageComponent } from "../global/ImageComponent";
+import axiosInstance from "@/utils/axiosInstance";
 
 function ContactUsComponent() {
 
@@ -9,14 +10,8 @@ function ContactUsComponent() {
     const [ApiRespond, setApiRespond] = useState<any>();
 
     function fetchContactUsDetails() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/contact-us/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
+        return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/contact-us/&expand=*`);
     }
 
     useEffect(() => {

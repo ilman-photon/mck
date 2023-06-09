@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import Head from "next/head";
+import axiosInstance from "@/utils/axiosInstance";
 
 // axios.defaults.baseURL = ${process.env.API_URL};
 
@@ -10,7 +12,7 @@ const useAxios = (axiosParams: AxiosRequestConfig) => {
 
   const fetchData = async (params: AxiosRequestConfig) => {
     try {
-      const result = await axios.request(params);
+      const result = await axiosInstance.request(params);
       setResponse(result);
     } catch (err: any) {
       setError(err);

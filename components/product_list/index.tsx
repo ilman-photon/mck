@@ -8,13 +8,24 @@ import Image from "next/image";
 import ProductCard from "../../components/health_needs/ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
 import HealthNeedFilter from "../health_needs/HealthNeedFilter";
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+
+import axiosInstance from "@/utils/axiosInstance";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 function ProductListComponent() {
   const router = useRouter();
   const [productListData, SetProductListData] = useState<any>();
-
+  /**
+   * @description you can use the state here as well eventho it is called by diff component
+   * 
+   * @access `Suharika`
+   */
+  const productItemName = useHeaderStore(state => state.selectedCategory)
+  /**
+   * @end
+   */
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
@@ -36,14 +47,8 @@ function ProductListComponent() {
     } else {
       queryParameter = `${filter} and`;
     }
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         if(res.data.results.length === 0){
@@ -73,16 +78,13 @@ function ProductListComponent() {
     setActiveFilter([]);
     fetchData();
   }, [router]);
-
- 
-
   
   useEffect(() => {
     createQueryParameters();
     console.log("in useffect")
   }, [activeFilter]);
 
- 
+
 
   const createQueryParameters = () => {
     let queryParams = "";
@@ -173,7 +175,7 @@ function ProductListComponent() {
 
   const fetchData = async () => {
     // Product Category setting - Filters data
-    const activeFiltersData = await axios(
+    const activeFiltersData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
     );
     const activeFiltersDataList = activeFiltersData?.data[0];
@@ -196,8 +198,8 @@ function ProductListComponent() {
 
 
   const fetchRecommandedProductData = async () => {
-    const tempName = productName?.replace(/ /g, "-")
-    const recommendedCategoryData = await axios(
+    const tempName = productItemName?.replace(/ /g, "-")
+    const recommendedCategoryData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
     );
     const response = recommendedCategoryData?.data[0]?.contentArea
@@ -212,35 +214,35 @@ function ProductListComponent() {
   useEffect(() => {
     fetchRecommandedProductData()
 
-  }, [productName])
+  }, [productItemName])
 
   const createTempFilterArr = (results: any) => {
     console.log("in createTempFilterArr")
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["items"] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        leftfiltermaindata?.subCategory?.value[0].id
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["items"] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
+        leftfiltermaindata?.subCategory?.value[0]?.id
       ] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["categoryName"] =
-        leftfiltermaindata?.mainCategory?.value[0].name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["categoryName"] =
+        leftfiltermaindata?.mainCategory?.value[0]?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["productType"] =
         leftfiltermaindata?.isBusinessVerticalCategory?.value
           ? "productType"
           : leftfiltermaindata?.name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isCategoryChecked"
       ] = false;
       leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] = [];
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "checked"
         ] = false;
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "name"
         ] = subItem.name;
       });
@@ -320,7 +322,6 @@ function ProductListComponent() {
         </div>
       )}
 
-{console.log(productCategoryData,"productCategoryData")}
 <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
 <HealthNeedFilter
           activeFiltersData={activeFiltersData}

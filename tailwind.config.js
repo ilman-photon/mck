@@ -19,7 +19,8 @@ module.exports = {
         current: "currentColor",
         mckblue: "#001a71",
         "mckblue-90": "#1A317F",
-        "beige-50": "#FFFAF6",
+        beige50: "#FFFAF6",
+        mckbeige: "#FFF6ED",
         mcklightblue: "#e6e8f1",
         mckyellow: "#FFEABC",
         mcklightyellow: "#FFF6ED",
@@ -49,6 +50,7 @@ module.exports = {
         306 : '306px',
         325 : '325px',
         338: '338px',
+        416: "416px",
         438: '438px',
         487 : '487px',
         526: '526px',
@@ -65,7 +67,9 @@ module.exports = {
         166: '166px',
         498: '498px',
         640: '640px',
-        800: '800px'
+        800: '800px',
+        700: '700px',
+        500: '500px'
       },
       height: {
         25: '25px',
@@ -160,6 +164,7 @@ module.exports = {
       },
       margin: {
         24: "24",
+        21: "-2px",
         60: "60",
         72: "72px",
         76: "76px",
@@ -172,7 +177,7 @@ module.exports = {
       fontSize: {
         32: "2rem",
         27: "1.688rem",
-        54: "3.375rem",
+        54: "54px",
         28: "28px",
         20: "20px", 
        },
@@ -188,6 +193,7 @@ module.exports = {
         lightblue: "#EAF1F8",
         acuteblue: "#DBDFEB",
         mckblue70: "#4D5F9C",
+        beigetransparent: "rgba(255, 250, 246, 0.7)",
       },
       shadow: {
         wheretobuy: '6px 10px 20px rgba(0, 26, 113, 0.15)',
@@ -237,6 +243,7 @@ module.exports = {
       },
       zIndex: {
         1: '1',
+        0.1: '-1',
       }
     },
   },

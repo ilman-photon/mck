@@ -117,7 +117,7 @@ const HealthNeedFilter = ({
     setAlternateFlag(!alternateFlag)
   };
   useEffect(() => {
-    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0].id === mainCategoryId);
+    const selectedProductType = productCategoryData?.find((a: any) => a.mainCategory?.value[0]?.id === mainCategoryId);
     const subCategoryValues = Array.from(new Set([selectedProductType?.subCategory?.value])).filter(Boolean);
     if(selectedFilterItems[mainCategoryId]){
       selectedFilterItems[mainCategoryId].items =  customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items);
@@ -336,7 +336,45 @@ const HealthNeedFilter = ({
             className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
             onClick={() => setIsFilterShow(!isFilterShow)}
           >
-            {isFilterShow ? 'Hide' : 'Open'}
+           {isFilterShow ? (
+              <div className="flex">
+                <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                  Hide
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-1"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.54498 5.96173H19.715V3.96173H7.54498L9.54498 5.96173ZM14.545 10.9617H16.715V8.96173H12.545L14.545 10.9617ZM12.715 14.7917V15.9617H8.71498V13.9617H11.885L8.88498 10.9617H4.71498V8.96173H6.88498L3.88498 5.96173H1.71498V3.96173H1.88498L0.10498 2.18173L1.51498 0.771729L19.895 19.1517L18.485 20.5617L12.715 14.7917Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            ) : (
+              <div className="flex">
+                     <span className="text-sofia-bold text-base font-extrabold text-mckblue">
+                     Open
+                </span>
+                <svg
+                  className="mr-2 ml-2 mt-2"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 12.6667H11V10.6667H7V12.6667ZM0 0.666748V2.66675H18V0.666748H0ZM3 7.66675H15V5.66675H3V7.66675Z"
+                    fill="#001A71"
+                  />
+                </svg>
+              </div>
+            )}
           </div>
         </div>
         <div className='text-mcknormalgrey'  id='hn_label_003_3'>
@@ -346,7 +384,7 @@ const HealthNeedFilter = ({
       <div className='lg:flex mt-6'>
         {isFilterShow ? (
           <div className='lg:w-1/6 xl:w-1/6 w-full h-max'>
-            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 mck-hn-filter-category'>
+            <div className='lg:border-r lg:border-[#CCD1E3] pb-3 mb-4 last:pb-0 last:mb-0'>
               {/* Left main category lists */}
               <div className='flex items-center my-px'>
                 <div className='w-full border lg:border-0 rounded px-4 lg:px-0'>
@@ -356,14 +394,14 @@ const HealthNeedFilter = ({
                         <>
                           {/* Left filter main category */}
 
-                          <section className='mck-hn-mobile-accordion tab overflow-hidden'>
+                          <section className='tab overflow-hidden border-b-[0.5px] border-[#ccd1e3] lg:border-b-0'>
                             <input
-                              className='mck-hn-accordion-title-check'
+                              className='hidden'
                               type='checkbox'
                               id={leftfiltermaindata?.contentLink?.id}
                             />
                             <label
-                              className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                              className="tab-label flex items-end py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                               htmlFor={leftfiltermaindata?.contentLink?.id}
                             >
                               <div
@@ -376,23 +414,23 @@ const HealthNeedFilter = ({
                                   alt={leftfiltermaindata?.mainCategory?.value[0].name}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
-                                  width={24} className="mr-2" />
+                                  width={24} className="mr-2 lg:ml-[1px]" />
                                   : null} 
                                 <label
                                   htmlFor={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
-                                  className='filter-title'
+                                  className='text-base font-extrabold text-sofia-bold text-mckblue z-[-1]'
                                   
                                   aria-label={
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 >
                                   {
                                     leftfiltermaindata?.mainCategory?.value[0]
-                                      .name
+                                      ?.name
                                   }
                                 </label>
                               </div>
@@ -400,11 +438,11 @@ const HealthNeedFilter = ({
                             {/* Left filter main category */}
 
                             {/* Left filter sub category */}
-                            <div className='lg:border-b lg:border-[#CCD1E3] pb-3 mb-2 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0'>
+                            <div className='lg:border-b lg:border-[#CCD1E3] mb-2 pb-0 last:m-0 tab-content lg:max-h-none lg:px-0'>
                               <ul className='m-0'>
                                 <li className='list-none pb-1 lg:pb-0'>
                                   <div
-                                    className='flex items-center my-px lg:pl-[5px] cursor-pointer'
+                                    className='flex items-center my-px cursor-pointer'
                                     
                                   >
                                     <input
@@ -427,13 +465,13 @@ const HealthNeedFilter = ({
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                     />
@@ -458,7 +496,7 @@ const HealthNeedFilter = ({
                                       key={leftfiltersubdata?.id}
                                     >
                                       <div
-                                        className='flex items-center my-px lg:pl-[5px] cursor-pointer'
+                                        className='flex items-center my-px cursor-pointer'
                                        
                                       >
                                         <input
@@ -481,13 +519,13 @@ const HealthNeedFilter = ({
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
                                                 ?.value[0].id
-                                            ][leftfiltersubdata?.id]?.checked
+                                            ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
                                         <label
@@ -513,7 +551,7 @@ const HealthNeedFilter = ({
           </div>
         ) : null}
 
-        <div className='lg:w-10/12 xl:w-10/12 w-full lg:pl-6'>
+        <div className='lg:w-10/12 xl:w-10/12 w-full lg:pl-6 pt-4 lg:pt-0'>
           <ProductComponent
             selectedProduct={selectedProduct}
             recommendedProduct={recommendedProduct}

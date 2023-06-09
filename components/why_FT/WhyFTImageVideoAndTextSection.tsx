@@ -78,11 +78,11 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full lg:py-9 mb-6 lg:mb-12`}
+            }  w-full mb-6 lg:mb-12`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
-          <div className="container mx-auto grid lg:flex">
+          <div className="container mx-auto flex flex-col-reverse lg:flex-row-reverse">
             <AVComponent
             isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
             videoContainerStyle={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
@@ -132,7 +132,7 @@ const ImageWithTextComponent = () => {
     className={`${sectionData?.assetPosition?.value === "Right"
         ? "flex-row-reverse text-center"
         : "text-left"
-      } w-full lg:py-8 lg:px-0 py-6 px-4 mb-6 lg:mb-12`}
+      } w-full lg:py-0 lg:px-0 py-6 px-4 mb-6 lg:mb-12`}
     style={{ backgroundColor: sectionData?.backgroundColor?.value }}
     key={sectionData?.image?.value?.id}
   >
@@ -150,7 +150,7 @@ const ImageWithTextComponent = () => {
         id={`${index}_IMG_001`}
       />
       <TextDescAndButton 
-          containerStyle="lg:p-5 lg:pr-9 lg:pl-8 my-auto col-span-1 w-full lg:w-1/2"
+          containerStyle="lg:p-5 lg:pr-9 lg:pl-8 my-auto col-span-1 w-full lg:w-1/2 flex flex-col items-end"
           idComponent={index} 
           title={sectionData?.title?.value}
           description={sectionData?.description?.value}
@@ -161,7 +161,7 @@ const ImageWithTextComponent = () => {
           titleStyle={`${sectionData?.assetPosition?.value === "Right"
           ? "mx-auto lg:text-left text-left"
           : "ml-0 text-left"
-        } lg:mb-6 mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
+        } lg:mb-6 flex w-full mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
           descriptionStyle={`${sectionData?.assetPosition?.value === "Right"
           ? "mx-auto lg:text-left text-left"
           : "ml-0 text-left"
@@ -169,7 +169,7 @@ const ImageWithTextComponent = () => {
           buttonStyle={`${sectionData?.assetPosition?.value === "Right"
           ? "mr-auto "
           : "ml-0"
-          } jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:mr-auto lg:blue-bg lg:text-white`}             
+          } jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:blue-bg lg:text-white`}             
       />
     </div>
   </div>
@@ -195,11 +195,12 @@ const ImageBGWithTextComponent = () => {
               onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
               CTABackgroundColor={sectionData?.buttonColorCode?.value} 
               CTATitle={sectionData?.buttonText?.value}
-              titleStyle="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
+              titleStyle="lg:text-left lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt"
               descriptionStyle="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis" 
               buttonStyle="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit"  
-              containerStyle="lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0"         
-            />
+              // containerStyle="lg:absolute lg:right-28 top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-start pt-8 lg:pt-0"         
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end pt-8 lg:pt-0'}`}
+           />
             </div>
       </div>
   )

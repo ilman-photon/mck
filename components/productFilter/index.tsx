@@ -16,14 +16,14 @@ function ProductFilter({
               <>
                 {/* Left filter main category */}
 
-                <section className="mck-hn-mobile-accordion tab overflow-hidden">
+                <section className="tab overflow-hidden">
                   <input
                     id={`${leftfiltermaindata?.contentLink?.id}_${index}`}
-                    className="mck-hn-accordion-title-check"
+                    className="hidden"
                     type="checkbox"
                   />
                   <label
-                    className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                    className="tab-label flex items-end py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                     htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
@@ -37,7 +37,7 @@ function ProductFilter({
                         height={24}
                         width={24} className="mr-2" /> 
                
-                      <label htmlFor="acute" className="filter-title"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
+                      <label htmlFor="acute" className="text-base font-extrabold text-sofia-bold text-mckblue z-[-1]"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
@@ -45,11 +45,11 @@ function ProductFilter({
                   {/* Left filter main category */}
 
                   {/* Left filter sub category */}
-                  <div className="lg:border-b lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                  <div className="lg:border-b lg:border-[#CCD1E3] border-0 pb-0 last:m-0 tab-content lg:max-h-none lg:px-0">
                     <ul>
                       <li className="list-none pb-1 lg:pb-0">
                         <div
-                          className="flex items-center my-px lg:pl-[5px] cursor-pointer"
+                          className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                           onClick={(e) =>
                             handleViewAllChange(
                               e,
@@ -90,7 +90,7 @@ function ProductFilter({
                         (leftfiltersubdata: any) => (
                           <li className="list-none pb-1 lg:pb-0 lg:pr-3" key={leftfiltersubdata?.id}>
                             <div
-                              className="flex items-center my-px lg:pl-[5px] cursor-pointer"
+                              className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                               onClick={(e) =>
                                 handleCheckBox(
                                   e,

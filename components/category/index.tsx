@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
@@ -11,14 +12,8 @@ export default function CategoryComponent({ sectionData }: any) {
   
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
+      return axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`);
     });
   }
 
