@@ -49,7 +49,7 @@ function ProductFilter({
                     <ul>
                       <li className="list-none pb-1 lg:pb-0">
                         <div
-                          className="flex items-center my-px lg:pl-[5px] cursor-pointer"
+                          className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                           onClick={(e) =>
                             handleViewAllChange(
                               e,
@@ -90,7 +90,7 @@ function ProductFilter({
                         (leftfiltersubdata: any) => (
                           <li className="list-none pb-1 lg:pb-0 lg:pr-3" key={leftfiltersubdata?.id}>
                             <div
-                              className="flex items-center my-px lg:pl-[5px] cursor-pointer"
+                              className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                               onClick={(e) =>
                                 handleCheckBox(
                                   e,

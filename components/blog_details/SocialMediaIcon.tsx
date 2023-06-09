@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
+import axiosInstance from "@/utils/axiosInstance";
 const SocialMediaIconComponent = () => {
 
     const [SocialMediaIcon, setSocialMediaIcon] = useState<any>();
@@ -11,7 +12,7 @@ const SocialMediaIconComponent = () => {
         fetchResentBlogListing();
     }, []);
     const fetchResentBlogListing = async () => {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
             `${process.env.API_URL}/api/episerver/v3.0/content/268?expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
         setSocialMediaIcon(response.data.socialMediaLinkBlock);

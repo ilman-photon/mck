@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { InfoWindow, GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import axiosInstance from "@/utils/axiosInstance";
 
 function PdpLocation(props: any) {
 
@@ -161,6 +162,7 @@ function PdpLocation(props: any) {
                                             <div className="flex flex-row justify-between mb-1">
                                                 <div>
                                                {value?.StoreUrl ? (
+                                                
                                                 <button className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-md leading-5" aria-pressed="true" onClick={() => showOnline(value.StoreUrl)}>View Online</button>
                                                ) : null} 
                                                </div>

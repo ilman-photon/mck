@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { useWindowResize } from "@/hooks/useWindowResize";
 import { ImageComponent } from "../global/ImageComponent";
+import axiosInstance from "@/utils/axiosInstance";
 
 function PdpCarousel(prodViewData: any) {
     const router = useRouter();
@@ -15,14 +16,8 @@ function PdpCarousel(prodViewData: any) {
     const [prodResponse, setProdResponse] = useState<any>();
 
     function fetchPDPCarouselDetails() {
-        return axios.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length && data }/&expand=*`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                },
-            }
-        );
+        return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/pdp/${data?.length && data }/&expand=*`);
     }
     useEffect(() => {
         setLastIndex(deviceWidth <= 400 ? 3 : (deviceWidth > 400 && deviceWidth <= 812) ? 4 : (deviceWidth > 812 && deviceWidth <= 1024) ? 5 : 6)

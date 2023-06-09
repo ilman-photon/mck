@@ -5,6 +5,7 @@ import SearchComponent from "./Search";
 import ResentBlogListComponent from "../blog_details/RecentBlogs";
 import { GetTime } from "../global/CommonUtil";
 import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 
 function BlogSearchComponent() {
   const [BlogListingContent, setBlogListingContent] = useState<any>();
@@ -17,14 +18,10 @@ function BlogSearchComponent() {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog-listing-setting/&expand=*`,
-        { headers: { "Accept-Language": "en" } }
-      );
-      const responseid = await axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`,
-        { headers: { "Accept-Language": "en" } }
-      );
+      const response = await axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog-listing-setting/&expand=*`);
+      const responseid = await axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/blog-page-are-your-medications-causing-you-to-lose-nutrients/&expand=*`);
       setBlogListingContent(response);
       setArticleContent(responseid);
     } catch (error) {
@@ -36,13 +33,7 @@ function BlogSearchComponent() {
   useEffect(() => {
     fetchBlogListing();
   }, []);
-  const HandelSearch = (e: any, searchstring: any) => {
-    console.log(e, searchstring);
-  };
 
-  const HandleSearchLoading = (value: any) => {
-    setIsLoading(value)
-  };
   // function handleKeyDown(e: any) {
   //     if (e.keyCode == 13) {
   //         console.log('e', e)
@@ -670,7 +661,7 @@ function BlogSearchComponent() {
                 Catogarytitle={
                   BlogListingContent?.data[0].categoryHeadingText.value
                 }
-                OnCatogarySelcete={(e) => console.log(e)}
+                OnCatogarySelcete={(e) => null}
               />
               <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
                 <div
@@ -683,7 +674,7 @@ function BlogSearchComponent() {
               </div>
               <RelatedProducts
               AppSetting={[]}
-                OnRelatedProductClick={(e) => console.log(e)}
+                OnRelatedProductClick={(e) => null}
                 title={
                   BlogListingContent?.data[0].relatedProductHeadingText.value
                 }
