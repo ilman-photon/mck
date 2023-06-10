@@ -80,10 +80,10 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
-          <div className="container mx-auto grid lg:flex">
+          <div className={`container mx-auto grid lg:flex ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
             <AVComponent
             isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
+            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
             videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
             idComponent={index} 
             videoControls={isPlaying} 
@@ -116,7 +116,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
                 onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
                 CTABackgroundColor={sectionData?.buttonColorCode?.value} 
                 CTATitle={sectionData?.buttonText?.value}  
-                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2"          
+                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col"          
             />
           </div>
         </div>
@@ -195,8 +195,8 @@ const ImageBGWithTextComponent = () => {
               CTATitle={sectionData?.buttonText?.value}
               titleStyle="text-mckblue text-gtl-med heading font-medium lg:mb-6 mb-4 text-heading-ellipsis"
               descriptionStyle="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis" 
-              buttonStyle="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit"  
-              containerStyle="lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-end pt-8 lg:pt-0"         
+              buttonStyle="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit"          
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end pt-8 lg:pt-0'}`}
             />
             </div>
       </div>
