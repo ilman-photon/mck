@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
 
 function RecommendationalProductComponent({ sectionData, indexs }: any) {
   const router = useRouter();
@@ -102,7 +103,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <div
                   className={`text-lg text-sofia-reg text-mcknormalgrey font-normal text-left mb-4 text-sixcontent-ellipsis`}
                   dangerouslySetInnerHTML={{
-                    __html: ele?.data?.description?.value,
+                    __html: DOMPurify.sanitize(ele?.data?.description?.value),
                   }}
                   id={`p-text 01${indexs}${index + 1}`}
                 ></div>
@@ -165,7 +166,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               index == 0 && "lg:pr-24 lg:pl-4 lg:pt-48"
             } `}
             dangerouslySetInnerHTML={{
-              __html: ele?.data?.description?.value,
+              __html: DOMPurify.sanitize(ele?.data?.description?.value),
             }}
             id={`p-text 01${indexs}${index + 1}`}
           ></div>

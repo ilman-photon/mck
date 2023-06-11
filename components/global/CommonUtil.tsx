@@ -93,7 +93,6 @@ export function customAdd(mainCatId: any, filter: any, productCategoryData: any 
     if(viewAllCheck && (findIndex === -1) ){
         const subCateIds = a?.map((data: any) => data?.name)
         coolStore.push({mainCatId, subCateIds})
-        console.log("coolstore -view all-->", coolStore)
         return coolStore;
     }else if(viewAllCheck && findIndex > -1){
         coolStore[findIndex] =  {...coolStore[findIndex], subCateIds: a?.map((data: any) => data?.name)}

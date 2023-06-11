@@ -6,6 +6,7 @@ import HeroArticle from "./HeroArticle";
 import { ImageComponent } from "../global/ImageComponent";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
+
 const BlogListContainer = () => {
     const { response, error, loading } = useAxios({
         method: "GET",
@@ -44,7 +45,7 @@ const BlogListContainer = () => {
                                             }}
                                         >
                                             <div className="lg:h-314 h-240 flex">
-                                                <ImageComponent src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item.image.value.url)} id={item.image.value.id} />
+                                                <ImageComponent src={DOMPurify.sanitize(item.image.value.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item.image.value.url)} id={item.image.value.id} />
                                             </div>
                                         </LinkComponent>
                                     </figure>
@@ -59,8 +60,8 @@ const BlogListContainer = () => {
                                                 <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-28  text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
                                             </LinkComponent>
                                             <div className='pb-3 pt-3'>
-                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item?.readMinute?.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item?.readMinute?.value}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
                                                 {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                             </div>
                                             <div className='flex flex-wrap h-25 overflow-hidden'>

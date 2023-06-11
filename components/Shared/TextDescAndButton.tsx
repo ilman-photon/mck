@@ -1,4 +1,5 @@
 import React from "react"
+import DOMPurify from 'isomorphic-dompurify';
 
 interface TextDescAndButtonProps{
     parentKey?:React.Key | null | undefined
@@ -52,7 +53,7 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
       <div
         className={descriptionStyle}
         dangerouslySetInnerHTML={{
-          __html: description,
+          __html: DOMPurify.sanitize(description),
         }}
         id={`${idComponent}_dis_001`}
       />

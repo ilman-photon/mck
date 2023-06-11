@@ -23,6 +23,10 @@ const nextConfig = {
       : test
       ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
       : "https://mcco02mstrub73kprep.dxcloud.episerver.net",
+    PASSWORD:"P@ssword123$",
+    USERNAME:"apiuser",
+    CLIENT_SECRET:"SuperSecretPassword"
+
   },
   images: {
     remotePatterns: [

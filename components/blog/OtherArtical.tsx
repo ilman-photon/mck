@@ -3,6 +3,8 @@ import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
+import DOMPurify from 'isomorphic-dompurify';
+
 interface OtherArticalProps {
     ArticleList: any;
 }
@@ -25,7 +27,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
                                     <div className="lg:h-314 h-240 flex">
-                                    <ImageComponent src={item.image.expandedValue.url} className='w-full lg:max-h-314 max-h-240 object-cover' alt={item.image.expandedValue.name} id={item.image.expandedValue.name} />
+                                    <ImageComponent src={DOMPurify.sanitize(item.image.expandedValue.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item.image.expandedValue.name)} id={item.image.expandedValue.name} />
                                     </div>
                                 </figure>
                             </LinkComponent>
@@ -38,12 +40,12 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                             query: { id: item.routeSegment },
                                         }}
                                     >
-                                        <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p></div>
+                                        <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item.title.value)}>{DOMPurify.sanitize(item.title.value)}</p></div>
                                     </LinkComponent>
 
                                     <div className='pb-3 pt-3'>
                                         <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
+                                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{DOMPurify.sanitize(item.readMinute.value)}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>
                                     <div className='flex flex-wrap h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
@@ -53,7 +55,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                                     backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
                                                     color: item.recommendedProductButtonText?.value
                                                 }}
-                                                className='mb-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
+                                                className='mb-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{DOMPurify.sanitize(tagitem.description)}</div>
                                         ))}
                                     </div>
                                 </div>

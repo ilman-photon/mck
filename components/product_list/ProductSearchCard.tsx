@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
+import DOMPurify from 'isomorphic-dompurify';
 
 const ProductSearchCard = ({ cardData }: any) => {
   const router = useRouter();
@@ -18,21 +19,21 @@ const ProductSearchCard = ({ cardData }: any) => {
                       <div
                         onClick={() => handleProductClick(cardData)}
                         className="lg:h-60 h-28 flex items-center justify-center">
-                        <img src={cardData?.image?.value?.url} alt={`${cardData?.image?.value?.url}`} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
+                        <img src={ DOMPurify.sanitize(cardData?.image?.value?.url)} alt={ DOMPurify.sanitize(cardData?.image?.value?.url)} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
                       <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer">
-                      {cardData?.productType?.value[0]?.name}
+                      { DOMPurify.sanitize(cardData?.productType?.value[0]?.name)}
                       </div>
                       <div
                      onClick={() => handleProductClick(cardData)}
                         className="text-mckblue mt-3 text-sofia-bold font-extrabold lg:text-xl text-lg truncate leading-[23px] cursor-pointer">
-                        {cardData?.highlightDescription.value}
+                        { DOMPurify.sanitize(cardData?.highlightDescription.value)}
                       </div>
                       <div
                         id="my_text"
                         className="text-mcknormalgrey mt-1 text-sofia-reg lg:text-base text-sm font-normal para-ellipsis-3"
                         dangerouslySetInnerHTML={{
-                          __html: cardData?.highlightDescription?.value,
+                          __html: DOMPurify.sanitize(cardData?.highlightDescription?.value),
                         }}
                       ></div>
                     </div>

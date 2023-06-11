@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import CarouselComponent from "@/components/carousel";
 import ImageVideoAndTextSection from "../homepage_section";
 import ImageVideoOrTextSection from "../promotional_text";
-
+import DOMPurify from 'isomorphic-dompurify';
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
@@ -26,7 +26,7 @@ function WhyFTComponent(
 
   useEffect(() => {
     document.title =
-      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Why F&T";
+      DOMPurify.sanitize(whyFTData?.contentArea?.expandedValue[0]?.title?.value) || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {

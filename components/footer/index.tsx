@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import { LinkComponent } from "../global/LinkComponent";
 import { useFooterStore } from "./Store/useFooterStore";
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function FooterComponent() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function FooterComponent() {
                   )}
                 </li>
                 <li className="lg:my-2 flex">
-                  {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
+                {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
                     (sociallink: any, index: number) => (
                       <>
                         {sociallink?.socialMediaUrl?.value && <LinkComponent
@@ -104,10 +105,11 @@ export default function FooterComponent() {
                         key={slink?.contentLink?.id}
                         id={slink?.contentLink?.id}
                       >
-                        {slink?.menuTitle?.value}
+                        {DOMPurify.sanitize(slink?.menuTitle?.value)}
                       </Link>
                     )
                   )}
+                  
                 </li>
               </ul>
             </div>
@@ -142,10 +144,10 @@ export default function FooterComponent() {
                     <div className="w-5 h-5 mb-2">
                       <ImageComponent
                         id={item?.contentLink?.guidValue}
-                        src={item?.menuIcon?.expandedValue?.url}
+                        src={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.url)}
                         width="21px"
                         height="18px"
-                        alt={item?.menuIcon?.expandedValue?.name}
+                        alt={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.name)}
                       />
                     </div>
                     <span
@@ -154,7 +156,7 @@ export default function FooterComponent() {
                         : "text-sofia-reg font-normal"
                         }`}
                     >
-                      {item?.menuItemName?.value}
+                      {DOMPurify.sanitize(item?.menuItemName?.value)}
                     </span>
                   </button>
                 </li>

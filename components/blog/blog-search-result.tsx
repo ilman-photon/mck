@@ -6,6 +6,7 @@ import ResentBlogListComponent from "../blog_details/RecentBlogs";
 import { GetTime } from "../global/CommonUtil";
 import axios from "axios";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
 
 function BlogSearchComponent() {
   const [BlogListingContent, setBlogListingContent] = useState<any>();
@@ -668,7 +669,7 @@ function BlogSearchComponent() {
                   className="text-mcknormalgrey shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
                   id="blog-label-009"
                 >
-                  {BlogListingContent?.data[0].trendingBlogHeadingText.value}
+                  {DOMPurify.sanitize(BlogListingContent?.data[0].trendingBlogHeadingText.value)}
                 </div>
                 <ResentBlogListComponent />
               </div>
@@ -679,7 +680,7 @@ function BlogSearchComponent() {
                   BlogListingContent?.data[0].relatedProductHeadingText.value
                 }
                 BlogListingContent={
-                  ArticleContent?.data[0].relatedProducts.expandedValue
+                  DOMPurify.sanitize(ArticleContent?.data[0].relatedProducts.expandedValue)
                 }
               />
             </div>

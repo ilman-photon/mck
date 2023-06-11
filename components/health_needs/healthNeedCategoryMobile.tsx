@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useRef } from "react";
+import DOMPurify from 'isomorphic-dompurify';
 
 const HealthNeedCategoryMobile = ({
   healthNeedData,
@@ -104,11 +105,11 @@ const HealthNeedCategoryMobile = ({
                         healthneedsdata
                       )
                     }
-                     aria-label={healthneedsdata?.title.value}
+                     aria-label={DOMPurify.sanitize(healthneedsdata?.title.value)}
                   >
                     <img
                       id={healthneedsdata?.title.value}
-                      src={healthneedsdata?.image?.expandedValue?.url}
+                      src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
                       alt={healthneedsdata?.title.value}
                       className="mb-3 mx-auto w-auto"
                     />
