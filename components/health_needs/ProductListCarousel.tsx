@@ -4,12 +4,12 @@ import { useWindowResize } from "@/hooks/useWindowResize";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
 import ProductSearchCard from "../product_list/ProductSearchCard";
-
+SwiperCore.use([Navigation, Autoplay]);
 const ProductComponent = ({
   selectedProduct,
   sectionData,
@@ -19,6 +19,7 @@ const ProductComponent = ({
 }: any) => {
   const [windowWidth] = useWindowResize();
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+  const [reviewCount, setReviewCount] = useState<number>(1);
 
   useEffect(() => {
     setIsMobile(windowWidth >= 968 ? false : true);
@@ -41,7 +42,15 @@ const ProductComponent = ({
     }
     return null;
   };
-
+  const handleOnSlideChange = (swiper: any) => {
+    if (isMobile) {
+      swiper.autoplay.running = true;
+      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
+    } else {
+      swiper.autoplay.running = false;
+      setReviewCount(() => Math.ceil(swiper.activeIndex / 6) + 1);
+    }
+  };
   return (
     <>
       {selectedProduct?.map((product: any, index: number) => (
@@ -90,36 +99,45 @@ const ProductComponent = ({
                     })}
                   </div>
                 ) : (
-                  <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21">
-                    <Swiper
-                      modules={[Navigation, Pagination]}
-                      spaceBetween={4}
-                      navigation={isMobile ? false : true}
-                      slidesPerView={isMobile ? "auto" :5}
-                      slidesPerGroup={isMobile ? 1 :5}
-                      autoplay={isMobile ? { delay: 3000 } : false}
-                      pagination={{ clickable: true, type: "fraction" }}
-                      className="lg:h-480 h-350"
-                    >
-                      {product?.data?.results?.map(
-                        (item: any, idxs: number) => {
-                          return (
-                            <SwiperSlide
-                              key={item?.contentLink?.id}
-                              className="swiper-slide-custom"
-                            >
-                              <ProductCard
-                                cardData={item}
-                                product={product}
-                                indexs={idxs}
-                                mainIndex={index}
-                              />
-                            </SwiperSlide>
-                          );
-                        }
-                      )}
-                    </Swiper>
-                  </div>
+                  <>
+                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21">
+                      <Swiper
+                        spaceBetween={4}
+                        navigation={isMobile ? false : true}
+                        slidesPerView={isMobile ? "auto" : 6}
+                        slidesPerGroup={isMobile ? 1 : 6}
+                        autoplay={isMobile ? { delay: 3000 } : false}
+                        className="lg:h-480 h-350"
+                        onSlideChange={(swiper) => {
+                          handleOnSlideChange(swiper);
+                        }}
+                      >
+                        {product?.data?.results?.map(
+                          (item: any, idxs: number) => {
+                            return (
+                              <SwiperSlide
+                                key={item?.contentLink?.id}
+                                className="swiper-slide-custom"
+                              >
+                                <ProductCard
+                                  cardData={item}
+                                  product={product}
+                                  indexs={idxs}
+                                  mainIndex={index}
+                                />
+                              </SwiperSlide>
+                            );
+                          }
+                        )}
+                      </Swiper>
+                    </div>
+                    <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+                      {reviewCount}/
+                      {isMobile
+                        ? Math.ceil(product?.data?.results?.length)
+                        : Math.ceil(product?.data?.results?.length / 6)}
+                    </div>
+                  </>
                 )}
               </>
             ) : (
