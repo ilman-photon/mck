@@ -87,14 +87,14 @@ const BlogDetailsComponent = () => {
           <div
             className="col-start-1 col-end-7 rounded-lg overflow-hidden"
             style={{
-              display: BlogInfo.image.expandedValue.url ? "block" : "none",
+              display: BlogInfo.image?.expandedValue?.url ? "block" : "none",
             }}
           >
             <ImageComponent
               className="m-auto w-full"
-              src={BlogInfo.image.expandedValue.url}
-              alt={BlogInfo.image.expandedValue.name}
-              id={BlogInfo.image.expandedValue.name}
+              src={BlogInfo.image?.expandedValue?.url}
+              alt={BlogInfo.image?.expandedValue?.name}
+              id={BlogInfo.image?.expandedValue?.name}
             />
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10">
@@ -135,15 +135,15 @@ const BlogDetailsComponent = () => {
                   <div
                     className="text-sofia-reg text-color text-lg leading-27"
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(BlogInfo.description.value),
+                      __html: DOMPurify.sanitize(BlogInfo.description?.value),
                     }}
                   ></div>
                 </div>
               </article>
               <div className="relative">
                 <CarouselComponent
-                  title={BlogInfo.relatedArticleHeading.value}
-                  relatedArticle={BlogInfo.relatedArticle.expandedValue}
+                  title={BlogInfo.relatedArticleHeading?.value}
+                  relatedArticle={BlogInfo.relatedArticle?.expandedValue}
                   OnRelatedArticleClick={(e) => handleBlogClick(e)}
                 />
                 {/* <CommentComponent /> */}
@@ -163,8 +163,8 @@ const BlogDetailsComponent = () => {
               <RelatedProducts
                 AppSetting={appSetting}
                 OnRelatedProductClick={(e) => handleProductClick(e)}
-                title={BlogInfo.relatedProductHeading.value}
-                BlogListingContent={BlogInfo.relatedProducts.expandedValue}
+                title={BlogInfo.relatedProductHeading?.value}
+                BlogListingContent={BlogInfo.relatedProducts?.expandedValue}
               />
             </div>
           </div>
