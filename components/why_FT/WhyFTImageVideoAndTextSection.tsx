@@ -71,7 +71,7 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
   const isInternalSource = sectionData?.video?.value?.url
   const isInternalSourceMatchAPI = isInternalSource?.includes(`${process?.env?.API_URL}`)
 
-  type ContentAlignment = 'Right' | 'Left' | 'Center'
+  type ContentAlignment = 'Right' | 'Left' | 'Centre'
 
   const isButtonRightAlignment = sectionData?.buttonPosition?.value === 'Right' as ContentAlignment
   const isButtonLeftAlignment = sectionData?.buttonPosition?.value === 'Left' as ContentAlignment
