@@ -82,10 +82,12 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
-          <div className="container mx-auto flex flex-col-reverse lg:flex-row-reverse">
+          {/* <div className="container mx-auto flex flex-col-reverse lg:flex-row-reverse"> */}
+          <div className={`container mx-auto grid lg:flex ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
             <AVComponent
             isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            videoContainerStyle={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
+            // videoContainerStyle={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
+            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
             videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
             idComponent={index} 
             videoControls={isPlaying} 
@@ -118,7 +120,8 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
                 onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
                 CTABackgroundColor={sectionData?.buttonColorCode?.value} 
                 CTATitle={sectionData?.buttonText?.value}  
-                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2"          
+                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex-1" 
+                // containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col"        
             />
           </div>
         </div>

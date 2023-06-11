@@ -1,22 +1,16 @@
 import Link from "next/link";
-import Image from "next/image";
-import SignUpComponent from "../signup";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import { LinkComponent } from "../global/LinkComponent";
-import axiosInstance from "@/utils/axiosInstance";
+import { useFooterStore } from "./Store/useFooterStore";
 
 export default function FooterComponent() {
   const router = useRouter();
-  const [footerData, setFooterData] = useState<any>();
-  const [footerSecondData, setFooterSecondData] = useState<any>();
-  const [footerMobileNav, setFooterMobileNav] = useState<any>();
+
   const checkEnableButton = () => {
     return router.pathname;
   };
-  const [activeButton, setActiveButton] = useState<string>("Home");
 
   const handleClick = (buttonName: string, url: string) => {
     setActiveButton(buttonName);
@@ -25,33 +19,19 @@ export default function FooterComponent() {
     });
   };
 
-  const getData = async () => {
-    const response = await axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`);
+  const footerData = useFooterStore(state => state.footerData)
+  const footerSecondData = useFooterStore(state => state.footerSecondData)
+  const footerMobileNav = useFooterStore(state => state.footerMobileNav)
+  const activeButton = useFooterStore(state => state.activeButton)
+  const setActiveButton = useFooterStore(state => state.setActiveButton)
+  const getData = useFooterStore(state => state.getData)
 
-    const secondBlock = response.data[0].footer.expandedValue[0].contentLink.id;
-    const responseid = await axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`);
-
-    const footerMobileNav =
-      response?.data[0]?.mobileMenuNavigation?.expandedValue[0]
-        ?.contentBlockArea?.expandedValue;
-
-    let buttonActive: string = "Home";
-
-    footerMobileNav.map((item: any) => {
-      if (item?.menuItemUrl?.value == checkEnableButton()) {
-        buttonActive = item?.menuItemName?.value;
-      }
-    });
-    setFooterData(response);
-    setFooterSecondData(responseid);
-    setFooterMobileNav(footerMobileNav);
-    setActiveButton(buttonActive);
-  };
   useEffect(() => {
-    getData();
-  }, []);
+    if(footerData === null){
+      getData(checkEnableButton())
+    }
+  },[footerData])
+
 
   return (
     <>
