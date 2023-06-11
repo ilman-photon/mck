@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/css/navigation";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
@@ -13,6 +13,7 @@ interface CarouselComponentProps {
   OnRelatedArticleClick: (e: string) => void;
   relatedArticle: [];
 }
+SwiperCore.use([Navigation, Autoplay]);
 
 const CarouselComponent: React.FC<CarouselComponentProps> = ({
   relatedArticle,
@@ -20,6 +21,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   OnRelatedArticleClick,
 }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [reviewCount, setReviewCount] = useState<number>(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,6 +35,15 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const handleOnSlideChange = (swiper: any) => {
+    if (isMobile) {
+      swiper.autoplay.running = true;
+      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
+    } else {
+      swiper.autoplay.running = false;
+      setReviewCount(() => Math.ceil(swiper.activeIndex / 2) + 1);
+    }
+  };
   return (
     <div className="lg:p-6 px-0">
       <h1
@@ -42,13 +53,15 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
       <div className="lg:pt-6 lg:px-2 lg:pb-6 blockDetailsCarousel">
 
         <Swiper
-          modules={[Navigation, Pagination]}
           spaceBetween={4}
           navigation={isMobile ? false : true}
           autoplay={isMobile ? { delay: 3000 } : false}
           slidesPerView={isMobile ? "auto" : 2}
           slidesPerGroup={isMobile ? 1 : 2}
           className="h-auto"
+          onSlideChange={(swiper) => {
+            handleOnSlideChange(swiper);
+          }}
         >
           {relatedArticle?.map((item: any, index: any) => {
             return (
@@ -126,6 +139,12 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             );
           })}
         </Swiper>
+      </div>
+      <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+        {reviewCount}/
+        {isMobile
+          ? Math.ceil(relatedArticle?.length)
+          : Math.ceil(relatedArticle?.length / 2)}
       </div>
     </div>
   );
