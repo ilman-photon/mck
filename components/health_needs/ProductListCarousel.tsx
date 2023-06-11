@@ -131,12 +131,12 @@ const ProductComponent = ({
                         )}
                       </Swiper>
                     </div>
-                    <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
                       {reviewCount}/
                       {isMobile
                         ? Math.ceil(product?.data?.results?.length)
                         : Math.ceil(product?.data?.results?.length / 6)}
-                    </div>
+                    </div>}
                   </>
                 )}
               </>
