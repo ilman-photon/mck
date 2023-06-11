@@ -71,6 +71,12 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
   const isInternalSource = sectionData?.video?.value?.url
   const isInternalSourceMatchAPI = isInternalSource?.includes(`${process?.env?.API_URL}`)
 
+  type ContentAlignment = 'Right' | 'Left' | 'Center'
+
+  const isButtonRightAlignment = sectionData?.buttonPosition?.value === 'Right' as ContentAlignment
+  const isButtonLeftAlignment = sectionData?.buttonPosition?.value === 'Left' as ContentAlignment
+  const isButtonCenterAlignment = sectionData?.buttonPosition?.value === 'Center' as ContentAlignment
+
   const VideoAndTextComponent = () => {
     return(
         <div
@@ -109,10 +115,8 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
                 ? "mx-auto lg:text-left text-center"
                 : "ml-0 text-left"
                 } jsx-290076256 text-lg font-normal text-sofia-reg lg:mb-6 mb-4 text-mcknormalgrey text-content-ellipsis`}
-                buttonStyle={`${sectionData?.assetPosition?.value === "Right"
-                ? "mx-auto"
-                : "ml-0"
-              } jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
+                buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
+                buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:ml-auto`}
                 idComponent={index} 
                 title={sectionData?.title?.value}
                 description={sectionData?.description?.value} 
@@ -120,7 +124,8 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
                 onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
                 CTABackgroundColor={sectionData?.buttonColorCode?.value} 
                 CTATitle={sectionData?.buttonText?.value}  
-                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex-1" 
+                // containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col" 
+                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col" 
                 // containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col"        
             />
           </div>
@@ -183,12 +188,12 @@ const ImageBGWithTextComponent = () => {
   return(
       <div className="relative lg:mb-12 mb-10">
             <ImageComponent
-              imageContainerStyle=""
+              imageContainerStyle="flex flex-1"
               imageSource={sectionData?.backgroundImage?.expandedValue?.url}
               imageStyle="w-full"
               alt={`${index}_img_001`}
               id={`${index}_img_001`}
-            />
+            />   
             <div className="container mx-auto position-relative bg-transparent-left">
             <TextDescAndButton 
               idComponent={index} 
@@ -215,8 +220,9 @@ const TextAndButtonOnlyComponents = () => {
             descriptionStyle={`w-full lg:${"w-1/2"} text-sofia-reg grey-txt text-base lg:text-left sm:text-center`}
             titleStyle="text-27 lg:text-5xl text-gtl-med blue-txt lg:mb-5 text-center lg:text-left page-heading-h3 md:mb-4 sm:mb-4"
             buttonStyle={`jsx-290076256 mt-3 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex mx-auto lg:mx-0`}
-            containerStyle='w-full p-6 mx-auto lg:p-72'
+            containerStyle={`w-full p-6 mx-auto lg:p-72 flex flex-1 flex-col ${sectionData?.assetPosition?.value  === 'Left' ? 'flex items-end w-1/2' : 'flex items-start'}`}
             idComponent={index} 
+            containerBackgroundColor={sectionData?.backgroundColor?.value}
             title={sectionData?.title?.value} 
             description={sectionData?.description?.value} 
             isButtonExist={sectionData?.buttonUrl?.value} 
