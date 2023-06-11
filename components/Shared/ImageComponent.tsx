@@ -22,12 +22,14 @@ export default function ImageComponent (props:ImageComponentProps) {
       <div
       className={imageContainerStyle}
     >
-      <img
-        className={imageStyle}
-        alt={alt}
-        src={imageSource}
-        id={id}
-      />
+    {imageSource ? (
+        <img
+          className={imageStyle}
+          alt={alt}
+          src={imageSource}
+          id={id}
+        />
+    ) : null}    
     </div>
     )
   }
