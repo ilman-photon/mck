@@ -20,8 +20,8 @@ const HeroArticle = ({ data }: any) => {
                     <img
                         className="w-full"
                         id={data?.image.value?.name}
-                        src={DOMPurify.sanitize(data?.image.value?.url)}
-                        alt={DOMPurify.sanitize(data?.image.value?.url)}
+                        src={DOMPurify.sanitize(data?.image?.value?.url)}
+                        alt={DOMPurify.sanitize(data?.image?.value?.url)}
                     />
                 </figure>
             </LinkComponent>

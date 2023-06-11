@@ -669,7 +669,7 @@ function BlogSearchComponent() {
                   className="text-mcknormalgrey shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
                   id="blog-label-009"
                 >
-                  {DOMPurify.sanitize(BlogListingContent?.data[0].trendingBlogHeadingText.value)}
+                  {DOMPurify.sanitize(BlogListingContent?.data[0]?.trendingBlogHeadingText?.value)}
                 </div>
                 <ResentBlogListComponent />
               </div>
@@ -680,7 +680,7 @@ function BlogSearchComponent() {
                   BlogListingContent?.data[0].relatedProductHeadingText.value
                 }
                 BlogListingContent={
-                  DOMPurify.sanitize(ArticleContent?.data[0].relatedProducts.expandedValue)
+                  DOMPurify.sanitize(ArticleContent?.data[0]?.relatedProducts?.expandedValue)
                 }
               />
             </div>

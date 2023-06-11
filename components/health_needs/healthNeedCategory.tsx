@@ -88,11 +88,11 @@ const HealthNeedCategory = ({
                 <img 
                   id={`hl-img+${index}`}
                   src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
-                  alt={DOMPurify.sanitize(healthneedsdata?.title.value)}
+                  alt={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   className="mb-3 mx-auto w-auto hover:opacity-60"
                   aria-hidden="true"
                 />
-                {DOMPurify.sanitize(healthneedsdata?.title.value)}
+                {DOMPurify.sanitize(healthneedsdata?.title?.value)}
               </li>
             ))}
         </ul>

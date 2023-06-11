@@ -12,7 +12,7 @@ const TagsComponent = ({BlogInfo}: any) => {
           className="categoryTag mb-1.5 text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"
           id="blog-label-006"
         >
-          {DOMPurify.sanitize(item.description)}
+          {DOMPurify.sanitize(item?.description)}
         </div>
       ))}
     </div>

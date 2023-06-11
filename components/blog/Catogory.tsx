@@ -27,8 +27,8 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
                 {item.categoryImage.expandedValue?.url && (
                   <img
                     className="mr-3"
-                    src={DOMPurify.sanitize(item.categoryImage.expandedValue.url)}
-                    alt={DOMPurify.sanitize(item.categoryImage.expandedValue.name)}
+                    src={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.url)}
+                    alt={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.name)}
                     id={item.categoryImage.expandedValue.name}
                   />
                 )}

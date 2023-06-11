@@ -163,7 +163,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   {firstResponse && (
                     <>
                       <img
-                        src={DOMPurify.sanitize(firstResponse.image?.value.url)}
+                        src={DOMPurify.sanitize(firstResponse.image?.value?.url)}
                         className="block object-cover object-center w-full h-[435px] lg:h-[800px] "
                         alt={
                           firstResponse?.image?.expandedValue?.altText?.value

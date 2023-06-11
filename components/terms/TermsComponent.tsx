@@ -55,11 +55,11 @@ function TermsComponent() {
       ) : (
         <>
           <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center">
-            {DOMPurify.sanitize(apiRespond?.data[0]?.title.value)}
+            {DOMPurify.sanitize(apiRespond?.data[0]?.title?.value)}
           </h1>
           <div
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(apiRespond?.data[0]?.description.value),
+              __html: DOMPurify.sanitize(apiRespond?.data[0]?.description?.value),
             }}
           ></div>
         </>

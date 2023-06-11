@@ -34,7 +34,7 @@ function PrivacyComponent() {
 
   useEffect(() => {
     // Set the title of the document dynamically
-    document.title = DOMPurify.sanitize(apiRespond?.data[0]?.title.value) || "Privacy Notice";
+    document.title = DOMPurify.sanitize(apiRespond?.data[0]?.title?.value) || "Privacy Notice";
   }, [apiRespond]);
 
   return (
@@ -58,12 +58,12 @@ function PrivacyComponent() {
       ) : (
         <>
           <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center">
-            {DOMPurify.sanitize(apiRespond?.data[0]?.title.value)}
+            {DOMPurify.sanitize(apiRespond?.data[0]?.title?.value)}
           </h1>
           <div
             className="text pb-6 font-medium text-2xl text-mckblue text-gtl-med"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(apiRespond?.data[0]?.description.value),
+              __html: DOMPurify.sanitize(apiRespond?.data[0]?.description?.value),
             }}
           ></div>
         </>

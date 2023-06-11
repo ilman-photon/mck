@@ -105,7 +105,7 @@ const HealthNeedCategoryMobile = ({
                         healthneedsdata
                       )
                     }
-                     aria-label={DOMPurify.sanitize(healthneedsdata?.title.value)}
+                     aria-label={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   >
                     <img
                       id={healthneedsdata?.title.value}

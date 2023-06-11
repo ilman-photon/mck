@@ -38,7 +38,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
           
           id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
         >
-          {DOMPurify.sanitize(cardData?.highlightDescription.value)}
+          {DOMPurify.sanitize(cardData?.highlightDescription?.value)}
         </div>
       </div>
       <div
