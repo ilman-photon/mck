@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import DOMPurify from 'isomorphic-dompurify';
 
 const HealthNeedCategory = ({
   healthNeedData,
@@ -62,7 +63,7 @@ const HealthNeedCategory = ({
         className="pt-[36px] px-1.5 mt-[72px] pb-0"
         
         id="hn_label_0001"
-        style={{ background: customerBackgroundColorCode }}
+        style={{ background:DOMPurify.sanitize( customerBackgroundColorCode) }}
       >
         <ul className="flex flex-wrap gap-4">
           {healthNeedData &&
@@ -86,12 +87,12 @@ const HealthNeedCategory = ({
               >
                 <img 
                   id={`hl-img+${index}`}
-                  src={healthneedsdata?.image?.expandedValue?.url}
-                  alt={healthneedsdata?.title.value}
+                  src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
+                  alt={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   className="mb-3 mx-auto w-auto hover:opacity-60"
                   aria-hidden="true"
                 />
-                {healthneedsdata?.title.value}
+                {DOMPurify.sanitize(healthneedsdata?.title?.value)}
               </li>
             ))}
         </ul>

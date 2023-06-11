@@ -74,7 +74,6 @@ function ProductListComponent() {
   }
 
   useEffect(() => {
-    console.log("in useffect 2")
     setActiveFilter([]);
     fetchData();
   }, [router]);
@@ -203,8 +202,6 @@ function ProductListComponent() {
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
     );
     const response = recommendedCategoryData?.data[0]?.contentArea
-    
-  console.log(response,"response-rec")
     setRecommendedProduct(response)
     const productCategoryDataList =
     recommendedCategoryData?.data?.[0]?.categoryFilter?.expandedValue;

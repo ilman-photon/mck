@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
+import DOMPurify from 'isomorphic-dompurify';
 
 const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
   const router = useRouter();
@@ -37,7 +38,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
           
           id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
         >
-          {cardData?.highlightDescription.value}
+          {DOMPurify.sanitize(cardData?.highlightDescription?.value)}
         </div>
       </div>
       <div
@@ -45,7 +46,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
         
         id={`hn_label_04_${indexs + 1}_${mainIndex + 1}`}
         dangerouslySetInnerHTML={{
-          __html: cardData?.highlightDescription?.value,
+          __html: DOMPurify.sanitize(cardData?.highlightDescription?.value),
         }}
       ></div>
     </div>

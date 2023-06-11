@@ -1,5 +1,5 @@
 import { ImageComponent } from "../Shared";
-
+import DOMPurify from 'isomorphic-dompurify';
 
 function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
 
@@ -28,7 +28,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
         <div
           // id="promotion-text"
           className={`mx-auto w-full lg:${textAlignment === 'text-center' && 'w-1/2'} text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt text-center `}
-          dangerouslySetInnerHTML={{ __html: sectionData?.description?.value }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(sectionData?.description?.value) }}
           id={`${index}_dis_001`}
         ></div>
       </div>

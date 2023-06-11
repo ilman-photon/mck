@@ -12,6 +12,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
 import { useWindowResize } from "@/hooks/useWindowResize";
+import DOMPurify from 'isomorphic-dompurify';
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -240,7 +241,7 @@ function HealthCareProfessionalComponent({
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
-                                        __html: customer?.reviewComment?.value,
+                                        __html: DOMPurify.sanitize(customer?.reviewComment?.value),
                                       }}
                                     ></div>
                                     <div
@@ -292,7 +293,7 @@ function HealthCareProfessionalComponent({
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                     id="hcp-btn-007"
-                    dangerouslySetInnerHTML={{ __html: descriptionValue }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(descriptionValue) }}
                   />
                   <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
                     <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
@@ -362,7 +363,7 @@ function HealthCareProfessionalComponent({
                                   className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
-                                    __html: tab?.description?.value,
+                                    __html: DOMPurify.sanitize(tab?.description?.value),
                                   }}
                                 />
                               </div>

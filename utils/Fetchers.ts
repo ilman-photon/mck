@@ -30,12 +30,10 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
   }
 
   if(!gettoken){
-    console.log("started");
     await generatecontenttoken("epi_content_delivery");
   }
 
   if(!searchtoken){
-    console.log("started");
     await generatecontenttoken("epi_content_search_api");
   }
 }
@@ -45,9 +43,9 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       const data = {
         'grant_type': 'password',
         'client_id': 'frontend',
-        'client_secret': 'SuperSecretPassword',
-        'username': "apiuser",
-        'password': "P@ssword123$",
+        'client_secret': process.env.CLIENT_SECRET,
+        'username': process.env.USERNAME,
+        'password': process.env.PASSWORD,
         'scope': scope
       };
       

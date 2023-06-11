@@ -10,6 +10,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -126,7 +127,6 @@ function AllProductCategoryPage({
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
-      console.log("activeFiltersData list -->", activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
       const productCategoryData = await axiosInstance(
@@ -137,7 +137,6 @@ function AllProductCategoryPage({
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
       setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
-      console.log("product catedata list --> ", productCategoryDataList);
       setAllProductCategoryList(productCategoryDataList);
       // Four column block area
       const productLandingPage = await axiosInstance(
@@ -337,7 +336,7 @@ function AllProductCategoryPage({
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        window.location.href = updatedURL;
+        window.location.href = DOMPurify.sanitize(updatedURL);
       }
     }
     if (queryParams) fetchProductList(queryParams);

@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import DOMPurify from 'isomorphic-dompurify';
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
@@ -205,7 +206,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
           >
             <img
               id="logo-image"
-              src={logoSrc || firstLogo}
+              src={DOMPurify.sanitize(logoSrc || firstLogo)}
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}

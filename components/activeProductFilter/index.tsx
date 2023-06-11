@@ -1,3 +1,5 @@
+import DOMPurify from 'isomorphic-dompurify';
+
 function ActiveProductFilter({
   activeFiltersData,
   activeFilter,
@@ -5,11 +7,11 @@ function ActiveProductFilter({
   handleClearAll,
 }: any) {
   return (
-    <div className="flex flex-wrap relative lg:mb-2 items-center text-mckblue"  aria-label={activeFiltersData?.activeFiltersText?.value}>
-      {activeFiltersData?.activeFiltersText?.value}
+    <div className="flex flex-wrap relative lg:mb-2 items-center text-mckblue"  aria-label={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}>
+      {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
       <img
-        src={activeFiltersData?.activeFiltersImage?.expandedValue?.url}
-        className="mr-2 ml-2" alt={activeFiltersData?.activeFiltersText?.value}
+        src={DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)}
+        className="mr-2 ml-2" alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
       />
 
       <div className="flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto">
@@ -32,8 +34,8 @@ function ActiveProductFilter({
             className="w-3 ml-0 mr-1"
             alt="delete icon"
           />
-          <div className="underline" onClick={handleClearAll}  aria-label={activeFiltersData?.clearAllText?.value}>
-            {activeFiltersData?.clearAllText?.value}
+          <div className="underline" onClick={handleClearAll}  aria-label={DOMPurify.sanitize(activeFiltersData?.clearAllText?.value)}>
+            {DOMPurify.sanitize(activeFiltersData?.clearAllText?.value)}
           </div>
         </div>
       </div>

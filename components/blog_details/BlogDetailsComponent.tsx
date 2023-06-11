@@ -58,7 +58,7 @@ const BlogDetailsComponent = () => {
     // Set the lang attribute to "en" on the <html> element
     // Set the title of the document dynamically
     document.documentElement.lang = "en";
-    document.title = DOMPurify.sanitize(BlogInfo?.title.value) || "Blog Details Page";
+    document.title = DOMPurify.sanitize(BlogInfo?.title?.value) || "Blog Details Page";
   }, []);
 
   return (
