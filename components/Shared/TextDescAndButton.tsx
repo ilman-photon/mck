@@ -13,6 +13,8 @@ interface TextDescAndButtonProps{
     titleStyle:string
     descriptionStyle:string
     buttonStyle:string
+    buttonContainerStyle?:string
+    containerBackgroundColor?:string
   }
   
 export default function TextDescAndButton (props:TextDescAndButtonProps) {
@@ -29,16 +31,20 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
       isButtonExist,
       onPressCTA,
       CTABackgroundColor,
-      CTATitle
+      CTATitle,
+      buttonContainerStyle,
+      containerBackgroundColor
     } = props
   
     const renderTitle  = title ? (
+    <div>
       <h1
       className={titleStyle}
       id={`${idComponent}_lbl_001`}
     >
       {title}
     </h1>
+    </div>
     ) : null
   
     const renderDescription  = description ? (
@@ -54,7 +60,7 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
     ) : null
   
     const renderButton = isButtonExist ?  (
-      <>
+      <div className={buttonContainerStyle}>
         <button
           className={buttonStyle}
           style={{
@@ -65,12 +71,15 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
         >
           {CTATitle}
         </button>
-      </>
+      </div>
     ) : null
   
     return (
         <div
           className={containerStyle}
+          style={{
+            backgroundColor:containerBackgroundColor ? containerBackgroundColor : 'transparent'
+          }}
           key={parentKey}
         >
           {renderTitle}
