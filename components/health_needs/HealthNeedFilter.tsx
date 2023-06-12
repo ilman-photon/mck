@@ -28,7 +28,8 @@ const HealthNeedFilter = ({
   sectionData,
   selectedRecommendedProduct,
   productSum,
-  productSearchCard
+  productSearchCard,
+  filterClicked
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -550,6 +551,7 @@ const HealthNeedFilter = ({
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
             productSearchCard={productSearchCard}
+            filterClicked={filterClicked}
           />
         </div>
       </div>
