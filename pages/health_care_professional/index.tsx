@@ -11,9 +11,9 @@ function Terms() {
   return (
     <>
       <GoogleTagManager />
-      <HeaderComponent isCarusolAvaible={isCarusonAvible} />
+      <HeaderComponent isCarusolAvaible={!isCarusonAvible} />
       <HealthCareProfessionalComponent
-        isCarusolAvaible={isCarusonAvible}
+        isCarusolAvaible={!isCarusonAvible}
         isCarusolAvaibleProps={setisCarusonAvible}
       />
       <FooterComponent />
