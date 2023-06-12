@@ -27,32 +27,32 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().playVideo();
+        video?.getInternalPlayer()?.play();
       } else {
-        video.getInternalPlayer().pauseVideo();
+        video?.getInternalPlayer()?.pause();
       }
     }
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().pauseVideo();
+        video?.getInternalPlayer()?.pause();
         setIsPlaying(false);
       } else {
-        let currentTime = video.getDuration()
+        let currentTime = video?.getDuration()
         const targetTime = 10; // Replace with the desired time in seconds
         if (currentTime < targetTime) {
           currentTime = targetTime;
         }
-        video?.getInternalPlayer()?.playVideo();
+        video?.getInternalPlayer()?.play();
         setIsPlaying(true);
       }
     }
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().play();
+        video?.getInternalPlayer()?.play();
       } else {
-        video.getInternalPlayer().pause();
+        video?.getInternalPlayer()?.pause();
       }
     }
   };  

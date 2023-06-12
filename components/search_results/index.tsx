@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import ActiveProductFilter from "../activeProductFilter";
 import ProductFilter from "../productFilter";
@@ -39,16 +38,9 @@ function ResultComponent() {
     } 
     const StringParam = router.query.search?.toString().toLowerCase();
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
-
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
     promise
-      .then((res) => {
+      .then((res:any) => {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
         setSearchLoading(false);
@@ -58,15 +50,15 @@ function ResultComponent() {
           {data: {results: res.data.results}},
         ])
       })
-      .catch((e: Error | AxiosError) => console.log(e));
+      .catch((e: Error) => console.log(e));
   }
 
   useEffect(() => {
     FetchProductFilter()
-      .then((res) => {
+      .then((res:any) => {
         setProductFilter(res);
       })
-      .catch((e) => console.log(e));
+      .catch((e:any) => console.log(e));
 
     fetchProductList("");
   }, [router.query.search]);
@@ -324,11 +316,11 @@ function ResultComponent() {
 
   useEffect(() => {
     fetchBlogSetting()
-      .then((res) => {
+      .then((res:any) => {
         setSearchplaceHolders(res.data[0])
 
       })
-      .catch((e: Error | AxiosError) => {
+      .catch((e: Error) => {
         // console.log(e);
       })
     document.documentElement.lang = "en";
@@ -363,10 +355,7 @@ function ResultComponent() {
               {/* <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">{placeHolders?.showingResultsText.value} <strong className='text-mckblue'><i>{productSearch}</i></strong></div> */}
               {/* <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div> */}
               <br />
-            </>}
-
-        </div>
-        <div className="mck-product-filter">
+               <div className="mck-product-filter">
         <HealthNeedFilter
           activeFiltersData={activeFiltersData}
           activeFilter={activeFilter}
@@ -381,6 +370,10 @@ function ResultComponent() {
           productSearchCard={productSearchCard}
         />
         </div>
+            </>}
+
+        </div>
+       
       </div>
     </>
   );

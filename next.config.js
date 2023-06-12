@@ -25,7 +25,9 @@ const nextConfig = {
       : "https://mcco02mstrub73kprep.dxcloud.episerver.net",
     PASSWORD:"P@ssword123$",
     USERNAME:"apiuser",
-    CLIENT_SECRET:"SuperSecretPassword"
+    CLIENT_SECRET:"SuperSecretPassword",
+    MAPSAPIKEY:'AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk',
+    HEARTMAPAPIKEY:'180A0FF6-6659-44EA-8E03-2BE22C2B27A3',
 
   },
   images: {

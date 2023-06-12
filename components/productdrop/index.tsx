@@ -35,9 +35,9 @@ function ProductDropComponent({ subMenuData }: Props) {
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
-        {subMenuData?.map(({ response }: any) => {
+        {subMenuData?.map(({ response }: any, index:any) => {
           return (
-            <li className="lg:w-1/5 xl:w-1/5" key={Math.random()}>
+            <li className="lg:w-1/5 xl:w-1/5" key={`submenukey${index}`}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                   onClick={() => {
@@ -68,12 +68,12 @@ function ProductDropComponent({ subMenuData }: Props) {
                   }`}
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
-                    (ele: any) => {
+                    (ele: any,index:any) => {
                       // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
                           className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
-                          key={Math.random()}
+                          key={`sbmenu${index}`}
                           onClick={() => {
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`

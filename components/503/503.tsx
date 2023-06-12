@@ -1,7 +1,5 @@
 import axiosInstance from "@/utils/axiosInstance";
-import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import DOMPurify from 'isomorphic-dompurify';
 
 function ServiceUnavailableCoumponent() {
     const [serviceErrorData, SetServiceErrorData] = useState<any>();
@@ -13,10 +11,10 @@ function ServiceUnavailableCoumponent() {
 
     useEffect(() => {
         fetchServiceUnavailableDetails()
-            .then((res) => {
+            .then((res:any) => {
                 SetServiceErrorData(res);               
             })
-            .catch((e: Error | AxiosError) => console.log(e));
+            .catch((e: Error) => console.log(e));
     }, []);
 
     return (
