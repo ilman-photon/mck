@@ -39,13 +39,14 @@ const BlogListContainer = () => {
                                 <article className='shadow-md rounded-lg lg:mb-12 mb-6' >
                                     <figure>
                                         <LinkComponent
+                                         aria-hidden="true"
                                             href={{
                                                 pathname: "/blog_details",
                                                 query: { id: item?.routeSegment },
                                             }}
                                         >
-                                            <div className="lg:h-314 h-240 flex" aria-hidden="true">
-                                                <ImageComponent src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item?.image?.value?.url)} id={item?.image?.value?.id} />
+                                            <div className="lg:h-314 h-240 flex">
+                                                <ImageComponent aria-hidden={true} src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item?.image?.value?.url)} id={item?.image?.value?.id} />
                                             </div>
                                         </LinkComponent>
                                     </figure>
