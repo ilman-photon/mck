@@ -13,6 +13,7 @@ function Terms() {
       <GoogleTagManager />
       <HeaderComponent isCarusolAvaible={isCarusonAvible} />
       <HealthCareProfessionalComponent
+        isCarusolAvaible={isCarusonAvible}
         isCarusolAvaibleProps={setisCarusonAvible}
       />
       <FooterComponent />

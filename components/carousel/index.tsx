@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTransition, animated } from "react-spring";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 interface CarouselComponentProps {
   sectionData: any;
+  isCarouselAvaible?: boolean;
 }
 
 const CarouselComponent: React.FC<CarouselComponentProps> = ({
   sectionData,
+  isCarouselAvaible,
 }) => {
   const router = useRouter();
   const [response, setResponse] = useState<any>();
@@ -84,7 +86,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         data-te-carousel-init
         data-te-carousel-slide
       >
-        <div className="bg-gradient absolute"></div>
+        {isCarouselAvaible && <div className="bg-gradient absolute"></div>}
+
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           {!loading &&
             (response?.length > 1 ? (
@@ -129,7 +132,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         <p
                           className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                           dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(item?.description?.value),
+                            __html: DOMPurify.sanitize(
+                              item?.description?.value
+                            ),
                           }}
                           id={item?.description?.value}
                         ></p>
@@ -163,7 +168,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   {firstResponse && (
                     <>
                       <img
-                        src={DOMPurify.sanitize(firstResponse.image?.value?.url)}
+                        src={DOMPurify.sanitize(
+                          firstResponse.image?.value?.url
+                        )}
                         className="block object-cover object-center w-full h-[435px] lg:h-[800px] "
                         alt={
                           firstResponse?.image?.expandedValue?.altText?.value
@@ -188,7 +195,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           <p
                             className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                             dangerouslySetInnerHTML={{
-                              __html: DOMPurify.sanitize(firstResponse.description?.value),
+                              __html: DOMPurify.sanitize(
+                                firstResponse.description?.value
+                              ),
                             }}
                             id={firstResponse.description?.value}
                           ></p>
