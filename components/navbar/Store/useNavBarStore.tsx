@@ -21,7 +21,7 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
         method:'GET'
       }).then(async res => {
         set({logoSrc1:res?.data?.[0]?.logoImage?.expandedValue?.url,logoSrc2:res?.data?.[0]?.secondLogoImage?.expandedValue?.url})
-        set({headerData:res?.data[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea?.expandedValue})
+        set({headerData:res?.data?.[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea?.expandedValue})
   
         const {headerData} = get()
         if(headerData){
@@ -30,7 +30,7 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
           ?.flat()
           ?.filter((megaMenu:any) => megaMenu !== null)
           ?.map(async (megaMenuFiltered:any) => {
-            return  callAPI<any,any>(`${process.env.API_URL}/api/episerver/v3.0/content/?References=${megaMenuFiltered.contentLink.id}&expand=*`,null,{
+            return  callAPI<any,any>(`${process.env.API_URL}/api/episerver/v3.0/content/?References=${megaMenuFiltered?.contentLink?.id}&expand=*`,null,{
               method:'GET',
             }).then((res)=>{
               megaMenuFiltered.response = res.data[0]
