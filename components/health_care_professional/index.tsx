@@ -371,7 +371,7 @@ function HealthCareProfessionalComponent({
                                   />
                                 </svg>
                               </label>
-                              <div className="tab py-6 px-6 lg:min-h-[700px]">
+                              <div className="tab py-6 px-6">
                                 <h2
                                   className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
                                   id={`hcp-label-0${idx}`}
