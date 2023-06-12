@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
+import YouTubePlayer from "react-player/youtube";
 
 export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const router = useRouter();
@@ -26,24 +27,32 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().play();
+        video.getInternalPlayer().playVideo();
       } else {
-        video.getInternalPlayer().pause();
+        video.getInternalPlayer().pauseVideo();
       }
     }
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().pause();
+        video.getInternalPlayer().pauseVideo();
         setIsPlaying(false);
       } else {
-        const currentTime = video.getInternalPlayer().currentTime;
+        let currentTime = video.getDuration()
         const targetTime = 10; // Replace with the desired time in seconds
         if (currentTime < targetTime) {
-          video.getInternalPlayer().currentTime = targetTime;
+          currentTime = targetTime;
         }
-        video.getInternalPlayer().play();
+        video?.getInternalPlayer()?.playVideo();
         setIsPlaying(true);
+      }
+    }
+
+    if (video) {
+      if (isPlaying) {
+        video.getInternalPlayer().play();
+      } else {
+        video.getInternalPlayer().pause();
       }
     }
   };  
@@ -72,7 +81,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const isButtonRightAlignment = sectionData?.buttonPosition?.value === 'Right' as ContentAlignment
   const isButtonLeftAlignment = sectionData?.buttonPosition?.value === 'Left' as ContentAlignment
   const isButtonCenterAlignment = sectionData?.buttonPosition?.value === 'Centre' as ContentAlignment
-
+  
 
   const VideoAndTextComponent = () => {
     return(
@@ -86,21 +95,21 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
           key={sectionData?.image?.value?.id}
         >
           <div className={`container mx-auto grid lg:flex ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
-            <AVComponent
-            isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
-            videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            idComponent={index} 
-            videoControls={isPlaying} 
-            videoComponentRef={videoRef} 
-            onSeek={() => setIsPlaying(true)} 
-            onStart={() => setIsPlaying(true)} 
-            onPlay={() => setIsPlaying(true)} 
-            onPause={() => setIsPlaying(false)} 
-            flagVideoUrl={isInternalSourceMatchAPI} 
-            onClickIconPlay={handleTogglePlay} 
-            iconPlayWrapperRef={circlePlayButtonRef}            
-            />
+              <AVComponent
+              isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
+              videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
+              videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
+              idComponent={index} 
+              videoControls={isPlaying} 
+              videoComponentRef={videoRef} 
+              onSeek={() => setIsPlaying(true)} 
+              onStart={() => setIsPlaying(true)} 
+              onPlay={() => setIsPlaying(true)} 
+              onPause={() => setIsPlaying(false)} 
+              flagVideoUrl={isInternalSourceMatchAPI} 
+              onClickIconPlay={handleTogglePlay} 
+              iconPlayWrapperRef={circlePlayButtonRef}            
+              />
             <TextDescAndButton
                 titleStyle={`${sectionData?.assetPosition?.value === "Right"
                 ? "mx-auto lg:text-left text-center"
