@@ -1138,15 +1138,15 @@ Mobiles Menu
 }
 
 .text-sofia-reg {
-  font-family: "sofia-pro-regular";
+  font-family: "sofia-pro-regular", Helvetica, Arial, Verdana, Tahoma, sans-serif;
 }
 
 .text-sofia-bold {
-  font-family: "sofia-pro-bold";
+  font-family: "sofia-pro-bold", Helvetica, Arial, Verdana, Tahoma, sans-serif;
 }
 
 .text-gtl-med {
-  font-family: "GTAlpina-Medium";
+  font-family: "GTAlpina-Medium", Helvetica, Arial, Verdana, Tahoma, sans-serif;
 }
 
 .text-27 {
@@ -2552,4 +2552,9 @@ li.indicator {
 li.indicator.active {
   border: 1px solid #001a71;
   background-color: #001a71;
+}
+.promotion-product-container{
+  .bg-center{
+      background-position: 90%;
+  }
 }

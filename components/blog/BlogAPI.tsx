@@ -16,7 +16,7 @@ export const fetchBlogFilter = (filter: any) => {
     const StringParam = filter.name.toString().toLowerCase();
 
     return axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and tag/value/name eq '${StringParam}' &expand=*`,
+        `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and contains(tolower(tag/value/name), '${StringParam}')&expand=*`,
         {
             headers: { "Accept-Language": "en" },
         }

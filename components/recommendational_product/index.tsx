@@ -111,7 +111,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             </div>
             {ele?.data?.buttonText?.value && ele?.data?.buttonUrl?.value && (
               <button
-                className={`lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto`}
+                className={`${ele?.data?.buttonColor?.value.length == 0 || ele?.data?.buttonColor?.value === "#001A71" ? "text-white ": "text-black"} lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto`}
                 onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
                 id={`home-product-button${indexs}${index + 1}`}
                 style={{
@@ -191,7 +191,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         : "";
       const renderContent = (
         <div
-          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] md:mb-0 ${
             index === 0
               ? "bg-no-repeat row-span-2 bg-center bg-cover bg-[url('" +
                 ele?.data?.backgroundImage?.value?.url +
@@ -241,7 +241,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       ) : (
         <>
           <div
-            className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center `}
+            className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center md:mb-0`}
           >
             <style jsx>{`
               .bg-color {
@@ -278,7 +278,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   return (
     <div id="promotion-container" className="mx-auto">
       <div className="promotion-product-container lg:mb-12">
-        <div className="md:grid lg:grid lg:gap-4 xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <div className="md:grid lg:grid lg:gap-4 xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 md:gap-4">
           {display}
           {displayOdd}
         </div>

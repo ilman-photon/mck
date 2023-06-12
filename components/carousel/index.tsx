@@ -25,7 +25,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
     try {
       setLoading(false);
-      setResponse(sectionData[0]?.contentBlockArea?.expandedValue);
+      setResponse(sectionData?.[0]?.contentBlockArea?.expandedValue);
     } catch (error) {
       setLoading(true);
     }
@@ -98,24 +98,20 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   key={item?.contentLink?.id + "_" + current}
                 >
                   <div
-                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[600px] lg:h-[800px]"
+                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[450px] lg:h-[800px]"
                     data-te-carousel-active
                     data-te-carousel-item
                   >
                     <img
                       src={DOMPurify.sanitize(item?.image?.value.url)}
-                      className="block object-cover object-center w-full h-[435px] lg:h-[800px]"
+                      className="block object-cover object-center w-full h-[225px] lg:h-[800px]"
                       alt={DOMPurify.sanitize(item?.image?.expandedValue?.altText?.value)}
                       id={item?.title?.value + "_" + current}
                       aria-hidden={true}
                     />
-                    {item?.title?.value && (
+                    {item?.title?.value || item?.buttonText?.value ? (
                       <div
-                        className={`px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner h-[200px] lg:h-auto text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full ${
-                          item?.title?.value &&
-                          item?.description?.value &&
-                          "hidden"
-                        }`}
+                        className={`px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner h-[225px] lg:h-auto text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full`}
                         style={{
                           backgroundColor:
                             item?.title?.value || item?.description?.value
@@ -123,25 +119,29 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               : "",
                         }}
                       >
+                        {item?.title?.value  ? (
                         <h2
                           className="text-mcklightyellow lg:mb-3"
                           id={item?.title?.value}
                         >
                           {item?.title?.value}
                         </h2>
-                        <p
-                          className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
-                          dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(
-                              item?.description?.value
-                            ),
-                          }}
-                          id={item?.description?.value}
-                        ></p>
-                        {item?.buttonText?.value && (
+                        ) : null}
+                        {item?.description?.value ? (
+                          <p
+                            className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(
+                                item?.description?.value
+                              ),
+                            }}
+                            id={item?.description?.value}
+                          ></p>
+                        ) : null}
+                        {item?.buttonText?.value ? (
                           <button
-                            id={item?.contentLink.id}
-                            className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                            id={item?.contentLink?.id}
+                            className={`${item?.ctaButtonColor?.value.length == 0 || item?.ctaButtonColor?.value === "#001A71" ? "text-white ": "text-black"} jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                             style={{
                               backgroundColor: item?.ctaButtonColor?.value,
                             }}
@@ -149,9 +149,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           >
                             {DOMPurify.sanitize(item?.buttonText?.value)}
                           </button>
-                        )}
+                        ) : null}
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </animated.div>
               ))
@@ -169,52 +169,52 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     <>
                       <img
                         src={DOMPurify.sanitize(
-                          firstResponse.image?.value?.url
+                          firstResponse?.image?.value?.url
                         )}
                         className="block object-cover object-center w-full h-[435px] lg:h-[800px] "
                         alt={
                           firstResponse?.image?.expandedValue?.altText?.value
                         }
-                        id={firstResponse.title?.value + "_" + current}
+                        id={firstResponse?.title?.value + "_" + current}
                         aria-hidden={true}
                       />
-                      {firstResponse.title?.value && (
+                      {firstResponse?.title?.value && (
                         <div
                           className=" px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full"
                           style={{
                             backgroundColor:
-                              firstResponse.backgroundColor?.value,
+                              firstResponse?.backgroundColor?.value,
                           }}
                         >
                           <h2
                             className="text-mcklightyellow lg:mb-3"
-                            id={firstResponse.title?.value}
+                            id={firstResponse?.title?.value}
                           >
-                            {firstResponse.title?.value}
+                            {firstResponse?.title?.value}
                           </h2>
                           <p
                             className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
                             dangerouslySetInnerHTML={{
                               __html: DOMPurify.sanitize(
-                                firstResponse.description?.value
+                                firstResponse?.description?.value
                               ),
                             }}
-                            id={firstResponse.description?.value}
+                            id={firstResponse?.description?.value}
                           ></p>
-                          {firstResponse.buttonText?.value && (
+                          {firstResponse?.buttonText?.value && (
                             <div
-                              id={firstResponse.contentLink.id}
+                              id={firstResponse?.contentLink?.id}
                               className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                               style={{
                                 backgroundColor:
-                                  firstResponse.ctaButtonColor?.value,
+                                  firstResponse?.ctaButtonColor?.value,
                               }}
                               onClick={() =>
-                                handleCTABtn(firstResponse.buttonUrl?.value)
+                                handleCTABtn(firstResponse?.buttonUrl?.value)
                               }
                               role="button"
                             >
-                              {firstResponse.buttonText?.value}
+                              {firstResponse?.buttonText?.value}
                             </div>
                           )}
                         </div>
@@ -223,10 +223,11 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   )}
                 </div>
               </div>
+              // null
             ))}
         </div>
         {!loading && response?.length > 1 && (
-          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 indicators">
+          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 lg:bottom-2 indicators">
             {response?.map((item: any, index: number) => (
               <li
                 className={`indicator content-center ${

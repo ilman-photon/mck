@@ -186,7 +186,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="lg:w-[640px] lg:desktop:w-[500px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
+            <div className="lg:w-[640px] lg:desktop:w-[500px] mobile:h-[551px] mobilelarge:h-[551px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -202,7 +202,7 @@ function WhereComponent() {
                     <div className="pb-2 cursor-pointer">
                       <Image
                         src="/images/health-mart.png"
-                        alt="Health Mart"
+                        alt="Health Mart logo"
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -335,7 +335,7 @@ function WhereComponent() {
                           <div className="pb-2 cursor-pointer">
                             <Image
                               src="/images/health-mart.png"
-                              alt="Health Mart"
+                              alt="Health Mart logo"
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}

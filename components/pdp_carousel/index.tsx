@@ -70,10 +70,13 @@ function PdpCarousel(prodViewData: any) {
     setSelectedItemIndex(id);
   };
 
+  const isProductImageLessThanSix = prodResponse?.productImages?.expandedValue?.length < 6
+
   return (
     <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" id="pdp-01">
       <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
         <div className="pdp_images flex lg:grid relative">
+         {isProductImageLessThanSix ? null : (
           <div className="hidden lg:block cursor-pointer absolute left-[36px] top-[-13px]">
             <img
               onClick={handleUpArrowClick}
@@ -85,7 +88,9 @@ function PdpCarousel(prodViewData: any) {
               id="pdp-img-001"
             />
           </div>
-          <div
+         )}   
+         {isProductImageLessThanSix ? null : (
+            <div
             onClick={handleUpArrowClick}
             className={`carousel-prev -left-6 cursor-pointer lg:hidden flex items-center absolute left-[-10px] top-[27px] ${
               arrowClick === 0 ? "opacity-25" : ""
@@ -107,6 +112,7 @@ function PdpCarousel(prodViewData: any) {
               ></path>
             </svg>
           </div>
+         )} 
           {/* <button onClick={handleUpArrowClick}>Up arrow</button> */}
           <ul className="3GnUWp flex lg:flex-col">
             {prodResponse?.productImages?.value
@@ -141,6 +147,7 @@ function PdpCarousel(prodViewData: any) {
               })}
           </ul>
           {/* <button onClick={handleDownArrowClick}>Down arrow</button> */}
+         {isProductImageLessThanSix ? null : (
           <div className="hidden lg:block cursor-pointer absolute bottom-[-13px] left-[36px]">
             <img
               onClick={handleDownArrowClick}
@@ -153,7 +160,8 @@ function PdpCarousel(prodViewData: any) {
               }`}
             />
           </div>
-
+         )} 
+        {isProductImageLessThanSix ? null : (
           <div
             onClick={handleDownArrowClick}
             className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${
@@ -178,6 +186,7 @@ function PdpCarousel(prodViewData: any) {
               ></path>
             </svg>
           </div>
+        )}
         </div>
         <div
           className={`lg:w-[526px] ${
