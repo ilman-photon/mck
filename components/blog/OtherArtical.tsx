@@ -44,7 +44,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     </LinkComponent>
 
                                     <div className='pb-3 pt-3'>
-                                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item?.readMinute?.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
+                                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item?.readMinute?.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item?.startPublish)}</span>
                                         <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{DOMPurify.sanitize(item?.readMinute?.value)}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>

@@ -188,7 +188,7 @@ function PdpLocation(props: any) {
                           <p className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
                             {value.StoreName},{" "}
                           </p>
-                          <p className="text-sofia-reg text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
+                          <p className="text-sofia-reg text-lg text-base font-normal lg:mb-1 lg:leading-5">
                             {value.Address},{" "}
                           </p>
                           <p className="text-sofia-reg text-lg text-base font-normal lg:leading-5 lg:mb-1">
@@ -272,7 +272,7 @@ function PdpLocation(props: any) {
                   </p>
                   <p
                     aria-label="1230 Lindon Ave"
-                    className="font-extrabold leading-5 mb-2"
+                    className="font-normal leading-5 mb-2"
                     id={`pdp-address_${props.index}-${index}`}
                   >
                     {value.Address},{" "}
