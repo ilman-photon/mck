@@ -103,9 +103,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     data-te-carousel-item
                   >
                     <img
-                      src={item?.image?.value.url}
+                      src={DOMPurify.sanitize(item?.image?.value.url)}
                       className="block object-cover object-center w-full h-[435px] lg:h-[800px]"
-                      alt={item?.image?.expandedValue?.altText?.value}
+                      alt={DOMPurify.sanitize(item?.image?.expandedValue?.altText?.value)}
                       id={item?.title?.value + "_" + current}
                       aria-hidden={true}
                     />
