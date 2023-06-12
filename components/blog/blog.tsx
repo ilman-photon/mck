@@ -161,6 +161,7 @@ const BlogComponent = () => {
         )}
       </div>
       <div className="lg:w-306 w-full blogright-sidebar">
+        <p className="invisible">{response?.data[0].blogSearchPlaceholderText.value}</p>
         {!ActiveSearch && (
           <div
             id="search"
