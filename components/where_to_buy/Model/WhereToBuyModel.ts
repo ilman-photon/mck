@@ -57,6 +57,7 @@ export declare module WhereToBuy {
         latitude:number
         onInitialLoad:() => void
         zoomLevel:number
+        onViewOnlineStore:(StoreId:string) => void
     }
 
     interface UnitedStatesMap {

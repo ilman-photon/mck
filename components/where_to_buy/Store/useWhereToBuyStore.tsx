@@ -79,5 +79,12 @@ export const useWhereToBuyStore = create<WhereToBuy.Controller>((set,get) => ({
      * @description USA coords 
      */
     usaLat:39,
-    usaLon:-95
+    usaLon:-95,
+    /**
+     * 
+     * @param `storeId`
+     */
+    onViewOnlineStore:(storeId) => {
+        window.open(`https://www.healthmart.com/store-details.html?storeId=${storeId}`,"_blank")
+    }
 })) 

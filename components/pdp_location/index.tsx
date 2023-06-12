@@ -19,6 +19,7 @@ function PdpLocation(props: any) {
   // let textInput: any
   const [textInput, setTextInput] = useState<any>("");
   const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey);
+  const onViewOnline = useWhereToBuyStore(state => state.onViewOnlineStore)
   const healthApiKey = useWhereToBuyStore(
     (state: any) => state.healthMartApiKey
   );
@@ -32,9 +33,6 @@ function PdpLocation(props: any) {
     window.open("https://maps.google.com?q=" + lat + "," + long);
   };
 
-  const showOnline = (url: any) => {
-    window.open(url, "_blank");
-  };
   function fectchLatandLongDetails() {
     return axios.get(
       `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
@@ -208,11 +206,11 @@ function PdpLocation(props: any) {
 
                       <div className="flex flex-row justify-between mb-1">
                         <div className="items-center justify-center">
-                          {value?.StoreUrl ? (
+                          {value?.StoreId ? (
                             <button
                               className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-md leading-5 text-lg"
                               aria-pressed="true"
-                              onClick={() => showOnline(value.StoreUrl)}
+                              onClick={() => onViewOnline(value?.StoreId)}
                             >
                               View Online
                             </button>
@@ -304,12 +302,12 @@ function PdpLocation(props: any) {
               </div>
               <div className="flex flex-row justify-between mt-1">
                 <div>
-                  {value?.StoreUrl ? (
+                  {value?.StoreId ? (
                     <div
                       className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"
                       role="link"
                       id={`pdp-view_${props.index}-${index}`}
-                      onClick={() => showOnline(value.StoreUrl)}
+                      onClick={() => onViewOnline(value?.StoreId)}
                     >
                       View Online
                     </div>
