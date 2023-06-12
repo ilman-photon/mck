@@ -39,7 +39,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         !isPause && infiniteScroll();
       }, Number(sectionData[0]?.timeInterval?.value));
     }
-    
+
     return () => {
       if (interval) {
         clearInterval(interval);
@@ -98,20 +98,20 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                   key={item?.contentLink?.id + "_" + current}
                 >
                   <div
-                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[600px] lg:h-[800px]"
+                    className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[450px] lg:h-[800px]"
                     data-te-carousel-active
                     data-te-carousel-item
                   >
                     <img
                       src={DOMPurify.sanitize(item?.image?.value.url)}
-                      className="block object-cover object-center w-full h-[435px] lg:h-[800px]"
+                      className="block object-cover object-center w-full h-[225px] lg:h-[800px]"
                       alt={DOMPurify.sanitize(item?.image?.expandedValue?.altText?.value)}
                       id={item?.title?.value + "_" + current}
                       aria-hidden={true}
                     />
                     {item?.title?.value || item?.buttonText?.value ? (
                       <div
-                        className={`px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner h-[200px] lg:h-auto text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full `}
+                        className={`px-4 lg:px-72 pt-6 lg:pt-6 lg:pb-8 pb-3 hero-banner h-[225px] lg:h-auto text-white lg:absolute left-0 bottom-20 md:block lg:w-487 w-full`}
                         style={{
                           backgroundColor:
                             item?.title?.value || item?.description?.value
