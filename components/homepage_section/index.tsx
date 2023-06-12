@@ -9,7 +9,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const router = useRouter();
   const [ApiRespond, setApiRespond] = useState<any>();
 
-  const isBlueBgColorBtn = sectionData?.buttonColorCode?.value.length == 0 || sectionData?.buttonColorCode?.value === "#001A71"
+  const isBlueBgColorBtn = sectionData?.buttonColorCode?.value.length == 0 || sectionData?.buttonColorCode?.value === "#001A71";
   const handleCTABtn = (url: string) => {
     router.push({
       pathname: url,
