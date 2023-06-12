@@ -12,7 +12,7 @@ import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 import axiosInstance from "@/utils/axiosInstance";
 
-let sectionData: any = [];
+// let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 function ProductListComponent() {
   const router = useRouter();
@@ -34,6 +34,7 @@ function ProductListComponent() {
   const [productName, setProductName] = useState<any>()
   const [productSum , setProductSum] = useState<any>()
   const [filterClicked, setFilterClicked] = useState(false);
+  const [sectionData , setSectionData] = useState<any>([])
   const productSearchCard = true
   let selectedCategoryName: any = [];
   // Right section product carousel data
@@ -295,7 +296,8 @@ function ProductListComponent() {
             );
 
             if (!isDuplicate) {
-              sectionData.push(id);
+              setSectionData((prevSectionData :any) => [...prevSectionData, id]);
+              // sectionData.push(id);
             }
           }
         }
