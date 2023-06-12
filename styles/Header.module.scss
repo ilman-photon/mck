@@ -20,14 +20,18 @@
 }
 
 .isNotSticky {
-    .header-sticky {
+    .header-sticky {    
         margin-top: 35px;
         @media (max-width: 968px) {
             margin: 0;
         }
     }
 }
-
+@media (max-width: 360px) {
+    .mobile-navwrapper {
+        max-width: 85% !important;
+    }
+}
 @media (max-width: 980px) {
     .mobile-overlay-wrapper {
         top: 64px;
@@ -38,6 +42,7 @@
         position: fixed;
         z-index: 9997;
         overflow-y: auto;
+        padding-left: 0px !important;
         padding-bottom: 65px;
         background: #00000045;
     }

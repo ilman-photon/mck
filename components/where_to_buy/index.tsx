@@ -365,7 +365,7 @@ function WhereComponent() {
                             </h2>
                           </div>
 
-                          <div className="flex flex-row mt-2">
+                          <div className="flex flex-row justify-between mt-2">
                             <div className="items-center justify-center">
                               {value?.StoreId ? (
                                 <button

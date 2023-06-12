@@ -47,8 +47,11 @@ function ProductListComponent() {
     } else {
       queryParameter = `${filter} and`;
     }
+    const replacement = ""
+    let result:string = queryParameter?.replace(/&\s*/g,replacement)
+    result = result?.replace(/\s+/g," ")?.replace(',','')
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`);
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${result} ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         if(res.data.results.length === 0){
@@ -73,6 +76,8 @@ function ProductListComponent() {
       });
   }
 
+  // filter: ((productType/value/name eq 'Cough Cold Flu Relief') and ContentType/any(t:t eq 'ProductDetailsPage')): 
+  // filter: ((productType/value/name eq 'Digestion Health') and ContentType/any(t:t eq 'ProductDetailsPage'))
   useEffect(() => {
     setActiveFilter([]);
     fetchData();

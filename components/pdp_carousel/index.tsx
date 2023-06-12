@@ -47,6 +47,9 @@ function PdpCarousel(prodViewData: any) {
     if (lastIndex < prodResponse?.productImages?.value?.length) {
       setArrowClick(() => arrowClick + 1);
       setLastIndex(() => lastIndex + 1);
+    } else {
+      prodResponse?.productImages?.value?.slice(arrowClick, lastIndex).length <=
+        arrowClick && setArrowClick(() => arrowClick + 1);
     }
   };
 
@@ -54,6 +57,8 @@ function PdpCarousel(prodViewData: any) {
     if (arrowClick > 0) {
       setArrowClick(() => arrowClick - 1);
       setLastIndex(() => lastIndex - 1);
+    } else {
+      selectedItemIndex - 1 >= 0 && setArrowClick(() => arrowClick - 1);
     }
   };
 

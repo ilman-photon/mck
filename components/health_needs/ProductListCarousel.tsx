@@ -4,7 +4,7 @@ import { useWindowResize } from "@/hooks/useWindowResize";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
@@ -111,6 +111,14 @@ const ProductComponent = ({
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
+                        a11y={{
+                          prevSlideMessage:"",
+                          nextSlideMessage: "",
+                          firstSlideMessage:"",
+                          lastSlideMessage:"",
+                        }
+                        }
+                        modules={[A11y]}
                       >
                         {product?.data?.results?.map(
                           (item: any, idxs: number) => {

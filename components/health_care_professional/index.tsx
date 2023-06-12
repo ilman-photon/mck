@@ -4,7 +4,7 @@ import HeaderImage from "../../public/images/health-professional.png";
 import Quotes from "../../public/images/teamcarousel-quotes.png";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
@@ -223,6 +223,14 @@ function HealthCareProfessionalComponent({
                         slidesPerView={isMobile ? "auto" : 3}
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
+                        a11y={{
+                          prevSlideMessage:"",
+                          nextSlideMessage: "",
+                          firstSlideMessage:"",
+                          lastSlideMessage:"",
+                        }
+                        }
+                        modules={[A11y]}
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
@@ -236,7 +244,7 @@ function HealthCareProfessionalComponent({
                                 key={idx}
                                 className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
+                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative md:h-[272px] lg:h-[220px]">
                                   <div
                                     key={customer?.customerName?.value}
                                     className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
