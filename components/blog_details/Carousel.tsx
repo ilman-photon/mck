@@ -6,6 +6,7 @@ import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
 import { ImageComponent } from "../global/ImageComponent";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
+import DOMPurify from 'isomorphic-dompurify';
 
 interface CarouselComponentProps {
   title: string;
@@ -90,7 +91,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         aria-hidden="true"
                       >
                         <ImageComponent
-                          src={item?.image?.value?.url}
+                          src={DOMPurify.sanitize(item?.image?.value?.url)}
                           alt={item?.image?.value?.id}
                           id={item?.image?.value?.id}
                           className="w-full max-h-[240px] lg:max-h-[276px] object-cover"

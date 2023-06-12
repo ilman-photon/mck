@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import ProductFilter from "@/components/productFilter";
 import ActiveProductFilter from "@/components/activeProductFilter";
@@ -54,7 +53,7 @@ function ProductListComponent() {
     const promise = axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${result} ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
-      .then((res) => {
+      .then((res:any) => {
         if(res.data.results.length === 0){
           setProductSum(res.data.totalMatching)
           // setProductName(res.data.results[0]?.productType?.value[0].name)
@@ -71,7 +70,7 @@ function ProductListComponent() {
           {data: {results: res.data.results}},
         ])
       })
-      .catch((e: Error | AxiosError) => console.log(e))
+      .catch((e: Error) => console.log(e))
       .finally(() => {
         setIsLoading(false);
       });

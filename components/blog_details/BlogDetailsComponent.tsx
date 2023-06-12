@@ -93,7 +93,7 @@ const BlogDetailsComponent = () => {
           >
             <ImageComponent
               className="m-auto w-full"
-              src={BlogInfo.image?.expandedValue?.url}
+              src={DOMPurify.sanitize(BlogInfo.image?.expandedValue?.url)}
               alt={BlogInfo.image?.expandedValue?.name}
               id={BlogInfo.image?.expandedValue?.name}
             />
