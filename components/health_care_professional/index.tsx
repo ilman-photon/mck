@@ -184,7 +184,7 @@ function HealthCareProfessionalComponent({
           </div>
         </div>
       ) : (
-        <div>
+        <div className="mb-18">
           {response &&
             response?.contentArea?.expandedValue &&
             Object.keys(response).length > 0 && (

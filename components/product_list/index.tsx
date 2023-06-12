@@ -326,7 +326,7 @@ function ProductListComponent() {
         </div>
       )}
 
-<div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1">
+<div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1 mb-18">
 <HealthNeedFilter
           activeFiltersData={activeFiltersData}
           activeFilter={activeFilter}
