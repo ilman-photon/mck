@@ -17,11 +17,16 @@ function ProductDropComponent({ subMenuData }: Props) {
    *
    */
 
-  function updateUrl(path: String, type: string) {
+  function updateUrl(path: string, type: string) {
     let f = "?filter=";
     let splitPath = path !== null ? path?.split(f) : "";
     if (type === "1") {
-      return splitPath?.[1];
+      if(splitPath?.[1]?.includes('&')){
+        const replacement = ""
+        let result:string = String(splitPath?.[1])?.replace(/&\s*/g,replacement)
+        return result?.replace(/\s+/g," ")?.replace(',','')
+      }
+      return splitPath?.[1]
     } else {
       return splitPath?.[0];
     }
@@ -64,6 +69,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any) => {
+                      // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
                           className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
