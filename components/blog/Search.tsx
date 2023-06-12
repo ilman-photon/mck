@@ -43,8 +43,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   };
   const HandleChange = (event: any) => {
     const { value } = event.target;
-    const regex = /^[A-Za-z0-9]*$/;
-    if (value === "") {
+    const regex = /^[a-zA-Z0-9' -]+$/;
+    if (value.length === 0) {
       setActiveClose(true);
       setsearch("");
     } else if (regex.test(value)) {
