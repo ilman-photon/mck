@@ -227,7 +227,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             ))}
         </div>
         {!loading && response?.length > 1 && (
-          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 indicators">
+          <ul className="list-unstyled absolute text-center left-0 right-0 bottom-1 lg:bottom-2 indicators">
             {response?.map((item: any, index: number) => (
               <li
                 className={`indicator content-center ${
