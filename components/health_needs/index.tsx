@@ -238,11 +238,11 @@ const HealthNeedsComponent = ({
     }
 
     if (queryParams) fetchProductList(queryParams);
-    else {
-      router.push({
-        pathname: "/health_needs",
-      });
-    }
+    // else {
+    //   router.push({
+    //     pathname: "/health_needs",
+    //   });
+    // }
   };
 
   // -------- Health needs page data fetch starts -------- //
@@ -252,6 +252,7 @@ const HealthNeedsComponent = ({
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("Health Needs");
       // Health needs Categories List
       const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
@@ -302,7 +303,8 @@ const HealthNeedsComponent = ({
 
     fetchData();
   }, []);
-
+ 
+  
   useEffect(() => {
     let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter
       ((item :any) => {
@@ -415,7 +417,29 @@ const HealthNeedsComponent = ({
         ] = subItem.name;
       });
     });
-    setSelectedFilterItems(tempArr);
+    //setSelectedFilterItems(tempArr);
+    console.log("Filtered",router.query.filter);
+    let selectedFilterData: any[] = [];
+    selectedFilterData = tempArr;
+    selectedFilterData.map((category: any) => {
+      category.map((sub_category: any) => {
+        if (router.query.filter === sub_category.name) {
+          sub_category.checked = true;
+          if (category["items"] && category["items"].indexOf(router.query.filter) === -1) {
+            category["items"].push(router.query.filter);
+            setActiveFilter([router.query.filter]);
+          }
+        } else {
+          if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
+            category["items"].splice(category["items"].indexOf(sub_category.name), 1);
+          }
+          category.checked = false;
+        }
+      });
+    });
+
+    setSelectedFilterItems(selectedFilterData);
+
   };
 
   return (

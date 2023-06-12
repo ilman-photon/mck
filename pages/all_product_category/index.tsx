@@ -1,7 +1,6 @@
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
@@ -64,7 +63,7 @@ function AllProductCategoryPage({
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
     );
     promise
-      .then((res) => {
+      .then((res:any) => {
         let tempResults: any = {};
         if (res.data.results.length === 0) {
           mainCatId.map((id: any) => {
@@ -93,7 +92,7 @@ function AllProductCategoryPage({
         );
         setSelectedProduct(transformedArray);
       })
-      .catch((e: Error | AxiosError) => console.log(e))
+      .catch((e: Error) => console.log(e))
       .finally(() => {
         setIsLoading(false);
       });
@@ -159,7 +158,7 @@ function AllProductCategoryPage({
           .get(
             `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
           )
-          .then((res) => {
+          .then((res:any) => {
             setProductSum(res.data.totalMatching);
             let tempResults: any = [];
             res.data.results.map((item: any) => {
@@ -182,7 +181,7 @@ function AllProductCategoryPage({
             );
             setSelectedProduct(transformedArray);
           })
-          .catch((e: Error | AxiosError) => console.log(e))
+          .catch((e: Error) => console.log(e))
           .finally(() => {
             setIsLoading(false);
           });
@@ -344,7 +343,7 @@ function AllProductCategoryPage({
 
   useEffect(() => {
     fetchCategoryId()
-      .then((res) => {
+      .then((res:any) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
         return axiosInstance.get(
           `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
@@ -355,16 +354,16 @@ function AllProductCategoryPage({
           }
         );
       })
-      .catch((e) => {
+      .catch((e:any) => {
         setCategoryLoding(true);
         setCategoryError(e);
       });
 
     FetchProductFilter()
-      .then((response) => {
+      .then((response:any) => {
         setProductFilter(response);
       })
-      .catch((e) => console.log(e));
+      .catch((e:any) => console.log(e));
   }, []);
 
   function fetchCategoryId() {
