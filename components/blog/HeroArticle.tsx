@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
-
+import DOMPurify from 'isomorphic-dompurify';
 
 const HeroArticle = ({ data }: any) => {
 
@@ -20,8 +20,9 @@ const HeroArticle = ({ data }: any) => {
                     <img
                         className="w-full"
                         id={data?.image.value?.name}
-                        src={data?.image.value?.url}
-                        alt={data?.image.value?.url}
+                        src={DOMPurify.sanitize(data?.image?.value?.url)}
+                        alt={DOMPurify.sanitize(data?.image?.value?.url)}
+                        aria-hidden="true"
                     />
                 </figure>
             </LinkComponent>

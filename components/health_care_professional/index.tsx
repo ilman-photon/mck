@@ -4,7 +4,7 @@ import HeaderImage from "../../public/images/health-professional.png";
 import Quotes from "../../public/images/teamcarousel-quotes.png";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
@@ -12,6 +12,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
 import { useWindowResize } from "@/hooks/useWindowResize";
+import DOMPurify from "isomorphic-dompurify";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -34,12 +35,12 @@ function HealthCareProfessionalComponent({
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [windowWidth] = useWindowResize()
+  const [windowWidth] = useWindowResize();
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
 
   useEffect(() => {
-    setIsMobile(windowWidth >= 968 ? false : true)
-  }, [windowWidth])
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
 
   const handleTabClick = (idx: any, tabTitle: string) => {
     setTabSelected(tabTitle);
@@ -155,15 +156,15 @@ function HealthCareProfessionalComponent({
     });
   }
   const handleOnSlideChange = (swiper: any) => {
-    if(isMobile){
-      swiper.autoplay.running = true
+    if (isMobile) {
+      swiper.autoplay.running = true;
       setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
-    }
-    else{
-      swiper.autoplay.running = false
+    } else {
+      swiper.autoplay.running = false;
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
-  }
+  };
+  !carouselRelated && isCarusolAvaibleProps(false);
   return (
     <>
       {loading ? (
@@ -194,11 +195,15 @@ function HealthCareProfessionalComponent({
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
-                      <div className="bg-gradient absolute"></div>
+
+                      {!isCarusolAvaible ? (
+                        <div className="bg-gradient absolute"></div>
+                      ) : (
+                        <br />
+                      )}
                     </div>
                   )}
                 </div>
-
                 <div
                   className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6`}
                   style={{ background: customerBackgroundColorCode }}
@@ -218,6 +223,14 @@ function HealthCareProfessionalComponent({
                         slidesPerView={isMobile ? "auto" : 3}
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
+                        a11y={{
+                          prevSlideMessage:"",
+                          nextSlideMessage: "",
+                          firstSlideMessage:"",
+                          lastSlideMessage:"",
+                        }
+                        }
+                        modules={[A11y]}
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
@@ -231,7 +244,7 @@ function HealthCareProfessionalComponent({
                                 key={idx}
                                 className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
+                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative md:h-[272px] lg:h-[220px]">
                                   <div
                                     key={customer?.customerName?.value}
                                     className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
@@ -240,7 +253,9 @@ function HealthCareProfessionalComponent({
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
-                                        __html: customer?.reviewComment?.value,
+                                        __html: DOMPurify.sanitize(
+                                          customer?.reviewComment?.value
+                                        ),
                                       }}
                                     ></div>
                                     <div
@@ -284,7 +299,10 @@ function HealthCareProfessionalComponent({
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{isMobile ? Math.ceil(customers?.length) : Math.ceil(customers?.length / 3)}
+                      {reviewCount}/
+                      {isMobile
+                        ? Math.ceil(customers?.length)
+                        : Math.ceil(customers?.length / 3)}
                     </div>
                   </div>
                 </div>
@@ -292,7 +310,9 @@ function HealthCareProfessionalComponent({
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                     id="hcp-btn-007"
-                    dangerouslySetInnerHTML={{ __html: descriptionValue }}
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(descriptionValue),
+                    }}
                   />
                   <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
                     <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
@@ -318,6 +338,10 @@ function HealthCareProfessionalComponent({
                                 }
                               />
                               <label
+                                tabIndex={0}
+                                onKeyUp={(e) => {
+                                  handleTabClick(idx, tab?.title?.value)
+                                }}
                                 htmlFor={tab?.title?.value}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
@@ -351,7 +375,7 @@ function HealthCareProfessionalComponent({
                                   />
                                 </svg>
                               </label>
-                              <div className="tab py-6 px-6 lg:min-h-[700px]">
+                              <div className="tab py-6 px-6">
                                 <h2
                                   className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
                                   id={`hcp-label-0${idx}`}
@@ -362,7 +386,9 @@ function HealthCareProfessionalComponent({
                                   className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
-                                    __html: tab?.description?.value,
+                                    __html: DOMPurify.sanitize(
+                                      tab?.description?.value
+                                    ),
                                   }}
                                 />
                               </div>

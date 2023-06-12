@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
+import YouTubePlayer from "react-player/youtube";
 
 export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const router = useRouter();
@@ -26,24 +27,32 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().play();
+        video.getInternalPlayer().playVideo();
       } else {
-        video.getInternalPlayer().pause();
+        video.getInternalPlayer().pauseVideo();
       }
     }
 
     if (video) {
       if (isPlaying) {
-        video.getInternalPlayer().pause();
+        video.getInternalPlayer().pauseVideo();
         setIsPlaying(false);
       } else {
-        const currentTime = video.getInternalPlayer().currentTime;
+        let currentTime = video.getDuration()
         const targetTime = 10; // Replace with the desired time in seconds
         if (currentTime < targetTime) {
-          video.getInternalPlayer().currentTime = targetTime;
+          currentTime = targetTime;
         }
-        video.getInternalPlayer().play();
+        video?.getInternalPlayer()?.playVideo();
         setIsPlaying(true);
+      }
+    }
+
+    if (video) {
+      if (isPlaying) {
+        video.getInternalPlayer().play();
+      } else {
+        video.getInternalPlayer().pause();
       }
     }
   };  
@@ -72,7 +81,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const isButtonRightAlignment = sectionData?.buttonPosition?.value === 'Right' as ContentAlignment
   const isButtonLeftAlignment = sectionData?.buttonPosition?.value === 'Left' as ContentAlignment
   const isButtonCenterAlignment = sectionData?.buttonPosition?.value === 'Centre' as ContentAlignment
-
+  
 
   const VideoAndTextComponent = () => {
     return(
@@ -86,21 +95,21 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
           key={sectionData?.image?.value?.id}
         >
           <div className={`container mx-auto grid lg:flex ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
-            <AVComponent
-            isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
-            videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
-            idComponent={index} 
-            videoControls={isPlaying} 
-            videoComponentRef={videoRef} 
-            onSeek={() => setIsPlaying(true)} 
-            onStart={() => setIsPlaying(true)} 
-            onPlay={() => setIsPlaying(true)} 
-            onPause={() => setIsPlaying(false)} 
-            flagVideoUrl={isInternalSourceMatchAPI} 
-            onClickIconPlay={handleTogglePlay} 
-            iconPlayWrapperRef={circlePlayButtonRef}            
-            />
+              <AVComponent
+              isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
+              videoContainerStyle={`w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1`}
+              videoSource={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
+              idComponent={index} 
+              videoControls={isPlaying} 
+              videoComponentRef={videoRef} 
+              onSeek={() => setIsPlaying(true)} 
+              onStart={() => setIsPlaying(true)} 
+              onPlay={() => setIsPlaying(true)} 
+              onPause={() => setIsPlaying(false)} 
+              flagVideoUrl={isInternalSourceMatchAPI} 
+              onClickIconPlay={handleTogglePlay} 
+              iconPlayWrapperRef={circlePlayButtonRef}            
+              />
             <TextDescAndButton
                 titleStyle={`${sectionData?.assetPosition?.value === "Right"
                 ? "mx-auto lg:text-left text-center"
@@ -114,7 +123,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
                 title={sectionData?.title?.value}
                 // buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
                 buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
-                buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
+                buttonStyle={`${sectionData?.buttonColorCode?.value === "#001A71" ? "text-white" : "text-black"} jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
                 description={sectionData?.description?.value} 
                 isButtonExist={sectionData?.buttonUrl?.value} 
                 onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
@@ -134,7 +143,7 @@ const ImageWithTextComponent = () => {
     className={`${sectionData?.assetPosition?.value === "Right"
         ? "flex-row-reverse text-center"
         : "text-left"
-      } w-full lg:py-8 lg:px-0 py-6 px-4 mb-6 lg:mb-12`}
+      } w-full lg:py-8 py-6 mb-6 lg:mb-12`}
     style={{ backgroundColor: sectionData?.backgroundColor?.value }}
     key={sectionData?.image?.value?.id}
   >
@@ -173,7 +182,7 @@ const ImageWithTextComponent = () => {
           // : "ml-0"
           // } jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:mx-0 lg:mr-auto lg:blue-bg lg:text-white`}  
           buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
-          buttonStyle={`jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}    
+          buttonStyle={`${sectionData?.buttonColorCode?.value === "#001A71" ? "text-white" : "text-black"} jsx-290076256 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}    
           // buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
           // buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}           
       />
@@ -205,7 +214,7 @@ const ImageBGWithTextComponent = () => {
               descriptionStyle="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis" 
               // buttonStyle="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit" 
               buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
-              buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}         
+              buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center ${sectionData?.buttonColorCode?.value === "#001A71" ? "text-white" : "text-black"} bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}         
               containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end pt-8 lg:pt-0'}`}
             />
             </div>
@@ -221,7 +230,7 @@ const TextAndButtonOnlyComponents = () => {
             // buttonStyle={`jsx-290076256 mt-3 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex mx-auto lg:mx-0`}
             // containerStyle='w-full p-6 mx-auto lg:p-72'
             buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
-            buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
+            buttonStyle={`${sectionData?.buttonColorCode?.value === "#001A71" ? "text-white" : "text-black"} jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
             containerStyle={`w-full p-6 mx-auto lg:p-72 flex flex-1 flex-col ${sectionData?.assetPosition?.value  === 'Left' ? 'flex items-end w-1/2' : 'flex items-start'}`}
             idComponent={index} 
             title={sectionData?.title?.value} 

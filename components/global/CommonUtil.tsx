@@ -16,9 +16,14 @@ export const GetTime = (time: any) => {
 
 }
 export const handleTagBackgroudColor = (index: number, MixedStyle: any) => {
-    const array = MixedStyle.split(',');
-    return array[index] === undefined ? array : array[index]
-}
+  if(MixedStyle){
+    const array = MixedStyle.split(",");
+    return array[index] === undefined ? array : array[index];
+  }
+else{
+   return "#FFFFF"
+ }
+};
 export const handlecategoryColorCode = (id: number, data: any) => {
     if (data === undefined) {
         return '#FFFFF'
@@ -88,7 +93,6 @@ export function customAdd(mainCatId: any, filter: any, productCategoryData: any 
     if(viewAllCheck && (findIndex === -1) ){
         const subCateIds = a?.map((data: any) => data?.name)
         coolStore.push({mainCatId, subCateIds})
-        console.log("coolstore -view all-->", coolStore)
         return coolStore;
     }else if(viewAllCheck && findIndex > -1){
         coolStore[findIndex] =  {...coolStore[findIndex], subCateIds: a?.map((data: any) => data?.name)}

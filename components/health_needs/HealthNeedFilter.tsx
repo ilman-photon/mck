@@ -5,6 +5,7 @@ import Image from 'next/image';
 import gifImage from '../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif';
 import { ImageComponent } from '../global/ImageComponent';
 import { customAdd, customUniqueElementArray, deleteMultipleElements, extractMainCategoryId, extractMainCategoryName, selectedProductType, selectedProductType_ } from '../global/CommonUtil';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface ISubCategory {
   id: number;
@@ -27,7 +28,8 @@ const HealthNeedFilter = ({
   sectionData,
   selectedRecommendedProduct,
   productSum,
-  productSearchCard
+  productSearchCard,
+  filterClicked
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -46,8 +48,8 @@ const HealthNeedFilter = ({
     });
     if(!productSearchCard){
     const currentURL = window.location.href;
-  const updatedURL = currentURL.split('?')[0]; 
-  window.location.href = updatedURL;
+    const updatedURL = currentURL.split('?')[0]; 
+    window.location.href = DOMPurify.sanitize(updatedURL);
     }
     else{
       fetchProductList('')
@@ -61,7 +63,6 @@ const HealthNeedFilter = ({
     const mainCatId = extractMainCategoryId(productCategoryData, item)
     if(selectedFilterItems[mainCatId]){
       selectedFilterItems[mainCatId].isCategoryChecked = false;
-      console.log("selectedFilterItems[mainCateId] -->", group, selectedFilterItems[mainCatId]?.isCategoryChecked)
       selectedFilterItems[mainCatId].map((sub_category: any ,idx :number  ) => {
         sub_category.checked = false;
         const tempLength = selectedFilterItems[mainCategoryId]['items'].length
@@ -71,11 +72,9 @@ const HealthNeedFilter = ({
       selectedFilterItems.map((category: any ,idx :number) => {
         category.map((sub_category: any) => {
           if(sub_category.name === item){
-            console.log(selectedFilterItems[idx]['items'],"before items")
             const index = selectedFilterItems[idx]?.['items'].indexOf(item);
             selectedFilterItems[idx]['items'].splice(index, 1);
             sub_category.checked = false;
-            console.log(selectedFilterItems[idx]['items'],"after items")
           }
         })
       })
@@ -122,11 +121,9 @@ const HealthNeedFilter = ({
     if(selectedFilterItems[mainCategoryId]){
       selectedFilterItems[mainCategoryId].items =  customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items);
     }
-    console.log("selected items itit --> ", selectedFilterItems[mainCategoryId], customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items), subCategoryValues.flat())
     if(customUniqueElementArray(selectedFilterItems[mainCategoryId]?.items)?.length === subCategoryValues.flat().length){
       if(selectedFilterItems[mainCategoryId]){
         const isAllAreChecked = selectedFilterItems[mainCategoryId].map((sub_category: any) => sub_category.checked).filter(Boolean);
-        console.log("itit 1-->", isAllAreChecked)
         if(isAllAreChecked?.length === subCategoryValues.flat().length){
           selectedFilterItems[mainCategoryId].isCategoryChecked = true;
         }
@@ -147,7 +144,6 @@ const HealthNeedFilter = ({
       }else{
         if(mainCategoryId === currentCategory?.mainCatId){
           if(mainCatNames?.includes(name)){
-            console.log("**SD -->before", mainCatNames, activeFilter)
             const findIndex = mainCatNames?.findIndex((item: any) => item === name)
             const findMainCatNameIndex = activeFilter?.flat().findIndex((item: any) => item === name);
             mainCatNames.splice(findIndex, 1);
@@ -157,7 +153,6 @@ const HealthNeedFilter = ({
             if(findCommonIndex>=0){
               common?.splice(findCommonIndex, 1)
             }
-            console.log("**SD -com->", mainCatNames, activeFilter.flat(), common, findCommonIndex, currentCategory?.subCateIds)
             const catIds = mainCatNames?.map((mcn: any) => extractMainCategoryId(productCategoryData, mcn)) 
             const process = catIds?.map((cId: any) =>selectedProductType_(productCategoryData, cId))
             const subCateNames =  process.flat()?.map((p: any) => p.name)
@@ -170,8 +165,6 @@ const HealthNeedFilter = ({
       }
     }
   }, [alternateFlag])
-
-  console.log("** active filter -->", activeFilter)
   const handleViewAllChange = (e: any, categoryId: any) => {
     let isCategoryChecked = false;
     let subCategoryChecked = false;
@@ -255,7 +248,7 @@ const HealthNeedFilter = ({
   //   return accumulator + obj?.data?.results?.length;
   // }, 0);
   return (
-    <div className='lg:mt-12 mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
+    <div className='lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
@@ -264,7 +257,7 @@ const HealthNeedFilter = ({
           id='hn_label_0003'
           aria-label={activeFiltersData?.activeFiltersText?.value}
         >
-          {activeFiltersData?.activeFiltersText?.value}
+          {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
             src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
@@ -310,7 +303,7 @@ const HealthNeedFilter = ({
                 id={`hn-001_0${'02'}`}
               />
               <div
-                className='underline text-sm lg:text-lg'
+                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -322,12 +315,12 @@ const HealthNeedFilter = ({
         </div>
         <div className='lg:hidden flex flex-row pb-4 justify-between'>
           <div className='flex'>
-            <span className='text-sofia-bold text-base font-extrabold text-mckblue'>FILTER</span>
+            <span className='text-sofia-bold text-base font-extrabold text-mckblue'>{DOMPurify.sanitize("FILTER")}</span>
             <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
-            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
             className='mr-2 ml-2'
-            alt={activeFiltersData?.activeFiltersText?.value}
+            alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}
           />
@@ -377,7 +370,7 @@ const HealthNeedFilter = ({
             )}
           </div>
         </div>
-        <div className='text-mcknormalgrey'  id='hn_label_003_3'>
+        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
           { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
@@ -410,8 +403,8 @@ const HealthNeedFilter = ({
                               >
                                 {leftfiltermaindata?.categoryImage?.expandedValue ? 
                                 <ImageComponent
-                                  src={leftfiltermaindata?.categoryImage?.expandedValue?.url}
-                                  alt={leftfiltermaindata?.mainCategory?.value[0].name}
+                                  src={DOMPurify.sanitize(leftfiltermaindata?.categoryImage?.expandedValue?.url)}
+                                  alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0].name)}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
                                   width={24} className="mr-2" />
@@ -480,7 +473,7 @@ const HealthNeedFilter = ({
                                         leftfiltermaindata?.mainCategory
                                           ?.value[0]?.name + 'View All'
                                       }
-                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer leading-[21px] font-normal'
                                       id={'mck-'+ activeFiltersData?.viewAllText?.value}
                                     >
                                       {activeFiltersData?.viewAllText?.value}
@@ -530,7 +523,7 @@ const HealthNeedFilter = ({
                                         />
                                         <label
                                           htmlFor={leftfiltersubdata?.name + index}
-                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                                           aria-label={leftfiltersubdata?.name}
                                         >
                                           {leftfiltersubdata?.name}
@@ -558,6 +551,7 @@ const HealthNeedFilter = ({
             sectionData={sectionData}
             selectedRecommendedProduct={selectedRecommendedProduct}
             productSearchCard={productSearchCard}
+            filterClicked={filterClicked}
           />
         </div>
       </div>

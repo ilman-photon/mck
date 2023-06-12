@@ -12,7 +12,7 @@ import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 import axiosInstance from "@/utils/axiosInstance";
 
-let sectionData: any = [];
+// let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 function ProductListComponent() {
   const router = useRouter();
@@ -34,6 +34,7 @@ function ProductListComponent() {
   const [productName, setProductName] = useState<any>()
   const [productSum , setProductSum] = useState<any>()
   const [filterClicked, setFilterClicked] = useState(false);
+  const [sectionData , setSectionData] = useState<any>([])
   const productSearchCard = true
   let selectedCategoryName: any = [];
   // Right section product carousel data
@@ -47,8 +48,11 @@ function ProductListComponent() {
     } else {
       queryParameter = `${filter} and`;
     }
+    const replacement = ""
+    let result:string = queryParameter?.replace(/&\s*/g,replacement)
+    result = result?.replace(/\s+/g," ")?.replace(',','')
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} ContentType/any(t:t eq 'ProductDetailsPage'))`);
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${result} ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
         if(res.data.results.length === 0){
@@ -60,10 +64,10 @@ function ProductListComponent() {
           ])
         }
         setFilterClicked(true);
-        setProductName(res.data.results[0].productType?.value[0].name)
+        setProductName(res.data.results[0]?.productType?.value[0].name)
         setProductSum(res.data.totalMatching)
         SetProductListData( [
-          {item: {name: res.data.results[0].productType?.value[0].name }},
+          {item: {name: res.data.results[0]?.productType?.value[0].name }},
           {data: {results: res.data.results}},
         ])
       })
@@ -73,8 +77,9 @@ function ProductListComponent() {
       });
   }
 
+  // filter: ((productType/value/name eq 'Cough Cold Flu Relief') and ContentType/any(t:t eq 'ProductDetailsPage')): 
+  // filter: ((productType/value/name eq 'Digestion Health') and ContentType/any(t:t eq 'ProductDetailsPage'))
   useEffect(() => {
-    console.log("in useffect 2")
     setActiveFilter([]);
     fetchData();
   }, [router]);
@@ -122,8 +127,8 @@ function ProductListComponent() {
                 :category.isBusinessVerticalCategory ? " or " : " and ";
             queryParams += `${
               category.isBusinessVerticalCategory
-                ? category.productType
-                : category.productType.toLowerCase()
+                ? category?.productType
+                : category?.productType.toLowerCase()
             }/value/name eq '${encodeItemName}' ${concatStr}`;
           });
           minSubCategoryCnt += category.items.length;
@@ -198,13 +203,12 @@ function ProductListComponent() {
 
 
   const fetchRecommandedProductData = async () => {
-    const tempName = productItemName?.replace(/ /g, "-")
+    const tempName = productItemName?.length>0 ? productItemName : productName
+    const correctedName = tempName?.replace(/ /g, "-")
     const recommendedCategoryData = await axiosInstance(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
     );
     const response = recommendedCategoryData?.data[0]?.contentArea
-    
-  console.log(response,"response-rec")
     setRecommendedProduct(response)
     const productCategoryDataList =
     recommendedCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
@@ -213,7 +217,7 @@ function ProductListComponent() {
   }
   useEffect(() => {
     fetchRecommandedProductData()
-  }, [router]) 
+  }, [router,productName]) 
 
 
   const createTempFilterArr = (results: any) => {
@@ -292,7 +296,8 @@ function ProductListComponent() {
             );
 
             if (!isDuplicate) {
-              sectionData.push(id);
+              setSectionData((prevSectionData :any) => [...prevSectionData, id]);
+              // sectionData.push(id);
             }
           }
         }

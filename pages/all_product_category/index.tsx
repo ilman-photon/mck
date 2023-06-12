@@ -10,6 +10,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from "isomorphic-dompurify";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -126,7 +127,6 @@ function AllProductCategoryPage({
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
-      console.log("activeFiltersData list -->", activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
       const productCategoryData = await axiosInstance(
@@ -137,7 +137,6 @@ function AllProductCategoryPage({
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
       setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
-      console.log("product catedata list --> ", productCategoryDataList);
       setAllProductCategoryList(productCategoryDataList);
       // Four column block area
       const productLandingPage = await axiosInstance(
@@ -337,7 +336,7 @@ function AllProductCategoryPage({
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        window.location.href = updatedURL;
+        window.location.href = DOMPurify.sanitize(updatedURL);
       }
     }
     if (queryParams) fetchProductList(queryParams);
@@ -347,6 +346,7 @@ function AllProductCategoryPage({
     fetchCategoryId()
       .then((res) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
+        if(id){
         return axiosInstance.get(
           `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
           {
@@ -355,6 +355,7 @@ function AllProductCategoryPage({
             },
           }
         );
+        }
       })
       .catch((e) => {
         setCategoryLoding(true);
@@ -466,7 +467,12 @@ function AllProductCategoryPage({
             </div>
           </div>
         ))}
-      {carouselData && <CarouselComponent sectionData={carouselData} />}
+      {carouselData && (
+        <CarouselComponent
+          isCarouselAvaible={carouselData ? true : false}
+          sectionData={carouselData}
+        />
+      )}
       {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">

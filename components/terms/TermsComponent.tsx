@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
+
 function TermsComponent() {
   const [apiRespond, setApiRespond] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +31,7 @@ function TermsComponent() {
   }, []);
 
   useEffect(() => {
-    document.title = apiRespond?.data[0]?.title.value || "Terms of Use";
+    document.title = DOMPurify.sanitize(apiRespond?.data[0]?.title.value) || "Terms of Use";
   }, [apiRespond]);
 
   return (
@@ -53,11 +55,11 @@ function TermsComponent() {
       ) : (
         <>
           <h1 className="lg:text-54 text-27 text-gtl-med text-mckblue pb-3 text-center">
-            {apiRespond?.data[0]?.title.value}
+            {DOMPurify.sanitize(apiRespond?.data[0]?.title?.value)}
           </h1>
           <div
             dangerouslySetInnerHTML={{
-              __html: apiRespond?.data[0]?.description.value,
+              __html: DOMPurify.sanitize(apiRespond?.data[0]?.description?.value),
             }}
           ></div>
         </>

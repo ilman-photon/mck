@@ -43,6 +43,10 @@ function WhereComponent() {
    */
   const usaLon = useWhereToBuyStore((state: any) => state.usaLon);
   const usaLat = useWhereToBuyStore((state: any) => state.usaLat);
+  /**
+   * @description Handler function for View Online Stores Detail
+   */
+  const onViewOnline = useWhereToBuyStore(state => state.onViewOnlineStore)
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
@@ -52,10 +56,6 @@ function WhereComponent() {
 
   const showMapClicked = (lat: any, long: any, store: any) => {
     window.open("https://maps.google.com?q=" + lat + "," + long);
-  };
-
-  const showOnline = (url: any) => {
-    window.open(url, "_blank");
   };
 
   function fectchLatandLongDetails() {
@@ -246,11 +246,11 @@ function WhereComponent() {
                       </div>
                     </div>
                     <div className="flex flex-row justify-between">
-                      {value?.StoreUrl ? (
+                      {value?.StoreId ? (
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
                           id={`wb-label-08_0${index}`}
-                          onClick={() => showOnline(value.StoreUrl)}
+                          onClick={() => onViewOnline(value?.StoreId)}
                         >
                           View Online
                         </div>
@@ -365,12 +365,12 @@ function WhereComponent() {
                             </h2>
                           </div>
 
-                          <div className="flex flex-row mt-2">
+                          <div className="flex flex-row justify-between mt-2">
                             <div className="items-center justify-center">
-                              {value?.StoreUrl ? (
+                              {value?.StoreId ? (
                                 <button
                                   className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
-                                  onClick={() => showOnline(value.StoreUrl)}
+                                  onClick={() => onViewOnline(value?.StoreId)}
                                 >
                                   View Online
                                 </button>

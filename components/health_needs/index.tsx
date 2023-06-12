@@ -9,6 +9,8 @@ import Image from "next/image";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
+
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 let _temparray: any = [];
@@ -74,7 +76,6 @@ const HealthNeedsComponent = ({
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
       .then((res) => {
-        console.log("FetchProductList----- ", res);
         setFilterClicked(true);
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
@@ -232,7 +233,7 @@ const HealthNeedsComponent = ({
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        window.location.href = updatedURL;
+        window.location.href = DOMPurify.sanitize(updatedURL);
       }
     }
 

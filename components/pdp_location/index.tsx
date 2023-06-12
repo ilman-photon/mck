@@ -15,9 +15,11 @@ function PdpLocation(props: any) {
   const [latitude, setLatitude] = useState(33.2411354);
   const [longitude, setLongitude] = useState(-111.7256936);
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [isCustomSearch, setIsCustomSearch] = useState(false)
   // let textInput: any
   const [textInput, setTextInput] = useState<any>("");
   const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey);
+  const onViewOnline = useWhereToBuyStore(state => state.onViewOnlineStore)
   const healthApiKey = useWhereToBuyStore(
     (state: any) => state.healthMartApiKey
   );
@@ -31,9 +33,6 @@ function PdpLocation(props: any) {
     window.open("https://maps.google.com?q=" + lat + "," + long);
   };
 
-  const showOnline = (url: any) => {
-    window.open(url, "_blank");
-  };
   function fectchLatandLongDetails() {
     return axios.get(
       `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
@@ -101,6 +100,7 @@ function PdpLocation(props: any) {
         setLongitude(res.data.results[0].geometry.location["lng"]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
+      setIsCustomSearch(true)
     // }
   };
 
@@ -139,7 +139,7 @@ function PdpLocation(props: any) {
         <GoogleMap
           mapContainerClassName="map-container product-detail-map box-border border border-solid border-mckblue"
           mapContainerStyle={style}
-          zoom={10}
+          zoom={isCustomSearch ? 15 : 10}
           options={mapConfigOptions}
           center={{
             lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,
@@ -188,7 +188,7 @@ function PdpLocation(props: any) {
                           <p className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
                             {value.StoreName},{" "}
                           </p>
-                          <p className="text-sofia-reg text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
+                          <p className="text-sofia-reg text-lg text-base font-normal lg:mb-1 lg:leading-5">
                             {value.Address},{" "}
                           </p>
                           <p className="text-sofia-reg text-lg text-base font-normal lg:leading-5 lg:mb-1">
@@ -206,11 +206,11 @@ function PdpLocation(props: any) {
 
                       <div className="flex flex-row justify-between mb-1">
                         <div className="items-center justify-center">
-                          {value?.StoreUrl ? (
+                          {value?.StoreId ? (
                             <button
                               className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-md leading-5 text-lg"
                               aria-pressed="true"
-                              onClick={() => showOnline(value.StoreUrl)}
+                              onClick={() => onViewOnline(value?.StoreId)}
                             >
                               View Online
                             </button>
@@ -272,7 +272,7 @@ function PdpLocation(props: any) {
                   </p>
                   <p
                     aria-label="1230 Lindon Ave"
-                    className="font-extrabold leading-5 mb-2"
+                    className="font-normal leading-5 mb-2"
                     id={`pdp-address_${props.index}-${index}`}
                   >
                     {value.Address},{" "}
@@ -302,12 +302,12 @@ function PdpLocation(props: any) {
               </div>
               <div className="flex flex-row justify-between mt-1">
                 <div>
-                  {value?.StoreUrl ? (
+                  {value?.StoreId ? (
                     <div
                       className="text-lg font-extrabold text-mckblue text-sofia-bold leading-5 cursor-pointer"
                       role="link"
                       id={`pdp-view_${props.index}-${index}`}
-                      onClick={() => showOnline(value.StoreUrl)}
+                      onClick={() => onViewOnline(value?.StoreId)}
                     >
                       View Online
                     </div>

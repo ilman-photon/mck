@@ -23,6 +23,9 @@ const nextConfig = {
       : test
       ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
       : "https://mcco02mstrub73kinte.dxcloud.episerver.net",
+    PASSWORD:"P@ssword123$",
+    USERNAME:"apiuser",
+    CLIENT_SECRET:"SuperSecretPassword"
   },
 };
 

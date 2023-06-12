@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import DOMPurify from 'isomorphic-dompurify';
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
@@ -124,7 +125,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     const handleScroll = () => {
       const offset = window.scrollY;
       // Adjust the scroll position value as per your requirements
-      if (offset > 100) {
+      if (offset > 28) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -177,7 +178,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70" : isSticky ? "sticky" : "relative z-40"
+          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70 " : isSticky ? "sticky" : "relative z-40"
         }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
@@ -205,7 +206,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
           >
             <img
               id="logo-image"
-              src={logoSrc || firstLogo}
+              src={DOMPurify.sanitize(logoSrc || firstLogo)}
               alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
               className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}
@@ -213,7 +214,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
               role="navigation"
             />
           </div>
-          <div className="lg:w-full flex border-0 w-18 header-sticky">
+          <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
             <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
             <Search />
           </div>

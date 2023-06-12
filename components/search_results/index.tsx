@@ -329,7 +329,7 @@ function ResultComponent() {
 
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
+        // console.log(e);
       })
     document.documentElement.lang = "en";
   }, []);

@@ -6,6 +6,7 @@ import HeroArticle from "./HeroArticle";
 import { ImageComponent } from "../global/ImageComponent";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
+
 const BlogListContainer = () => {
     const { response, error, loading } = useAxios({
         method: "GET",
@@ -22,12 +23,12 @@ const BlogListContainer = () => {
 
     useEffect(() => {
         // Set the title of the document dynamically
-        document.title = DOMPurify.sanitize(response?.data[0]?.title.value) || "Blog Listing Page";
+        document.title = DOMPurify.sanitize(response?.data[0]?.title?.value) || "Blog Listing Page";
     }, [JSON.stringify(response)]);
 
     return (
         <>
-            <HeroArticle data={response?.data.results[0]} />
+            <HeroArticle data={response?.data?.results[0]} />
             <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1' id="carouselExampleCaptions">
                 {response?.data.results?.map((item: any, index: any) => (
                     <React.Fragment key={item?.contentLink?.id}>
@@ -40,11 +41,11 @@ const BlogListContainer = () => {
                                         <LinkComponent
                                             href={{
                                                 pathname: "/blog_details",
-                                                query: { id: item.routeSegment },
+                                                query: { id: item?.routeSegment },
                                             }}
                                         >
-                                            <div className="lg:h-314 h-240 flex">
-                                                <ImageComponent src={DOMPurify.sanitize(item.image.value.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item.image.value.url)} id={item.image.value.id} />
+                                            <div className="lg:h-314 h-240 flex" aria-hidden="true">
+                                                <ImageComponent src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item?.image?.value?.url)} id={item?.image?.value?.id} />
                                             </div>
                                         </LinkComponent>
                                     </figure>
@@ -53,14 +54,14 @@ const BlogListContainer = () => {
                                             <LinkComponent
                                                 href={{
                                                     pathname: "/blog_details",
-                                                    query: { id: item.routeSegment },
+                                                    query: { id: item?.routeSegment },
                                                 }}
                                             >
-                                                <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-28  text-p-ellipsis' aria-labelledby={item.title.value}>{item.title.value}</p>
+                                                <p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue mb-3 no-underline lg:leading-9 lg:h-28  text-p-ellipsis' aria-labelledby={item.title.value}>{item?.title?.value}</p>
                                             </LinkComponent>
                                             <div className='pb-3 pt-3'>
-                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item.readMinute.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item.startPublish)}</span>
-                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item.readMinute.value}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${item?.readMinute?.value ? 'shade-grey-right-border' : ''}`}>{GetTime(item?.startPublish)}</span>
+                                                <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{item?.readMinute?.value}</span>
                                                 {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                             </div>
                                             <div className='flex flex-wrap h-25 overflow-hidden'>

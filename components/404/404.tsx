@@ -10,7 +10,6 @@ function FourOhFourCoumponent() {
         return axiosInstance.get(
             `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/page-not-found/&expand=*`);
     }
-console.log(notFoundData, "error")
     useEffect(() => {
         fetchNotFoundDetails()
             .then((res) => {

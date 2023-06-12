@@ -4,6 +4,8 @@ import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
+
 const SocialMediaIconComponent = () => {
 
     const [SocialMediaIcon, setSocialMediaIcon] = useState<any>();
@@ -31,7 +33,7 @@ const SocialMediaIconComponent = () => {
                     >
                         <ImageComponent
                             src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url}
-                            alt={item?.socialMediaImage?.expandedValue?.altText?.value}
+                            alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
                             className="socialimg"
                        />
