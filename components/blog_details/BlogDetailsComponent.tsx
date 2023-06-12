@@ -86,6 +86,7 @@ const BlogDetailsComponent = () => {
         >
           <div
             className="col-start-1 col-end-7 rounded-lg overflow-hidden"
+            aria-hidden="true"
             style={{
               display: BlogInfo.image?.expandedValue?.url ? "block" : "none",
             }}

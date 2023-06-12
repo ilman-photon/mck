@@ -77,7 +77,7 @@ function ProductFilter({
                           />
                           <label
                             htmlFor={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
-                            className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                            className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                             id=""  aria-label="View All"
                           >
                             View All
@@ -122,7 +122,7 @@ function ProductFilter({
                               />
                               <label
                                 htmlFor={`${leftfiltersubdata?.name}_${index}`}
-                                className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                                className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                                 aria-label={leftfiltersubdata?.name}
                               >
                                 {leftfiltersubdata?.name}

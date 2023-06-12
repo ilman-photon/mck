@@ -27,6 +27,8 @@
         }
     }
 }
+
+
 @media (max-width: 360px) {
     .mobile-navwrapper {
         max-width: 85% !important;
@@ -227,6 +229,21 @@
     .isStickyActive {
         .logo-image {
            margin-top: 10px !important;
+        }
+    }
+}
+
+@media (min-width: 1023px) {
+    .isStickyActive {
+        .brand-logo {
+            img {
+                width: 180px;
+                position: absolute;
+                margin-top: 12px;
+                z-index: 9;
+                fill: rgb(255, 255, 255);
+                height: auto;
+            }
         }
     }
 }

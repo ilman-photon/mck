@@ -345,6 +345,7 @@ function AllProductCategoryPage({
     fetchCategoryId()
       .then((res:any) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
+        if(id){
         return axiosInstance.get(
           `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
           {
@@ -353,6 +354,7 @@ function AllProductCategoryPage({
             },
           }
         );
+        }
       })
       .catch((e:any) => {
         setCategoryLoding(true);

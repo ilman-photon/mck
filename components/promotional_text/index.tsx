@@ -27,7 +27,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
         </h3>
         <div
           // id="promotion-text"
-          className={`mx-auto w-full lg:${textAlignment === 'text-center' && 'w-1/2'} text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt text-center `}
+          className={`mx-auto w-full lg:${textAlignment === 'text-center' && 'w-1/2'} text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt text-left `}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(sectionData?.description?.value) }}
           id={`${index}_dis_001`}
         ></div>
