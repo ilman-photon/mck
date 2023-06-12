@@ -10,7 +10,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -465,7 +465,12 @@ function AllProductCategoryPage({
             </div>
           </div>
         ))}
-      {carouselData && <CarouselComponent sectionData={carouselData} />}
+      {carouselData && (
+        <CarouselComponent
+          isCarouselAvaible={carouselData ? true : false}
+          sectionData={carouselData}
+        />
+      )}
       {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">

@@ -17,7 +17,7 @@ function HealthNeedsPage() {
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
     headers: {
       "Accept-Language": "en",
-    //  "Authorization":`Bearer ${localStorage.getItem("token")}`
+      //  "Authorization":`Bearer ${localStorage.getItem("token")}`
     },
   });
 
@@ -32,13 +32,13 @@ function HealthNeedsPage() {
 
   function FetchProductFilter() {
     return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`);
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`
+    );
   }
 
   useEffect(() => {
     // Set the lang attribute to "en" on the <html> element
     document.documentElement.lang = "en";
-  
   }, []);
 
   useEffect(() => {

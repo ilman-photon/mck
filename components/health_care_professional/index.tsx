@@ -12,7 +12,7 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
 import { useWindowResize } from "@/hooks/useWindowResize";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -35,12 +35,12 @@ function HealthCareProfessionalComponent({
   const [tabRelated, setTabRelated] = useState<any>([]);
   const [tabSelected, setTabSelected] = useState("Key Benefits");
   const [tabClicked, setTabClicked] = useState<any[]>();
-  const [windowWidth] = useWindowResize()
+  const [windowWidth] = useWindowResize();
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
 
   useEffect(() => {
-    setIsMobile(windowWidth >= 968 ? false : true)
-  }, [windowWidth])
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
 
   const handleTabClick = (idx: any, tabTitle: string) => {
     setTabSelected(tabTitle);
@@ -156,15 +156,14 @@ function HealthCareProfessionalComponent({
     });
   }
   const handleOnSlideChange = (swiper: any) => {
-    if(isMobile){
-      swiper.autoplay.running = true
+    if (isMobile) {
+      swiper.autoplay.running = true;
       setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
-    }
-    else{
-      swiper.autoplay.running = false
+    } else {
+      swiper.autoplay.running = false;
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
-  }
+  };
   return (
     <>
       {loading ? (
@@ -195,11 +194,15 @@ function HealthCareProfessionalComponent({
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
-                      <div className="bg-gradient absolute"></div>
+
+                      {!isCarusolAvaible ? (
+                        <div className="bg-gradient absolute"></div>
+                      ) : (
+                        <br />
+                      )}
                     </div>
                   )}
                 </div>
-
                 <div
                   className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6`}
                   style={{ background: customerBackgroundColorCode }}
@@ -241,7 +244,9 @@ function HealthCareProfessionalComponent({
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
                                       id={`hcp-label-000${idx}`}
                                       dangerouslySetInnerHTML={{
-                                        __html: DOMPurify.sanitize(customer?.reviewComment?.value),
+                                        __html: DOMPurify.sanitize(
+                                          customer?.reviewComment?.value
+                                        ),
                                       }}
                                     ></div>
                                     <div
@@ -285,7 +290,10 @@ function HealthCareProfessionalComponent({
                       </Swiper>
                     </div>
                     <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/{isMobile ? Math.ceil(customers?.length) : Math.ceil(customers?.length / 3)}
+                      {reviewCount}/
+                      {isMobile
+                        ? Math.ceil(customers?.length)
+                        : Math.ceil(customers?.length / 3)}
                     </div>
                   </div>
                 </div>
@@ -293,7 +301,9 @@ function HealthCareProfessionalComponent({
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
                     id="hcp-btn-007"
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(descriptionValue) }}
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(descriptionValue),
+                    }}
                   />
                   <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
                     <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
@@ -363,7 +373,9 @@ function HealthCareProfessionalComponent({
                                   className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(tab?.description?.value),
+                                    __html: DOMPurify.sanitize(
+                                      tab?.description?.value
+                                    ),
                                   }}
                                 />
                               </div>
