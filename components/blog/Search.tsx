@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import React, { memo, useState, useEffect } from "react";
 import { fetchBlogSearch } from "./BlogAPI";
+import { useRouter } from "next/router";
 interface CatogaryComponentProps {
   placeholder: any;
   searchText: string;
@@ -18,6 +19,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   const [error, setError] = useState<boolean>(false);
   const [search, setsearch] = useState<any>();
   const [ActiveClose, setActiveClose] = useState<any>(true);
+  const router = useRouter();
   useEffect(() => {
     if (searchText) {
       setsearch(searchText);
@@ -27,19 +29,24 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
 
   const fetchSearchBlog = async () => {
     if (search === undefined) {
-    setActiveClose(true);
-        
+      setActiveClose(true);
     } else {
       fetchBlogSearch(search)
         .then((res) => {
-            setActiveClose(false);
+          setActiveClose(false);
           handleResponse(res.data.results, search);
         })
         .catch((e: Error | AxiosError) => {
           setError(true);
-          console.log(e);
+          // handleFetchSerach();
         });
     }
+  };
+  const handleFetchSerach = () => {
+    router.push({
+      pathname: "/blog-search-result",
+      query: { id: search },
+    });
   };
   const HandleChange = (event: any) => {
     const { value } = event.target;
