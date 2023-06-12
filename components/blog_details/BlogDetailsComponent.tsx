@@ -80,7 +80,7 @@ const BlogDetailsComponent = () => {
           </div>
         </div>
       ) : (
-        <div
+        <div role="main"
           className="container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto "
           id="carouselExampleCaptions"
         >
@@ -91,9 +91,10 @@ const BlogDetailsComponent = () => {
               display: BlogInfo.image?.expandedValue?.url ? "block" : "none",
             }}
           >
-            <ImageComponent
-              className="m-auto w-full"
+            <ImageComponent              
+              aria-hidden={true}
               src={DOMPurify.sanitize(BlogInfo.image?.expandedValue?.url)}
+              className="m-auto w-full"
               alt={BlogInfo.image?.expandedValue?.name}
               id={BlogInfo.image?.expandedValue?.name}
             />
