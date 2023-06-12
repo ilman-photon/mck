@@ -109,8 +109,8 @@ export default function Home() {
                     />
                   </div>
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
-                  <div className="mx-4 lg:mx-18">
-                    <div className="container mx-auto px-5">
+                  <div className="">
+                    <div className="container mx-auto">
                       <RecommendationalProductComponent
                         indexs={`hp_0${index}`}
                         sectionData={filteredData("RecommendedProductBlock")}
