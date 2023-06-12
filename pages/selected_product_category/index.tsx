@@ -8,15 +8,15 @@ import GoogleTagManager from "@/components/google_tag_manager";
 import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 
 function ProductListPage() {
-  const selectedCategory = useHeaderStore(state => state.selectedCategory)
-  const categoryName=selectedCategory?.replace(/ /g, "-")
+  const selectedCategory = useHeaderStore((state) => state.selectedCategory);
+  const categoryName = selectedCategory?.replace(/ /g, "-");
   const [token, setToken] = useState(null);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`,
     headers: {
       "Accept-Language": "en",
-   //   "Authorization":`Bearer ${localStorage.getItem("token")}`
+      //   "Authorization":`Bearer ${localStorage.getItem("token")}`
     },
   });
 
@@ -35,20 +35,28 @@ function ProductListPage() {
 
   useEffect(() => {
     // Set the title of the document dynamically
-    if (response && response.data && response.data.length > 0 && response.data[0].title && response.data[0].title.value) {
-        document.title = response.data[0].title.value;
+    if (
+      response &&
+      response.data &&
+      response.data.length > 0 &&
+      response.data[0].title &&
+      response.data[0].title.value
+    ) {
+      document.title = response.data[0].title.value;
     } else {
-        document.title = "Selected Product Page";
+      document.title = "Selected Product Page";
     }
-
-    
   }, [JSON.stringify(response)]);
 
   return (
     <>
       <GoogleTagManager />
-      <HeaderComponent />
-
+      <HeaderComponent
+        isCarusolAvaible={
+          response?.data[0]?.contentArea?.expandedValue[0]?.name ==
+            "Carousel" && true
+        }
+      />
       {error && <p>{error.message}</p>}
       {!loading && !error && response && (
         <CarouselComponent sectionData={filteredData("CarouselBlock")} />
