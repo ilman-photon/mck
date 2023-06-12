@@ -88,6 +88,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         className="h-240 lg:h-276 flex"
                         role="button"
                         tabIndex={0}
+                        aria-hidden="true"
                       >
                         <ImageComponent
                           src={item?.image?.value?.url}

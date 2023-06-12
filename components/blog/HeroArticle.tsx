@@ -22,6 +22,7 @@ const HeroArticle = ({ data }: any) => {
                         id={data?.image.value?.name}
                         src={DOMPurify.sanitize(data?.image?.value?.url)}
                         alt={DOMPurify.sanitize(data?.image?.value?.url)}
+                        aria-hidden="true"
                     />
                 </figure>
             </LinkComponent>
