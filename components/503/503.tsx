@@ -1,7 +1,6 @@
 import axiosInstance from "@/utils/axiosInstance";
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import DOMPurify from 'isomorphic-dompurify';
 
 function ServiceUnavailableCoumponent() {
     const [serviceErrorData, SetServiceErrorData] = useState<any>();

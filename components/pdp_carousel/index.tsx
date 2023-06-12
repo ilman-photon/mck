@@ -37,7 +37,7 @@ function PdpCarousel(prodViewData: any) {
 
   useEffect(() => {
     fetchPDPCarouselDetails()
-      .then((res) => {
+      .then((res:any) => {
         setProdResponse(res.data[0]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
@@ -118,7 +118,7 @@ function PdpCarousel(prodViewData: any) {
                                 `}
                     id={"pdp_carousel_" + index}
                     // key={imgdata?.id}
-                    key={Math.random()}
+                    key={`pdpcarousalkey${index}`}
                     onClick={() => {
                       handleImageClick(index);
                     }}

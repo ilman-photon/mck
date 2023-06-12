@@ -58,7 +58,7 @@ const HealthNeedsComponent = ({
     const values = matches.map((match) => match[1]);
 
     let categoryArrayList = _temparray;
-
+  
     let queryParameter = "";
     if (filter === "") {
       // queryParameter = `(productType/value/name eq 'Acute Care')`;
@@ -75,7 +75,7 @@ const HealthNeedsComponent = ({
     const promise = axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`);
     promise
-      .then((res) => {
+      .then((res:any) => {
         setFilterClicked(true);
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
@@ -355,7 +355,7 @@ const HealthNeedsComponent = ({
         .get(
           // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
           `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`)
-        .then((res) => {
+        .then((res:any) => {
           setProductSum(res.data.totalMatching);
           let tempResults: any = [];
           res.data.results.map((item: any) => {
