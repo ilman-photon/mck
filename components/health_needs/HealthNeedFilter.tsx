@@ -247,7 +247,7 @@ const HealthNeedFilter = ({
   //   return accumulator + obj?.data?.results?.length;
   // }, 0);
   return (
-    <div className='lg:mt-12 mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
+    <div className='lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0'>
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
@@ -302,7 +302,7 @@ const HealthNeedFilter = ({
                 id={`hn-001_0${'02'}`}
               />
               <div
-                className='underline text-sm lg:text-lg'
+                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -369,7 +369,7 @@ const HealthNeedFilter = ({
             )}
           </div>
         </div>
-        <div className='text-mcknormalgrey'  id='hn_label_003_3'>
+        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
           { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
         </div>
       </section>
@@ -472,7 +472,7 @@ const HealthNeedFilter = ({
                                         leftfiltermaindata?.mainCategory
                                           ?.value[0]?.name + 'View All'
                                       }
-                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                                      className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer leading-[21px] font-normal'
                                       id={'mck-'+ activeFiltersData?.viewAllText?.value}
                                     >
                                       {activeFiltersData?.viewAllText?.value}
@@ -522,7 +522,7 @@ const HealthNeedFilter = ({
                                         />
                                         <label
                                           htmlFor={leftfiltersubdata?.name + index}
-                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer'
+                                          className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                                           aria-label={leftfiltersubdata?.name}
                                         >
                                           {leftfiltersubdata?.name}
