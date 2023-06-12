@@ -4,7 +4,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
-import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 
@@ -153,12 +152,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           })}
         </Swiper>
       </div>
-      <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-        {reviewCount}/
-        {isMobile
-          ? Math.ceil(relatedArticle?.length)
-          : Math.ceil(relatedArticle?.length / 2)}
-      </div>
+      {relatedArticle?.length >= 2 && !isMobile && (
+        <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+          {reviewCount}/
+          {isMobile
+            ? Math.ceil(relatedArticle?.length)
+            : Math.ceil(relatedArticle?.length / 2)}
+        </div>
+      )}
     </div>
   );
 };
