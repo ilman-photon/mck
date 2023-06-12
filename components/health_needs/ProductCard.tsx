@@ -13,9 +13,12 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
   };
 
   return (
-    <div className="swiper-list-item lg:w-[202px] w-[166px] lg:min-h-[420px] min-h-[300px] rounded-lg border border-[#CCD1E3] mr-1 p-4 ">
-      <div
+    <div className="swiper-list-item lg:w-[202px] w-[166px] lg:min-h-[420px] min-h-[300px] rounded-lg border border-[#CCD1E3] mr-1 p-4 "
+        role="button"
+        tabIndex={0}
         onClick={() => handleProductClick(cardData)}
+    >
+      <div
         className="cursor-pointer"
       >
         <div className="lg:h-60 h-28 flex items-center justify-center" aria-hidden="true">

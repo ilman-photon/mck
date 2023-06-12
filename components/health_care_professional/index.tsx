@@ -4,7 +4,7 @@ import HeaderImage from "../../public/images/health-professional.png";
 import Quotes from "../../public/images/teamcarousel-quotes.png";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import CarouselComponent from "../carousel";
@@ -223,6 +223,14 @@ function HealthCareProfessionalComponent({
                         slidesPerView={isMobile ? "auto" : 3}
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
+                        a11y={{
+                          prevSlideMessage:"",
+                          nextSlideMessage: "",
+                          firstSlideMessage:"",
+                          lastSlideMessage:"",
+                        }
+                        }
+                        modules={[A11y]}
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
