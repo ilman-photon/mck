@@ -173,7 +173,8 @@ module.exports = {
         170: "170px",
         169: "169px",
         73: "-73px",
-        145: "-145px"
+        145: "-145px",
+        50: "50px",
       },
       fontSize: {
         32: "2rem",
@@ -220,6 +221,7 @@ module.exports = {
         30:"30px",
         61:"61px",
         18:"18px",
+        21:"21px",
       },
       borderWidth: {
         '0.5': '0.5px',
