@@ -15,6 +15,7 @@ function PdpLocation(props: any) {
   const [latitude, setLatitude] = useState(33.2411354);
   const [longitude, setLongitude] = useState(-111.7256936);
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [isCustomSearch, setIsCustomSearch] = useState(false)
   // let textInput: any
   const [textInput, setTextInput] = useState<any>("");
   const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey);
@@ -101,6 +102,7 @@ function PdpLocation(props: any) {
         setLongitude(res.data.results[0].geometry.location["lng"]);
       })
       .catch((e: Error | AxiosError) => console.log(e));
+      setIsCustomSearch(true)
     // }
   };
 
@@ -139,7 +141,7 @@ function PdpLocation(props: any) {
         <GoogleMap
           mapContainerClassName="map-container product-detail-map box-border border border-solid border-mckblue"
           mapContainerStyle={style}
-          zoom={10}
+          zoom={isCustomSearch ? 15 : 10}
           options={mapConfigOptions}
           center={{
             lat: responseValue?.length > 0 ? responseValue[0]?.Lat : 33.2411354,

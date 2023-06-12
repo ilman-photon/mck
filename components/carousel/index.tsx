@@ -32,7 +32,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
-    if (sectionData[0]?.autoRotate?.value) {
+    if (sectionData?.[0]?.autoRotate?.value) {
       interval = setInterval(() => {
         !isPause && infiniteScroll();
       }, Number(sectionData[0]?.timeInterval?.value));
