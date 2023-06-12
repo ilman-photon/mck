@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
@@ -62,6 +62,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           onSlideChange={(swiper) => {
             handleOnSlideChange(swiper);
           }}
+          a11y={{
+            prevSlideMessage:"",
+            nextSlideMessage: "",
+            firstSlideMessage:"",
+            lastSlideMessage:"",
+          }
+          }
+          modules={[A11y]}
         >
           {relatedArticle?.map((item: any, index: any) => {
             return (
@@ -78,6 +86,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         }
                         }
                         className="h-240 lg:h-276 flex"
+                        role="button"
+                        tabIndex={0}
                       >
                         <ImageComponent
                           src={item.image.value.url}
@@ -93,6 +103,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           onClick={() =>
                             OnRelatedArticleClick(item.routeSegment)
                           }
+                          role="button"
+                          tabIndex={0}
                           className="articleTitle lg:text-32 leading-10 max-[576px]:leading-8 sm:text-32 text-3xl text-gtl-med text-mckblue no-underline text-p-ellipsis"
                           aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                         >

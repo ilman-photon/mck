@@ -55,6 +55,11 @@ export default function CategoryComponent({ sectionData }: any) {
             return (
               <div
                 key={item?.data?.contentLink?.id}
+                role="button"
+                  tabIndex={0}
+                  onClick={() =>
+                    handleClickOnCategory(item?.data?.productCategoryUrl?.value)
+                  }
                 className={`mb-6 cursor-pointer ${
                   index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
                 }`}
@@ -62,9 +67,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 <div
                   id={`category_0${index}`}
                   className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
-                  onClick={() =>
-                    handleClickOnCategory(item?.data?.productCategoryUrl?.value)
-                  }
+                  
                 >
                   <style jsx>{`
                     .border {
