@@ -60,10 +60,10 @@ function ProductListComponent() {
           ])
         }
         setFilterClicked(true);
-        setProductName(res.data.results[0].productType?.value[0].name)
+        setProductName(res.data.results[0]?.productType?.value[0].name)
         setProductSum(res.data.totalMatching)
         SetProductListData( [
-          {item: {name: res.data.results[0].productType?.value[0].name }},
+          {item: {name: res.data.results[0]?.productType?.value[0].name }},
           {data: {results: res.data.results}},
         ])
       })
@@ -121,8 +121,8 @@ function ProductListComponent() {
                 :category.isBusinessVerticalCategory ? " or " : " and ";
             queryParams += `${
               category.isBusinessVerticalCategory
-                ? category.productType
-                : category.productType.toLowerCase()
+                ? category?.productType
+                : category?.productType.toLowerCase()
             }/value/name eq '${encodeItemName}' ${concatStr}`;
           });
           minSubCategoryCnt += category.items.length;
@@ -197,9 +197,10 @@ function ProductListComponent() {
 
 
   const fetchRecommandedProductData = async () => {
-    const tempName = productItemName?.replace(/ /g, "-")
+    const tempName = productItemName?.length>0 ? productItemName : productName
+    const correctedName = tempName?.replace(/ /g, "-")
     const recommendedCategoryData = await axiosInstance(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${tempName}/&expand=*`
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
     );
     const response = recommendedCategoryData?.data[0]?.contentArea
     setRecommendedProduct(response)
@@ -210,7 +211,7 @@ function ProductListComponent() {
   }
   useEffect(() => {
     fetchRecommandedProductData()
-  }, [router]) 
+  }, [router,productName]) 
 
 
   const createTempFilterArr = (results: any) => {

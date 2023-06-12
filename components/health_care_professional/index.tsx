@@ -164,6 +164,7 @@ function HealthCareProfessionalComponent({
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   };
+  !carouselRelated && isCarusolAvaibleProps(false);
   return (
     <>
       {loading ? (

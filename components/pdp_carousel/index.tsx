@@ -184,14 +184,6 @@ function PdpCarousel(prodViewData: any) {
             deviceWidth < 1024 && deviceWidth !== 0 ? "h-[300px]" : ""
           } box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}
         >
-          <h3>
-            hello selected : {selectedItemIndex} arrow click : {arrowClick}{" "}
-            length :{" "}
-            {
-              prodResponse?.productImages?.value?.slice(arrowClick, lastIndex)
-                .length
-            }
-          </h3>
           <ImageComponent
             src={
               (prodResponse?.productImages?.value &&
