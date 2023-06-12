@@ -26,7 +26,7 @@ function WhyFTComponent(
 
   useEffect(() => {
     document.title =
-      DOMPurify.sanitize(whyFTData?.contentArea?.expandedValue[0]?.title?.value) || "Why F&T";
+      DOMPurify.sanitize(whyFTData?.contentArea?.expandedValue?.[0]?.title?.value) || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {
@@ -41,11 +41,10 @@ function WhyFTComponent(
     setIsLoading(true);
     fetchWhyFTDetails()
       .then((res) => {
-        SetWhyFTData(res.data[0]);
+        SetWhyFTData(res?.data[0]);
         setIsLoading(false);
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       });
   }, []);
@@ -71,7 +70,7 @@ function WhyFTComponent(
 
   function filteredData(valueType: string) {
     return whyFTData?.contentArea?.expandedValue?.filter((ele: any) => {
-      return ele.contentType.some((arrEle: string) => {
+      return ele?.contentType?.some((arrEle: string) => {
         return arrEle == valueType;
       });
     });
@@ -82,8 +81,8 @@ function WhyFTComponent(
   const rearrangedData1 = () => {
     const rearrangedData = [...whyFTData?.contentArea.expandedValue].sort(
       (a, b) => {
-        const aIndex = whyFTData?.contentArea.expandedValue.indexOf(a);
-        const bIndex = whyFTData?.contentArea.expandedValue.indexOf(b);
+        const aIndex = whyFTData?.contentArea?.expandedValue?.indexOf(a);
+        const bIndex = whyFTData?.contentArea?.expandedValue?.indexOf(b);
         if (shouldRearrange(aIndex) && !shouldRearrange(bIndex)) {
           return -1;
         } else if (!shouldRearrange(aIndex) && shouldRearrange(bIndex)) {
@@ -95,8 +94,8 @@ function WhyFTComponent(
     return rearrangedData;
   };
 
-  whyFTData.contentArea.expandedValue.map(
-    (item: any) => item.name == "Carousel" && isCarusolAvaibleProps(true)
+  whyFTData?.contentArea?.expandedValue?.map(
+    (item: any) => item?.name == "Carousel" && isCarusolAvaibleProps(true)
   );
   return (
     <>

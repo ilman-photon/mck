@@ -13,6 +13,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   const menuData = useHeaderStore((state) => state.headerData);
   const [menuData_, setMenuData_] = useState(menuData ?? []);
 
+  const getRandomNumber = () => {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0];
+  };
+
   useLayoutEffect(() => {
     if(menuData === null){
       getHeaderData();
@@ -64,7 +70,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
           {isMobileMenuActive && (
             <div
               className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
-              key={Math.random()}
+              key={getRandomNumber()}
             >
               <div className="relative megamenu-row">
                 <Link
@@ -84,7 +90,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
             return (
               <div
                 className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
-                key={Math.random()}
+                key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
                   <Link

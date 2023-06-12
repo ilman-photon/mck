@@ -79,13 +79,11 @@ function BlogSearchComponent() {
             </div>
           </div>
           <div className="container grid grid-cols-3 gap-4 w-full lg:mt-12 lg:px-9 lg:pb-0 p-4 lg:pt-0 mx-auto">
-            <div className="lg:col-span-2 col-start-1 col-end-7">
               <SearchResult
                 placeHolders={BlogListingContent?.data[0]}
                 ArticleContent={ArticleList}
                 searchString={searchInfo.SearchString}
               />
-            </div>
             <div
               className="lg:w-306 w-full blogright-sidebar"
               // className="lg:col-span-1 col-start-1 col-end-7"

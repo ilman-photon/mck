@@ -76,8 +76,8 @@ export default function FooterComponent() {
                             id={sociallink?.socialMediaImage?.expandedValue?.altText
                               ?.value}
                             src={
-                              sociallink?.socialMediaImage?.expandedValue
-                                ?.thumbnail?.value?.url
+                              DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue
+                                ?.thumbnail?.value?.url)
                             }
                             className="mx-auto"
                             alt={

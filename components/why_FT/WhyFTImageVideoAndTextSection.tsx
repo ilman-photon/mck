@@ -84,7 +84,7 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full mb-6 lg:mb-12`}
+            }  w-full lg:py-6 mb-6 lg:mb-12 py-6`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -140,7 +140,7 @@ const ImageWithTextComponent = () => {
     className={`${sectionData?.assetPosition?.value === "Right"
         ? "flex-row-reverse text-center"
         : "text-left"
-      } w-full lg:py-0 lg:px-0 py-6 mb-6 lg:mb-12`}
+      } w-full lg:py-6 lg:px-0 py-6 mb-6 lg:mb-12`}
     style={{ backgroundColor: sectionData?.backgroundColor?.value }}
     key={sectionData?.image?.value?.id}
   >
