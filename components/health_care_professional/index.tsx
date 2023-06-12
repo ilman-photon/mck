@@ -338,6 +338,10 @@ function HealthCareProfessionalComponent({
                                 }
                               />
                               <label
+                                tabIndex={0}
+                                onKeyUp={(e) => {
+                                  handleTabClick(idx, tab?.title?.value)
+                                }}
                                 htmlFor={tab?.title?.value}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
