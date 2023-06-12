@@ -116,7 +116,7 @@ const BlogComponent = () => {
             } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            placeholder={response?.data[0].blogSearchPlaceholderText.value}
+            placeholder={response?.data[0].blogSearchPlaceholderText?.value}
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
@@ -168,7 +168,7 @@ const BlogComponent = () => {
             className="lg:block hidden relative flex items-center content-center mb-6"
           >
             <SearchComponent
-              placeholder={response?.data[0].blogSearchPlaceholderText.value}
+              placeholder={response?.data[0]?.blogSearchPlaceholderText.value}
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
@@ -177,8 +177,8 @@ const BlogComponent = () => {
           </div>
         )}
         <CatogaryComponent
-          CatogaryListing={response?.data[0].categoryFilter.expandedValue}
-          Catogarytitle={response?.data[0].categoryHeadingText.value}
+          CatogaryListing={response?.data[0]?.categoryFilter?.expandedValue}
+          Catogarytitle={response?.data[0]?.categoryHeadingText?.value}
           OnCatogarySelcete={(e) => filterBlogList(e)}
         />
         <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
@@ -186,15 +186,15 @@ const BlogComponent = () => {
             className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
             id="blog-label-009"
           >
-            {response?.data[0].trendingBlogHeadingText.value}
+            {response?.data[0]?.trendingBlogHeadingText?.value}
           </div>
           <ResentBlogListComponent />
         </div>
         <RelatedProducts
           AppSetting={AppSetting}
           OnRelatedProductClick={(e) => handleProductClick(e)}
-          title={response?.data[0].relatedProductHeadingText.value}
-          BlogListingContent={response?.data[0].recommendedProducts?.expandedValue}
+          title={response?.data[0]?.relatedProductHeadingText?.value}
+          BlogListingContent={response?.data[0]?.recommendedProducts?.expandedValue}
         />
       </div>
     </div>
