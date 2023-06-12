@@ -202,7 +202,7 @@ function WhereComponent() {
                     <div className="pb-2 cursor-pointer">
                       <Image
                         src="/images/health-mart.png"
-                        alt="Health Mart"
+                        alt="Health Mart logo"
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -335,7 +335,7 @@ function WhereComponent() {
                           <div className="pb-2 cursor-pointer">
                             <Image
                               src="/images/health-mart.png"
-                              alt="Health Mart"
+                              alt="Health Mart logo"
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}

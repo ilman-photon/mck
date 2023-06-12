@@ -179,7 +179,7 @@ function PdpLocation(props: any) {
                       <div className="pb-2 cursor-pointer">
                         <img
                           src="images/health-mart.png"
-                          alt="Health Mart"
+                          alt="Health Mart Logo"
                           id={`pdp-img-00` + index}
                         />
                       </div>
@@ -257,7 +257,7 @@ function PdpLocation(props: any) {
               <div className="pb-2 cursor-pointer">
                 <img
                   src="images/health-mart.png"
-                  alt="Health Mart"
+                  alt="Health Mart logo"
                   id={`pdp-img_${props.index}-${index}`}
                 />
               </div>

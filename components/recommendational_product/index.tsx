@@ -191,7 +191,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         : "";
       const renderContent = (
         <div
-          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] md:mb-0 ${
             index === 0
               ? "bg-no-repeat row-span-2 bg-center bg-cover bg-[url('" +
                 ele?.data?.backgroundImage?.value?.url +
@@ -241,7 +241,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
       ) : (
         <>
           <div
-            className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center `}
+            className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] bg-cover bg-center md:mb-0`}
           >
             <style jsx>{`
               .bg-color {
@@ -278,7 +278,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
   return (
     <div id="promotion-container" className="mx-auto">
       <div className="promotion-product-container lg:mb-12">
-        <div className="md:grid lg:grid lg:gap-4 xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <div className="md:grid lg:grid lg:gap-4 xl:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 md:gap-4">
           {display}
           {displayOdd}
         </div>

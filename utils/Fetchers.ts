@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios';import axiosInstance from './axiosInstance';
-;
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import axiosInstance from './axiosInstance';
 
 export interface CallAPIOptions {
   checkToken: boolean;
@@ -52,7 +52,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://mcco02mstrub73kinte.dxcloud.episerver.net/api/episerver/connect/token',
+        url: `${process.env.API_URL}/api/episerver/connect/token`,
         headers: { 
           'Content-Type': 'application/x-www-form-urlencoded', 
           'Accept-Language': 'en', 
@@ -63,7 +63,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       };
       
       axios.request(config)
-      .then((response) => {
+      .then((response:any) => {
         const now:any = new Date();
         if (typeof window !== 'undefined') {
           if(scope === "epi_content_delivery"){
@@ -78,7 +78,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
         resolve(response.data.accesstoken);
        
       })
-      .catch((error) => {
+      .catch((error:any) => {
         reject(false);
         console.log(error);
       });
@@ -132,7 +132,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
   }
 
   return axiosInstance(axiosProps)
-    .then(response => {
+    .then((response: any) => {
       return response || {};
     })
     .catch((err: AxiosError) => {

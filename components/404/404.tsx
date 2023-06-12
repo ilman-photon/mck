@@ -12,7 +12,7 @@ function FourOhFourCoumponent() {
     }
     useEffect(() => {
         fetchNotFoundDetails()
-            .then((res) => {
+            .then((res:any) => {
                 SetNotFoundData(res);
             })
             .catch((e: Error | AxiosError) => console.log(e));
@@ -31,7 +31,7 @@ function FourOhFourCoumponent() {
                 </div>
                 <div className="bg-logo-right overflow-hidden lg:relative absolute">
                     {notFoundData && 
-                        <img src={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} alt={notFoundData?.data[0]?.backgroundImage?.expandedValue?.url} id="err-404-img-005"/>
+                        <img src={DOMPurify.sanitize(notFoundData?.data[0]?.backgroundImage?.expandedValue?.url)} alt={DOMPurify.sanitize(notFoundData?.data[0]?.backgroundImage?.expandedValue?.url)} id="err-404-img-005"/>
                     }
                 </div>
             </div>

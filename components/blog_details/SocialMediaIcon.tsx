@@ -32,7 +32,7 @@ const SocialMediaIconComponent = () => {
                         aria-label={item?.socialMediaUrl?.value}
                     >
                         <ImageComponent
-                            src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url}
+                            src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}
                             alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
                             className="socialimg"
