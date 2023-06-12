@@ -125,7 +125,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     const handleScroll = () => {
       const offset = window.scrollY;
       // Adjust the scroll position value as per your requirements
-      if (offset > 100) {
+      if (offset > 10) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -178,10 +178,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70" : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
-          isSticky ? "isStickyActive" : "isNotSticky"
-        }`}
+          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70 isStickyActive" : isSticky ? "sticky isNotSticky" : "relative z-40"
+        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey `}
         style={!isMobile ? divHeight : undefined}
       >
         <div className="container mx-auto lg:grid contents align-content-center">
