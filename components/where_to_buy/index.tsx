@@ -241,26 +241,26 @@ function WhereComponent() {
                           aria-label="ABC Pharmacy"
                           id={`wb-label-03${index}`}
                         >
-                          {value.StoreName}
+                          {value?.StoreName}
                         </p>
                         <p
                           aria-label="1230 Lindon Ave"
                           id={`wb-label-04${index}`}
                         >
-                          {value.Address},{" "}
+                          {value?.Address},{" "}
                         </p>
                         <p
                           aria-label="DENVER, CO. 80202"
                           id={`wb-label-05_0${index}`}
                         >
-                          {value.City} {value.Zip}
+                          {value?.City}{value?.State ? `, ${value?.State}` : ''} {value?.Zip}
                         </p>
                         <p
                           className="text-mckblue"
                           aria-label="303-571-5314"
                           id={`wb-label-06_0${index}`}
                         >
-                          {value.Phone}
+                          {value?.Phone}
                         </p>
                       </div>
                       <div
@@ -268,7 +268,7 @@ function WhereComponent() {
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >
-                        {Number(value.Distance).toFixed(1)} mi
+                        {Number(value?.Distance).toFixed(1)} mi
                       </div>
                     </div>
                     <div className="flex flex-row justify-between">
@@ -298,9 +298,9 @@ function WhereComponent() {
                           id={`wb-label-10_0${index}`}
                           onClick={() =>
                             showMapClicked(
-                              value.Lat,
-                              value.Lon,
-                              value.StoreName
+                              value?.Lat,
+                              value?.Lon,
+                              value?.StoreName
                             )
                           }
                         >
@@ -339,8 +339,8 @@ function WhereComponent() {
                   <Marker
                     key={index}
                     position={{
-                      lat: value.Lat,
-                      lng: value.Lon,
+                      lat: value?.Lat,
+                      lng: value?.Lon,
                     }}
                     onClick={() => {
                       handleMapClick(value, index);
@@ -349,8 +349,8 @@ function WhereComponent() {
                     {selectedMarker === value && (
                       <InfoWindow
                         position={{
-                          lat: value.Lat,
-                          lng: value.Lon,
+                          lat: value?.Lat,
+                          lng: value?.Lon,
                         }}
                         onCloseClick={() => {
                           setSelectedMarker(null);
@@ -376,21 +376,21 @@ function WhereComponent() {
                                 className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5"
                                 id={`wb-label-003${index}`}
                               >
-                                {value.StoreName}
+                                {value?.StoreName}
                               </p>
                               <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-1 lg:leading-5">
-                                {value.Address},{" "}
+                                {value?.Address},{" "}
                               </p>
                               <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
                                 {" "}
-                                {value.City} {value.Zip}
+                                {value?.City}{value?.State ? `, ${value?.State}` : ''} {value?.Zip}
                               </p>
                               <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 leading-[20px]">
-                                {value.Phone}
+                                {value?.Phone}
                               </p>
                             </span>
                             <h2 className="text-sofia-bold text-xl font-extrabold ml-auto text-mcknormalgrey">
-                              {Number(value.Distance).toFixed(1)} mi
+                              {Number(value?.Distance).toFixed(1)} mi
                             </h2>
                           </div>
 
@@ -418,9 +418,9 @@ function WhereComponent() {
                                 className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
                                 onClick={() =>
                                   showMapClicked(
-                                    value.Lat,
-                                    value.Lon,
-                                    value.StoreName
+                                    value?.Lat,
+                                    value?.Lon,
+                                    value?.StoreName
                                   )
                                 }
                               >

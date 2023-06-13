@@ -207,21 +207,21 @@ function PdpLocation(props: any) {
                       <div className="flex mb-1.5">
                         <span className="text-sofia-reg text-mcknormalgrey mb-1">
                           <p className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5">
-                            {value.StoreName},{" "}
+                            {value?.StoreName},{" "}
                           </p>
                           <p className="text-sofia-reg text-lg text-base font-normal lg:mb-1 lg:leading-5">
                             {value.Address},{" "}
                           </p>
                           <p className="text-sofia-reg text-lg text-base font-normal lg:leading-5 lg:mb-1">
                             {" "}
-                            {value.City} {value.Zip}
+                            {value?.City}{value?.State ? `, ${value?.State}` : ''} {value?.Zip}
                           </p>
                           <p className="text-sofia-reg text-mckblue text-lg text-base font-normal lg:leading-5 leading-[20px]">
-                            {value.Phone}
+                            {value?.Phone}
                           </p>
                         </span>
                         <h2 className="text-sofia-bold text-xl font-extrabold ml-auto text-mcknormalgrey">
-                          {Number(value.Distance).toFixed(1)} mi
+                          {Number(value?.Distance).toFixed(1)} mi
                         </h2>
                       </div>
 
@@ -303,7 +303,7 @@ function PdpLocation(props: any) {
                     id={`pdp-address_${props.index}-00${index}`}
                     className="leading-5 mb-2"
                   >
-                    {value.City} {value.Zip}
+                    {value?.City}{value?.State ? `, ${value?.State}` : ''} {value?.Zip}
                   </p>
                   <p
                     aria-label="303-571-5314"
