@@ -54,6 +54,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const isEvenLength = response?.length % 2 === 0;
     const isSingleItem = response?.length === 1;
 
+    const blueColorBackground =  "#001a71"
+    const greenColorBackground = "#2ccfad"
+
+    const whiteColor = 'white'
+    const blackColor = 'black'
+
+    const backgroundColorData = ele?.data?.buttonColor?.value
+
     const renderContent = () => (
       <>
         <div
@@ -111,11 +119,12 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             </div>
             {ele?.data?.buttonText?.value && ele?.data?.buttonUrl?.value && (
               <button
-                className={`${ele?.data?.buttonColor?.value.length == 0 || ele?.data?.buttonColor?.value === "#001A71" ? "text-white ": "text-black"} lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto`}
+                className={`${ele?.data?.buttonColor?.value.length == 0 || ele?.data?.buttonColor?.value?.toLowerCase() === "#001a71" ? "text-white ": "text-black"} lg:min-w-[139px] w-max leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex lg:ml-auto lg:mr-0 ml-auto`}
                 onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
                 id={`home-product-button${indexs}${index + 1}`}
                 style={{
-                  backgroundColor: ele?.data?.buttonColor?.value,
+                  backgroundColor: backgroundColorData?.toLowerCase() === blueColorBackground ? blueColorBackground : backgroundColorData?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
+                  color:backgroundColorData?.toLowerCase() === blueColorBackground ? whiteColor : backgroundColorData?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
                 }}
               >
                 {ele?.data?.buttonText?.value}
@@ -145,6 +154,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     response?.length % 2 !== 0 &&
     response?.length !== 1 &&
     response?.map((ele: any, index: number) => {
+
+    const blueColorBackground =  "#001a71"
+    const greenColorBackground = "#2ccfad"
+
+    const whiteColor = 'white'
+    const blackColor = 'black'
+
+    const backgroundColorData = ele?.data?.buttonColor?.value
       const renderImage = ele?.data?.imageTitle?.value?.url && (
         <img
           className={`h-auto lg:max-w-fit mx-auto lg:w-338 w-270 ${
@@ -180,7 +197,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
             onClick={() => handleCTABtn(ele?.data?.buttonUrl?.value)}
             id={`home-product-button${indexs}${index + 1}`}
             style={{
-              backgroundColor: ele?.data?.buttonColor?.value,
+              backgroundColor: backgroundColorData?.toLowerCase() === blueColorBackground ? blueColorBackground : backgroundColorData?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
+              color:backgroundColorData?.toLowerCase() === blueColorBackground ? whiteColor : backgroundColorData?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
             }}
           >
             {ele?.data?.buttonText?.value}

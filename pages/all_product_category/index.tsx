@@ -42,6 +42,7 @@ function AllProductCategoryPage({
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [productSum, setProductSum] = useState<any>();
+  const [filterClicked, setFilterClicked] = useState(false);
   const productSearchCard = false;
   let selectedCategoryName: any = [];
   let productName: any = [];
@@ -69,6 +70,8 @@ function AllProductCategoryPage({
           mainCatId.map((id: any) => {
             tempResults[selectedFilterItems[id].categoryName] = [];
           });
+          setFilterClicked(true)
+          return
         }
 
         res.data.results.map((item: any) => {
@@ -497,6 +500,7 @@ function AllProductCategoryPage({
           selectedRecommendedProduct={selectedRecommendedProduct}
           productSum={productSum}
           productSearchCard={productSearchCard}
+          filterClicked={filterClicked}
         />
       </div>
       <FooterComponent />

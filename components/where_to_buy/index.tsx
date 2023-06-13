@@ -12,6 +12,8 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import Link from "next/link";
+import { useWindowResize } from "@/hooks/useWindowResize";
 // import axiosInstance from "@/utils/axiosInstance";
 
 function WhereComponent() {
@@ -21,6 +23,12 @@ function WhereComponent() {
   const [longitude, setLongitude] = useState(-111.7256936);
   const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
   // let textInput: any;
   let [textInput, setTextInput] = useState<any>("");
   /**
@@ -139,6 +147,16 @@ function WhereComponent() {
       .catch((e: Error | AxiosError) => console.log(e));
   };
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*\#/, "");
+    const elem = document.getElementById(targetId);
+    elem?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       {loading ? ( // Tampilkan elemen loading jika loading = true
@@ -179,9 +197,6 @@ function WhereComponent() {
                 <Image
                   src="images/Vector-nw.svg"
                   alt="location"
-                  // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                  // width={24}
-                  // height={25}
                   className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
                   width={15}
                   height={20}
@@ -195,6 +210,7 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
+            <Link href={isMobile ? '#google-map' : {}} scroll onClick={handleScroll}>
             <div className="lg:w-[640px] lg:desktop:w-[500px] mobile:h-[551px] mobilelarge:h-[551px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
@@ -294,12 +310,14 @@ function WhereComponent() {
                 );
               })}
             </div>
+            </Link>
           </div>
 
           <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
+              id="google-map"
               options={mapConfigOptions}
               zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
