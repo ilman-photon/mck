@@ -43,7 +43,7 @@ export default function Search() {
             value={searchString}
             onChange={handleKeyUp}
             onKeyDown={handleKey}
-            className="input-search outline-0 h-12 w-12 border-none text-sofia-reg placeholder:text-sofia-reg text-base placeholder:text-base font-normal placeholder:font-normal tracking-normal placeholder:tracking-normal rounded px-3 py-4 pr-36 bg-transparent absolute lg:inset-y-0 xl:inset-y-0 right-3.5 blue-txt focus:w-60 focus:bg-white focus:top-1 opacity-0 focus:opacity-100 cursor-pointer"
+            className="input-search outline-0 h-12 w-12 border-none text-sofia-reg placeholder:text-sofia-reg text-base placeholder:text-base font-normal placeholder:font-normal tracking-normal placeholder:tracking-normal rounded px-3 py-4 pr-10 bg-transparent absolute lg:inset-y-0 xl:inset-y-0 right-3.5 blue-txt focus:w-60 focus:bg-white focus:top-1 opacity-0 focus:opacity-100 cursor-pointer"
             placeholder="Search..."
             aria-label="Foster Thrive Product"
           />
