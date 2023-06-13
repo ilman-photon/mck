@@ -55,14 +55,16 @@ function ProductListComponent() {
     promise
       .then((res:any) => {
         if(res.data.results.length === 0){
+          setFilterClicked(true);
           setProductSum(res.data.totalMatching)
           // setProductName(res.data.results[0]?.productType?.value[0].name)
           SetProductListData( [
             {item: {name: "" }},
             {data: {results: ""}},
           ])
+          return
         }
-        setFilterClicked(true);
+        setFilterClicked(false);
         setProductName(res.data.results[0]?.productType?.value[0].name)
         setProductSum(res.data.totalMatching)
         SetProductListData( [
