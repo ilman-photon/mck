@@ -31,7 +31,7 @@ function Faq() {
             style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
           >
             <Image
-              src={DOMPurify.sanitize(gifi)}
+              src={gifi}
               alt="loading-image"
               width={400}
               height={400}
