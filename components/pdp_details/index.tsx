@@ -49,10 +49,10 @@ function PdpDetail(pdpViewData: any) {
                 </div>
             
             <div  className="border-y-2 py-6 mb-6">
-                <div className="text-gtl-med text-mcknormalgrey text-base font-medium mb-3 mx-4 lg:mx-0 " id="pdp_details_004">Description</div>
-                <ul className="pdp-detail-description text-sofia-reg text-mcknormalgrey text-lg font-normal list-disc pl-9 mx-4 lg:mx-0">
-                    <li dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.description?.value), }} id="pdp_details_005"></li>
-                </ul>
+                <div className="text-gtl-med text-mcknormalgrey text-2xl font-medium mb-3 mx-4 lg:mx-0 " id="pdp_details_004">Description</div>
+                <p className="pdp-detail-description text-sofia-reg text-mcknormalgrey text-lg font-normal list-disc pl-6 mx-4 lg:mx-0"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.description?.value), }} id="pdp_details_005">
+                </p>
             </div>
 
             
