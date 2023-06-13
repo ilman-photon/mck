@@ -260,9 +260,9 @@ const HealthNeedFilter = ({
           {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
-            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
             className='mr-2 ml-2'
-            alt={activeFiltersData?.activeFiltersText?.value}
+            alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}                   
             aria-hidden="true"

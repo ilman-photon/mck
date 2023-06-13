@@ -20,8 +20,8 @@ export function LinkComponent({rel, key, id, href, className, children, ...props
             rel={rel || "stylesheet"}
             href= {href || '#'}
             key={key}
-            id={id}
-            aria-label={props["aria-label"]}
+            id={id && DOMPurify.sanitize(id)}
+            aria-label={props["aria-label"] && DOMPurify.sanitize(props["aria-label"])}
         >{children}</Link>
 
     )

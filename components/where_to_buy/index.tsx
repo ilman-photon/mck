@@ -197,6 +197,7 @@ function WhereComponent() {
                 <Image
                   src="images/Vector-nw.svg"
                   alt="location"
+                  aria-hidden={true}
                   className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
                   width={15}
                   height={20}
@@ -290,6 +291,7 @@ function WhereComponent() {
                           id={`wb-label-09_0${index}`}
                           width={24}
                           height={25}
+                          aria-hidden={true}
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"

@@ -23,9 +23,9 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
       >
         <div className="lg:h-60 h-28 flex items-center justify-center" aria-hidden="true">
           <ImageComponent
-            src={cardData?.image?.value?.url}
-            alt={`${indexs}${cardData?.image?.value?.url}`}
-            id={`hn_label_01_${indexs + 1}_${mainIndex + 1}`}
+            src={DOMPurify.sanitize(cardData?.image?.value?.url)}
+            alt={DOMPurify.sanitize(`${indexs}${cardData?.image?.value?.url}`)}
+            id={DOMPurify.sanitize(`hn_label_01_${indexs + 1}_${mainIndex + 1}`)}
             className="h-fit mx-auto border-0 lg:max-h-60 max-h-28"
           />
         </div>
