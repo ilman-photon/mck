@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import CarouselComponent from "@/components/carousel";
 import ImageVideoAndTextSection from "../homepage_section";
 import ImageVideoOrTextSection from "../promotional_text";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
@@ -18,7 +18,8 @@ function WhyFTComponent(
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
     return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`);
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`
+    );
   }
   useEffect(() => {
     document.documentElement.lang = "en";
@@ -26,7 +27,9 @@ function WhyFTComponent(
 
   useEffect(() => {
     document.title =
-      DOMPurify.sanitize(whyFTData?.contentArea?.expandedValue?.[0]?.title?.value) || "Why F&T";
+      DOMPurify.sanitize(
+        whyFTData?.contentArea?.expandedValue?.[0]?.title?.value
+      ) || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {
@@ -35,6 +38,13 @@ function WhyFTComponent(
       document.body.className = pageName;
     };
     setPageNameAsClassName();
+  }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -48,6 +58,7 @@ function WhyFTComponent(
         setIsLoading(false);
       });
   }, []);
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -123,27 +134,29 @@ function WhyFTComponent(
       <div className="flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
         <React.Fragment>
           {whyFTData &&
-            whyFTData?.contentArea?.expandedValue.map((item: any, index: number) => (
-              <>
-                <React.Fragment key={index}>
-                  {item?.contentType[1] === "TwoCloumnBlock" ? (
-                    <WhyFTImageVideoAndTextSection
-                      index={`wfnt_0${index}`}
-                      sectionData={item}
-                    />
-                  ) : item?.contentType[1] === "OneColumnBlock" ? (
-                    <div className="container mx-auto py-6 lg:p-0 text-center mb-6 lg:mb-12">
-                      <ImageVideoOrTextSection
+            whyFTData?.contentArea?.expandedValue.map(
+              (item: any, index: number) => (
+                <>
+                  <React.Fragment key={index}>
+                    {item?.contentType[1] === "TwoCloumnBlock" ? (
+                      <WhyFTImageVideoAndTextSection
                         index={`wfnt_0${index}`}
                         sectionData={item}
-                        textAlignment={"text-left"}
                       />
-                    </div>
-                  ) : null}
-                  {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
-                </React.Fragment>
-              </>
-            ))}
+                    ) : item?.contentType[1] === "OneColumnBlock" ? (
+                      <div className="container mx-auto py-6 lg:p-0 text-center mb-6 lg:mb-12">
+                        <ImageVideoOrTextSection
+                          index={`wfnt_0${index}`}
+                          sectionData={item}
+                          textAlignment={"text-left"}
+                        />
+                      </div>
+                    ) : null}
+                    {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
+                  </React.Fragment>
+                </>
+              )
+            )}
         </React.Fragment>
       </div>
     </>

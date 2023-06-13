@@ -19,7 +19,7 @@ function WhereComponent() {
   const [latitude, setLatitude] = useState(33.2411354);
   const [isCustomSearch, setIsCustomSearch] = useState(false);
   const [longitude, setLongitude] = useState(-111.7256936);
-  const [loading, setLoading] = useState(true); // Tambahkan state loading
+  const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(-1);
   // let textInput: any;
   let [textInput, setTextInput] = useState<any>("");
@@ -46,7 +46,7 @@ function WhereComponent() {
   /**
    * @description Handler function for View Online Stores Detail
    */
-  const onViewOnline = useWhereToBuyStore(state => state.onViewOnlineStore)
+  const onViewOnline = useWhereToBuyStore((state) => state.onViewOnlineStore);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
@@ -70,7 +70,8 @@ function WhereComponent() {
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`);
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`
+    );
   }
 
   useEffect(() => {
@@ -89,6 +90,13 @@ function WhereComponent() {
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }, [isCustomSearch]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   const fetchLocationDetails = () => {
     setLoading(true);
     fetchPDPLoctionDetails()
@@ -120,6 +128,7 @@ function WhereComponent() {
       element.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };
+
   const handleKey = () => {
     fectchLatandLongDetails()
       .then((res) => {
