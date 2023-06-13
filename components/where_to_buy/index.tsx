@@ -177,7 +177,7 @@ function WhereComponent() {
         </div>
       ) : (
         <div
-          className="container where-to-buy-container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
+          className="lg:w-full pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
           id="carouselExampleCaptions"
         >
           <div>
@@ -315,7 +315,7 @@ function WhereComponent() {
             </Link>
           </div>
 
-          <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
+          <div className="lg:w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
