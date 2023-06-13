@@ -5,6 +5,7 @@ import { NavBarData } from "../Model/NavBarModel"
 interface ControllerNavBar {
     getData:() => void
     headerData:any
+    categoryMapping?:any
     subHeaderData:NavBarData[] | null
     onClickEachCategory: (parentCat:any) => void
     selectedCategory:string
@@ -22,6 +23,7 @@ export const useHeaderStore = create<ControllerNavBar>((set,get) => ({
       }).then(async res => {
         set({logoSrc1:res?.data?.[0]?.logoImage?.expandedValue?.url,logoSrc2:res?.data?.[0]?.secondLogoImage?.expandedValue?.url})
         set({headerData:res?.data?.[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea?.expandedValue})
+        set({categoryMapping:res?.data?.[0]?.categoryMapping?.expandedValue})
   
         const {headerData} = get()
         if(headerData){

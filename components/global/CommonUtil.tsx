@@ -17,12 +17,12 @@ export const GetTime = (time: any) => {
 }
 export const handleTagBackgroudColor = (index: number, MixedStyle: any) => {
   if(MixedStyle){
-    const array = MixedStyle.split(",");
-    return array[index] === undefined ? array : array[index];
-  }
+        const array = MixedStyle.split(",");
+        return array[index] === undefined ? array : array[index];
+    }
 else{
-   return "#FFFFF"
- }
+        return "#FFFFF"
+    }
 };
 export const handlecategoryColorCode = (id: number, data: any) => {
     if (data === undefined) {
@@ -30,7 +30,11 @@ export const handlecategoryColorCode = (id: number, data: any) => {
     }
     else {
         let obj = data.find((o: any) => o.categoryType.value[0].id === id);
-        return obj.categoryColorCode.value
+        if (obj) {
+            return obj.categoryColorCode.value
+        } else {
+            return '#FFFFF'
+        }
     }
 }
 
@@ -101,7 +105,7 @@ export function customAdd(mainCatId: any, filter: any, productCategoryData: any 
         if((coolStore?.findIndex((a:any) => a.mainCatId === mainCatId) === -1)){
             coolStore.push({mainCatId, subCateIds: [filter]})
             return coolStore;
-        }else{
+        } else {
             const idx = coolStore?.map((c: any) => c.mainCatId).indexOf(mainCatId);
             coolStore[idx].subCateIds = [...coolStore[idx]?.subCateIds, filter]
             return coolStore
@@ -112,9 +116,9 @@ export function customAdd(mainCatId: any, filter: any, productCategoryData: any 
 export function customUniqueElementArray(arr: any) {
     const a = arr && arr.filter(Boolean).filter((item: any) => !Array.isArray(item))
     return Array.from(new Set(a));
-} 
+}
 
-export const extractMainCategoryName = (productCategoryData: any) => productCategoryData?.map((cate: any) => cate?.name) 
+export const extractMainCategoryName = (productCategoryData: any) => productCategoryData?.map((cate: any) => cate?.name)
 export const extractMainCategoryId = (productCategoryData: any, mainCatName: any) => {
     let requiredId = ''
     productCategoryData?.forEach((ele: any) => {
@@ -123,7 +127,7 @@ export const extractMainCategoryId = (productCategoryData: any, mainCatName: any
         }
     });
     return requiredId;
-}  
+}
 export const extractMainCateName = (productCategoryData: any, mainCatId: any) => {
     let requiredName = ''
     productCategoryData?.forEach((ele: any) => {
@@ -132,7 +136,7 @@ export const extractMainCateName = (productCategoryData: any, mainCatId: any) =>
         }
     });
     return requiredName;
-}  
+}
 export const customFindIndex = (arr: any, item: any) => {
     return arr?.findIndex((a: any) => a === item)
 }
