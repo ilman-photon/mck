@@ -8,7 +8,7 @@ import SocialMediaIconComponent from "./SocialMediaIcon";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { GetTime } from "../global/CommonUtil";
-import { fetchApplicationSetting, fetchBlogDetails } from "../blog/BlogAPI";
+import { fetchBlogDetails, fetchBlogSetting } from "../blog/BlogAPI";
 import { ImageComponent } from "../global/ImageComponent";
 import TagsComponent from "../blog/Tags";
 import DOMPurify from "isomorphic-dompurify";
@@ -29,12 +29,13 @@ const BlogDetailsComponent = () => {
     try {
       const [BlodDetails, AppSetting] = await Promise.all([
         fetchBlogDetails(id),
-        fetchApplicationSetting(),
+        fetchBlogSetting(),
       ]);
       const Blogdata = await BlodDetails;
-      const APPdata = await AppSetting.data[0].categoryMapping.expandedValue;
+      const APPdata = await AppSetting;
       setIsLoading(false);
       setBlogInfo(Blogdata.data[0]);
+      console.log("On No Related Product", Blogdata.data[0])
       setAppSetting(APPdata);
     } catch (error) {
       console.error("Error fetching Blog data:", error);
@@ -121,26 +122,24 @@ const BlogDetailsComponent = () => {
                   <div className="grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-4 lg:pb-6 pb-4">
                     <div className="lg:pb-0 pb-4">
                       <span
-                        className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${
-                          BlogInfo?.readMinute?.value
+                        className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${BlogInfo?.readMinute?.value
                             ? "shade-grey-right-border"
                             : ""
-                        }`}
+                          }`}
                         id="blog-label-001"
                       >
                         {GetTime(BlogInfo?.startPublish)}
                       </span>
                       <span
-                        className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${
-                          false ? "shade-grey-right-border" : ""
-                        }`}
+                        className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${false ? "shade-grey-right-border" : ""
+                          }`}
                         id="blog-label-002"
                       >
                         {DOMPurify.sanitize(BlogInfo?.readMinute?.value)}
                       </span>
                       {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
-                    <TagsComponent BlogInfo={BlogInfo} />
+                    <TagsComponent BlogTag={BlogInfo?.tag} />
                   </div>
 
                   <div
@@ -167,12 +166,11 @@ const BlogDetailsComponent = () => {
                   className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg leading-27"
                   id="blog-label-009"
                 >
-                  Recent Blogs
+                  {appSetting?.data[0]?.trendingBlogHeadingText?.value}
                 </div>
-                <ResentBlogListComponent />
+                <ResentBlogListComponent ResentBlogList={BlogInfo?.relatedArticle} />
               </div>
               <RelatedProducts
-                AppSetting={appSetting}
                 OnRelatedProductClick={(e) => handleProductClick(e)}
                 title={BlogInfo?.relatedProductHeading?.value}
                 BlogListingContent={BlogInfo?.relatedProducts?.expandedValue}
