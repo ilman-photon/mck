@@ -5,6 +5,10 @@ import ResentBlogListComponent from "../blog_details/RecentBlogs";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import SearchResult from "./SearchResult";
+import { fetchBlogSearch } from "./BlogAPI";
+import { useRouter } from "next/router";
+import { AxiosError } from "axios";
+import OtherArtical from "./OtherArtical";
 
 function BlogSearchComponent() {
   const [BlogListingContent, setBlogListingContent] = useState<any>();
@@ -16,6 +20,26 @@ function BlogSearchComponent() {
     searchResult: [],
     noSearchResult: false,
   });
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (id) {
+      fetchBlogSearch(id.toString())
+        .then((res) => {
+          setArticleList(res.data.results);
+          setSeachInfo((prevState: any) => ({
+            ...prevState,
+            SearchString: id,
+            ActiveSearch: false,
+          }));
+          setIsLoading(false);
+        })
+        .catch((e: Error | AxiosError) => {
+          setIsLoading(false);
+        });
+    }
+  }, [id]);
 
   const fetchBlogListing = async () => {
     setIsLoading(true);
@@ -24,7 +48,7 @@ function BlogSearchComponent() {
       const response = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog-listing-setting/&expand=*`
       );
-   
+
       setBlogListingContent(response);
     } catch (error) {
       console.error(error);
@@ -59,10 +83,7 @@ function BlogSearchComponent() {
         <div>Loading...</div>
       ) : (
         <>
-          {" "}
-          <div 
-          className="container mx-auto w-full py-3"
-          >
+        <div className="container  mx-auto py-3">
             <div
               id="search"
               className="w-full relative flex items-center content-center"
@@ -77,13 +98,70 @@ function BlogSearchComponent() {
                 handleClose={() => HandleSearchClose()}
               />
             </div>
-          </div>
-          <div className="container grid grid-cols-3 gap-4 w-full lg:mt-12 lg:px-9 lg:pb-0 p-4 lg:pt-0 mx-auto">
-              <SearchResult
-                placeHolders={BlogListingContent?.data[0]}
-                ArticleContent={ArticleList}
-                searchString={searchInfo.SearchString}
-              />
+            </div>
+          <div className="container flex lg:flex-row flex-col gap-6 w-full lg: lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto ">
+
+          <div className="lg:w-966 w-full">
+              <div className="w-full lg:pb-11 pb-5">
+                {false ? (
+                  <>
+                    <h1
+                      className="lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left"
+                      id="blog-link-001"
+                    >
+                      {`${BlogListingContent?.data[0].noMatchFoundText.value} “${searchInfo.SearchString}”`}{" "}
+                    </h1>
+                    <div
+                      className="text-base text-sofia-reg text-mckback font-normal lg:pb-px pb-3"
+                      id="srnf-label-001"
+                    >
+                      {BlogListingContent?.data[0].searchForText.value}{" "}
+                      <strong className="text-mckred">
+                        <i>{searchInfo.SearchString}</i>
+                      </strong>
+                    </div>
+                    <div
+                      className="text-lg text-sofia-reg text-mcknormalgrey font-normal"
+                      id="srnf-label-003"
+                    >
+                      {BlogListingContent?.data[0].showResultsText.value.replace(
+                        /#/g,
+                        0
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h1
+                      className="lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left"
+                      id="blog-link-001"
+                    >
+                      {`${ArticleList.length} ${BlogListingContent?.data[0].showingResultsText.value} “${searchInfo.SearchString}“`}{" "}
+                    </h1>
+                    <div
+                      className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1"
+                      id="srnf-label-002"
+                    >
+                      {BlogListingContent?.data[0].showingResultsText.value}{" "}
+                      <strong className="text-mckblue">
+                        <i>{searchInfo.SearchString}</i>
+                      </strong>
+                    </div>
+                    <div
+                      className="text-lg text-sofia-reg text-mcknormalgrey font-normal"
+                      id="srnf-label-003"
+                    >
+                      {BlogListingContent?.data[0].showResultsText.value.replace(
+                        /#/g,
+                        ArticleList.length
+                      )}
+                    </div>
+                    <br />
+                  </>
+                )}
+              </div>
+              <OtherArtical ArticleList={ArticleList} />
+            </div>
             <div
               className="lg:w-306 w-full blogright-sidebar"
               // className="lg:col-span-1 col-start-1 col-end-7"
@@ -109,7 +187,8 @@ function BlogSearchComponent() {
                 <ResentBlogListComponent />
               </div>
             </div>
-          </div>
+            </div>
+
         </>
       )}
     </>

@@ -12,6 +12,8 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import Link from "next/link";
+import { useWindowResize } from "@/hooks/useWindowResize";
 // import axiosInstance from "@/utils/axiosInstance";
 
 function WhereComponent() {
@@ -19,8 +21,14 @@ function WhereComponent() {
   const [latitude, setLatitude] = useState(33.2411354);
   const [isCustomSearch, setIsCustomSearch] = useState(false);
   const [longitude, setLongitude] = useState(-111.7256936);
-  const [loading, setLoading] = useState(true); // Tambahkan state loading
+  const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
   // let textInput: any;
   let [textInput, setTextInput] = useState<any>("");
   /**
@@ -46,7 +54,7 @@ function WhereComponent() {
   /**
    * @description Handler function for View Online Stores Detail
    */
-  const onViewOnline = useWhereToBuyStore(state => state.onViewOnlineStore)
+  const onViewOnline = useWhereToBuyStore((state) => state.onViewOnlineStore);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
@@ -70,7 +78,8 @@ function WhereComponent() {
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`);
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`
+    );
   }
 
   useEffect(() => {
@@ -89,6 +98,13 @@ function WhereComponent() {
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }, [isCustomSearch]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   const fetchLocationDetails = () => {
     setLoading(true);
     fetchPDPLoctionDetails()
@@ -120,6 +136,7 @@ function WhereComponent() {
       element.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };
+
   const handleKey = () => {
     fectchLatandLongDetails()
       .then((res) => {
@@ -128,6 +145,16 @@ function WhereComponent() {
         setIsCustomSearch(true);
       })
       .catch((e: Error | AxiosError) => console.log(e));
+  };
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*\#/, "");
+    const elem = document.getElementById(targetId);
+    elem?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -150,7 +177,7 @@ function WhereComponent() {
         </div>
       ) : (
         <div
-          className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
+          className="container where-to-buy-container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
           id="carouselExampleCaptions"
         >
           <div>
@@ -170,9 +197,7 @@ function WhereComponent() {
                 <Image
                   src="images/Vector-nw.svg"
                   alt="location"
-                  // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                  // width={24}
-                  // height={25}
+                  aria-hidden={true}
                   className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
                   width={15}
                   height={20}
@@ -186,7 +211,8 @@ function WhereComponent() {
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="lg:w-[640px] lg:desktop:w-[500px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
+            <Link href={isMobile ? '#google-map' : {}} scroll onClick={handleScroll}>
+            <div className="lg:w-[640px] lg:desktop:w-[500px] mobile:h-[551px] mobilelarge:h-[551px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -202,7 +228,7 @@ function WhereComponent() {
                     <div className="pb-2 cursor-pointer">
                       <Image
                         src="/images/health-mart.png"
-                        alt="Health Mart"
+                        alt="Health Mart logo"
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -265,6 +291,7 @@ function WhereComponent() {
                           id={`wb-label-09_0${index}`}
                           width={24}
                           height={25}
+                          aria-hidden={true}
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"
@@ -285,12 +312,14 @@ function WhereComponent() {
                 );
               })}
             </div>
+            </Link>
           </div>
 
           <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
+              id="google-map"
               options={mapConfigOptions}
               zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
@@ -335,7 +364,7 @@ function WhereComponent() {
                           <div className="pb-2 cursor-pointer">
                             <Image
                               src="/images/health-mart.png"
-                              alt="Health Mart"
+                              alt="Health Mart logo"
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}

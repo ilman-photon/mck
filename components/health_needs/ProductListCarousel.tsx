@@ -44,7 +44,7 @@ const ProductComponent = ({
   };
   const handleOnSlideChange = (swiper: any) => {
     if (isMobile) {
-      swiper.autoplay.running = true;
+      swiper.autoplay.running = false;
       setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
     } else {
       swiper.autoplay.running = false;
@@ -70,17 +70,7 @@ const ProductComponent = ({
             return null;
           })}
           <section className="relative">
-            <h2
-              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0"
-              id={`hn_label_00_${index}`}
-              aria-label={product?.item?.name}
-            >
-              {product?.data?.results?.length > 0
-                ? product?.item?.name
-                : filterClicked
-                ? product?.item?.name
-                : null}
-            </h2>
+            
 
             {product?.data?.results?.length > 0 ? (
               <>
@@ -100,14 +90,26 @@ const ProductComponent = ({
                   </div>
                 ) : (
                   <>
-                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21">
+                  <h2
+              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0"
+              id={`hn_label_00_${index}`}
+              aria-label={product?.item?.name}
+            >
+              {product?.data?.results?.length > 0
+                ? product?.item?.name
+                : !filterClicked
+                ? product?.item?.name
+                // : "There are no products"
+                : null
+                }
+            </h2>
+                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21 lg:mb-12">
                       <Swiper
                         spaceBetween={4}
                         navigation={isMobile ? false : true}
                         slidesPerView={isMobile ? "auto" : 6}
                         slidesPerGroup={isMobile ? 1 : 6}
-                        autoplay={isMobile ? { delay: 3000 } : false}
-                        className="lg:h-480 h-350"
+                        className="lg:h-420 h-350"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
@@ -139,7 +141,7 @@ const ProductComponent = ({
                         )}
                       </Swiper>
                     </div>
-                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 absolute left-0 right-0 bottom-2">
                       {reviewCount}/
                       {isMobile
                         ? Math.ceil(product?.data?.results?.length)
@@ -149,13 +151,18 @@ const ProductComponent = ({
                 )}
               </>
             ) : (
-              <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
-                {filterClicked ? "There are no products" : null}
-              </div>
+              // <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
+              //   {filterClicked ? "There are no products" : null}
+              // </div>
+              null
             )}
           </section>
+          
         </div>
       ))}
+      <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
+                {filterClicked ? "There are no products" : null}
+              </div>
     </>
   );
 };

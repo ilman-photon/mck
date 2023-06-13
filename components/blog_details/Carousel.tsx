@@ -46,10 +46,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   };
   return (
     <div className="lg:p-6 px-0">
-      <h1
+      <h3
         className="text-gtl-med text-mckblue text-32 font-medium pb-6"
         dangerouslySetInnerHTML={{ __html: title }}
-      ></h1>
+      ></h3>
       <div className="lg:pt-6 lg:px-2 lg:pb-6 blockDetailsCarousel">
 
         <Swiper
@@ -86,14 +86,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         }
                         }
                         className="h-240 lg:h-276 flex"
-                        role="button"
-                        tabIndex={0}
                         aria-hidden="true"
                       >
                         <ImageComponent
                           src={DOMPurify.sanitize(item?.image?.value?.url)}
                           alt={item?.image?.value?.id}
                           id={item?.image?.value?.id}
+                          aria-hidden="true"
                           className="w-full max-h-[240px] lg:max-h-[276px] object-cover"
                         />
                       </div>

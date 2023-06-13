@@ -260,9 +260,9 @@ const HealthNeedFilter = ({
           {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
-            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
             className='mr-2 ml-2'
-            alt={activeFiltersData?.activeFiltersText?.value}
+            alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}                   
             aria-hidden="true"
@@ -371,7 +371,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
-          { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
+          {productSum >= 0 ?  (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum) : null}
         </div>
       </section>
       <div className='lg:flex mt-6'>

@@ -6,19 +6,26 @@ import CarouselComponent from "@/components/carousel";
 import ProductListComponent from "@/components/product_list";
 import GoogleTagManager from "@/components/google_tag_manager";
 import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
+import axiosInstance from "@/utils/axiosInstance";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const categoryName = selectedCategory?.replace(/ /g, "-");
   const [token, setToken] = useState(null);
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`,
-    headers: {
-      "Accept-Language": "en",
-      //   "Authorization":`Bearer ${localStorage.getItem("token")}`
-    },
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  let [response , setResponse] =useState<any>()
+
+  const fetchData = async () => {
+    const data = await axiosInstance(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`
+    );
+    setResponse(data)
+
+  }
+  useEffect(() => {
+    fetchData()
+  }, [categoryName]) 
+
 
   // filter data to share as props
   function filteredData(valueType: string) {
@@ -48,6 +55,14 @@ function ProductListPage() {
     }
   }, [JSON.stringify(response)]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <GoogleTagManager />
@@ -57,11 +72,25 @@ function ProductListPage() {
             "Carousel" && true
         }
       />
-      {error && <p>{error.message}</p>}
-      {!loading && !error && response && (
-        <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+      {/* {error && <p>{error.message}</p>} */}
+      {isLoading ? (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-75"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            {/* Add your spinner component here */}
+          </div>
+        </div>
+      ) : (
+        response && (
+          <>
+            <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+            <ProductListComponent />
+          </>
+        )
       )}
-      <ProductListComponent />
       <FooterComponent />
     </>
   );

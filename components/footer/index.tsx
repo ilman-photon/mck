@@ -39,7 +39,7 @@ export default function FooterComponent() {
       <footer
         id="footer"
         role="contentinfo"
-        className="container mx-auto bg-mcklightyellow lg:mb-0 mb-16 mt-18"
+        className="container mx-autobg-mcklightyellow lg:mb-0 mb-16"
       >
         <div className="mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
           <div className="grid grid-cols-1 lg:grid-cols-2">

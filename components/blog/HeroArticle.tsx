@@ -35,7 +35,7 @@ const HeroArticle = ({ data }: any) => {
                             }}
                             className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                         >
-                    <h1 className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
+                    <h1 role="link" className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                     </LinkComponent>
                     <div className='pb-3 lg:pt-0 pt-3'>
                       

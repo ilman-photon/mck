@@ -210,7 +210,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
               className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}
               tabIndex={0}
-              role="navigation"
             />
           </div>
           <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
