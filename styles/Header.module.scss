@@ -67,7 +67,7 @@
 @media (max-width: 1025px) and (min-width: 1023px) {
     .isStickyActive{
         .isMobileUi {
-        margin-right: 4rem !important;
+        margin-right: 11rem !important;
         .mainmenu-items {
             margin: 0 20px !important;
             .mainmenu-link {font-size: 16px;}
@@ -205,7 +205,7 @@
     }
 }
 
-@media (max-width: 1600px) and (min-width:1399px) {
+@media (max-width: 1535px) and (min-width:1399px) {
     .isStickyActive{
         .isMobileUi {
         padding-left: 3vw;
@@ -220,6 +220,27 @@
         padding-left: 9vw;
         .mainmenu-items {
             margin: 0 30px !important;
+        }
+        }
+    }
+}
+
+
+@media (max-width: 1980px) and (min-width:1536px) {
+    .isStickyActive{
+        .isMobileUi {
+        padding-left: 3vw;
+        .mainmenu-items {
+            margin: 0 32px !important;
+            .mainmenu-link {font-size: 16px;}
+        }
+        }
+    }
+    .isNotSticky {
+        .isMobileUi {
+        padding-left: 9vw;
+        .mainmenu-items {
+            margin: 0 40px !important;
         }
         }
     }

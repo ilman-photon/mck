@@ -31,7 +31,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       height: "auto",
     };
     const style1 = {
-      margin: 0,
+      margin: '0 auto',
       background: "#FFF6ED",
       color: "#001a71",
     };
@@ -179,12 +179,11 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         id="header"
         className={`header ${
           isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70 " : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
+        } flex lg:grid container mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
       >
-        <div className="container mx-auto lg:grid contents align-content-center">
           <div className="flex">
             {/* Hamburger menu starts */}
             <div
@@ -217,7 +216,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
             <Search />
           </div>
-        </div>
       </div>
       {children}
     </>
