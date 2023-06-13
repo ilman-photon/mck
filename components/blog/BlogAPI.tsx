@@ -1,5 +1,5 @@
+import { GETBLOGSETTING } from "@/hooks/ApiContent";
 import axiosInstance from "@/utils/axiosInstance";
-import axios from "axios";
 
 export const fetchBlogDetails = (blogID: any) => {
     const StringParam = blogID.toString().toLowerCase();
@@ -8,8 +8,7 @@ export const fetchBlogDetails = (blogID: any) => {
 }
 
 export const fetchBlogSetting = () => {
-    return axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog-listing-setting/&expand=*`);
+    return axiosInstance.get(GETBLOGSETTING);
 }
 
 export const fetchBlogFilter = (filter: any) => {
