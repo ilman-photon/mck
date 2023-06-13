@@ -246,12 +246,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   )}
                 </div>
               </div>
-
-              {renderDescription}
+              <div className="col-span-2">
+                {renderDescription}
+                <div className="lg:pr-24">
+                  {renderButton}
+                </div>
+              </div>   
+              
             </div>
-
-            <div aria-hidden="true">&nbsp;</div>
-            {renderButton}
           </div>
         </div>
       );
