@@ -12,6 +12,7 @@ import RecommendationalProductComponent from "@/components/recommendational_prod
 import GoogleTagManager from "@/components/google_tag_manager";
 import CookieSetting from "@/components/cookieSetting";
 import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 
 export default function Home() {
@@ -42,10 +43,10 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-        <title>McKesson</title>
-        <meta name="description" content="Created by Mckesson" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+         <title>McKesson</title>
+         <meta name="description" content="Created by Mckesson" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       {isLoading && (
@@ -57,7 +58,7 @@ export default function Home() {
           >
             <Image
               src={gifImage}
-              alt="loading-image"
+              alt={DOMPurify.sanitize("loading-image")}
               width={400}
               height={400}
               loading="eager"
@@ -68,7 +69,7 @@ export default function Home() {
 
       <HeaderComponent
         isCarusolAvaible={
-          response?.data[0]?.blockArea?.expandedValue[0]?.contentType[1] ===
+         DOMPurify.sanitize(response?.data[0]?.blockArea?.expandedValue[0]?.contentType[1]) ===
           "CarouselBlock"
             ? true
             : false

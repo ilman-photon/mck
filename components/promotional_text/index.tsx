@@ -12,6 +12,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
       imageStyle="w-full"
       alt={`${index}_img_001`}
       id={`${index}_img_001`}
+      ariahidden={false}
       />
     ) : ( 
       <div

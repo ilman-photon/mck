@@ -19,6 +19,19 @@ interface TextDescAndButtonProps{
   }
   
 export default function TextDescAndButton (props:TextDescAndButtonProps) {
+
+    const blueColorBackground =  "#001a71"
+    const greenColorBackground = "#2ccfad"
+
+    const whiteColor = 'white'
+    const blackColor = 'black'
+  
+    // If button colour is McKesson Blue, the font colour should be white.
+    // If button colour is McKesson Green, the font colour should Black.
+    // If any other colour is provided, default to McKesson Blue with font colour being white. 
+    // Please do this on a priority the first thing tomorrow morning.
+    // Please start with home page (including recommendational products and the carosal). 
+    // Consider this as a P2.
   
     const {
       parentKey,
@@ -39,12 +52,12 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
   
     const renderTitle  = title ? (
     <div>
-      <h1
+      <h3
       className={titleStyle}
       id={`${idComponent}_lbl_001`}
     >
       {title}
-    </h1>
+    </h3>
     </div>
     ) : null
   
@@ -65,7 +78,8 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
         <button
           className={buttonStyle}
           style={{
-            backgroundColor: CTABackgroundColor,
+            backgroundColor: CTABackgroundColor?.toLowerCase() === blueColorBackground ? blueColorBackground : CTABackgroundColor?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
+            color:CTABackgroundColor?.toLowerCase() === blueColorBackground ? whiteColor : CTABackgroundColor?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
           }}
           id={`${idComponent}_btn_001`}
           onClick={onPressCTA}

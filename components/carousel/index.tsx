@@ -20,7 +20,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const dataFetchedRef = useRef(false);
 
   useEffect(() => {
-    if (dataFetchedRef.current) return;
+    // if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
     try {
@@ -29,7 +29,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     } catch (error) {
       setLoading(true);
     }
-  }, []);
+  }, [sectionData]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -72,6 +72,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     leave: { opacity: 0, transform: "translateX(-100%)" },
     config: { duration: 2100 },
   });
+
+
+  const blueColorBackground =  "#001a71"
+  const greenColorBackground = "#2ccfad"
+
+  const whiteColor = 'white'
+  const blackColor = 'black'
 
   const firstResponse = response?.[0];
   const carouselContent =
@@ -141,9 +148,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         {item?.buttonText?.value ? (
                           <button
                             id={item?.contentLink?.id}
-                            className={`${item?.ctaButtonColor?.value.length == 0 || item?.ctaButtonColor?.value === "#001A71" ? "text-white ": "text-black"} jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                            className={`${item?.ctaButtonColor?.value.length == 0 || item?.ctaButtonColor?.value?.toLowerCase() === "#001a71" ? "text-white ": "text-black"} jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                             style={{
-                              backgroundColor: item?.ctaButtonColor?.value,
+                              backgroundColor: item?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? blueColorBackground : item?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
+                              color:item?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? whiteColor : item?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
                             }}
                             onClick={() => handleCTABtn(item?.buttonUrl?.value)}
                           >
@@ -206,8 +214,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               id={firstResponse?.contentLink?.id}
                               className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                               style={{
-                                backgroundColor:
-                                  firstResponse?.ctaButtonColor?.value,
+                                  backgroundColor: firstResponse?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? blueColorBackground : firstResponse?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
+                                  color:firstResponse?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? whiteColor : firstResponse?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
                               }}
                               onClick={() =>
                                 handleCTABtn(firstResponse?.buttonUrl?.value)

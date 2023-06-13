@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   InfoWindow,
   GoogleMap,
@@ -9,6 +9,7 @@ import {
 import { useWhereToBuyStore } from "../where_to_buy/Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
 import axiosInstance from "@/utils/axiosInstance";
+import Link from "next/link";
 
 function PdpLocation(props: any) {
   const [responseValue, setResponseValue] = useState<any>();
@@ -71,6 +72,8 @@ function PdpLocation(props: any) {
       .catch((e: Error | AxiosError) => console.log(e));
   };
 
+  const googleMapsRef = useRef<HTMLDivElement>(null);
+
   const handleLocationClick = (i: any, data: any) => {
     setSelectedMarker(null);
     setSelectedMarker(data);
@@ -104,6 +107,22 @@ function PdpLocation(props: any) {
     // }
   };
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    googleMapsRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  //   e.preventDefault();
+  //   const href = e.currentTarget.href;
+  //   const targetId = href.replace(/.*\#/, "");
+  //   const elem = document.getElementById(targetId);
+  //   console.log(href)
+  //   elem?.scrollIntoView({
+  //     behavior: "smooth",
+  //   });
+  // };
+
   return isLoaded ? (
     <div className="row-span-2 lg:pt-[72px]">
       <div className="relative mx-4 lg:mx-0 mt-6 lg:mt-0">
@@ -133,8 +152,10 @@ function PdpLocation(props: any) {
         Disclaimer: Products are subject to availability
       </div>
       <div
+        id="google-map"
         className="mb-6 h-[300px] mx-4 lg:mx-0"
         style={{ position: "relative" }}
+        ref={googleMapsRef}
       >
         <GoogleMap
           mapContainerClassName="map-container product-detail-map box-border border border-solid border-mckblue"
@@ -242,15 +263,15 @@ function PdpLocation(props: any) {
       </div>
 
       <div className="h-[500px] overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100 mx-4 lg:mx-0 location-box lg:pr-4 pr-4">
-        {responseValue?.map((value: any, index: Number) => {
+        {responseValue?.map((value: any, index: number) => {
           return (
+            <Link key={value.id} href={"#google-map"} scroll onClick={handleScroll} >
             <div
               className={
                 index === selectedStore
                   ? "text-mckthingrey border rounded-lg p-3 mb-4 bg-shadesblue "
                   : "text-mckthingrey border rounded-lg p-3 mb-3"
               }
-              key={value.id}
               onClick={() => handleLocationClick(index, value)}
               id={"store-item" + index}
             >
@@ -317,6 +338,7 @@ function PdpLocation(props: any) {
                   <img
                     src="images/directions_car_filled.svg"
                     alt="direction"
+                    aria-hidden={true}
                     className="inline-block"
                     id={`pdp-directionimg_${props.index}-${index}`}
                   />
@@ -331,6 +353,7 @@ function PdpLocation(props: any) {
                 </div>
               </div>
             </div>
+        </Link>
           );
         })}
       </div>

@@ -42,6 +42,7 @@ function AllProductCategoryPage({
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [productSum, setProductSum] = useState<any>();
+  const [filterClicked, setFilterClicked] = useState(false);
   const productSearchCard = false;
   let selectedCategoryName: any = [];
   let productName: any = [];
@@ -63,12 +64,14 @@ function AllProductCategoryPage({
       `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
     );
     promise
-      .then((res:any) => {
+      .then((res: any) => {
         let tempResults: any = {};
         if (res.data.results.length === 0) {
           mainCatId.map((id: any) => {
             tempResults[selectedFilterItems[id].categoryName] = [];
           });
+          setFilterClicked(true)
+          return
         }
 
         res.data.results.map((item: any) => {
@@ -158,7 +161,7 @@ function AllProductCategoryPage({
           .get(
             `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
           )
-          .then((res:any) => {
+          .then((res: any) => {
             setProductSum(res.data.totalMatching);
             let tempResults: any = [];
             res.data.results.map((item: any) => {
@@ -343,29 +346,29 @@ function AllProductCategoryPage({
 
   useEffect(() => {
     fetchCategoryId()
-      .then((res:any) => {
+      .then((res: any) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
-        if(id){
-        return axiosInstance.get(
-          `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
-        );
+        if (id) {
+          return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
+            {
+              headers: {
+                "Accept-Language": "en",
+              },
+            }
+          );
         }
       })
-      .catch((e:any) => {
+      .catch((e: any) => {
         setCategoryLoding(true);
         setCategoryError(e);
       });
 
     FetchProductFilter()
-      .then((response:any) => {
+      .then((response: any) => {
         setProductFilter(response);
       })
-      .catch((e:any) => console.log(e));
+      .catch((e: any) => console.log(e));
   }, []);
 
   function fetchCategoryId() {
@@ -441,6 +444,13 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       <Head>
@@ -448,24 +458,23 @@ function AllProductCategoryPage({
       </Head>
       <GoogleTagManager />
       <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
-      {!carouselData ||
-        (isLoading && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="fixed inset-0 bg-black opacity-50"></div>
-            <div
-              className="relative"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            >
-              <Image
-                src={gifImage}
-                alt="coba-image"
-                width={400}
-                height={400}
-                loading="eager"
-              />
-            </div>
+      {!carouselData && isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            <Image
+              src={gifImage}
+              alt="coba-image"
+              width={400}
+              height={400}
+              loading="eager"
+            />
           </div>
-        ))}
+        </div>
+      )}
       {carouselData && (
         <CarouselComponent
           isCarouselAvaible={carouselData ? true : false}
@@ -491,6 +500,7 @@ function AllProductCategoryPage({
           selectedRecommendedProduct={selectedRecommendedProduct}
           productSum={productSum}
           productSearchCard={productSearchCard}
+          filterClicked={filterClicked}
         />
       </div>
       <FooterComponent />

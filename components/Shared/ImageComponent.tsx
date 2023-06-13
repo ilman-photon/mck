@@ -6,6 +6,7 @@ interface ImageComponentProps {
     imageSource:string
     id:string
     imageContainerStyle:string
+    ariahidden:boolean
   }
   
 export default function ImageComponent (props:ImageComponentProps) {
@@ -16,6 +17,7 @@ export default function ImageComponent (props:ImageComponentProps) {
         imageSource,
         id,
         alt,
+        ariahidden,
     } = props
   
     return (
@@ -28,6 +30,7 @@ export default function ImageComponent (props:ImageComponentProps) {
           alt={alt}
           src={imageSource}
           id={id}
+          aria-hidden={ariahidden}
         />
     ) : null}    
     </div>
