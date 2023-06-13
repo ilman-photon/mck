@@ -20,7 +20,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const dataFetchedRef = useRef(false);
 
   useEffect(() => {
-    if (dataFetchedRef.current) return;
+    // if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
     try {
@@ -29,7 +29,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     } catch (error) {
       setLoading(true);
     }
-  }, []);
+  }, [sectionData]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
