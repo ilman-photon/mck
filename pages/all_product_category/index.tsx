@@ -10,6 +10,7 @@ import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
+import { useRouter } from "next/router";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -27,6 +28,7 @@ interface MyComponentProps {
 function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
+  const router = useRouter();
   const [categoryError, setCategoryError] = useState<any>();
   const [categoryLoading, setCategoryLoding] = useState<any>(true);
   const [productFilter, setProductFilter] = useState<any>();
@@ -70,8 +72,8 @@ function AllProductCategoryPage({
           mainCatId.map((id: any) => {
             tempResults[selectedFilterItems[id].categoryName] = [];
           });
-          setFilterClicked(true)
-          return
+          setFilterClicked(true);
+          return;
         }
 
         res.data.results.map((item: any) => {
@@ -338,7 +340,7 @@ function AllProductCategoryPage({
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        window.location.href = DOMPurify.sanitize(updatedURL);
+        router.push(updatedURL);
       }
     }
     if (queryParams) fetchProductList(queryParams);
