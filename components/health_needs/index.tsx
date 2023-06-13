@@ -77,7 +77,11 @@ const HealthNeedsComponent = ({
     );
     promise
       .then((res: any) => {
-        setFilterClicked(true);
+        if(res.data.results.length === 0){
+          setFilterClicked(true);
+          return
+        }
+       
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
         //   setHealthData(!healthData);
