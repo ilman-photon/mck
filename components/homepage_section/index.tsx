@@ -203,6 +203,7 @@ const ImageBGWithTextComponent = () => {
               imageStyle="w-full"
               alt={`${index}_img_001`}
               id={`${index}_img_001`}
+              ariahidden={false}
             />
             <div className="container mx-auto position-relative bg-transparent-left">
             <TextDescAndButton 
