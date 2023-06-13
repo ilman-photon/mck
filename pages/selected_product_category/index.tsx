@@ -6,20 +6,26 @@ import CarouselComponent from "@/components/carousel";
 import ProductListComponent from "@/components/product_list";
 import GoogleTagManager from "@/components/google_tag_manager";
 import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
+import axiosInstance from "@/utils/axiosInstance";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const categoryName = selectedCategory?.replace(/ /g, "-");
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`,
-    headers: {
-      "Accept-Language": "en",
-      //   "Authorization":`Bearer ${localStorage.getItem("token")}`
-    },
-  });
+  let [response , setResponse] =useState<any>()
+
+  const fetchData = async () => {
+    const data = await axiosInstance(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`
+    );
+    setResponse(data)
+
+  }
+  useEffect(() => {
+    fetchData()
+  }, [categoryName]) 
+
 
   // filter data to share as props
   function filteredData(valueType: string) {
@@ -66,7 +72,7 @@ function ProductListPage() {
             "Carousel" && true
         }
       />
-      {error && <p>{error.message}</p>}
+      {/* {error && <p>{error.message}</p>} */}
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
@@ -78,8 +84,6 @@ function ProductListPage() {
           </div>
         </div>
       ) : (
-        !loading &&
-        !error &&
         response && (
           <>
             <CarouselComponent sectionData={filteredData("CarouselBlock")} />
