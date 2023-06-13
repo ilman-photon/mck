@@ -32,7 +32,7 @@ function ContactUsComponent() {
     }, [ApiRespond]);
     return (
         <>
-            <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto ">
+            <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto mb-6 lg:mb-18">
                 <h1  className="text-gtl-med pb-6 font-medium text-[27px] lg:leading-61 text-mckblue lg:text-[54px] leading-30" id="cu_label_001">{contactUsData?.data[0]?.title?.value}</h1>
                 <div className="grid lg:grid-cols-2 lg:gap-6">
                     <div className="overflow-hidden rounded-lg text-mckthingrey border contact-container lg:mb-12 mb-6">
