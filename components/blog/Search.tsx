@@ -42,12 +42,12 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         });
     }
   };
-  const handleFetchSerach = () => {
-    router.push({
-      pathname: "/blog-search-result",
-      query: { id: search },
-    });
-  };
+  // const fetchSearchBlog = () => {
+  //   router.push({
+  //     pathname: "/blog-search-result",
+  //     query: { id: search },
+  //   });
+  // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
     const regex = /^[a-zA-Z0-9' -]+$/;
@@ -61,7 +61,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   return (
     <>
       <input
-        style={{ border: error ? "2px solid red" : "1px solid #001A71" }}
+        style={{ border: error ? "2px solid red" : "2px solid #001A71" }}
         className="w-full text-sofia-reg font-normal text-base text-mckblue placeholder:text-mckblue placeholder:text-opacity-50 pl-4 py-3 pr-12 focus:border active:border border border-blue focus:outline-none rounded"
         type="text"
         placeholder={placeholder}

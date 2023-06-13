@@ -157,6 +157,7 @@ const ImageWithTextComponent = () => {
         imageSource={sectionData?.image?.value?.url}
         alt={`${index}_IMG_001`}
         id={`${index}_IMG_001`}
+        ariahidden={false}
       />
       <TextDescAndButton 
           containerStyle="lg:p-5 lg:pr-9 lg:pl-8 my-auto col-span-1 w-full lg:w-1/2 flex flex-col"
@@ -196,6 +197,7 @@ const ImageBGWithTextComponent = () => {
               imageStyle="w-full"
               alt={`${index}_img_001`}
               id={`${index}_img_001`}
+              ariahidden={false}
             />   
             <div className="container mx-auto position-relative bg-transparent-left">
             <TextDescAndButton 

@@ -65,8 +65,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const renderContent = () => (
       <>
         <div
-          className={`bg-color p-4 lg:p-[36px] ${
-            isSingleItem ? "col-span-2" : "odd:ml-0"
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
+            isSingleItem ? "mb-4 lg:mb-0 col-span-2" : "odd:ml-0"
           }`}
           key={ele?.data?.contentLink?.id}
         >
@@ -170,6 +170,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           src={ele?.data?.imageTitle?.value?.url}
           alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
           id={`home-product-image${indexs}${index + 1}`}
+          aria-hidden={true}
         />
       );
 
@@ -236,6 +237,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <div className="mx-auto my-auto lg:h-40 object-contain lg:py-48">
                   {ele?.data?.image?.value?.url && (
                     <img
+                      aria-hidden={true}
                       className={`mx-auto lg:my-auto max-h-160`}
                       src={ele?.data?.image?.value?.url}
                       id={`home-product-image01${indexs}${index + 1}`}
@@ -244,12 +246,14 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   )}
                 </div>
               </div>
-
-              {renderDescription}
+              <div className="col-span-2">
+                {renderDescription}
+                <div className="lg:pr-24">
+                  {renderButton}
+                </div>
+              </div>   
+              
             </div>
-
-            <div aria-hidden="true">&nbsp;</div>
-            {renderButton}
           </div>
         </div>
       );
@@ -276,6 +280,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div className="mx-auto my-auto lg:h-40 object-contain">
                     {ele?.data?.image?.value?.url && (
                       <img
+                        aria-hidden={true}
                         className="mx-auto lg:my-auto max-h-160"
                         src={ele?.data?.image?.value?.url}
                         id={`home-product-image01${indexs}${index + 1}`}

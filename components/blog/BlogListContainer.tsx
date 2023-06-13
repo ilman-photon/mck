@@ -4,10 +4,12 @@ import useAxios from "@/hooks/useApi";
 import { LinkComponent } from "../global/LinkComponent";
 import HeroArticle from "./HeroArticle";
 import { ImageComponent } from "../global/ImageComponent";
-import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
+import { GetTime, handlecategoryColorCode } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 const BlogListContainer = () => {
+  const catMapping = useHeaderStore((state) => state.categoryMapping);
     const { response, error, loading } = useAxios({
         method: "GET",
         url: `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage')&orderby=changed desc&top=10&skip=0`,
@@ -69,7 +71,7 @@ const BlogListContainer = () => {
                                                 {item.tag.value.map((tagitem: any, idx: any) => (
                                                     <div key={idx}
                                                         style={{
-                                                            backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
+                                                            backgroundColor: handlecategoryColorCode(tagitem.id, catMapping)
                                                         }}
                                                         className='mb-1 categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mr-1 border-solid shade-blue-border h-fit'>{tagitem.description}</div>
                                                 ))}

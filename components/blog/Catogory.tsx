@@ -30,6 +30,7 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
                     src={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.url)}
                     alt={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.name)}
                     id={item.categoryImage.expandedValue.name}
+                    aria-hidden={true}
                   />
                 )}
                 {item?.categoryDisplayName?.value}

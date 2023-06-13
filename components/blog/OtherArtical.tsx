@@ -1,15 +1,18 @@
 import React, { memo } from "react";
-import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
+import { GetTime, handlecategoryColorCode } from "../global/CommonUtil";
 
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 interface OtherArticalProps {
     ArticleList: any;
 }
 
 const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
+    const catMapping = useHeaderStore((state) => state.categoryMapping);
+
     return (
         <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
             {ArticleList ? ArticleList?.map((item: any, index: any) => (
@@ -27,7 +30,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
                                     <div className="lg:h-314 h-240 flex" aria-hidden="true" >
-                                    <ImageComponent src={DOMPurify.sanitize(item?.image?.expandedValue?.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item?.image?.expandedValue?.name)} id={item?.image?.expandedValue?.name} />
+                                    <ImageComponent src={DOMPurify.sanitize(item?.image?.expandedValue?.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item?.image?.expandedValue?.name)} id={item?.image?.expandedValue?.name} aria-hidden={true}/>
                                     </div>
                                 </figure>
                             </LinkComponent>
@@ -51,10 +54,9 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     <div className='flex flex-wrap h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
                                         {item.tag.value.map((tagitem: any, idx: any) => (
                                             <div key={idx}
-                                                style={{
-                                                    backgroundColor: handleTagBackgroudColor(idx, item.tagBackgroundColorCode?.value),
-                                                    color: item.recommendedProductButtonText?.value
-                                                }}
+                                            style={{
+                                                backgroundColor: handlecategoryColorCode(tagitem.id,catMapping),
+                                            }}
                                                 className='mb-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{DOMPurify.sanitize(tagitem?.description)}</div>
                                         ))}
                                     </div>

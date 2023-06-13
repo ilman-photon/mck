@@ -260,9 +260,9 @@ const HealthNeedFilter = ({
           {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
             id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
-            src = {activeFiltersData?.activeFiltersImage?.expandedValue?.url} 
+            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
             className='mr-2 ml-2'
-            alt={activeFiltersData?.activeFiltersText?.value}
+            alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}                   
             aria-hidden="true"
@@ -275,19 +275,21 @@ const HealthNeedFilter = ({
             {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]'
+                  className='flex items-end rounded-xl px-2 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB] h-22'
                   key={item}
                 >
+                  <div className='gap-1 flex self-baseline'>
                   {extractMainCategoryName(productCategoryData)?.includes(item)?`${item}-All` : `${item}`}
                   <Image
                     src='/images/hn-delete-icon.svg'
-                    className='cursor-pointer mt-0.5'
+                    className='cursor-pointer mt-0.5 self-center'
                     alt='delete icon'
                     onClick={() => handleDelete(activeFilter, item)}
                     width={7}
                     height={7}
                     id={`hn-001_0${index}`}
                   />
+                  </div>
                 </div>
               );
             })}
@@ -296,14 +298,14 @@ const HealthNeedFilter = ({
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
-                className='w-3 cursor-pointer mr-1'
+                className='w-3 cursor-pointer lg:mr-2 mr-1'
                 alt='delete icon'
                 width={12}
                 height={12}
                 id={`hn-001_0${'02'}`}
               />
               <div
-                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal'
+                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal text-sofia-regular text-mckblue'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -370,8 +372,8 @@ const HealthNeedFilter = ({
             )}
           </div>
         </div>
-        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
-          { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
+        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base text-sofia-regular'  id='hn_label_003_3'>
+          {productSum >= 0 ?  (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum) : null}
         </div>
       </section>
       <div className='lg:flex mt-6'>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useLayoutEffect } from "react";
 import { AxiosError } from "axios";
 import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
@@ -11,7 +11,6 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
-  fetchApplicationSetting,
   fetchBlogFilter,
   fetchBlogSetting,
 } from "./BlogAPI";
@@ -31,10 +30,8 @@ const BlogComponent = () => {
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [ActiveSearch, setActiveSearch] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
-  const [response, setResponse] = useState<any>();
+  const [BlogSetting, setBlogSetting] = useState<any>();
   const [loading, setIsLoading] = useState<any>();
-  const [AppSetting, setAppSetting] = useState<any>();
-
   const [searchInfo, setSeachInfo] = useState<any>({
     ActiveSearch: true,
     SearchString: "",
@@ -44,29 +41,16 @@ const BlogComponent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    HandleAppSetting();
-
     setIsLoading(true);
     fetchBlogSetting()
       .then((res) => {
-        setResponse(res);
+        setBlogSetting(res);
         setIsLoading(false);
       })
       .catch((e: Error | AxiosError) => {
         setIsLoading(false);
       });
   }, []);
-  const HandleAppSetting = () => {
-    fetchApplicationSetting()
-      .then((res) => {
-        setAppSetting(res.data[0].categoryMapping.expandedValue);
-        setIsLoading(false);
-      })
-      .catch((e: Error | AxiosError) => {
-        setIsLoading(false);
-      });
-  };
-
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
     router.push({
@@ -130,7 +114,7 @@ const BlogComponent = () => {
           } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            placeholder={response?.data[0].blogSearchPlaceholderText?.value}
+            placeholder={BlogSetting?.data[0].blogSearchPlaceholderText?.value}
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
@@ -159,7 +143,7 @@ const BlogComponent = () => {
               case "Search":
                 return (
                   <SearchResult
-                    placeHolders={response?.data[0]}
+                    placeHolders={BlogSetting?.data[0]}
                     ArticleContent={ArticleContent}
                     searchString={searchInfo.SearchString}
                   />
@@ -175,8 +159,8 @@ const BlogComponent = () => {
         )}
       </div>
       <div className="lg:w-306 w-full blogright-sidebar">
-        <p className="invisible">
-          {response?.data[0].blogSearchPlaceholderText.value}
+        <p className="hidden">
+          {BlogSetting?.data[0]?.blogSearchPlaceholderText?.value}
         </p>
         {!ActiveSearch && (
           <div
@@ -185,7 +169,7 @@ const BlogComponent = () => {
             className="lg:block hidden relative flex items-center content-center mb-6"
           >
             <SearchComponent
-              placeholder={response?.data[0]?.blogSearchPlaceholderText.value}
+              placeholder={BlogSetting?.data[0]?.blogSearchPlaceholderText?.value}
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
@@ -194,8 +178,8 @@ const BlogComponent = () => {
           </div>
         )}
         <CatogaryComponent
-          CatogaryListing={response?.data[0]?.categoryFilter?.expandedValue}
-          Catogarytitle={response?.data[0]?.categoryHeadingText?.value}
+          CatogaryListing={BlogSetting?.data[0]?.categoryFilter?.expandedValue}
+          Catogarytitle={BlogSetting?.data[0]?.categoryHeadingText?.value}
           OnCatogarySelcete={(e) => filterBlogList(e)}
         />
         <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
@@ -203,16 +187,15 @@ const BlogComponent = () => {
             className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
             id="blog-label-009"
           >
-            {response?.data[0]?.trendingBlogHeadingText?.value}
+            {BlogSetting?.data[0]?.trendingBlogHeadingText?.value}
           </div>
-          <ResentBlogListComponent />
+          <ResentBlogListComponent ResentBlogList={BlogSetting?.data[0]?.trendingAritcle}/>
         </div>
         <RelatedProducts
-          AppSetting={AppSetting}
           OnRelatedProductClick={(e) => handleProductClick(e)}
-          title={response?.data[0]?.relatedProductHeadingText?.value}
+          title={BlogSetting?.data[0]?.relatedProductHeadingText?.value}
           BlogListingContent={
-            response?.data[0]?.recommendedProducts?.expandedValue
+            BlogSetting?.data[0]?.recommendedProducts?.expandedValue
           }
         />
       </div>
