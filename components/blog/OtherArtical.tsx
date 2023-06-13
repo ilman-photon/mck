@@ -27,7 +27,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
                                     <div className="lg:h-314 h-240 flex" aria-hidden="true" >
-                                    <ImageComponent src={DOMPurify.sanitize(item?.image?.expandedValue?.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item?.image?.expandedValue?.name)} id={item?.image?.expandedValue?.name} />
+                                    <ImageComponent src={DOMPurify.sanitize(item?.image?.expandedValue?.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item?.image?.expandedValue?.name)} id={item?.image?.expandedValue?.name} aria-hidden={true}/>
                                     </div>
                                 </figure>
                             </LinkComponent>

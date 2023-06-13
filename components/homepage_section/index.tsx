@@ -158,7 +158,8 @@ const ImageWithTextComponent = () => {
       <ImageComponent
         imageContainerStyle='w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0  col-span-1'
         imageStyle={sectionData?.image?.value?.url}
-        imageSource={sectionData?.image?.value?.url}
+        imageSource={sectionData?.image?.value?.url}        
+        ariahidden={true}
         alt={`${index}_IMG_001`}
         id={`${index}_IMG_001`}
       />
