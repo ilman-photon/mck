@@ -27,13 +27,27 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
     }
   }, [searchText]);
 
-
-  const fetchSearchBlog = () => {
-    router.push({
-      pathname: "/blog-search-result",
-      query: { id: search },
-    });
+  const fetchSearchBlog = async () => {
+    if (search === undefined) {
+      setActiveClose(true);
+    } else {
+      fetchBlogSearch(search)
+        .then((res) => {
+          setActiveClose(false);
+          handleResponse(res.data.results, search);
+        })
+        .catch((e: Error | AxiosError) => {
+          setError(true);
+          // handleFetchSerach();
+        });
+    }
   };
+  // const fetchSearchBlog = () => {
+  //   router.push({
+  //     pathname: "/blog-search-result",
+  //     query: { id: search },
+  //   });
+  // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
     const regex = /^[a-zA-Z0-9' -]+$/;
