@@ -4,10 +4,12 @@ import FaqComponent from "@/components/faq/FaqComponent";
 import HeaderComponent from "@/components/header";
 import GoogleTagManager from "@/components/google_tag_manager";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import DOMPurify from 'isomorphic-dompurify';
+
 import Image from "next/image";
 function Faq() {
   const [isLoading, setIsLoading] = useState(true);
-
+  const gifi:any = gifImage;
   useEffect(() => {
     // Simulating a delay to show the loading state
     const timer = setTimeout(() => {
@@ -29,7 +31,7 @@ function Faq() {
             style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
           >
             <Image
-              src={gifImage}
+              src={gifi}
               alt="loading-image"
               width={400}
               height={400}

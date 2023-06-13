@@ -16,14 +16,14 @@ function ProductFilter({
               <>
                 {/* Left filter main category */}
 
-                <section className="mck-hn-mobile-accordion tab overflow-hidden">
+                <section className="tab overflow-hidden">
                   <input
                     id={`${leftfiltermaindata?.contentLink?.id}_${index}`}
-                    className="mck-hn-accordion-title-check"
+                    className="hidden"
                     type="checkbox"
                   />
                   <label
-                    className="tab-label py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
+                    className="tab-label flex items-end py-5 lg:p-0 relative after:absolute after:top-6 after:content-['+'] after:right-4 lg:after:content-['']"
                     htmlFor={`${leftfiltermaindata?.contentLink?.id}_${index}`}
                   >
                     <div
@@ -35,9 +35,9 @@ function ProductFilter({
                         alt={leftfiltermaindata?.mainCategory?.value[0].name}
                         id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                         height={24}
-                        width={24} /> 
+                        width={24} className="mr-2" /> 
                
-                      <label htmlFor="acute" className="ml-2 filter-title"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
+                      <label htmlFor="acute" className="text-base font-extrabold text-sofia-bold text-mckblue z-[-1]"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
@@ -45,11 +45,11 @@ function ProductFilter({
                   {/* Left filter main category */}
 
                   {/* Left filter sub category */}
-                  <div className="lg:border-b lg:border-[#CCD1E3] border-0 mck-hn-filter-subcat tab-content lg:max-h-none lg:px-0">
+                  <div className="lg:border-b lg:border-[#CCD1E3] border-0 pb-0 last:m-0 tab-content lg:max-h-none lg:px-0">
                     <ul>
                       <li className="list-none pb-1 lg:pb-0">
                         <div
-                          className="flex items-center my-px"
+                          className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                           onClick={(e) =>
                             handleViewAllChange(
                               e,
@@ -61,7 +61,7 @@ function ProductFilter({
                             id={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
                             type="checkbox"
                             value="view all"
-                            className="w-4 h-4 accent-[#001A71]"
+                            className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                             checked={
                               selectedFilterItems[
                                 leftfiltermaindata?.mainCategory?.value[0].id
@@ -76,8 +76,8 @@ function ProductFilter({
                             role="checkbox"
                           />
                           <label
-                            htmlFor="mck-view-all"
-                            className="ml-2 text-mcknormalgrey text-sm"
+                            htmlFor={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
+                            className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                             id=""  aria-label="View All"
                           >
                             View All
@@ -90,7 +90,7 @@ function ProductFilter({
                         (leftfiltersubdata: any) => (
                           <li className="list-none pb-1 lg:pb-0 lg:pr-3" key={leftfiltersubdata?.id}>
                             <div
-                              className="flex items-center my-px"
+                              className="flex items-center my-px lg:pl-[4.5px] cursor-pointer"
                               onClick={(e) =>
                                 handleCheckBox(
                                   e,
@@ -104,7 +104,7 @@ function ProductFilter({
                                 id={`${leftfiltersubdata?.name}_${index}`}
                                 type="checkbox"
                                 value={leftfiltersubdata?.name}
-                                className="w-4 h-4 accent-[#001A71]"
+                                className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                                 checked={
                                   selectedFilterItems[
                                     leftfiltermaindata?.mainCategory?.value[0]
@@ -121,8 +121,8 @@ function ProductFilter({
                                 role="checkbox"
                               />
                               <label
-                                htmlFor={leftfiltersubdata?.name}
-                                className="ml-2 text-sm"
+                                htmlFor={`${leftfiltersubdata?.name}_${index}`}
+                                className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                                 aria-label={leftfiltersubdata?.name}
                               >
                                 {leftfiltersubdata?.name}

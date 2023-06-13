@@ -46,8 +46,8 @@ export declare module WhereToBuy {
         isLoading:boolean
         onLoadStart:() => void
         onLoadEnd:() => void
-        mapsApiKey:string
-        healthMartApiKey:string
+        mapsApiKey:any
+        healthMartApiKey:any
         getLatAndLongDetails: (params:any) => Promise<void>
         getPDPLoctionDetails: () => void
         getLocationDetails:() => void
@@ -57,6 +57,7 @@ export declare module WhereToBuy {
         latitude:number
         onInitialLoad:() => void
         zoomLevel:number
+        onViewOnlineStore:(StoreId:string) => void
     }
 
     interface UnitedStatesMap {

@@ -23,11 +23,11 @@ export const useWhereToBuyStore = create<WhereToBuy.Controller>((set,get) => ({
     /**
      * @description maps key 
      */
-    mapsApiKey:'AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk',
+    mapsApiKey:process.env.MAPSAPIKEY,
     /**
      * @description health mart key 
     */
-    healthMartApiKey:'180A0FF6-6659-44EA-8E03-2BE22C2B27A3',
+    healthMartApiKey:process.env.HEARTMAPAPIKEY,
     /**
      * @description fetchers to set Longitude and Latitude on initial load
     */
@@ -79,5 +79,12 @@ export const useWhereToBuyStore = create<WhereToBuy.Controller>((set,get) => ({
      * @description USA coords 
      */
     usaLat:39,
-    usaLon:-95
+    usaLon:-95,
+    /**
+     * 
+     * @param `storeId`
+     */
+    onViewOnlineStore:(storeId) => {
+        window.open(`https://www.healthmart.com/store-details.html?storeId=${storeId}`,"_blank")
+    }
 })) 

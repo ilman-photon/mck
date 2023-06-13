@@ -1,22 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { useWindowResize } from "@/hooks/useWindowResize";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
-
+import ProductSearchCard from "../product_list/ProductSearchCard";
+SwiperCore.use([Navigation, Autoplay]);
 const ProductComponent = ({
   selectedProduct,
   sectionData,
   selectedRecommendedProduct,
-  filterClicked
+  filterClicked,
+  productSearchCard,
 }: any) => {
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+  const [reviewCount, setReviewCount] = useState<number>(1);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
   const handleProduct = (item: any, index: number) => {
-    const filteredSection = sectionData.filter((section: any) =>
-      section.name.includes(item)
-    );
+    const filteredSection = sectionData.filter((section: any) => {
+      const tempName = section?.recommendedProductCategory?.value[0]?.name;
+      const itemName = tempName?.toLowerCase().replace(/[^\w\s]/gi, "");
+      const searchItem = item?.toLowerCase().replace(/[^\w\s]/gi, "");
+      return itemName.includes(searchItem);
+    });
+
     if (filteredSection.length > 0) {
       return (
         <RecommendationalProductComponent
@@ -27,56 +42,127 @@ const ProductComponent = ({
     }
     return null;
   };
-
+  const handleOnSlideChange = (swiper: any) => {
+    if (isMobile) {
+      swiper.autoplay.running = false;
+      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
+    } else {
+      swiper.autoplay.running = false;
+      setReviewCount(() => Math.ceil(swiper.activeIndex / 6) + 1);
+    }
+  };
   return (
     <>
       {selectedProduct?.map((product: any, index: number) => (
         <div key={index}>
           {selectedRecommendedProduct?.map((item: any, idx: number) => {
-            // console.log(item,"item",selectedProduct)
-            if (item === product?.item?.name && item.length >0) {
+            let correctItemValue = item
+              ?.toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "");
+            let correctProductValue = product?.item?.name
+              ?.toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "");
+            if (correctItemValue === correctProductValue) {
               return handleProduct(item, index);
             }
             return null;
           })}
           <section className="relative">
-            <h1
-              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-6 lg:pt-0"
-              
+            
+
+            {product?.data?.results?.length > 0 ? (
+              <>
+                {productSearchCard ? (
+                  <div className="grid mobile:grid-cols-2 md:grid-cols-3  desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:mb-0 break-words">
+                    {product?.data?.results?.map((item: any, idxs: number) => {
+                      return (
+                        <ProductSearchCard
+                          cardData={item}
+                          key={item.id}
+                          product={product}
+                          indexs={idxs}
+                          mainIndex={index}
+                        />
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <>
+                  <h2
+              className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0"
               id={`hn_label_00_${index}`}
               aria-label={product?.item?.name}
             >
-              {product?.data?.results?.length > 0 ? product?.item?.name : filterClicked ? product?.item?.name :null }  
-            </h1>
-
-          {product?.data?.results?.length > 0 ? 
-            <div className="lg:pt-6 lg:pb-12 pb-6">
-              <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={4}
-                navigation
-                slidesPerView={5}
-                slidesPerGroup={5}
-                pagination={{ clickable: true, type: "fraction" }}
-                className="lg:h-480 h-350"
-
-              >
-                {product?.data?.results?.map((item: any, idxs: number) => {
-                  return (
-                    <SwiperSlide
-                      key={item?.contentLink?.id}
-                      className="swiper-slide-custom"
-                    >
-                      <ProductCard cardData={item} product={product} indexs={idxs} mainIndex={index} />
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </div>
-            : <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">{filterClicked ? "There are no products" : null }</div>} 
+              {product?.data?.results?.length > 0
+                ? product?.item?.name
+                : !filterClicked
+                ? product?.item?.name
+                // : "There are no products"
+                : null
+                }
+            </h2>
+                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21 lg:mb-12">
+                      <Swiper
+                        spaceBetween={4}
+                        navigation={isMobile ? false : true}
+                        slidesPerView={isMobile ? "auto" : 6}
+                        slidesPerGroup={isMobile ? 1 : 6}
+                        className="lg:h-420 h-300"
+                        onSlideChange={(swiper) => {
+                          handleOnSlideChange(swiper);
+                        }}
+                        a11y={{
+                          prevSlideMessage:"",
+                          nextSlideMessage: "",
+                          firstSlideMessage:"",
+                          lastSlideMessage:"",
+                        }
+                        }
+                        modules={[A11y]}
+                      >
+                        {product?.data?.results?.map(
+                          (item: any, idxs: number) => {
+                            return (
+                              <SwiperSlide
+                                key={item?.contentLink?.id}
+                                className="swiper-slide-custom"
+                              >
+                                <ProductCard
+                                  cardData={item}
+                                  product={product}
+                                  indexs={idxs}
+                                  mainIndex={index}
+                                />
+                              </SwiperSlide>
+                            );
+                          }
+                        )}
+                      </Swiper>
+                    </div>
+                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 absolute left-0 right-0 bottom-2">
+                      {reviewCount}/
+                      {isMobile
+                        ? Math.ceil(product?.data?.results?.length)
+                        : Math.ceil(product?.data?.results?.length / 6)}
+                    </div>}
+                  </>
+                )}
+              </>
+            ) : (
+              // <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
+              //   {filterClicked ? "There are no products" : null}
+              // </div>
+              null
+            )}
           </section>
+          
         </div>
       ))}
+      <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
+                {filterClicked ? "There are no products" : null}
+              </div>
     </>
   );
 };

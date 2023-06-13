@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { AxiosError } from "axios";
 import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
@@ -9,21 +9,24 @@ import SearchResult from "./SearchResult";
 import OtherArtical from "./OtherArtical";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-import dynamic from 'next/dynamic';
-import { fetchApplicationSetting, fetchBlogFilter, fetchBlogSetting } from "./BlogAPI";
+import dynamic from "next/dynamic";
+import {
+  fetchApplicationSetting,
+  fetchBlogFilter,
+  fetchBlogSetting,
+} from "./BlogAPI";
 
-const BlogList = dynamic(
-  () => import('./BlogListContainer'),
-  {
-    loading: () => <div className="fixed inset-0 flex items-center justify-center z-50">
+const BlogList = dynamic(() => import("./BlogListContainer"), {
+  loading: () => (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-black opacity-30"></div>
       <div className="relative">
         <Image src={gifImage} alt="coba-image" />{" "}
       </div>
-    </div>,
-  },
-);
-function BlogComponent() {
+    </div>
+  ),
+});
+const BlogComponent = () => {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [ActiveSearch, setActiveSearch] = useState<any>(false);
@@ -34,38 +37,35 @@ function BlogComponent() {
 
   const [searchInfo, setSeachInfo] = useState<any>({
     ActiveSearch: true,
-    SearchString: '',
+    SearchString: "",
     searchResult: [],
-    noSearchResult: false
+    noSearchResult: false,
   });
   const router = useRouter();
 
   useEffect(() => {
-    HandleAppSetting()
+    HandleAppSetting();
 
     setIsLoading(true);
     fetchBlogSetting()
       .then((res) => {
-        setResponse(res)
+        setResponse(res);
         setIsLoading(false);
-
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
-      })
+      });
   }, []);
   const HandleAppSetting = () => {
     fetchApplicationSetting()
-        .then((res) => {
-            setAppSetting(res.data[0].categoryMapping.expandedValue)
-            setIsLoading(false);
-        })
-        .catch((e: Error | AxiosError) => {
-            console.log(e);
-            setIsLoading(false);
-        })
-}
+      .then((res) => {
+        setAppSetting(res.data[0].categoryMapping.expandedValue);
+        setIsLoading(false);
+      })
+      .catch((e: Error | AxiosError) => {
+        setIsLoading(false);
+      });
+  };
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -80,12 +80,11 @@ function BlogComponent() {
       .then((res) => {
         setFilterBlogList(res.data.results);
         setCurrentScreen("Filter");
-        setIsLoading(false)
-      })
-      .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       })
+      .catch((e: Error | AxiosError) => {
+        setIsLoading(false);
+      });
   };
 
   const HandelSearch = (data: any, searchString: string) => {
@@ -93,33 +92,45 @@ function BlogComponent() {
       ...prevState,
       searchResult: data,
       SearchString: searchString,
-      ActiveSearch: false
+      ActiveSearch: false,
     }));
-    setActiveSearch(true)
+    setActiveSearch(true);
     setArticleContent(data);
     setCurrentScreen("Search");
   };
   const HandleSearchClose = () => {
-    setCurrentScreen('List')
+    setCurrentScreen("List");
     setSeachInfo((prevState: any) => ({
       ...prevState,
       searchResult: [],
-      SearchString: '',
-      ActiveSearch: true
+      SearchString: "",
+      ActiveSearch: true,
     }));
-    setActiveSearch(false)
-  }
+    setActiveSearch(false);
+  };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div id="carouselExampleCaptions" className="container flex lg:flex-row flex-col gap-6 w-full lg:py-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto lg:mt-[170px]">
+    <div
+      role="main"
+      id="carouselExampleCaptions"
+      className="container flex lg:flex-row flex-col gap-6 w-full lg:p-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto "
+    >
       <div className="lg:w-966 w-full">
         <div
           id="search"
-          className={`lg:${!ActiveSearch && "hidden"
-            } block w-full relative flex items-center content-center mb-6`}
+          className={`lg:${
+            !ActiveSearch && "hidden"
+          } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            placeholder={response?.data[0].blogSearchPlaceholderText.value}
+            placeholder={response?.data[0].blogSearchPlaceholderText?.value}
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
@@ -164,6 +175,9 @@ function BlogComponent() {
         )}
       </div>
       <div className="lg:w-306 w-full blogright-sidebar">
+        <p className="invisible">
+          {response?.data[0].blogSearchPlaceholderText.value}
+        </p>
         {!ActiveSearch && (
           <div
             id="search"
@@ -171,7 +185,7 @@ function BlogComponent() {
             className="lg:block hidden relative flex items-center content-center mb-6"
           >
             <SearchComponent
-              placeholder={response?.data[0].blogSearchPlaceholderText.value}
+              placeholder={response?.data[0]?.blogSearchPlaceholderText.value}
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
@@ -180,8 +194,8 @@ function BlogComponent() {
           </div>
         )}
         <CatogaryComponent
-          CatogaryListing={response?.data[0].categoryFilter.expandedValue}
-          Catogarytitle={response?.data[0].categoryHeadingText.value}
+          CatogaryListing={response?.data[0]?.categoryFilter?.expandedValue}
+          Catogarytitle={response?.data[0]?.categoryHeadingText?.value}
           OnCatogarySelcete={(e) => filterBlogList(e)}
         />
         <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
@@ -189,19 +203,20 @@ function BlogComponent() {
             className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
             id="blog-label-009"
           >
-            {response?.data[0].trendingBlogHeadingText.value}
+            {response?.data[0]?.trendingBlogHeadingText?.value}
           </div>
           <ResentBlogListComponent />
         </div>
         <RelatedProducts
           AppSetting={AppSetting}
           OnRelatedProductClick={(e) => handleProductClick(e)}
-          title={response?.data[0].relatedProductHeadingText.value}
-          BlogListingContent={response?.data[0].recommendedProducts?.expandedValue}
+          title={response?.data[0]?.relatedProductHeadingText?.value}
+          BlogListingContent={
+            response?.data[0]?.recommendedProducts?.expandedValue
+          }
         />
       </div>
     </div>
   );
-}
-
-export default BlogComponent;
+};
+export default memo(BlogComponent);

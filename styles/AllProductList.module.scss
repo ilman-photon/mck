@@ -242,6 +242,17 @@
     line-height: 24px;
   }
 
+
+  img + .filter-title {
+    margin-left: 0px;
+  }
+  .filter-title {
+    margin-left: 5px;
+    @media (max-width: 980px) {
+      margin-left: 0px;      
+    }
+  }
+
   .mck-hn-selected-value {
     padding: 0 8px 2px;
     background: #f8f9fb;
@@ -320,7 +331,6 @@
     ul,
     ol {
       list-style: disc;
-      margin-left: 16px;
     }
 
     ol {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactElement } from "react";
+import DOMPurify from 'isomorphic-dompurify';
 
 type LinkComponentProps = {
     rel?: string;
@@ -11,6 +12,7 @@ type LinkComponentProps = {
     children?: ReactElement | string | number 
 }
 export function LinkComponent({rel, key, id, href, className, children, ...props}: LinkComponentProps){
+    const child:any = children
     return(
         <Link
             {...props}
@@ -18,8 +20,8 @@ export function LinkComponent({rel, key, id, href, className, children, ...props
             rel={rel || "stylesheet"}
             href= {href || '#'}
             key={key}
-            id={id}
-            aria-label={props["aria-label"]}
+            id={id && DOMPurify.sanitize(id)}
+            aria-label={props["aria-label"] && DOMPurify.sanitize(props["aria-label"])}
         >{children}</Link>
 
     )

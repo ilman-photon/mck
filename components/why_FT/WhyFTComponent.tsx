@@ -3,20 +3,22 @@ import React, { useState, useEffect } from "react";
 import CarouselComponent from "@/components/carousel";
 import ImageVideoAndTextSection from "../homepage_section";
 import ImageVideoOrTextSection from "../promotional_text";
-
+import DOMPurify from "isomorphic-dompurify";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-function WhyFTComponent() {
+import { WhyFTComponentType } from "./WhyFTComponent.type";
+import WhyFTImageVideoAndTextSection from "./WhyFTImageVideoAndTextSection";
+import axiosInstance from "@/utils/axiosInstance";
+function WhyFTComponent(
+  { isCarusolAvaibleProps }: WhyFTComponentType = {
+    isCarusolAvaibleProps: null,
+  }
+) {
   const [whyFTData, SetWhyFTData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   function fetchWhyFTDetails() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`
     );
   }
   useEffect(() => {
@@ -25,7 +27,9 @@ function WhyFTComponent() {
 
   useEffect(() => {
     document.title =
-      whyFTData?.contentArea?.expandedValue[0]?.title?.value || "Why F&T";
+      DOMPurify.sanitize(
+        whyFTData?.contentArea?.expandedValue?.[0]?.title?.value
+      ) || "Why F&T";
   }, [whyFTData]);
 
   useEffect(() => {
@@ -35,19 +39,26 @@ function WhyFTComponent() {
     };
     setPageNameAsClassName();
   }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
     fetchWhyFTDetails()
       .then((res) => {
-        SetWhyFTData(res.data[0]);
+        SetWhyFTData(res?.data[0]);
         setIsLoading(false);
       })
       .catch((e: Error | AxiosError) => {
-        console.log(e);
         setIsLoading(false);
       });
   }, []);
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -70,7 +81,7 @@ function WhyFTComponent() {
 
   function filteredData(valueType: string) {
     return whyFTData?.contentArea?.expandedValue?.filter((ele: any) => {
-      return ele.contentType.some((arrEle: string) => {
+      return ele?.contentType?.some((arrEle: string) => {
         return arrEle == valueType;
       });
     });
@@ -81,8 +92,8 @@ function WhyFTComponent() {
   const rearrangedData1 = () => {
     const rearrangedData = [...whyFTData?.contentArea.expandedValue].sort(
       (a, b) => {
-        const aIndex = whyFTData?.contentArea.expandedValue.indexOf(a);
-        const bIndex = whyFTData?.contentArea.expandedValue.indexOf(b);
+        const aIndex = whyFTData?.contentArea?.expandedValue?.indexOf(a);
+        const bIndex = whyFTData?.contentArea?.expandedValue?.indexOf(b);
         if (shouldRearrange(aIndex) && !shouldRearrange(bIndex)) {
           return -1;
         } else if (!shouldRearrange(aIndex) && shouldRearrange(bIndex)) {
@@ -94,16 +105,22 @@ function WhyFTComponent() {
     return rearrangedData;
   };
 
+  whyFTData?.contentArea?.expandedValue?.map(
+    (item: any) => item?.name == "Carousel" && isCarusolAvaibleProps(true)
+  );
   return (
     <>
-      <div className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0" role="main">
+      <div
+        className="why-FT flex flex-col mx-auto px-0 lg:pt-0 lg:px-0"
+        role="main"
+      >
         <React.Fragment>
           {whyFTData &&
             rearrangedData1().map((item: any, index: number) => (
               <>
                 <React.Fragment key={index}>
                   {item?.contentType[1] === "CarouselBlock" ? (
-                    <div className="lg:mb-76 md:mb-24 sm:mb-24">
+                    <div className="lg:mb-12">
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
@@ -117,27 +134,29 @@ function WhyFTComponent() {
       <div className="flex flex-col px-0 lg:pt-0 lg:px-0" role="main">
         <React.Fragment>
           {whyFTData &&
-            rearrangedData1().map((item: any, index: number) => (
-              <>
-                <React.Fragment key={index}>
-                  {item?.contentType[1] === "TwoCloumnBlock" ? (
-                    <ImageVideoAndTextSection
-                      index={`wfnt_0${index}`}
-                      sectionData={whyFTData.contentArea.expandedValue[index]}
-                    />
-                  ) : item?.contentType[1] === "OneColumnBlock" ? (
-                    <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
-                      <ImageVideoOrTextSection
+            whyFTData?.contentArea?.expandedValue.map(
+              (item: any, index: number) => (
+                <>
+                  <React.Fragment key={index}>
+                    {item?.contentType[1] === "TwoCloumnBlock" ? (
+                      <WhyFTImageVideoAndTextSection
                         index={`wfnt_0${index}`}
-                        sectionData={whyFTData.contentArea.expandedValue[index]}
-                        textAlignment={"text-left"}
-                      /></div>
-
-                  ) : null}
-                  {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
-                </React.Fragment>
-              </>
-            ))}
+                        sectionData={item}
+                      />
+                    ) : item?.contentType[1] === "OneColumnBlock" ? (
+                      <div className="container mx-auto py-6 lg:p-0 text-center mb-6 lg:mb-12">
+                        <ImageVideoOrTextSection
+                          index={`wfnt_0${index}`}
+                          sectionData={item}
+                          textAlignment={"text-left"}
+                        />
+                      </div>
+                    ) : null}
+                    {/* item?.contentType[1] === 'RecommendedProductBlock' ? <RecommendationalProductComponent sectionData={filteredData("RecommendedProductBlock")} /> : null} */}
+                  </React.Fragment>
+                </>
+              )
+            )}
         </React.Fragment>
       </div>
     </>

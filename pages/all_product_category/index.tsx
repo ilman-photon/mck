@@ -1,7 +1,6 @@
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
@@ -9,10 +8,12 @@ import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import Head from "next/head";
+import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from "isomorphic-dompurify";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
-let mainCatId:any =[]
+let mainCatId: any = [];
 interface MyComponentProps {
   Response: {
     data: {
@@ -32,7 +33,7 @@ function AllProductCategoryPage({
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
-  const [allProductCategoryList, setAllProductCategoryList] = useState<any>([])
+  const [allProductCategoryList, setAllProductCategoryList] = useState<any>([]);
 
   const [productCategory, setProductCategory] = useState<any>();
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
@@ -40,7 +41,9 @@ function AllProductCategoryPage({
   const [carouselData, setCarouselData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
-  const [productSum , setProductSum] = useState<any>()
+  const [productSum, setProductSum] = useState<any>();
+  const [filterClicked, setFilterClicked] = useState(false);
+  const productSearchCard = false;
   let selectedCategoryName: any = [];
   let productName: any = [];
 
@@ -57,25 +60,22 @@ function AllProductCategoryPage({
     const regex = /'([^']+)'/g;
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
     );
     promise
-      .then((res) => {
+      .then((res: any) => {
         let tempResults: any = {};
-        if(res.data.results.length === 0){
-        mainCatId.map((id :any) =>{ 
-          tempResults[selectedFilterItems[id].categoryName] = [];
-        })
-      }
-        
+        if (res.data.results.length === 0) {
+          mainCatId.map((id: any) => {
+            tempResults[selectedFilterItems[id].categoryName] = [];
+          });
+          setFilterClicked(true)
+          return
+        }
+
         res.data.results.map((item: any) => {
-          setProductSum(res.data.totalMatching)
+          setProductSum(res.data.totalMatching);
           let name = item.productType.value[0].name;
           if (tempResults[name]) {
             let tempArray = tempResults[name];
@@ -85,15 +85,17 @@ function AllProductCategoryPage({
             tempResults[name] = [item];
           }
         });
-        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
-          return {
-            item: { name: key },
-            data: { results: value }
-          };
-        });
-        setSelectedProduct(transformedArray)
+        const transformedArray = Object.entries(tempResults).map(
+          ([key, value]) => {
+            return {
+              item: { name: key },
+              data: { results: value },
+            };
+          }
+        );
+        setSelectedProduct(transformedArray);
       })
-      .catch((e: Error | AxiosError) => console.log(e))
+      .catch((e: Error) => console.log(e))
       .finally(() => {
         setIsLoading(false);
       });
@@ -107,7 +109,7 @@ function AllProductCategoryPage({
   useEffect(() => {
     const fetchData = async () => {
       // Health needs Categories List
-      const healthNeedsCategories = await axios(
+      const healthNeedsCategories = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -122,15 +124,14 @@ function AllProductCategoryPage({
       setHealthNeedData(healthNeedsCategoriesListData);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios(
+      const activeFiltersData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
-      console.log("activeFiltersData list -->", activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(
+      const productCategoryData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
       const productCategoryDataList =
@@ -138,10 +139,9 @@ function AllProductCategoryPage({
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
       setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
-      console.log("product catedata list --> ", productCategoryDataList)
-      setAllProductCategoryList(productCategoryDataList)
+      setAllProductCategoryList(productCategoryDataList);
       // Four column block area
-      const productLandingPage = await axios(
+      const productLandingPage = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
       );
 
@@ -157,37 +157,34 @@ function AllProductCategoryPage({
         productName.push(item.productCategoryName?.value);
       });
       productName?.map((item: any) => {
-        axios
+        axiosInstance
           .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`,
-            {
-              headers: {
-                "Accept-Language": "en",
-              },
-            }
+            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
           )
-          .then((res) => {
-            setProductSum(res.data.totalMatching)
-            let tempResults: any = [];       
-           res.data.results.map((item: any) => {
-          let name = item?.productCategory?.value[0]?.name;
-          if (tempResults[name]) {
-            let tempArray = tempResults[name];
-            tempArray.push(item);
-            tempResults[name] = tempArray;
-          } else {
-            tempResults[name] = [item];
-          }
-        });
-        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
-          return {
-            item: { name: key },
-            data: { results: value }
-          };
-        });
-        setSelectedProduct(transformedArray)
+          .then((res: any) => {
+            setProductSum(res.data.totalMatching);
+            let tempResults: any = [];
+            res.data.results.map((item: any) => {
+              let name = item?.productCategory?.value[0]?.name;
+              if (tempResults[name]) {
+                let tempArray = tempResults[name];
+                tempArray.push(item);
+                tempResults[name] = tempArray;
+              } else {
+                tempResults[name] = [item];
+              }
+            });
+            const transformedArray = Object.entries(tempResults).map(
+              ([key, value]) => {
+                return {
+                  item: { name: key },
+                  data: { results: value },
+                };
+              }
+            );
+            setSelectedProduct(transformedArray);
           })
-          .catch((e: Error | AxiosError) => console.log(e))
+          .catch((e: Error) => console.log(e))
           .finally(() => {
             setIsLoading(false);
           });
@@ -243,7 +240,7 @@ function AllProductCategoryPage({
       let lastCatId = 0;
       let minCategoryCnt = 0;
       let minSubCategoryCnt = 0;
-      let tempId = false
+      let tempId = false;
       selectedFilterItems.map((category: any, catId: any) => {
         if (!category.isCategoryChecked && category.items.length > 0) {
           if (!mainCatId.includes(catId)) {
@@ -251,12 +248,14 @@ function AllProductCategoryPage({
           }
           const categoryName = selectedFilterItems[catId].categoryName;
           selectedCategoryName.push(categoryName);
-          if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
-            tempId = true
+          if (lastCatId >= 0 && !category.isBusinessVerticalCategory) {
+            tempId = true;
           }
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += tempId ? " and " : " or " 
-            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
+            queryParams += tempId ? " and " : " or ";
+            if (tempId && category.isBusinessVerticalCategory) {
+              tempId = false;
+            }
           }
 
           queryParams += "(";
@@ -267,7 +266,9 @@ function AllProductCategoryPage({
             const concatStr =
               category.items.length === index + 1
                 ? ""
-                :category.isBusinessVerticalCategory ? " or " : " and ";
+                : category.isBusinessVerticalCategory
+                ? " or "
+                : " and ";
             queryParams += `${
               category.isBusinessVerticalCategory
                 ? category.productType
@@ -295,25 +296,31 @@ function AllProductCategoryPage({
           // minCategoryCnt += category.isCategoryChecked;
           minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
-            if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
-              tempId = true
+            if (lastCatId >= 0 && !category.isBusinessVerticalCategory) {
+              tempId = true;
             }
             if (lastCatId > 0 && lastCatId != catId) {
               // queryParams += " and ";
-              queryParams += tempId ? " and " : " or " 
-            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
+              queryParams += tempId ? " and " : " or ";
+              if (tempId && category.isBusinessVerticalCategory) {
+                tempId = false;
+              }
             }
             queryParams += "(";
-          category.items.map((item: any, index: any) => { 
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
-            const concatStr =
-              category.items.length === index + 1 ? "" : " or ";;
-            queryParams += `${(category?.isBusinessVerticalCategory ? (category?.productType) : (category?.productType).toLowerCase())}/value/name eq '${encodeItemName}' ${concatStr}`;
-          });
-          queryParams += `)`;
-          lastCatId = catId;
-        }
+            category.items.map((item: any, index: any) => {
+              const itemName = item.replace(/[^a-zA-Z ]/g, "");
+              const encodeItemName = encodeURI(itemName);
+              const concatStr =
+                category.items.length === index + 1 ? "" : " or ";
+              queryParams += `${
+                category?.isBusinessVerticalCategory
+                  ? category?.productType
+                  : (category?.productType).toLowerCase()
+              }/value/name eq '${encodeItemName}' ${concatStr}`;
+            });
+            queryParams += `)`;
+            lastCatId = catId;
+          }
           // minCategoryCnt += category.isCategoryChecked;
           // if (category.isCategoryChecked) {
           //   const categoryName = selectedFilterItems[catId].categoryName;
@@ -330,8 +337,8 @@ function AllProductCategoryPage({
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
         // queryParams = "";
         const currentURL = window.location.href;
-  const updatedURL = currentURL.split('?')[0]; 
-  window.location.href = updatedURL;
+        const updatedURL = currentURL.split("?")[0];
+        window.location.href = DOMPurify.sanitize(updatedURL);
       }
     }
     if (queryParams) fetchProductList(queryParams);
@@ -339,48 +346,40 @@ function AllProductCategoryPage({
 
   useEffect(() => {
     fetchCategoryId()
-      .then((res) => {
+      .then((res: any) => {
         const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
-        return axios.get(
-          `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
-          {
-            headers: {
-              "Accept-Language": "en",
-            },
-          }
-        );
+        if (id) {
+          return axiosInstance.get(
+            `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
+            {
+              headers: {
+                "Accept-Language": "en",
+              },
+            }
+          );
+        }
       })
-      .catch((e) => {
+      .catch((e: any) => {
         setCategoryLoding(true);
         setCategoryError(e);
       });
 
     FetchProductFilter()
-      .then((response) => {
+      .then((response: any) => {
         setProductFilter(response);
       })
-      .catch((e) => console.log(e));
+      .catch((e: any) => console.log(e));
   }, []);
 
   function fetchCategoryId() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`
     );
   }
 
   function FetchProductFilter() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`
     );
   }
 
@@ -445,32 +444,43 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       <Head>
         <title>Your Page Title</title>
       </Head>
       <GoogleTagManager />
-      <HeaderComponent />
-      {!carouselData ||
-        (isLoading && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="fixed inset-0 bg-black opacity-50"></div>
-            <div
-              className="relative"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            >
-              <Image
-                src={gifImage}
-                alt="coba-image"
-                width={400}
-                height={400}
-                loading="eager"
-              />
-            </div>
+      <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
+      {!carouselData && isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            <Image
+              src={gifImage}
+              alt="coba-image"
+              width={400}
+              height={400}
+              loading="eager"
+            />
           </div>
-        ))}
-      {carouselData && <CarouselComponent sectionData={carouselData} />}
+        </div>
+      )}
+      {carouselData && (
+        <CarouselComponent
+          isCarouselAvaible={carouselData ? true : false}
+          sectionData={carouselData}
+        />
+      )}
       {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
       <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
@@ -488,7 +498,9 @@ function AllProductCategoryPage({
           recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
-          productSum ={productSum}
+          productSum={productSum}
+          productSearchCard={productSearchCard}
+          filterClicked={filterClicked}
         />
       </div>
       <FooterComponent />

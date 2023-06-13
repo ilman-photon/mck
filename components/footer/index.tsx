@@ -1,20 +1,17 @@
 import Link from "next/link";
-import Image from "next/image";
-import SignUpComponent from "../signup";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
+import { LinkComponent } from "../global/LinkComponent";
+import { useFooterStore } from "./Store/useFooterStore";
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function FooterComponent() {
   const router = useRouter();
-  const [footerData, setFooterData] = useState<any>();
-  const [footerSecondData, setFooterSecondData] = useState<any>();
-  const [footerMobileNav, setFooterMobileNav] = useState<any>();
+
   const checkEnableButton = () => {
     return router.pathname;
   };
-  const [activeButton, setActiveButton] = useState<string>("Home");
 
   const handleClick = (buttonName: string, url: string) => {
     setActiveButton(buttonName);
@@ -23,44 +20,26 @@ export default function FooterComponent() {
     });
   };
 
-  const getData = async () => {
-    const response = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
+  const footerData = useFooterStore(state => state.footerData)
+  const footerSecondData = useFooterStore(state => state.footerSecondData)
+  const footerMobileNav = useFooterStore(state => state.footerMobileNav)
+  const activeButton = useFooterStore(state => state.activeButton)
+  const setActiveButton = useFooterStore(state => state.setActiveButton)
+  const getData = useFooterStore(state => state.getData)
 
-    const secondBlock = response.data[0].footer.expandedValue[0].contentLink.id;
-    const responseid = await axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`,
-      { headers: { "Accept-Language": "en" } }
-    );
-
-    const footerMobileNav =
-      response?.data[0]?.mobileMenuNavigation?.expandedValue[0]
-        ?.contentBlockArea?.expandedValue;
-
-    let buttonActive: string = "Home";
-
-    footerMobileNav.map((item: any) => {
-      if (item?.menuItemUrl?.value == checkEnableButton()) {
-        buttonActive = item?.menuItemName?.value;
-      }
-    });
-    setFooterData(response);
-    setFooterSecondData(responseid);
-    setFooterMobileNav(footerMobileNav);
-    setActiveButton(buttonActive);
-  };
   useEffect(() => {
-    getData();
-  }, []);
+    if(footerData === null){
+      getData(checkEnableButton())
+    }
+  },[footerData])
+
 
   return (
     <>
       <footer
         id="footer"
         role="contentinfo"
-        className="bg-mcklightyellow lg:mb-0 mb-16 mt-18"
+        className="bg-mcklightyellow lg:mb-0 mb-16"
       >
         <div className="container mx-auto mt-0 lg:py-9 lg:px-[72px] py-8 px-5">
           <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -82,34 +61,32 @@ export default function FooterComponent() {
                   )}
                 </li>
                 <li className="lg:my-2 flex">
-                  {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
-                    (sociallink: any) => (
-                      <Link
-                        className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
-                        rel="stylesheet"
-                        href={
-                          sociallink?.socialMediaUrl?.value
-                            ? sociallink?.socialMediaUrl?.value
-                            : ""
-                        }
-                        key={sociallink?.contentLink?.id}
-                        id={sociallink?.contentLink?.id}
-                        aria-label={sociallink?.socialMediaUrl?.value}
-                      >
-                        <ImageComponent
-                          id={sociallink?.socialMediaImage?.expandedValue?.altText
-                            ?.value}
-                          src={
-                            sociallink?.socialMediaImage?.expandedValue
-                              ?.thumbnail?.value?.url
-                          }
-                          className="mx-auto"
-                          alt={
-                            sociallink?.socialMediaImage?.expandedValue?.altText
-                              ?.value
-                          }
-                        />
-                      </Link>
+                {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
+                    (sociallink: any, index: number) => (
+                      <>
+                        {sociallink?.socialMediaUrl?.value && <LinkComponent
+                          className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
+                          rel="stylesheet"
+                          href={sociallink?.socialMediaUrl?.value}
+                          key={sociallink?.contentLink?.id}
+                          id={`sl-00${index}`}
+                          aria-label={sociallink?.socialMediaUrl?.value}
+                        >
+                          <ImageComponent
+                            id={sociallink?.socialMediaImage?.expandedValue?.altText
+                              ?.value}
+                            src={
+                              DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue
+                                ?.thumbnail?.value?.url)
+                            }
+                            className="mx-auto"
+                            alt={
+                              sociallink?.socialMediaImage?.expandedValue?.altText
+                                ?.value
+                            }
+                          />
+                        </LinkComponent>}
+                      </>
                     )
                   )}
                 </li>
@@ -128,17 +105,18 @@ export default function FooterComponent() {
                         key={slink?.contentLink?.id}
                         id={slink?.contentLink?.id}
                       >
-                        {slink?.menuTitle?.value}
+                        {DOMPurify.sanitize(slink?.menuTitle?.value)}
                       </Link>
                     )
                   )}
+                  
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </footer>
-      <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue lg:hidden xl:hidden">
+      <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue bg-beige50 lg:hidden xl:hidden">
         <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
           {footerMobileNav &&
             footerMobileNav.map((item: any) => {
@@ -166,10 +144,10 @@ export default function FooterComponent() {
                     <div className="w-5 h-5 mb-2">
                       <ImageComponent
                         id={item?.contentLink?.guidValue}
-                        src={item?.menuIcon?.expandedValue?.url}
+                        src={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.url)}
                         width="21px"
                         height="18px"
-                        alt={item?.menuIcon?.expandedValue?.name}
+                        alt={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.name)}
                       />
                     </div>
                     <span
@@ -178,7 +156,7 @@ export default function FooterComponent() {
                         : "text-sofia-reg font-normal"
                         }`}
                     >
-                      {item?.menuItemName?.value}
+                      {DOMPurify.sanitize(item?.menuItemName?.value)}
                     </span>
                   </button>
                 </li>

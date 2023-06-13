@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
+import DOMPurify from 'isomorphic-dompurify';
 
 const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
   const router = useRouter();
@@ -12,16 +13,19 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
   };
 
   return (
-    <div className="swiper-list-item lg:w-[202px] w-[166px] lg:min-h-[420px] min-h-[300px] rounded-lg border border-[#CCD1E3] mr-1 p-4 ">
-      <div
+    <div className="swiper-list-item lg:w-[202px] w-[166px] lg:min-h-[420px] min-h-[300px] rounded-lg border border-[#CCD1E3] mr-1 p-4 "
+        role="button"
+        tabIndex={0}
         onClick={() => handleProductClick(cardData)}
+    >
+      <div
         className="cursor-pointer"
       >
-        <div className="lg:h-60 h-28 flex items-center justify-center">
+        <div className="lg:h-60 h-28 flex items-center justify-center" aria-hidden="true">
           <ImageComponent
-            src={cardData?.image?.value?.url}
-            alt={`${indexs}${cardData?.image?.value?.url}`}
-            id={`hn_label_01_${indexs + 1}_${mainIndex + 1}`}
+            src={DOMPurify.sanitize(cardData?.image?.value?.url)}
+            alt={DOMPurify.sanitize(`${indexs}${cardData?.image?.value?.url}`)}
+            id={DOMPurify.sanitize(`hn_label_01_${indexs + 1}_${mainIndex + 1}`)}
             className="h-fit mx-auto border-0 lg:max-h-60 max-h-28"
           />
         </div>
@@ -37,7 +41,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
           
           id={`hn_label_03_${indexs + 1}_${mainIndex + 1}`}
         >
-          {cardData?.highlightDescription.value}
+          {DOMPurify.sanitize(cardData?.highlightDescription?.value)}
         </div>
       </div>
       <div
@@ -45,7 +49,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
         
         id={`hn_label_04_${indexs + 1}_${mainIndex + 1}`}
         dangerouslySetInnerHTML={{
-          __html: cardData?.highlightDescription?.value,
+          __html: DOMPurify.sanitize(cardData?.highlightDescription?.value),
         }}
       ></div>
     </div>

@@ -3,6 +3,9 @@ import axios from "axios";
 import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
+import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
+
 const SocialMediaIconComponent = () => {
 
     const [SocialMediaIcon, setSocialMediaIcon] = useState<any>();
@@ -11,7 +14,7 @@ const SocialMediaIconComponent = () => {
         fetchResentBlogListing();
     }, []);
     const fetchResentBlogListing = async () => {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
             `${process.env.API_URL}/api/episerver/v3.0/content/268?expand=*`, { headers: { 'Accept-Language': 'en' } },
         );
         setSocialMediaIcon(response.data.socialMediaLinkBlock);
@@ -24,13 +27,13 @@ const SocialMediaIconComponent = () => {
                     <LinkComponent
                         className="text-sofia-reg text-lg text-mcknormalgrey"
                         rel="stylesheet"
-                        href={item?.socialMediaUrl.value}
+                        href={DOMPurify.sanitize(item?.socialMediaUrl.value)}
                         id={`link-${index}${item?.contentLink?.id}`}
                         aria-label={item?.socialMediaUrl?.value}
                     >
                         <ImageComponent
-                            src={item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url}
-                            alt={item?.socialMediaImage?.expandedValue?.altText?.value}
+                            src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}
+                            alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
                             className="socialimg"
                        />

@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
 import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
-
+import DOMPurify from 'isomorphic-dompurify';
 
 const HeroArticle = ({ data }: any) => {
 
@@ -20,8 +20,9 @@ const HeroArticle = ({ data }: any) => {
                     <img
                         className="w-full"
                         id={data?.image.value?.name}
-                        src={data?.image.value?.url}
-                        alt={data?.image.value?.url}
+                        src={DOMPurify.sanitize(data?.image?.value?.url)}
+                        alt={DOMPurify.sanitize(data?.image?.value?.url)}
+                        aria-hidden="true"
                     />
                 </figure>
             </LinkComponent>
@@ -34,7 +35,7 @@ const HeroArticle = ({ data }: any) => {
                             }}
                             className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                         >
-                    <h1 className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
+                    <h1 role="link" className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                     </LinkComponent>
                     <div className='pb-3 lg:pt-0 pt-3'>
                       
@@ -49,7 +50,7 @@ const HeroArticle = ({ data }: any) => {
                                 style={{
                                     backgroundColor: handleTagBackgroudColor(index, data?.tagBackgroundColorCode?.value),
                                 }}
-                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit lg:mb-0 mb-2' id='blog-label-006'>
+                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit  mb-2' id='blog-label-006'>
                                 {item.description}
                             </div>
                         ))}

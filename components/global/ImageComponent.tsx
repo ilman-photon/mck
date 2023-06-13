@@ -1,5 +1,6 @@
 import React, { CSSProperties, useEffect } from "react";
 import { useNoImage } from "./utils/constants/noImage";
+import DOMPurify from "isomorphic-dompurify";
 
 
 
@@ -40,9 +41,9 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
     return <img
         style={{ height, width, ...style, }}
         className={className}
-        src={srcImage}
+        src={DOMPurify.sanitize(srcImage)}
         onLoad={() => setLoad(true)}
-        alt={alt || "Image is not available"}
+        alt={DOMPurify.sanitize(String(alt)) || "Image is not available"}
         id={id}
     />;
 }

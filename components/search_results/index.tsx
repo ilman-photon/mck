@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import ActiveProductFilter from "../activeProductFilter";
 import ProductFilter from "../productFilter";
@@ -8,6 +7,8 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import ProductCard from "../../components/health_needs/ProductCard";
 import { ImageComponent } from "../global/ImageComponent";
 import { fetchBlogSetting } from "../blog/BlogAPI";
+import axiosInstance from "@/utils/axiosInstance";
+import HealthNeedFilter from "../health_needs/HealthNeedFilter";
 
 function ResultComponent() {
   const router = useRouter();
@@ -20,16 +21,12 @@ function ResultComponent() {
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [productSearch, setProductSearch] = useState<any>(router.query.search);
   const [placeHolders, setSearchplaceHolders] = useState<any>();
+  const productSearchCard = true
+  const [productSum , setProductSum] = useState<any>()
 
   function FetchProductFilter() {
-    return axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    return axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
   }
 
   // Right section product filter data
@@ -40,31 +37,28 @@ function ResultComponent() {
       queryParameter = `(${filter}) and `;
     } 
     const StringParam = router.query.search?.toString().toLowerCase();
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`,
-
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
-    );
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
     promise
-      .then((res) => {
+      .then((res:any) => {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
-        SetProductListData(res);
         setSearchLoading(false);
+        setProductSum(res.data.totalMatching)
+        SetProductListData( [
+          {item: {name: res.data.results[0].productType?.value[0].name }},
+          {data: {results: res.data.results}},
+        ])
       })
-      .catch((e: Error | AxiosError) => console.log(e));
+      .catch((e: Error) => console.log(e));
   }
 
   useEffect(() => {
     FetchProductFilter()
-      .then((res) => {
+      .then((res:any) => {
         setProductFilter(res);
       })
-      .catch((e) => console.log(e));
+      .catch((e:any) => console.log(e));
 
     fetchProductList("");
   }, [router.query.search]);
@@ -207,7 +201,7 @@ function ResultComponent() {
   useEffect(() => {
     const fetchData = async () => {
       // Health needs Categories List
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -222,7 +216,7 @@ function ResultComponent() {
       setHealthNeedData(healthNeedsCategoriesListData);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios.get(
+      const activeFiltersData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
@@ -230,7 +224,7 @@ function ResultComponent() {
       setactiveFiltersData(activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios(
+      const productCategoryData = await axiosInstance(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-search-result/&expand=*`
       );
       const productCategoryDataList =
@@ -322,12 +316,12 @@ function ResultComponent() {
 
   useEffect(() => {
     fetchBlogSetting()
-      .then((res) => {
+      .then((res:any) => {
         setSearchplaceHolders(res.data[0])
 
       })
-      .catch((e: Error | AxiosError) => {
-        console.log(e);
+      .catch((e: Error) => {
+        // console.log(e);
       })
     document.documentElement.lang = "en";
   }, []);
@@ -339,7 +333,7 @@ function ResultComponent() {
 
   return (
     <>
-      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:mt-[170px] lg:pt-[72px] lg:pb-0">
+      <div className="search-results lg:p-72 lg:px-0 p-4 pt-6 pb-0 container mx-auto lg:pt-[72px] lg:pb-0">
         <div className="desktop:px-6 mobile:px-0">
           {searchLoading &&
             <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -357,84 +351,29 @@ function ResultComponent() {
             </div >
           </div > :
             <>
-              <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}“`} </h1>
-              <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">{placeHolders?.showingResultsText.value} <strong className='text-mckblue'><i>{productSearch}</i></strong></div>
-              <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div>
+              <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}”`} </h1>
+              {/* <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">{placeHolders?.showingResultsText.value} <strong className='text-mckblue'><i>{productSearch}</i></strong></div> */}
+              {/* <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div> */}
               <br />
+               <div className="mck-product-filter">
+        <HealthNeedFilter
+          activeFiltersData={activeFiltersData}
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+          productCategoryData={productCategoryData}
+          selectedFilterItems={selectedFilterItems}
+          selectedProduct={productListData}
+          setSelectedFilterItems={setSelectedFilterItems}
+          selectedViewAllCateory={selectedViewAllCateory}
+          fetchProductList={fetchProductList}
+          productSum={productSum}
+          productSearchCard={productSearchCard}
+        />
+        </div>
             </>}
 
         </div>
-        <div className="mck-product-filter">
-          <div className="container lg:mt-8 mt-6 md:px-6 lg:px-6 xl:px-0">
-            {/* Health needs - Top Active Filter section starts */}
-            <section>
-              <ActiveProductFilter
-                activeFiltersData={activeFiltersData}
-                activeFilter={activeFilter}
-                handleClearOne={handleClearOne}
-                handleClearAll={handleClearAll}
-              />
-            </section>
-            {/* Health needs - Top Active Filter section starts */}
-
-            {/* Health needs - Left coloumn Filter section starts */}
-            <div className="lg:flex  lg:mt-8 mt-6">
-              <div className="flex-none h-max lg:w-1/6 xl:w-1/6 w-full">
-                <ProductFilter
-                  productCategoryData={productCategoryData}
-                  handleViewAllChange={handleViewAllChange}
-                  selectedFilterItems={selectedFilterItems}
-                  handleCheckBox={handleCheckBox}
-                />
-              </div>
-
-              <div className="flex-auto lg:w-10/12 xl:w-10/12 w-full lg:pl-6">
-                {/* Health needs - Right coloumn starts */}
-                <div>
-                  {/* {healthNeedData?.map((healthcategorytitle: any) => ( */}
-                  <>
-                    {/* Health needs categories title & product carousel items starts */}
-                    <section>
-                      {/* Product items */}
-                      <div className="grid mobile:grid-cols-2 md:grid-cols-3 desktop:grid-cols-4 lg:grid-cols-5 pt-4 lg:pt-0 lg:pl-0 break-words">
-                        {productListData?.data?.results.map((item: any, idx: number) => {
-                          return (
-                            <div
-                              className="rounded-lg border border-[#CCD1E3] mr-1 p-4 lg:mb-6 mb-4"
-                              key={item?.contentLink?.id}
-                              onClick={() => handleProductClick(item)}
-                            >
-                              <div className="lg:h-60 h-28 flex items-center justify-center">
-                                <ImageComponent
-                                  src={item?.image?.value?.url}
-                                  alt={item?.image?.value?.url}
-                                  className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer"
-                                  id={"sr-prod-img-001" + idx}
-                                />
-                              </div>
-                              <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px]">
-                                {item?.form?.value[1]?.name}
-                              </div>
-                              <div className="text-mckblue mt-3 text-sofia-bold font-extrabold text-xl truncate">
-                                {item?.highlightDescription.value}
-                              </div>
-                              <div
-                                className="text-mcknormalgrey mt-1 text-sofia-reg text-base font-normal para-ellipsis-3"
-                                dangerouslySetInnerHTML={{
-                                  __html: item?.highlightDescription?.value,
-                                }}
-                              ></div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  </>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </>
   );

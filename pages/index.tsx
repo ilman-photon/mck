@@ -12,14 +12,16 @@ import RecommendationalProductComponent from "@/components/recommendational_prod
 import GoogleTagManager from "@/components/google_tag_manager";
 import CookieSetting from "@/components/cookieSetting";
 import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 
 export default function Home() {
+  
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
     headers: {
-      "Accept-Language": "en",
+      "Accept-Language": "en"
     },
   });
 
@@ -32,43 +34,6 @@ export default function Home() {
   }
 
   const [isLoading, setIsLoading] = useState(true);
-  const [showComponent, setShowComponent] = useState(true);
-  const [cookiesAccepted, setCookiesAccepted] = useState(false);
-  const [isCookiesShow, setCookiesShow] = useState(true);
-  const [isCookiesManageShow, setCookiesManageShow] = useState(false);
-
-  const handleCookieManageShow = () => {
-    setCookiesManageShow(false);
-  };
-
-  const handleCookieManageShowAccept = () => {
-    setCookiesManageShow(true);
-  };
-
-  const handleCookieShowCookies = () => {
-    setCookiesShow(false);
-  };
-
-  const handleAcceptCookies = () => {
-    setCookiesAccepted(true);
-  };
-
-  const handleAcceptCookiesSetting = () => {
-    setCookiesManageShow(false);
-  };
-
-  const handleManageSettings = () => {
-    // Logic to manage cookie settings
-    console.log("alert");
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowComponent(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     setIsLoading(loading);
@@ -78,10 +43,10 @@ export default function Home() {
     <>
       <GoogleTagManager />
       <Head>
-        <title>McKesson</title>
-        <meta name="description" content="Created by Mckesson" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+         <title>McKesson</title>
+         <meta name="description" content="Created by Mckesson" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       {isLoading && (
@@ -93,7 +58,7 @@ export default function Home() {
           >
             <Image
               src={gifImage}
-              alt="loading-image"
+              alt={DOMPurify.sanitize("loading-image")}
               width={400}
               height={400}
               loading="eager"
@@ -102,9 +67,16 @@ export default function Home() {
         </div>
       )}
 
-      <HeaderComponent />
-
-      {!isLoading && (
+      <HeaderComponent
+        isCarusolAvaible={
+         DOMPurify.sanitize(response?.data[0]?.blockArea?.expandedValue[0]?.contentType[1]) ===
+          "CarouselBlock"
+            ? true
+            : false
+        }
+      >
+        <>
+        {!isLoading && (
         <>
           {response?.data[0]?.blockArea?.expandedValue?.map(
             (item: any, index: number) => (
@@ -113,17 +85,20 @@ export default function Home() {
                   <CarouselComponent
                     sectionData={filteredData("CarouselBlock")}
                   />
-                ) : item?.contentType[1] === "FourColumnBlock" ? (
+                ) : item?.contentType[1] === "ProductCategoryBlock" ? (
                   <CategoryComponent
-                    sectionData={filteredData("FourColumnBlock")}
+                    sectionData={filteredData("ProductCategoryBlock")}
                   />
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
-                  <ImageVideoAndTextSection
-                    index={`hp_0${index}`}
-                    sectionData={
-                      response.data[0].blockArea?.expandedValue[index]
-                    }
-                  />
+                  <div>
+                    <ImageVideoAndTextSection
+                      index={`hp_0${index}`}
+                      customStyleClass={"lg:px-5"}
+                      sectionData={
+                        response.data[0].blockArea?.expandedValue[index]
+                      }
+                    />
+                  </div>
                 ) : item?.contentType[1] === "OneColumnBlock" ? (
                   <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
                     <ImageVideoOrTextSection
@@ -135,20 +110,25 @@ export default function Home() {
                     />
                   </div>
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
-                  <div className="mx-4 lg:mx-18">
-                    <RecommendationalProductComponent
-                      indexs={`hp_0${index}`}
-                      sectionData={filteredData("RecommendedProductBlock")}
-                    />
+                  <div className="">
+                    <div className="container mx-auto">
+                      <RecommendationalProductComponent
+                        indexs={`hp_0${index}`}
+                        sectionData={filteredData("RecommendedProductBlock")}
+                      />
+                    </div>
                   </div>
                 ) : null}
               </React.Fragment>
             )
           )}
-
           <FooterComponent />
         </>
       )}
+        </>
+      </HeaderComponent>
+
+      
     </>
   );
 }

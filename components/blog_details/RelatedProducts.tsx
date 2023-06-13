@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { ImageComponent } from "../global/ImageComponent";
 import { handlecategoryColorCode } from "../global/CommonUtil";
+import DOMPurify from 'isomorphic-dompurify';
+
 interface RelatedProductsProps {
     AppSetting: any
     BlogListingContent: any;
@@ -23,10 +25,10 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                      onClick={() => OnRelatedProductClick(item)}
                     >
                         <ImageComponent
-                            src={item.image.expandedValue?.url}
+                            src={DOMPurify.sanitize(item?.image?.expandedValue?.url)}
                             id='blog-img-006'
                             alt='Allergy Relief Product'
-                            className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px]"
+                            className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px] cursor-pointer"
                         />
                     </figure>
                     <figcaption>
@@ -37,17 +39,17 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                                     backgroundColor: handlecategoryColorCode(item.productType.value[0].id, AppSetting),
                                 }}
                             >
-                                {item.productType.value[0].name}
+                                {DOMPurify.sanitize(item?.productType?.value[0]?.name)}
                             </div>
 
                             <p
                              onClick={() => OnRelatedProductClick(item)}
-                                className="articleTitle text-xl text-heading-ellipsis sm:leading-9 text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
+                                className="articleTitle cursor-pointer text-xl text-heading-ellipsis sm:leading-9 text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
                                 aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
                                 id={`blog-label-010-` + index}>
-                                {item.name}
+                                {DOMPurify.sanitize(item?.name)}
                             </p>
-                            <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: item.subTitle.value }}></p>
+                            <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.subTitle?.value) }}></p>
                         </div>
                     </figcaption>
                 </div>))}

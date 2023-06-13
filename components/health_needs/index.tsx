@@ -8,10 +8,19 @@ import HealthNeedCategoryMobile from "./healthNeedCategoryMobile";
 import Image from "next/image";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
+import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from "isomorphic-dompurify";
+
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
 let _temparray: any = [];
-const HealthNeedsComponent = () => {
+
+type HealthNeedsComponentType = {
+  isCarusolAvaibleProps?: any;
+};
+const HealthNeedsComponent = ({
+  isCarusolAvaibleProps,
+}: HealthNeedsComponentType) => {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<any>([]);
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
@@ -25,7 +34,7 @@ const HealthNeedsComponent = () => {
   const [filterClicked, setFilterClicked] = useState(false);
   const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
     useState();
-  const [productSum , setProductSum] = useState<any>()
+  const [productSum, setProductSum] = useState<any>();
 
   // Right section product carousel data
   function fetchProductList(filter: any) {
@@ -63,45 +72,56 @@ const HealthNeedsComponent = () => {
       }
     }
 
-    const promise = axios.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+    const promise = axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
     );
     promise
-      .then((res) => {
-        console.log("FetchProductList----- ", res);
-        setFilterClicked(true);
+      .then((res: any) => {
+        if(res.data.results.length === 0){
+          setFilterClicked(true);
+          return
+        }
+       
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
         //   setHealthData(!healthData);
         // } else {
-          let catArray: any = [];
-          let tempResults :any =[]
-          setProductSum(res.data.totalMatching)
-          res.data.results.map((item: any) => {
-
-            item?.healthNeeds?.value.forEach((value :any) => {
-              if (value.name !== "Health Needs" && 
-              categoryArrayList.some((element : any) => value.name.includes(element))) { 
-                if (!tempResults[value.name]) {
-                  tempResults[value.name] = [];
-                }
-                tempResults[value.name].push(item);
+        let catArray: any = [];
+        let tempResults: any = [];
+        setProductSum(res.data.totalMatching);
+        res.data.results.map((item: any) => {
+          item?.healthNeeds?.value.forEach((value: any) => {
+            if (
+              value.name !== "Health Needs" &&
+              categoryArrayList.some((element: any) =>
+                value.name.includes(element)
+              )
+            ) {
+              if (!tempResults[value.name]) {
+                tempResults[value.name] = [];
               }
-            });
+              tempResults[value.name].push(item);
+            } else if (
+              value.name !== "Health Needs" &&
+              categoryArrayList.length == 0
+            ) {
+              if (!tempResults[value.name]) {
+                tempResults[value.name] = [];
+              }
+              tempResults[value.name].push(item);
+            }
+          });
         });
-        console.log(tempResults,"tempResults")
-        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
-          return {
-            item: { name: key },
-            data: { results: value }
-          };
-        });
-        setSelectedProduct(transformedArray)
+
+        const transformedArray = Object.entries(tempResults).map(
+          ([key, value]) => {
+            return {
+              item: { name: key },
+              data: { results: value },
+            };
+          }
+        );
+        setSelectedProduct(transformedArray);
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -131,14 +151,14 @@ const HealthNeedsComponent = () => {
     };
   }, []);
 
-// {console.log(productSum,"sum")}
+  // {console.log(productSum,"sum")}
   useEffect(() => {
     createQueryParameters();
   }, [activeFilter]);
 
   const createQueryParameters = () => {
     let queryParams = "";
-    let tempId = false
+    let tempId = false;
     if (selectedFilterItems.length > 0) {
       let lastCatId = 0;
       let minCategoryCnt = 0;
@@ -146,12 +166,14 @@ const HealthNeedsComponent = () => {
       selectedFilterItems.map((category: any, catId: any) => {
         _temparray = [];
         if (!category.isCategoryChecked && category.items.length > 0) {
-          if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
-            tempId = true
+          if (lastCatId >= 0 && !category.isBusinessVerticalCategory) {
+            tempId = true;
           }
           if (lastCatId > 0 && lastCatId != catId) {
-            queryParams += tempId ? " and " : " or " 
-            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
+            queryParams += tempId ? " and " : " or ";
+            if (tempId && category.isBusinessVerticalCategory) {
+              tempId = false;
+            }
           }
           queryParams += "(";
           category.items.map((item: any, index: any) => {
@@ -162,9 +184,7 @@ const HealthNeedsComponent = () => {
             }
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
-            const concatStr =
-              category.items.length === index + 1
-                ? "":" or ";
+            const concatStr = category.items.length === index + 1 ? "" : " or ";
             queryParams += `${
               category?.isBusinessVerticalCategory
                 ? category?.productType
@@ -179,12 +199,14 @@ const HealthNeedsComponent = () => {
           minCategoryCnt += category.isCategoryChecked;
           // minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
-            if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
-              tempId = true
+            if (lastCatId >= 0 && !category.isBusinessVerticalCategory) {
+              tempId = true;
             }
             if (lastCatId > 0 && lastCatId != catId) {
-              queryParams += tempId ? " and " : " or " 
-            if(tempId && category.isBusinessVerticalCategory) { tempId = false}
+              queryParams += tempId ? " and " : " or ";
+              if (tempId && category.isBusinessVerticalCategory) {
+                tempId = false;
+              }
             }
             queryParams += "(";
             category.items.map((item: any, index: any) => {
@@ -196,8 +218,7 @@ const HealthNeedsComponent = () => {
               const itemName = item.replace(/[^a-zA-Z ]/g, "");
               const encodeItemName = encodeURI(itemName);
               const concatStr =
-                category.items.length === index + 1
-                  ? "":" or ";
+                category.items.length === index + 1 ? "" : " or ";
               queryParams += `${
                 category?.isBusinessVerticalCategory
                   ? category?.productType
@@ -222,16 +243,16 @@ const HealthNeedsComponent = () => {
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        window.location.href = updatedURL;
+        window.location.href = DOMPurify.sanitize(updatedURL);
       }
     }
 
     if (queryParams) fetchProductList(queryParams);
-    else {
-      router.push({
-        pathname: "/health_needs",
-      });
-    }
+    // else {
+    //   router.push({
+    //     pathname: "/health_needs",
+    //   });
+    // }
   };
 
   // -------- Health needs page data fetch starts -------- //
@@ -241,8 +262,9 @@ const HealthNeedsComponent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("Health Needs");
       // Health needs Categories List
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -261,14 +283,14 @@ const HealthNeedsComponent = () => {
       setRecommendedProduct(healthNeedsCategories?.data[0].contentArea);
 
       // Product Category setting - Filters data
-      const activeFiltersData = await axios.get(
+      const activeFiltersData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
       );
       const activeFiltersDataList = activeFiltersData?.data[0];
       setactiveFiltersData(activeFiltersDataList);
 
       // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axios.get(
+      const productCategoryData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const productCategoryDataList =
@@ -293,8 +315,19 @@ const HealthNeedsComponent = () => {
   }, []);
 
   useEffect(() => {
+    let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter(
+      (item: any) => {
+        if (
+          item &&
+          item?.title &&
+          item?.title?.value === "Health Needs Highlights"
+        ) {
+          return item;
+        }
+      }
+    );
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].healthNeedItem?.expandedValue.map(
+      return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
@@ -321,7 +354,7 @@ const HealthNeedsComponent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const healthNeedsCategories = await axios.get(
+      const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
@@ -334,38 +367,34 @@ const HealthNeedsComponent = () => {
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
 
-        axios
-          .get(
-            // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`,
-            {
-              headers: {
-                "Accept-Language": "en",
-              },
-            }
-          )
-          .then((res) => {
-            setProductSum(res.data.totalMatching)
-            let tempResults: any = [];       
-           res.data.results.map((item: any) => {
-            item?.healthNeeds?.value.forEach((value :any) => {
-              if (value.name !== "Health Needs") { 
+      axiosInstance
+        .get(
+          // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
+          `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
+        )
+        .then((res: any) => {
+          setProductSum(res.data.totalMatching);
+          let tempResults: any = [];
+          res.data.results.map((item: any) => {
+            item?.healthNeeds?.value.forEach((value: any) => {
+              if (value.name !== "Health Needs") {
                 if (!tempResults[value.name]) {
                   tempResults[value.name] = [];
                 }
                 tempResults[value.name].push(item);
               }
             });
-
-        });
-        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
-          return {
-            item: { name: key },
-            data: { results: value }
-          };
-        });
-        setSelectedProduct(transformedArray)
           });
+          const transformedArray = Object.entries(tempResults).map(
+            ([key, value]) => {
+              return {
+                item: { name: key },
+                data: { results: value },
+              };
+            }
+          );
+          setSelectedProduct(transformedArray);
+        });
       // });
     };
 
@@ -375,37 +404,74 @@ const HealthNeedsComponent = () => {
   const createTempFilterArr = (results: any) => {
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["items"] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        leftfiltermaindata?.subCategory?.value[0].id
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["items"] = [];
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
+        leftfiltermaindata?.subCategory?.value[0]?.id
       ] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["categoryName"] =
-        leftfiltermaindata?.mainCategory?.value[0].name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["categoryName"] =
+        leftfiltermaindata?.mainCategory?.value[0]?.name;
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isBusinessVerticalCategory"
       ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id]["productType"] =
         leftfiltermaindata?.name;
       // leftfiltermaindata?.isBusinessVerticalCategory?.value
       //   ? leftfiltermaindata?.name
       //   : leftfiltermaindata?.name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
+      tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][
         "isCategoryChecked"
       ] = false;
       leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] =
+          [];
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "checked"
         ] = false;
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "name"
         ] = subItem.name;
       });
     });
-    setSelectedFilterItems(tempArr);
-  };
+    //setSelectedFilterItems(tempArr);
+    console.log("Filtered", router.query.filter);
+    let selectedFilterData: any[] = [];
+    selectedFilterData = tempArr;
+    selectedFilterData.map((category: any) => {
+      category.map((sub_category: any) => {
+        if (router.query.filter === sub_category.name) {
+          sub_category.checked = true;
+          if (
+            category["items"] &&
+            category["items"].indexOf(router.query.filter) === -1
+          ) {
+            category["items"].push(router.query.filter);
+            setActiveFilter([router.query.filter]);
+          }
+        } else {
+          if (
+            category["items"] &&
+            category["items"].indexOf(sub_category.name) > -1
+          ) {
+            category["items"].splice(
+              category["items"].indexOf(sub_category.name),
+              1
+            );
+          }
+          category.checked = false;
+        }
+      });
+    });
 
+    setSelectedFilterItems(selectedFilterData);
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {isLoading && (
@@ -450,7 +516,7 @@ const HealthNeedsComponent = () => {
           setSelectedFilterItems={setSelectedFilterItems}
           selectedViewAllCateory={selectedViewAllCateory}
           fetchProductList={fetchProductList}
-          // recommendedProduct={recommendedProduct}
+          recommendedProduct={recommendedProduct}
           sectionData={sectionData}
           selectedRecommendedProduct={selectedRecommendedProduct}
           filterClicked={filterClicked}

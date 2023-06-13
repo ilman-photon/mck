@@ -12,16 +12,25 @@ import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animat
 import Image from "next/image";
 import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
+import Link from "next/link";
+import { useWindowResize } from "@/hooks/useWindowResize";
+// import axiosInstance from "@/utils/axiosInstance";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
   const [latitude, setLatitude] = useState(33.2411354);
   const [isCustomSearch, setIsCustomSearch] = useState(false);
   const [longitude, setLongitude] = useState(-111.7256936);
-  const [loading, setLoading] = useState(true); // Tambahkan state loading
+  const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(-1);
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
+
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
   // let textInput: any;
-  let [textInput, setTextInput] = useState<any>('')
+  let [textInput, setTextInput] = useState<any>("");
   /**
    * @state creds key
    */
@@ -42,6 +51,10 @@ function WhereComponent() {
    */
   const usaLon = useWhereToBuyStore((state: any) => state.usaLon);
   const usaLat = useWhereToBuyStore((state: any) => state.usaLat);
+  /**
+   * @description Handler function for View Online Stores Detail
+   */
+  const onViewOnline = useWhereToBuyStore((state) => state.onViewOnlineStore);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapKey,
@@ -53,33 +66,19 @@ function WhereComponent() {
     window.open("https://maps.google.com?q=" + lat + "," + long);
   };
 
-  const showOnline = (url: any) => {
-    window.open(url, "_blank");
-  };
-
   function fectchLatandLongDetails() {
     return axios.get(
       `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
         !isNaN(textInput)
           ? `components=postal_code:${Number(textInput)}`
           : `address=${textInput}`
-      }`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+      }`
     );
   }
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`,
-      {
-        headers: {
-          "Accept-Language": "en",
-        },
-      }
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`
     );
   }
 
@@ -88,8 +87,8 @@ function WhereComponent() {
   }, [latitude]);
   useEffect(() => {
     // textInput = 75201;
-    if(!isCustomSearch){
-      setTextInput(75201)
+    if (!isCustomSearch) {
+      setTextInput(75201);
     }
     // setTextInput('75201')
     fectchLatandLongDetails()
@@ -99,6 +98,13 @@ function WhereComponent() {
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }, [isCustomSearch]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   const fetchLocationDetails = () => {
     setLoading(true);
     fetchPDPLoctionDetails()
@@ -130,14 +136,25 @@ function WhereComponent() {
       element.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };
+
   const handleKey = () => {
-      fectchLatandLongDetails()
-        .then((res) => {
-          setLatitude(res?.data?.results[0]?.geometry.location['lat']);
-          setLongitude(res?.data?.results[0]?.geometry.location['lng']);
-          setIsCustomSearch(true)
-        })
-        .catch((e: Error | AxiosError) => console.log(e));
+    fectchLatandLongDetails()
+      .then((res) => {
+        setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
+        setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        setIsCustomSearch(true);
+      })
+      .catch((e: Error | AxiosError) => console.log(e));
+  };
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*\#/, "");
+    const elem = document.getElementById(targetId);
+    elem?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -159,9 +176,12 @@ function WhereComponent() {
           </div>
         </div>
       ) : (
-      <div className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:mt-[170px] lg:pt-0 where-to-buy" id="carouselExampleCaptions">
+        <div
+          className="container where-to-buy-container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
+          id="carouselExampleCaptions"
+        >
           <div>
-          <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
+            <div className="absolute lg:relative top-[81px] z-[1] left-4 right-4 p-4 lg:p-0 flex lg:flex-row flex-col rounded-lg lg:m-6 lg:top-0 lg:left-0 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <input
                 type="text"
                 id="fname"
@@ -169,31 +189,30 @@ function WhereComponent() {
                 role="search"
                 onChange={(e) => setTextInput(e.target.value)}
                 value={!isCustomSearch ? undefined : textInput}
-                onKeyDown={(e) => e.key === 'Enter' ? handleKey() : null}
+                onKeyDown={(e) => (e.key === "Enter" ? handleKey() : null)}
                 placeholder="City, State or Zip code"
                 className="border-mckblue bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
               <div onClick={handleKey} className="cursor-pointer">
-              <Image
-                src="images/Vector-nw.svg"
-                alt="location"
-                // className="cursor-pointer text-mckgreyborder absolute lg:top-7 top-[63px] right-8"
-                // width={24}
-                // height={25}
-                className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
-                width={15}
-                height={20}
-              />
+                <Image
+                  src="images/Vector-nw.svg"
+                  alt="location"
+                  aria-hidden={true}
+                  className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
+                  width={15}
+                  height={20}
+                />
               </div>
             </div>
             <div
-              className="lg:w-598 max-w-[498px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
+              className="lg:w-[640px] lg:desktop:w-[400px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
             >
               Disclaimer: Products are subject to availability
             </div>
-            <div className="pb-6 pl-6 lg:pr-4 pr-4 lg:max-w-[498px] lg:w-598 w-full overflow-y-scroll lg:h-760 mr-6 location-box">
+            <Link href={isMobile ? '#google-map' : {}} scroll onClick={handleScroll}>
+            <div className="lg:w-[640px] lg:desktop:w-[500px] mobile:h-[551px] mobilelarge:h-[551px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
               {responseValue?.map((value: any, index: Number) => {
                 return (
                   <div
@@ -209,7 +228,7 @@ function WhereComponent() {
                     <div className="pb-2 cursor-pointer">
                       <Image
                         src="/images/health-mart.png"
-                        alt="Health Mart"
+                        alt="Health Mart logo"
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
@@ -253,11 +272,11 @@ function WhereComponent() {
                       </div>
                     </div>
                     <div className="flex flex-row justify-between">
-                      {value?.StoreUrl ? (
+                      {value?.StoreId ? (
                         <div
                           className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"
                           id={`wb-label-08_0${index}`}
-                          onClick={() => showOnline(value.StoreUrl)}
+                          onClick={() => onViewOnline(value?.StoreId)}
                         >
                           View Online
                         </div>
@@ -272,6 +291,7 @@ function WhereComponent() {
                           id={`wb-label-09_0${index}`}
                           width={24}
                           height={25}
+                          aria-hidden={true}
                         />
                         <button
                           className="inline-block relative top-1 cursor-pointer"
@@ -292,12 +312,14 @@ function WhereComponent() {
                 );
               })}
             </div>
+            </Link>
           </div>
 
-          <div className="lg:w-842 w-full relative h-782 lg:h-854">
+          <div className="lg:w-[800px] w-full relative h-782 lg:h-854">
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
+              id="google-map"
               options={mapConfigOptions}
               zoom={isCustomSearch ? 15 : initialZoomLevelMap}
               center={{
@@ -336,62 +358,75 @@ function WhereComponent() {
                         }}
                       >
                         <div
-                          className="pt-1 pr-2 pb-2 pl-1"
                           key={value.id}
                           onClick={() => handleLocationClick(index, value)}
                         >
                           <div className="pb-2 cursor-pointer">
                             <Image
                               src="/images/health-mart.png"
-                              alt="Health Mart"
+                              alt="Health Mart logo"
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}
                             />
                           </div>
-                          <div className="flex">
-                            <span className="text-mcknormalgrey mb-2.5">
-                              <span className="text-sofia-reg lg:text-lg text-base lg:font-extrabold font-normal lg:mb-2 lg:leading-5" id={`wb-label-003${index}`} >
+                          <div className="flex mb-1.5">
+                            <span className="text-mcknormalgrey mb-1">
+                              <p
+                                className="text-sofia-bold text-lg text-base font-extrabold lg:mb-1 lg:leading-5"
+                                id={`wb-label-003${index}`}
+                              >
                                 {value.StoreName}
-                              </span>
-                              <span className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-2 lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:mb-1 lg:leading-5">
                                 {value.Address},{" "}
-                              </span>
-                              <div className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg lg:text-lg text-base font-normal lg:leading-5">
                                 {" "}
                                 {value.City} {value.Zip}
-                              </div>
-                              <div className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5">
+                              </p>
+                              <p className="text-sofia-reg text-mckblue lg:text-lg text-base font-normal lg:leading-5 leading-[20px]">
                                 {value.Phone}
-                              </div>
+                              </p>
                             </span>
-                            <h2 className="text-sofia-reg text-mckblue lg:text-20 text-base font-extrabold ml-auto">
+                            <h2 className="text-sofia-bold text-xl font-extrabold ml-auto text-mcknormalgrey">
                               {Number(value.Distance).toFixed(1)} mi
                             </h2>
                           </div>
 
-                          <div className="flex mt-2 mb-4">
-                            {value?.StoreUrl ? (
+                          <div className="flex flex-row justify-between mt-2">
+                            <div className="items-center justify-center">
+                              {value?.StoreId ? (
+                                <button
+                                  className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
+                                  onClick={() => onViewOnline(value?.StoreId)}
+                                >
+                                  View Online
+                                </button>
+                              ) : null}
+                            </div>
+                            <div>
+                              <Image
+                                src="/images/directions_car_filled.svg"
+                                alt="direction"
+                                className="inline-block mr-1"
+                                id={`wb-label-09_0${index}`}
+                                width={24}
+                                height={25}
+                              />
                               <button
-                                className="text-sofia-bold font-extrabold text-mckblue cursor-pointer lg:mr-7 text-lg leading-5"
-                                onClick={() => showOnline(value.StoreUrl)}
+                                className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
+                                onClick={() =>
+                                  showMapClicked(
+                                    value.Lat,
+                                    value.Lon,
+                                    value.StoreName
+                                  )
+                                }
                               >
-                                View Online
+                                Get Directions
                               </button>
-                            ) : null}
-
-                            <button
-                              className="text-sofia-bold font-extrabold text-mckblue ml-auto lg:ml-0 cursor-pointer text-lg leading-5"
-                              onClick={() =>
-                                showMapClicked(
-                                  value.Lat,
-                                  value.Lon,
-                                  value.StoreName
-                                )
-                              }
-                            >
-                              Get Directions
-                            </button>
+                            </div>
                           </div>
                         </div>
                       </InfoWindow>

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
@@ -11,14 +13,8 @@ export default function CategoryComponent({ sectionData }: any) {
   
   function idRequests() {
     return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axios.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`,
-        {
-          headers: {
-            "Accept-Language": "en",
-          },
-        }
-      );
+      return axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`);
     });
   }
 
@@ -59,6 +55,9 @@ export default function CategoryComponent({ sectionData }: any) {
             return (
               <div
                 key={item?.data?.contentLink?.id}
+                  onClick={() =>
+                    handleClickOnCategory(item?.data?.productCategoryUrl?.value)
+                  }
                 className={`mb-6 cursor-pointer ${
                   index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
                 }`}
@@ -66,9 +65,7 @@ export default function CategoryComponent({ sectionData }: any) {
                 <div
                   id={`category_0${index}`}
                   className="mx-auto w-36 lg:w-52 h-36 lg:h-52"
-                  onClick={() =>
-                    handleClickOnCategory(item?.data?.productCategoryUrl?.value)
-                  }
+                  
                 >
                   <style jsx>{`
                     .border {
@@ -76,10 +73,10 @@ export default function CategoryComponent({ sectionData }: any) {
                     }
                   `}</style>
                   <img
-                    src={item?.data?.productCategoryImage?.value?.url}
-                    alt={`category_${index}`}
+                    src={DOMPurify.sanitize(item?.data?.productCategoryImage?.value?.url)}
+                    alt={DOMPurify.sanitize(`category_${index}`)}
                     id={item?.data?.productCategoryImage?.value?.url}
-                    
+                    aria-hidden={true}                    
                   />
                 </div>
                 <div
@@ -89,14 +86,14 @@ export default function CategoryComponent({ sectionData }: any) {
                   <Link
                     href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
                   >
-                    {item?.data?.name}
+                    {DOMPurify.sanitize(item?.data?.name)}
                   </Link>
                 </div>
                 <div
                   
                   className="text-center text-sofia-reg font-normal w-full lg:w-3/4 xl:w-3/4 mx-auto text-base lg:text-lg text-mcknormalgrey text-heading-ellipsis"
                   dangerouslySetInnerHTML={{
-                    __html: item?.data?.productCategoryDescription?.value,
+                    __html: DOMPurify.sanitize(item?.data?.productCategoryDescription?.value),
                   }}
                   id={`category_Titel_0${index}`}
                 ></div>
