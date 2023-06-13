@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function Search() {
   const router = useRouter();
   let textInput: any;
-  const [searchString, setSearchString] = useState<string>();
+  const [searchString, setSearchString] = useState<string>('');
   const regex = /^[a-zA-Z0-9' -]+$/;
 
   const handleKey = (e: any) => {
@@ -26,8 +26,8 @@ export default function Search() {
   };
   const handleKeyUp = (e: any) => {
     const { value } = e.target;
-    if (regex.test(value)) {
-      setSearchString(value);
+    if (regex.test(value)||value==='') {
+      setSearchString(e.target.value);
     }
   };
 
