@@ -1782,10 +1782,7 @@ Mobiles Menu
     fill: #fff;
   }
   .brand-logo {
-    padding-left: 72px;
-  }
-  .isStickyActive .brand-logo {
-    padding-left: 24px;
+    padding-left: 16px;
   }
   .signup-form {
     width: 27%;
@@ -2564,7 +2561,4 @@ li.indicator.active {
 
 .where-to-buy-container {
   max-width: 100%;
-}
-@media (max-width: 1440px) {
-  .container {max-width: 1440px;} 
 }
