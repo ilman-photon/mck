@@ -317,6 +317,7 @@ function PdpLocation(props: any) {
                   <img
                     src="images/directions_car_filled.svg"
                     alt="direction"
+                    aria-hidden={true}
                     className="inline-block"
                     id={`pdp-directionimg_${props.index}-${index}`}
                   />
