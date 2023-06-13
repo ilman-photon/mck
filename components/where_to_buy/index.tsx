@@ -177,7 +177,7 @@ function WhereComponent() {
         </div>
       ) : (
         <div
-          className="container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
+          className="container where-to-buy-container pl-0 pr-0 flex lg:flex-row px-4 flex-col-reverse mx-auto lg:h-854 lg:pt-0 where-to-buy"
           id="carouselExampleCaptions"
         >
           <div>
