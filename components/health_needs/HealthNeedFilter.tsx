@@ -371,7 +371,7 @@ const HealthNeedFilter = ({
           </div>
         </div>
         <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
-          { (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum)}
+          {productSum >= 0 ?  (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum) : null}
         </div>
       </section>
       <div className='lg:flex mt-6'>

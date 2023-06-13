@@ -52,12 +52,12 @@ export default function TextDescAndButton (props:TextDescAndButtonProps) {
   
     const renderTitle  = title ? (
     <div>
-      <h1
+      <h3
       className={titleStyle}
       id={`${idComponent}_lbl_001`}
     >
       {title}
-    </h1>
+    </h3>
     </div>
     ) : null
   

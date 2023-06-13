@@ -170,6 +170,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           src={ele?.data?.imageTitle?.value?.url}
           alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
           id={`home-product-image${indexs}${index + 1}`}
+          aria-hidden={true}
         />
       );
 
@@ -236,6 +237,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 <div className="mx-auto my-auto lg:h-40 object-contain lg:py-48">
                   {ele?.data?.image?.value?.url && (
                     <img
+                      aria-hidden={true}
                       className={`mx-auto lg:my-auto max-h-160`}
                       src={ele?.data?.image?.value?.url}
                       id={`home-product-image01${indexs}${index + 1}`}
@@ -276,6 +278,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   <div className="mx-auto my-auto lg:h-40 object-contain">
                     {ele?.data?.image?.value?.url && (
                       <img
+                        aria-hidden={true}
                         className="mx-auto lg:my-auto max-h-160"
                         src={ele?.data?.image?.value?.url}
                         id={`home-product-image01${indexs}${index + 1}`}
