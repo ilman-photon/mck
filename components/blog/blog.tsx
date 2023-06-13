@@ -9,20 +9,23 @@ import SearchResult from "./SearchResult";
 import OtherArtical from "./OtherArtical";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-import dynamic from 'next/dynamic';
-import { fetchApplicationSetting, fetchBlogFilter, fetchBlogSetting } from "./BlogAPI";
+import dynamic from "next/dynamic";
+import {
+  fetchApplicationSetting,
+  fetchBlogFilter,
+  fetchBlogSetting,
+} from "./BlogAPI";
 
-const BlogList = dynamic(
-  () => import('./BlogListContainer'),
-  {
-    loading: () => <div className="fixed inset-0 flex items-center justify-center z-50">
+const BlogList = dynamic(() => import("./BlogListContainer"), {
+  loading: () => (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-black opacity-30"></div>
       <div className="relative">
         <Image src={gifImage} alt="coba-image" />{" "}
       </div>
-    </div>,
-  },
-);
+    </div>
+  ),
+});
 const BlogComponent = () => {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
@@ -34,36 +37,35 @@ const BlogComponent = () => {
 
   const [searchInfo, setSeachInfo] = useState<any>({
     ActiveSearch: true,
-    SearchString: '',
+    SearchString: "",
     searchResult: [],
-    noSearchResult: false
+    noSearchResult: false,
   });
   const router = useRouter();
 
   useEffect(() => {
-    HandleAppSetting()
+    HandleAppSetting();
 
     setIsLoading(true);
     fetchBlogSetting()
       .then((res) => {
-        setResponse(res)
+        setResponse(res);
         setIsLoading(false);
-
       })
       .catch((e: Error | AxiosError) => {
         setIsLoading(false);
-      })
+      });
   }, []);
   const HandleAppSetting = () => {
     fetchApplicationSetting()
-        .then((res) => {
-            setAppSetting(res.data[0].categoryMapping.expandedValue)
-            setIsLoading(false);
-        })
-        .catch((e: Error | AxiosError) => {
-            setIsLoading(false);
-        })
-}
+      .then((res) => {
+        setAppSetting(res.data[0].categoryMapping.expandedValue);
+        setIsLoading(false);
+      })
+      .catch((e: Error | AxiosError) => {
+        setIsLoading(false);
+      });
+  };
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -78,11 +80,11 @@ const BlogComponent = () => {
       .then((res) => {
         setFilterBlogList(res.data.results);
         setCurrentScreen("Filter");
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch((e: Error | AxiosError) => {
         setIsLoading(false);
-      })
+      });
   };
 
   const HandelSearch = (data: any, searchString: string) => {
@@ -90,30 +92,42 @@ const BlogComponent = () => {
       ...prevState,
       searchResult: data,
       SearchString: searchString,
-      ActiveSearch: false
+      ActiveSearch: false,
     }));
-    setActiveSearch(true)
+    setActiveSearch(true);
     setArticleContent(data);
     setCurrentScreen("Search");
   };
   const HandleSearchClose = () => {
-    setCurrentScreen('List')
+    setCurrentScreen("List");
     setSeachInfo((prevState: any) => ({
       ...prevState,
       searchResult: [],
-      SearchString: '',
-      ActiveSearch: true
+      SearchString: "",
+      ActiveSearch: true,
     }));
-    setActiveSearch(false)
-  }
+    setActiveSearch(false);
+  };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div role="main" id="carouselExampleCaptions" className="container flex lg:flex-row flex-col gap-6 w-full lg:p-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto ">
+    <div
+      role="main"
+      id="carouselExampleCaptions"
+      className="container flex lg:flex-row flex-col gap-6 w-full lg:p-72 lg:px-7 lg:pb-0 p-4 pb-0 pt-6 mx-auto "
+    >
       <div className="lg:w-966 w-full">
         <div
           id="search"
-          className={`lg:${!ActiveSearch && "hidden"
-            } block w-full relative flex items-center content-center mb-6`}
+          className={`lg:${
+            !ActiveSearch && "hidden"
+          } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
             placeholder={response?.data[0].blogSearchPlaceholderText?.value}
@@ -161,7 +175,9 @@ const BlogComponent = () => {
         )}
       </div>
       <div className="lg:w-306 w-full blogright-sidebar">
-        {/* <p aria-hidden="false" aria-label={response?.data[0].blogSearchPlaceholderText.value} tabIndex={0}>{response?.data[0].blogSearchPlaceholderText.value}</p> */}
+        <p className="invisible">
+          {response?.data[0].blogSearchPlaceholderText.value}
+        </p>
         {!ActiveSearch && (
           <div
             id="search"
@@ -195,10 +211,12 @@ const BlogComponent = () => {
           AppSetting={AppSetting}
           OnRelatedProductClick={(e) => handleProductClick(e)}
           title={response?.data[0]?.relatedProductHeadingText?.value}
-          BlogListingContent={response?.data[0]?.recommendedProducts?.expandedValue}
+          BlogListingContent={
+            response?.data[0]?.recommendedProducts?.expandedValue
+          }
         />
       </div>
     </div>
   );
-}
+};
 export default memo(BlogComponent);

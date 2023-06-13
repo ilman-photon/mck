@@ -9,6 +9,7 @@ import GoogleTagManager from "@/components/google_tag_manager";
 import Head from "next/head";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+
 interface MyComponentProps {
   Response: {
     data: {
@@ -22,19 +23,18 @@ interface MyComponentProps {
 function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
   const [isLoading, setIsLoading] = useState(true);
 
-  const [apiRespond, setApiRespond] = useState<any>();
-
   useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
+
   useEffect(() => {
-    // Simulating a delay to show the loading state
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
     if (
       Response &&
@@ -72,7 +72,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
       </Head>
       <GoogleTagManager />
       <HeaderComponent />
-      {isLoading ? (
+      {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
           <div
@@ -88,8 +88,9 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
             />
           </div>
         </div>
-      ) : (
-        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 lg:mx-4 lg:mx-auto mt-18">
+      )}
+      {!isLoading && (
+        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 lg:mx-4 lg:mx-auto my-18 ">
           <div className="left-column overflow-hidden lg:overflow-visible">
             <div className="pdp-slider">
               <PdpCarousel />
@@ -104,7 +105,6 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
           </div>
         </div>
       )}
-
       <FooterComponent />
     </>
   );

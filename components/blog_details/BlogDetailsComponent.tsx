@@ -11,7 +11,7 @@ import { GetTime } from "../global/CommonUtil";
 import { fetchApplicationSetting, fetchBlogDetails } from "../blog/BlogAPI";
 import { ImageComponent } from "../global/ImageComponent";
 import TagsComponent from "../blog/Tags";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 const BlogDetailsComponent = () => {
   const router = useRouter();
@@ -58,9 +58,17 @@ const BlogDetailsComponent = () => {
     // Set the lang attribute to "en" on the <html> element
     // Set the title of the document dynamically
     document.documentElement.lang = "en";
-    document.title = DOMPurify.sanitize(BlogInfo?.title?.value) || "Blog Details Page";
+    document.title =
+      DOMPurify.sanitize(BlogInfo?.title?.value) || "Blog Details Page";
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {loading ? (
@@ -80,7 +88,8 @@ const BlogDetailsComponent = () => {
           </div>
         </div>
       ) : (
-        <div role="main"
+        <div
+          role="main"
           className="container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto "
           id="carouselExampleCaptions"
         >
@@ -88,15 +97,15 @@ const BlogDetailsComponent = () => {
             className="col-start-1 col-end-7 rounded-lg overflow-hidden"
             aria-hidden="true"
             style={{
-              display: BlogInfo.image?.expandedValue?.url ? "block" : "none",
+              display: BlogInfo?.image?.expandedValue?.url ? "block" : "none",
             }}
           >
-            <ImageComponent              
+            <ImageComponent
               aria-hidden={true}
-              src={DOMPurify.sanitize(BlogInfo.image?.expandedValue?.url)}
+              src={DOMPurify.sanitize(BlogInfo?.image?.expandedValue?.url)}
               className="m-auto w-full"
-              alt={BlogInfo.image?.expandedValue?.name}
-              id={BlogInfo.image?.expandedValue?.name}
+              alt={BlogInfo?.image?.expandedValue?.name}
+              id={BlogInfo?.image?.expandedValue?.name}
             />
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10">
@@ -107,19 +116,19 @@ const BlogDetailsComponent = () => {
                     className="lg:text-54  lg:leading-61  max-[576px]:leading-9 text-32 text-gtl-med text-mckblue lg:pb-6 text-center"
                     id="blog-link-001"
                   >
-                    {DOMPurify.sanitize(BlogInfo.title?.value)}
+                    {DOMPurify.sanitize(BlogInfo?.title?.value)}
                   </h1>
                   <div className="grid lg:grid-cols-2 lg:gap-4 lg:pt-0 pt-4 lg:pb-6 pb-4">
                     <div className="lg:pb-0 pb-4">
                       <span
                         className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${
-                          BlogInfo.readMinute?.value
+                          BlogInfo?.readMinute?.value
                             ? "shade-grey-right-border"
                             : ""
                         }`}
                         id="blog-label-001"
                       >
-                        {GetTime(BlogInfo.startPublish)}
+                        {GetTime(BlogInfo?.startPublish)}
                       </span>
                       <span
                         className={`text-mckblue text-sofia-reg font-normal text-base px-2 border-solid ${
@@ -127,7 +136,7 @@ const BlogDetailsComponent = () => {
                         }`}
                         id="blog-label-002"
                       >
-                        {DOMPurify.sanitize(BlogInfo.readMinute?.value)}
+                        {DOMPurify.sanitize(BlogInfo?.readMinute?.value)}
                       </span>
                       {/* <span className='text-mckblue text-sofia-reg font-normal text-base pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
@@ -137,15 +146,15 @@ const BlogDetailsComponent = () => {
                   <div
                     className="text-sofia-reg text-color text-lg leading-27"
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(BlogInfo.description?.value),
+                      __html: DOMPurify?.sanitize(BlogInfo?.description?.value),
                     }}
                   ></div>
                 </div>
               </article>
               <div className="relative">
                 <CarouselComponent
-                  title={BlogInfo.relatedArticleHeading?.value}
-                  relatedArticle={BlogInfo.relatedArticle?.expandedValue}
+                  title={BlogInfo?.relatedArticleHeading?.value}
+                  relatedArticle={BlogInfo?.relatedArticle?.expandedValue}
                   OnRelatedArticleClick={(e) => handleBlogClick(e)}
                 />
                 {/* <CommentComponent /> */}
@@ -165,8 +174,8 @@ const BlogDetailsComponent = () => {
               <RelatedProducts
                 AppSetting={appSetting}
                 OnRelatedProductClick={(e) => handleProductClick(e)}
-                title={BlogInfo.relatedProductHeading?.value}
-                BlogListingContent={BlogInfo.relatedProducts?.expandedValue}
+                title={BlogInfo?.relatedProductHeading?.value}
+                BlogListingContent={BlogInfo?.relatedProducts?.expandedValue}
               />
             </div>
           </div>

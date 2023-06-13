@@ -9,7 +9,7 @@ import Image from "next/image";
 
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import axiosInstance from "@/utils/axiosInstance";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -58,7 +58,7 @@ const HealthNeedsComponent = ({
     const values = matches.map((match) => match[1]);
 
     let categoryArrayList = _temparray;
-  
+
     let queryParameter = "";
     if (filter === "") {
       // queryParameter = `(productType/value/name eq 'Acute Care')`;
@@ -73,45 +73,55 @@ const HealthNeedsComponent = ({
     }
 
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`);
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
+    );
     promise
-      .then((res:any) => {
-        setFilterClicked(true);
+      .then((res: any) => {
+        if(res.data.results.length === 0){
+          setFilterClicked(true);
+          return
+        }
+       
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
         //   setHealthData(!healthData);
         // } else {
-          let catArray: any = [];
-          let tempResults :any =[]
-          setProductSum(res.data.totalMatching)
-          res.data.results.map((item: any) => {
+        let catArray: any = [];
+        let tempResults: any = [];
+        setProductSum(res.data.totalMatching);
+        res.data.results.map((item: any) => {
+          item?.healthNeeds?.value.forEach((value: any) => {
+            if (
+              value.name !== "Health Needs" &&
+              categoryArrayList.some((element: any) =>
+                value.name.includes(element)
+              )
+            ) {
+              if (!tempResults[value.name]) {
+                tempResults[value.name] = [];
+              }
+              tempResults[value.name].push(item);
+            } else if (
+              value.name !== "Health Needs" &&
+              categoryArrayList.length == 0
+            ) {
+              if (!tempResults[value.name]) {
+                tempResults[value.name] = [];
+              }
+              tempResults[value.name].push(item);
+            }
+          });
+        });
 
-            item?.healthNeeds?.value.forEach((value :any) => {
-              if (value.name !== "Health Needs" && 
-              categoryArrayList.some((element : any) => value.name.includes(element))) { 
-                
-                if (!tempResults[value.name]) {
-                  tempResults[value.name] = [];
-                }
-                tempResults[value.name].push(item);
-              }
-              else if (value.name !== "Health Needs" && categoryArrayList.length == 0)
-              {
-                if (!tempResults[value.name]) {
-                  tempResults[value.name] = [];
-                }
-                tempResults[value.name].push(item);
-              }
-            });
-        });
-        
-        const transformedArray = Object.entries(tempResults).map(([key, value]) => {
-          return {
-            item: { name: key },
-            data: { results: value }
-          };
-        });
-        setSelectedProduct(transformedArray)
+        const transformedArray = Object.entries(tempResults).map(
+          ([key, value]) => {
+            return {
+              item: { name: key },
+              data: { results: value },
+            };
+          }
+        );
+        setSelectedProduct(transformedArray);
       })
       .catch((e: Error | AxiosError) => console.log(e))
       .finally(() => {
@@ -303,15 +313,19 @@ const HealthNeedsComponent = ({
 
     fetchData();
   }, []);
- 
-  
+
   useEffect(() => {
-    let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter
-      ((item :any) => {
-        if (item && item?.title && item?.title?.value === "Health Needs Highlights") {
-          return item
+    let tempRecommendedProduct = recommendedProduct?.expandedValue?.filter(
+      (item: any) => {
+        if (
+          item &&
+          item?.title &&
+          item?.title?.value === "Health Needs Highlights"
+        ) {
+          return item;
         }
-      });
+      }
+    );
     recommendedProduct?.expandedValue?.map((id: any) => {
       return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
         (item: any) => {
@@ -356,8 +370,9 @@ const HealthNeedsComponent = ({
       axiosInstance
         .get(
           // `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(healthNeeds/value/name eq '${correctText}')`,
-          `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`)
-        .then((res:any) => {
+          `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
+        )
+        .then((res: any) => {
           setProductSum(res.data.totalMatching);
           let tempResults: any = [];
           res.data.results.map((item: any) => {
@@ -408,7 +423,8 @@ const HealthNeedsComponent = ({
         "isCategoryChecked"
       ] = false;
       leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] = [];
+        tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id] =
+          [];
         tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id][subItem.id][
           "checked"
         ] = false;
@@ -418,20 +434,29 @@ const HealthNeedsComponent = ({
       });
     });
     //setSelectedFilterItems(tempArr);
-    console.log("Filtered",router.query.filter);
+    console.log("Filtered", router.query.filter);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
           sub_category.checked = true;
-          if (category["items"] && category["items"].indexOf(router.query.filter) === -1) {
+          if (
+            category["items"] &&
+            category["items"].indexOf(router.query.filter) === -1
+          ) {
             category["items"].push(router.query.filter);
             setActiveFilter([router.query.filter]);
           }
         } else {
-          if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
-            category["items"].splice(category["items"].indexOf(sub_category.name), 1);
+          if (
+            category["items"] &&
+            category["items"].indexOf(sub_category.name) > -1
+          ) {
+            category["items"].splice(
+              category["items"].indexOf(sub_category.name),
+              1
+            );
           }
           category.checked = false;
         }
@@ -439,9 +464,14 @@ const HealthNeedsComponent = ({
     });
 
     setSelectedFilterItems(selectedFilterData);
-
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
 
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {isLoading && (

@@ -12,6 +12,7 @@ import axiosInstance from "@/utils/axiosInstance";
 function HealthNeedsPage() {
   // Loading
   const [token, setToken] = useState(null);
+  const [loadingTemp, setLoadingTemp] = useState(true);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
@@ -40,7 +41,13 @@ function HealthNeedsPage() {
     // Set the lang attribute to "en" on the <html> element
     document.documentElement.lang = "en";
   }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      false;
+    }, 500);
 
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     // Set the title of the document dynamically
     if (
@@ -56,6 +63,14 @@ function HealthNeedsPage() {
     }
   }, [JSON.stringify(response)]);
   const [isCarusonAvible, setisCarusonAvible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingTemp(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       <GoogleTagManager />
@@ -67,9 +82,10 @@ function HealthNeedsPage() {
         }
       />
       {error && <p>{error.message}</p>}
-      {!loading && !error && response && (
-        <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-      )}
+      {loadingTemp ||
+        (!loading && !error && response && (
+          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+        ))}
       <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
       <FooterComponent />
     </>
