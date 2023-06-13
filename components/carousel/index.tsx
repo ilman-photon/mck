@@ -82,7 +82,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     <div className="flex items-center justify-center">
       <div
         id="carouselExampleCaptions"
-        className="w-full relative"
+        className="container relative mobile:p-0"
         data-te-carousel-init
         data-te-carousel-slide
       >
