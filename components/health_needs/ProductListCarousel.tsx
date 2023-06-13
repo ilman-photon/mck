@@ -44,7 +44,7 @@ const ProductComponent = ({
   };
   const handleOnSlideChange = (swiper: any) => {
     if (isMobile) {
-      swiper.autoplay.running = true;
+      swiper.autoplay.running = false;
       setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
     } else {
       swiper.autoplay.running = false;
@@ -109,7 +109,6 @@ const ProductComponent = ({
                         navigation={isMobile ? false : true}
                         slidesPerView={isMobile ? "auto" : 6}
                         slidesPerGroup={isMobile ? 1 : 6}
-                        autoplay={isMobile ? { delay: 3000 } : false}
                         className="lg:h-480 h-350"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
