@@ -14,7 +14,12 @@ function PdpCarousel(prodViewData: any) {
   const [arrowClick, setArrowClick] = useState(0);
   const [dataImageId, setDataImageId] = useState(0);
   const [prodResponse, setProdResponse] = useState<any>();
-
+  const [carouselState, setCarouselState] = useState({
+    selectedItemIndex: 0,
+    lastIndex: 0,
+    arrowClick: 0,
+  });
+  const [imgUrl, setImgUrl] = useState("");
   function fetchPDPCarouselDetails() {
     return axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${
@@ -48,33 +53,47 @@ function PdpCarousel(prodViewData: any) {
       setArrowClick(() => arrowClick + 1);
       setLastIndex(() => lastIndex + 1);
     }
-    prodResponse?.productImages?.value?.length > selectedItemIndex &&
+    prodResponse?.productImages?.value?.length > selectedItemIndex + 1 &&
       setSelectedItemIndex((prevState) => prevState + 1);
   };
 
   const handleUpArrowClick = () => {
     if (arrowClick > 0) {
-      setArrowClick(() => arrowClick - 1);
-      setLastIndex(() => lastIndex - 1);
+      setArrowClick((prevArrowClick) => prevArrowClick - 1);
+      setLastIndex((prevLastIndex) => prevLastIndex - 1);
     }
-    selectedItemIndex > 0 && setSelectedItemIndex((prevState) => prevState - 1);
+    if (selectedItemIndex > 0) {
+      setSelectedItemIndex(
+        (prevSelectedItemIndex) => prevSelectedItemIndex - 1
+      );
+    }
   };
 
   const handleImageClick = (i: any, dataImageId?: any) => {
     const index = prodResponse?.productImages?.value.findIndex(
       (imgdata: any) => imgdata.id === dataImageId
     );
-    setSelectedItemIndex(index);
+    setSelectedItemIndex(index + arrowClick);
     setDataImageId(dataImageId);
   };
 
   const handleMouseOver = (id: number) => {
-    // setSelectedItemIndex(id);
+    setSelectedItemIndex(id);
   };
 
   const isProductImageLessThanSix =
     prodResponse?.productImages?.expandedValue?.length < 6;
   console.log(prodResponse?.productImages?.value);
+  useEffect(() => {
+    const imgData =
+      prodResponse?.productImages?.value &&
+      prodResponse?.productImages?.value[selectedItemIndex + arrowClick];
+    const imgUrl =
+      (imgData && imgData.url) ||
+      prodResponse?.image?.expandedValue?.url ||
+      prodResponse?.image?.value?.url;
+    setImgUrl(imgUrl);
+  }, [selectedItemIndex, arrowClick, prodResponse]);
   return (
     <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" id="pdp-01">
       <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
@@ -121,11 +140,12 @@ function PdpCarousel(prodViewData: any) {
             {prodResponse?.productImages?.value
               ?.slice(arrowClick, lastIndex)
               .map((imgdata: any, index: any) => {
+                console.log(imgdata.url);
                 return (
                   <li
                     className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
                                     ${
-                                      selectedItemIndex === index
+                                      selectedItemIndex === index + arrowClick
                                         ? "cursor-pointer border-solid border-4 border-indigo-600 hover:border-solid hover:border-4"
                                         : ""
                                     } 
@@ -157,7 +177,7 @@ function PdpCarousel(prodViewData: any) {
                 src="images\carousel_down.png"
                 alt="image"
                 className={`m-auto ${
-                  prodResponse?.productImages?.value?.length <=
+                  prodResponse?.productImages?.value?.length - 1 <=
                   selectedItemIndex
                     ? "opacity-25"
                     : ""
@@ -169,7 +189,8 @@ function PdpCarousel(prodViewData: any) {
             <div
               onClick={handleDownArrowClick}
               className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${
-                prodResponse?.productImages?.value?.length <= selectedItemIndex
+                prodResponse?.productImages?.value?.length - 1 <=
+                selectedItemIndex
                   ? "opacity-25"
                   : ""
               }`}
@@ -197,16 +218,8 @@ function PdpCarousel(prodViewData: any) {
             deviceWidth < 1024 && deviceWidth !== 0 ? "h-[300px]" : ""
           } box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}
         >
-          <p>{selectedItemIndex}</p>
           <ImageComponent
-            src={
-              (prodResponse?.productImages?.value &&
-                prodResponse?.productImages?.value[
-                  selectedItemIndex + arrowClick
-                ]?.url) ||
-              prodResponse?.image?.expandedValue?.url ||
-              prodResponse?.image?.value?.url
-            }
+            src={imgUrl}
             className="lg:w-[270px] max-w-[200px]"
             alt="Image is not available"
             id={
