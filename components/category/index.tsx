@@ -55,8 +55,6 @@ export default function CategoryComponent({ sectionData }: any) {
             return (
               <div
                 key={item?.data?.contentLink?.id}
-                role="button"
-                  tabIndex={0}
                   onClick={() =>
                     handleClickOnCategory(item?.data?.productCategoryUrl?.value)
                   }
@@ -78,7 +76,7 @@ export default function CategoryComponent({ sectionData }: any) {
                     src={DOMPurify.sanitize(item?.data?.productCategoryImage?.value?.url)}
                     alt={DOMPurify.sanitize(`category_${index}`)}
                     id={item?.data?.productCategoryImage?.value?.url}
-                    
+                    aria-hidden={true}                    
                   />
                 </div>
                 <div
