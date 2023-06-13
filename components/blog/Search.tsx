@@ -27,22 +27,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
     }
   }, [searchText]);
 
-  const fetchSearchBlog = async () => {
-    if (search === undefined) {
-      setActiveClose(true);
-    } else {
-      fetchBlogSearch(search)
-        .then((res) => {
-          setActiveClose(false);
-          handleResponse(res.data.results, search);
-        })
-        .catch((e: Error | AxiosError) => {
-          setError(true);
-          // handleFetchSerach();
-        });
-    }
-  };
-  const handleFetchSerach = () => {
+
+  const fetchSearchBlog = () => {
     router.push({
       pathname: "/blog-search-result",
       query: { id: search },

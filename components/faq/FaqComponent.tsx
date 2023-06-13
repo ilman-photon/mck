@@ -3,6 +3,37 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import DOMPurify from 'isomorphic-dompurify';
 
+const ItemExpandeble = ({bdata}: any) => {
+    const [selectedValue, setSelectedValue] = useState<boolean>(false)
+    const handleOnClick = (e: string) => {
+        if(e == "Enter" || e === 'click') {
+            setSelectedValue(!selectedValue)
+        }
+    }
+
+    return(  <div className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4" id={"faq_label_003"+bdata?.contentLink?.id} key={bdata?.contentLink?.id}>
+    <input 
+        type= "checkbox" 
+        id= {bdata?.contentLink?.id} 
+        checked={selectedValue}
+   />
+        <label 
+        role="button"
+        tabIndex={0}
+        onClick={(e) => handleOnClick('click')}
+        onKeyUp={(e) => handleOnClick(e.key)}
+        className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base" 
+        htmlFor={bdata?.contentLink?.id}
+        >
+        <span>{bdata?.question?.value}</span>
+        </label>
+    <div className={` tab-content text-sofia-reg font-normal text-base text-mcknormalgrey`}>
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(bdata?.answer?.value), }} id="faq_label_004">
+        </div>
+    </div>
+</div>)
+};
+
 function FaqComponent() {
 
     const [faqData, SetFaqData] = useState<any>();
@@ -35,21 +66,13 @@ function FaqComponent() {
 
     return (
         <>
-            <div role="main" className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0 ">
+            <div role="main" className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18">
                 <h1 className="text-mckblue text-54 heading pb-3 text-center" id="faq_label_001">{DOMPurify.sanitize(faqData?.name)}</h1>
                 <div className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faqData?.description?.value), }} id="faq_label_002"></div>
-                    {faqData?.blockArea?.expandedValue?.map((bdata: any) => (
-                        <div className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4" id={"faq_label_003"+bdata?.contentLink?.id} key={bdata?.contentLink?.id}>
-                        <input type="checkbox" id={bdata?.contentLink?.id} />
-                        <label className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base" htmlFor={bdata?.contentLink?.id}>
-                            <span>{bdata?.question?.value}</span></label>
-                        <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
-                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(bdata?.answer?.value), }} id="faq_label_004">
-                            </div>
-                        </div>
-                    </div>
-                    ))}               
+                    {faqData?.blockArea?.expandedValue?.map((bdata: any) => {
+                        return(<ItemExpandeble key={bdata?.contentLink?.id} bdata={bdata} />)
+                    })}               
 
                 <div className="shade-blue-border w-full lg:mt-6 mt-4 rounded-lg overflow-hidden">
                     <h3 className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4" id="faq_label_005">{faqData?.differentQuestionHeading?.value}</h3>

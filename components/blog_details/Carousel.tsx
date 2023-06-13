@@ -5,8 +5,9 @@ import "swiper/css/pagination";
 import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
 import "swiper/css/navigation";
 import { ImageComponent } from "../global/ImageComponent";
-import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
+import { GetTime, handlecategoryColorCode } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 interface CarouselComponentProps {
   title: string;
@@ -22,6 +23,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [reviewCount, setReviewCount] = useState<number>(1);
+  const catMapping = useHeaderStore((state) => state.categoryMapping);
 
   useEffect(() => {
     const handleResize = () => {
@@ -114,14 +116,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           <span
                             className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${
                               item.startPublish ? "shade-grey-right-border" : ""
-                            }`}
+                              }`}
                           >
                             {GetTime(item?.startPublish)}
                           </span>
                           <span
                             className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${
                               false ? "shade-grey-right-border" : ""
-                            }`}
+                              }`}
                           >
                             {item?.readMinute?.value}
                           </span>
@@ -131,10 +133,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           {item.tag.value.map((tagitem: any, idx: any) => (
                             <div
                               style={{
-                                backgroundColor: handleTagBackgroudColor(
-                                  idx,
-                                  item?.tagBackgroundColorCode?.value
-                                ),
+                                backgroundColor: handlecategoryColorCode(tagitem.id, catMapping),
                               }}
                               key={idx}
                               className="mb-1 categoryTag text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border"

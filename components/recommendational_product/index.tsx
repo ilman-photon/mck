@@ -65,8 +65,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
     const renderContent = () => (
       <>
         <div
-          className={`bg-color p-4 lg:p-[36px] ${
-            isSingleItem ? "col-span-2" : "odd:ml-0"
+          className={`bg-color mb-4 lg:mb-0 p-4 lg:p-[36px] ${
+            isSingleItem ? "mb-4 lg:mb-0 col-span-2" : "odd:ml-0"
           }`}
           key={ele?.data?.contentLink?.id}
         >
