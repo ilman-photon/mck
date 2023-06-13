@@ -27,7 +27,7 @@ const SocialMediaIconComponent = () => {
                     <LinkComponent
                         className="text-sofia-reg text-lg text-mcknormalgrey"
                         rel="stylesheet"
-                        href={item?.socialMediaUrl.value}
+                        href={DOMPurify.sanitize(item?.socialMediaUrl.value)}
                         id={`link-${index}${item?.contentLink?.id}`}
                         aria-label={item?.socialMediaUrl?.value}
                     >
