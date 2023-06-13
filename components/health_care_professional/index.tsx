@@ -165,6 +165,13 @@ function HealthCareProfessionalComponent({
     }
   };
   !carouselRelated && isCarusolAvaibleProps(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {loading ? (
@@ -224,12 +231,11 @@ function HealthCareProfessionalComponent({
                         slidesPerGroup={isMobile ? 1 : 3}
                         className="h-auto"
                         a11y={{
-                          prevSlideMessage:"",
+                          prevSlideMessage: "",
                           nextSlideMessage: "",
-                          firstSlideMessage:"",
-                          lastSlideMessage:"",
-                        }
-                        }
+                          firstSlideMessage: "",
+                          lastSlideMessage: "",
+                        }}
                         modules={[A11y]}
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
@@ -340,7 +346,7 @@ function HealthCareProfessionalComponent({
                               <label
                                 tabIndex={0}
                                 onKeyUp={(e) => {
-                                  handleTabClick(idx, tab?.title?.value)
+                                  handleTabClick(idx, tab?.title?.value);
                                 }}
                                 htmlFor={tab?.title?.value}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 

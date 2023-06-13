@@ -11,6 +11,7 @@ function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const categoryName = selectedCategory?.replace(/ /g, "-");
   const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`,
@@ -48,6 +49,14 @@ function ProductListPage() {
     }
   }, [JSON.stringify(response)]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <GoogleTagManager />
@@ -58,10 +67,26 @@ function ProductListPage() {
         }
       />
       {error && <p>{error.message}</p>}
-      {!loading && !error && response && (
-        <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+      {isLoading ? (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black opacity-75"></div>
+          <div
+            className="relative"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          >
+            {/* Add your spinner component here */}
+          </div>
+        </div>
+      ) : (
+        !loading &&
+        !error &&
+        response && (
+          <>
+            <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+            <ProductListComponent />
+          </>
+        )
       )}
-      <ProductListComponent />
       <FooterComponent />
     </>
   );
