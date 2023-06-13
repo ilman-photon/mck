@@ -340,7 +340,7 @@ function AllProductCategoryPage({
         // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
-        router.push(updatedURL);
+        router.push(updatedURL, undefined, { scroll: false });
       }
     }
     if (queryParams) fetchProductList(queryParams);
