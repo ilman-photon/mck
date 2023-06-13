@@ -4,9 +4,22 @@
       width: 30.375rem;
       min-height: 189px;
       padding: 16px 16px 16px !important;
+      position: relative;
+      overflow: unset;
       &-d {
         overflow: hidden !important;
         max-height: unset !important;
+      }
+      &::before{
+        content: '';
+        position: absolute;
+        background-image: url("/images/triangle.png");  
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 29px;
+        bottom: -27px;
+        left: 50%;
+        margin-left: -20px;
       }
     }
     .gm-style-iw {
