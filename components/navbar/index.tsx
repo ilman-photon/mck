@@ -69,16 +69,18 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
         >
           {isMobileMenuActive && (
             <div
-              className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
+              className="group lg:ml-9 lg:mr-7 xl:ml-9 xl:mr-7 whitespace-nowrap mainmenu-items"
               key={getRandomNumber()}
             >
               <div className="relative megamenu-row">
+              <div className="pr-2.5">
                 <Link
                   className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                   href="/"
                 >
                   Home
                 </Link>
+                </div>
                 <span
                   className={`lg:hidden xl:hidden`}
                   aria-hidden={true}
@@ -89,16 +91,18 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
           {menuData?.map((item: any, idx: number) => {
             return (
               <div
-                className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
+                className="group lg:ml-9 lg:mr-7 xl:ml-9 xl:mr-7 whitespace-nowrap mainmenu-items"
                 key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
+                <div className="pr-2.5">
                   <Link
                     className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                     href={item?.menuItemUrl?.value ?? ""}
                   >
                     {item?.menuItemName?.value}
                   </Link>
+                  </div>
                   <span
                     onClick={() => {
                       handleMenuOpen(idx, item?.menuItemName?.value, item);
@@ -106,7 +110,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     className={`${
                       item?.subMenuContentBlockArea?.value == null
                         ? "lg:hidden xl:hidden"
-                        : "icon-arrow hidden lg:block xl:block lg:-right-5 lg:top-2.5"
+                        : "icon-arrow hidden lg:block xl:block lg:-right-5 lg:-right-[10px] lg:top-2.5"
                     } 
                     ${
                       menuData_ && menuData_[idx] && menuData_[idx].flag
