@@ -164,6 +164,17 @@ function HealthCareProfessionalComponent({
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   };
+  console.log("response", response);
+  response &&
+    response?.contentArea?.expandedValue.map((item: any) => {
+      if (
+        item.contentType.includes("CarouselBlock") ||
+        item.contentType.includes("Carousel") ||
+        item.contentType.includes("carousel")
+      ) {
+        isCarusolAvaibleProps(true);
+      }
+    });
   !carouselRelated && isCarusolAvaibleProps(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -325,10 +336,16 @@ function HealthCareProfessionalComponent({
                       {tabRelated &&
                         tabRelated.length > 0 &&
                         tabRelated?.map((tab: any, idx: number) => {
-                          const tabColorCode = DOMPurify.sanitize(tab?.tabColorCode?.value)
-                          const sanitizedTabDescription =  DOMPurify.sanitize(tab?.description?.value)
-                          const sanitizedAltText = DOMPurify.sanitize("check")
-                          const sanitizedHtmlFor = DOMPurify.sanitize(tab?.title?.value)
+                          const tabColorCode = DOMPurify.sanitize(
+                            tab?.tabColorCode?.value
+                          );
+                          const sanitizedTabDescription = DOMPurify.sanitize(
+                            tab?.description?.value
+                          );
+                          const sanitizedAltText = DOMPurify.sanitize("check");
+                          const sanitizedHtmlFor = DOMPurify.sanitize(
+                            tab?.title?.value
+                          );
                           return (
                             <React.Fragment key={idx}>
                               <input
@@ -342,23 +359,23 @@ function HealthCareProfessionalComponent({
                                       tab?.title?.value === tabSelected
                                     : tab?.title?.value === tabSelected
                                 }
-                                onClick={() =>{
-                                  if(tab?.title?.value){
-                                    handleTabClick(idx, tab?.title?.value)
+                                onClick={() => {
+                                  if (tab?.title?.value) {
+                                    handleTabClick(idx, tab?.title?.value);
                                   }
                                 }}
                               />
                               <label
                                 tabIndex={0}
                                 onKeyUp={() => {
-                                  if(tab?.title?.value){
-                                    handleTabClick(idx, tab?.title?.value)
+                                  if (tab?.title?.value) {
+                                    handleTabClick(idx, tab?.title?.value);
                                   }
                                 }}
                                 htmlFor={sanitizedHtmlFor}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                                style={{background:tabColorCode}}
+                                style={{ background: tabColorCode }}
                               >
                                 {tab?.tabImage?.expandedValue?.url ? (
                                   <ImageComponent

@@ -105,9 +105,19 @@ function WhyFTComponent(
     return rearrangedData;
   };
 
-  whyFTData?.contentArea?.expandedValue?.map(
-    (item: any) => item?.name == "Carousel" && isCarusolAvaibleProps(true)
-  );
+  // whyFTData?.contentArea?.expandedValue?.map(
+  //   (item: any) =>
+  //     item?.name.toLowerCase() == "Carousel" && isCarusolAvaibleProps(true)
+  // );
+  whyFTData?.contentArea?.expandedValue?.map((item: any) => {
+    if (
+      item.contentType.includes("CarouselBlock") ||
+      item.contentType.includes("Carousel") ||
+      item.contentType.includes("carousel")
+    ) {
+      isCarusolAvaibleProps(true);
+    }
+  });
   return (
     <>
       <div
