@@ -48,7 +48,7 @@ export default function Home() {
          <meta name="viewport" content="width=device-width, initial-scale=1" />
          <link rel="icon" href="/favicon_mck.ico" />
       </Head>
-
+      <div className="wrapper">
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
@@ -111,7 +111,7 @@ export default function Home() {
                   </div>
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
                   <div className="">
-                    <div className="container mx-auto">
+                          <div className="mx-auto lg:px-72 px-15">
                       <RecommendationalProductComponent
                         indexs={`hp_0${index}`}
                         sectionData={filteredData("RecommendedProductBlock")}
@@ -127,7 +127,7 @@ export default function Home() {
       )}
         </>
       </HeaderComponent>
-
+      </div>
       
     </>
   );

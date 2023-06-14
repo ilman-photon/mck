@@ -7,10 +7,12 @@ function LongLoad() {
   return (
     <>
       <div className="grid">
-        <GoogleTagManager/>
-        <HeaderComponent />
-        <LongLoadComponent/>
-        <FooterComponent />
+        <GoogleTagManager />
+        <div className="wrapper">
+          <HeaderComponent />
+          <LongLoadComponent />
+          <FooterComponent />
+        </div>
       </div>
     </>
   );

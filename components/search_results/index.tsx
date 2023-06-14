@@ -38,7 +38,7 @@ function ResultComponent() {
     } 
     const StringParam = router.query.search?.toString().toLowerCase();
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(productSubCategory/value/name), '${StringParam}') or contains(tolower(productCategory/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
     promise
       .then((res:any) => {
         setProductCount(res?.data?.totalMatching);
@@ -50,7 +50,7 @@ function ResultComponent() {
           {data: {results: res.data.results}},
         ])
       })
-      .catch((e: Error) => console.log(e));
+      .catch((e: Error) =>  setSearchLoading(false));
   }
 
   useEffect(() => {

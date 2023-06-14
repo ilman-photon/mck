@@ -30,7 +30,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px] cursor-pointer"
                         />
                     </figure>
-                    <figcaption>
+                    <div>
                         <div className="content p-6">
                             <TagsComponent BlogTag={item.productType} />
                             <p
@@ -45,7 +45,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
 
                             <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id={`blog-titel-0`+index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.subTitle?.value) }}></p>
                         </div>
-                    </figcaption>
+                    </div>
                 </div>))}
         </div>
     )

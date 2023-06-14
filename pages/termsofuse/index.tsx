@@ -7,12 +7,14 @@ import GoogleTagManager from "@/components/google_tag_manager";
 function Terms() {
     return (
         <>
-        <GoogleTagManager/>
-        <HeaderComponent />
-        <TermsComponent />
-        <FooterComponent />
-    </>
+            <GoogleTagManager />
+            <div className="wrapper">
+                <HeaderComponent />
+                <TermsComponent />
+                <FooterComponent />
+            </div>
+        </>
     )
-    
+
 }
 export default Terms;

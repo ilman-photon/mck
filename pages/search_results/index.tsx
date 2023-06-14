@@ -7,12 +7,14 @@ import GoogleTagManager from "@/components/google_tag_manager";
 function SearchResultComponent() {
     return (
         <>
-        <GoogleTagManager/>
-        <HeaderComponent />
-        <ResultComponent />
-        <FooterComponent />
-    </>
+            <GoogleTagManager />
+            <div className="wrapper">
+                <HeaderComponent />
+                <ResultComponent />
+                <FooterComponent />
+            </div>
+        </>
     )
-    
+
 }
 export default SearchResultComponent;

@@ -50,11 +50,11 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
-    const regex = /^[a-zA-Z0-9' -]+$/;
+    const regex = /[#''&]/;
     if (value.length === 0) {
       setActiveClose(true);
       setsearch("");
-    } else if (regex.test(value)) {
+    } else if (!regex.test(value) || event.keyCode === 55) {
       setsearch(value);
     }
   };
@@ -74,7 +74,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         <svg
           onClick={fetchSearchBlog}
           tabIndex={0}
-          className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
+          aria-label="search icon"
+          className="focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
           width="18"
           height="19"
           viewBox="0 0 18 19"
@@ -93,7 +94,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
           onClick={() => {
             handleClose("List"), setsearch("");
           }}
-          className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
+          className="focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
+          aria-label="close icon"
           width="18"
           height="19"
           viewBox="0 0 18 19"

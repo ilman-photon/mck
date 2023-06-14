@@ -53,7 +53,7 @@ function AllProductCategoryPage({
     setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
-      queryParameter = `(productType/value/name eq 'Acute Care')`;
+      // queryParameter = `(productType/value/name eq 'Acute Care')`;
     } else {
       queryParameter = filter;
     }
@@ -306,17 +306,20 @@ function AllProductCategoryPage({
               }
             }
             queryParams += "(";
-            category.items.map((item: any, index: any) => {
-              const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            console.log(category,"cat",)
+            const itemName = category.categoryName.replace(/[^a-zA-Z ]/g, "");
+            // category.items.map((item: any, index: any) => {
               const encodeItemName = encodeURI(itemName);
               const concatStr =
-                category.items.length === index + 1 ? "" : " or ";
+                // category.items.length === index + 1 ? "" :
+                 " or ";
               queryParams += `${
                 category?.isBusinessVerticalCategory
                   ? category?.productType
                   : (category?.productType).toLowerCase()
-              }/value/name eq '${encodeItemName}' ${concatStr}`;
-            });
+              }/value/name eq '${encodeItemName}'`
+              //  ${concatStr}`;
+            // });
             queryParams += `)`;
             lastCatId = catId;
           }
@@ -443,9 +446,10 @@ function AllProductCategoryPage({
   return (
     <>
       <Head>
-        <title>Your Page Title</title>
+        <title>McKesson</title>
       </Head>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
       {!carouselData && isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -493,6 +497,7 @@ function AllProductCategoryPage({
         />
       </div>
       <FooterComponent />
+      </div>
     </>
   );
 }

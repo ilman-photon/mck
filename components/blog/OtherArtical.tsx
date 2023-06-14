@@ -35,7 +35,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                 </figure>
                             </LinkComponent>
 
-                            <figcaption>
+                            <div>
                                 <div className='content lg:p-6 p-4 lg:pt-4'>
                                     <LinkComponent
                                         href={{
@@ -62,7 +62,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                         ))}
                                     </div>
                                 </div>
-                            </figcaption>
+                            </div>
                         </article>
                     </div>
 

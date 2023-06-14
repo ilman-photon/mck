@@ -10,9 +10,11 @@ function FTComponent() {
   return (
     <>
       <GoogleTagManager />
-      <HeaderComponent isCarusolAvaible={isCarusonAvible} />
-      <WhyFTComponent isCarusolAvaibleProps={setisCarusonAvible} />
-      <FooterComponent />
+      <div className="wrapper">
+        <HeaderComponent isCarusolAvaible={isCarusonAvible} />
+        <WhyFTComponent isCarusolAvaibleProps={setisCarusonAvible} />
+        <FooterComponent />
+      </div>
     </>
   );
 }
