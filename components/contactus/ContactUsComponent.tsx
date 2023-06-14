@@ -65,7 +65,8 @@ function ContactUsComponent() {
                             </div>
                             <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                                 <span className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex" id="cu_label_010">
-                                <a className="flex" href = "mailto: #"> 
+                                <a className="flex" href = "mailto: #">
+                                {contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue ? 
                                 <div className="w-18 mr-4" aria-hidden={true}>
                                     {<ImageComponent 
                                     src={DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url)} 
@@ -73,6 +74,7 @@ function ContactUsComponent() {
                                     id="cu_img_011"
                                     className="w-fit mx-auto my-0" />}
                                 </div>
+                                :null} 
                                     {DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailTitle?.value)}</a></span>
                             </div>
                             <div className="flex flex-col lg:flex-row">
