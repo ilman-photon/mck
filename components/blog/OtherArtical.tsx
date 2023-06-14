@@ -54,6 +54,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     <div className='flex flex-wrap h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
                                         {item.tag.value.map((tagitem: any, idx: any) => (
                                             <div key={idx}
+                                            tabIndex={0}
                                                 style={{
                                                     backgroundColor: handlecategoryColorCode(tagitem.id, catMapping),
                                                 }}
