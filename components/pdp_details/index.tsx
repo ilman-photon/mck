@@ -45,7 +45,7 @@ function PdpDetail(pdpViewData: any) {
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.subTitle?.value), }}></h2>
             <div className="text-gtl-med text-mcknormalgrey text-2xl lg:text-4xl font-medium mb-6 mx-4 lg:mx-0 inline-flex" id="pdp_details_003">
                 <p className="pr-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.volume?.value),  }}></p>
-                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.uom?.value),  }}></p> 
+                {/* <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.uom?.value),  }}></p>  */}
                 </div>
             
             <div  className="border-y-2 py-6 mb-6">
