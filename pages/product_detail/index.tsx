@@ -68,7 +68,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Your Page Title</title>
+        <title>McKesson</title>
       </Head>
       <GoogleTagManager />
       <HeaderComponent />

@@ -443,7 +443,7 @@ function AllProductCategoryPage({
   return (
     <>
       <Head>
-        <title>Your Page Title</title>
+        <title>McKesson</title>
       </Head>
       <GoogleTagManager />
       <HeaderComponent isCarusolAvaible={carouselData ? true : false} />

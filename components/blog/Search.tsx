@@ -74,7 +74,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         <svg
           onClick={fetchSearchBlog}
           tabIndex={0}
-          className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
+          aria-label="search icon"
+          className="focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
           width="18"
           height="19"
           viewBox="0 0 18 19"
@@ -93,7 +94,8 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
           onClick={() => {
             handleClose("List"), setsearch("");
           }}
-          className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
+          className="focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
+          aria-label="close icon"
           width="18"
           height="19"
           viewBox="0 0 18 19"
