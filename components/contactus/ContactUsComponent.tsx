@@ -145,6 +145,8 @@ function ContactUsComponent() {
                     id="cu_label_010"
                   >
                     <a className="flex" href="mailto: #">
+                      {contactUsData?.data[0]?.contentArea
+                                ?.expandedValue[0]?.emailImage?.expandedValue ? 
                       <div className="w-18 mr-4" aria-hidden={true}>
                         {
                           <ImageComponent
@@ -164,6 +166,7 @@ function ContactUsComponent() {
                           />
                         }
                       </div>
+                      : null}
                       {DOMPurify.sanitize(
                         contactUsData?.data[0]?.contentArea?.expandedValue[0]
                           ?.emailTitle?.value
