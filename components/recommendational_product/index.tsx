@@ -81,9 +81,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
               {ele?.data?.imageTitle?.value?.url && (
                 <img
                   className={`h-auto lg:max-w-fit lg:w-338 w-270`}
-                  src={ele?.data?.imageTitle?.value?.url}
-                  alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-                  id={`home-product-image${indexs}${index + 1}`}
+                  src={DOMPurify.sanitize(ele?.data?.imageTitle?.value?.url)}
+                  alt={DOMPurify.sanitize(ele?.data?.imageTitle?.expandedValue?.altText?.value)}
+                  id={DOMPurify.sanitize(`home-product-image${indexs}${index + 1}`)}
                 />
               )}
             </div>
@@ -96,9 +96,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   {ele?.data?.imageTitle?.value?.url && (
                     <img
                       className={`mx-auto lg:my-auto`}
-                      src={ele?.data?.image?.value?.url}
-                      id={`home-product-image01${indexs}${index + 1}`}
-                      alt={ele?.data?.image?.expandedValue?.altText?.value}
+                      src={DOMPurify.sanitize(ele?.data?.image?.value?.url)}
+                      id={DOMPurify.sanitize(`home-product-image01${indexs}${index + 1}`)}
+                      alt={DOMPurify.sanitize(ele?.data?.image?.expandedValue?.altText?.value)}
                       aria-hidden={true}
                     />
                   )}
@@ -128,7 +128,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   color:backgroundColorData?.toLowerCase() === blueColorBackground ? whiteColor : backgroundColorData?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
                 }}
               >
-                {ele?.data?.buttonText?.value}
+                {DOMPurify.sanitize(ele?.data?.buttonText?.value)}
               </button>
             )}
           </div>
@@ -168,9 +168,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
           className={`h-auto lg:max-w-fit mx-auto lg:w-338 w-270 ${
             index === 0 && "lg:absolute"
           }`}
-          src={ele?.data?.imageTitle?.value?.url}
-          alt={ele?.data?.imageTitle?.expandedValue?.altText?.value}
-          id={`home-product-image${indexs}${index + 1}`}
+          src={DOMPurify.sanitize(ele?.data?.imageTitle?.value?.url)}
+          alt={DOMPurify.sanitize(ele?.data?.imageTitle?.expandedValue?.altText?.value)}
+          id={DOMPurify.sanitize(`home-product-image${indexs}${index + 1}`)}
           aria-hidden={true}
         />
       );
@@ -240,9 +240,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                     <img
                       aria-hidden={true}
                       className={`mx-auto lg:my-auto max-h-160`}
-                      src={ele?.data?.image?.value?.url}
-                      id={`home-product-image01${indexs}${index + 1}`}
-                      alt={ele?.data?.image?.expandedValue?.altText?.value}
+                      src={DOMPurify.sanitize(ele?.data?.image?.value?.url)}
+                      id={DOMPurify.sanitize(`home-product-image01${indexs}${index + 1}`)}
+                      alt={DOMPurify.sanitize(ele?.data?.image?.expandedValue?.altText?.value)}
                     />
                   )}
                 </div>
@@ -284,8 +284,8 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                         aria-hidden={true}
                         className="mx-auto lg:my-auto max-h-160"
                         src={ele?.data?.image?.value?.url}
-                        id={`home-product-image01${indexs}${index + 1}`}
-                        alt={ele?.data?.image?.expandedValue?.altText?.value}
+                        id={DOMPurify.sanitize(`home-product-image01${indexs}${index + 1}`)}
+                        alt={DOMPurify.sanitize(ele?.data?.image?.expandedValue?.altText?.value)}
                       />
                     )}
                   </div>

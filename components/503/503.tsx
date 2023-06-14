@@ -15,18 +15,24 @@ function ServiceUnavailableCoumponent() {
             .then((res:any) => {
                 SetServiceErrorData(res);               
             })
-            .catch((e: Error) => console.log(e));
+            .catch((e: Error) => {
+                return
+            });
     }, []);
+
+    const sanitizedTitle = DOMPurify.sanitize(serviceErrorData?.data[0]?.title?.value)
+    const sanitizedDescription = DOMPurify.sanitize(serviceErrorData?.data[0]?.description?.value);
+    const sanitizedAltText = DOMPurify.sanitize("");
 
     return (
         <>
             <div className="container flex lg:flex-row mx-auto lg:pl-18 pt-6 pl-4 pr-4 lg:pt-0 lg:pr-0">
                 <div className="lg:w-9/12 w-full lg:pt-72">
-                <h2 className="lg:heading pb-3 text-54 text-gtl-med font-medium text-mckblue" id="err-503-label-001">{serviceErrorData?.data[0]?.title?.value}</h2>
-                <div className="lg:text error-msg pb-6 font-medium text-mckblue text-gtl-med" id="err-503-label-002" dangerouslySetInnerHTML={{ __html:DOMPurify.sanitize(serviceErrorData?.data[0]?.description?.value)}}></div>
+                <h2 className="lg:heading pb-3 text-54 text-gtl-med font-medium text-mckblue" id="err-503-label-001">{sanitizedTitle}</h2>
+                <div className="lg:text error-msg pb-6 font-medium text-mckblue text-gtl-med" id="err-503-label-002" dangerouslySetInnerHTML={{ __html:sanitizedDescription}}></div>
                 </div>
                 <div className="lg:h-502 relative overflow-hidden bg-logo-right-503">
-                <img alt={DOMPurify.sanitize("")} id="err-503-img-005" src="https://mcco02mstrub73kprep.dxcloud.episerver.net/globalassets/oops.svg" />
+                <img alt={sanitizedAltText} id="err-503-img-005" src={"https://mcco02mstrub73kprep.dxcloud.episerver.net/globalassets/oops.svg"}  />
                     {/* <img src={serviceErrorData?.data[0]?.backgroundImage?.expandedValue?.url} alt="" id="err-503-img-005"/> */}
                     </div>
             </div>  
