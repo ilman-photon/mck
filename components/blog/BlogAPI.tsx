@@ -1,10 +1,9 @@
 import { GETBLOGSETTING } from "@/hooks/ApiContent";
 import axiosInstance from "@/utils/axiosInstance";
 
-export const fetchBlogDetails = (blogID: any) => {
-    const StringParam = blogID.toString().toLowerCase();
+export const fetchBlogList = () => {
     return axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${StringParam}/&expand=*`);
+        `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage')&orderby=changed desc&top=10&skip=0`);
 }
 
 export const fetchBlogSetting = () => {
@@ -33,11 +32,7 @@ export const fetchBlogSearch = (search: string) => {
     );
 }
 
-export const fetchApplicationSetting = () => {
-    return axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`);
-}
-export const fetchBlogetails = (id: string) => {
+export const fetchBlogDetails = (id: string) => {
     return axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/blog/${id}/&expand=*`);
 }
