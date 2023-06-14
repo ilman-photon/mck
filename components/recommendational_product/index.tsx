@@ -99,6 +99,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                       src={ele?.data?.image?.value?.url}
                       id={`home-product-image01${indexs}${index + 1}`}
                       alt={ele?.data?.image?.expandedValue?.altText?.value}
+                      aria-hidden={true}
                     />
                   )}
                 </div>

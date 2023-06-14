@@ -91,6 +91,7 @@ const HealthNeedCategory = ({
                   alt={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   className="mb-3 mx-auto w-auto hover:opacity-60"
                   aria-hidden="true"
+                  role="link"
                 />
                 {DOMPurify.sanitize(healthneedsdata?.title?.value)}
               </li>
