@@ -259,7 +259,7 @@ const HealthNeedFilter = ({
         >
           {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
-            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+            id={DOMPurify.sanitize(`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`)}
             src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
             className='mr-2 ml-2'
             alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
@@ -283,7 +283,7 @@ const HealthNeedFilter = ({
                   <Image
                     src='/images/hn-delete-icon.svg'
                     className='cursor-pointer mt-0.5 self-center'
-                    alt='delete icon'
+                    alt={DOMPurify.sanitize('delete icon')}
                     onClick={() => handleDelete(activeFilter, item)}
                     width={7}
                     height={7}
@@ -299,7 +299,7 @@ const HealthNeedFilter = ({
               <Image
                 src='/images/hn-delete-icon.svg'
                 className='w-3 cursor-pointer lg:mr-2 mr-1'
-                alt='delete icon'
+                alt={DOMPurify.sanitize('delete icon')}
                 width={12}
                 height={12}
                 id={`hn-001_0${'02'}`}
