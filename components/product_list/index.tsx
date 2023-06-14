@@ -218,7 +218,7 @@ function ProductListComponent() {
   }
   useEffect(() => {
     fetchRecommandedProductData()
-  }, [router,productName]) 
+  }, [router,productItemName]) 
 
 
   const createTempFilterArr = (results: any) => {
