@@ -150,39 +150,39 @@ function BlogNoMatchesFoundComponent() {
                     <figure className='w-full text-center'>
                         <Image src={allergyrelief} className="px-5 lg:px-0 m-auto" alt='Allergy Relief Product' id='srnf-img-014'/>
                     </figure>
-                    <figcaption>
+                    <div>
                         <div className="content p-6">
                             <div className="bg-acuteblue text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='srnf-label-014-01'>Acute Care</div>
                             <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='srnf-link-014'>Allergy Relief</a>
                             <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='srnf-label-014-02'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                         </div>
-                    </figcaption>
+                    </div>
                 </div>
                 
                 <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4" id='srnf-label-015'>
                     <figure className='w-full text-center'>
                         <Image src={bloodpressure} className="px-5 lg:px-0 m-auto" alt='Blood Pressure Monitor Product'  id='srnf-img-015'/>
                     </figure>
-                    <figcaption>
+                    <div>
                         <div className="content p-6">
                             <div className="bg-diagnosticgreen text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='srnf-label-015-01'>Diagnostic Care</div>
                             <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='srnf-link-015'>Blood Pressure Monitor</a>
                             <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='srnf-label-015-02'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                         </div>
-                    </figcaption>
+                    </div>
                 </div>
                 
                 <div className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4" id='srnf-label-016'>
                     <figure className='w-full text-center'>
                         <Image src={vitaminD} className="px-5 lg:px-0 m-auto" alt='Vitamin D3 Product'  id='srnf-img-016'/>
                     </figure>
-                    <figcaption>
+                    <div>
                         <div className="content p-6">
                             <div className="bg-preventiveyellow text-mckblue text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 mb-3" id='srnf-label-016-01'>Preventive Care</div>
                             <a href="" className="articleTitle text-xl text-sofia-reg font-extrabold text-mckblue mt-3 no-underline" aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report" id='srnf-link-016'>Vitamin D3</a>
                             <p className="text-sofia-reg font-noraml text-mcknormalgrey text-base" id='srnf-label-016-02'>Antihistamine Loratadine oral solution USP, 5 mg/5 ml</p>
                         </div>
-                    </figcaption>
+                    </div>
                 </div>
             </div>
         </div>

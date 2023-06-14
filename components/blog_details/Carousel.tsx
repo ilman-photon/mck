@@ -99,7 +99,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         />
                       </div>
                     </figure>
-                    <figcaption>
+                    <div>
                       <div className="content lg:p-6 p-4 lg:pt-4">
                         <div
                           onClick={() =>
@@ -143,7 +143,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           ))}
                         </div>
                       </div>
-                    </figcaption>
+                    </div>
                   </article>
                 </div>
               </SwiperSlide>
