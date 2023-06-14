@@ -55,20 +55,7 @@ const ProductComponent = ({
     <>
       {selectedProduct?.map((product: any, index: number) => (
         <div key={index}>
-          {selectedRecommendedProduct?.map((item: any, idx: number) => {
-            let correctItemValue = item
-              ?.toLowerCase()
-              .replace(/[^\w\s]/gi, "")
-              .replace(/\s+/g, "");
-            let correctProductValue = product?.item?.name
-              ?.toLowerCase()
-              .replace(/[^\w\s]/gi, "")
-              .replace(/\s+/g, "");
-            if (correctItemValue === correctProductValue) {
-              return handleProduct(item, index);
-            }
-            return null;
-          })}
+          
           <section className="relative">
             
 
@@ -103,6 +90,20 @@ const ProductComponent = ({
                 : null
                 }
             </h2>
+            {selectedRecommendedProduct?.map((item: any, idx: number) => {
+            let correctItemValue = item
+              ?.toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "");
+            let correctProductValue = product?.item?.name
+              ?.toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "");
+            if (correctItemValue === correctProductValue) {
+              return handleProduct(item, index);
+            }
+            return null;
+          })}
                     <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21 lg:mb-12">
                       <Swiper
                         spaceBetween={4}
