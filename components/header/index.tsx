@@ -166,7 +166,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, []); 
 
   return (
     <>
