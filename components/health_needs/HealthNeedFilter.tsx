@@ -406,8 +406,8 @@ const HealthNeedFilter = ({
                                 {leftfiltermaindata?.categoryImage?.expandedValue ? 
                                 <ImageComponent
                                   src={DOMPurify.sanitize(leftfiltermaindata?.categoryImage?.expandedValue?.url)}
-                                  alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0].name)}
-                                  id={leftfiltermaindata?.mainCategory?.value[0].name + index}
+                                  alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0]?.name)}
+                                  id={leftfiltermaindata?.mainCategory?.value[0]?.name + index}
                                   height={24}
                                   width={24} className="mr-2" />
                                   : null} 
@@ -445,7 +445,7 @@ const HealthNeedFilter = ({
                                       handleViewAllChange(
                                         e,
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0].id
+                                          ?.value[0]?.id
                                       )
                                     }
                                       id={
@@ -500,7 +500,7 @@ const HealthNeedFilter = ({
                                             e,
                                             leftfiltersubdata?.name,
                                             leftfiltermaindata?.mainCategory
-                                              ?.value[0].id,
+                                              ?.value[0]?.id,
                                             leftfiltersubdata?.id
                                           )
                                         }
