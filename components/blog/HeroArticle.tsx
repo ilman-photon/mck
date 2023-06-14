@@ -29,7 +29,7 @@ const HeroArticle = ({ data }: any) => {
                     />
                 </figure>
             </LinkComponent>
-            <figcaption>
+            <div>
                 <div className='content lg:p-6 p-4 lg:pt-4'>
                     <LinkComponent
                         id={'blog-hero-title-article-01'}
@@ -63,7 +63,7 @@ const HeroArticle = ({ data }: any) => {
                         ))}
                     </div>
                 </div>
-            </figcaption>
+            </div>
         </article>
     )
 }
