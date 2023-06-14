@@ -42,12 +42,12 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         });
     }
   };
-  const handleFetchSerach = () => {
-    router.push({
-      pathname: "/blog-search-result",
-      query: { id: search },
-    });
-  };
+  // const fetchSearchBlog = () => {
+  //   router.push({
+  //     pathname: "/blog-search-result",
+  //     query: { id: search },
+  //   });
+  // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
     const regex = /^[a-zA-Z0-9' -]+$/;

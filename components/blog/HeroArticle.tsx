@@ -1,10 +1,11 @@
 import React, { memo } from "react";
-import { GetTime, handleTagBackgroudColor } from "../global/CommonUtil";
-import Link from "next/link";
+import { GetTime, handlecategoryColorCode } from "../global/CommonUtil";
 import { LinkComponent } from "../global/LinkComponent";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 const HeroArticle = ({ data }: any) => {
+    const catMapping = useHeaderStore((state) => state.categoryMapping);
 
     return (
 
@@ -48,7 +49,7 @@ const HeroArticle = ({ data }: any) => {
                         {data?.tag?.value.map((item: any, index: any) => (
                             <div key={index}
                                 style={{
-                                    backgroundColor: handleTagBackgroudColor(index, data?.tagBackgroundColorCode?.value),
+                                    backgroundColor: handlecategoryColorCode(item.id,catMapping),
                                 }}
                                 className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit  mb-2' id='blog-label-006'>
                                 {item.description}
