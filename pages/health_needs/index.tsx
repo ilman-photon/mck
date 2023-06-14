@@ -46,7 +46,7 @@ function HealthNeedsPage() {
       response.data[0].title &&
       response.data[0].title.value
     ) {
-      document.title = DOMPurify.sanitize(response.data[0].title.value)
+      document.title = DOMPurify.sanitize(response.data[0].title.value);
     } else {
       document.title = "Health Needs";
     }
@@ -60,6 +60,22 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  console.log("response", response);
+  // response &&
+  //   response.data.forEach((item: any) => {
+  //     item.contentArea.expandedValue.forEach((expandedItem: any) => {
+  //       if (
+  //         expandedItem.contentType.includes("CarouselBlock") ||
+  //         expandedItem.contentType.includes("Carousel") ||
+  //         expandedItem.contentType.includes("carousel")
+  //       ) {
+  //         tempCarusolAvaible = true;
+  //       }
+  //     });
+  //   });
+
+  // setisCarusonAvible(tempCarusolAvaible);
   return (
     <>
       <GoogleTagManager />

@@ -12,7 +12,7 @@ function Terms() {
     <>
       <GoogleTagManager />
       <div className="wrapper">
-        <HeaderComponent isCarusolAvaible={!isCarusonAvible} />
+        <HeaderComponent isCarusolAvaible={isCarusonAvible} />
         <HealthCareProfessionalComponent
           isCarusolAvaible={!isCarusonAvible}
           isCarusolAvaibleProps={setisCarusonAvible}
