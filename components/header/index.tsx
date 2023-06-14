@@ -166,7 +166,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, []); 
 
   return (
     <>
@@ -207,7 +207,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             <img
               id="logo-image"
               src={DOMPurify.sanitize(logoSrc || firstLogo)}
-              alt={headerData?.secondLogoImage?.expandedValue?.altText?.value}
+              alt="Foster Thrive Logo image Link"
               className="logo-image lg:mt-7"
               style={isMobile ? undefined : imgWidth}
               tabIndex={0}

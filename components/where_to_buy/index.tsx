@@ -18,9 +18,13 @@ import { useWindowResize } from "@/hooks/useWindowResize";
 
 function WhereComponent() {
   const [responseValue, setResponseValue] = useState<any>();
-  const [latitude, setLatitude] = useState(33.2411354);
+  // const [latitude, setLatitude] = useState(33.2411354);
+  const [latLong,setLatLong] = useState({
+    latitude:33.2411354,
+    longitude:-111.7256936
+  })
   const [isCustomSearch, setIsCustomSearch] = useState(false);
-  const [longitude, setLongitude] = useState(-111.7256936);
+  // const [longitude, setLongitude] = useState(-111.7256936);
   const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(-1);
   const [windowWidth] = useWindowResize();
@@ -78,13 +82,13 @@ function WhereComponent() {
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latitude}/${longitude}?apikey=${healthApiKey}`
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latLong.latitude}/${latLong.longitude}?apikey=${healthApiKey}`
     );
   }
 
   useEffect(() => {
     fetchLocationDetails();
-  }, [latitude]);
+  }, [latLong.latitude]);
   useEffect(() => {
     // textInput = 75201;
     if (!isCustomSearch) {
@@ -93,8 +97,12 @@ function WhereComponent() {
     // setTextInput('75201')
     fectchLatandLongDetails()
       .then((res) => {
-        setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
-        setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        // setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
+        // setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        setLatLong({
+          latitude:res?.data?.results[0]?.geometry.location["lat"],
+          longitude:res?.data?.results[0]?.geometry.location["lng"],
+        })
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }, [isCustomSearch]);
@@ -140,8 +148,12 @@ function WhereComponent() {
   const handleKey = () => {
     fectchLatandLongDetails()
       .then((res) => {
-        setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
-        setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        // setLatitude(res?.data?.results[0]?.geometry.location["lat"]);
+        // setLongitude(res?.data?.results[0]?.geometry.location["lng"]);
+        setLatLong({
+          latitude:res?.data?.results[0]?.geometry.location["lat"],
+          longitude:res?.data?.results[0]?.geometry.location["lng"],
+        })
         setIsCustomSearch(true);
       })
       .catch((e: Error | AxiosError) => console.log(e));
@@ -232,6 +244,7 @@ function WhereComponent() {
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
+                        tabIndex={0}
                       />
                     </div>
                     <div className="flex flex-row justify-between pb-2">
@@ -316,6 +329,7 @@ function WhereComponent() {
           </div>
 
           <div className="lg:w-full relative h-782 lg:h-854">
+            {isLoaded ? (
             <GoogleMap
               mapContainerClassName="map-container"
               mapContainerStyle={style}
@@ -368,6 +382,7 @@ function WhereComponent() {
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}
+                              tabIndex={0}
                             />
                           </div>
                           <div className="flex mb-1.5">
@@ -435,42 +450,46 @@ function WhereComponent() {
                 );
               })}
             </GoogleMap>
+            ) : null}
 
+           {isLoaded ? (
             <div className="flex gap-2 divider-x lg:flex-row left-1/2 absolute bottom-2 ml-145 lg:ml-auto lg:left-0 rounded-tl rounded-bl lg:rounded-tl-none lg:rounded-bl-none rounded-tr rounded-br bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
-              <div className="p-2">
-                <h2 className="text-sm text-gray-900 dark:text-white">
-                  Transit
-                </h2>
-                <h1 className="text-xs text-gray-600 dark:text-white">
-                  Click on stations for more information
-                </h1>
-              </div>
-              <div className="w-[1px] bg-gray-200" />
-              <div className="p-2">
-                <input
-                  className="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] 
-                  bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 
-                  before:rounded-full before:bg-transparent before:content-[''] 
-                  after:absolute after:z-[2] 
-                  after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none 
-                  after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] 
-                  after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] 
-                  checked:bg-blue-200 checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] 
-                  checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full 
-                  checked:after:border-none checked:after:bg-primary 
-                  checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] 
-                  checked:after:bg-blue-600
-                  checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] 
-                  hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12
-                  dark:checked:bg-primary dark:checked:after:bg-primary 
-                  dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] 
-                  dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
-                  type="checkbox"
-                  role="switch"
-                  checked={showTransit}
-                />
-              </div>
+            <div className="p-2">
+              <h2 className="text-sm text-gray-900 dark:text-white">
+                Transit
+              </h2>
+              <h1 className="text-xs text-gray-600 dark:text-white">
+                Click on stations for more information
+              </h1>
             </div>
+            <div className="w-[1px] bg-gray-200" />
+            <div className="p-2">
+              <input
+                className="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] 
+                bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 
+                before:rounded-full before:bg-transparent before:content-[''] 
+                after:absolute after:z-[2] 
+                after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none 
+                after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] 
+                after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] 
+                checked:bg-blue-200 checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] 
+                checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full 
+                checked:after:border-none checked:after:bg-primary 
+                checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] 
+                checked:after:bg-blue-600
+                checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] 
+                hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12
+                dark:checked:bg-primary dark:checked:after:bg-primary 
+                dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] 
+                dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
+                type="checkbox"
+                role="switch"
+                checked={showTransit}
+              />
+            </div>
+          </div>
+           ) : null} 
+           
             {/* <div className="flex lg:flex-row flex-col absolute top-2 left-2 right-2 rounded-lg p-4 bg-[#FFFDFB] shadow-[6px_10px_20px_rgba(0, 26, 113, 0.15)]">
               <label
                 htmlFor="fname"

@@ -4,12 +4,12 @@ import FaqComponent from "@/components/faq/FaqComponent";
 import HeaderComponent from "@/components/header";
 import GoogleTagManager from "@/components/google_tag_manager";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 import Image from "next/image";
 function Faq() {
   const [isLoading, setIsLoading] = useState(true);
-  const gifi:any = gifImage;
+  const gifi: any = gifImage;
   useEffect(() => {
     // Simulating a delay to show the loading state
     const timer = setTimeout(() => {
@@ -23,7 +23,7 @@ function Faq() {
     <>
       <GoogleTagManager />
       <HeaderComponent />
-      {isLoading ? (
+      {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
           <div
@@ -39,9 +39,8 @@ function Faq() {
             />
           </div>
         </div>
-      ) : (
-        <FaqComponent />
       )}
+      <FaqComponent />
       <FooterComponent />
     </>
   );

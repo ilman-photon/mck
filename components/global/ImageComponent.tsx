@@ -11,21 +11,22 @@ type ImageComponentProps = {
     height?: number | string;
     alt?: string;
     className?: any;
+    ariahidden:boolean;
 }
-export function ImageComponent({ src, height, width, alt, className, id }: ImageComponentProps) {
+export function ImageComponent({ src, height, width, alt, className, id, ariahidden }: ImageComponentProps) {
     const [didLoad, setLoad] = React.useState(false);
     const [srcImage, setsrcImage] = React.useState<any>();
     const noImageSrc = useNoImage()
     useEffect(() => {
         const img = new Image();
-        img.src = src;
+        img.src = DOMPurify.sanitize(src);
 
         const handleImageLoad = () => {
-            setsrcImage(src);
+            setsrcImage(DOMPurify.sanitize(src));
         };
 
         const handleImageError = (e: any) => {
-            setsrcImage(noImageSrc);
+            setsrcImage(DOMPurify.sanitize(noImageSrc));
         };
 
         img.addEventListener('load', handleImageLoad);
@@ -38,12 +39,16 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
     }, [src]);
 
     const style: CSSProperties = didLoad ? {} : { visibility: 'hidden', height: 0, width: 0 };
-    return <img
-        style={{ height, width, ...style, }}
-        className={className}
-        src={DOMPurify.sanitize(srcImage)}
-        onLoad={() => setLoad(true)}
-        alt={DOMPurify.sanitize(String(alt)) || "Image is not available"}
-        id={id}
-    />;
+    return(
+        <img
+            style={{ height, width, ...style, }}
+            className={className}
+            src={srcImage}
+            onLoad={() => setLoad(true)}
+            alt={DOMPurify.sanitize(String(alt)) || "Image is not available"}
+            id={DOMPurify.sanitize(id)}
+            aria-hidden={ariahidden}
+        />
+    )
+    
 }

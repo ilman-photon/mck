@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { ImageComponent } from "../global/ImageComponent";
-import { handlecategoryColorCode } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
 import TagsComponent from "../blog/Tags";
 
@@ -20,26 +19,31 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                     key={index}
                     className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4 lg:max-h-[377px] ">
                     <figure className='w-full  text-center'
-                     onClick={() => OnRelatedProductClick(item)}
+                        onClick={() => OnRelatedProductClick(item)}
                     >
                         <ImageComponent
                             src={DOMPurify.sanitize(item?.image?.expandedValue?.url)}
-                            id='blog-img-006'
-                            alt='Allergy Relief Product'
+                            id={`blog-img-relatedProduct-0${index}`}
+                            key={`blog-img-relatedProduct-0${index}`}
+                            alt={`Product-alt${index}`}
+                            ariahidden={false}
                             className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px] cursor-pointer"
                         />
                     </figure>
                     <figcaption>
                         <div className="content p-6">
-                        <TagsComponent BlogTag={item.productType} />
+                            <TagsComponent BlogTag={item.productType} />
                             <p
-                             onClick={() => OnRelatedProductClick(item)}
+                                onClick={() => OnRelatedProductClick(item)}
                                 className="articleTitle cursor-pointer text-xl text-heading-ellipsis sm:leading-9 text-sofia-reg font-extrabold text-mckblue mt-3 mb-1 no-underline"
-                                aria-labelledby="CoverMyMeds Leaders Analyze 4 Key Trends from Medication Access Report"
-                                id={`blog-label-010-` + index}>
-                                {DOMPurify.sanitize(item?.name)}
-                            </p>
-                            <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id='blog-label-010-03' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.subTitle?.value) }}></p>
+                                aria-labelledby={`ProductTitel` + index}
+                                id={`blog-label-0`+index}
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify?.sanitize(item?.title.value),
+                                }}
+                            />
+
+                            <p className="text-sofia-reg text-heading-ellipsis font-noraml text-mcknormalgrey text-base" id={`blog-titel-0`+index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.subTitle?.value) }}></p>
                         </div>
                     </figcaption>
                 </div>))}

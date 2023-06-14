@@ -12,6 +12,7 @@ function ActiveProductFilter({
       <img
         src={DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)}
         className="mr-2 ml-2" alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
+        aria-hidden={true}
       />
 
       <div className="flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto">
