@@ -1,5 +1,6 @@
 import LandingLayout from "@/components/Layout/LandingLayout";
 import PrivacyComponent from "@/components/privacy/PrivacyComponent";
+import GoogleTagManager from "@/components/google_tag_manager";
 
 function privacy() {
 
@@ -7,9 +8,9 @@ function privacy() {
         <>
             <GoogleTagManager />
             <div className="wrapper">
-        <LandingLayout>
-            <PrivacyComponent />
-        </LandingLayout>
+                <LandingLayout>
+                    <PrivacyComponent />
+                </LandingLayout>
             </div>
         </>
     )
