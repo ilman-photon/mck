@@ -7,6 +7,7 @@ import ProductListComponent from "@/components/product_list";
 import GoogleTagManager from "@/components/google_tag_manager";
 import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from "isomorphic-dompurify";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
@@ -26,8 +27,6 @@ function ProductListPage() {
     fetchData()
   }, [categoryName]) 
 
-
-  // filter data to share as props
   function filteredData(valueType: string) {
     return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
@@ -36,12 +35,10 @@ function ProductListPage() {
     });
   }
   useEffect(() => {
-    // Set the lang attribute to "en" on the <html> element
     document.documentElement.lang = "en";
   }, []);
 
   useEffect(() => {
-    // Set the title of the document dynamically
     if (
       response &&
       response.data &&
@@ -49,7 +46,7 @@ function ProductListPage() {
       response.data[0].title &&
       response.data[0].title.value
     ) {
-      document.title = response.data[0].title.value;
+      document.title = DOMPurify.sanitize(response.data[0].title.value);
     } else {
       document.title = "Selected Product Page";
     }
@@ -72,7 +69,6 @@ function ProductListPage() {
             "Carousel" && true
         }
       />
-      {/* {error && <p>{error.message}</p>} */}
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div>
@@ -80,7 +76,6 @@ function ProductListPage() {
             className="relative"
             style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
           >
-            {/* Add your spinner component here */}
           </div>
         </div>
       ) : (

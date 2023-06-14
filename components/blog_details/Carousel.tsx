@@ -151,14 +151,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           })}
         </Swiper>
       </div>
-      {relatedArticle?.length >= 2 && !isMobile && (
+      {relatedArticle?.length > 2|| isMobile  ? 
         <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
           {reviewCount}/
           {isMobile
             ? Math.ceil(relatedArticle?.length)
             : Math.ceil(relatedArticle?.length / 2)}
-        </div>
-      )}
+        </div>:<></>
+      }
     </div>
   );
 };
