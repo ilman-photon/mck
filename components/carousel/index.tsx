@@ -73,12 +73,11 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     config: { duration: 2100 },
   });
 
+  const blueColorBackground = "#001a71";
+  const greenColorBackground = "#2ccfad";
 
-  const blueColorBackground =  "#001a71"
-  const greenColorBackground = "#2ccfad"
-
-  const whiteColor = 'white'
-  const blackColor = 'black'
+  const whiteColor = "white";
+  const blackColor = "black";
 
   const firstResponse = response?.[0];
   const carouselContent =
@@ -112,7 +111,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     <img
                       src={DOMPurify.sanitize(item?.image?.value.url)}
                       className="block object-cover object-center w-full h-[225px] lg:h-[800px]"
-                      alt={DOMPurify.sanitize(item?.image?.expandedValue?.altText?.value)}
+                      alt={DOMPurify.sanitize(
+                        item?.image?.expandedValue?.altText?.value
+                      )}
                       id={item?.title?.value + "_" + current}
                       aria-hidden={true}
                     />
@@ -126,13 +127,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               : "",
                         }}
                       >
-                        {item?.title?.value  ? (
-                        <h2
-                          className="text-mcklightyellow lg:mb-3"
-                          id={item?.title?.value}
-                        >
-                          {item?.title?.value}
-                        </h2>
+                        {item?.title?.value ? (
+                          <h2
+                            className="text-mcklightyellow lg:mb-3"
+                            id={item?.title?.value}
+                          >
+                            {item?.title?.value}
+                          </h2>
                         ) : null}
                         {item?.description?.value ? (
                           <p
@@ -148,10 +149,30 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         {item?.buttonText?.value ? (
                           <button
                             id={item?.contentLink?.id}
-                            className={`${item?.ctaButtonColor?.value.length == 0 || item?.ctaButtonColor?.value?.toLowerCase() === "#001a71" ? "text-white ": "text-black"} jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
+                            className={`${
+                              item?.ctaButtonColor?.value.length == 0 ||
+                              item?.ctaButtonColor?.value?.toLowerCase() ===
+                                "#001a71"
+                                ? "text-white "
+                                : "text-black"
+                            } jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                             style={{
-                              backgroundColor: item?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? blueColorBackground : item?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
-                              color:item?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? whiteColor : item?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
+                              backgroundColor:
+                                item?.ctaButtonColor?.value?.toLowerCase() ===
+                                blueColorBackground
+                                  ? blueColorBackground
+                                  : item?.ctaButtonColor?.value?.toLowerCase() ===
+                                    greenColorBackground
+                                  ? greenColorBackground
+                                  : blueColorBackground,
+                              color:
+                                item?.ctaButtonColor?.value?.toLowerCase() ===
+                                blueColorBackground
+                                  ? whiteColor
+                                  : item?.ctaButtonColor?.value?.toLowerCase() ===
+                                    greenColorBackground
+                                  ? blackColor
+                                  : whiteColor,
                             }}
                             onClick={() => handleCTABtn(item?.buttonUrl?.value)}
                           >
@@ -214,8 +235,22 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                               id={firstResponse?.contentLink?.id}
                               className={`jsx-290076256 w-[124px] h-[44px] leading-5 lg:ml-0 mb-1 lg:mb-0 ml-0 text-sofia-bold flex justify-center items-center text-center text-white hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer lg:text-base xl:text-base text-sm`}
                               style={{
-                                  backgroundColor: firstResponse?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? blueColorBackground : firstResponse?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? greenColorBackground : blueColorBackground,
-                                  color:firstResponse?.ctaButtonColor?.value?.toLowerCase() === blueColorBackground ? whiteColor : firstResponse?.ctaButtonColor?.value?.toLowerCase() === greenColorBackground ? blackColor : whiteColor
+                                backgroundColor:
+                                  firstResponse?.ctaButtonColor?.value?.toLowerCase() ===
+                                  blueColorBackground
+                                    ? blueColorBackground
+                                    : firstResponse?.ctaButtonColor?.value?.toLowerCase() ===
+                                      greenColorBackground
+                                    ? greenColorBackground
+                                    : blueColorBackground,
+                                color:
+                                  firstResponse?.ctaButtonColor?.value?.toLowerCase() ===
+                                  blueColorBackground
+                                    ? whiteColor
+                                    : firstResponse?.ctaButtonColor?.value?.toLowerCase() ===
+                                      greenColorBackground
+                                    ? blackColor
+                                    : whiteColor,
                               }}
                               onClick={() =>
                                 handleCTABtn(firstResponse?.buttonUrl?.value)

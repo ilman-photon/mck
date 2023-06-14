@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 const HealthNeedCategory = ({
   healthNeedData,
@@ -9,7 +9,7 @@ const HealthNeedCategory = ({
   setActiveFilter,
   activeFilter,
   productCategoryData,
-  customerBackgroundColorCode
+  customerBackgroundColorCode,
 }: any) => {
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState(null);
@@ -43,7 +43,7 @@ const HealthNeedCategory = ({
       );
       selectedFilterItems[cat_id][sub_cat_id].checked = false;
     } else {
-      selectedFilterItems[cat_id].items = [];   
+      selectedFilterItems[cat_id].items = [];
       selectedFilterItems[cat_id].items.push(data);
       selectedFilterItems.map((category: any) => {
         category.isCategoryChecked = false;
@@ -60,10 +60,9 @@ const HealthNeedCategory = ({
   return (
     <div className="hidden lg:flex md:hidden desktop:px-6">
       <div
-        className="pt-[36px] px-1.5 mt-[72px] pb-0"
-        
+        className="pt-[36px] px-1.5 pb-0"
         id="hn_label_0001"
-        style={{ background:DOMPurify.sanitize( customerBackgroundColorCode) }}
+        style={{ background: DOMPurify.sanitize(customerBackgroundColorCode) }}
       >
         <ul className="flex flex-wrap gap-4">
           {healthNeedData &&
@@ -77,18 +76,20 @@ const HealthNeedCategory = ({
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
-                  }`}
+                }`}
                 onClick={() =>
                   handleHealthNeedData(
                     healthneedsdata?.title.value,
                     healthneedsdata
                   )
                 }
-                 aria-label={healthneedsdata?.title.value}
+                aria-label={healthneedsdata?.title.value}
               >
-                <img 
+                <img
                   id={`hl-img+${index}`}
-                  src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
+                  src={DOMPurify.sanitize(
+                    healthneedsdata?.image?.expandedValue?.url
+                  )}
                   alt={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   className="mb-3 mx-auto w-auto hover:opacity-60"
                   aria-hidden="true"
