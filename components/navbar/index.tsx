@@ -69,7 +69,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
         >
           {isMobileMenuActive && (
             <div
-              className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
+              className="group lg:ml-9 lg:mr-7 xl:ml-9 xl:mr-7 whitespace-nowrap mainmenu-items"
               key={getRandomNumber()}
             >
               <div className="relative megamenu-row">
@@ -91,7 +91,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
           {menuData?.map((item: any, idx: number) => {
             return (
               <div
-                className="group lg:ml-9 lg:mr-9 xl:ml-9 xl:mr-9 whitespace-nowrap mainmenu-items"
+                className="group lg:ml-9 lg:mr-7 xl:ml-9 xl:mr-7 whitespace-nowrap mainmenu-items"
                 key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
