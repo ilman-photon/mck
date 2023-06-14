@@ -70,7 +70,7 @@ export default function FooterComponent() {
                           href={sociallink?.socialMediaUrl?.value}
                           key={sociallink?.contentLink?.id}
                           id={`sl-00${index}`}
-                          aria-label={sociallink?.socialMediaUrl?.value}
+                          aria-label={sociallink?.socialMediaImage?.expandedValue?.altText?.value}
                         >
                           <ImageComponent
                             id={sociallink?.socialMediaImage?.expandedValue?.altText
@@ -81,8 +81,7 @@ export default function FooterComponent() {
                             }
                             className="mx-auto"
                             alt={
-                              sociallink?.socialMediaImage?.expandedValue?.altText
-                                ?.value
+                              sociallink?.socialMediaImage?.expandedValue?.altText?.value
                             }
                           />
                         </LinkComponent>}

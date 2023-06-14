@@ -232,6 +232,7 @@ function WhereComponent() {
                         id={`wb-label-02${index}`}
                         width={150}
                         height={39}
+                        tabIndex={0}
                       />
                     </div>
                     <div className="flex flex-row justify-between pb-2">
@@ -368,6 +369,7 @@ function WhereComponent() {
                               id={`wb-img-002_0${index}`}
                               width={150}
                               height={39}
+                              tabIndex={0}
                             />
                           </div>
                           <div className="flex mb-1.5">
