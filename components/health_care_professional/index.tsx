@@ -325,13 +325,16 @@ function HealthCareProfessionalComponent({
                       {tabRelated &&
                         tabRelated.length > 0 &&
                         tabRelated?.map((tab: any, idx: number) => {
-                          const { value } = tab?.tabColorCode;
+                          const tabColorCode = DOMPurify.sanitize(tab?.tabColorCode?.value)
+                          const sanitizedTabDescription =  DOMPurify.sanitize(tab?.description?.value)
+                          const sanitizedAltText = DOMPurify.sanitize("check")
+                          const sanitizedHtmlFor = DOMPurify.sanitize(tab?.title?.value)
                           return (
                             <React.Fragment key={idx}>
                               <input
                                 type="radio"
                                 name="tabs"
-                                id={tab?.title?.value}
+                                id={sanitizedHtmlFor}
                                 checked={
                                   isMobile
                                     ? tabClicked &&
@@ -339,30 +342,34 @@ function HealthCareProfessionalComponent({
                                       tab?.title?.value === tabSelected
                                     : tab?.title?.value === tabSelected
                                 }
-                                onClick={() =>
-                                  handleTabClick(idx, tab?.title?.value)
-                                }
+                                onClick={() =>{
+                                  if(tab?.title?.value){
+                                    handleTabClick(idx, tab?.title?.value)
+                                  }
+                                }}
                               />
                               <label
                                 tabIndex={0}
-                                onKeyUp={(e) => {
-                                  handleTabClick(idx, tab?.title?.value);
+                                onKeyUp={() => {
+                                  if(tab?.title?.value){
+                                    handleTabClick(idx, tab?.title?.value)
+                                  }
                                 }}
-                                htmlFor={tab?.title?.value}
+                                htmlFor={sanitizedHtmlFor}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                                style={{ background: value }}
+                                style={{background:tabColorCode}}
                               >
                                 {tab?.tabImage?.expandedValue?.url ? (
                                   <ImageComponent
                                     src={tab?.tabImage?.expandedValue?.url}
                                     id={tab?.tabImage?.expandedValue?.url}
                                     className="mr-3"
-                                    alt="check"
+                                    alt={sanitizedAltText}
                                   />
                                 ) : (
                                   <div className="px-3 flex lg:hidden md:hidden">
-                                    &nbsp;
+                                    &amp;nbsp;
                                   </div>
                                 )}
 
@@ -392,9 +399,7 @@ function HealthCareProfessionalComponent({
                                   className="text-sofia-reg lg:text-32 text-xl text-mckblue font-extrabold lg:pb-6 pb-6 key-description-wrapper"
                                   id={`hcp-label-00${idx}`}
                                   dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(
-                                      tab?.description?.value
-                                    ),
+                                    __html: sanitizedTabDescription,
                                   }}
                                 />
                               </div>

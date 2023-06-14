@@ -1,6 +1,4 @@
 import React, { useState, useEffect, memo } from "react";
-import axios from "axios";
-import Link from "next/link";
 import { LinkComponent } from "../global/LinkComponent";
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
@@ -29,7 +27,7 @@ const SocialMediaIconComponent = () => {
                         rel="stylesheet"
                         href={DOMPurify.sanitize(item?.socialMediaUrl.value)}
                         id={`link-${index}${item?.contentLink?.id}`}
-                        aria-label={item?.socialMediaUrl?.value}
+                        aria-label={DOMPurify.sanitize(item?.socialMediaUrl?.value)}
                     >
                         <ImageComponent
                             src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}

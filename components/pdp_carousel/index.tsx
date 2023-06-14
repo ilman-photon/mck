@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
+import DOMPurify from "isomorphic-dompurify";
 
 function PdpCarousel(prodViewData: any) {
   const router = useRouter();
@@ -135,12 +136,10 @@ function PdpCarousel(prodViewData: any) {
               </svg>
             </div>
           )}
-          {/* <button onClick={handleUpArrowClick}>Up arrow</button> */}
           <ul className="3GnUWp flex lg:flex-col">
-            {prodResponse?.productImages?.value
+            {prodResponse?.productImages?.value && prodResponse?.productImages?.value
               ?.slice(arrowClick, lastIndex)
               .map((imgdata: any, index: any) => {
-                console.log(imgdata.url);
                 return (
                   <li
                     className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
@@ -151,7 +150,6 @@ function PdpCarousel(prodViewData: any) {
                                     } 
                                 `}
                     id={"pdp_carousel_" + index}
-                    // key={imgdata?.id}
                     key={`pdpcarousalkey${index}`}
                     onClick={() => {
                       handleImageClick(index, imgdata?.id);
@@ -161,9 +159,9 @@ function PdpCarousel(prodViewData: any) {
                     <img
                       className="max-w-xl w-10"
                       role="img"
-                      src={imgdata?.url}
-                      alt={`pdp-img-C0` + index}
-                      id={`pdp-img-C0` + index}
+                      src={DOMPurify.sanitize(imgdata?.url)}
+                      alt={DOMPurify.sanitize(`pdp-img-C0` + index)}
+                      id={DOMPurify.sanitize(`pdp-img-C0` + index)}
                     />
                   </li>
                 );
@@ -175,7 +173,7 @@ function PdpCarousel(prodViewData: any) {
               <img
                 onClick={handleDownArrowClick}
                 src="images\carousel_down.png"
-                alt="image"
+                alt={DOMPurify.sanitize("image")}
                 className={`m-auto ${
                   prodResponse?.productImages?.value?.length - 1 <=
                   selectedItemIndex
@@ -219,9 +217,9 @@ function PdpCarousel(prodViewData: any) {
           } box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}
         >
           <ImageComponent
-            src={imgUrl}
+            src={DOMPurify.sanitize(imgUrl)}
             className="lg:w-[270px] max-w-[200px]"
-            alt="Image is not available"
+            alt={DOMPurify.sanitize("Image is not available")}
             id={
               "pdp_carousel_" + prodResponse?.productImages?.value?.imgdata?.id
             }
