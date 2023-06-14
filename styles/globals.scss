@@ -1148,7 +1148,8 @@ Mobiles Menu
 }
 
 .text-sofia-reg {
-  font-family: "sofia-pro-regular", Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-family: "sofia-pro-regular", Helvetica, Arial, Verdana, Tahoma,
+    sans-serif;
 }
 
 .text-sofia-bold {
@@ -1969,9 +1970,11 @@ Mobile and iPad Navigation
     position: sticky;
     padding: 0 19px;
   }
-  .header:hover, .header-sticky:hover, .brand-logo:hover + .header-sticky {
-      background-color: rgb(255 250 246);
-      color: #001a71 !important;
+  .header:hover,
+  .header-sticky:hover,
+  .brand-logo:hover + .header-sticky {
+    background-color: rgb(255 250 246);
+    color: #001a71 !important;
   }
 
   .isStickyActive {
@@ -1995,7 +1998,7 @@ Mobile and iPad Navigation
       width: 100%;
       height: 100vh;
       overflow-y: scroll;
-      padding-bottom: 10rem !important; 
+      padding-bottom: 10rem !important;
       .mainmenu-items {
         padding: 0;
       }
@@ -2258,7 +2261,6 @@ Mobile and iPad Navigation
 .carousel-controls {
   .left-btn,
   .right-btn {
-    background-image: url("../public/images/product-carousel-left.svg");
     width: 48px;
     height: 48px;
     background-position: center;
@@ -2266,6 +2268,11 @@ Mobile and iPad Navigation
   }
   .right-btn {
     background-image: url("../public/images/product-carousel-right.svg");
+  }
+
+  .left-btn {
+    background-image: url("../public/images/product-carousel-right.svg");
+    transform: rotate(180deg);
   }
 }
 .para-ellipsis-3 {
@@ -2503,7 +2510,6 @@ video {
   right: var(--swiper-navigation-sides-offset, 10px) !important;
 }
 
-
 .socialimg {
   padding-right: 10px;
 }
@@ -2551,9 +2557,9 @@ li.indicator.active {
   border: 1px solid #001a71;
   background-color: #001a71;
 }
-.promotion-product-container{
-  .bg-center{
-      background-position: 90%;
+.promotion-product-container {
+  .bg-center {
+    background-position: 90%;
   }
 }
 
