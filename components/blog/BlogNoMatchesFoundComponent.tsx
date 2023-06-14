@@ -21,7 +21,7 @@ function BlogNoMatchesFoundComponent() {
       <div className='container grid grid-cols-3 gap-4 w-full lg:mt-12 lg:px-9 lg:pb-0 p-4 lg:pt-0 mx-auto'>
         <div className='lg:col-span-2 col-start-1 col-end-7'>
             <div className='w-full lg:pb-11 pb-5'>
-                <h1 className="lg:text-54 text-32 text-gtl-med text-mckblue font-medium lg:pb-12 pb-1" id="srnf-label-001">No Matches Found for “CoverMyMeds”</h1>
+                <h2 className="lg:text-54 text-32 text-gtl-med text-mckblue font-medium lg:pb-12 pb-1" id="srnf-label-001" aria-hidden="true">No Matches Found for “CoverMyMeds”</h2>
                 <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">Showing results for <strong className='text-mckblue'><i>CoverMyMeds</i></strong></div>
                 <div className="text-base text-sofia-reg text-mckback font-normal lg:pb-px pb-3" id="srnf-label-001">Search for <strong className='text-mckred'><i>CoverMyMeds</i></strong></div>
                 <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">Showing 12 results</div>
