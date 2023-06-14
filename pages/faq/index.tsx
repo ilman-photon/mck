@@ -22,6 +22,7 @@ function Faq() {
   return (
     <>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent />
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -42,6 +43,7 @@ function Faq() {
       )}
       <FaqComponent />
       <FooterComponent />
+      </div>
     </>
   );
 }

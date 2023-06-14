@@ -12,9 +12,11 @@ const LandingLayout: React.FC<CatogaryComponentProps> = ({ children }) => {
     return (
         <Fragment>
             <GoogleTagManager />
-            <HeaderComponent />
-            {children}
-            <FooterComponent />
+            <div className="wrapper">
+                <HeaderComponent />
+                {children}
+                <FooterComponent />
+            </div>
         </Fragment>
 
     )
