@@ -60,31 +60,36 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  console.log("response", response);
-  // response &&
-  //   response.data.forEach((item: any) => {
-  //     item.contentArea.expandedValue.forEach((expandedItem: any) => {
-  //       if (
-  //         expandedItem.contentType.includes("CarouselBlock") ||
-  //         expandedItem.contentType.includes("Carousel") ||
-  //         expandedItem.contentType.includes("carousel")
-  //       ) {
-  //         tempCarusolAvaible = true;
-  //       }
-  //     });
-  //   });
-
-  // setisCarusonAvible(tempCarusolAvaible);
+  response &&
+    response?.data[0].contentArea.expandedValue.map((item: any) => {
+      if (
+        item.contentType.includes("CarouselBlock") ||
+        item.contentType.includes("Carousel") ||
+        item.contentType.includes("carousel")
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   return (
     <>
       <GoogleTagManager />
       <div className="wrapper">
         <HeaderComponent
           isCarusolAvaible={
-            response?.data[0].contentArea.expandedValue[0].name == "Carousel"
-              ? true
-              : false
+            response &&
+            response?.data[0].contentArea.expandedValue.map((item: any) => {
+              if (
+                item.contentType.includes("CarouselBlock") ||
+                item.contentType.includes("Carousel") ||
+                item.contentType.includes("carousel")
+              ) {
+                return true;
+              } else {
+                return false;
+              }
+            })
           }
         />
         {error && <p>{error.message}</p>}

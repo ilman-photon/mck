@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
@@ -14,13 +14,13 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
   const [headerData, setHeaderData] = useState<any>();
-  
-  const logoSrc = useHeaderStore(state => state.currentusedLogo)
-  const firstLogo = useHeaderStore(state => state.logoSrc1)
-  const setLogo = useHeaderStore(state => state.setLogoSrc)
-  const onMouseEnterToHeader = useHeaderStore(state => state.onMouseEnter)
-  const isDataExist = useHeaderStore(state => state.headerData)
-  
+
+  const logoSrc = useHeaderStore((state) => state.currentusedLogo);
+  const firstLogo = useHeaderStore((state) => state.logoSrc1);
+  const setLogo = useHeaderStore((state) => state.setLogoSrc);
+  const onMouseEnterToHeader = useHeaderStore((state) => state.onMouseEnter);
+  const isDataExist = useHeaderStore((state) => state.headerData);
+
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -31,7 +31,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       height: "auto",
     };
     const style1 = {
-      margin: '0 auto',
+      margin: "0 auto",
       background: "#FFF6ED",
       color: "#001a71",
     };
@@ -46,8 +46,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   };
 
   useLayoutEffect(() => {
-      setLogo()
-  },[])
+    setLogo();
+  }, []);
 
   useEffect(() => {
     let header = headerImgRef.current!.getBoundingClientRect();
@@ -61,7 +61,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   }, []);
 
   useEffect(() => {
-    if(isDataExist === null){
+    if (isDataExist === null) {
       fetchHeaderData();
     }
   }, [isDataExist]);
@@ -69,7 +69,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   function fetchHeaderData() {
     axiosInstance
       .get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`)
+        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`
+      )
       .then((res) => {
         setHeaderData(res.data[0]);
         // setMenuData(
@@ -96,7 +97,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     setIsBarAnimated(!isBarAnimated);
     setIsMobileMenuActive(!isMobileMenuActive);
   }
-  
+
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
@@ -108,15 +109,14 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
- 
   function handleHeaderMouseEnter() {
     if (!isMobile) {
-      onMouseEnterToHeader()
+      onMouseEnterToHeader();
     }
   }
 
   function handleHeaderMouseLeave() {
-    setLogo()
+    setLogo();
   }
 
   const [isSticky, setIsSticky] = useState(false);
@@ -145,7 +145,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       const hamburgerMenuActive = document.querySelector(
         ".hamburger-menu.active"
       );
-      const a = document.getElementById('nav-bar')?.firstChild;
+      const a = document.getElementById("nav-bar")?.firstChild;
 
       if (
         hamburgerMenu &&
@@ -166,7 +166,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -178,44 +178,49 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70 " : isSticky ? "sticky" : "relative z-40"
+          isCarusolAvaible
+            ? "sticky lg:bg-beige50 lg:bg-opacity-70 "
+            : isSticky
+            ? "sticky"
+            : "relative z-40"
         } flex lg:grid container mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
       >
-          <div className="flex">
-            {/* Hamburger menu starts */}
-            <div
-              className={`hamburger-menu lg:hidden xl:hidden ${
-                isMobileMenuActive ? "active" : ""
-              }`}
-              onClick={() => handleHamburgerClick()}
-            >
-              <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
-            </div>
-            {/* Hamburger menu ends */}
-          </div>
-
+        <div className="flex">
           <div
-            ref={headerImgRef}
-            className="brand-logo lg:max-w-[300px]"
-            role="banner"
-            onClick={handleOnClickLogo}
+            className={`hamburger-menu lg:hidden xl:hidden ${
+              isMobileMenuActive ? "active" : ""
+            }`}
+            onClick={() => handleHamburgerClick()}
           >
-            <img
-              id="logo-image"
-              src={DOMPurify.sanitize(logoSrc || firstLogo)}
-              alt="Foster Thrive Logo image Link"
-              className="logo-image lg:mt-7"
-              style={isMobile ? undefined : imgWidth}
-              tabIndex={0}
-            />
+            <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
           </div>
-          <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
-            <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
-            <Search />
-          </div>
+        </div>
+
+        <div
+          ref={headerImgRef}
+          className="brand-logo lg:max-w-[300px]"
+          role="banner"
+          onClick={handleOnClickLogo}
+        >
+          <img
+            id="logo-image"
+            src={DOMPurify.sanitize(logoSrc || firstLogo)}
+            alt="Foster Thrive Logo image Link"
+            className="logo-image lg:mt-7"
+            style={isMobile ? undefined : imgWidth}
+            tabIndex={0}
+          />
+        </div>
+        <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
+          <NavBar
+            isMobileMenuActive={isMobileMenuActive}
+            setIsMobileMenuActive={setIsMobileMenuActive}
+          />
+          <Search />
+        </div>
       </div>
       {children}
     </>
