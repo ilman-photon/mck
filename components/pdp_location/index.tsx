@@ -202,6 +202,7 @@ function PdpLocation(props: any) {
                           src="images/health-mart.png"
                           alt="Health Mart Logo"
                           id={`pdp-img-00` + index}
+                          tabIndex={0}
                         />
                       </div>
                       <div className="flex mb-1.5">
@@ -280,6 +281,7 @@ function PdpLocation(props: any) {
                   src="images/health-mart.png"
                   alt="Health Mart logo"
                   id={`pdp-img_${props.index}-${index}`}
+                  tabIndex={0}
                 />
               </div>
               <div className="flex flex-row justify-between pb-2">

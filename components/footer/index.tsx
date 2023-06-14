@@ -70,7 +70,7 @@ export default function FooterComponent() {
                           href={sociallink?.socialMediaUrl?.value}
                           key={sociallink?.contentLink?.id}
                           id={`sl-00${index}`}
-                          aria-label={sociallink?.socialMediaUrl?.value}
+                          aria-label={sociallink?.socialMediaImage?.expandedValue?.altText?.value}
                         >
                           <ImageComponent
                             id={sociallink?.socialMediaImage?.expandedValue?.altText
@@ -79,10 +79,10 @@ export default function FooterComponent() {
                               DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue
                                 ?.thumbnail?.value?.url)
                             }
+                            ariahidden={false}
                             className="mx-auto"
                             alt={
-                              sociallink?.socialMediaImage?.expandedValue?.altText
-                                ?.value
+                              sociallink?.socialMediaImage?.expandedValue?.altText?.value
                             }
                           />
                         </LinkComponent>}
@@ -147,6 +147,7 @@ export default function FooterComponent() {
                         src={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.url)}
                         width="21px"
                         height="18px"
+                        ariahidden={false}
                         alt={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.name)}
                       />
                     </div>

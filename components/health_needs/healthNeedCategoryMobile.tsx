@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useRef } from "react";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 const HealthNeedCategoryMobile = ({
   healthNeedData,
@@ -16,6 +16,8 @@ const HealthNeedCategoryMobile = ({
   const [slideIndex, setSlideIndex] = useState(0);
   const slidesPerRow = 3;
   const rowsPerPage = 2;
+  const [isFirstIndex, setIsFirstIndex] = useState<boolean>(true);
+  const [isLastIndex, setIsLastIndex] = useState<boolean>(false);
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -47,7 +49,7 @@ const HealthNeedCategoryMobile = ({
       );
       selectedFilterItems[cat_id][sub_cat_id].checked = false;
     } else {
-      selectedFilterItems[cat_id].items = [];   
+      selectedFilterItems[cat_id].items = [];
       selectedFilterItems[cat_id].items.push(data);
       selectedFilterItems.map((category: any) => {
         category.isCategoryChecked = false;
@@ -62,8 +64,16 @@ const HealthNeedCategoryMobile = ({
   };
 
   const handlePrev = () => {
-    if (slideIndex > 0) {
-      setSlideIndex(slideIndex - 1);
+    var newSlideIndex = slideIndex - 1;
+
+    if (newSlideIndex > 0) {
+      setSlideIndex(newSlideIndex);
+      setIsLastIndex(false);
+      setIsFirstIndex(false);
+    } else if (newSlideIndex == 0) {
+      setSlideIndex(0);
+      setIsLastIndex(false);
+      setIsFirstIndex(true);
     }
   };
 
@@ -71,21 +81,32 @@ const HealthNeedCategoryMobile = ({
     const totalPages = Math.ceil(
       healthNeedData.length / (slidesPerRow * rowsPerPage)
     );
-    if (slideIndex < totalPages - 1) {
-      setSlideIndex(slideIndex + 1);
+    var newSlideIndex = slideIndex + 1;
+    if (newSlideIndex < totalPages - 1) {
+      setSlideIndex(newSlideIndex);
+      setIsLastIndex(false);
+      setIsFirstIndex(false);
+    } else if (newSlideIndex == totalPages - 1) {
+      setSlideIndex(totalPages - 1);
+      setIsLastIndex(true);
+      setIsFirstIndex(false);
     }
   };
 
   return (
     <div className="lg:hidden">
-      <h1 className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med lg:px-4 font-medium"  aria-label="Health Needs">Health Needs</h1>
+      <h1
+        className="pt-6 text-[27px] leading-[30px] text-mckblue text-gtl-med lg:px-4 font-medium"
+        aria-label="Health Needs"
+      >
+        Health Needs
+      </h1>
       <div
         className="pt-6 lg:pt-9 px-1.5 mt-6 lg:mt-12 pb-0 bg-[#f2f4f9] lg:mx-4 relative min-h-[300px]"
-        
         id="hn_label_0002"
       >
         <div className="">
-          <div className="carousel-container grid grid-cols-3 md:grid-cols-3 gap-4 overflow-x-auto" >
+          <div className="carousel-container grid grid-cols-3 md:grid-cols-3 gap-4 overflow-x-auto">
             {healthNeedData &&
               healthNeedData
                 .slice(
@@ -95,21 +116,26 @@ const HealthNeedCategoryMobile = ({
                 .map((healthneedsdata: any) => (
                   <div
                     key={healthneedsdata?.contentLink?.id}
-                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${activeIcon === healthneedsdata?.contentLink?.id
+                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
+                      activeIcon === healthneedsdata?.contentLink?.id
                         ? "active"
                         : ""
-                      }`}
+                    }`}
                     onClick={() =>
                       handleHealthNeedData(
                         healthneedsdata?.title.value,
                         healthneedsdata
                       )
                     }
-                     aria-label={DOMPurify.sanitize(healthneedsdata?.title?.value)}
+                    aria-label={DOMPurify.sanitize(
+                      healthneedsdata?.title?.value
+                    )}
                   >
                     <img
                       id={healthneedsdata?.title.value}
-                      src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
+                      src={DOMPurify.sanitize(
+                        healthneedsdata?.image?.expandedValue?.url
+                      )}
                       alt={healthneedsdata?.title.value}
                       className="mb-3 mx-auto w-auto"
                     />
@@ -118,17 +144,21 @@ const HealthNeedCategoryMobile = ({
                 ))}
           </div>
           {healthNeedData?.length > slidesPerRow * rowsPerPage && (
-            <div className="carousel-controls flex justify-center absolute top-[124px] w-full" >
+            <div className="carousel-controls flex justify-center absolute top-[124px] w-full">
               <button
-                className="left-btn left-[-18px] absolute"
-                onClick={handlePrev}  aria-label="Previous"
-              >
-              </button>
+                className={`${
+                  isFirstIndex ? "opacity-50" : "opacity-100"
+                } left-btn left-[-18px] absolute`}
+                onClick={handlePrev}
+                aria-label="Previous"
+              ></button>
               <button
-                className="right-btn right-[-8px] absolute"
-                onClick={handleNext}  aria-label="Next"
-              >
-              </button>
+                className={`${
+                  isLastIndex ? "opacity-50" : "opacity-100"
+                } right-btn right-[-8px] absolute`}
+                onClick={handleNext}
+                aria-label="Next"
+              ></button>
             </div>
           )}
         </div>

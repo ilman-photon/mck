@@ -27,6 +27,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
             alt={DOMPurify.sanitize(`${indexs}${cardData?.image?.value?.url}`)}
             id={DOMPurify.sanitize(`hn_label_01_${indexs + 1}_${mainIndex + 1}`)}
             className="h-fit mx-auto border-0 lg:max-h-60 max-h-28"
+            ariahidden={true}
           />
         </div>
         <div

@@ -1,17 +1,12 @@
-import FooterComponent from "@/components/footer";
-import GoogleTagManager from "@/components/google_tag_manager";
-import HeaderComponent from "@/components/header";
+import LandingLayout from "@/components/Layout/LandingLayout";
 import PrivacyComponent from "@/components/privacy/PrivacyComponent";
 
 function privacy() {
 
     return (
-        <>
-            <GoogleTagManager/>
-            <HeaderComponent />
+        <LandingLayout>
             <PrivacyComponent />
-            <FooterComponent />
-        </>
+        </LandingLayout>
     )
 
 }

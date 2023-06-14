@@ -229,9 +229,6 @@ function AllProductCategoryPage({
     setSelectedFilterItems(tempArr);
   };
 
-  // Get & display checkbox value - From Sub category list
-  const [checkedValues, setCheckedValues] = useState<string[]>([]);
-
   useEffect(() => {
     createQueryParameters();
   }, [activeFilter]);
@@ -326,21 +323,10 @@ function AllProductCategoryPage({
             queryParams += `)`;
             lastCatId = catId;
           }
-          // minCategoryCnt += category.isCategoryChecked;
-          // if (category.isCategoryChecked) {
-          //   const categoryName = selectedFilterItems[catId].categoryName;
-          //   const itemName = categoryName.replace(/[^a-zA-Z ]/g, "");
-          //   const encodeItemName = encodeURI(itemName);
-          //   const joinedCond =
-          //     selectedViewAllCateory.length === minCategoryCnt ? "" : "and ";
-          //   const beforeCond = minSubCategoryCnt > 0 ? " and " : "";
-          //   queryParams += ` ${beforeCond} (${selectedFilterItems[catId].productType}/value/name eq '${encodeItemName}') ${joinedCond} `;
-          // }
         }
       });
 
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        // queryParams = "";
         const currentURL = window.location.href;
         const updatedURL = currentURL.split("?")[0];
         router.push(updatedURL, undefined, { scroll: false });
@@ -373,7 +359,9 @@ function AllProductCategoryPage({
       .then((response: any) => {
         setProductFilter(response);
       })
-      .catch((e: any) => console.log(e));
+      .catch(() => {
+        return
+      });
   }, []);
 
   function fetchCategoryId() {
@@ -435,13 +423,12 @@ function AllProductCategoryPage({
         })
         .then((data: any) => {
           if (data && data.length > 0 && data[0].title && data[0].title.value) {
-            document.title = data[0].title.value;
+            document.title = DOMPurify.sanitize(data[0].title.value)
           } else {
             document.title = "All Products";
           }
         })
-        .catch((error: Error) => {
-          console.log(error.message);
+        .catch(() => {
           document.title = "All Products";
         });
     } else {
@@ -459,7 +446,7 @@ function AllProductCategoryPage({
   return (
     <>
       <Head>
-        <title>Your Page Title</title>
+        <title>McKesson</title>
       </Head>
       <GoogleTagManager />
       <HeaderComponent isCarusolAvaible={carouselData ? true : false} />

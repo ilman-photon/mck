@@ -78,8 +78,7 @@ function HeaderNoStickyComponent() {
             className="brand-logo lg:max-w-[300px]"
             onClick={handleOnCLickLogo}
           >
-            <img
-              
+            <img              
               src={isSmall}
               alt="logo"
               className="mt-1 lg:mt-7 ml-3"

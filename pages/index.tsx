@@ -46,7 +46,7 @@ export default function Home() {
          <title>McKesson</title>
          <meta name="description" content="Created by Mckesson" />
          <meta name="viewport" content="width=device-width, initial-scale=1" />
-         <link rel="icon" href="/favicon.ico" />
+         <link rel="icon" href="/favicon_mck.ico" />
       </Head>
 
       {isLoading && (

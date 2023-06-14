@@ -111,10 +111,10 @@ const BlogComponent = () => {
           id="search"
           className={`lg:${
             !ActiveSearch && "hidden"
-          } block w-full relative flex items-center content-center mb-6`}
+            } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            placeholder={BlogSetting?.data[0].blogSearchPlaceholderText?.value}
+            placeholder={BlogSetting?.data?.[0].blogSearchPlaceholderText?.value}
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
@@ -160,16 +160,16 @@ const BlogComponent = () => {
       </div>
       <div className="lg:w-306 w-full blogright-sidebar">
         <p className="hidden">
-          {BlogSetting?.data[0]?.blogSearchPlaceholderText?.value}
+          {BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value}
         </p>
         {!ActiveSearch && (
           <div
             id="search"
             role="search"
-            className="lg:block hidden relative flex items-center content-center mb-6"
+            className="lg:block hidden relative flex items-center content-center mb-6"            
           >
             <SearchComponent
-              placeholder={BlogSetting?.data[0]?.blogSearchPlaceholderText?.value}
+              placeholder={`Search medicine for ${BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value}`}              
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
@@ -178,8 +178,8 @@ const BlogComponent = () => {
           </div>
         )}
         <CatogaryComponent
-          CatogaryListing={BlogSetting?.data[0]?.categoryFilter?.expandedValue}
-          Catogarytitle={BlogSetting?.data[0]?.categoryHeadingText?.value}
+          CatogaryListing={BlogSetting?.data?.[0]?.categoryFilter?.expandedValue}
+          Catogarytitle={BlogSetting?.data?.[0]?.categoryHeadingText?.value}
           OnCatogarySelcete={(e) => filterBlogList(e)}
         />
         <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
@@ -187,15 +187,15 @@ const BlogComponent = () => {
             className="text-mckblue shade-blue-bg py-3 px-4 text-sofia-bold font-extrabold text-lg"
             id="blog-label-009"
           >
-            {BlogSetting?.data[0]?.trendingBlogHeadingText?.value}
+            {BlogSetting?.data?.[0]?.trendingBlogHeadingText?.value}
           </div>
-          <ResentBlogListComponent ResentBlogList={BlogSetting?.data[0]?.trendingAritcle}/>
+          <ResentBlogListComponent ResentBlogList={BlogSetting?.data?.[0]?.trendingAritcle} />
         </div>
         <RelatedProducts
           OnRelatedProductClick={(e) => handleProductClick(e)}
-          title={BlogSetting?.data[0]?.relatedProductHeadingText?.value}
+          title={BlogSetting?.data?.[0]?.relatedProductHeadingText?.value}
           BlogListingContent={
-            BlogSetting?.data[0]?.recommendedProducts?.expandedValue
+            BlogSetting?.data?.[0]?.recommendedProducts?.expandedValue
           }
         />
       </div>
