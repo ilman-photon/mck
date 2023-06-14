@@ -79,6 +79,11 @@ const HealthNeedsComponent = ({
       .then((res: any) => {
         if(res.data.results.length === 0){
           setFilterClicked(true);
+          setProductSum(res.data.totalMatching)
+          setSelectedProduct( [
+            {item: {name: "" }},
+            {data: {results: ""}},
+          ])
           return
         }
        
