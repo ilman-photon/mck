@@ -91,7 +91,7 @@ const ProductComponent = ({
                 }
             </h2>
            
-                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21 lg:mb-12">
+                    <div className="lg:pt-6 lg:pb-12 pb-6 lg:m-21 lg:mb-[50px]">
                       <Swiper
                         spaceBetween={4}
                         navigation={isMobile ? false : true}
@@ -129,7 +129,7 @@ const ProductComponent = ({
                         )}
                       </Swiper>
                     </div>
-                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 absolute left-0 right-0 bottom-2">
+                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 lg:absolute lg:left-0 lg:right-0 lg:bottom-[-2px]">
                       {reviewCount}/
                       {isMobile
                         ? Math.ceil(product?.data?.results?.length)

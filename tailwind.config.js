@@ -145,6 +145,7 @@ module.exports = {
       },
       bottom: {
         13: '-13px',
+        0.2: '-2px',
       },
       right: {
         10: '-10px',
