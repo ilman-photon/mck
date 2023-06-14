@@ -10,6 +10,7 @@ import Image from "next/image";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -32,24 +33,25 @@ const HealthNeedsComponent = ({
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [filterClicked, setFilterClicked] = useState(false);
+  const [productName, setProductName] = useState<any>()
   const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
     useState();
   const [productSum, setProductSum] = useState<any>();
-
+  const productItemName = useHeaderStore(state => state.selectedCategory)
   // Right section product carousel data
   function fetchProductList(filter: any) {
     setIsLoading(true);
     if (filter.length > 0) {
       const query = filter.match(/eq '(.*)'/);
       const queryParams = { filter: query[1] };
-      router.push({
-        pathname: "/health_needs",
-        query: queryParams,
-      });
+      // router.push({
+      //   pathname: "/health_needs",
+      //   query: queryParams,
+      // });
     } else {
-      router.push({
-        pathname: "/health_needs",
-      });
+      // router.push({
+      //   pathname: "/health_needs",
+      // });
     }
 
     const query = filter;
@@ -94,6 +96,7 @@ const HealthNeedsComponent = ({
         let catArray: any = [];
         let tempResults: any = [];
         setProductSum(res.data.totalMatching);
+        setProductName(res.data.results[0]?.productType?.value[0].name)
         res.data.results.map((item: any) => {
           item?.healthNeeds?.value.forEach((value: any) => {
             if (
@@ -160,6 +163,32 @@ const HealthNeedsComponent = ({
   useEffect(() => {
     createQueryParameters();
   }, [activeFilter]);
+
+  const fetchRecommandedProductData = async () => {
+    const tempName = productItemName?.length>0 ? productItemName : productName
+    const correctedName = tempName?.replace(/ /g, "-")
+    const recommendedCategoryData = await axiosInstance(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+    );
+    const response = recommendedCategoryData?.data[0]?.contentArea
+    setRecommendedProduct(response)
+    const productCategoryDataList =
+    recommendedCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
+  setproductCategoryData(productCategoryDataList);
+  createTempFilterArr(productCategoryDataList);
+  }
+  useEffect(() => {
+    fetchRecommandedProductData()
+  }, [router,productItemName]) 
+
+  const getQueryParameterValue = (paramName: string) => {
+    const url = window.location.href;
+    const queryString = url.substring(url.indexOf('?') + 1);
+    const searchParams = new URLSearchParams(queryString);
+    return searchParams.get(paramName);
+  }
+  
+  
 
   const createQueryParameters = () => {
     let queryParams = "";
@@ -357,6 +386,7 @@ const HealthNeedsComponent = ({
     });
   }, [recommendedProduct]);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       const healthNeedsCategories = await axiosInstance.get(
@@ -442,9 +472,11 @@ const HealthNeedsComponent = ({
     console.log("Filtered", router.query.filter);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
+    console.log(selectedFilterData);
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
+          console.log(1);
           sub_category.checked = true;
           if (
             category["items"] &&
@@ -454,6 +486,7 @@ const HealthNeedsComponent = ({
             setActiveFilter([router.query.filter]);
           }
         } else {
+          console.log(2);
           if (
             category["items"] &&
             category["items"].indexOf(sub_category.name) > -1
