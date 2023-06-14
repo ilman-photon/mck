@@ -71,120 +71,126 @@ function FaqComponent() {
 
   useEffect(() => {
     document.documentElement.lang = "en";
-    console.log(faqData);
   }, []);
 
   useEffect(() => {
     document.title = ApiRespond?.data[0]?.title.value || "Faq";
-    console.log(faqData);
   }, [ApiRespond]);
 
   return (
     <>
-      <div
-        role="main"
-        className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18"
-      >
-        <h1
-          className="text-mckblue text-54 heading pb-3 text-center"
-          id="faq_label_001"
-        >
-          {DOMPurify.sanitize(faqData?.name)}
-        </h1>
+      {faqData && (
         <div
-          className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(faqData?.description?.value),
-          }}
-          id="faq_label_002"
-        ></div>
-        {faqData?.blockArea?.expandedValue?.map((bdata: any) => {
-          return <ItemExpandeble key={bdata?.contentLink?.id} bdata={bdata} />;
-        })}
-
-        <div className="shade-blue-border w-full lg:mt-6 mt-4 rounded-lg overflow-hidden">
-          <h3
-            className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
-            id="faq_label_005"
+          role="main"
+          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18"
+        >
+          <h1
+            className="text-mckblue text-54 heading pb-3 text-center"
+            id="faq_label_001"
           >
-            {faqData?.differentQuestionHeading?.value}
-          </h3>
-          <div className="shade-blue-border-top lg:p-6 p-4">
-            <p
-              className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium"
-              id="faq_label_006"
-            >
-              {faqData?.differentQuestionDetails?.value}
-            </p>
-            <a
-              style={{
-                background: ctaBgClr,
-              }}
-              href={DOMPurify.sanitize(
-                faqData?.differentQuestionCTALink?.value
-              )}
-              className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
-              id="faq_btn_007"
-            >
-              {DOMPurify.sanitize(faqData?.differentQuestionCTAText?.value)}
-            </a>
-          </div>
-        </div>
+            {DOMPurify.sanitize(faqData?.name)}
+          </h1>
+          <div
+            className="text-center text-mckblue text-gtl-med pb-6 lg:text-27 text-xl"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(faqData?.description?.value),
+            }}
+            id="faq_label_002"
+          ></div>
+          {faqData?.blockArea?.expandedValue?.map((bdata: any) => {
+            return (
+              <ItemExpandeble key={bdata?.contentLink?.id} bdata={bdata} />
+            );
+          })}
 
-        <div className="grid lg:grid-cols-2 lg:gap-4 mt-6">
-          <div className="rounded-lg shade-blue-border overflow-hidden faq-box">
+          <div className="shade-blue-border w-full lg:mt-6 mt-4 rounded-lg overflow-hidden">
             <h3
               className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
-              id="faq_label_008"
+              id="faq_label_005"
             >
-              {DOMPurify.sanitize(faqData?.whatYouCanDoHeading?.value)}
+              {faqData?.differentQuestionHeading?.value}
             </h3>
-            <div
-              className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
-              id="faq_label_009"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(faqData?.whatYouCanDoDeatils?.value),
-              }}
-            ></div>
+            <div className="shade-blue-border-top lg:p-6 p-4">
+              <p
+                className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium"
+                id="faq_label_006"
+              >
+                {faqData?.differentQuestionDetails?.value}
+              </p>
+              <a
+                style={{
+                  background: ctaBgClr,
+                }}
+                href={DOMPurify.sanitize(
+                  faqData?.differentQuestionCTALink?.value
+                )}
+                className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
+                id="faq_btn_007"
+              >
+                {DOMPurify.sanitize(faqData?.differentQuestionCTAText?.value)}
+              </a>
+            </div>
           </div>
-          <div className="mt-6 lg:mt-0">
+
+          <div className="grid lg:grid-cols-2 lg:gap-4 mt-6">
             <div className="rounded-lg shade-blue-border overflow-hidden faq-box">
               <h3
                 className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
-                id="faq_label_010"
+                id="faq_label_008"
               >
-                {DOMPurify.sanitize(faqData?.speaktoAPharmacistHeading?.value)}
+                {DOMPurify.sanitize(faqData?.whatYouCanDoHeading?.value)}
               </h3>
               <div
                 className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
-                id="faq_label_011"
+                id="faq_label_009"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
-                    faqData?.speaktoAPharmacistDetail?.value
+                    faqData?.whatYouCanDoDeatils?.value
                   ),
                 }}
               ></div>
             </div>
-            <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
-              <h3
-                className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
-                id="faq_label_012"
-              >
-                {DOMPurify.sanitize(faqData?.sendFeedBackHeading?.value)}
-              </h3>
-              <div
-                className="lg:pt-5 lg:pl-5 lg:pr-5 pt-4 pr-4 pl-4 pb-0 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
-                id="faq_label_013"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(
-                    faqData?.sendFeedBackDetails?.value
-                  ),
-                }}
-              ></div>
+            <div className="mt-6 lg:mt-0">
+              <div className="rounded-lg shade-blue-border overflow-hidden faq-box">
+                <h3
+                  className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
+                  id="faq_label_010"
+                >
+                  {DOMPurify.sanitize(
+                    faqData?.speaktoAPharmacistHeading?.value
+                  )}
+                </h3>
+                <div
+                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                  id="faq_label_011"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      faqData?.speaktoAPharmacistDetail?.value
+                    ),
+                  }}
+                ></div>
+              </div>
+              <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
+                <h3
+                  className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
+                  id="faq_label_012"
+                >
+                  {DOMPurify.sanitize(faqData?.sendFeedBackHeading?.value)}
+                </h3>
+                <div
+                  className="lg:pt-5 lg:pl-5 lg:pr-5 pt-4 pr-4 pl-4 pb-0 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
+                  id="faq_label_013"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      faqData?.sendFeedBackDetails?.value
+                    ),
+                  }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
