@@ -46,6 +46,7 @@ function ContactUsComponent() {
                                         src={DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.phoneImage?.expandedValue?.url)} 
                                         alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.phoneImage?.expandedValue?.altText?.value || "Cell Icon"} 
                                         id="cu_img_005"
+                                        ariahidden={true}
                                         className="w-fit mx-auto my-0"/> }
                                     </div>
                                 {DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.phoneNumber?.value)}</span>
@@ -58,6 +59,7 @@ function ContactUsComponent() {
                                     src={DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.operationHourImage?.expandedValue?.url)} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.operationHourImage?.expandedValue?.altText?.value || "timer icon"} 
                                     id="cu_img_008"
+                                    ariahidden={true}
                                     className="w-fit mx-auto my-0" />}
                                 </div>
                                 {DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.operationHourTitle?.value)}</span>
@@ -71,6 +73,7 @@ function ContactUsComponent() {
                                     src={DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.url)} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailImage?.expandedValue?.altText?.value || "email icon"} 
                                     id="cu_img_011"
+                                    ariahidden={true}
                                     className="w-fit mx-auto my-0" />}
                                 </div>
                                     {DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.emailTitle?.value)}</a></span>
@@ -82,6 +85,7 @@ function ContactUsComponent() {
                                     src={DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.locationIcon?.expandedValue?.url)} 
                                     alt={contactUsData?.data[0]?.contentArea?.expandedValue[0]?.locationIcon?.expandedValue?.altText?.value || 'alt="location icon"'} 
                                     id="cu_img_013"
+                                    ariahidden={true}
                                     className="w-fit mx-auto my-0"/>}
                                 </div>
                                 {DOMPurify.sanitize(contactUsData?.data[0]?.contentArea?.expandedValue[0]?.locationTitle?.value)}</span>

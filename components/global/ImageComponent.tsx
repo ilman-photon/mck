@@ -11,8 +11,9 @@ type ImageComponentProps = {
     height?: number | string;
     alt?: string;
     className?: any;
+    ariahidden:boolean;
 }
-export function ImageComponent({ src, height, width, alt, className, id }: ImageComponentProps) {
+export function ImageComponent({ src, height, width, alt, className, id, ariahidden }: ImageComponentProps) {
     const [didLoad, setLoad] = React.useState(false);
     const [srcImage, setsrcImage] = React.useState<any>();
     const noImageSrc = useNoImage()
@@ -45,5 +46,6 @@ export function ImageComponent({ src, height, width, alt, className, id }: Image
         onLoad={() => setLoad(true)}
         alt={DOMPurify.sanitize(String(alt)) || "Image is not available"}
         id={id}
+        aria-hidden={ariahidden}
     />;
 }

@@ -79,6 +79,7 @@ export default function FooterComponent() {
                               DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue
                                 ?.thumbnail?.value?.url)
                             }
+                            ariahidden={false}
                             className="mx-auto"
                             alt={
                               sociallink?.socialMediaImage?.expandedValue?.altText?.value
@@ -146,6 +147,7 @@ export default function FooterComponent() {
                         src={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.url)}
                         width="21px"
                         height="18px"
+                        ariahidden={false}
                         alt={DOMPurify.sanitize(item?.menuIcon?.expandedValue?.name)}
                       />
                     </div>

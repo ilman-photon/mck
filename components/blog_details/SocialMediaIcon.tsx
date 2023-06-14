@@ -35,6 +35,7 @@ const SocialMediaIconComponent = () => {
                             src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}
                             alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
+                            ariahidden={false}
                             className="socialimg"
                        />
                     </LinkComponent>

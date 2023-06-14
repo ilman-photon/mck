@@ -102,7 +102,7 @@ const BlogDetailsComponent = () => {
             }}
           >
             <ImageComponent
-              aria-hidden={true}
+              ariahidden={true}
               src={DOMPurify.sanitize(BlogInfo?.image?.expandedValue?.url)}
               className="m-auto w-full"
               alt={BlogInfo?.image?.expandedValue?.name}

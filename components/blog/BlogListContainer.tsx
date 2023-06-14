@@ -48,7 +48,7 @@ const BlogListContainer = () => {
                                             }}
                                         >
                                             <div className="lg:h-314 h-240 flex">
-                                                <ImageComponent aria-hidden={true} src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item?.image?.value?.url)} id={item?.image?.value?.id} />
+                                                <ImageComponent aria-hidden={true} src={DOMPurify.sanitize(item?.image?.value?.url)} className='lg:max-h-314 max-h-240 w-full object-cover' alt={DOMPurify.sanitize(item?.image?.value?.url)} id={item?.image?.value?.id} ariahidden={false}/>
                                             </div>
                                         </LinkComponent>
                                     </figure>

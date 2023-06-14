@@ -265,7 +265,7 @@ const HealthNeedFilter = ({
             alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}                   
-            aria-hidden="true"
+            ariahidden={true}
           />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
@@ -288,6 +288,7 @@ const HealthNeedFilter = ({
                     width={7}
                     height={7}
                     id={`hn-001_0${index}`}
+                    aria-hidden={true}
                   />
                   </div>
                 </div>
@@ -303,6 +304,7 @@ const HealthNeedFilter = ({
                 width={12}
                 height={12}
                 id={`hn-001_0${'02'}`}
+                aria-hidden={true}
               />
               <div
                 className='underline text-sm lg:text-lg lg:leading-[27px] font-normal text-sofia-regular text-mckblue'
@@ -325,6 +327,7 @@ const HealthNeedFilter = ({
             alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
             height={24}
+            ariahidden={true}
           />
           </div>
           <div
@@ -338,6 +341,7 @@ const HealthNeedFilter = ({
                 </span>
                 <svg
                   className="mr-2 ml-2 mt-1"
+                  aria-hidden={true}
                   width="20"
                   height="20"
                   viewBox="0 0 20 21"
@@ -360,6 +364,7 @@ const HealthNeedFilter = ({
                   width="20"
                   height="20"
                   viewBox="0 0 20 21"
+                  aria-hidden={true}
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -409,7 +414,9 @@ const HealthNeedFilter = ({
                                   alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0].name)}
                                   id={leftfiltermaindata?.mainCategory?.value[0].name + index}
                                   height={24}
-                                  width={24} className="mr-2" />
+                                  width={24} 
+                                  ariahidden={false}
+                                  className="mr-2" />
                                   : null} 
                                 <label
                                   htmlFor={
