@@ -26,8 +26,10 @@ export default function Search() {
   };
   const handleKeyUp = (e: any) => {
     const { value } = e.target;
-    if (!regex.test(value)||value==='') {
-      setSearchString(e.target.value);
+    if (!regex.test(value)||value===''&&e.nativeEvent.data==="&") {
+      if(!(e.nativeEvent.data==="&")){
+        setSearchString(e.target.value);
+      }
     }
   };
 
