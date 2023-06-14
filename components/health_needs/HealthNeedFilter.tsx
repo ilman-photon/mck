@@ -259,14 +259,13 @@ const HealthNeedFilter = ({
         >
           {DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
           <ImageComponent
-            id={DOMPurify.sanitize(`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`)}
-            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
+            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+            src={DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)}
             className='mr-2 ml-2'
             alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
             width={24}
-            height={24}                   
-            ariahidden={true}
-          />
+            height={24}
+            aria-hidden="true" ariahidden={false}          />
           <div
             className='flex flex-wrap items-baseline pt-3 lg:pt-0 w-full lg:w-auto'
             
@@ -275,22 +274,19 @@ const HealthNeedFilter = ({
             {activeFilter?.length > 0 && activeFilter?.map((item: any, index: number) => {
               return (
                 <div
-                  className='flex items-end rounded-xl px-2 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB] h-22'
+                  className='flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]'
                   key={item}
                 >
-                  <div className='gap-1 flex self-baseline'>
                   {extractMainCategoryName(productCategoryData)?.includes(item)?`${item}-All` : `${item}`}
                   <Image
                     src='/images/hn-delete-icon.svg'
-                    className='cursor-pointer mt-0.5 self-center'
-                    alt={DOMPurify.sanitize('delete icon')}
+                    className='cursor-pointer mt-0.5'
+                    alt='delete icon'
                     onClick={() => handleDelete(activeFilter, item)}
                     width={7}
                     height={7}
                     id={`hn-001_0${index}`}
-                    aria-hidden={true}
                   />
-                  </div>
                 </div>
               );
             })}
@@ -299,15 +295,14 @@ const HealthNeedFilter = ({
               {/* <img className="" src={activeFiltersData?.clearAllImage?.expandedValue?.url} /> */}
               <Image
                 src='/images/hn-delete-icon.svg'
-                className='w-3 cursor-pointer lg:mr-2 mr-1'
-                alt={DOMPurify.sanitize('delete icon')}
+                className='w-3 cursor-pointer mr-1'
+                alt='delete icon'
                 width={12}
                 height={12}
                 id={`hn-001_0${'02'}`}
-                aria-hidden={true}
               />
               <div
-                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal text-sofia-regular text-mckblue'
+                className='underline text-sm lg:text-lg lg:leading-[27px] font-normal'
                 onClick={handleClearAll}
                 aria-label={activeFiltersData?.clearAllText?.value}
               >
@@ -321,14 +316,12 @@ const HealthNeedFilter = ({
           <div className='flex'>
             <span className='text-sofia-bold text-base font-extrabold text-mckblue'>{DOMPurify.sanitize("FILTER")}</span>
             <ImageComponent
-            id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
-            src = {DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)} 
-            className='mr-2 ml-2'
-            alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
-            width={24}
-            height={24}
-            ariahidden={true}
-          />
+              id={`hn_label_003_${activeFiltersData?.activeFiltersImage?.expandedValue?.contentLink?.id}`}
+              src={DOMPurify.sanitize(activeFiltersData?.activeFiltersImage?.expandedValue?.url)}
+              className='mr-2 ml-2'
+              alt={DOMPurify.sanitize(activeFiltersData?.activeFiltersText?.value)}
+              width={24}
+              height={24} ariahidden={false}          />
           </div>
           <div
             className='cursor-pointer text-sofia-bold text-base font-extrabold text-mckblue'
@@ -341,7 +334,6 @@ const HealthNeedFilter = ({
                 </span>
                 <svg
                   className="mr-2 ml-2 mt-1"
-                  aria-hidden={true}
                   width="20"
                   height="20"
                   viewBox="0 0 20 21"
@@ -364,7 +356,6 @@ const HealthNeedFilter = ({
                   width="20"
                   height="20"
                   viewBox="0 0 20 21"
-                  aria-hidden={true}
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -377,7 +368,7 @@ const HealthNeedFilter = ({
             )}
           </div>
         </div>
-        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base text-sofia-regular'  id='hn_label_003_3'>
+        <div className='text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base'  id='hn_label_003_3'>
           {productSum >= 0 ?  (activeFiltersData?.showResultsText?.value)?.replace (/#/,  productSum) : null}
         </div>
       </section>
@@ -410,13 +401,11 @@ const HealthNeedFilter = ({
                               >
                                 {leftfiltermaindata?.categoryImage?.expandedValue ? 
                                 <ImageComponent
-                                  src={DOMPurify.sanitize(leftfiltermaindata?.categoryImage?.expandedValue?.url)}
-                                  alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0]?.name)}
-                                  id={leftfiltermaindata?.mainCategory?.value[0]?.name + index}
-                                  height={24}
-                                  width={24} 
-                                  ariahidden={false}
-                                  className="mr-2" />
+                                    src={DOMPurify.sanitize(leftfiltermaindata?.categoryImage?.expandedValue?.url)}
+                                    alt={DOMPurify.sanitize(leftfiltermaindata?.mainCategory?.value[0].name)}
+                                    id={leftfiltermaindata?.mainCategory?.value[0].name + index}
+                                    height={24}
+                                    width={24} className="mr-2" ariahidden={false} />
                                   : null} 
                                 <label
                                   htmlFor={
@@ -452,7 +441,7 @@ const HealthNeedFilter = ({
                                       handleViewAllChange(
                                         e,
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.id
+                                          ?.value[0].id
                                       )
                                     }
                                       id={
@@ -507,7 +496,7 @@ const HealthNeedFilter = ({
                                             e,
                                             leftfiltersubdata?.name,
                                             leftfiltermaindata?.mainCategory
-                                              ?.value[0]?.id,
+                                              ?.value[0].id,
                                             leftfiltersubdata?.id
                                           )
                                         }
@@ -520,13 +509,13 @@ const HealthNeedFilter = ({
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value?.[0]?.id
+                                                ?.value[0].id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value?.[0]?.id
+                                                ?.value[0].id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />

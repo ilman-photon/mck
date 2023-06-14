@@ -19,10 +19,10 @@ const nextConfig = {
 
   env: {
     API_URL: dev
-      ? "https://mcco02mstrub73kprod.dxcloud.episerver.net"
+      ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
       : test
-      ? "https://mcco02mstrub73kprod.dxcloud.episerver.net"
-      : "https://mcco02mstrub73kprod.dxcloud.episerver.net",
+      ? "https://mcco02mstrub73kprep.dxcloud.episerver.net"
+      : "https://mcco02mstrub73kprep.dxcloud.episerver.net",
       PASSWORD:"P@ssword123$",
     USERNAME:"apiuser",
     CLIENT_SECRET:"SuperSecretPassword",
