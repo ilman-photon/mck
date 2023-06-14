@@ -7,12 +7,14 @@ import BlogSearchComponent from "@/components/blog/blog-search-result";
 function Faq() {
     return (
         <>
-        <GoogleTagManager/>
-        <HeaderComponent />
-        <BlogSearchComponent/>
-        <FooterComponent />
-    </>
+            <GoogleTagManager />
+            <div className="wrapper">
+                <HeaderComponent />
+                <BlogSearchComponent />
+                <FooterComponent />
+            </div>
+        </>
     )
-    
+
 }
 export default Faq;

@@ -7,12 +7,14 @@ import GoogleTagManager from "@/components/google_tag_manager";
 function WhereToBuy() {
     return (
         <>
-        <GoogleTagManager/>
-        <HeaderComponent />
-        <WhereComponent />
-        <FooterComponent />
-    </>
+            <GoogleTagManager />
+            <div className="wrapper">
+                <HeaderComponent />
+                <WhereComponent />
+                <FooterComponent />
+            </div>
+        </>
     )
-    
+
 }
 export default WhereToBuy;

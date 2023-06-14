@@ -4,9 +4,14 @@ import PrivacyComponent from "@/components/privacy/PrivacyComponent";
 function privacy() {
 
     return (
+        <>
+            <GoogleTagManager />
+            <div className="wrapper">
         <LandingLayout>
             <PrivacyComponent />
         </LandingLayout>
+            </div>
+        </>
     )
 
 }

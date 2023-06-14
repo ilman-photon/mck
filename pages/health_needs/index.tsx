@@ -63,20 +63,22 @@ function HealthNeedsPage() {
   return (
     <>
       <GoogleTagManager />
-      <HeaderComponent
-        isCarusolAvaible={
-          response?.data[0].contentArea.expandedValue[0].name == "Carousel"
-            ? true
-            : false
-        }
-      />
-      {error && <p>{error.message}</p>}
-      {loadingTemp ||
-        (!loading && !error && response && (
-          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-        ))}
-      <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
-      <FooterComponent />
+      <div className="wrapper">
+        <HeaderComponent
+          isCarusolAvaible={
+            response?.data[0].contentArea.expandedValue[0].name == "Carousel"
+              ? true
+              : false
+          }
+        />
+        {error && <p>{error.message}</p>}
+        {loadingTemp ||
+          (!loading && !error && response && (
+            <CarouselComponent sectionData={filteredData("CarouselBlock")} />
+          ))}
+        <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
+        <FooterComponent />
+      </div>
     </>
   );
 }

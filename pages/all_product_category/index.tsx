@@ -446,6 +446,7 @@ function AllProductCategoryPage({
         <title>McKesson</title>
       </Head>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
       {!carouselData && isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -493,6 +494,7 @@ function AllProductCategoryPage({
         />
       </div>
       <FooterComponent />
+      </div>
     </>
   );
 }

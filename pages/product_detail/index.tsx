@@ -71,6 +71,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
         <title>McKesson</title>
       </Head>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent />
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -106,6 +107,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
         </div>
       )}
       <FooterComponent />
+      </div>
     </>
   );
 }
