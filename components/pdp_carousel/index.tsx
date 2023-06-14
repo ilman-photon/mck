@@ -220,6 +220,7 @@ function PdpCarousel(prodViewData: any) {
             src={DOMPurify.sanitize(imgUrl)}
             className="lg:w-[270px] max-w-[200px]"
             alt={DOMPurify.sanitize("Image is not available")}
+            ariahidden={false}
             id={
               "pdp_carousel_" + prodResponse?.productImages?.value?.imgdata?.id
             }

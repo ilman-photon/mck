@@ -80,6 +80,7 @@ function ContactUsComponent() {
                               ?.altText?.value || "Cell Icon"
                           }
                           id="cu_img_005"
+                          ariahidden={true}
                           className="w-fit mx-auto my-0"
                         />
                       }
@@ -118,6 +119,7 @@ function ContactUsComponent() {
                               ?.expandedValue?.altText?.value || "timer icon"
                           }
                           id="cu_img_008"
+                          ariahidden={true}
                           className="w-fit mx-auto my-0"
                         />
                       }
@@ -157,6 +159,7 @@ function ContactUsComponent() {
                                 ?.altText?.value || "email icon"
                             }
                             id="cu_img_011"
+                            ariahidden={true}
                             className="w-fit mx-auto my-0"
                           />
                         }
@@ -187,6 +190,7 @@ function ContactUsComponent() {
                               ?.altText?.value || 'alt="location icon"'
                           }
                           id="cu_img_013"
+                          ariahidden={true}
                           className="w-fit mx-auto my-0"
                         />
                       }

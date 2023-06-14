@@ -366,6 +366,7 @@ function HealthCareProfessionalComponent({
                                     id={tab?.tabImage?.expandedValue?.url}
                                     className="mr-3"
                                     alt={sanitizedAltText}
+                                    ariahidden={false}
                                   />
                                 ) : (
                                   <div className="px-3 flex lg:hidden md:hidden">

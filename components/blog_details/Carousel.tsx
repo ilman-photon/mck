@@ -94,7 +94,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           src={DOMPurify.sanitize(item?.image?.value?.url)}
                           alt={item?.image?.value?.id}
                           id={item?.image?.value?.id}
-                          aria-hidden="true"
+                          ariahidden={true}
                           className="w-full max-h-[240px] lg:max-h-[276px] object-cover"
                         />
                       </div>
