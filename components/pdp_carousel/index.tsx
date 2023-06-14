@@ -137,35 +137,38 @@ function PdpCarousel(prodViewData: any) {
             </div>
           )}
           <ul className="3GnUWp flex lg:flex-col">
-            {prodResponse?.productImages?.value && prodResponse?.productImages?.value
-              ?.slice(arrowClick, lastIndex)
-              .map((imgdata: any, index: any) => {
-                return (
-                  <li
-                    className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
+            {prodResponse?.productImages?.value &&
+              prodResponse?.productImages?.value
+                ?.slice(arrowClick, lastIndex)
+                .map((imgdata: any, index: any) => {
+                  return (
+                    <li
+                      className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
                                     ${
                                       selectedItemIndex === index + arrowClick
                                         ? "cursor-pointer border-solid border-4 border-indigo-600 hover:border-solid hover:border-4"
                                         : ""
                                     } 
                                 `}
-                    id={"pdp_carousel_" + index}
-                    key={`pdpcarousalkey${index}`}
-                    onClick={() => {
-                      handleImageClick(index, imgdata?.id);
-                    }}
-                    onMouseOver={(event) => handleMouseOver(index)}
-                  >
-                    <img
-                      className="max-w-xl w-10"
-                      role="img"
-                      src={DOMPurify.sanitize(imgdata?.url)}
-                      alt={DOMPurify.sanitize(`pdp-img-C0` + index)}
-                      id={DOMPurify.sanitize(`pdp-img-C0` + index)}
-                    />
-                  </li>
-                );
-              })}
+                      id={"pdp_carousel_" + index}
+                      key={`pdpcarousalkey${index}`}
+                      onClick={() => {
+                        handleImageClick(index, imgdata?.id);
+                      }}
+                      onMouseOver={(event) =>
+                        handleMouseOver(index + arrowClick)
+                      }
+                    >
+                      <img
+                        className="max-w-xl w-10"
+                        role="img"
+                        src={DOMPurify.sanitize(imgdata?.url)}
+                        alt={DOMPurify.sanitize(`pdp-img-C0` + index)}
+                        id={DOMPurify.sanitize(`pdp-img-C0` + index)}
+                      />
+                    </li>
+                  );
+                })}
           </ul>
           {/* <button onClick={handleDownArrowClick}>Down arrow</button> */}
           {isProductImageLessThanSix ? null : (
