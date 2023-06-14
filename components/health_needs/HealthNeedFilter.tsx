@@ -513,13 +513,13 @@ const HealthNeedFilter = ({
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
+                                                ?.value?.[0]?.id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
+                                                ?.value?.[0]?.id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
