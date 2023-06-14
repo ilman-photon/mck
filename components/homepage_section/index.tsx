@@ -92,7 +92,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full lg:py-9 mb-6 lg:mb-12`}
+            }  w-full lg:px-72 lg:py-9 mb-6 lg:mb-12`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -131,7 +131,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
                 onPressCTA={() => handleCTABtn(sectionData?.buttonUrl?.value)} 
                 CTABackgroundColor={sectionData?.buttonColorCode?.value} 
                 CTATitle={sectionData?.buttonText?.value}  
-                containerStyle="lg:p-5 p-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col"          
+                containerStyle="lg:p-5 py-4 lg:px-4 my-auto col-span-1 w-full lg:w-1/2 flex flex-1 flex-col"          
             />
           </div>
         </div>
@@ -145,7 +145,7 @@ const ImageWithTextComponent = () => {
     className={`${sectionData?.assetPosition?.value === "Right"
         ? "flex-row-reverse text-center"
         : "text-left"
-      } w-full lg:py-8 py-6 mb-6 lg:mb-12`}
+      } w-full lg:px-72 lg:py-8 py-6 mb-6 lg:mb-12`}
     style={{ backgroundColor: sectionData?.backgroundColor?.value }}
     key={sectionData?.image?.value?.id}
   >

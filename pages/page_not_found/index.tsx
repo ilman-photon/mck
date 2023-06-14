@@ -6,11 +6,13 @@ import React from "react";
 function NotFound() {
     return (
         <>
-        <HeaderComponent />
-        <PageNotFound /> 
-        <FooterComponent />
-    </>
+            <div className="wrapper">
+                <HeaderComponent />
+                <PageNotFound />
+                <FooterComponent />
+            </div>
+        </>
     )
-    
+
 }
 export default NotFound;

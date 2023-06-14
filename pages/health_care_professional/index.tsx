@@ -11,12 +11,14 @@ function Terms() {
   return (
     <>
       <GoogleTagManager />
-      <HeaderComponent isCarusolAvaible={!isCarusonAvible} />
-      <HealthCareProfessionalComponent
-        isCarusolAvaible={!isCarusonAvible}
-        isCarusolAvaibleProps={setisCarusonAvible}
-      />
-      <FooterComponent />
+      <div className="wrapper">
+        <HeaderComponent isCarusolAvaible={!isCarusonAvible} />
+        <HealthCareProfessionalComponent
+          isCarusolAvaible={!isCarusonAvible}
+          isCarusolAvaibleProps={setisCarusonAvible}
+        />
+        <FooterComponent />
+      </div>
     </>
   );
 }

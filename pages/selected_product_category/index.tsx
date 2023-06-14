@@ -63,6 +63,7 @@ function ProductListPage() {
   return (
     <>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent
         isCarusolAvaible={
           response?.data[0]?.contentArea?.expandedValue[0]?.name ==
@@ -87,6 +88,7 @@ function ProductListPage() {
         )
       )}
       <FooterComponent />
+      </div>
     </>
   );
 }

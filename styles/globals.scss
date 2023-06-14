@@ -1793,7 +1793,10 @@ Mobiles Menu
     fill: #fff;
   }
   .brand-logo {
-    padding-left: 16px;
+    margin-left: 72px;
+  }
+  .isStickyActive .brand-logo {
+    margin-left: 24px;
   }
   .signup-form {
     width: 27%;
@@ -2579,4 +2582,21 @@ li.indicator.active {
     height: 16px;
     margin: 2px 4px;
   }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 1440px){
+  .header.container { 
+    max-width: 1440px;
+  } 
+}
+@media screen and (min-width: 1441px){
+  .header.container { 
+    max-width: 1440px;
+  } 
 }

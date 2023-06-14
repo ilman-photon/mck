@@ -28,18 +28,19 @@ const nextConfig = {
     CLIENT_SECRET:"SuperSecretPassword",
     MAPSAPIKEY:'AIzaSyCZy8PsqiP202lhDapwxE8r1qUgZtC-Vjk',
     HEARTMAPAPIKEY:'180A0FF6-6659-44EA-8E03-2BE22C2B27A3',
+
   },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mcco02mstrub73kprod.dxcloud.episerver.net',
+        hostname: 'mcco02mstrub73kprep.dxcloud.episerver.net',
         port: '',
         pathname: '/globalassets/**',
       },
       {
         protocol: 'https',
-        hostname: 'mcco02mstrub73kprod.dxcloud.episerver.net',
+        hostname: 'mcco02mstrub73kprep.dxcloud.episerver.net',
         port: '',
         pathname: '/contentassets/**',
       },
