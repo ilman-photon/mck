@@ -15,7 +15,7 @@ import DOMPurify from "isomorphic-dompurify";
 
 const BlogDetailsComponent = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id }: any = router.query;
   const [BlogInfo, setBlogInfo] = useState<any>();
   const [appSetting, setAppSetting] = useState<any>();
   const [loading, setIsLoading] = useState<boolean>(true);
@@ -35,7 +35,6 @@ const BlogDetailsComponent = () => {
       const APPdata = await AppSetting;
       setIsLoading(false);
       setBlogInfo(Blogdata.data[0]);
-      console.log("On No Related Product", Blogdata.data[0])
       setAppSetting(APPdata);
     } catch (error) {
       console.error("Error fetching Blog data:", error);
@@ -123,8 +122,8 @@ const BlogDetailsComponent = () => {
                     <div className="lg:pb-0 pb-4">
                       <span
                         className={`text-mckblue text-sofia-reg font-normal text-base pr-2 border-solid ${BlogInfo?.readMinute?.value
-                            ? "shade-grey-right-border"
-                            : ""
+                          ? "shade-grey-right-border"
+                          : ""
                           }`}
                         id="blog-label-001"
                       >
