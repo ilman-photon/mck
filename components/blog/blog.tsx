@@ -12,8 +12,9 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
   fetchBlogFilter,
-  fetchBlogSetting,
+  // fetchBlogSetting,
 } from "./BlogAPI";
+import { useBlogStore } from "../global/Store/useBlogStore";
 
 const BlogList = dynamic(() => import("./BlogListContainer"), {
   loading: () => (
@@ -30,8 +31,13 @@ const BlogComponent = () => {
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [ActiveSearch, setActiveSearch] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
-  const [BlogSetting, setBlogSetting] = useState<any>();
-  const [loading, setIsLoading] = useState<any>();
+  // const [BlogSetting, setBlogSetting] = useState<any>();
+  const BlogSetting = useBlogStore(state => state.blogSettings)
+  const fetchBlogSetting = useBlogStore(state => state.getBlogSetting)
+  // const [loading, setIsLoading] = useState<any>();
+  const loading = useBlogStore(state => state.isLoading)
+  const setIsLoading = useBlogStore(state => state.setIsLoading)
+
   const [searchInfo, setSeachInfo] = useState<any>({
     ActiveSearch: true,
     SearchString: "",
@@ -41,16 +47,11 @@ const BlogComponent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchBlogSetting()
-      .then((res) => {
-        setBlogSetting(res);
-        setIsLoading(false);
-      })
-      .catch((e: Error | AxiosError) => {
-        setIsLoading(false);
-      });
-  }, []);
+    if(BlogSetting === null){
+      fetchBlogSetting()
+    }
+  }, [BlogSetting]);
+
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
     router.push({
@@ -100,6 +101,7 @@ const BlogComponent = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <div
       role="main"

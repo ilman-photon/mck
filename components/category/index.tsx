@@ -36,7 +36,7 @@ export default function CategoryComponent({ sectionData }: any) {
     {!loading && response && !isNull && (
       <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
         <div className="flex flex-wrap justify-center">
-          {response.map((item: any, index: number) =>{
+          {response.map((item: any, index: any) =>{
             if(!item?.data?.productCategoryImage?.value?.url){
                setIsNull(true)
             }
@@ -83,7 +83,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(item?.data?.productCategoryDescription?.value),
                   }}
-                  id={`category_Titel_0${index}`}
+                  id={`category_Titel_0${DOMPurify.sanitize(index)}`}
                 ></div>
               </div>
             )

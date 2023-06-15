@@ -24,7 +24,7 @@ function HealthNeedsPage() {
   function filteredData(valueType: string) {
     return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
-        return arrEle == valueType;
+        return arrEle === valueType;
       });
     });
   }
@@ -32,6 +32,7 @@ function HealthNeedsPage() {
   useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       false;
@@ -39,6 +40,7 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
     if (
       response &&
@@ -47,11 +49,13 @@ function HealthNeedsPage() {
       response.data[0].title &&
       response.data[0].title.value
     ) {
-      document.title = DOMPurify.sanitize(response.data[0].title.value);
+      const sanitizedTitle = DOMPurify.sanitize(response.data[0].title.value);
+      document.title = sanitizedTitle;
     } else {
       document.title = "Health Needs";
     }
   }, [JSON.stringify(response)]);
+
   const [isCarusonAvible, setisCarusonAvible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -61,6 +65,7 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <GoogleTagManager />
@@ -75,10 +80,11 @@ function HealthNeedsPage() {
           }
         />
         {error && <p>{error.message}</p>}
-        {loadingTemp ||
-          (!loading && !error && response && (
-            <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-          ))}
+        {!loading && !error && response && (
+          <CarouselComponent
+            sectionData={filteredData("CarouselBlock")}
+          />
+        )}
         <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
         <FooterComponent />
       </div>

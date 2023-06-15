@@ -64,7 +64,7 @@ function HeaderNoStickyComponent() {
 
   return (
     <>
-      <div className="flex lg:grid container mx-auto bg-transparent blue-txt">
+      <div className="flex lg:grid container mx-auto bg-transparent text-mckblue">
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
             <img
