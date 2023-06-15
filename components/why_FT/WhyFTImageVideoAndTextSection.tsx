@@ -89,7 +89,7 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
           key={sectionData?.image?.value?.id}
         >
           {/* <div className="container mx-auto flex flex-col-reverse lg:flex-row-reverse"> */}
-          <div className={`container mx-auto grid lg:flex xtralarge:px-72 desktop:px-72 ipadlarge:px-72 mobile:px-15 ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
+          <div className={`container mx-auto grid lg:flex xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15 ${sectionData?.assetPosition?.value === 'Right' ? 'flex flex-row-reverse flex-1' : 'text-left'} `}>
             <AVComponent
             isVideoExist={sectionData.video?.value?.url || sectionData?.videoUrl?.value} 
             // videoContainerStyle={`${sectionData?.assetPosition?.value} w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1`}
@@ -148,7 +148,7 @@ const ImageWithTextComponent = () => {
       className={`${sectionData?.assetPosition?.value === "Right"
           ? "flex-row-reverse text-center"
           : "text-left"
-        } container mx-auto grid lg:flex xtralarge:px-72 desktop:px-72 ipadlarge:px-72 mobile:px-15`}
+        } container mx-auto grid lg:flex xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15`}
     >
       <ImageComponent
         // imageContainerStyle='w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0  col-span-1'
@@ -214,7 +214,7 @@ const ImageBGWithTextComponent = () => {
               buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
               buttonStyle={`jsx-290076256 w-fit leading-5 pd-12 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
               // containerStyle="lg:absolute lg:right-28 top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-start pt-8 lg:pt-0"         
-              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center pt-8 lg:pt-0 desktop:left-[72px] mobile:left-[15px] px-[15px]'}`}
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center pt-8 lg:pt-0 mediumdesktop:left-[72px] mobile:left-[15px] px-[15px]'}`}
            />
             </div>
       </div>

@@ -246,11 +246,12 @@ module.exports = {
         50: '50%',
       },
       screens: {
-        desktop: {'max': '1380px','min':'1280px'},
-        smalldekstop:  {'max': '1285px','min':'1280px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
         ipadlarge: {'max': '1025px', 'min':'1023px'},
+        desktop: {'max' : '1280px'},
+        smalldekstop:  {'max': '1285px','min':'1280px'},
+        mediumdesktop: {'max': '1380px','min':'1280px'},
         xtralarge: {'min': '1600px'},
       },
       maxWidth: {
