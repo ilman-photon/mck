@@ -1,6 +1,6 @@
 import { useWindowResize } from "@/hooks/useWindowResize";
 import Link from "next/link";
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import ProductDropComponent from "../productdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 
@@ -62,6 +62,25 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
     setIsOpen(check);
     setMenuData_(a);
   };
+  const MenuContainer = useRef<HTMLDivElement>(null);
+  const Menu = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        MenuContainer.current &&
+        !MenuContainer.current.contains(event.target as Node) &&
+        Menu.current &&
+        !Menu.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuActive(false)
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -73,6 +92,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
           }`}
       >
         <div
+          ref={MenuContainer}
           // onMouseLeave={() => setIsMobileMenuActive(false)}
           className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi lg:bg-transparent mobilelarge:top-16 mobilelarge:max-w-[75%] mobilesm:max-w-[85%] mobilelarge:-left-full mobilelarge:fixed ${
             isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""
@@ -80,6 +100,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
         >
           {isMobileMenuActive && (
             <div
+              ref={Menu}
               className="group lg:ml-7 lg:mr-6 whitespace-nowrap mainmenu-items"
               key={getRandomNumber()}
             >
@@ -110,6 +131,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                   id={`header-menu-0${idx+1}`}
                   >
                     <Link
+                    onClick={setIsMobileMenuActive}
                       className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                       href={item?.menuItemUrl?.value ?? ""}
                     >
@@ -120,17 +142,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     onClick={() => {
                       handleMenuOpen(idx, item?.menuItemName?.value, item);
                     }}
-                    className={`${
-                      item?.subMenuContentBlockArea?.value == null
-                      ? "lg:hidden xl:hidden"
-                      : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
-                      } 
-                    ${
-                      menuData_ && menuData_[idx] && menuData_[idx].flag
-                        ? "open"
-                        : ""
-                      }
-                    `}
+                    className={`${item?.subMenuContentBlockArea?.value == null? "lg:hidden xl:hidden": "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"} ${menuData_ && menuData_[idx] && menuData_[idx].flag&&"open"}`}
                     aria-hidden={true}
                   ></span>
                 </div>
