@@ -80,7 +80,7 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       })
       .catch((error:any) => {
         reject(false);
-        console.log(error);
+        //console.log(error);
       });
     });
   }
