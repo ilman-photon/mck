@@ -11,6 +11,7 @@ import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import { useRouter } from "next/router";
+import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -29,28 +30,18 @@ function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
   const router = useRouter();
-  const [categoryError, setCategoryError] = useState<any>();
-  const [categoryLoading, setCategoryLoding] = useState<any>(true);
-  const [productFilter, setProductFilter] = useState<any>();
-  const [activeFilter, setActiveFilter] = useState<any>([]);
-  const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
+  // const [activeFilter, setActiveFilter] = useState<any>([]);
+  const activeFilter = useAllProductCategory(state => state.activeFilters)
+  const setActiveFilter = useAllProductCategory(state => state.setActiveFilters)
+  
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
-  const [allProductCategoryList, setAllProductCategoryList] = useState<any>([]);
-
-  const [productCategory, setProductCategory] = useState<any>();
-  const [selectedProduct, setSelectedProduct] = useState<any>([]);
-  const [categoryProduct, setCategoryProduct] = useState<any>();
-  const [carouselData, setCarouselData] = useState<any>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [recommendedProduct, setRecommendedProduct] = useState<any>();
-  const [productSum, setProductSum] = useState<any>();
   const [filterClicked, setFilterClicked] = useState(false);
   const productSearchCard = false;
   let selectedCategoryName: any = [];
-  let productName: any = [];
+  // let productName: any = [];
 
   function fetchProductList(filter: any) {
-    setIsLoading(true);
+    setIsLoadingTrue();
     let queryParameter = "";
     if (filter === "") {
       // queryParameter = `(productType/value/name eq 'Acute Care')`;
@@ -99,138 +90,43 @@ function AllProductCategoryPage({
       })
       .catch((e: Error) => console.log(e))
       .finally(() => {
-        setIsLoading(false);
+        setIsLoadingFalse();
       });
   }
 
-  // -------- Health needs page data fetch starts -------- //
-  const [healthNeedData, setHealthNeedData] = useState<any>();
-  const [activeFiltersData, setactiveFiltersData] = useState<any>();
-  const [productCategoryData, setproductCategoryData] = useState<any>();
+  /**
+   * @description business logic wired here
+   */
+  const getData = useAllProductCategory(state => state.getProductCategorySettings)
+  const healthNeedData = useAllProductCategory(state => state.healthNeedData);
+  const activeFiltersData = useAllProductCategory(state => state.activeFilterData)
+  const productCategoryData = useAllProductCategory(state => state.productCategoryData)
+  const productCategory = useAllProductCategory(state => state.productCategory)
+  const carouselData = useAllProductCategory(state => state.carouselData)
+  const categoryProduct = useAllProductCategory(state => state.categoryProduct)
+  const selectedProduct = useAllProductCategory(state => state.selectedProduct)
+  const setSelectedProduct = useAllProductCategory(state => state.setSelectedProduct)
+  const selectedFilterItems = useAllProductCategory(state => state.selectedFilterItems)
+  const allProductCategoryList = useAllProductCategory(state => state.allProductCategoryList)
+  const setIsLoadingTrue = useAllProductCategory(state => state.setIsLoadingTrue)
+  const setIsLoadingFalse = useAllProductCategory(state => state.setIsLoadingFalse)
+  const isLoading = useAllProductCategory(state => state.isLoading)
+  const recommendedProduct = useAllProductCategory(state => state.recommendProduct)
+  const productSum = useAllProductCategory(state => state.productSum)
+  const setProductSum = useAllProductCategory(state => state.setProductSum)
+  const setSelectedFilterItems = useAllProductCategory(state => state.setSelectedFilterItems)
 
   useEffect(() => {
-    const fetchData = async () => {
-      // Health needs Categories List
-      const healthNeedsCategories = await axiosInstance(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
-      );
-      const healthNeedsCategoriesList =
-        healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
-          (categoryList: any) => categoryList.name === "Health Need Highlights"
-        );
+    if(healthNeedData === null){
+      getData()
+    }
+  },[healthNeedData])
 
-      const healthNeedsCategoriesListData =
-        healthNeedsCategoriesList.length > 0
-          ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
-          : [];
-      setHealthNeedData(healthNeedsCategoriesListData);
-
-      // Product Category setting - Filters data
-      const activeFiltersData = await axiosInstance(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
-      );
-      const activeFiltersDataList = activeFiltersData?.data[0];
-      setactiveFiltersData(activeFiltersDataList);
-
-      // Product Category Helath needs - Left side category lists
-      const productCategoryData = await axiosInstance(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
-      );
-      const productCategoryDataList =
-        productCategoryData?.data[0]?.categoryFilter?.expandedValue;
-      setproductCategoryData(productCategoryDataList);
-      createTempFilterArr(productCategoryDataList);
-      setCarouselData(productCategoryData?.data[0]?.contentArea?.expandedValue);
-      setAllProductCategoryList(productCategoryDataList);
-      // Four column block area
-      const productLandingPage = await axiosInstance(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
-      );
-
-      // const tempList = productLandingPage?.data[0].contentArea?
-      const productCategoryList =
-        productLandingPage?.data[0].contentArea?.expandedValue[1]
-          ?.contentBlockArea?.expandedValue;
-      setProductCategory(productCategoryList);
-      setRecommendedProduct(productLandingPage?.data[0].contentArea);
-      let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
-      setCategoryProduct([tempObj]);
-      productCategoryList?.map((item: any) => {
-        productName.push(item.productCategoryName?.value);
-      });
-      productName?.map((item: any) => {
-        axiosInstance
-          .get(
-            `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))&expand=*&orderby=changed desc`
-          )
-          .then((res: any) => {
-            setProductSum(res.data.totalMatching);
-            let tempResults: any = [];
-            res.data.results.map((item: any) => {
-              let name = item?.productCategory?.value[0]?.name;
-              if (tempResults[name]) {
-                let tempArray = tempResults[name];
-                tempArray.push(item);
-                tempResults[name] = tempArray;
-              } else {
-                tempResults[name] = [item];
-              }
-            });
-            const transformedArray = Object.entries(tempResults).map(
-              ([key, value]) => {
-                return {
-                  item: { name: key },
-                  data: { results: value },
-                };
-              }
-            );
-            setSelectedProduct(transformedArray);
-          })
-          .catch((e: Error) => console.log(e))
-          .finally(() => {
-            setIsLoading(false);
-          });
-      });
-    };
-
-    fetchData();
-  }, []);
-
-  const createTempFilterArr = (results: any) => {
-    let tempArr: any = [];
-    results?.map((leftfiltermaindata: any) => {
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["items"] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        leftfiltermaindata?.subCategory?.value[0].id
-      ] = [];
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["categoryName"] =
-        leftfiltermaindata?.mainCategory?.value[0].name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        "isBusinessVerticalCategory"
-      ] = leftfiltermaindata?.isBusinessVerticalCategory?.value;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id]["productType"] =
-        leftfiltermaindata?.isBusinessVerticalCategory?.value
-          ? "productType"
-          : leftfiltermaindata?.name;
-      tempArr[leftfiltermaindata?.mainCategory?.value[0].id][
-        "isCategoryChecked"
-      ] = false;
-      leftfiltermaindata?.subCategory?.value.map((subItem: any) => {
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id] = [];
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
-          "checked"
-        ] = false;
-        tempArr[leftfiltermaindata?.mainCategory?.value[0].id][subItem.id][
-          "name"
-        ] = subItem.name;
-      });
-    });
-    setSelectedFilterItems(tempArr);
-  };
 
   useEffect(() => {
-    createQueryParameters();
+    if(activeFilter){
+      createQueryParameters();
+    }
   }, [activeFilter]);
 
   const createQueryParameters = () => {
@@ -306,7 +202,6 @@ function AllProductCategoryPage({
               }
             }
             queryParams += "(";
-            console.log(category,"cat",)
             const itemName = category.categoryName.replace(/[^a-zA-Z ]/g, "");
             // category.items.map((item: any, index: any) => {
               const encodeItemName = encodeURI(itemName);
@@ -334,47 +229,6 @@ function AllProductCategoryPage({
     }
     if (queryParams) fetchProductList(queryParams);
   };
-
-  useEffect(() => {
-    fetchCategoryId()
-      .then((res: any) => {
-        const id = res?.data[0]?.productCategory?.value[0]?.contentLink?.id;
-        if (id) {
-          return axiosInstance.get(
-            `${process.env.API_URL}/api/episerver/v3.0/content/${id}`,
-            {
-              headers: {
-                "Accept-Language": "en",
-              },
-            }
-          );
-        }
-      })
-      .catch((e: any) => {
-        setCategoryLoding(true);
-        setCategoryError(e);
-      });
-
-    FetchProductFilter()
-      .then((response: any) => {
-        setProductFilter(response);
-      })
-      .catch(() => {
-        return
-      });
-  }, []);
-
-  function fetchCategoryId() {
-    return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`
-    );
-  }
-
-  function FetchProductFilter() {
-    return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category-setting/?expand=*`
-    );
-  }
 
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
@@ -438,7 +292,7 @@ function AllProductCategoryPage({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setIsLoadingFalse();
     }, 500);
 
     return () => clearTimeout(timer);
