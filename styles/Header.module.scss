@@ -67,7 +67,7 @@
 @media (max-width: 1025px) and (min-width: 1023px) {
     .isStickyActive{
         .isMobileUi {
-            padding-left: 0vw;
+            padding-left: 14vw;
         .mainmenu-items {
             margin: 0 20px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
@@ -76,7 +76,7 @@
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 10vw !important;
+        padding-left: 14vw !important;
         .mainmenu-items {
             margin: 0 20px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
@@ -89,7 +89,7 @@
 @media (max-width: 1030px) and (min-width: 1000px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 8vw !important;
+        padding-left: 14vw !important;
         }
     }
 }
@@ -99,13 +99,14 @@
         .isMobileUi {
         padding-left: 0vw;
         .mainmenu-items {
-            margin: 0 37px !important;
+            margin: 0 32px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 12px;}
         }
         }
     }
     .isNotSticky {
         .isMobileUi {
+            padding-left: 4vw;
         .mainmenu-items {
             margin: 0 25px;
             .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
@@ -181,7 +182,7 @@
 @media (max-width: 1300px) and (min-width: 1280px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 5vw;
+        padding-left: 8vw;
         .mainmenu-items {
             margin: 0 20px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
@@ -190,7 +191,7 @@
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 7vw;
+        padding-left: 10vw;
         .mainmenu-items {
             margin: 0 25px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
@@ -202,7 +203,7 @@
 @media (max-width: 1379px) and (min-width:1300px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 3vw;
+        padding-left: 6vw;
         .mainmenu-items {
             margin: 0 35px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
@@ -211,9 +212,9 @@
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 4vw;
+        padding-left: 6vw;
         .mainmenu-items {
-            margin: 0 40px !important;
+            margin: 0 36px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
@@ -266,7 +267,7 @@
 @media (max-width: 1980px) and (min-width:1536px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 3vw;
+        padding-left: 6vw;
         .mainmenu-items {
             margin: 0 28px !important;
             .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
@@ -275,7 +276,7 @@
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 9vw;
+        padding-left: 13vw;
         .mainmenu-items {
             margin: 0 40px !important;
         }

@@ -72,7 +72,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                       // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
-                          className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
+                          className="blue-txt text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
                             /**
