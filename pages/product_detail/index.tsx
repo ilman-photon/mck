@@ -90,7 +90,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
         </div>
       )}
       {!isLoading && (
-        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 lg:mx-4 lg:mx-auto my-18 ">
+        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 my-18">
           <div className="left-column overflow-hidden lg:overflow-visible">
             <div className="pdp-slider">
               <PdpCarousel />
