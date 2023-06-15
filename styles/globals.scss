@@ -69,7 +69,6 @@
 @import "healthcare.module.scss";
 @import "productList.module.scss";
 @import "AllProductList.module.scss";
-@import "whyFT.module.scss";
 @import "termsofuse.module.scss";
 
 body {
@@ -2403,8 +2402,6 @@ Mobile and iPad Navigation
 }
 
 //where to buy Scroll
-.location-box {
-}
 .location-box::-webkit-scrollbar {
   width: 15px;
   border: solid 0.5px #808cb8;
@@ -2476,10 +2473,6 @@ video {
 }
 .blockDetailsCarousel .swiper-button-next {
   right: var(--swiper-navigation-sides-offset, 10px) !important;
-}
-
-.socialimg {
-  padding-right: 10px;
 }
 
 a.skip-main {
@@ -2554,13 +2547,11 @@ li.indicator.active {
     max-width: 1440px;
     margin: 0 auto;
   }
-}
-@media (max-width: 1440px) {
   .header.container {
     max-width: 1440px;
   }
 }
-@media screen and (min-width: 1441px) {
+@media (max-width: 1440px) {
   .header.container {
     max-width: 1440px;
   }
