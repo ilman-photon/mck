@@ -26,7 +26,7 @@ export default function CategoryComponent({ sectionData }: any) {
         setResponse(responses);
       })
       .catch((error) => {
-        console.log("error", error);
+        //console.log("error", error);
         setLoading(true);
       });
   }, []);
@@ -86,7 +86,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   <Link
                     href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
                   >
-                    {DOMPurify.sanitize(item?.data?.name)}
+                    {DOMPurify.sanitize(item?.data?.productCategoryName?.value)}
                   </Link>
                 </div>
                 <div

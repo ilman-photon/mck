@@ -33,11 +33,11 @@ const HealthNeedsComponent = ({
   const [loadingProgress, setLoadingProgress] = useState(0); // State untuk mengatur kemajuan loading progress
   const [recommendedProduct, setRecommendedProduct] = useState<any>();
   const [filterClicked, setFilterClicked] = useState(false);
-  const [productName, setProductName] = useState<any>()
+  const [productName, setProductName] = useState<any>();
   const [customerBackgroundColorCode, setCustomerBackgroundColorCode] =
     useState();
   const [productSum, setProductSum] = useState<any>();
-  const productItemName = useHeaderStore(state => state.selectedCategory)
+  const productItemName = useHeaderStore((state) => state.selectedCategory);
   // Right section product carousel data
   function fetchProductList(filter: any) {
     setIsLoading(true);
@@ -79,16 +79,16 @@ const HealthNeedsComponent = ({
     );
     promise
       .then((res: any) => {
-        if(res.data.results.length === 0){
+        if (res.data.results.length === 0) {
           setFilterClicked(true);
-          setProductSum(res.data.totalMatching)
-          setSelectedProduct( [
-            {item: {name: "" }},
-            {data: {results: ""}},
-          ])
-          return
+          setProductSum(res.data.totalMatching);
+          setSelectedProduct([
+            { item: { name: "" } },
+            { data: { results: "" } },
+          ]);
+          return;
         }
-       
+
         let tempObj: any = {};
         // if (filter.includes("Health%20Needs")) {
         //   setHealthData(!healthData);
@@ -96,7 +96,7 @@ const HealthNeedsComponent = ({
         let catArray: any = [];
         let tempResults: any = [];
         setProductSum(res.data.totalMatching);
-        setProductName(res.data.results[0]?.productType?.value[0].name)
+        setProductName(res.data.results[0]?.productType?.value[0].name);
         res.data.results.map((item: any) => {
           item?.healthNeeds?.value.forEach((value: any) => {
             if (
@@ -165,30 +165,29 @@ const HealthNeedsComponent = ({
   }, [activeFilter]);
 
   const fetchRecommandedProductData = async () => {
-    const tempName = productItemName?.length>0 ? productItemName : productName
-    const correctedName = tempName?.replace(/ /g, "-")
+    const tempName =
+      productItemName?.length > 0 ? productItemName : productName;
+    const correctedName = tempName?.replace(/ /g, "-");
     const recommendedCategoryData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
     );
-    const response = recommendedCategoryData?.data[0]?.contentArea
-    setRecommendedProduct(response)
+    const response = recommendedCategoryData?.data[0]?.contentArea;
+    setRecommendedProduct(response);
     const productCategoryDataList =
-    recommendedCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
-  setproductCategoryData(productCategoryDataList);
-  createTempFilterArr(productCategoryDataList);
-  }
+      recommendedCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
+    setproductCategoryData(productCategoryDataList);
+    createTempFilterArr(productCategoryDataList);
+  };
   useEffect(() => {
-    fetchRecommandedProductData()
-  }, [router,productItemName]) 
+    fetchRecommandedProductData();
+  }, [router, productName]);
 
   const getQueryParameterValue = (paramName: string) => {
     const url = window.location.href;
-    const queryString = url.substring(url.indexOf('?') + 1);
+    const queryString = url.substring(url.indexOf("?") + 1);
     const searchParams = new URLSearchParams(queryString);
     return searchParams.get(paramName);
-  }
-  
-  
+  };
 
   const createQueryParameters = () => {
     let queryParams = "";
@@ -296,7 +295,6 @@ const HealthNeedsComponent = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Health Needs");
       // Health needs Categories List
       const healthNeedsCategories = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
@@ -386,7 +384,6 @@ const HealthNeedsComponent = ({
     });
   }, [recommendedProduct]);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       const healthNeedsCategories = await axiosInstance.get(
@@ -469,14 +466,14 @@ const HealthNeedsComponent = ({
       });
     });
     //setSelectedFilterItems(tempArr);
-    console.log("Filtered", router.query.filter);
+    //console.log("Filtered", router.query.filter);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
-    console.log(selectedFilterData);
+   // console.log(selectedFilterData);
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
-          console.log(1);
+     //     console.log(1);
           sub_category.checked = true;
           if (
             category["items"] &&
@@ -486,7 +483,6 @@ const HealthNeedsComponent = ({
             setActiveFilter([router.query.filter]);
           }
         } else {
-          console.log(2);
           if (
             category["items"] &&
             category["items"].indexOf(sub_category.name) > -1

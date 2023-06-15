@@ -44,10 +44,10 @@ function ResultComponent() {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
         setSearchLoading(false);
-        setProductSum(res.data.totalMatching)
+        setProductSum(res?.data?.totalMatching)
         SetProductListData( [
-          {item: {name: res.data.results[0].productType?.value[0].name }},
-          {data: {results: res.data.results}},
+          {item: {name: res?.data?.results[0]?.productType?.value[0].name }},
+          {data: {results: res?.data?.results}},
         ])
       })
       .catch((e: Error) =>  setSearchLoading(false));
@@ -94,7 +94,7 @@ function ResultComponent() {
         })
       );
       filterItems[categoryId][subCategoryId].checked = false;
-      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0) {
+      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"]?.length <= 0) {
         filterItems[categoryId].isCategoryChecked = false;
       }
     }
@@ -154,7 +154,6 @@ function ResultComponent() {
 
   const createQueryParameters = () => {
     let queryParams = "";
-    if (selectedFilterItems.length > 0) {
 
       let businessVerticalCategory: string[];
       businessVerticalCategory = [];
@@ -189,7 +188,6 @@ function ResultComponent() {
       } else {
         queryParams = notBusinessQueryParams;
       }
-    }
     fetchProductList(queryParams);
   };
 
@@ -210,7 +208,7 @@ function ResultComponent() {
         );
 
       const healthNeedsCategoriesListData =
-        healthNeedsCategoriesList.length > 0
+        healthNeedsCategoriesList?.length > 0
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
       setHealthNeedData(healthNeedsCategoriesListData);

@@ -12,6 +12,7 @@ import DOMPurify from "isomorphic-dompurify";
 
 function HealthNeedsPage() {
   const [loadingTemp, setLoadingTemp] = useState(true);
+  const [tempStatus, setTempStatus] = useState(false);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
@@ -60,29 +61,15 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  console.log("response", response);
-  // response &&
-  //   response.data.forEach((item: any) => {
-  //     item.contentArea.expandedValue.forEach((expandedItem: any) => {
-  //       if (
-  //         expandedItem.contentType.includes("CarouselBlock") ||
-  //         expandedItem.contentType.includes("Carousel") ||
-  //         expandedItem.contentType.includes("carousel")
-  //       ) {
-  //         tempCarusolAvaible = true;
-  //       }
-  //     });
-  //   });
-
-  // setisCarusonAvible(tempCarusolAvaible);
   return (
     <>
       <GoogleTagManager />
       <div className="wrapper">
         <HeaderComponent
           isCarusolAvaible={
-            response?.data[0].contentArea.expandedValue[0].name == "Carousel"
+            response?.data[0].contentArea.expandedValue[0].contentType.includes(
+              "CarouselBlock"
+            )
               ? true
               : false
           }
