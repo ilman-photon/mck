@@ -40,6 +40,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
             <li className="lg:w-1/5 xl:w-1/5" key={`submenukey${index}`}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
+                id={`header-mainmenu-${index+1}`}
                   onClick={() => {
                     selectCategory(response?.menuItemName?.value);
                   }}
@@ -72,6 +73,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                       // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
+                        id={`header-submenu-${index+1}`}
                           className="blue-txt text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
