@@ -51,17 +51,18 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
           return response.json();
         })
         .then((data: any) => {
+          let title = "Product Details Page";
           if (data && data.length > 0 && data[0].title && data[0].title.value) {
             document.title = DOMPurify.sanitize(data[0].title.value);
-          } else {
-            document.title = "Product Details Page";
           }
+            document.title = title;
+          
         })
         .catch((error: Error) => {
-          document.title = "Product Details Page";
+          document.title =  "Product Details Page";
         });
     } else {
-      document.title = "Product Details Page";
+      document.title =  DOMPurify.sanitize("Product Details Page");
     }
   }, [JSON.stringify(Response)]);
 
@@ -91,7 +92,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
         </div>
       )}
       {!isLoading && (
-        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 lg:mx-4 lg:mx-auto my-18 ">
+        <div className="product-detail-page grid lg:grid-flow-col container lg:px-72 my-18">
           <div className="left-column overflow-hidden lg:overflow-visible">
             <div className="pdp-slider">
               <PdpCarousel />

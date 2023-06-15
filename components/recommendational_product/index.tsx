@@ -95,7 +95,6 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                   )}
                 </div>
               </div>
-
               <div
                 id={`p-text${indexs}${index + 1}`}
                 className={`text-justify pr-0 lg:pr-0 col-span-2`}
@@ -166,7 +165,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
         />
       );
 
-      const renderDescription = (
+      const renderDescription:any = (
         <div
           id={`p-text${indexs}${index + 1}`}
           className="text-justify pr-0 lg:pr-0 col-span-2 lg:text-[18px]"

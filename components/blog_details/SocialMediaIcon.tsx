@@ -34,7 +34,7 @@ const SocialMediaIconComponent = () => {
                             alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
                             ariahidden={false}
-                            className="socialimg"
+                            className="pr-10"
                        />
                     </LinkComponent>
                 </React.Fragment>

@@ -9,18 +9,17 @@ import Image from "next/image";
 import { WhyFTComponentType } from "./WhyFTComponent.type";
 import WhyFTImageVideoAndTextSection from "./WhyFTImageVideoAndTextSection";
 import axiosInstance from "@/utils/axiosInstance";
+import { useWhyFTStore } from "../global/Store/useWhyFTStore";
 function WhyFTComponent(
   { isCarusolAvaibleProps }: WhyFTComponentType = {
     isCarusolAvaibleProps: null,
   }
 ) {
-  const [whyFTData, SetWhyFTData] = useState<any>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  function fetchWhyFTDetails() {
-    return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/why-ft/&expand=*`
-    );
-  }
+  const whyFTData = useWhyFTStore(state => state.data)
+  const getWhyFTDetails = useWhyFTStore(state => state.getData)
+  const isLoading = useWhyFTStore(state => state.isLoading)
+  const setLoadingTimeout = useWhyFTStore(state => state.setTimeoutLoader)
+
   useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
@@ -41,23 +40,17 @@ function WhyFTComponent(
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setLoadingTimeout();
     }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchWhyFTDetails()
-      .then((res) => {
-        SetWhyFTData(res?.data[0]);
-        setIsLoading(false);
-      })
-      .catch((e: Error | AxiosError) => {
-        setIsLoading(false);
-      });
-  }, []);
+    if(whyFTData === null){
+      getWhyFTDetails()
+    }
+  }, [whyFTData]);
 
   if (isLoading) {
     return (
@@ -154,7 +147,7 @@ function WhyFTComponent(
                         sectionData={item}
                       />
                     ) : item?.contentType[1] === "OneColumnBlock" ? (
-                      <div className="container mx-auto py-6 xtralarge:px-72 desktop:px-72 ipadlarge:px-72 mobile:px-15 text-center mb-6 lg:mb-12">
+                      <div className="container mx-auto py-6 xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15 text-center mb-6 lg:mb-12">
                         <ImageVideoOrTextSection
                           index={`wfnt_0${index}`}
                           sectionData={item}

@@ -15,8 +15,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const [divHeight, setDivHeight] = useState({});
   const [headerData, setHeaderData] = useState<any>();
 
-  const logoSrc = useHeaderStore((state) => state.currentusedLogo);
   const firstLogo = useHeaderStore((state) => state.logoSrc1);
+  const beigeLogo = useHeaderStore((state) => state.logoSrc2);
   const setLogo = useHeaderStore((state) => state.setLogoSrc);
   const onMouseEnterToHeader = useHeaderStore((state) => state.onMouseEnter);
   const isDataExist = useHeaderStore((state) => state.headerData);
@@ -45,10 +45,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     }
   };
 
-  useLayoutEffect(() => {
-    setLogo();
-  }, []);
-
   useEffect(() => {
     let header = headerImgRef.current!.getBoundingClientRect();
     const handleScrollEvent = () => {
@@ -73,12 +69,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       )
       .then((res) => {
         setHeaderData(res.data[0]);
-        // setMenuData(
-        //   res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
-        //     .expandedValue
-        // );
-        // console.log(res?.data[0])
-        // setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
       })
       .catch((e: Error | AxiosError) => console.log(e));
   }
@@ -108,16 +98,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  function handleHeaderMouseEnter() {
-    if (!isMobile) {
-      onMouseEnterToHeader();
-    }
-  }
-
-  function handleHeaderMouseLeave() {
-    setLogo();
-  }
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -153,12 +133,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         !hamburgerMenu.contains(event.target as Node) &&
         !hamburgerMenuActive.contains(event.target as Node)
       ) {
-        // setIsMobileMenuActive(false);
         setIsBarAnimated(false);
       }
-      // if(a?.contains(event.target as Node)){
-      //   setIsMobileMenuActive(false);
-      // }
     };
 
     window.addEventListener("click", handleClickOutside);
@@ -174,8 +150,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         Skip to main content
       </a>
       <div
-        onMouseEnter={handleHeaderMouseEnter}
-        onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
           isCarusolAvaible
@@ -183,7 +157,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             : isSticky
             ? "sticky"
             : "relative z-40"
-        } flex lg:grid container mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
+        } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
@@ -206,10 +180,20 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
           onClick={handleOnClickLogo}
         >
           <img
-            id="logo-image"
-            src={DOMPurify.sanitize(logoSrc || firstLogo)}
+            id="logo-image-bgcolor"
+            src={DOMPurify.sanitize(firstLogo)}
             alt="Foster Thrive Logo image Link"
             className="logo-image lg:mt-7"
+            style={isMobile ? undefined : imgWidth}
+            tabIndex={0}
+            width={500}
+            height={500}
+          />
+          <img
+            id="logo-image-beige"
+            src={DOMPurify.sanitize(beigeLogo)}
+            alt="Foster Thrive Logo image Link"
+            className="logo-image lg:mt-7 hidden"
             style={isMobile ? undefined : imgWidth}
             tabIndex={0}
           />

@@ -14,30 +14,30 @@ import CookieSetting from "@/components/cookieSetting";
 import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
+import { useHomeStore } from "@/components/global/Store/useHomeStore";
+import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 
 export default function Home() {
-  
-  const { response, error, loading } = useAxios({
-    method: "GET",
-    url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/home/&expand=*&Select=blockArea`,
-    headers: {
-      "Accept-Language": "en"
-    },
-  });
+
+  const getHomeData = useHomeStore(state => state.getData)
+  const preFetchProductData = useAllProductCategory(state => state.getProductCategorySettings)
+  const response = useHomeStore(state => state.data)
+  const isLoading = useHomeStore(state => state.isLoading)
+
+  useEffect(() => {
+    if(response === null){
+      getHomeData()
+      preFetchProductData()
+    }
+  },[response])
 
   function filteredData(valueType: string) {
-    return response?.data[0]?.blockArea?.expandedValue?.filter((ele: any) => {
+    return response.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
         return arrEle == valueType;
       });
     });
   }
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(loading);
-  }, [loading]);
 
   return (
     <>
@@ -69,7 +69,7 @@ export default function Home() {
 
       <HeaderComponent
         isCarusolAvaible={
-         DOMPurify.sanitize(response?.data[0]?.blockArea?.expandedValue[0]?.contentType[1]) ===
+         DOMPurify.sanitize(response?.expandedValue[0]?.contentType[1]) ===
           "CarouselBlock"
             ? true
             : false
@@ -78,7 +78,7 @@ export default function Home() {
         <>
         {!isLoading && (
         <>
-          {response?.data[0]?.blockArea?.expandedValue?.map(
+          {response?.expandedValue?.map(
             (item: any, index: number) => (
               <React.Fragment key={index}>
                 {item?.contentType[1] === "CarouselBlock" ? (
@@ -97,7 +97,7 @@ export default function Home() {
                       index={`hp_0${index}`}
                       customStyleClass={"lg:px-5"}
                       sectionData={
-                        response.data[0].blockArea?.expandedValue[index]
+                        response.expandedValue[index]
                       }
                     />
                   </div>
@@ -105,7 +105,7 @@ export default function Home() {
                   <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
                     <ImageVideoOrTextSection
                       sectionData={
-                        response.data[0].blockArea?.expandedValue[index]
+                        response.expandedValue[index]
                       }
                       textAlignment={"text-center"}
                       index={`hp_0${index}`}

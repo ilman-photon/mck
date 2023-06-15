@@ -14,6 +14,13 @@ module.exports = {
       flexBasis: {
         "18/25": "72%",
       },
+      flexGrow: {
+        3: '3',
+      },
+      order: {
+        99: '99',
+        'initial': 'initial',
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
@@ -40,6 +47,7 @@ module.exports = {
         mckred: "#DC2E21",
         mckgreyborder: "#808CB8",
         mckopacityblue: "#001a712e",
+        mckoverlaygrey: "#00000045",
       },
       width: {
         18: '18px',
@@ -110,6 +118,12 @@ module.exports = {
         420: '420px',
         530: '530px'
       },
+      maxWidth: {
+        'unset':'unset',
+        170: "170px",
+        160: "160px",
+        343: '343px',
+      },
       minHeight: {
         50: '50px',
         57: '57px',
@@ -131,12 +145,10 @@ module.exports = {
         260: '260px',
         620: '620px',
       },
-      minHeight: {
-        50: '50px',
-      },
       left: {
         36: '36px',
         18: '-18px',
+        32: '32px',
       },
       top: {
         13: '-13px',
@@ -160,6 +172,7 @@ module.exports = {
         0: '0'
       },
       padding: {
+        '0.5': '5px',
         9: '9px',
         10: '10px',
         15: '15px',
@@ -247,19 +260,19 @@ module.exports = {
         50: '50%',
       },
       screens: {
-        desktop: {'max': '1380px','min':'1280px'},
+        mobilesm: {'max':'360px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
         ipadlarge: {'max': '1025px', 'min':'1023px'},
+        desktop: {'max' : '1280px'},
+        smalldekstop:  {'max': '1285px','min':'1280px'},
+        mediumdesktop: {'max': '1380px','min':'1280px'},
         xtralarge: {'min': '1600px'},
-      },
-      maxWidth: {
-        170: "170px",
-        160: "160px"
       },
       zIndex: {
         1: '1',
         0.1: '-1',
+        9997: '9997',
       }
     },
   },
