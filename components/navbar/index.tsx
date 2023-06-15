@@ -74,7 +74,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
       >
         <div
           // onMouseLeave={() => setIsMobileMenuActive(false)}
-          className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent mobilelarge:top-16 mobilelarge:max-w-[75%] mobilesm:max-w-[85%] mobilelarge:-left-full mobilelarge:fixed ${
+          className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi lg:bg-transparent mobilelarge:top-16 mobilelarge:max-w-[75%] mobilesm:max-w-[85%] mobilelarge:-left-full mobilelarge:fixed ${
             isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""
             }`}
         >
