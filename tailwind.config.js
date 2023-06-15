@@ -136,6 +136,7 @@ module.exports = {
       left: {
         36: '36px',
         18: '-18px',
+        32: '32px',
       },
       top: {
         13: '-13px',
