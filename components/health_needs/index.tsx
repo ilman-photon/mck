@@ -271,12 +271,12 @@ const HealthNeedsComponent = ({
         }
       });
 
-      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        // queryParams = "";
-        const currentURL = window.location.href;
-        const updatedURL = currentURL.split("?")[0];
-        window.location.href = DOMPurify.sanitize(updatedURL);
-      }
+      // if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+      // queryParams = "";
+      // const currentURL = window.location.href;
+      // const updatedURL = currentURL.split("?")[0];
+      // window.location.href = DOMPurify.sanitize(updatedURL);
+      // }
     }
 
     if (queryParams) fetchProductList(queryParams);
@@ -328,8 +328,8 @@ const HealthNeedsComponent = ({
         productCategoryData?.data[0]?.categoryFilter?.expandedValue;
       setproductCategoryData(productCategoryDataList);
       createTempFilterArr(productCategoryDataList);
-      const subCategories = productCategoryDataList[0].subCategory.value;
-      const mainCategory = productCategoryDataList[0].mainCategory.value[0];
+      const subCategories = productCategoryDataList[0].subCategory?.value;
+      const mainCategory = productCategoryDataList[0].mainCategory?.value[0];
 
       subCategories.forEach((subCat: any) => {
         const name = subCat.name;
