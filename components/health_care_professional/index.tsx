@@ -214,16 +214,17 @@ function HealthCareProfessionalComponent({
                         sectionData={filteredData("CarouselBlock")}
                       />
 
-                      {!isCarusolAvaible ? (
+                      {isCarusolAvaible && (
                         <div className="bg-gradient absolute"></div>
-                      ) : (
-                        <br />
                       )}
                     </div>
                   )}
                 </div>
                 <div
-                  className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6`}
+                  className={`${
+                    isCarusolAvaible &&
+                    "lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6"
+                  }  `}
                   style={{ background: customerBackgroundColorCode }}
                 >
                   <div className="container mx-auto">

@@ -14,7 +14,7 @@ function Terms() {
       <div className="wrapper">
         <HeaderComponent isCarusolAvaible={isCarusonAvible} />
         <HealthCareProfessionalComponent
-          isCarusolAvaible={!isCarusonAvible}
+          isCarusolAvaible={isCarusonAvible}
           isCarusolAvaibleProps={setisCarusonAvible}
         />
         <FooterComponent />
