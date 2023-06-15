@@ -13,6 +13,7 @@ import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import DOMPurify from "isomorphic-dompurify";
+import { useHealthCareProfessionalStore } from "../global/Store/useHealthCareProfessionalStore";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -23,8 +24,8 @@ function HealthCareProfessionalComponent({
   isCarusolAvaible,
   isCarusolAvaibleProps,
 }: HealthCareProfessionalComponentType) {
-  const [loading, setLoading] = useState(true);
-  const [response, setResponse] = useState<any>();
+  // const [loading, setLoading] = useState(true);
+  // const [response, setResponse] = useState<any>();
   const [customers, setCustomers] = useState<any>();
   const [customerReviewTitle, setCustomerReviewTitle] = useState<any>();
   const [reviewCount, setReviewCount] = useState<number>(1);
@@ -56,28 +57,16 @@ function HealthCareProfessionalComponent({
   };
 
   const [ApiRespond, setApiRespond] = useState<any>();
-  const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
+  const loading = useHealthCareProfessionalStore(state => state.isLoading)
+  const setLoading = useHealthCareProfessionalStore(state => state.setIsLoading)
+  const fetchUrl = useHealthCareProfessionalStore(state => state.getData)
+  const response = useHealthCareProfessionalStore(state => state.response)
 
-  const fetchUrl = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosInstance.get(url, {
-        headers: { "Accept-Language": "en" },
-      });
-      if (Object.keys(res?.data).length > 0) {
-        setResponse(res?.data[0]);
-      } else {
-        setResponse(null);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    fetchUrl();
-  }, []);
+    if(response === null){
+      fetchUrl();
+    }
+  }, [response]);
 
   useEffect(() => {
     if (response && Object.keys(response).length > 0) {
@@ -164,7 +153,6 @@ function HealthCareProfessionalComponent({
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   };
-  console.log("response", response);
   response &&
     response?.contentArea?.expandedValue.map((item: any) => {
       if (
