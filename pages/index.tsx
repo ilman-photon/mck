@@ -86,9 +86,11 @@ export default function Home() {
                     sectionData={filteredData("CarouselBlock")}
                   />
                 ) : item?.contentType[1] === "ProductCategoryBlock" ? (
+                        <div className="lg:px-72 px-15">
                   <CategoryComponent
                     sectionData={filteredData("ProductCategoryBlock")}
                   />
+                        </div>
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
                   <div>
                     <ImageVideoAndTextSection

@@ -239,16 +239,17 @@ module.exports = {
       },
       border: {
         blue20: "#CCD1E3",
-
       },
       borderRadius: {
         10: '10px',
         50: '50%',
       },
       screens: {
-        desktop: {'max': '1280px'},
+        desktop: {'max': '1380px','min':'1280px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
+        ipadlarge: {'max': '1025px', 'min':'1023px'},
+        xtralarge: {'min': '1600px'},
       },
       maxWidth: {
         170: "170px",
