@@ -87,7 +87,7 @@ function ProductListComponent() {
   
   useEffect(() => {
     createQueryParameters();
-    console.log("in useffect")
+    //console.log("in useffect")
   }, [activeFilter]);
 
 
@@ -104,7 +104,7 @@ function ProductListComponent() {
       selectedFilterItems.map((category: any, catId: any) => {
         
         if (!category.isCategoryChecked && category.items.length > 0) {
-          console.log("in if")
+          //console.log("in if")
           // if (!mainCatId.includes(catId)) {
           //   mainCatId.push(catId);
           // }
@@ -137,7 +137,7 @@ function ProductListComponent() {
           lastCatId = catId;
         }
          else {
-          console.log("in else")
+          //console.log("in else")
           minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
             if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
@@ -222,7 +222,7 @@ function ProductListComponent() {
 
 
   const createTempFilterArr = (results: any) => {
-    console.log("in createTempFilterArr")
+    //console.log("in createTempFilterArr")
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
       tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];

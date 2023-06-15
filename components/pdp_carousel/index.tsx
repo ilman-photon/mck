@@ -84,7 +84,7 @@ function PdpCarousel(prodViewData: any) {
 
   const isProductImageLessThanSix =
     prodResponse?.productImages?.expandedValue?.length < 6;
-  console.log(prodResponse?.productImages?.value);
+  //console.log(prodResponse?.productImages?.value);
   useEffect(() => {
     const imgData =
       prodResponse?.productImages?.value &&

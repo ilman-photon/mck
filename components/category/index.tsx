@@ -26,7 +26,7 @@ export default function CategoryComponent({ sectionData }: any) {
         setResponse(responses);
       })
       .catch((error) => {
-        console.log("error", error);
+        //console.log("error", error);
         setLoading(true);
       });
   }, []);
