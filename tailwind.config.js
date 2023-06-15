@@ -239,7 +239,6 @@ module.exports = {
       },
       border: {
         blue20: "#CCD1E3",
-
       },
       borderRadius: {
         10: '10px',
