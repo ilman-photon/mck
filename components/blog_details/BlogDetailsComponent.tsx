@@ -109,7 +109,7 @@ const BlogDetailsComponent = () => {
             />
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10">
-            <div className="lg:w-966 lg:col-span-2 col-start-1 col-end-7 lg:pl-4">
+            <div className="lg:w-966 desktop:w-700 smalldesktop:w-700 lg:col-span-2 col-start-1 col-end-7 lg:pl-4">
               <article className="mb-6">
                 <div className="content lg:p-6 pb-0 p-4 px-0">
                   <h1
@@ -158,7 +158,7 @@ const BlogDetailsComponent = () => {
                 {/* <CommentComponent /> */}
               </div>
             </div>
-            <div className="lg:w-306 lg:ml-100 lg:col-span-1 col-start-1 col-end-7">
+            <div className="lg:w-306 lg:ml-100 desktop:ml-0 smalldekstop:ml-0 lg:col-span-1 col-start-1 col-end-7">
               <SocialMediaIconComponent />
               <div className="category-card shade-blue-border rounded-lg overflow-hidden mb-6">
                 <div
