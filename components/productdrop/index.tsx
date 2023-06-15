@@ -54,7 +54,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                       filter: updateUrl(response?.menuItemUrl?.value, "1"),
                     },
                   }}
-                  className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium"
+                  className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
                 >
                   {/* {item?.data[0]?.menuItemName?.value} */}
                   {response?.menuItemName?.value}
@@ -74,7 +74,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                       return (
                         <li
                         id={`header-submenu-${index+1}`}
-                          className="blue-txt text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
+                          className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
                             /**

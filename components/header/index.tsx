@@ -157,7 +157,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             : isSticky
             ? "sticky"
             : "relative z-40"
-        } flex lg:grid container mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
+        } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
