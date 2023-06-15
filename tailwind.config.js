@@ -116,6 +116,7 @@ module.exports = {
         530: '530px',
         689: '689px',
         420: '420px',
+        530: '530px'
       },
       maxWidth: {
         'unset':'unset',
@@ -184,7 +185,8 @@ module.exports = {
         30: "30px",
         11: "11px",
         46: "46px",
-        120: "120px"
+        120: "120px",
+        24: "24px"
       },
       margin: {
         24: "24",
