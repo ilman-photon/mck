@@ -82,7 +82,7 @@ function FaqComponent() {
       {faqData && (
         <div
           role="main"
-          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18"
+          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18 desktop:px-6 smalldekstop:px-6 desktop:pt-[50px] smalldekstop:pt-[50px] desktop:mb-[50px] smalldekstop:mb-[50px]"
         >
           <h1
             className="text-mckblue text-54 heading pb-3 text-center"

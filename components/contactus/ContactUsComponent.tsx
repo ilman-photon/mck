@@ -33,7 +33,7 @@ function ContactUsComponent() {
   return (
     <>
       {contactUsData && (
-        <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto mb-6 lg:mb-18">
+        <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto mb-6 lg:mb-18 desktop:px-6 smalldekstop:px-6 desktop:pt-[50px] smalldekstop:pt-[50px] desktop:mb-[50px] smalldekstop:mb-[50px]">
           <h1
             className="text-gtl-med pb-6 font-medium text-[27px] lg:leading-61 text-mckblue lg:text-[54px] leading-30"
             id="cu_label_001"

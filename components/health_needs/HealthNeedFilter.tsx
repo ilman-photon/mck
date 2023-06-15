@@ -309,7 +309,7 @@ const HealthNeedFilter = ({
   //   return accumulator + obj?.data?.results?.length;
   // }, 0);
   return (
-    <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 mobilelarge:px-0">
+    <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 smalldekstop:px-6 mobilelarge:px-0">
       {/* Health needs - Top Active Filter section starts */}
       <section>
         <div
