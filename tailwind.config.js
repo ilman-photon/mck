@@ -159,6 +159,7 @@ module.exports = {
         0: '0'
       },
       padding: {
+        '0.5': '5px',
         9: '9px',
         10: '10px',
         15: '15px',
@@ -246,6 +247,7 @@ module.exports = {
       },
       screens: {
         desktop: {'max': '1380px','min':'1280px'},
+        smalldekstop:  {'max': '1285px','min':'1280px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
         ipadlarge: {'max': '1025px', 'min':'1023px'},
