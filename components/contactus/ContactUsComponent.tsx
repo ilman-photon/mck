@@ -139,7 +139,8 @@ function ContactUsComponent() {
                     )}
                   </p>
                 </div>
-                <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
+               {contactUsData?.data[0]?.contentArea?.expandedValue[0]
+                          ?.emailTitle?.value && <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                   <span
                     className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex"
                     id="cu_label_010"
@@ -170,7 +171,7 @@ function ContactUsComponent() {
                       )}
                     </a>
                   </span>
-                </div>
+                </div>}
                 <div className="flex flex-col lg:flex-row">
                   <span
                     className="contact-number font-extrabold lg:text-lg text-base lg:mr-3 text-mckblue text-sofia-bold flex mb-1 lg:mb-0"
