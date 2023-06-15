@@ -271,12 +271,12 @@ const HealthNeedsComponent = ({
         }
       });
 
-      // if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-      // queryParams = "";
-      // const currentURL = window.location.href;
-      // const updatedURL = currentURL.split("?")[0];
-      // window.location.href = DOMPurify.sanitize(updatedURL);
-      // }
+      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+        queryParams = "";
+        // const currentURL = window.location.href;
+        // const updatedURL = currentURL.split("?")[0];
+        // window.location.href = DOMPurify.sanitize(updatedURL);
+      }
     }
 
     if (queryParams) fetchProductList(queryParams);
