@@ -1,10 +1,11 @@
+import { useWindowResize } from "@/hooks/useWindowResize";
 import Link from "next/link";
 import { useState, useLayoutEffect, useEffect } from "react";
 import ProductDropComponent from "../productdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 
 function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState('');
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,7 +13,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
 
   const menuData = useHeaderStore((state) => state.headerData);
   const [menuData_, setMenuData_] = useState(menuData ?? []);
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
 
+  useEffect(() => {
+    setIsMobile(windowWidth >= 968 ? false : true);
+  }, [windowWidth]);
   const getRandomNumber = () => {
     const array = new Uint32Array(1);
     window.crypto.getRandomValues(array);
@@ -36,7 +42,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
     const findex = menuData?.findIndex(
       (md: any) => md?.menuItemName?.value === value
     );
-    setActive(item);
+    if (value !== active) {
+      setActive(value);
+    }
+    else {
+      setActive('');
+    }
     const a =
       menuData_.length > 0 &&
       menuData_.map((m: any, idx: number) => {
@@ -74,12 +85,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
             >
               <div className="relative megamenu-row">
                 <div className="pr-2.5">
-                <Link
-                  className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
-                  href="/"
-                >
-                  Home
-                </Link>
+                  <Link
+                    className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
+                    href="/"
+                  >
+                    Home
+                  </Link>
                 </div>
                 <span
                   className={`lg:hidden xl:hidden`}
@@ -95,13 +106,13 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                 key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
-                <div className="pr-2.5">
-                  <Link
-                    className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
-                    href={item?.menuItemUrl?.value ?? ""}
-                  >
-                    {item?.menuItemName?.value}
-                  </Link>
+                  <div className="pr-2.5">
+                    <Link
+                      className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
+                      href={item?.menuItemUrl?.value ?? ""}
+                    >
+                      {item?.menuItemName?.value}
+                    </Link>
                   </div>
                   <span
                     onClick={() => {
@@ -109,9 +120,9 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     }}
                     className={`${
                       item?.subMenuContentBlockArea?.value == null
-                        ? "lg:hidden xl:hidden"
-                        : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
-                    } 
+                      ? "lg:hidden xl:hidden"
+                      : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
+                      } 
                     ${
                       menuData_ && menuData_[idx] && menuData_[idx].flag
                         ? "open"
@@ -122,16 +133,16 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                   ></span>
                 </div>
                 <div
-                  className={`${
-                    menuData_ && menuData_[idx] && menuData_[idx].flag
-                      ? "block"
-                      : "hidden"
-                  } secondmenu ${
-                    item?.subMenuContentBlockArea?.value == null
+                  style={{display:isMobile ? active !== item?.menuItemName?.value ? "none" : "block":''}}
+                  className={`
+                  ${!isMobile && menuData_ && menuData_[idx] && menuData_[idx].flag
+                    ? "block"
+                    : "hidden"
+                    } secondmenu ${!isMobile && item?.subMenuContentBlockArea?.value == null
                       ? "hidden"
                       : "group-hover:block"
                     }
-                  `}
+                   `}
                 >
                   {menuData_ && menuData_[idx] && menuData_[idx].flag ? (
                     <ProductDropComponent
