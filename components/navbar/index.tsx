@@ -31,7 +31,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
       setMenuData_(a);
     }
   }, [menuData]);
- 
+
   const handleMenuOpen = (idx: number, value: any, item: any) => {
     const findex = menuData?.findIndex(
       (md: any) => md?.menuItemName?.value === value
@@ -59,13 +59,13 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
         role="navigation"
         className={`md:flex container lg:flex ml-auto mobile-customenav ${
           isMobileMenuActive ? "mobile-overlay-wrapper" : ""
-        }`}
+          }`}
       >
         <div
           // onMouseLeave={() => setIsMobileMenuActive(false)}
           className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent ${
             isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""
-          }`}
+            }`}
         >
           {isMobileMenuActive && (
             <div
@@ -107,12 +107,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                       item?.subMenuContentBlockArea?.value == null
                         ? "lg:hidden xl:hidden"
                         : "icon-arrow hidden lg:block xl:block lg:-right-5 lg:top-2.5"
-                    } 
+                      } 
                     ${
                       menuData_ && menuData_[idx] && menuData_[idx].flag
                         ? "open"
                         : ""
-                    }
+                      }
                     `}
                     aria-hidden={true}
                   ></span>
@@ -126,15 +126,17 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     item?.subMenuContentBlockArea?.value == null
                       ? "hidden"
                       : "group-hover:block"
-                  }
+                    }
                   `}
                 >
                   {menuData_ && menuData_[idx] && menuData_[idx].flag ? (
                     <ProductDropComponent
+                      handleClick={setIsMobileMenuActive}
                       subMenuData={item.subMenuContentBlockArea.value}
                     />
                   ) : (
                     <ProductDropComponent
+                      handleClick={setIsMobileMenuActive}
                       subMenuData={item.subMenuContentBlockArea.value}
                     />
                   )}

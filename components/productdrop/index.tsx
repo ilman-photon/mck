@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
-function ProductDropComponent({ subMenuData }: Props) {
+function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
 
   /**
@@ -78,6 +78,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
+                            handleClick(false)
                             if (response?.menuItemName?.value) {
                               selectCategory(response?.menuItemName?.value);
                             } else {
@@ -137,6 +138,7 @@ function ProductDropComponent({ subMenuData }: Props) {
 
 type Props = {
   subMenuData: any;
+  handleClick: (value: any) => void;
 };
 
 export default ProductDropComponent;
