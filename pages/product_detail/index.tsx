@@ -51,17 +51,18 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
           return response.json();
         })
         .then((data: any) => {
+          let title = "Product Details Page";
           if (data && data.length > 0 && data[0].title && data[0].title.value) {
             document.title = DOMPurify.sanitize(data[0].title.value);
-          } else {
-            document.title = "Product Details Page";
           }
+            document.title = title;
+          
         })
         .catch((error: Error) => {
-          document.title = "Product Details Page";
+          document.title =  "Product Details Page";
         });
     } else {
-      document.title = "Product Details Page";
+      document.title =  DOMPurify.sanitize("Product Details Page");
     }
   }, [JSON.stringify(Response)]);
 

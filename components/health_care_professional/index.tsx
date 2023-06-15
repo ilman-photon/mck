@@ -213,7 +213,6 @@ function HealthCareProfessionalComponent({
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
-
                       {isCarusolAvaible && (
                         <div className="bg-gradient absolute"></div>
                       )}
@@ -344,26 +343,15 @@ function HealthCareProfessionalComponent({
                             tab?.description?.value
                           );
                           const sanitizedAltText = DOMPurify.sanitize("check");
-                          const sanitizedHtmlFor = DOMPurify.sanitize(
-                            tab?.title?.value
-                          );
+                          const sanitizedHtmlFor = tab?.title?.value;
                           return (
                             <React.Fragment key={idx}>
                               <input
                                 type="radio"
                                 name="tabs"
-                                id={sanitizedHtmlFor}
-                                checked={
-                                  isMobile
-                                    ? tabClicked &&
-                                      tabClicked[idx]?.flag &&
-                                      tab?.title?.value === tabSelected
-                                    : tab?.title?.value === tabSelected
-                                }
-                                onClick={() => {
-                                  if (tab?.title?.value) {
-                                    handleTabClick(idx, tab?.title?.value);
-                                  }
+                                id={DOMPurify.sanitize(sanitizedHtmlFor)}
+                                checked={isMobile? tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected : tab?.title?.value === DOMPurify.sanitize(tabSelected)}
+                                onClick={() => {if (tab?.title?.value) { handleTabClick(idx, tab?.title?.value); }
                                 }}
                               />
                               <label
@@ -373,7 +361,7 @@ function HealthCareProfessionalComponent({
                                     handleTabClick(idx, tab?.title?.value);
                                   }
                                 }}
-                                htmlFor={sanitizedHtmlFor}
+                                htmlFor={DOMPurify.sanitize(sanitizedHtmlFor)}
                                 className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
                                 cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
                                 style={{ background: tabColorCode }}
