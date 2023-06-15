@@ -170,7 +170,9 @@ function FaqComponent() {
                   }}
                 ></div>
               </div>
-              <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
+              <div
+                className={`rounded-lg shade-blue-border overflow-hidden mt-6 faq-box hidden`}
+              >
                 <h3
                   className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
                   id="faq_label_012"
