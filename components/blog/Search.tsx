@@ -34,7 +34,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
       fetchBlogSearch(search)
         .then((res) => {
           setActiveClose(false);
-          handleResponse(res.data.results, search);
+          handleResponse(res?.data?.results, search);
         })
         .catch((e: Error | AxiosError) => {
           setError(true);
@@ -51,7 +51,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   const HandleChange = (event: any) => {
     const { value } = event.target;
     const regex = /[#''&]/;
-    if (value.length === 0) {
+    if (value?.length === 0) {
       setActiveClose(true);
       setsearch("");
     } else if (!regex.test(value) || event.keyCode === 55) {

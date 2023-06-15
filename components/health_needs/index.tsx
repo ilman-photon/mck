@@ -180,7 +180,7 @@ const HealthNeedsComponent = ({
   };
   useEffect(() => {
     fetchRecommandedProductData();
-  }, [router, productItemName]);
+  }, [router, productName]);
 
   const getQueryParameterValue = (paramName: string) => {
     const url = window.location.href;
