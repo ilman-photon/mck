@@ -40,7 +40,6 @@ const HealthNeedsComponent = ({
   const productItemName = useHeaderStore((state) => state.selectedCategory);
   // Right section product carousel data
   function fetchProductList(filter: any) {
-    setIsLoading(true);
     if (filter.length > 0) {
       const query = filter.match(/eq '(.*)'/);
       const queryParams = { filter: query[1] };
@@ -466,14 +465,11 @@ const HealthNeedsComponent = ({
       });
     });
     //setSelectedFilterItems(tempArr);
-    //console.log("Filtered", router.query.filter);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
-   // console.log(selectedFilterData);
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
-     //     console.log(1);
           sub_category.checked = true;
           if (
             category["items"] &&
