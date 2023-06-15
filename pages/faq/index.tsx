@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FooterComponent from "@/components/footer";
 import FaqComponent from "@/components/faq/FaqComponent";
 import HeaderComponent from "@/components/header";
+import Head from "next/head";
 import GoogleTagManager from "@/components/google_tag_manager";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import DOMPurify from "isomorphic-dompurify";
@@ -21,28 +22,32 @@ function Faq() {
 
   return (
     <>
+      <Head>
+        <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
+      </Head>
       <GoogleTagManager />
       <div className="wrapper">
-      <HeaderComponent />
-      {isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-75"></div>
-          <div
-            className="relative"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-          >
-            <Image
-              src={gifi}
-              alt="loading-image"
-              width={400}
-              height={400}
-              loading="eager"
-            />
+        <HeaderComponent />
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-75"></div>
+            <div
+              className="relative"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
+              <Image
+                src={gifi}
+                alt="loading-image"
+                width={400}
+                height={400}
+                loading="eager"
+              />
+            </div>
           </div>
-        </div>
-      )}
-      <FaqComponent />
-      <FooterComponent />
+        )}
+        <FaqComponent />
+        <FooterComponent />
       </div>
     </>
   );
