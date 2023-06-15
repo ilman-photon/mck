@@ -466,14 +466,14 @@ const HealthNeedsComponent = ({
       });
     });
     //setSelectedFilterItems(tempArr);
-    console.log("Filtered", router.query.filter);
+    //console.log("Filtered", router.query.filter);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
-    console.log(selectedFilterData);
+   // console.log(selectedFilterData);
     selectedFilterData.map((category: any) => {
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
-          console.log(1);
+     //     console.log(1);
           sub_category.checked = true;
           if (
             category["items"] &&

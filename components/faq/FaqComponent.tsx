@@ -108,14 +108,14 @@ function FaqComponent() {
               className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
               id="faq_label_005"
             >
-              {faqData?.differentQuestionHeading?.value}
+              {DOMPurify.sanitize(faqData?.differentQuestionHeading?.value)}
             </h3>
             <div className="shade-blue-border-top lg:p-6 p-4">
               <p
                 className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium"
                 id="faq_label_006"
               >
-                {faqData?.differentQuestionDetails?.value}
+                {DOMPurify.sanitize(faqData?.differentQuestionDetails?.value)}
               </p>
               <a
                 style={{
