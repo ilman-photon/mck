@@ -15,16 +15,19 @@ import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated 
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import { useHomeStore } from "@/components/global/Store/useHomeStore";
+import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 
 export default function Home() {
 
   const getHomeData = useHomeStore(state => state.getData)
+  const preFetchProductData = useAllProductCategory(state => state.getProductCategorySettings)
   const response = useHomeStore(state => state.data)
   const isLoading = useHomeStore(state => state.isLoading)
 
   useEffect(() => {
     if(response === null){
       getHomeData()
+      preFetchProductData()
     }
   },[response])
 
