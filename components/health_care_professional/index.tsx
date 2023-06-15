@@ -153,6 +153,7 @@ function HealthCareProfessionalComponent({
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   };
+  //console.log("response", response);
   response &&
     response?.contentArea?.expandedValue.map((item: any) => {
       if (

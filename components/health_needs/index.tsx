@@ -167,6 +167,7 @@ const HealthNeedsComponent = ({
   }, [activeFilter]);
 
   const fetchRecommandedProductData = async () => {
+    console.log(675756757);
     const tempName =
       productItemName?.length > 0 ? productItemName : productName;
     const correctedName = tempName?.replace(/ /g, "-");
@@ -180,7 +181,58 @@ const HealthNeedsComponent = ({
     setproductCategoryData(productCategoryDataList);
     createTempFilterArr(productCategoryDataList);
   };
+
+  const fetchData = async () => {
+    // Health needs Categories List
+    const healthNeedsCategories = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+    );
+    const healthNeedsCategoriesList =
+      healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
+        (categoryList: any) => categoryList.name === "Health Need Highlights"
+      );
+
+    const healthNeedsCategoriesListData =
+      healthNeedsCategoriesList.length > 0
+        ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
+        : [];
+    setCustomerBackgroundColorCode(
+      healthNeedsCategoriesList[0].backgroundColorCode?.value
+    );
+    setHealthNeedData(healthNeedsCategoriesListData);
+    setRecommendedProduct(healthNeedsCategories?.data[0].contentArea);
+
+    // Product Category setting - Filters data
+    const activeFiltersData = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
+    );
+    const activeFiltersDataList = activeFiltersData?.data[0];
+    setactiveFiltersData(activeFiltersDataList);
+
+    // Product Category Helath needs - Left side category lists
+    const productCategoryData = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+    );
+    const productCategoryDataList =
+      productCategoryData?.data[0]?.categoryFilter?.expandedValue;
+    setproductCategoryData(productCategoryDataList);
+    createTempFilterArr(productCategoryDataList);
+    const subCategories = productCategoryDataList[0].subCategory?.value;
+    const mainCategory = productCategoryDataList[0].mainCategory?.value[0];
+
+    subCategories.forEach((subCat: any) => {
+      const name = subCat.name;
+      const catId = mainCategory.id;
+      const subCatId = subCat.id;
+
+      selectedHealthNeed[name] = { cat_id: catId, sub_cat_id: subCatId };
+    });
+
+    setSelectedHealthNeed(selectedHealthNeed);
+  };
+
   useEffect(() => {
+    fetchData();
     fetchRecommandedProductData();
   }, [router, productItemName]);
 
@@ -346,7 +398,7 @@ const HealthNeedsComponent = ({
       setSelectedHealthNeed(selectedHealthNeed);
     };
 
-    fetchData();
+   // fetchData();
   }, []);
 
   useEffect(() => {
@@ -433,7 +485,7 @@ const HealthNeedsComponent = ({
       // });
     };
 
-    fetchData();
+  //  fetchData();
   }, [healthData]);
 
   const createTempFilterArr = (results: any) => {
@@ -468,6 +520,7 @@ const HealthNeedsComponent = ({
         ] = subItem.name;
       });
     });
+    
     //setSelectedFilterItems(tempArr);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
@@ -496,7 +549,7 @@ const HealthNeedsComponent = ({
         }
       });
     });
-
+    console.log(selectedFilterData);
     setSelectedFilterItems(selectedFilterData);
   };
   useEffect(() => {
