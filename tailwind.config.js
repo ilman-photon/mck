@@ -117,6 +117,12 @@ module.exports = {
         689: '689px',
         420: '420px',
       },
+      maxWidth: {
+        'unset':'unset',
+        170: "170px",
+        160: "160px",
+        343: '343px',
+      },
       minHeight: {
         50: '50px',
         57: '57px',
@@ -137,9 +143,6 @@ module.exports = {
         240: '240px',
         260: '260px',
         620: '620px',
-      },
-      minHeight: {
-        50: '50px',
       },
       left: {
         36: '36px',
@@ -263,10 +266,6 @@ module.exports = {
         smalldekstop:  {'max': '1285px','min':'1280px'},
         mediumdesktop: {'max': '1380px','min':'1280px'},
         xtralarge: {'min': '1600px'},
-      },
-      maxWidth: {
-        170: "170px",
-        160: "160px"
       },
       zIndex: {
         1: '1',
