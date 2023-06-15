@@ -40,6 +40,8 @@ const HealthNeedsComponent = ({
   const productItemName = useHeaderStore((state) => state.selectedCategory);
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    setIsLoading(true);
+
     if (filter.length > 0) {
       const query = filter.match(/eq '(.*)'/);
       const queryParams = { filter: query[1] };
@@ -61,7 +63,9 @@ const HealthNeedsComponent = ({
     let categoryArrayList = _temparray;
 
     let queryParameter = "";
+    let url = "";
     if (filter === "") {
+      url = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))`;
       // queryParameter = `(productType/value/name eq 'Acute Care')`;
       // queryParameter = `(healthNeeds/value/name eq 'Bone')`;
     } else {
@@ -71,11 +75,10 @@ const HealthNeedsComponent = ({
         queryParameter = filter;
         // + " and ContentType/any(t:t eq 'ProductDetailsPage')";
       }
+      url = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`;
     }
 
-    const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
-    );
+    const promise = axiosInstance.get(url);
     promise
       .then((res: any) => {
         if (res.data.results.length === 0) {
@@ -323,12 +326,13 @@ const HealthNeedsComponent = ({
         }
       });
 
-      // if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-      // queryParams = "";
-      // const currentURL = window.location.href;
-      // const updatedURL = currentURL.split("?")[0];
-      // window.location.href = DOMPurify.sanitize(updatedURL);
-      // }
+      if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
+        queryParams = "";
+        fetchProductList("");
+        // const currentURL = window.location.href;
+        // const updatedURL = currentURL.split("?")[0];
+        // window.location.href = DOMPurify.sanitize(updatedURL);
+      }
     }
 
     if (queryParams) fetchProductList(queryParams);

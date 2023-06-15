@@ -221,7 +221,7 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
 
           <div className={`grid h-full w-full`}>
             <div className="w-full lg:mb-0 mb-6 lg:min-h-57 text-left">
-              {DOMPurify.sanitize(renderImage)}
+              {renderImage}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:pr-0 my-auto text-justify">
               <div className={`pb-4 lg:pb-0 col-span-1`}>
@@ -238,9 +238,9 @@ function RecommendationalProductComponent({ sectionData, indexs }: any) {
                 </div>
               </div>
               <div className="col-span-2">
-                {DOMPurify.sanitize(renderDescription)}
+                {renderDescription}
                 <div className="lg:pr-24">
-                  {DOMPurify.sanitize(renderButton)}
+                  {renderButton}
                 </div>
               </div>   
               

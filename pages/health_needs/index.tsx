@@ -9,6 +9,7 @@ import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
+import Head from "next/head";
 
 function HealthNeedsPage() {
   const [loadingTemp, setLoadingTemp] = useState(true);
@@ -68,6 +69,10 @@ function HealthNeedsPage() {
 
   return (
     <>
+      <Head>
+        <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
+      </Head>
       <GoogleTagManager />
       <div className="wrapper">
         <HeaderComponent
@@ -81,9 +86,7 @@ function HealthNeedsPage() {
         />
         {error && <p>{error.message}</p>}
         {!loading && !error && response && (
-          <CarouselComponent
-            sectionData={filteredData("CarouselBlock")}
-          />
+          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
         )}
         <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
         <FooterComponent />

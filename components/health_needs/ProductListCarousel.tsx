@@ -97,7 +97,7 @@ const ProductComponent = ({
                         navigation={isMobile ? false : true}
                         slidesPerView={isMobile ? "auto" : 6}
                         slidesPerGroup={isMobile ? 1 : 6}
-                        className="lg:h-420 h-300"
+                        className="lg:h-420 h-300 md:h-[305px]"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}

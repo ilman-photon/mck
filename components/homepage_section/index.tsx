@@ -116,7 +116,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
                 titleStyle={`${sectionData?.assetPosition?.value === "Right"
                 ? "mx-auto lg:text-left text-center"
                 : "ml-0 text-left"
-                } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
+                } lg:mb-6 mb-4 text-2xl text-54 text-gtl-med text-left text-mckblue text-heading-ellipsis`}
                 descriptionStyle={`${sectionData?.assetPosition?.value === "Right"
                 ? "mx-auto lg:text-left text-center"
                 : "ml-0 text-left"
@@ -175,7 +175,7 @@ const ImageWithTextComponent = () => {
           titleStyle={`${sectionData?.assetPosition?.value === "Right"
           ? "mx-auto lg:text-left text-left"
           : "ml-0 text-left"
-        } lg:mb-6 mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left blue-txt text-heading-ellipsis`}
+        } lg:mb-6 mb-4 lg:mt-0 mt-6 text-2xl text-54 text-gtl-med text-left text-mckblue text-heading-ellipsis`}
           descriptionStyle={`${sectionData?.assetPosition?.value === "Right"
           ? "mx-auto lg:text-left text-left"
           : "ml-0 text-left"
@@ -219,7 +219,7 @@ const ImageBGWithTextComponent = () => {
               // buttonStyle="p-3 uppercase rounded-lg blue-bg text-white text-sofia-bold font-extrabold text-base float-right w-fit" 
               buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
               buttonStyle={`jsx-290076256 w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center ${isBlueBgColorBtn ? "text-white" : "text-black"} bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}         
-              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center items-end pt-8 lg:pt-0'}`}
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center items-end' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center items-end pt-8 lg:pt-0'}`}
             />
             </div>
       </div>
@@ -230,7 +230,7 @@ const TextAndButtonOnlyComponents = () => {
   return(
     <TextDescAndButton 
             descriptionStyle={`w-full lg:${"w-1/2"} text-sofia-reg grey-txt text-base lg:text-left sm:text-center`}
-            titleStyle="text-27 lg:text-5xl text-gtl-med blue-txt lg:mb-5 text-center lg:text-left page-heading-h3 md:mb-4 sm:mb-4"
+            titleStyle="text-27 lg:text-5xl text-gtl-med text-mckblue lg:mb-5 text-center lg:text-left page-heading-h3 md:mb-4 sm:mb-4"
             // buttonStyle={`jsx-290076256 mt-3 min-w-[139px] leading-5 pd-12 h-[44px] text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex mx-auto lg:mx-0`}
             // containerStyle='w-full p-6 mx-auto lg:p-72'
             buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}

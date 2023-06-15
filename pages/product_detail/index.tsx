@@ -70,6 +70,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
     <>
       <Head>
         <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
       </Head>
       <GoogleTagManager />
       <div className="wrapper">

@@ -47,11 +47,11 @@ export default function FooterComponent() {
               <ul className="mb-0 list-none lg:py-0 px-0">
                 <li className="lg:my-0 grid">
                   {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
-                    (link: any) => (
+                    (link: any,index:number) => (
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey lg:my-2 mb-3 w-fit"
                         rel="stylesheet"
-                        id={link?.contentLink?.id}
+                        id={`fotter-block-01-${index+1}`}
                         key={link?.contentLink?.id}
                         href={link?.menuUrl?.value ? link?.menuUrl?.value : ""}
                       >
@@ -97,13 +97,13 @@ export default function FooterComponent() {
               <ul className="mb-0 list-none">
                 <li className="lg:my-0 grid">
                   {footerSecondData?.data[0]?.menuItemsColumn2?.expandedValue.map(
-                    (slink: any) => (
+                    (slink: any,index:number) => (
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3 w-fit"
                         rel="stylesheet"
                         href={slink?.menuUrl && slink?.menuUrl?.value}
                         key={slink?.contentLink?.id}
-                        id={slink?.contentLink?.id}
+                        id={`fotter-block-02-${index+1}`}
                       >
                         {DOMPurify.sanitize(slink?.menuTitle?.value)}
                       </Link>
@@ -119,10 +119,11 @@ export default function FooterComponent() {
       <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue bg-beige50 lg:hidden xl:hidden">
         <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
           {footerMobileNav &&
-            footerMobileNav.map((item: any) => {
+            footerMobileNav.map((item: any,index:number) => {
               return (
                 <li key={item?.contentLink?.guidValue}>
                   <button
+                    id={`fotter-mobile-${index+1}`}
                     type="button"
                     className={`inline-flex flex-col items-center justify-center pt-4 pb-3 w-full h-full border-t-4 border-transparent hover:border-t-4 hover:border-mckblue hover ${activeButton === item?.menuItemName?.value
                       ? "bg-white"

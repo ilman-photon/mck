@@ -5,6 +5,8 @@ import HeaderComponent from "@/components/header";
 import GoogleTagManager from "@/components/google_tag_manager";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import Head from "next/head";
+
 function Contactus() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,6 +20,10 @@ function Contactus() {
 
   return (
     <>
+      <Head>
+        <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
+      </Head>
       <GoogleTagManager />
       <div className="wrapper">
         <HeaderComponent />

@@ -82,7 +82,7 @@ function FaqComponent() {
       {faqData && (
         <div
           role="main"
-          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18"
+          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18 desktop:px-6 smalldekstop:px-6 desktop:pt-[50px] smalldekstop:pt-[50px] desktop:mb-[50px] smalldekstop:mb-[50px]"
         >
           <h1
             className="text-mckblue text-54 heading pb-3 text-center"
@@ -170,7 +170,9 @@ function FaqComponent() {
                   }}
                 ></div>
               </div>
-              <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
+              <div
+                className={`rounded-lg shade-blue-border overflow-hidden mt-6 faq-box hidden`}
+              >
                 <h3
                   className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
                   id="faq_label_012"

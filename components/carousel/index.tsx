@@ -129,7 +129,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                       >
                         {item?.title?.value ? (
                           <h2
-                            className="text-mcklightyellow lg:mb-3"
+                            className="text-sofia-reg font-bold text-4xl mobile:text-2xl text-mcklightyellow lg:mb-3 max-w-343 mobilelarge:max-w-unset mobilelarge:mb-[10px] mobile:font-normal"
                             id={item?.title?.value}
                           >
                             {item?.title?.value}
@@ -137,7 +137,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         ) : null}
                         {item?.description?.value ? (
                           <p
-                            className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                            className="text-sofia-reg lg:text-20 text-lg text-mcklightyellow lg:mb-3 max-w-343 mobilelarge:max-w-unset pb-4 lg:pb-0"
                             dangerouslySetInnerHTML={{
                               __html: DOMPurify.sanitize(
                                 item?.description?.value
@@ -216,13 +216,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                           }}
                         >
                           <h2
-                            className="text-mcklightyellow lg:mb-3"
+                            className="text-sofia-reg font-bold text-4xl mobile:text-2xl text-mcklightyellow lg:mb-3 max-w-343 mobilelarge:max-w-unset mobile:mb-[10px] mobile:font-normal"
                             id={firstResponse?.title?.value}
                           >
                             {firstResponse?.title?.value}
                           </h2>
                           <p
-                            className="lg:mb-3 pb-4 lg:pb-0 text-mcklightyellow"
+                            className="text-sofia-reg lg:text-20 text-lg text-mcklightyellow lg:mb-3 max-w-343 mobilelarge:max-w-unset pb-4 lg:pb-0"
                             dangerouslySetInnerHTML={{
                               __html: DOMPurify.sanitize(
                                 firstResponse?.description?.value
