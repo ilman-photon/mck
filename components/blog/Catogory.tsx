@@ -19,7 +19,7 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
         {Catogarytitle}
       </div>
       {CatogaryListing?.map((item: any, index: number) => (
-        <div className="lg:px-6 px-2" key={`${item?.contentLink?.id}${index}`}>
+        <div className="lg:px-6 px-2 desktop:px-4 smalldekstop:px-4" key={`${item?.contentLink?.id}${index}`}>
           <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
             <React.Fragment>
               <input type="checkbox" id={item.categoryDisplayName.value} className="hidden" />
