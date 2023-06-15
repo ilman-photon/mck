@@ -349,6 +349,7 @@ function HealthCareProfessionalComponent({
                               <input
                                 type="radio"
                                 name="tabs"
+                                className="hidden"
                                 id={DOMPurify.sanitize(sanitizedHtmlFor)}
                                 checked={isMobile? tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected : tab?.title?.value === DOMPurify.sanitize(tabSelected)}
                                 onClick={() => {if (tab?.title?.value) { handleTabClick(idx, tab?.title?.value); }
@@ -362,8 +363,7 @@ function HealthCareProfessionalComponent({
                                   }
                                 }}
                                 htmlFor={DOMPurify.sanitize(sanitizedHtmlFor)}
-                                className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
-                                cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
+                                className={`order-1 flex grow-3 text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase cursor-pointer border border-mckthingrey items-center justify-center py-4 lg:px-0 px-4 relative mobilelarge:order-initial mobilelarge:w-full mobilelarge:mr-0 mobilelarge:justify-start`}
                                 style={{ background: tabColorCode }}
                               >
                                 {tab?.tabImage?.expandedValue?.url ? (
@@ -395,7 +395,7 @@ function HealthCareProfessionalComponent({
                                   />
                                 </svg>
                               </label>
-                              <div className="tab py-6 px-6">
+                              <div className="tab py-6 px-6 order-99 grow w-full hidden bg-white mobilelarge:order-initial">
                                 <h2
                                   className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
                                   id={`hcp-label-0${idx}`}

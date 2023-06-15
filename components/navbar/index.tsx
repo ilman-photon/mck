@@ -69,12 +69,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
         id="nav-bar"
         role="navigation"
         className={`md:flex container lg:flex ml-auto mobile-customenav ${
-          isMobileMenuActive ? "mobile-overlay-wrapper" : ""
+          isMobileMenuActive ? "mobilelarge:top-16 mobilelarge:left-0 mobilelarge:w-full mobilelarge:h-full mobilelarge:fixed mobilelarge:overflow-y-auto mobilelarge:pl-0 mobilelarge:pb-16 mobilelarge:z-9997 mobilelarge:bg-mckoverlaygrey" : ""
           }`}
       >
         <div
           // onMouseLeave={() => setIsMobileMenuActive(false)}
-          className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent ${
+          className={`lg:mx-auto lg:flex xl:mx-auto xl:flex isMobileUi mobile-navwrapper lg:bg-transparent mobilelarge:top-16 mobilelarge:max-w-[75%] mobilesm:max-w-[85%] mobilelarge:-left-full mobilelarge:fixed ${
             isMobileMenuActive ? "active bg-mcklightyellow text-mckblue" : ""
             }`}
         >

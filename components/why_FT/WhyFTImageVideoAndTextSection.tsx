@@ -214,7 +214,7 @@ const ImageBGWithTextComponent = () => {
               buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
               buttonStyle={`jsx-290076256 w-fit leading-5 pd-12 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
               // containerStyle="lg:absolute lg:right-28 top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center lg:items-start pt-8 lg:pt-0"         
-              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center pt-8 lg:pt-0 mediumdesktop:left-[72px] mobile:left-[15px] px-[15px]'}`}
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-540 flex flex-col justify-center pt-8 lg:pt-0 xtralarge:left-[72px] mediumdesktop:left-[72px] mobile:left-[15px] px-[15px]'}`}
            />
             </div>
       </div>

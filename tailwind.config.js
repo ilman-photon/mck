@@ -14,6 +14,13 @@ module.exports = {
       flexBasis: {
         "18/25": "72%",
       },
+      flexGrow: {
+        3: '3',
+      },
+      order: {
+        99: '99',
+        'initial': 'initial',
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
@@ -40,6 +47,7 @@ module.exports = {
         mckred: "#DC2E21",
         mckgreyborder: "#808CB8",
         mckopacityblue: "#001a712e",
+        mckoverlaygrey: "#00000045",
       },
       width: {
         18: '18px',
@@ -247,6 +255,7 @@ module.exports = {
         50: '50%',
       },
       screens: {
+        mobilesm: {'max':'360px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
         ipadlarge: {'max': '1025px', 'min':'1023px'},
@@ -262,6 +271,7 @@ module.exports = {
       zIndex: {
         1: '1',
         0.1: '-1',
+        9997: '9997',
       }
     },
   },
