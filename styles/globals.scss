@@ -1780,6 +1780,22 @@ Mobiles Menu
   .header:hover .search-icon path {
     fill: #fff;
   }
+  .header:hover {
+    #logo-image-bgcolor {
+      display: none;
+    }
+    #logo-image-beige {
+      display: block;
+    }
+  }
+  .header {
+    #logo-image-bgcolor {
+      display: block;
+    }
+    #logo-image-beige {
+      display: none;
+    }
+  }
 
   .input-search:focus + svg {
     fill: red;
@@ -2541,21 +2557,21 @@ li.indicator.active {
     margin: 0 auto;
   }
 }
-@media (max-width: 1440px){
-  .header.container { 
+@media (max-width: 1440px) {
+  .header.container {
     max-width: 1440px;
-  } 
+  }
 }
-@media screen and (min-width: 1441px){
-  .header.container { 
+@media screen and (min-width: 1441px) {
+  .header.container {
     max-width: 1440px;
-  } 
+  }
 }
 
-.blog-details-container ul{
+.blog-details-container ul {
   list-style-type: disc;
   padding-left: 5px;
 }
-.blog-details-container ol{
+.blog-details-container ol {
   padding-left: 5px;
 }
