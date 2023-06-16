@@ -9,6 +9,8 @@ const ResentBlogListComponent = ({ ResentBlogList }: any) => {
                     <LinkComponent
                         id={`blog-recent-0${index}`}
                         key={`blog-recent-0${index}`}
+                        ariahidden={false} 
+                        tabIndex={0}
                         href={{
                             pathname: "/blog_details",
                             query: { id: item.routeSegment },

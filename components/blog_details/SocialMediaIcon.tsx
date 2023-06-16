@@ -28,6 +28,8 @@ const SocialMediaIconComponent = () => {
                         href={DOMPurify.sanitize(item?.socialMediaUrl.value)}
                         id={`link-${index}${item?.contentLink?.id}`}
                         aria-label={DOMPurify.sanitize(item?.socialMediaUrl?.value)}
+                        ariahidden={false} 
+                        tabIndex={0}
                     >
                         <ImageComponent
                             src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}

@@ -47,7 +47,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const blackColor = "black";
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center" role="main">
       <div id="carouselExampleCaptions" className="w-full relative">
         {isCarouselAvaible && <div className="bg-gradient absolute"></div>}
 
