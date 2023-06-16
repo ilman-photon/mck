@@ -47,7 +47,6 @@ const HealthNeedFilter = ({
   const [group, setGroup] = useState<any>();
   const [mainCatNames, setMainCatNames] = useState<any>([]);
   const handleClearAll = () => {
-  
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
       category.isCategoryChecked = false;
@@ -59,7 +58,6 @@ const HealthNeedFilter = ({
       const currentURL = window.location.href;
       const updatedURL = currentURL.split("?")[0];
       window.location.href = DOMPurify.sanitize(updatedURL);
-
     } else {
       fetchProductList("clearall");
     }
@@ -107,7 +105,6 @@ const HealthNeedFilter = ({
       setActiveFilter([...activeFilter, filter]);
       selectedFilterItems[categoryId][subCategoryId].checked = true;
     } else {
-      console.log("group ", group);
       const index = selectedFilterItems[categoryId]["items"].indexOf(filter);
       selectedFilterItems[categoryId]["items"].splice(index, 1);
       const subIds = group?.find(
@@ -123,7 +120,6 @@ const HealthNeedFilter = ({
           return item !== filter;
         })
       );
-      console.log("activeFilter ", activeFilter);
       // fetchProductList('');
       selectedFilterItems[categoryId][subCategoryId].checked = false;
       selectedFilterItems[categoryId].isCategoryChecked = false;
@@ -290,9 +286,6 @@ const HealthNeedFilter = ({
     if (selectedViewAllCateory.length > 0) {
     } else {
       fetchProductList("");
-      // router.push({
-      //   pathname: '/health_needs'
-      // });
     }
     fetchProductList("");
   };
@@ -306,10 +299,6 @@ const HealthNeedFilter = ({
       });
     }
   }, [productCategoryData]);
-  // const productsSum = selectedProduct.reduce((accumulator :any, obj :any) => {
-
-  //   return accumulator + obj?.data?.results?.length;
-  // }, 0);
   return (
     <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 smalldekstop:px-6 mobilelarge:px-0">
       {/* Health needs - Top Active Filter section starts */}
@@ -597,7 +586,6 @@ const HealthNeedFilter = ({
                                               leftfiltersubdata?.id
                                             )
                                           }
-
                                           id={leftfiltersubdata?.name + index}
                                           type="checkbox"
                                           value={leftfiltersubdata?.name}

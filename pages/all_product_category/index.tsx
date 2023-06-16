@@ -40,14 +40,11 @@ function AllProductCategoryPage({
   const [filterClicked, setFilterClicked] = useState(false);
   const productSearchCard = false;
   let selectedCategoryName: any = [];
-  // let productName: any = [];
 
   function fetchProductList(filter: any) {
     setIsLoadingTrue();
     let queryParameter = "";
-    if (filter === "") {
-      // queryParameter = `(productType/value/name eq 'Acute Care')`;
-    } else {
+    if (filter.length > 0) {
       queryParameter = filter;
     }
 
@@ -55,12 +52,17 @@ function AllProductCategoryPage({
     const regex = /'([^']+)'/g;
     const matches = [...query.matchAll(regex)];
     const values = matches.map((match) => match[1]);
-    const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`
-    );
+    let url = "";
+    if (filter === "") {
+      url = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(ContentType/any(t:t eq 'ProductDetailsPage'))`;
+    } else {
+      url = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(${queryParameter} and ContentType/any(t:t eq 'ProductDetailsPage'))`;
+    }
+    const promise = axiosInstance.get(url);
     promise
       .then((res: any) => {
         let tempResults: any = {};
+
         if (res.data.results.length === 0) {
           mainCatId.map((id: any) => {
             tempResults[selectedFilterItems[id].categoryName] = [];
@@ -70,6 +72,7 @@ function AllProductCategoryPage({
             { item: { name: "" } },
             { data: { results: "" } },
           ]);
+          setProductSum(res.data.totalMatching);
           return;
         }
 
@@ -253,9 +256,8 @@ function AllProductCategoryPage({
       });
 
       if (minCategoryCnt === 0 && minSubCategoryCnt == 0) {
-        const currentURL = window.location.href;
-        const updatedURL = currentURL.split("?")[0];
-        router.push(updatedURL, undefined, { scroll: false });
+        queryParams = "";
+        fetchProductList("");
       }
     }
     if (queryParams) fetchProductList(queryParams);

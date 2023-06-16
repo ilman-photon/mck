@@ -397,8 +397,6 @@ const HealthNeedsComponent = ({
 
       setSelectedHealthNeed(selectedHealthNeed);
     };
-
-   // fetchData();
   }, []);
 
   useEffect(() => {
@@ -484,8 +482,6 @@ const HealthNeedsComponent = ({
         });
       // });
     };
-
-  //  fetchData();
   }, [healthData]);
 
   const createTempFilterArr = (results: any) => {
@@ -520,7 +516,7 @@ const HealthNeedsComponent = ({
         ] = subItem.name;
       });
     });
-    
+
     //setSelectedFilterItems(tempArr);
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
