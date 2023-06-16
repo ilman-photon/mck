@@ -138,7 +138,7 @@ stages:
         optargs: '-scanallnonfataltoplevelmodules true -toplevel'
         importResults: true
         failBuildOnPolicyFail: false
-        maximumWaitTime: '60'
+        maximumWaitTime: '75'
         createSandBox: true
         sandboxName: 'Web'
 
