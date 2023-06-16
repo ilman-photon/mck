@@ -2516,12 +2516,27 @@ li.indicator.active {
   }
 }
 
-.blog-details-container ul {
-  list-style-type: disc;
-  padding-left: 40px;
-}
-.blog-details-container ol {
-  padding-left: 40px;
+// .blog-details-container ul {
+//   list-style-type: disc;
+//   padding-left: 40px;
+// }
+// .blog-details-container ol {
+//   padding-left: 40px;
+// }
+
+.blog-details-container {
+  ul, ol {
+    padding-left: 20px;
+    ul {
+      padding: 0;
+    }
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
 }
 
 .swiper-pagination-bullet {
