@@ -109,7 +109,7 @@ const BlogDetailsComponent = () => {
             />
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-4 lg:pt-10">
-            <div className="lg:w-966 desktop:w-700 smalldesktop:w-700 lg:col-span-2 col-start-1 col-end-7 lg:pl-4">
+            <div className="lg:w-966 desktopmini:w-700 smalldesktop:w-700 mobilelarge:w-full lg:col-span-2 col-start-1 col-end-7 lg:pl-4">
               <article className="mb-6">
                 <div className="content lg:p-6 pb-0 p-4 px-0">
                   <h1
