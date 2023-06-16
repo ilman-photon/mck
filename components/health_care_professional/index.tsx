@@ -215,7 +215,7 @@ function HealthCareProfessionalComponent({
                   }  `}
                   style={{ background: customerBackgroundColorCode }}
                 >
-                  <div className="container mx-auto">
+                  <div className="container mx-auto hcp-testimonial">
                     <h1
                       className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                       id="hcp-label-1"

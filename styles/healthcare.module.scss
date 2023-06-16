@@ -1,28 +1,30 @@
 .health-care-component {
-    .swiper-initialized {
-      padding: 10px 22px 0px;
-      @media (max-width: 968px) {
-        padding: 0 0px;
+    .hcp-testimonial {
+      .swiper-initialized {
+        padding: 10px 22px 0px;
+        @media (max-width: 968px) {
+          padding: 0 0px;
+        }
       }
-    }
-    .swiper-slide {
-      padding-bottom: 52px;
-      @media (max-width: 1190px) and (min-width: 990px) {
-        padding-bottom: 57px;
-        margin-bottom: 0px;
+      .swiper-slide {
+        padding-bottom: 52px;
+        @media (max-width: 1190px) and (min-width: 990px) {
+          padding-bottom: 57px;
+          margin-bottom: 0px;
+        }
+        @media (max-width: 968px) {
+          width: 100%;
+        }
       }
-      @media (max-width: 968px) {
-        width: 100%;
+      .swiper-button-next {
+        right: 0px !important;
+      } 
+      .swiper-button-prev {
+        left: 0px !important;
       }
-    }
-    .swiper-button-next {
-      right: 0px !important;
-    } 
-    .swiper-button-prev {
-      left: 0px !important;
-    }
-    .swiper-button-next, .swiper-button-prev {
-      top: 38% !important;
+      .swiper-button-next, .swiper-button-prev {
+        top: 38% !important;
+      }
     }
   }
 
