@@ -48,6 +48,7 @@ module.exports = {
         mckgreyborder: "#808CB8",
         mckopacityblue: "#001a712e",
         mckoverlaygrey: "#00000045",
+        mckbeige70: "#FFFAF6B2",
       },
       width: {
         18: '18px',
@@ -220,7 +221,7 @@ module.exports = {
         mckthingrey: "#CCD1E3",
         mckyellow: "#FFEABC",
         lightblue: "#EAF1F8",
-        acuteblue: "#DBDFEB",
+        acuteblue: "#DBDFEB", 
         mckblue70: "#4D5F9C",
         beigetransparent: "rgba(255, 250, 246, 0.7)",
       },
@@ -275,6 +276,7 @@ module.exports = {
         1: '1',
         0.1: '-1',
         9997: '9997',
+        9999: '9999',
       }
     },
   },

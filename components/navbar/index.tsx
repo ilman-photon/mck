@@ -106,11 +106,11 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                 key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
-                  <div className="pr-2.5"
+                  <div className="lg:pr-2.5 mobilelarge:py-0"
                   id={`header-menu-0${idx+1}`}
                   >
                     <Link
-                      className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
+                      className="text-lg text-sofia-reg text-center font-medium flex my-3 lg:border-b-2 lg:border-transparent hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                       href={item?.menuItemUrl?.value ?? ""}
                     >
                       {item?.menuItemName?.value}

@@ -153,11 +153,11 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         id="header"
         className={`header ${
           isCarusolAvaible
-            ? "sticky lg:bg-beige50 lg:bg-opacity-70 "
+            ? "sticky lg:bg-beige50 lg:bg-opacity-70"
             : isSticky
             ? "sticky"
             : "relative z-40"
-        } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
+        } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey lg:pb-1 ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
@@ -175,7 +175,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
 
         <div
           ref={headerImgRef}
-          className="brand-logo lg:max-w-[300px]"
+          className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
           role="banner"
           onClick={handleOnClickLogo}
         >
@@ -186,8 +186,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             className="logo-image lg:mt-7"
             style={isMobile ? undefined : imgWidth}
             tabIndex={0}
-            width={500}
-            height={500}
           />
           <img
             id="logo-image-beige"
