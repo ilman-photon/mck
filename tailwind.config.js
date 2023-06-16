@@ -127,6 +127,9 @@ module.exports = {
         140: "140px",
         105: "105px",
       },
+      minWidth: {
+        121: "121px"
+      },
       minHeight: {
         50: '50px',
         57: '57px',

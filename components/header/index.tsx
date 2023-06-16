@@ -170,22 +170,26 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
           role="banner"
           onClick={handleOnClickLogo}
         >
-          <img
-            id="logo-image-bgcolor"
-            src={DOMPurify.sanitize(firstLogo)}
-            alt="Foster Thrive Logo image Link"
-            className="logo-image lg:mt-7"
-            style={isMobile ? undefined : imgWidth}
-            tabIndex={0}
-          />
-          <img
-            id="logo-image-beige"
-            src={DOMPurify.sanitize(beigeLogo)}
-            alt="Foster Thrive Logo image Link"
-            className="logo-image lg:mt-7 hidden"
-            style={isMobile ? undefined : imgWidth}
-            tabIndex={0}
-          />
+          {firstLogo && (
+            <div>
+              <img
+                id="logo-image-bgcolor"
+                src={DOMPurify.sanitize(firstLogo)}
+                alt="Foster Thrive Logo image Link"
+                className="logo-image lg:mt-7"
+                style={isMobile ? undefined : imgWidth}
+                tabIndex={0}
+              />
+              <img
+                id="logo-image-beige"
+                src={DOMPurify.sanitize(beigeLogo)}
+                alt="Foster Thrive Logo image Link"
+                className="logo-image lg:mt-7 hidden"
+                style={isMobile ? undefined : imgWidth}
+                tabIndex={0}
+              />
+            </div>
+          )}
         </div>
         <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
           <NavBar

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import DOMPurify from "isomorphic-dompurify";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
-import Image from "next/image";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
@@ -67,14 +66,14 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
             className="mySwiper"
           >
             {response &&
-              response.map((item: any, idx: any) => {
+              response?.map((item: any, idx: any) => {
                 return (
                   <SwiperSlide
                     key={item.contentLink.id}
                     className={`w-full mx-auto ${item ? "block" : "hidden"}`}
                   >
                     <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[450px] lg:h-[800px]">
-                      <Image
+                      <img
                         src={DOMPurify.sanitize(item?.image?.value.url)}
                         className="block object-cover object-center w-full h-[225px] lg:h-[800px]"
                         alt={DOMPurify.sanitize(
@@ -82,8 +81,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                         )}
                         id={item?.title?.value + "_" + current}
                         aria-hidden={true}
-                        width="500"
-                        height="500"
                       />
                       {item?.title?.value || item?.buttonText?.value ? (
                         <div

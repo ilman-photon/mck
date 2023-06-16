@@ -1446,6 +1446,11 @@ Mobiles Menu
       ol {
         list-style: auto;
       }
+      p{
+        a{
+          text-decoration: underline;
+        }
+      }
     }
     // :checked
     input[type="checkbox"] {
@@ -1785,10 +1790,6 @@ Mobiles Menu
 }
 
 .NavTabs_Contain {
-  // .tabs {
-  //   display: flex;
-  //   flex-wrap: wrap;
-  // }
   .tabs label {
     -webkit-box-flex: 3;
     -ms-flex-positive: 3;

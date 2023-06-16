@@ -17,7 +17,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
             {BlogListingContent?.map((item: any, index: number) => (
                 <div
                     key={index}
-                    className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4 lg:max-h-[377px] ">
+                    className="shade-blue-border rounded-lg overflow-hidden lg:mb-6 mb-4 pt-4 lg:h-auto ">
                     <figure className='w-full  text-center'
                         onClick={() => OnRelatedProductClick(item)}
                     >
