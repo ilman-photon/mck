@@ -70,6 +70,8 @@ export default function FooterComponent() {
                           href={sociallink?.socialMediaUrl?.value}
                           key={sociallink?.contentLink?.id}
                           id={`sl-00${index}`}
+                          ariahidden={false} 
+                          tabIndex={0}
                           aria-label={sociallink?.socialMediaImage?.expandedValue?.altText?.value}
                         >
                           <ImageComponent

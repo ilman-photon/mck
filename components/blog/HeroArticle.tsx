@@ -11,21 +11,24 @@ const HeroArticle = ({ data }: any) => {
 
         <article className='mostrecent-article shadow-md rounded-lg lg:mb-12 mb-6 overflow-hidden'>
             <LinkComponent
+                tabIndex={-1}  
                 id={'blog-hero-article-01'}
                 key={'blog-hero-article-01'}
+                ariahidden={true}
                 href={{
                     pathname: "/blog_details",
                     query: { id: data?.routeSegment },
                 }}
                 className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
             >
-                <figure className="w-full lg:h-402 lg:overflow-hidden">
+                <figure tabIndex={-1} className="w-full lg:h-402 lg:overflow-hidden">
                     <img
                         className="w-full"
                         id={data?.image.value?.name}
                         src={DOMPurify.sanitize(data?.image?.value?.url)}
                         alt={DOMPurify.sanitize(data?.image?.value?.url)}
-                        aria-hidden="true"
+                        aria-hidden="true"  
+                        tabIndex={-1}                     
                     />
                 </figure>
             </LinkComponent>
@@ -34,13 +37,15 @@ const HeroArticle = ({ data }: any) => {
                     <LinkComponent
                         id={'blog-hero-title-article-01'}
                         key={'blog-hero-title-article-01'}
+                        ariahidden={true} 
+                        tabIndex={0}
                         href={{
                             pathname: "/blog_details",
                             query: { id: data?.routeSegment },
                         }}
                         className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
-                        <h1 role="link" aria-hidden="true" className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
+                        <h1 role="link" className='lg:text-32 text-xl lg:leading-linemax max-[576px]:leading-9 sm:text-32 max-[576px]:mb-2.5 max-[576px]:h-25 max-[576px]:overflow-hidden text-gtl-med text-mckblue lg:pb-3' id='blog-link-001'>{data?.title?.value}</h1>
                     </LinkComponent>
                     <div className='pb-3 lg:pt-0 pt-3'>
 

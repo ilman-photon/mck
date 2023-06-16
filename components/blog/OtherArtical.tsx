@@ -27,6 +27,8 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     pathname: "/blog_details",
                                     query: { id: item?.routeSegment },
                                 }}
+                                ariahidden={true}
+                                tabIndex={0}
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
                                     <div className="lg:h-314 h-240 flex" aria-hidden="true" >
@@ -42,6 +44,8 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                             pathname: "/blog_details",
                                             query: { id: item.routeSegment },
                                         }}
+                                        ariahidden={false} 
+                                        tabIndex={0}
                                     >
                                         <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item?.title?.value)}>{DOMPurify.sanitize(item?.title?.value)}</p></div>
                                     </LinkComponent>
