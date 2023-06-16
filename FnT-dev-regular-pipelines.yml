@@ -7,7 +7,14 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'foster-thrive-service-connection'
+- name: webAppName
+  value: 'foster-thrive-dev'
+
+- name: vmImageName
+  value: 'windows-2019'
+
+- group: Frontend_Dev_Varaibles
+
   appProfile: 'FosterAndThrive-Web'
   apiId: '93763420b32d1d60fc708debadbdeac5'
   apiKey: '188b1f01fb3b2aa3a2ef055d9c795793ad3d0b57f654bdf276cccc81d015f3faf7926d3bb7fb46535dba00ee0c9c2f75eb060aaf40abfe9fe663e38bf9c99d19'
