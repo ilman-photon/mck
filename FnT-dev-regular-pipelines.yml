@@ -7,18 +7,23 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'foster-thrive-service-connection'
-  appProfile: 'FosterAndThrive-Web'
-  apiId: '93763420b32d1d60fc708debadbdeac5'
-  apiKey: '188b1f01fb3b2aa3a2ef055d9c795793ad3d0b57f654bdf276cccc81d015f3faf7926d3bb7fb46535dba00ee0c9c2f75eb060aaf40abfe9fe663e38bf9c99d19'
-  # Web app name
-  webAppName: 'foster-thrive-dev'
-  
-  # Environment name
-  environmentName: 'dev'
+- name: webAppName
+  value: 'foster-thrive-dev'
 
-  # Agent VM image name
-  vmImageName: 'windows-2019'
+- name: vmImageName
+  value: 'windows-2019'
+
+- name: appProfile
+  value: 'FosterAndThrive-Web'
+
+- name: apiId
+  value: '93763420b32d1d60fc708debadbdeac5'
+
+- name: apiKey
+  value: '188b1f01fb3b2aa3a2ef055d9c795793ad3d0b57f654bdf276cccc81d015f3faf7926d3bb7fb46535dba00ee0c9c2f75eb060aaf40abfe9fe663e38bf9c99d19'
+
+- group: Frontend_Dev_Varaibles
+
 
 stages:
 - stage: Build
@@ -49,15 +54,15 @@ stages:
         versionSpec: '18.x'
       displayName: 'Install Node.js'
     
-    - task: CmdLine@2
-      inputs:
-        script: |
-          cat next.config.js
-          mv config/env.dev.next.config.js next.config.js
-          sleep 3s
-          printf "dev url updated"
-          cat next.config.js
-      displayName: 'Dev Url updation'
+    #- task: CmdLine@2
+    #  inputs:
+    #    script: |
+    #      cat next.config.js
+    #      mv config/env.dev.next.config.js next.config.js
+    #      sleep 3s
+    #      printf "dev url updated"
+    #      cat next.config.js
+    #  displayName: 'Dev Url updation'
 
     - task: CmdLine@2
       inputs:
@@ -133,7 +138,7 @@ stages:
         optargs: '-scanallnonfataltoplevelmodules true -toplevel'
         importResults: true
         failBuildOnPolicyFail: false
-        maximumWaitTime: '60'
+        maximumWaitTime: '75'
         createSandBox: true
-        sandboxName: 'Web'
+        sandboxName: 'Web1'
 
