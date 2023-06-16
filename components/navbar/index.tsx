@@ -9,8 +9,6 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const getHeaderData = useHeaderStore((state) => state.getData);
-
   const menuData = useHeaderStore((state) => state.headerData);
   const [menuData_, setMenuData_] = useState(menuData ?? []);
   const [windowWidth] = useWindowResize();
@@ -24,12 +22,6 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
     window.crypto.getRandomValues(array);
     return array[0];
   };
-
-  useLayoutEffect(() => {
-    if(menuData === null){
-      getHeaderData();
-    }
-  }, [menuData]);
 
   useEffect(() => {
     if(menuData !== null){
