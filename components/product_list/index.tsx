@@ -38,11 +38,14 @@ function ProductListComponent() {
   let selectedCategoryName: any = [];
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    
     setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq '${router.query.filter}') and`;
-    } else if (filter === "NA") {
+    } else if(filter === "clearall"){
+      queryParameter = "";
+    }else if (filter === "NA") {
       queryParameter = "";
     } else {
       queryParameter = `${filter} and`;
@@ -166,7 +169,10 @@ function ProductListComponent() {
         // queryParams = "";
         fetchProductList('')
       }
+
     }
+    console.log("queryParams",queryParams);
+    console.log("selectedFilterItems",selectedFilterItems);
     fetchProductList(queryParams);
   };
 

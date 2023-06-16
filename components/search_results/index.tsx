@@ -146,6 +146,7 @@ function ResultComponent() {
     });
     setActiveFilter(() => selectedSubCat);
     setSelectedFilterItems(() => selectedFilterData);
+    
   };
 
   useEffect(() => {

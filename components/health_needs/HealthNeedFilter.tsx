@@ -47,6 +47,7 @@ const HealthNeedFilter = ({
   const [group, setGroup] = useState<any>();
   const [mainCatNames, setMainCatNames] = useState<any>([]);
   const handleClearAll = () => {
+  
     setActiveFilter([]);
     selectedFilterItems.map((category: any) => {
       category.isCategoryChecked = false;
@@ -58,8 +59,9 @@ const HealthNeedFilter = ({
       const currentURL = window.location.href;
       const updatedURL = currentURL.split("?")[0];
       window.location.href = DOMPurify.sanitize(updatedURL);
+
     } else {
-      fetchProductList("");
+      fetchProductList("clearall");
     }
   };
   const handleDelete = (activeFilter: any, item: any) => {
