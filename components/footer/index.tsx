@@ -1,17 +1,12 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import { LinkComponent } from "../global/LinkComponent";
-import { useFooterStore } from "./Store/useFooterStore";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 export default function FooterComponent() {
   const router = useRouter();
-
-  const checkEnableButton = () => {
-    return router.pathname;
-  };
 
   const handleClick = (buttonName: string, url: string) => {
     setActiveButton(buttonName);
@@ -20,19 +15,11 @@ export default function FooterComponent() {
     });
   };
 
-  const footerData = useFooterStore(state => state.footerData)
-  const footerSecondData = useFooterStore(state => state.footerSecondData)
-  const footerMobileNav = useFooterStore(state => state.footerMobileNav)
-  const activeButton = useFooterStore(state => state.activeButton)
-  const setActiveButton = useFooterStore(state => state.setActiveButton)
-  const getData = useFooterStore(state => state.getData)
-
-  useEffect(() => {
-    if(footerData === null){
-      getData(checkEnableButton())
-    }
-  },[footerData])
-
+  const footerData = useHeaderStore(state => state.footerData)
+  const footerSecondData = useHeaderStore(state => state.footerSecondData)
+  const footerMobileNav = useHeaderStore(state => state.footerMobileNav)
+  const activeButton = useHeaderStore(state => state.activeButton)
+  const setActiveButton = useHeaderStore(state => state.setActiveButton)
 
   return (
     <>
@@ -46,7 +33,7 @@ export default function FooterComponent() {
             <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">
               <ul className="mb-0 list-none lg:py-0 px-0">
                 <li className="lg:my-0 grid">
-                  {footerData?.data[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
+                  {footerData?.data?.[0]?.footer?.expandedValue[0]?.menuItemsColumn1?.expandedValue.map(
                     (link: any,index:number) => (
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey lg:my-2 mb-3 w-fit"
@@ -61,7 +48,7 @@ export default function FooterComponent() {
                   )}
                 </li>
                 <li className="lg:my-2 flex">
-                {footerSecondData?.data[0]?.socialMediaLinkBlock?.expandedValue.map(
+                {footerSecondData?.data?.[0]?.socialMediaLinkBlock?.expandedValue.map(
                     (sociallink: any, index: number) => (
                       <>
                         {sociallink?.socialMediaUrl?.value && <LinkComponent
@@ -96,7 +83,7 @@ export default function FooterComponent() {
             <div className="lg:py-0 lg:pl-6 pl-0">
               <ul className="mb-0 list-none">
                 <li className="lg:my-0 grid">
-                  {footerSecondData?.data[0]?.menuItemsColumn2?.expandedValue.map(
+                  {footerSecondData?.data?.[0]?.menuItemsColumn2?.expandedValue.map(
                     (slink: any,index:number) => (
                       <Link
                         className="text-sofia-reg text-lg text-mcknormalgrey lg:py-2 mb-3 w-fit"
@@ -119,7 +106,7 @@ export default function FooterComponent() {
       <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue bg-beige50 lg:hidden xl:hidden">
         <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
           {footerMobileNav &&
-            footerMobileNav.map((item: any,index:number) => {
+            footerMobileNav?.map((item: any,index:number) => {
               return (
                 <li key={item?.contentLink?.guidValue}>
                   <button

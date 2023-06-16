@@ -1,9 +1,9 @@
-import { callAPI } from "@/utils/Fetchers";
 import { create } from "zustand";
 import { NavBarData } from "../Model/NavBarModel";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface ControllerNavBar {
-  getData: () => void;
+  getData: (checkButtonName: any) => void;
   headerData: any;
   categoryMapping?: any;
   subHeaderData: NavBarData[] | null;
@@ -14,29 +14,46 @@ interface ControllerNavBar {
   setLogoSrc?: () => void;
   onMouseEnter?: () => void;
   currentusedLogo: string;
+  footerData:any,
+  footerSecondData: any
+  footerMobileNav: any
+  activeButton: string
+  setActiveButton: (buttonName: string) => void
 }
 
 export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
-  getData: () => {
-    const callApiHeader = callAPI<any, any>(
+  getData: (checkButtonName) => {
+    const callApiHeader = axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`,
-      null,
       {
         method: "GET",
       }
     ).then(async (res) => {
-      set({
-        logoSrc1: res?.data?.[0]?.logoImage?.expandedValue?.url,
-        logoSrc2: res?.data?.[0]?.secondLogoImage?.expandedValue?.url,
+      const secondBlock = res.data[0].footer.expandedValue[0].contentLink.id;
+      const responseid = await axiosInstance.get(
+        `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`);
+      const footerMobileNav =
+        res?.data[0]?.mobileMenuNavigation?.expandedValue[0]
+          ?.contentBlockArea?.expandedValue;
+      let buttonActive: string = "Home";
+      footerMobileNav.map((item: any) => {
+        if (item?.menuItemUrl?.value == checkButtonName) {
+          buttonActive = item?.menuItemName?.value;
+        }
       });
       set({
         headerData:
           res?.data?.[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea
             ?.expandedValue,
+        footerData: res,
+        footerSecondData:responseid,
+        footerMobileNav,
+        activeButton:buttonActive ,
+        logoSrc1: res?.data?.[0]?.logoImage?.expandedValue?.url,
+        logoSrc2: res?.data?.[0]?.secondLogoImage?.expandedValue?.url,
+        categoryMapping: res?.data?.[0]?.categoryMapping?.expandedValue
       });
-      set({ categoryMapping: res?.data?.[0]?.categoryMapping?.expandedValue });
-
-      const { headerData } = get();
+      const headerData = get().headerData
       if (headerData) {
         const dataSet = headerData;
         const listRequest: any = dataSet
@@ -44,9 +61,8 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
           ?.flat()
           ?.filter((megaMenu: any) => megaMenu !== null)
           ?.map(async (megaMenuFiltered: any) => {
-            return callAPI<any, any>(
+            return axiosInstance.get(
               `${process.env.API_URL}/api/episerver/v3.0/content/?References=${megaMenuFiltered?.contentLink?.id}&expand=*`,
-              null,
               {
                 method: "GET",
               }
@@ -82,4 +98,9 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
       currentusedLogo: logoSrc2,
     });
   },
+  footerData:null,
+  footerSecondData:null,
+  footerMobileNav: null,
+  activeButton: 'Home',
+  setActiveButton: (buttonName) => set({ activeButton: buttonName })
 }));

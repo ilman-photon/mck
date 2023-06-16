@@ -10,16 +10,18 @@ import DOMPurify from "isomorphic-dompurify";
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
+
+  const checkEnableButton = () => {
+    return router.pathname;
+  };
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
-  const [headerData, setHeaderData] = useState<any>();
 
   const firstLogo = useHeaderStore((state) => state.logoSrc1);
   const beigeLogo = useHeaderStore((state) => state.logoSrc2);
-  const setLogo = useHeaderStore((state) => state.setLogoSrc);
-  const onMouseEnterToHeader = useHeaderStore((state) => state.onMouseEnter);
   const isDataExist = useHeaderStore((state) => state.headerData);
+  const getHeaderData = useHeaderStore(state => state.getData)
 
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
@@ -58,20 +60,9 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
 
   useEffect(() => {
     if (isDataExist === null) {
-      fetchHeaderData();
+      getHeaderData(checkEnableButton())
     }
   }, [isDataExist]);
-
-  function fetchHeaderData() {
-    axiosInstance
-      .get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`
-      )
-      .then((res) => {
-        setHeaderData(res.data[0]);
-      })
-      .catch((e: Error | AxiosError) => console.log(e));
-  }
 
   function handleOnClickLogo() {
     router.push({
