@@ -64,6 +64,10 @@ function AllProductCategoryPage({
             tempResults[selectedFilterItems[id].categoryName] = [];
           });
           setFilterClicked(true);
+          setSelectedProduct( [
+            {item: {name: "" }},
+            {data: {results: ""}},
+          ])
           return;
         }
 
