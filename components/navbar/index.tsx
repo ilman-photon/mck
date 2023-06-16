@@ -97,6 +97,12 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
               >
                 <div className="relative megamenu-row">
                   <div className="lg:pr-2.5 mobilelarge:py-0"
+                  onMouseOverCapture={() => {
+                    handleMenuOpen(idx,item?.menuItemName?.value,item)
+                  }}
+                  onMouseOutCapture={() => {
+                    handleMenuOpen(idx,item?.menuItemName?.value,item)
+                  }}
                   id={`header-menu-0${idx+1}`}
                   >
                     <Link
