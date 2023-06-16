@@ -28,7 +28,7 @@ const ProductSearchCard = ({ cardData }: any) => {
                       style={{
                         backgroundColor: handlecategoryColorCode(cardData?.productCategory?.value?.[0]?.id, catMapping),
                     }}
-                      className="w-max rounded-xl px-2 py-0.5 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer">
+                      className="w-max rounded-xl px-2 pt-[2px] pb-1 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer flex items-center">
                       { DOMPurify.sanitize(cardData?.productType?.value[0]?.name)}
                       </div>
                       <div
