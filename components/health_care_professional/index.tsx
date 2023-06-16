@@ -250,7 +250,7 @@ function HealthCareProfessionalComponent({
                                 key={idx}
                                 className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative md:h-[272px] lg:h-[220px]">
+                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
                                   <div
                                     key={customer?.customerName?.value}
                                     className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
@@ -321,7 +321,7 @@ function HealthCareProfessionalComponent({
                     }}
                   />
                   <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
-                    <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
+                    <div className="tabs flex flex-wrap border border-mckthingrey rounded-lg overflow-hidden">
                       {tabRelated &&
                         tabRelated.length > 0 &&
                         tabRelated?.map((tab: any, idx: number) => {

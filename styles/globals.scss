@@ -127,11 +127,6 @@ body {
   z-index: 20 !important;
 }
 
-.brand-logo {
-  cursor: pointer;
-  z-index: 9999;
-}
-
 .mobile-nav {
   display: none;
 }
@@ -1701,11 +1696,6 @@ Mobiles Menu
 }
 
 /*Header issue changes*/
-@media (max-width: 768px) {
-  .brand-logo {
-    width: 183px;
-  }
-}
 @media (min-width: 968px) {
   .header {
     // height: 178px;
@@ -1713,15 +1703,21 @@ Mobiles Menu
     padding: 0;
   }
   .header:hover,
-  .header-sticky:hover,
-  .brand-logo:hover + .header-sticky {
+  .header-sticky:hover {
+  // .brand-logo:hover + .header-sticky 
     background: #001a71 !important;
     color: #fff !important;
+  }
+  .header.isNotSticky:focus,
+  .header-sticky.isNotSticky:focus {
+    background: #FFFAF6B2 !important;
+    color: #001a71 !important;
   }
   .header:hover .icon-arrow,
   .header-sticky:hover .icon-arrow,
   .brand-logo:hover + .header-sticky .icon-arrow {
     border-color: #fff;
+    cursor: pointer;
   }
   .header:hover .group svg path {
     fill: #fff;
@@ -1757,11 +1753,6 @@ Mobiles Menu
   .input-search:focus + .search-icon path {
     fill: #001a71 !important;
   }
-  // .search-icon {
-  //   position: absolute;
-  //   bottom: 23px;
-  //   right: 43px;
-  // }
   .header:hover .search-icon path {
     fill: #fff;
   }
@@ -1794,10 +1785,10 @@ Mobiles Menu
 }
 
 .NavTabs_Contain {
-  .tabs {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  // .tabs {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  // }
   .tabs label {
     -webkit-box-flex: 3;
     -ms-flex-positive: 3;
@@ -1928,6 +1919,9 @@ Mobile and iPad Navigation
       padding-bottom: 10rem !important;
       .mainmenu-items {
         padding: 0;
+      }
+      .megamenu-row {
+        padding: 0px;
       }
       div {
         overflow: hidden;

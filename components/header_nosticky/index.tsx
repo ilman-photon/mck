@@ -75,7 +75,7 @@ function HeaderNoStickyComponent() {
           </div>
           <div
             ref={headerImgRef}
-            className="brand-logo lg:max-w-[300px]"
+            className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
             onClick={handleOnCLickLogo}
           >
             <img              
