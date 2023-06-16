@@ -22,7 +22,12 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const beigeLogo = useHeaderStore((state) => state.logoSrc2);
   const isDataExist = useHeaderStore((state) => state.headerData);
   const getHeaderData = useHeaderStore(state => state.getData)
-
+  
+  useLayoutEffect(() => {
+    if (isDataExist === null) {
+      getHeaderData(checkEnableButton())
+    }
+  }, [isDataExist]);
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -58,11 +63,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     };
   }, []);
 
-  useEffect(() => {
-    if (isDataExist === null) {
-      getHeaderData(checkEnableButton())
-    }
-  }, [isDataExist]);
 
   function handleOnClickLogo() {
     router.push({

@@ -24,10 +24,8 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   };
 
   useEffect(() => {
-    if(menuData !== null){
       const a = menuData?.map((m: any) => ({ ...m, flag: false }));
       setMenuData_(a);
-    }
   }, [menuData]);
 
   const handleMenuOpen = (idx: number, value: any, item: any) => {
