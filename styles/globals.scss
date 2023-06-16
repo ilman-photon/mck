@@ -1446,6 +1446,11 @@ Mobiles Menu
       ol {
         list-style: auto;
       }
+      p{
+        a{
+          text-decoration: underline;
+        }
+      }
     }
     // :checked
     input[type="checkbox"] {
