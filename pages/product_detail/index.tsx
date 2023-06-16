@@ -51,17 +51,18 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
           return response.json();
         })
         .then((data: any) => {
+          let title = "Product Details Page";
           if (data && data.length > 0 && data[0].title && data[0].title.value) {
             document.title = DOMPurify.sanitize(data[0].title.value);
-          } else {
-            document.title = "Product Details Page";
           }
+            document.title = title;
+          
         })
         .catch((error: Error) => {
-          document.title = "Product Details Page";
+          document.title =  "Product Details Page";
         });
     } else {
-      document.title = "Product Details Page";
+      document.title =  DOMPurify.sanitize("Product Details Page");
     }
   }, [JSON.stringify(Response)]);
 
@@ -69,8 +70,10 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
     <>
       <Head>
         <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
       </Head>
       <GoogleTagManager />
+      <div className="wrapper">
       <HeaderComponent />
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -106,6 +109,7 @@ function ProductDetails({ Response }: MyComponentProps): React.ReactElement {
         </div>
       )}
       <FooterComponent />
+      </div>
     </>
   );
 }

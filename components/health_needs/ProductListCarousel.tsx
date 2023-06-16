@@ -32,7 +32,7 @@ const ProductComponent = ({
       return itemName.includes(searchItem);
     });
 
-    if (filteredSection.length > 0) {
+    if (filteredSection?.length > 0) {
       return (
         <RecommendationalProductComponent
           indexs={index}
@@ -97,7 +97,7 @@ const ProductComponent = ({
                         navigation={isMobile ? false : true}
                         slidesPerView={isMobile ? "auto" : 6}
                         slidesPerGroup={isMobile ? 1 : 6}
-                        className="lg:h-420 h-300"
+                        className="lg:h-420 h-300 md:h-[305px]"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
@@ -139,9 +139,7 @@ const ProductComponent = ({
                 )}
               </>
             ) : (
-              // <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
-              //   {filterClicked ? "There are no products" : null}
-              // </div>
+              
               null
             )}
           </section>
@@ -164,9 +162,9 @@ const ProductComponent = ({
           
         </div>
       ))}
-      <div className="mt-3 lg:pt-6 lg:pl-6 lg:pb-6 text-sofia-bold font-extrabold text-xl truncate">
-                {filterClicked ? "There are no products" : null}
-              </div>
+        {selectedProduct?.[1]?.data?.results?.length === 0 && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
+        {filterClicked ? "There are no products" : null}
+      </div>}
     </>
   );
 };

@@ -8,6 +8,7 @@ import { ImageComponent } from "../global/ImageComponent";
 import { GetTime, handlecategoryColorCode } from "../global/CommonUtil";
 import DOMPurify from 'isomorphic-dompurify';
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import { useWindowResize } from "@/hooks/useWindowResize";
 
 interface CarouselComponentProps {
   title: string;
@@ -21,22 +22,15 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   title,
   OnRelatedArticleClick,
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth] = useWindowResize();
+  const [isMobile, setIsMobile] = useState(windowWidth <= 767 ? false : true);
   const [reviewCount, setReviewCount] = useState<number>(1);
   const catMapping = useHeaderStore((state) => state.categoryMapping);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 968);
-    };
+    setIsMobile(windowWidth <= 767);
+  }, [windowWidth]);
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const handleOnSlideChange = (swiper: any) => {
     if (isMobile) {
       swiper.autoplay.running = true;
@@ -151,13 +145,13 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           })}
         </Swiper>
       </div>
-      {relatedArticle?.length > 2|| isMobile  ? 
+      {relatedArticle && relatedArticle?.length != 0 && relatedArticle?.length > 2 || isMobile ?
         <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
           {reviewCount}/
           {isMobile
             ? Math.ceil(relatedArticle?.length)
             : Math.ceil(relatedArticle?.length / 2)}
-        </div>:<></>
+        </div> : <></>
       }
     </div>
   );

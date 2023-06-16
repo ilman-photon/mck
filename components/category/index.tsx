@@ -1,35 +1,23 @@
-import axios from "axios";
+// import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import axiosInstance from "@/utils/axiosInstance";
+// import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from 'isomorphic-dompurify';
+import { useCategoryStore } from "../global/Store/useCategoryStore";
 
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
-  const [response, setResponse] = useState<any>();
-  const [loading, setLoading] = useState(true);
   const [isNull,setIsNull] = useState(false)
-  
-  function idRequests() {
-    return sectionData[0]?.contentBlockArea?.value?.map((item: any) => {
-      return axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/${item?.contentLink?.id}`);
-    });
-  }
+  const response = useCategoryStore(state => state.data)
+  const getData = useCategoryStore(state => state.getData)
+  const loading = useCategoryStore(state => state.isLoading)
 
   useEffect(() => {
-    axios
-      .all(idRequests())
-      .then((responses) => {
-        setLoading(false);
-        setResponse(responses);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        setLoading(true);
-      });
-  }, []);
+    if(response === null){
+      getData(sectionData[0]?.contentBlockArea?.value)
+    }
+  },[response])
 
   function handleClickOnCategory(url: string) {
     let f = "?filter=";
@@ -48,7 +36,7 @@ export default function CategoryComponent({ sectionData }: any) {
     {!loading && response && !isNull && (
       <div className="container w-full mx-auto my-6 mb-0 lg:mt-20 lg:mb-12 px-4 lg:px-0">
         <div className="flex flex-wrap justify-center">
-          {response.map((item: any, index: number) =>{
+          {response.map((item: any, index: any) =>{
             if(!item?.data?.productCategoryImage?.value?.url){
                setIsNull(true)
             }
@@ -86,7 +74,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   <Link
                     href={`/selected_product_category?type=${item?.data?.productCategoryType?.value[0].name}`}
                   >
-                    {DOMPurify.sanitize(item?.data?.name)}
+                    {DOMPurify.sanitize(item?.data?.productCategoryName?.value)}
                   </Link>
                 </div>
                 <div
@@ -95,7 +83,7 @@ export default function CategoryComponent({ sectionData }: any) {
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(item?.data?.productCategoryDescription?.value),
                   }}
-                  id={`category_Titel_0${index}`}
+                  id={`category_Titel_0${DOMPurify.sanitize(index)}`}
                 ></div>
               </div>
             )

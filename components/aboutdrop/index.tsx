@@ -9,28 +9,28 @@ function AboutDropComponent() {
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
                         <ul>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Beauty</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Bone</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Digestion</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Energy</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Eye Health</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">General Wellness</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Heart</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Immune Health</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Beauty</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Bone</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Digestion</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Energy</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Eye Health</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">General Wellness</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Heart</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Immune Health</a></li>
                         </ul>
                     </div>
                 </li>
                 <li className="w-1/5 pl-2">
                     <div className="border-l border-black">
                         <ul>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Joints</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Kids</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Men&#39;s Health</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Mood</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Prenatal & Post Natal</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Sleep</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Stress</a></li>
-                            <li className="blue-txt text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Women&#39;s Health</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Joints</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Kids</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Men&#39;s Health</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Mood</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Prenatal & Post Natal</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Sleep</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Stress</a></li>
+                            <li className="text-mckblue text-left text-sofia-reg py-2 pl-2 hover:bg-beige-50"><a className="cursor-pointer">Women&#39;s Health</a></li>
 
                         </ul>
                     </div>

@@ -46,8 +46,8 @@ export default function AVComponent(props: MediaComponentProps) {
             className={videoContainerStyle}
         >
             <div className="w-full h-full flex justify-center items-center">
-                <div className={`w-full mx-auto relative flex flex-col justify-center lg:px-0 px-10 md:px-0`} id="video-container">
-                    <div className='player-wrapper'>
+                <div className={`w-full mx-auto relative flex flex-col justify-center lg:px-0 md:px-0`} id="video-container">
+                    <div className='player-wrapper relative pt-[56.25%] rounded-10 mt-[0.8rem] mb-[0.8rem]'>
                         {String(videoSource)?.toLowerCase()?.includes('youtube') ? (
                            <ReactYoutube
                             videoId={String(youtubeId)}
@@ -64,7 +64,7 @@ export default function AVComponent(props: MediaComponentProps) {
                         ) : (
 
                             <ReactPlayer
-                                className='react-player'
+                                className='react-player absolute top-0 left-0 rounded-10 overflow-hidden'
                                 url={videoSource}
                                 id={`${idComponent}_vid_001`}
                                 controls={videoControls}

@@ -5,6 +5,8 @@ import HeaderComponent from "@/components/header";
 import GoogleTagManager from "@/components/google_tag_manager";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
+import Head from "next/head";
+
 function Contactus() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,28 +20,34 @@ function Contactus() {
 
   return (
     <>
+      <Head>
+        <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
+      </Head>
       <GoogleTagManager />
-      <HeaderComponent />
-      {isLoading ? (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-75"></div>
-          <div
-            className="relative"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-          >
-            <Image
-              src={gifImage}
-              alt="loading-image"
-              width={400}
-              height={400}
-              loading="eager"
-            />
+      <div className="wrapper">
+        <HeaderComponent />
+        {isLoading ? (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-75"></div>
+            <div
+              className="relative"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
+              <Image
+                src={gifImage}
+                alt="loading-image"
+                width={400}
+                height={400}
+                loading="eager"
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        <ContactUsComponent />
-      )}
-      <FooterComponent />
+        ) : (
+          <ContactUsComponent />
+        )}
+        <FooterComponent />
+      </div>
     </>
   );
 }

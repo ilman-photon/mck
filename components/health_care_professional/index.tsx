@@ -13,6 +13,7 @@ import { ImageComponent } from "../global/ImageComponent";
 import axiosInstance from "@/utils/axiosInstance";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import DOMPurify from "isomorphic-dompurify";
+import { useHealthCareProfessionalStore } from "../global/Store/useHealthCareProfessionalStore";
 
 SwiperCore.use([Navigation, Autoplay]);
 type HealthCareProfessionalComponentType = {
@@ -23,8 +24,8 @@ function HealthCareProfessionalComponent({
   isCarusolAvaible,
   isCarusolAvaibleProps,
 }: HealthCareProfessionalComponentType) {
-  const [loading, setLoading] = useState(true);
-  const [response, setResponse] = useState<any>();
+  // const [loading, setLoading] = useState(true);
+  // const [response, setResponse] = useState<any>();
   const [customers, setCustomers] = useState<any>();
   const [customerReviewTitle, setCustomerReviewTitle] = useState<any>();
   const [reviewCount, setReviewCount] = useState<number>(1);
@@ -56,28 +57,16 @@ function HealthCareProfessionalComponent({
   };
 
   const [ApiRespond, setApiRespond] = useState<any>();
-  const url = `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/generic/health-care-professionals/&expand=*`;
+  const loading = useHealthCareProfessionalStore(state => state.isLoading)
+  const setLoading = useHealthCareProfessionalStore(state => state.setIsLoading)
+  const fetchUrl = useHealthCareProfessionalStore(state => state.getData)
+  const response = useHealthCareProfessionalStore(state => state.response)
 
-  const fetchUrl = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosInstance.get(url, {
-        headers: { "Accept-Language": "en" },
-      });
-      if (Object.keys(res?.data).length > 0) {
-        setResponse(res?.data[0]);
-      } else {
-        setResponse(null);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    fetchUrl();
-  }, []);
+    if(response === null){
+      fetchUrl();
+    }
+  }, [response]);
 
   useEffect(() => {
     if (response && Object.keys(response).length > 0) {
@@ -164,6 +153,17 @@ function HealthCareProfessionalComponent({
       setReviewCount(() => Math.ceil(swiper.activeIndex / 3) + 1);
     }
   };
+  //console.log("response", response);
+  response &&
+    response?.contentArea?.expandedValue.map((item: any) => {
+      if (
+        item.contentType.includes("CarouselBlock") ||
+        item.contentType.includes("Carousel") ||
+        item.contentType.includes("carousel")
+      ) {
+        isCarusolAvaibleProps(true);
+      }
+    });
   !carouselRelated && isCarusolAvaibleProps(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -202,20 +202,20 @@ function HealthCareProfessionalComponent({
                       <CarouselComponent
                         sectionData={filteredData("CarouselBlock")}
                       />
-
-                      {!isCarusolAvaible ? (
+                      {isCarusolAvaible && (
                         <div className="bg-gradient absolute"></div>
-                      ) : (
-                        <br />
                       )}
                     </div>
                   )}
                 </div>
                 <div
-                  className={`lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6`}
+                  className={`${
+                    isCarusolAvaible &&
+                    "lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6"
+                  }  `}
                   style={{ background: customerBackgroundColorCode }}
                 >
-                  <div className="container mx-auto">
+                  <div className="container mx-auto hcp-testimonial">
                     <h1
                       className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
                       id="hcp-label-1"
@@ -250,7 +250,7 @@ function HealthCareProfessionalComponent({
                                 key={idx}
                                 className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative md:h-[272px] lg:h-[220px]">
+                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
                                   <div
                                     key={customer?.customerName?.value}
                                     className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
@@ -321,44 +321,39 @@ function HealthCareProfessionalComponent({
                     }}
                   />
                   <div className="NavTabs_Contain lg:px-0 px-4 keybenefits-navatabs-wrapper">
-                    <div className="tabs border border-mckthingrey rounded-lg overflow-hidden">
+                    <div className="tabs flex flex-wrap border border-mckthingrey rounded-lg overflow-hidden">
                       {tabRelated &&
                         tabRelated.length > 0 &&
                         tabRelated?.map((tab: any, idx: number) => {
-                          const tabColorCode = DOMPurify.sanitize(tab?.tabColorCode?.value)
-                          const sanitizedTabDescription =  DOMPurify.sanitize(tab?.description?.value)
-                          const sanitizedAltText = DOMPurify.sanitize("check")
-                          const sanitizedHtmlFor = DOMPurify.sanitize(tab?.title?.value)
+                          const tabColorCode = DOMPurify.sanitize(
+                            tab?.tabColorCode?.value
+                          );
+                          const sanitizedTabDescription = DOMPurify.sanitize(
+                            tab?.description?.value
+                          );
+                          const sanitizedAltText = DOMPurify.sanitize("check");
+                          const sanitizedHtmlFor = tab?.title?.value;
                           return (
                             <React.Fragment key={idx}>
                               <input
                                 type="radio"
                                 name="tabs"
-                                id={sanitizedHtmlFor}
-                                checked={
-                                  isMobile
-                                    ? tabClicked &&
-                                      tabClicked[idx]?.flag &&
-                                      tab?.title?.value === tabSelected
-                                    : tab?.title?.value === tabSelected
-                                }
-                                onClick={() =>{
-                                  if(tab?.title?.value){
-                                    handleTabClick(idx, tab?.title?.value)
-                                  }
+                                className="hidden"
+                                id={DOMPurify.sanitize(sanitizedHtmlFor)}
+                                checked={isMobile? tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected : tab?.title?.value === DOMPurify.sanitize(tabSelected)}
+                                onClick={() => {if (tab?.title?.value) { handleTabClick(idx, tab?.title?.value); }
                                 }}
                               />
                               <label
                                 tabIndex={0}
                                 onKeyUp={() => {
-                                  if(tab?.title?.value){
-                                    handleTabClick(idx, tab?.title?.value)
+                                  if (tab?.title?.value) {
+                                    handleTabClick(idx, tab?.title?.value);
                                   }
                                 }}
-                                htmlFor={sanitizedHtmlFor}
-                                className={`flex text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase 
-                                cursor-pointer border border-mckthingrey items-center py-4 lg:px-0 px-4 relative`}
-                                style={{background:tabColorCode}}
+                                htmlFor={DOMPurify.sanitize(sanitizedHtmlFor)}
+                                className={`order-1 flex grow-3 text-sofia-reg text-base font-extrabold text-mckblue text-center uppercase cursor-pointer border border-mckthingrey items-center justify-center py-4 lg:px-0 px-4 relative mobilelarge:order-initial mobilelarge:w-full mobilelarge:mr-0 mobilelarge:justify-start`}
+                                style={{ background: tabColorCode }}
                               >
                                 {tab?.tabImage?.expandedValue?.url ? (
                                   <ImageComponent
@@ -389,7 +384,7 @@ function HealthCareProfessionalComponent({
                                   />
                                 </svg>
                               </label>
-                              <div className="tab py-6 px-6">
+                              <div className="tab py-6 px-6 order-99 grow w-full hidden bg-white mobilelarge:order-initial">
                                 <h2
                                   className="text-gtl-med lg:text-5xl text-2xl text-mckblue font-medium lg:pb-12 pb-6"
                                   id={`hcp-label-0${idx}`}

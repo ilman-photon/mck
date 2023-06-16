@@ -1,15 +1,4 @@
 @import "variables.module.scss";
-.megamenu-row:focus,
-.megamenu-row:focus-visible,
-.megamenu-row:focus-within {
-    &+.secondmenu,
-    &+.secondmenu:focus,
-    &+.secondmenu:focus-visible,
-    &+.secondmenu:focus-within {
-        display: block !important;
-    }
-}
-
 .show-cookies {
     &+.header {
         margin-top: 26px;
@@ -28,58 +17,22 @@
     }
 }
 
-
-@media (max-width: 360px) {
-    .mobile-navwrapper {
-        max-width: 85% !important;
-    }
-}
-@media (max-width: 980px) {
-    .mobile-overlay-wrapper {
-        top: 64px;
-        max-width: 100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9997;
-        overflow-y: auto;
-        padding-left: 0px !important;
-        padding-bottom: 65px;
-        background: #00000045;
-    }
-    
-    .mobile-navwrapper {
-        top: 64px;
-        max-width: 75%;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9997;
-        overflow-y: auto;
-        transform: translateZ(205px);
-        transition: all 0.5s ease-in-out;
-        padding-bottom: 65px;
-    }
-}
-
 @media (max-width: 1025px) and (min-width: 1023px) {
     .isStickyActive{
         .isMobileUi {
-        margin-right: 4rem !important;
+            padding-left: 14vw;
         .mainmenu-items {
             margin: 0 20px !important;
-            .mainmenu-link {font-size: 16px;}
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
         }
         }
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 10vw !important;
+        padding-left: 14vw !important;
         .mainmenu-items {
             margin: 0 20px !important;
-            .mainmenu-link {font-size: 14px;}
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
         }
         }
     }
@@ -89,75 +42,112 @@
 @media (max-width: 1030px) and (min-width: 1000px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 8vw !important;
+        padding-left: 14vw !important;
         }
     }
 }
 
-@media (max-width: 1100px) and (min-width: 1024px) {
+@media (max-width: 1159px) and (min-width: 1100px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 2vw;
+        padding-left: 0vw;
         .mainmenu-items {
-            margin: 0 18px !important;
-            .mainmenu-link {font-size: 12px;}
+            margin: 0 32px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 12px;}
         }
         }
     }
-}
-
-@media (max-width: 1279px) and (min-width: 1100px) {
-    .isStickyActive{
-        .isMobileUi {
-        padding-left: 6vw;
-        .mainmenu-items {
-            margin: 0 18px !important;
-            .mainmenu-link {font-size: 14px;}
-        }
-        }
-    }
-}
-  
-@media (max-width: 1259px) and (min-width: 1000px) {
     .isNotSticky {
         .isMobileUi {
-        padding-left: 4vw;
+            padding-left: 4vw;
         .mainmenu-items {
-            margin: 0 20px !important;
-            .mainmenu-link {font-size: 14px;}
+            margin: 0 25px;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
         }
         }
     }
+    .mainmenu-items:first-child {margin-left: 0px !important;}
+}
+
+@media (max-width: 1249px) and (min-width: 1160px) {
+    .isStickyActive{
+        .isMobileUi {
+        padding-left: 0vw;
+        .mainmenu-items {
+            margin: 0 40px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
+        }
+        }
+    }
+    .isNotSticky {
+        .isMobileUi {
+            .mainmenu-items {
+                margin: 0 40px;
+                .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
+            }
+        }
+    }
+    .mainmenu-items:first-child {margin-left: 0px !important;}
+}
+  
+@media (max-width: 1259px) and (min-width: 1250px) {
+    .isStickyActive{
+        .isMobileUi {
+        padding-left: 0vw;
+        .mainmenu-items {
+            margin: 0 40px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
+        }
+        }
+    }
+    .isNotSticky {
+        .isMobileUi {
+        .mainmenu-items {
+            margin: 0 40px;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
+        }
+        }
+    }
+    .mainmenu-items:first-child {margin-left: 0px !important;}
 }
 
 @media (max-width: 1279px) and (min-width: 1260px) {
-    .isNotSticky {
+    .isStickyActive{
         .isMobileUi {
-        padding-left: 4vw;
+        padding-left: 0vw;
         .mainmenu-items {
-            margin: 0 20px !important;
-            .mainmenu-link {font-size: 14px;}
+            margin: 0 40px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
         }
         }
     }
+    .isNotSticky {
+        .isMobileUi {
+        .mainmenu-items {
+            margin: 0 40px;
+            .mainmenu-link, .megamenu-submenu a {font-size: 14px;}
+        }
+        }
+    }
+    .mainmenu-items:first-child {margin-left: 0px !important;}
 }
 
 @media (max-width: 1300px) and (min-width: 1280px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 5vw;
+        padding-left: 8vw;
         .mainmenu-items {
             margin: 0 20px !important;
-            .mainmenu-link {font-size: 16px;}
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 7vw;
+        padding-left: 10vw;
         .mainmenu-items {
             margin: 0 25px !important;
-            .mainmenu-link {font-size: 16px;}
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
@@ -166,19 +156,19 @@
 @media (max-width: 1379px) and (min-width:1300px) {
     .isStickyActive{
         .isMobileUi {
-        padding-left: 3vw;
+        padding-left: 6vw;
         .mainmenu-items {
-            margin: 0 20px !important;
-            .mainmenu-link {font-size: 16px;}
+            margin: 0 35px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
     .isNotSticky {
         .isMobileUi {
-        padding-left: 4vw;
+        padding-left: 6vw;
         .mainmenu-items {
-            margin: 0 23px !important;
-            .mainmenu-link {font-size: 16px;}
+            margin: 0 36px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
@@ -189,29 +179,30 @@
         .isMobileUi {
         padding-left: 3vw;
         .mainmenu-items {
-            margin: 0 20px !important;
+            margin: 0 44px !important;
             a {font-size: 16px;}
         }
+        .megamenu-submenu a {font-size: 16px;}
         }
     }
     .isNotSticky {
         .isMobileUi {
         padding-left: 4vw;
         .mainmenu-items {
-            margin: 0 25px !important;
-            .mainmenu-link {font-size: 16px;}
+            margin: 0 40px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
 }
 
-@media (max-width: 1600px) and (min-width:1399px) {
+@media (max-width: 1535px) and (min-width:1500px) {
     .isStickyActive{
         .isMobileUi {
         padding-left: 3vw;
         .mainmenu-items {
             margin: 0 25px !important;
-            .mainmenu-link {font-size: 16px;}
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
         }
         }
     }
@@ -220,6 +211,27 @@
         padding-left: 9vw;
         .mainmenu-items {
             margin: 0 30px !important;
+        }
+        }
+    }
+}
+
+
+@media (max-width: 1980px) and (min-width:1536px) {
+    .isStickyActive{
+        .isMobileUi {
+        padding-left: 6vw;
+        .mainmenu-items {
+            margin: 0 28px !important;
+            .mainmenu-link, .megamenu-submenu a {font-size: 16px;}
+        }
+        }
+    }
+    .isNotSticky {
+        .isMobileUi {
+        padding-left: 13vw;
+        .mainmenu-items {
+            margin: 0 40px !important;
         }
         }
     }

@@ -1,8 +1,11 @@
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import { handlecategoryColorCode } from "../global/CommonUtil";
 
 const ProductSearchCard = ({ cardData }: any) => {
+  const catMapping = useHeaderStore((state) => state.categoryMapping);
   const router = useRouter();
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -21,7 +24,11 @@ const ProductSearchCard = ({ cardData }: any) => {
                         className="lg:h-60 h-28 flex items-center justify-center">
                         <img src={ DOMPurify.sanitize(cardData?.image?.value?.url)} alt={ DOMPurify.sanitize(cardData?.image?.value?.url)} className="mx-auto border-0 lg:max-h-60 max-h-28 cursor-pointer" />
                       </div>
-                      <div className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer">
+                      <div 
+                      style={{
+                        backgroundColor: handlecategoryColorCode(cardData?.productCategory?.value?.[0]?.id, catMapping),
+                    }}
+                      className="w-max rounded-xl px-2 pt-[2px] pb-1 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold leading-[18px] h-[22px] cursor-pointer flex items-center">
                       { DOMPurify.sanitize(cardData?.productType?.value[0]?.name)}
                       </div>
                       <div

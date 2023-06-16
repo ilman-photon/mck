@@ -33,7 +33,7 @@ function ContactUsComponent() {
   return (
     <>
       {contactUsData && (
-        <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto mb-6 lg:mb-18">
+        <div className="lg:pt-72 pt-6 px-4 container flex flex-col mx-auto mb-6 lg:mb-18 desktop:px-6 smalldekstop:px-6 desktop:pt-[50px] smalldekstop:pt-[50px] desktop:mb-[50px] smalldekstop:mb-[50px]">
           <h1
             className="text-gtl-med pb-6 font-medium text-[27px] lg:leading-61 text-mckblue lg:text-[54px] leading-30"
             id="cu_label_001"
@@ -146,6 +146,8 @@ function ContactUsComponent() {
                     id="cu_label_010"
                   >
                     <a className="flex" href="mailto: #">
+                      {contactUsData?.data[0]?.contentArea
+                                ?.expandedValue[0]?.emailImage?.expandedValue ? 
                       <div className="w-18 mr-4" aria-hidden={true}>
                         {
                           <ImageComponent
@@ -165,6 +167,7 @@ function ContactUsComponent() {
                           />
                         }
                       </div>
+                      : null}
                       {DOMPurify.sanitize(
                         contactUsData?.data[0]?.contentArea?.expandedValue[0]
                           ?.emailTitle?.value

@@ -248,9 +248,9 @@ function WhereComponent() {
                       />
                     </div>
                     <div className="flex flex-row justify-between pb-2">
-                      <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal">
+                      <div className="text-mcknormalgrey text-lg font-normal">
                         <p
-                          className="font-extrabold"
+                          className="text-sofia-bold font-extrabold"
                           aria-label="ABC Pharmacy"
                           id={`wb-label-03${index}`}
                         >
@@ -277,7 +277,7 @@ function WhereComponent() {
                         </p>
                       </div>
                       <div
-                        className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey"
+                        className="lg:text-lg leading-8 text-sofia-bold font-extrabold text-mcknormalgrey"
                         aria-label=".3 mi"
                         id={`wb-label-07_0${index}`}
                       >

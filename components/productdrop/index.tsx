@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
-function ProductDropComponent({ subMenuData }: Props) {
+function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
 
   /**
@@ -40,6 +40,7 @@ function ProductDropComponent({ subMenuData }: Props) {
             <li className="lg:w-1/5 xl:w-1/5" key={`submenukey${index}`}>
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
+                id={`header-mainmenu-${index+1}`}
                   onClick={() => {
                     selectCategory(response?.menuItemName?.value);
                   }}
@@ -53,7 +54,7 @@ function ProductDropComponent({ subMenuData }: Props) {
                       filter: updateUrl(response?.menuItemUrl?.value, "1"),
                     },
                   }}
-                  className="text-gtl-med text-2xl blue-txt text-left pl-2 empty:hidden categoryname font-medium"
+                  className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
                 >
                   {/* {item?.data[0]?.menuItemName?.value} */}
                   {response?.menuItemName?.value}
@@ -72,12 +73,14 @@ function ProductDropComponent({ subMenuData }: Props) {
                       // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
-                          className="blue-txt text-left text-sofia-reg pt-9 pb-9 pl-2 hover:bg-beige-50"
+                        id={`header-submenu-${index+1}`}
+                          className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
+                            handleClick(false)
                             if (response?.menuItemName?.value) {
                               selectCategory(response?.menuItemName?.value);
                             } else {
@@ -137,6 +140,7 @@ function ProductDropComponent({ subMenuData }: Props) {
 
 type Props = {
   subMenuData: any;
+  handleClick: (value: any) => void;
 };
 
 export default ProductDropComponent;

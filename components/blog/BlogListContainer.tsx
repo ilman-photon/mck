@@ -14,7 +14,7 @@ const BlogListContainer = () => {
                 setBlogList(res?.data?.results);
             })
             .catch((e: Error | AxiosError) => {
-                console.log(e)
+               // console.log(e)
             });
     }, []);
     useEffect(() => {

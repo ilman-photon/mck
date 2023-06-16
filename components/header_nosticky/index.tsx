@@ -64,7 +64,7 @@ function HeaderNoStickyComponent() {
 
   return (
     <>
-      <div className="flex lg:grid container mx-auto bg-transparent blue-txt">
+      <div className="flex lg:grid container mx-auto bg-transparent text-mckblue">
         <div className="w-full mb-12 flex" style={divHeight}>
           <div className="mobile-nav px-5 py-5">
             <img
@@ -75,7 +75,7 @@ function HeaderNoStickyComponent() {
           </div>
           <div
             ref={headerImgRef}
-            className="brand-logo lg:max-w-[300px]"
+            className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
             onClick={handleOnCLickLogo}
           >
             <img              

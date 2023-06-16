@@ -34,10 +34,7 @@ export const useFooterStore = create<Controller>((set, get) => ({
                 buttonActive = item?.menuItemName?.value;
             }
         });
-        set({ footerData: response })
-        set({ footerSecondData: responseid })
-        set({ footerMobileNav: footerMobileNav })
-        set({ activeButton: buttonActive })
+        set({ footerData: response,footerSecondData:responseid,footerMobileNav,activeButton:buttonActive })
     },
     setActiveButton: (buttonName) => set({ activeButton: buttonName })
 }))

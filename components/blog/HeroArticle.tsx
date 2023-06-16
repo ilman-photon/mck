@@ -54,7 +54,7 @@ const HeroArticle = ({ data }: any) => {
                         <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-hero-label-002'>{data?.readMinute?.value}</span>
                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
-                    <div className='flex flex-wrap mb-2.5 h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 '>
+                    <div className='flex flex-wrap mb-2.5 h-[33px] overflow-hidden [&>*:nth-child(1)]:ml-0 '>
                         {data?.tag?.value.map((item: any, index: any) => (
                             <div
                                 id={`blog-hero-article-tag` + index}
@@ -62,7 +62,7 @@ const HeroArticle = ({ data }: any) => {
                                 style={{
                                     backgroundColor: handlecategoryColorCode(item.id, catMapping),
                                 }}
-                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit  mb-2'>
+                                className='categoryTag text-mcknormalgrey text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border lg:w-fit xl:w-fit  my-1'>
                                 {item.description}
                             </div>
                         ))}

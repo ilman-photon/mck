@@ -9,9 +9,11 @@ import HealthNeedsComponent from "@/components/health_needs";
 import GoogleTagManager from "@/components/google_tag_manager";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
+import Head from "next/head";
 
 function HealthNeedsPage() {
   const [loadingTemp, setLoadingTemp] = useState(true);
+  const [tempStatus, setTempStatus] = useState(false);
   const { response, error, loading } = useAxios({
     method: "GET",
     url: `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`,
@@ -23,7 +25,7 @@ function HealthNeedsPage() {
   function filteredData(valueType: string) {
     return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
       return ele.contentType.some((arrEle: string) => {
-        return arrEle == valueType;
+        return arrEle === valueType;
       });
     });
   }
@@ -31,6 +33,7 @@ function HealthNeedsPage() {
   useEffect(() => {
     document.documentElement.lang = "en";
   }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       false;
@@ -38,6 +41,7 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
     if (
       response &&
@@ -46,11 +50,13 @@ function HealthNeedsPage() {
       response.data[0].title &&
       response.data[0].title.value
     ) {
-      document.title = DOMPurify.sanitize(response.data[0].title.value)
+      const sanitizedTitle = DOMPurify.sanitize(response.data[0].title.value);
+      document.title = sanitizedTitle;
     } else {
       document.title = "Health Needs";
     }
   }, [JSON.stringify(response)]);
+
   const [isCarusonAvible, setisCarusonAvible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -60,23 +66,31 @@ function HealthNeedsPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
+      <Head>
+        <title>McKesson</title>
+        <link rel="icon" href="/favicon_mck.ico" />
+      </Head>
       <GoogleTagManager />
-      <HeaderComponent
-        isCarusolAvaible={
-          response?.data[0].contentArea.expandedValue[0].name == "Carousel"
-            ? true
-            : false
-        }
-      />
-      {error && <p>{error.message}</p>}
-      {loadingTemp ||
-        (!loading && !error && response && (
+      <div className="wrapper">
+        <HeaderComponent
+          isCarusolAvaible={
+            response?.data[0].contentArea.expandedValue[0].contentType.includes(
+              "CarouselBlock"
+            )
+              ? true
+              : false
+          }
+        />
+        {error && <p>{error.message}</p>}
+        {!loading && !error && response && (
           <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-        ))}
-      <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
-      <FooterComponent />
+        )}
+        <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
+        <FooterComponent />
+      </div>
     </>
   );
 }

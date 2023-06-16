@@ -13,7 +13,7 @@ const ItemExpandeble = ({ bdata }: any) => {
 
   return (
     <div
-      className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4"
+      className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4 "
       id={"faq_label_003" + bdata?.contentLink?.id}
       key={bdata?.contentLink?.id}
     >
@@ -82,7 +82,7 @@ function FaqComponent() {
       {faqData && (
         <div
           role="main"
-          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18"
+          className="faq-container container flex pt-6 lg:pt-72 flex-col mx-auto px-0  mb-6 lg:mb-18 desktop:px-6 smalldekstop:px-6 desktop:pt-[50px] smalldekstop:pt-[50px] desktop:mb-[50px] smalldekstop:mb-[50px]"
         >
           <h1
             className="text-mckblue text-54 heading pb-3 text-center"
@@ -108,14 +108,14 @@ function FaqComponent() {
               className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
               id="faq_label_005"
             >
-              {faqData?.differentQuestionHeading?.value}
+              {DOMPurify.sanitize(faqData?.differentQuestionHeading?.value)}
             </h3>
             <div className="shade-blue-border-top lg:p-6 p-4">
               <p
                 className="lg:pb-4 pb-2 lg:text-27 text-base text-mckblue text-gtl-med font-medium"
                 id="faq_label_006"
               >
-                {faqData?.differentQuestionDetails?.value}
+                {DOMPurify.sanitize(faqData?.differentQuestionDetails?.value)}
               </p>
               <a
                 style={{
@@ -124,7 +124,7 @@ function FaqComponent() {
                 href={DOMPurify.sanitize(
                   faqData?.differentQuestionCTALink?.value
                 )}
-                className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
+                className="text-center inline-block min-w-[121px] rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
                 id="faq_btn_007"
               >
                 {DOMPurify.sanitize(faqData?.differentQuestionCTAText?.value)}
@@ -141,7 +141,7 @@ function FaqComponent() {
                 {DOMPurify.sanitize(faqData?.whatYouCanDoHeading?.value)}
               </h3>
               <div
-                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                 id="faq_label_009"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
@@ -161,7 +161,7 @@ function FaqComponent() {
                   )}
                 </h3>
                 <div
-                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                   id="faq_label_011"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(
@@ -170,7 +170,9 @@ function FaqComponent() {
                   }}
                 ></div>
               </div>
-              <div className="rounded-lg shade-blue-border overflow-hidden mt-6 faq-box">
+              <div
+                className={`rounded-lg shade-blue-border overflow-hidden mt-6 faq-box hidden`}
+              >
                 <h3
                   className="shade-blue-bg text-mckblue text-sofia-bold font-extrabold lg:text-lg text-base py-3 px-4"
                   id="faq_label_012"

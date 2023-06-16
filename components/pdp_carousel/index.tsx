@@ -15,6 +15,7 @@ function PdpCarousel(prodViewData: any) {
   const [arrowClick, setArrowClick] = useState(0);
   const [dataImageId, setDataImageId] = useState(0);
   const [prodResponse, setProdResponse] = useState<any>();
+  const [indexPoint, setIndexPoint] = useState();
   const [carouselState, setCarouselState] = useState({
     selectedItemIndex: 0,
     lastIndex: 0,
@@ -38,7 +39,6 @@ function PdpCarousel(prodViewData: any) {
         ? 5
         : 6
     );
-    setArrowClick(0);
   }, [deviceWidth]);
 
   useEffect(() => {
@@ -53,38 +53,45 @@ function PdpCarousel(prodViewData: any) {
     if (lastIndex < prodResponse?.productImages?.value?.length) {
       setArrowClick(() => arrowClick + 1);
       setLastIndex(() => lastIndex + 1);
+      setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
     }
-    prodResponse?.productImages?.value?.length > selectedItemIndex + 1 &&
+    if (prodResponse?.productImages?.value?.length > selectedItemIndex + 1) {
       setSelectedItemIndex((prevState) => prevState + 1);
+      setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
+    }
   };
 
   const handleUpArrowClick = () => {
     if (arrowClick > 0) {
       setArrowClick((prevArrowClick) => prevArrowClick - 1);
       setLastIndex((prevLastIndex) => prevLastIndex - 1);
+      setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
     }
     if (selectedItemIndex > 0) {
       setSelectedItemIndex(
         (prevSelectedItemIndex) => prevSelectedItemIndex - 1
       );
+      setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
     }
   };
 
   const handleImageClick = (i: any, dataImageId?: any) => {
     const index = prodResponse?.productImages?.value.findIndex(
-      (imgdata: any) => imgdata.id === dataImageId
+      (imgdata: any) => imgdata.id == dataImageId
     );
-    setSelectedItemIndex(index + arrowClick);
+
+    setSelectedItemIndex(i + arrowClick);
     setDataImageId(dataImageId);
+    setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
   };
 
   const handleMouseOver = (id: number) => {
     setSelectedItemIndex(id);
+    setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
   };
 
   const isProductImageLessThanSix =
     prodResponse?.productImages?.expandedValue?.length < 6;
-  console.log(prodResponse?.productImages?.value);
   useEffect(() => {
     const imgData =
       prodResponse?.productImages?.value &&
@@ -93,8 +100,9 @@ function PdpCarousel(prodViewData: any) {
       (imgData && imgData.url) ||
       prodResponse?.image?.expandedValue?.url ||
       prodResponse?.image?.value?.url;
-    setImgUrl(imgUrl);
+    setImgUrl(prodResponse?.productImages?.value[selectedItemIndex]?.url);
   }, [selectedItemIndex, arrowClick, prodResponse]);
+
   return (
     <div className="flex lg:mx-auto lg:h-[636px] mx-4 lg:mx-0" id="pdp-01">
       <div className="flex flex-col-reverse lg:flex-row pdp-carousel w-full">
@@ -137,35 +145,38 @@ function PdpCarousel(prodViewData: any) {
             </div>
           )}
           <ul className="3GnUWp flex lg:flex-col">
-            {prodResponse?.productImages?.value && prodResponse?.productImages?.value
-              ?.slice(arrowClick, lastIndex)
-              .map((imgdata: any, index: any) => {
-                return (
-                  <li
-                    className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
+            {prodResponse?.productImages?.value &&
+              prodResponse?.productImages?.value
+                ?.slice(arrowClick, lastIndex)
+                .map((imgdata: any, index: any) => {
+                  return (
+                    <li
+                      className={`lg:w-24 w-20 lg:h-24 h-20 rounded box-border flex flex-row justify-center items-center p-2 bg-white border border-solid border-mckblue mb-3 
                                     ${
                                       selectedItemIndex === index + arrowClick
                                         ? "cursor-pointer border-solid border-4 border-indigo-600 hover:border-solid hover:border-4"
                                         : ""
                                     } 
                                 `}
-                    id={"pdp_carousel_" + index}
-                    key={`pdpcarousalkey${index}`}
-                    onClick={() => {
-                      handleImageClick(index, imgdata?.id);
-                    }}
-                    onMouseOver={(event) => handleMouseOver(index)}
-                  >
-                    <img
-                      className="max-w-xl w-10"
-                      role="img"
-                      src={DOMPurify.sanitize(imgdata?.url)}
-                      alt={DOMPurify.sanitize(`pdp-img-C0` + index)}
-                      id={DOMPurify.sanitize(`pdp-img-C0` + index)}
-                    />
-                  </li>
-                );
-              })}
+                      id={"pdp_carousel_" + index}
+                      key={`pdpcarousalkey${index}`}
+                      onClick={() => {
+                        handleImageClick(index, imgdata?.id);
+                      }}
+                      onMouseOver={(event) =>
+                        handleMouseOver(index + arrowClick)
+                      }
+                    >
+                      <img
+                        className="max-w-xl w-10"
+                        role="img"
+                        src={DOMPurify.sanitize(imgdata?.url)}
+                        alt={DOMPurify.sanitize(`pdp-img-C0` + index)}
+                        id={DOMPurify.sanitize(`pdp-img-C0` + index)}
+                      />
+                    </li>
+                  );
+                })}
           </ul>
           {/* <button onClick={handleDownArrowClick}>Down arrow</button> */}
           {isProductImageLessThanSix ? null : (

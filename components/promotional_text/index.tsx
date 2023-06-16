@@ -22,7 +22,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
         <h3
           id={`${index}_lbl_001`}
           // id="promotion-heading"
-          className="text-2xl lg:text-5xl text-gtl-med blue-txt lg:mt-6 text-center" 
+          className="text-2xl lg:text-5xl text-gtl-med text-mckblue lg:mt-6 text-center" 
         >
           {sectionData?.title?.value}
         </h3>

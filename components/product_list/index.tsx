@@ -38,11 +38,14 @@ function ProductListComponent() {
   let selectedCategoryName: any = [];
   // Right section product carousel data
   function fetchProductList(filter: any) {
+    
     setIsLoading(true);
     let queryParameter = "";
     if (filter === "") {
       queryParameter = `(productType/value/name eq '${router.query.filter}') and`;
-    } else if (filter === "NA") {
+    } else if(filter === "clearall"){
+      queryParameter = "";
+    }else if (filter === "NA") {
       queryParameter = "";
     } else {
       queryParameter = `${filter} and`;
@@ -87,14 +90,14 @@ function ProductListComponent() {
   
   useEffect(() => {
     createQueryParameters();
-    console.log("in useffect")
+    //console.log("in useffect")
   }, [activeFilter]);
 
 
 
   const createQueryParameters = () => {
     let queryParams = "";
-
+    
     if (selectedFilterItems.length > 0) {
       
       let lastCatId = 0;
@@ -104,7 +107,7 @@ function ProductListComponent() {
       selectedFilterItems.map((category: any, catId: any) => {
         
         if (!category.isCategoryChecked && category.items.length > 0) {
-          console.log("in if")
+          //console.log("in if")
           // if (!mainCatId.includes(catId)) {
           //   mainCatId.push(catId);
           // }
@@ -137,7 +140,7 @@ function ProductListComponent() {
           lastCatId = catId;
         }
          else {
-          console.log("in else")
+          //console.log("in else")
           minSubCategoryCnt += category.items.length;
           if (category.isCategoryChecked) {
             if(lastCatId >= 0 && !category.isBusinessVerticalCategory){
@@ -166,7 +169,10 @@ function ProductListComponent() {
         // queryParams = "";
         fetchProductList('')
       }
+
     }
+    console.log("queryParams",queryParams);
+    console.log("selectedFilterItems",selectedFilterItems);
     fetchProductList(queryParams);
   };
 
@@ -209,6 +215,7 @@ function ProductListComponent() {
     const recommendedCategoryData = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
     );
+    
     const response = recommendedCategoryData?.data[0]?.contentArea
     setRecommendedProduct(response)
     const productCategoryDataList =
@@ -222,7 +229,7 @@ function ProductListComponent() {
 
 
   const createTempFilterArr = (results: any) => {
-    console.log("in createTempFilterArr")
+    //console.log("in createTempFilterArr")
     let tempArr: any = [];
     results?.map((leftfiltermaindata: any) => {
       tempArr[leftfiltermaindata?.mainCategory?.value[0]?.id] = [];
@@ -256,7 +263,24 @@ function ProductListComponent() {
 
     let selectedFilterData: any[] = [];
     selectedFilterData = tempArr;
+    console.log("selectedFilterData",selectedFilterData);
+    console.log("selectedproduct",productName);
+    console.log("selectedproduct",router.query.filter);
+    console.log("selectedFilterItems",selectedFilterItems);
     selectedFilterData.map((category: any) => {
+
+      if(router.query.filter === category.categoryName){
+        
+        category.isCategoryChecked = true;
+        category.checked = true;
+        category.map((sub_category: any) => {
+            sub_category.checked = true;
+            if (category["items"] && category["items"].indexOf(router.query.filter) === -1) {
+              category["items"].push(router.query.filter);
+              setActiveFilter([router.query.filter]);
+            }
+        });
+      }
       category.map((sub_category: any) => {
         if (router.query.filter === sub_category.name) {
           sub_category.checked = true;

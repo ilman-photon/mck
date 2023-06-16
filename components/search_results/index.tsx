@@ -38,19 +38,19 @@ function ResultComponent() {
     } 
     const StringParam = router.query.search?.toString().toLowerCase();
     const promise = axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
+      `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${queryParameter}ContentType/any(t:t eq 'ProductDetailsPage') and (contains(tolower(productType/value/name), '${StringParam}') or contains(tolower(productSubCategory/value/name), '${StringParam}') or contains(tolower(productCategory/value/name), '${StringParam}') or contains(tolower(description/value), '${StringParam}') or contains(tolower(title/value), '${StringParam}') or contains(tolower(name), '${StringParam}') or contains(tolower(highlightDescription/value), '${StringParam}'))`);
     promise
       .then((res:any) => {
         setProductCount(res?.data?.totalMatching);
         setProductSearch(router.query.search);
         setSearchLoading(false);
-        setProductSum(res.data.totalMatching)
+        setProductSum(res?.data?.totalMatching)
         SetProductListData( [
-          {item: {name: res.data.results[0].productType?.value[0].name }},
-          {data: {results: res.data.results}},
+          {item: {name: res?.data?.results[0]?.productType?.value[0].name }},
+          {data: {results: res?.data?.results}},
         ])
       })
-      .catch((e: Error) => console.log(e));
+      .catch((e: Error) =>  setSearchLoading(false));
   }
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function ResultComponent() {
         })
       );
       filterItems[categoryId][subCategoryId].checked = false;
-      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"].length <= 0) {
+      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"]?.length <= 0) {
         filterItems[categoryId].isCategoryChecked = false;
       }
     }
@@ -146,6 +146,7 @@ function ResultComponent() {
     });
     setActiveFilter(() => selectedSubCat);
     setSelectedFilterItems(() => selectedFilterData);
+    
   };
 
   useEffect(() => {
@@ -154,7 +155,6 @@ function ResultComponent() {
 
   const createQueryParameters = () => {
     let queryParams = "";
-    if (selectedFilterItems.length > 0) {
 
       let businessVerticalCategory: string[];
       businessVerticalCategory = [];
@@ -189,7 +189,6 @@ function ResultComponent() {
       } else {
         queryParams = notBusinessQueryParams;
       }
-    }
     fetchProductList(queryParams);
   };
 
@@ -210,7 +209,7 @@ function ResultComponent() {
         );
 
       const healthNeedsCategoriesListData =
-        healthNeedsCategoriesList.length > 0
+        healthNeedsCategoriesList?.length > 0
           ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
           : [];
       setHealthNeedData(healthNeedsCategoriesListData);

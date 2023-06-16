@@ -6,21 +6,23 @@ import axios, { AxiosError } from "axios";
 import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
+
+  const checkEnableButton = () => {
+    return router.pathname;
+  };
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
-  const [headerData, setHeaderData] = useState<any>();
-  
-  const logoSrc = useHeaderStore(state => state.currentusedLogo)
-  const firstLogo = useHeaderStore(state => state.logoSrc1)
-  const setLogo = useHeaderStore(state => state.setLogoSrc)
-  const onMouseEnterToHeader = useHeaderStore(state => state.onMouseEnter)
-  const isDataExist = useHeaderStore(state => state.headerData)
-  
+
+  const firstLogo = useHeaderStore((state) => state.logoSrc1);
+  const beigeLogo = useHeaderStore((state) => state.logoSrc2);
+  const isDataExist = useHeaderStore((state) => state.headerData);
+  const getHeaderData = useHeaderStore(state => state.getData)
+
   const handleScroll = (elTopOffset: any, elHeight: any) => {
     const style = {
       width: "180px",
@@ -31,7 +33,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       height: "auto",
     };
     const style1 = {
-      margin: 0,
+      margin: "0 auto",
       background: "#FFF6ED",
       color: "#001a71",
     };
@@ -45,10 +47,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     }
   };
 
-  useLayoutEffect(() => {
-      setLogo()
-  },[])
-
   useEffect(() => {
     let header = headerImgRef.current!.getBoundingClientRect();
     const handleScrollEvent = () => {
@@ -61,26 +59,10 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   }, []);
 
   useEffect(() => {
-    if(isDataExist === null){
-      fetchHeaderData();
+    if (isDataExist === null) {
+      getHeaderData(checkEnableButton())
     }
   }, [isDataExist]);
-
-  function fetchHeaderData() {
-    axiosInstance
-      .get(
-        `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/application-settings/&expand=*`)
-      .then((res) => {
-        setHeaderData(res.data[0]);
-        // setMenuData(
-        //   res.data[0].headerMegaMenu.expandedValue[0].contentBlockArea
-        //     .expandedValue
-        // );
-        // console.log(res?.data[0])
-        // setLogoSrc(res.data[0]?.logoImage?.expandedValue?.url);
-      })
-      .catch((e: Error | AxiosError) => console.log(e));
-  }
 
   function handleOnClickLogo() {
     router.push({
@@ -96,7 +78,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     setIsBarAnimated(!isBarAnimated);
     setIsMobileMenuActive(!isMobileMenuActive);
   }
-  
+
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
@@ -107,17 +89,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
- 
-  function handleHeaderMouseEnter() {
-    if (!isMobile) {
-      onMouseEnterToHeader()
-    }
-  }
-
-  function handleHeaderMouseLeave() {
-    setLogo()
-  }
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -145,7 +116,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       const hamburgerMenuActive = document.querySelector(
         ".hamburger-menu.active"
       );
-      const a = document.getElementById('nav-bar')?.firstChild;
+      const a = document.getElementById("nav-bar")?.firstChild;
 
       if (
         hamburgerMenu &&
@@ -153,12 +124,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         !hamburgerMenu.contains(event.target as Node) &&
         !hamburgerMenuActive.contains(event.target as Node)
       ) {
-        // setIsMobileMenuActive(false);
         setIsBarAnimated(false);
       }
-      // if(a?.contains(event.target as Node)){
-      //   setIsMobileMenuActive(false);
-      // }
     };
 
     window.addEventListener("click", handleClickOutside);
@@ -166,7 +133,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -174,49 +141,62 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         Skip to main content
       </a>
       <div
-        onMouseEnter={handleHeaderMouseEnter}
-        onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
-          isCarusolAvaible ? "sticky lg:bg-beige50 lg:bg-opacity-70 " : isSticky ? "sticky" : "relative z-40"
-        }  mx-auto blue-txt border-b bg-mckbeige lg:border-b border-mcknormalgrey ${
+          isCarusolAvaible
+            ? "sticky lg:bg-beige50 lg:bg-opacity-70"
+            : isSticky
+            ? "sticky"
+            : "relative z-40"
+        } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey lg:pb-1 ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}
         style={!isMobile ? divHeight : undefined}
       >
-        <div className="container mx-auto lg:grid contents align-content-center">
-          <div className="flex">
-            {/* Hamburger menu starts */}
-            <div
-              className={`hamburger-menu lg:hidden xl:hidden ${
-                isMobileMenuActive ? "active" : ""
-              }`}
-              onClick={() => handleHamburgerClick()}
-            >
-              <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
-            </div>
-            {/* Hamburger menu ends */}
-          </div>
-
+        <div className="flex">
           <div
-            ref={headerImgRef}
-            className="brand-logo lg:max-w-[300px]"
-            role="banner"
-            onClick={handleOnClickLogo}
+            className={`hamburger-menu lg:hidden xl:hidden ${
+              isMobileMenuActive ? "active" : ""
+            }`}
+            onClick={() => handleHamburgerClick()}
           >
-            <img
-              id="logo-image"
-              src={DOMPurify.sanitize(logoSrc || firstLogo)}
-              alt="Foster Thrive Logo image Link"
-              className="logo-image lg:mt-7"
-              style={isMobile ? undefined : imgWidth}
-              tabIndex={0}
-            />
+            <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
           </div>
-          <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
-            <NavBar isMobileMenuActive={isMobileMenuActive} setIsMobileMenuActive={setIsMobileMenuActive}/>
-            <Search />
-          </div>
+        </div>
+
+        <div
+          ref={headerImgRef}
+          className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
+          role="banner"
+          onClick={handleOnClickLogo}
+        >
+          {firstLogo && (
+            <div>
+              <img
+                id="logo-image-bgcolor"
+                src={DOMPurify.sanitize(firstLogo)}
+                alt="Foster Thrive Logo image Link"
+                className="logo-image lg:mt-7"
+                style={isMobile ? undefined : imgWidth}
+                tabIndex={0}
+              />
+              <img
+                id="logo-image-beige"
+                src={DOMPurify.sanitize(beigeLogo)}
+                alt="Foster Thrive Logo image Link"
+                className="logo-image lg:mt-7 hidden"
+                style={isMobile ? undefined : imgWidth}
+                tabIndex={0}
+              />
+            </div>
+          )}
+        </div>
+        <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
+          <NavBar
+            isMobileMenuActive={isMobileMenuActive}
+            setIsMobileMenuActive={setIsMobileMenuActive}
+          />
+          <Search />
         </div>
       </div>
       {children}

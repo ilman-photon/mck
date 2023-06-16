@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 
 const HealthNeedCategory = ({
   healthNeedData,
@@ -9,7 +9,7 @@ const HealthNeedCategory = ({
   setActiveFilter,
   activeFilter,
   productCategoryData,
-  customerBackgroundColorCode
+  customerBackgroundColorCode,
 }: any) => {
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState(null);
@@ -43,7 +43,7 @@ const HealthNeedCategory = ({
       );
       selectedFilterItems[cat_id][sub_cat_id].checked = false;
     } else {
-      selectedFilterItems[cat_id].items = [];   
+      selectedFilterItems[cat_id].items = [];
       selectedFilterItems[cat_id].items.push(data);
       selectedFilterItems.map((category: any) => {
         category.isCategoryChecked = false;
@@ -60,10 +60,9 @@ const HealthNeedCategory = ({
   return (
     <div className="hidden lg:flex md:hidden desktop:px-6">
       <div
-        className="pt-[36px] px-1.5 mt-[72px] pb-0"
-        
+        className="pt-[36px] px-1.5 pb-0 desktop:mx-0 smalldekstop:mx-6 desktop:mt-6 smalldekstop:mt-6 lg:mt-[72px]"
         id="hn_label_0001"
-        style={{ background:DOMPurify.sanitize( customerBackgroundColorCode) }}
+        style={{ background: DOMPurify.sanitize(customerBackgroundColorCode) }}
       >
         <ul className="flex flex-wrap gap-4">
           {healthNeedData &&
@@ -73,22 +72,24 @@ const HealthNeedCategory = ({
                 key={healthneedsdata?.contentLink?.id}
                 tabIndex={0}
                 role="link"
-                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-[36px] cursor-pointer lg:max-w-[170px] active:lg:max-w-[170px]${
+                className={`list-none text-sofia-reg text-mckblue text-lg text-center shrink pl-[30px] pr-[30px] pb-[36px] cursor-pointer lg:max-w-[170px] active:lg:max-w-[170px] desktop:max-w-[105px] active:desktop:max-w-[105px] smalldekstop:max-w-[140px] active:smalldekstop:max-w-[140px]${
                   activeIcon === healthneedsdata?.contentLink?.id
                     ? "active"
                     : ""
-                  }`}
+                }`}
                 onClick={() =>
                   handleHealthNeedData(
                     healthneedsdata?.title.value,
                     healthneedsdata
                   )
                 }
-                 aria-label={healthneedsdata?.title.value}
+                aria-label={healthneedsdata?.title.value}
               >
-                <img 
+                <img
                   id={`hl-img+${index}`}
-                  src={DOMPurify.sanitize(healthneedsdata?.image?.expandedValue?.url)}
+                  src={DOMPurify.sanitize(
+                    healthneedsdata?.image?.expandedValue?.url
+                  )}
                   alt={DOMPurify.sanitize(healthneedsdata?.title?.value)}
                   className="mb-3 mx-auto w-auto hover:opacity-60"
                   aria-hidden="true"
