@@ -288,7 +288,7 @@ function PdpLocation(props: any) {
                 <div className="text-sofia-reg text-mcknormalgrey text-lg font-normal">
                   <p
                     aria-label="MEDMETRICS PHARMACY"
-                    className="font-extrabold leading-5 mb-2"
+                    className="text-sofia-bold leading-5 mb-2"
                     id={`pdp-address_${props.index}-${index}`}
                   >
                     {value.StoreName}
@@ -316,7 +316,7 @@ function PdpLocation(props: any) {
                   </p>
                 </div>
                 <div
-                  className="lg:text-lg leading-8 font-extrabold text-mcknormalgrey"
+                  className="lg:text-lg leading-8 text-sofia-bold text-mcknormalgrey"
                   aria-label=".3 mi"
                   id={`pdp-distance_${props.index}-${index}`}
                 >
