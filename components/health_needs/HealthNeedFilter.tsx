@@ -495,12 +495,12 @@ const HealthNeedFilter = ({
                                         ?.expandedValue?.url
                                     )}
                                     alt={DOMPurify.sanitize(
-                                      leftfiltermaindata?.mainCategory?.value[0]
-                                        .name
+                                      leftfiltermaindata?.mainCategory?.value?.[0]
+                                        ?.name
                                     )}
                                     id={
-                                      leftfiltermaindata?.mainCategory?.value[0]
-                                        .name + index
+                                      leftfiltermaindata?.mainCategory?.value?.[0]
+                                        ?.name + index
                                     }
                                     height={24}
                                     width={24}
@@ -538,12 +538,12 @@ const HealthNeedFilter = ({
                                         handleViewAllChange(
                                           e,
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0].id
+                                            ?.value?.[0]?.id
                                         )
                                       }
                                       id={
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.name + "View All"
+                                          ?.value?.[0]?.name + "View All"
                                       }
                                       type="checkbox"
                                       value="view all"
@@ -553,20 +553,20 @@ const HealthNeedFilter = ({
                                       checked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0]?.id
+                                            ?.value?.[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                       defaultChecked={
                                         selectedFilterItems[
                                           leftfiltermaindata?.mainCategory
-                                            ?.value[0]?.id
+                                            ?.value?.[0]?.id
                                         ]?.isCategoryChecked
                                       }
                                     />
                                     <label
                                       htmlFor={
                                         leftfiltermaindata?.mainCategory
-                                          ?.value[0]?.name + "View All"
+                                          ?.value?.[0]?.name + "View All"
                                       }
                                       className="ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer leading-[21px] font-normal"
                                       id={
@@ -593,10 +593,11 @@ const HealthNeedFilter = ({
                                               e,
                                               leftfiltersubdata?.name,
                                               leftfiltermaindata?.mainCategory
-                                                ?.value[0].id,
+                                                ?.value?.[0]?.id,
                                               leftfiltersubdata?.id
                                             )
                                           }
+
                                           id={leftfiltersubdata?.name + index}
                                           type="checkbox"
                                           value={leftfiltersubdata?.name}
@@ -606,13 +607,13 @@ const HealthNeedFilter = ({
                                           checked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
+                                                ?.value?.[0]?.id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                           defaultChecked={
                                             selectedFilterItems[
                                               leftfiltermaindata?.mainCategory
-                                                ?.value[0].id
+                                                ?.value?.[0]?.id
                                             ]?.[leftfiltersubdata?.id]?.checked
                                           }
                                         />
