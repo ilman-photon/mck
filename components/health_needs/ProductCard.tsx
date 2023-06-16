@@ -37,7 +37,7 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
         style={{
           backgroundColor: handlecategoryColorCode(cardData?.productCategory?.value?.[0]?.id, catMapping),
       }}
-          className="w-max rounded-xl px-2 py-0.5 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px]"
+          className="w-max rounded-xl px-2 pt-[2px] pb-1 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px] flex items-center"
           
           id={`hn_label_02_${indexs + 1}_${mainIndex + 1}`}
         >
