@@ -16,7 +16,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
     return (
         <div className='grid lg:grid-cols-2 gap-x-6 grid-cols-1'>
             {ArticleList ? ArticleList?.map((item: any, index: any) => (
-                <div key={`{blog-article_${item.contentLink.id}}`}>
+                <div key={`{blog-article_${item?.contentLink?.id}}`}>
                     <div
                         className='articletitle-link max-h-620 w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
                     >
@@ -42,7 +42,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     <LinkComponent
                                         href={{
                                             pathname: "/blog_details",
-                                            query: { id: item.routeSegment },
+                                            query: { id: item?.routeSegment },
                                         }}
                                         ariahidden={false} 
                                         tabIndex={0}
@@ -56,11 +56,11 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>
                                     <div className='flex flex-wrap h-[33px] overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
-                                        {item.tag.value.map((tagitem: any, idx: any) => (
+                                        {item?.tag?.value.map((tagitem: any, idx: any) => (
                                             <div key={idx}
                                             tabIndex={0}
                                                 style={{
-                                                    backgroundColor: handlecategoryColorCode(tagitem.id, catMapping),
+                                                    backgroundColor: handlecategoryColorCode(tagitem?.id, catMapping),
                                                 }}
                                                 className='my-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{DOMPurify.sanitize(tagitem?.description)}</div>
                                         ))}
