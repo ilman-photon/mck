@@ -141,7 +141,7 @@ function FaqComponent() {
                 {DOMPurify.sanitize(faqData?.whatYouCanDoHeading?.value)}
               </h3>
               <div
-                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                 id="faq_label_009"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
@@ -161,7 +161,7 @@ function FaqComponent() {
                   )}
                 </h3>
                 <div
-                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                   id="faq_label_011"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(
