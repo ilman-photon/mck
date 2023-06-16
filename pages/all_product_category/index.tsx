@@ -31,9 +31,11 @@ function AllProductCategoryPage({
 }: MyComponentProps): React.ReactElement {
   const router = useRouter();
   // const [activeFilter, setActiveFilter] = useState<any>([]);
-  const activeFilter = useAllProductCategory(state => state.activeFilters)
-  const setActiveFilter = useAllProductCategory(state => state.setActiveFilters)
-  
+  const activeFilter = useAllProductCategory((state) => state.activeFilters);
+  const setActiveFilter = useAllProductCategory(
+    (state) => state.setActiveFilters
+  );
+
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [filterClicked, setFilterClicked] = useState(false);
   const productSearchCard = false;
@@ -64,10 +66,10 @@ function AllProductCategoryPage({
             tempResults[selectedFilterItems[id].categoryName] = [];
           });
           setFilterClicked(true);
-          setSelectedProduct( [
-            {item: {name: "" }},
-            {data: {results: ""}},
-          ])
+          setSelectedProduct([
+            { item: { name: "" } },
+            { data: { results: "" } },
+          ]);
           return;
         }
 
@@ -101,34 +103,59 @@ function AllProductCategoryPage({
   /**
    * @description business logic wired here
    */
-  const getData = useAllProductCategory(state => state.getProductCategorySettings)
-  const healthNeedData = useAllProductCategory(state => state.healthNeedData);
-  const activeFiltersData = useAllProductCategory(state => state.activeFilterData)
-  const productCategoryData = useAllProductCategory(state => state.productCategoryData)
-  const productCategory = useAllProductCategory(state => state.productCategory)
-  const carouselData = useAllProductCategory(state => state.carouselData)
-  const categoryProduct = useAllProductCategory(state => state.categoryProduct)
-  const selectedProduct = useAllProductCategory(state => state.selectedProduct)
-  const setSelectedProduct = useAllProductCategory(state => state.setSelectedProduct)
-  const selectedFilterItems = useAllProductCategory(state => state.selectedFilterItems)
-  const allProductCategoryList = useAllProductCategory(state => state.allProductCategoryList)
-  const setIsLoadingTrue = useAllProductCategory(state => state.setIsLoadingTrue)
-  const setIsLoadingFalse = useAllProductCategory(state => state.setIsLoadingFalse)
-  const isLoading = useAllProductCategory(state => state.isLoading)
-  const recommendedProduct = useAllProductCategory(state => state.recommendProduct)
-  const productSum = useAllProductCategory(state => state.productSum)
-  const setProductSum = useAllProductCategory(state => state.setProductSum)
-  const setSelectedFilterItems = useAllProductCategory(state => state.setSelectedFilterItems)
+  const getData = useAllProductCategory(
+    (state) => state.getProductCategorySettings
+  );
+  const healthNeedData = useAllProductCategory((state) => state.healthNeedData);
+  const activeFiltersData = useAllProductCategory(
+    (state) => state.activeFilterData
+  );
+  const productCategoryData = useAllProductCategory(
+    (state) => state.productCategoryData
+  );
+  const productCategory = useAllProductCategory(
+    (state) => state.productCategory
+  );
+  const carouselData = useAllProductCategory((state) => state.carouselData);
+  const categoryProduct = useAllProductCategory(
+    (state) => state.categoryProduct
+  );
+  const selectedProduct = useAllProductCategory(
+    (state) => state.selectedProduct
+  );
+  const setSelectedProduct = useAllProductCategory(
+    (state) => state.setSelectedProduct
+  );
+  const selectedFilterItems = useAllProductCategory(
+    (state) => state.selectedFilterItems
+  );
+  const allProductCategoryList = useAllProductCategory(
+    (state) => state.allProductCategoryList
+  );
+  const setIsLoadingTrue = useAllProductCategory(
+    (state) => state.setIsLoadingTrue
+  );
+  const setIsLoadingFalse = useAllProductCategory(
+    (state) => state.setIsLoadingFalse
+  );
+  const isLoading = useAllProductCategory((state) => state.isLoading);
+  const recommendedProduct = useAllProductCategory(
+    (state) => state.recommendProduct
+  );
+  const productSum = useAllProductCategory((state) => state.productSum);
+  const setProductSum = useAllProductCategory((state) => state.setProductSum);
+  const setSelectedFilterItems = useAllProductCategory(
+    (state) => state.setSelectedFilterItems
+  );
 
   useEffect(() => {
-    if(healthNeedData === null){
-      getData()
+    if (healthNeedData === null) {
+      getData();
     }
-  },[healthNeedData])
-
+  }, [healthNeedData]);
 
   useEffect(() => {
-    if(activeFilter){
+    if (activeFilter) {
       createQueryParameters();
     }
   }, [activeFilter]);
@@ -208,16 +235,16 @@ function AllProductCategoryPage({
             queryParams += "(";
             const itemName = category.categoryName.replace(/[^a-zA-Z ]/g, "");
             // category.items.map((item: any, index: any) => {
-              const encodeItemName = encodeURI(itemName);
-              const concatStr =
-                // category.items.length === index + 1 ? "" :
-                 " or ";
-              queryParams += `${
-                category?.isBusinessVerticalCategory
-                  ? category?.productType
-                  : (category?.productType).toLowerCase()
-              }/value/name eq '${encodeItemName}'`
-              //  ${concatStr}`;
+            const encodeItemName = encodeURI(itemName);
+            const concatStr =
+              // category.items.length === index + 1 ? "" :
+              " or ";
+            queryParams += `${
+              category?.isBusinessVerticalCategory
+                ? category?.productType
+                : (category?.productType).toLowerCase()
+            }/value/name eq '${encodeItemName}'`;
+            //  ${concatStr}`;
             // });
             queryParams += `)`;
             lastCatId = catId;
@@ -281,7 +308,7 @@ function AllProductCategoryPage({
         })
         .then((data: any) => {
           if (data && data.length > 0 && data[0].title && data[0].title.value) {
-            document.title = DOMPurify.sanitize(data[0].title.value)
+            document.title = DOMPurify.sanitize(data[0].title.value);
           } else {
             document.title = "All Products";
           }
@@ -308,53 +335,61 @@ function AllProductCategoryPage({
       </Head>
       <GoogleTagManager />
       <div className="wrapper">
-      <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
-      {!carouselData && isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50"></div>
-          <div
-            className="relative"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-          >
-            <Image
-              src={gifImage}
-              alt="coba-image"
-              width={400}
-              height={400}
-              loading="eager"
-            />
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-30"></div>
+            <div className="relative">
+              <Image src={gifImage} alt="coba-image" />{" "}
+            </div>
           </div>
-        </div>
-      )}
-      {carouselData && (
-        <CarouselComponent
-          isCarouselAvaible={carouselData ? true : false}
-          sectionData={carouselData}
-        />
-      )}
-      {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
+        )}
+        <HeaderComponent isCarusolAvaible={carouselData ? true : false} />
+        {!carouselData && isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black opacity-50"></div>
+            <div
+              className="relative"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
+              <Image
+                src={gifImage}
+                alt="coba-image"
+                width={400}
+                height={400}
+                loading="eager"
+              />
+            </div>
+          </div>
+        )}
+        {carouselData && (
+          <CarouselComponent
+            isCarouselAvaible={carouselData ? true : false}
+            sectionData={carouselData}
+          />
+        )}
+        {categoryProduct && <CategoryComponent sectionData={categoryProduct} />}
 
-      <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
-        <HealthNeedFilter
-          activeFiltersData={activeFiltersData}
-          activeFilter={activeFilter}
-          setActiveFilter={setActiveFilter}
-          productCategoryData={productCategoryData}
-          allProductCategoryList={allProductCategoryList}
-          selectedFilterItems={selectedFilterItems}
-          selectedProduct={selectedProduct}
-          setSelectedFilterItems={setSelectedFilterItems}
-          selectedViewAllCateory={selectedViewAllCateory}
-          fetchProductList={fetchProductList}
-          recommendedProduct={recommendedProduct}
-          sectionData={sectionData}
-          selectedRecommendedProduct={selectedRecommendedProduct}
-          productSum={productSum}
-          productSearchCard={productSearchCard}
-          filterClicked={filterClicked}
-        />
-      </div>
-      <FooterComponent />
+        <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
+          <HealthNeedFilter
+            activeFiltersData={activeFiltersData}
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
+            productCategoryData={productCategoryData}
+            allProductCategoryList={allProductCategoryList}
+            selectedFilterItems={selectedFilterItems}
+            selectedProduct={selectedProduct}
+            setSelectedFilterItems={setSelectedFilterItems}
+            selectedViewAllCateory={selectedViewAllCateory}
+            fetchProductList={fetchProductList}
+            recommendedProduct={recommendedProduct}
+            sectionData={sectionData}
+            selectedRecommendedProduct={selectedRecommendedProduct}
+            productSum={productSum}
+            productSearchCard={productSearchCard}
+            filterClicked={filterClicked}
+          />
+        </div>
+        <FooterComponent />
       </div>
     </>
   );

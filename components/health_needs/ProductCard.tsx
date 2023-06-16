@@ -1,8 +1,11 @@
 import { useRouter } from "next/router";
 import { ImageComponent } from "../global/ImageComponent";
 import DOMPurify from 'isomorphic-dompurify';
+import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import { handlecategoryColorCode } from "../global/CommonUtil";
 
 const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
+  const catMapping = useHeaderStore((state) => state.categoryMapping);
   const router = useRouter();
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -31,7 +34,10 @@ const ProductCard = ({ cardData, product, indexs, mainIndex }: any) => {
           />
         </div>
         <div
-          className="w-max rounded-xl px-2 py-0.5 bg-mckthingrey mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px]"
+        style={{
+          backgroundColor: handlecategoryColorCode(cardData?.productCategory?.value?.[0]?.id, catMapping),
+      }}
+          className="w-max rounded-xl px-2 pt-[2px] pb-1 mt-2 text-sofia-bold text-mckblue text-xs font-extrabold h-[22px] flex items-center"
           
           id={`hn_label_02_${indexs + 1}_${mainIndex + 1}`}
         >

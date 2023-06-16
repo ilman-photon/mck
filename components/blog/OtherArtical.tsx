@@ -51,14 +51,14 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                         <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`}>{DOMPurify.sanitize(item?.readMinute?.value)}</span>
                                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2'>1.3K views</span> */}
                                     </div>
-                                    <div className='flex flex-wrap h-25 overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
+                                    <div className='flex flex-wrap h-[33px] overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
                                         {item.tag.value.map((tagitem: any, idx: any) => (
                                             <div key={idx}
                                             tabIndex={0}
                                                 style={{
                                                     backgroundColor: handlecategoryColorCode(tagitem.id, catMapping),
                                                 }}
-                                                className='mb-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{DOMPurify.sanitize(tagitem?.description)}</div>
+                                                className='my-1 text-mcknormalgrey categoryTag  text-sofia-reg font-extrabold text-xs rounded-lg w-fit py-0.5 px-2 ml-1 border-solid shade-blue-border h-fit'>{DOMPurify.sanitize(tagitem?.description)}</div>
                                         ))}
                                     </div>
                                 </div>

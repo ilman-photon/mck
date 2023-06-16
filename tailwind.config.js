@@ -127,6 +127,9 @@ module.exports = {
         140: "140px",
         105: "105px",
       },
+      minWidth: {
+        121: "121px"
+      },
       minHeight: {
         50: '50px',
         57: '57px',
@@ -189,7 +192,8 @@ module.exports = {
         11: "11px",
         46: "46px",
         120: "120px",
-        24: "24px"
+        24: "24px",
+        0.2: "2px",
       },
       margin: {
         24: "24",
@@ -263,12 +267,12 @@ module.exports = {
         50: '50%',
       },
       screens: {
+        desktop: {'max' : '1280px'},
         mobilesm: {'max':'360px'},
         mobile: {'max': '767px'},
         mobilelarge: {'max': '1023px'},
         ipadlarge: {'max': '1025px', 'min':'1023px'},
         desktopmini: {'max' : '1280px', 'min':'1023px'},
-        desktop: {'max' : '1280px'},
         smalldekstop:  {'max': '1285px','min':'1280px'},
         mediumdesktop: {'max': '1380px','min':'1280px'},
         xtralarge: {'min': '1600px'},

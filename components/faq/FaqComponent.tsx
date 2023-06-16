@@ -13,7 +13,7 @@ const ItemExpandeble = ({ bdata }: any) => {
 
   return (
     <div
-      className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4"
+      className="tab text-mckblue w-full overflow-hidden rounded-lg lg:mb-6 mb-4 "
       id={"faq_label_003" + bdata?.contentLink?.id}
       key={bdata?.contentLink?.id}
     >
@@ -124,7 +124,7 @@ function FaqComponent() {
                 href={DOMPurify.sanitize(
                   faqData?.differentQuestionCTALink?.value
                 )}
-                className="text-center inline-block lg:w-32 w-full rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
+                className="text-center inline-block min-w-[121px] rounded-lg blue-bg text-white p-3 text-sofia-bold font-extrabold lg:text-base text-sm uppercase"
                 id="faq_btn_007"
               >
                 {DOMPurify.sanitize(faqData?.differentQuestionCTAText?.value)}
@@ -141,7 +141,7 @@ function FaqComponent() {
                 {DOMPurify.sanitize(faqData?.whatYouCanDoHeading?.value)}
               </h3>
               <div
-                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                 id="faq_label_009"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
@@ -161,7 +161,7 @@ function FaqComponent() {
                   )}
                 </h3>
                 <div
-                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg underline"
+                  className="lg:p-5 p-4 text-mckblue shade-blue-border-top lg:text-lg text-base text-sofia-reg"
                   id="faq_label_011"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(
