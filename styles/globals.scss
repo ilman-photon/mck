@@ -2524,3 +2524,14 @@ li.indicator.active {
 .blog-details-container ol {
   padding-left: 40px;
 }
+
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  background-color: #ccd1e3 !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #001a71 !important;
+}
