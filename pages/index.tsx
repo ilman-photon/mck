@@ -15,13 +15,13 @@ import gifImage from "../public/images/FT-2593651-0423 Foster & Thrive Animated 
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import { useHomeStore } from "@/components/global/Store/useHomeStore";
-import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
-import { useRouter } from "next/router";
 
 export default function Home() {
+
   const getHomeData = useHomeStore(state => state.getData)
   const response = useHomeStore(state => state.data)
   const isLoading = useHomeStore(state => state.isLoading)
+
 
   useEffect(() => {
     if(response === null){
