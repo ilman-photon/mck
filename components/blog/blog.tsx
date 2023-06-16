@@ -171,7 +171,7 @@ const BlogComponent = () => {
             className="lg:block hidden relative flex items-center content-center mb-6"            
           >
             <SearchComponent
-              placeholder={`Search medicine for ${BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value}`}              
+              placeholder={`${BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value}`}              
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
