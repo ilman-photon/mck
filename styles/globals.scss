@@ -1708,12 +1708,13 @@ Mobiles Menu
     padding: 0;
   }
   .header:hover,
+  .header:hover .mainmenu-link,
   .header-sticky:hover {
   // .brand-logo:hover + .header-sticky 
     background: #001a71 !important;
     color: #fff !important;
   }
-  .header.isNotSticky:focus,
+  .header.isNotSticky:focus, 
   .header-sticky.isNotSticky:focus {
     background: #FFFAF6B2 !important;
     color: #001a71 !important;
