@@ -77,7 +77,7 @@ function HealthNeedsPage() {
       <div className="wrapper">
         <HeaderComponent
           isCarusolAvaible={
-            response?.data[0].contentArea.expandedValue[0].contentType.includes(
+            response?.data?.[0]?.contentArea?.expandedValue?.[0]?.contentType?.includes(
               "CarouselBlock"
             )
               ? true
