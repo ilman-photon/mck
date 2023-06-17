@@ -49,7 +49,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
   const whiteColor = "white";
   const blackColor = "black";
-  console.log("waktu", sectionData?.[0]?.timeInterval?.value);
   return (
     <div className="flex items-center justify-center" role="main">
       <div id="carouselExampleCaptions" className="w-full relative">
