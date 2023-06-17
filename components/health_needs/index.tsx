@@ -267,11 +267,17 @@ const HealthNeedsComponent = ({
           const encodeProductCategoryName = encodeURI(productCategoryName)
           {category.isBusinessVerticalCategory && category?.productType !== 'healthNeeds' ? queryParams += `productCategory/value/name eq '${encodeProductCategoryName}' and ` : ''}
           category.items.map((item: any, index: any) => {
-            if (category.productType === "healthNeeds") {
-              if (!_temparray.includes(item)) {
-                _temparray.push(item);
-              }
-            }
+            /**
+             * @description it breaks the other filters
+             */
+            // if (category.productType === "healthNeeds") {
+            //   if (!_temparray.includes(item)) {
+            //     _temparray.push(item);
+            //   }
+            // }
+            /**
+             * @end
+             */
             // console.log('ini',category)
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
