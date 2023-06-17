@@ -208,6 +208,7 @@ function HealthCareProfessionalComponent({
                     </div>
                   )}
                 </div>
+                {response && customers && customers?.length > 0 &&
                 <div
                   className={`${
                     isCarusolAvaible &&
@@ -304,14 +305,16 @@ function HealthCareProfessionalComponent({
                           })}
                       </Swiper>
                     </div>
-                    <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                      {reviewCount}/
-                      {isMobile
-                        ? Math.ceil(customers?.length)
-                        : Math.ceil(customers?.length / 3)}
-                    </div>
+                    
+                          <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+                            {reviewCount}/
+                            {isMobile
+                              ? Math.ceil(customers?.length)
+                              : Math.ceil(customers?.length / 3)}
+                          </div>
                   </div>
                 </div>
+              }
                 <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
