@@ -22,6 +22,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const dataFetchedRef = useRef(false);
+  const [timeDelayCarousel, setTimeDelayCarousel] = useState(5000)
+  const [autoRotate, setIsAutoRotate] = useState(true)
 
   useEffect(() => {
     dataFetchedRef.current = true;
@@ -29,6 +31,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     try {
       setLoading(false);
       setResponse(sectionData?.[0]?.contentBlockArea?.expandedValue);
+      setTimeDelayCarousel(Number(sectionData?.[0]?.timeInterval?.value))
+      setIsAutoRotate(!sectionData?.[0]?.autoRotate?.value)
     } catch (error) {
       setLoading(true);
     }
@@ -55,8 +59,9 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           <Swiper
             centeredSlides={true}
             autoplay={{
-              delay: 2100,
+              delay: timeDelayCarousel,
               disableOnInteraction: false,
+              stopOnLastSlide: autoRotate
             }}
             pagination={{
               clickable: true,
