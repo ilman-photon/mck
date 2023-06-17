@@ -26,14 +26,14 @@ const HealthNeedCategory = ({
   const handleHealthNeedData = (data: any, healthNeedData: any) => {
     setActiveIcon(healthNeedData?.contentLink?.id);
     router.push({
-      pathname: updateUrl(healthNeedData.healthNeedsCategoryUrl.value, "0"),
+      pathname: updateUrl(healthNeedData?.healthNeedsCategoryUrl?.value, "0"),
       query: {
-        filter: updateUrl(healthNeedData.healthNeedsCategoryUrl.value, "1"),
+        filter: updateUrl(healthNeedData?.healthNeedsCategoryUrl?.value, "1"),
       },
     });
 
-    const cat_id = productCategoryData.mainCategory.value[0].id;
-    const sub_cat_id = healthNeedData.healthNeedCategory.value[0].id;
+    const cat_id = productCategoryData?.mainCategory?.value[0]?.id;
+    const sub_cat_id = healthNeedData?.healthNeedCategory?.value[0].id;
 
     if (selectedFilterItems[cat_id][sub_cat_id].checked) {
       setActiveFilter(
@@ -79,11 +79,11 @@ const HealthNeedCategory = ({
                 }`}
                 onClick={() =>
                   handleHealthNeedData(
-                    healthneedsdata?.title.value,
+                    healthneedsdata?.title?.value,
                     healthneedsdata
                   )
                 }
-                aria-label={healthneedsdata?.title.value}
+                aria-label={healthneedsdata?.title?.value}
               >
                 <img
                   id={`hl-img+${index}`}
