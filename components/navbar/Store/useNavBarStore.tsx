@@ -29,7 +29,7 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
         method: "GET",
       }
     ).then(async (res) => {
-      const secondBlock = res.data[0].footer.expandedValue[0].contentLink.id;
+      const secondBlock = res?.data?.[0]?.footer?.expandedValue?.[0]?.contentLink?.id;
       const responseid = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content/?References=${secondBlock}&expand=*`);
       const footerMobileNav =

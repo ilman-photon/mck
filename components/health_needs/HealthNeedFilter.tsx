@@ -58,6 +58,11 @@ const HealthNeedFilter = ({
       const currentURL = window.location.href;
       const updatedURL = currentURL.split("?")[0];
       window.location.href = DOMPurify.sanitize(updatedURL);
+      /**
+       * @description this is the part where it reloads when you clear all, just pass the props of fetchProductList
+       * 
+       * @example `fetchProductList("")`
+       */
     } else {
       fetchProductList("clearall");
     }

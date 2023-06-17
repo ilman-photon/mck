@@ -167,7 +167,7 @@ const HealthNeedsComponent = ({
   }, [activeFilter]);
 
   const fetchRecommandedProductData = async () => {
-    console.log(675756757);
+    // console.log(675756757);
     const tempName =
       productItemName?.length > 0 ? productItemName : productName;
     const correctedName = tempName?.replace(/ /g, "-");
@@ -188,21 +188,24 @@ const HealthNeedsComponent = ({
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
     );
     const healthNeedsCategoriesList =
-      healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
+      healthNeedsCategories?.data?.[0]?.contentArea?.expandedValue?.filter(
         (categoryList: any) => categoryList.name === "Health Need Highlights"
       );
 
     const healthNeedsCategoriesListData =
       healthNeedsCategoriesList.length > 0
-        ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
+        ? healthNeedsCategoriesList?.[0]?.healthNeedItem?.expandedValue
         : [];
     setCustomerBackgroundColorCode(
-      healthNeedsCategoriesList[0].backgroundColorCode?.value
+      healthNeedsCategoriesList?.[0].backgroundColorCode?.value
     );
     setHealthNeedData(healthNeedsCategoriesListData);
     setRecommendedProduct(healthNeedsCategories?.data[0].contentArea);
 
     // Product Category setting - Filters data
+    const productCategoryData = await axiosInstance.get(
+      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
+    );
     const activeFiltersData = await axiosInstance.get(
       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
     );
@@ -210,9 +213,6 @@ const HealthNeedsComponent = ({
     setactiveFiltersData(activeFiltersDataList);
 
     // Product Category Helath needs - Left side category lists
-    const productCategoryData = await axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
-    );
     const productCategoryDataList =
       productCategoryData?.data[0]?.categoryFilter?.expandedValue;
     setproductCategoryData(productCategoryDataList);
@@ -263,22 +263,26 @@ const HealthNeedsComponent = ({
             }
           }
           queryParams += "(";
+          const productCategoryName = category.productType.replace(/[^a-zA-Z ]/g, "")
+          const encodeProductCategoryName = encodeURI(productCategoryName)
+          {category.isBusinessVerticalCategory && category?.productType !== 'healthNeeds' ? queryParams += `productCategory/value/name eq '${encodeProductCategoryName}' and ` : ''}
           category.items.map((item: any, index: any) => {
             if (category.productType === "healthNeeds") {
               if (!_temparray.includes(item)) {
                 _temparray.push(item);
               }
             }
+            // console.log('ini',category)
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
             const encodeItemName = encodeURI(itemName);
+
+            // console.log('encode',encodeItemName)
+            // console.log(item)
             const concatStr = category.items.length === index + 1 ? "" : " or ";
             queryParams += `${
-              category?.isBusinessVerticalCategory
-                ? category?.productType
-                : (category?.productType).toLowerCase()
+              category?.isBusinessVerticalCategory && category?.productType !== 'healthNeeds' ? 'productSubCategory' : category?.isBusinessVerticalCategory && category?.productType === `healthNeeds` ? `healthNeeds` : category?.productType?.toLowerCase() 
             }/value/name eq '${encodeItemName}' ${concatStr}`;
           });
-
           minSubCategoryCnt += category.items.length;
           queryParams += `)`;
           lastCatId = catId;
@@ -355,7 +359,7 @@ const HealthNeedsComponent = ({
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
       );
       const healthNeedsCategoriesList =
-        healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
+        healthNeedsCategories?.data?.[0]?.contentArea?.expandedValue?.filter(
           (categoryList: any) => categoryList.name === "Health Need Highlights"
         );
 
@@ -545,7 +549,7 @@ const HealthNeedsComponent = ({
         }
       });
     });
-    console.log(selectedFilterData);
+    // console.log(selectedFilterData);
     setSelectedFilterItems(selectedFilterData);
   };
   useEffect(() => {
