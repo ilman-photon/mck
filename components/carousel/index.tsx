@@ -22,8 +22,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const dataFetchedRef = useRef(false);
-  const [timeDelayCarousel, setTimeDelayCarousel] = useState(5000)
-  const [autoRotate, setIsAutoRotate] = useState(true)
+  const [timeDelayCarousel, setTimeDelayCarousel] = useState(5000);
+  const [autoRotate, setIsAutoRotate] = useState(true);
 
   useEffect(() => {
     dataFetchedRef.current = true;
@@ -31,8 +31,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     try {
       setLoading(false);
       setResponse(sectionData?.[0]?.contentBlockArea?.expandedValue);
-      setTimeDelayCarousel(Number(sectionData?.[0]?.timeInterval?.value))
-      setIsAutoRotate(!sectionData?.[0]?.autoRotate?.value)
+      setTimeDelayCarousel(Number(sectionData?.[0]?.timeInterval?.value));
+      setIsAutoRotate(!sectionData?.[0]?.autoRotate?.value);
     } catch (error) {
       setLoading(true);
     }
@@ -49,7 +49,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
 
   const whiteColor = "white";
   const blackColor = "black";
-
+  console.log("waktu", sectionData?.[0]?.timeInterval?.value);
   return (
     <div className="flex items-center justify-center" role="main">
       <div id="carouselExampleCaptions" className="w-full relative">
@@ -58,10 +58,11 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           <Swiper
             centeredSlides={true}
+            speed={timeDelayCarousel}
+            loop={true}
             autoplay={{
-              delay: timeDelayCarousel,
               disableOnInteraction: false,
-              stopOnLastSlide: autoRotate
+              stopOnLastSlide: autoRotate,
             }}
             pagination={{
               clickable: true,
