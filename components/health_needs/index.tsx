@@ -275,6 +275,7 @@ const HealthNeedsComponent = ({
                 _temparray.push(item);
               }
             }
+            console.log(item)
             /**
              * @end
              */
@@ -306,22 +307,25 @@ const HealthNeedsComponent = ({
               }
             }
             queryParams += "(";
-            category.items.map((item: any, index: any) => {
-              if (category.productType === "healthNeeds") {
-                if (!_temparray.includes(item)) {
-                  _temparray.push(item);
-                }
-              }
-              const itemName = item.replace(/[^a-zA-Z ]/g, "");
-              const encodeItemName = encodeURI(itemName);
-              const concatStr =
-                category.items.length === index + 1 ? "" : " or ";
+            // category.items.map((item: any, index: any) => {
+            //   if (category.productType === "healthNeeds") {
+            //     if (!_temparray.includes(item)) {
+            //       _temparray.push(item);
+            //     }
+            //   }
+            //   const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            //   const encodeItemName = encodeURI(itemName);
+            //   const concatStr =
+            //     category.items.length === index + 1 ? "" : " or ";
+              // queryParams += `${
+              //   category?.isBusinessVerticalCategory && category.productType !== `healthNeeds`
+              //     ? category?.productType : category?.isBusinessVerticalCategory && category?.productType === `healthNeeds` && _temparray?.length > 18 ? 'healthNeeds'
+              //     : (category?.productType).toLowerCase()
+              // }/value/name eq '${encodeItemName}' ${concatStr}`;
               queryParams += `${
-                category?.isBusinessVerticalCategory
-                  ? category?.productType
-                  : (category?.productType).toLowerCase()
-              }/value/name eq '${encodeItemName}' ${concatStr}`;
-            });
+                `healthNeeds/value/name eq 'Health Needs'` 
+              }`
+            // });
             queryParams += `)`;
             lastCatId = catId;
             // const categoryName = selectedFilterItems[catId].categoryName;
