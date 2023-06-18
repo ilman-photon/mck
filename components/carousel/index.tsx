@@ -58,7 +58,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
           <Swiper
             centeredSlides={true}
             speed={timeDelayCarousel}
-            loop={true}
             autoplay={{
               disableOnInteraction: false,
               stopOnLastSlide: autoRotate,
