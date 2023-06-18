@@ -23,6 +23,8 @@ interface Controller {
     setSelectedFilterItems:(item:any) => void
     activeFilters:any
     setActiveFilters:(filter:any) => void 
+    getPlpCategory:() => Promise<void>
+    categoryPlp:any
 }
 
 export const useAllProductCategory = create<Controller>((set,get) => ({
@@ -158,5 +160,15 @@ export const useAllProductCategory = create<Controller>((set,get) => ({
       setIsLoadingTrue:() => set({isLoading:true}),
       setIsLoadingFalse:() => set({isLoading:false}),
       setProductSum:(sum) => set({productSum:sum}),
-      setSelectedFilterItems:(item) => set({selectedFilterItems:item})
+      setSelectedFilterItems:(item) => set({selectedFilterItems:item}),
+      getPlpCategory:async() => {
+        const productLandingPage = await axiosInstance(
+          `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/landing-page/&expand=*`
+        ); 
+        let tempObj = productLandingPage?.data[0].contentArea?.expandedValue[1];
+          set({
+            categoryPlp:[tempObj]
+          })
+      },
+      categoryPlp:null
 }))
