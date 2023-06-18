@@ -9,7 +9,7 @@ interface ImageComponentProps {
     ariahidden:boolean
   }
   
-export default function ImageComponent (props:ImageComponentProps) {
+export default function CommonImage (props:ImageComponentProps) {
   
     const { 
         imageContainerStyle,
