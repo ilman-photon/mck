@@ -270,11 +270,11 @@ const HealthNeedsComponent = ({
             /**
              * @description it breaks the other filters
              */
-            // if (category.productType === "healthNeeds") {
-            //   if (!_temparray.includes(item)) {
-            //     _temparray.push(item);
-            //   }
-            // }
+            if (category.productType === "healthNeeds") {
+              if (!_temparray.includes(item)) {
+                _temparray.push(item);
+              }
+            }
             /**
              * @end
              */
