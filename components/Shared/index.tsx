@@ -1,9 +1,9 @@
 import AVComponent from "./AVComponent";
 import TextDescAndButton from "./TextDescAndButton";
-import ImageComponent from "./ImageComponent";
+import CommonImage from "./ImageComponent";
 
 export {
     AVComponent,
     TextDescAndButton,
-    ImageComponent
+    CommonImage
 }
