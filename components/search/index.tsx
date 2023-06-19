@@ -16,7 +16,7 @@ export default function Search() {
       });
     }
   };
-  const handleSearch = () => {
+  const handleSearch = (e: any) => {
     if (searchString && !regex.test(searchString)) {
       // searchString &&
       router.push({
@@ -39,7 +39,7 @@ export default function Search() {
       <div className="relative search-box lg:w-auto w-64" role="search">
         <div
           className="btn-search w-12 h-12 bg-transparent right-px absolute cursor-pointer outline-none font-black border-0"
-          onClick={(e) => handleSearch(e)}
+          onClick={(e: any) => handleSearch(e)}
         >
           <input
             type={textInput}
