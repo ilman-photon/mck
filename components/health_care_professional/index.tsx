@@ -367,7 +367,7 @@ function HealthCareProfessionalComponent({
                                     ariahidden={false}
                                   />
                                 ) : (
-                                  <div className="px-3 flex lg:hidden md:hidden">
+                                  <div className="hidden">
                                     &amp;nbsp;
                                   </div>
                                 )}
