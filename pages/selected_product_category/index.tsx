@@ -9,7 +9,6 @@ import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
-import CategoryComponent from "@/components/category";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
@@ -89,7 +88,6 @@ function ProductListPage() {
           response && (
             <>
               <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-              <CategoryComponent sectionData={filteredData("ProductCategoryBlock")}/>     
               <ProductListComponent />
             </>
           )
