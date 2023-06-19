@@ -3,7 +3,7 @@ import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
-import { AVComponent, CommonImage, TextDescAndButton } from "../Shared";
+import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
 
 export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any) {
   const router = useRouter();
@@ -150,7 +150,7 @@ const ImageWithTextComponent = () => {
           : "text-left"
         } container mx-auto grid lg:flex xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15`}
     >
-      <CommonImage
+      <ImageComponent
         // imageContainerStyle='w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0  col-span-1'
         imageContainerStyle="w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0 col-span-1 flex flex-1"
         imageStyle={`w-full ${sectionData?.image?.value?.url}`}
@@ -191,7 +191,7 @@ const ImageWithTextComponent = () => {
 const ImageBGWithTextComponent = () => {
   return(
       <div className="relative lg:mb-12 mb-10">
-            <CommonImage
+            <ImageComponent
               imageContainerStyle="flex flex-1"
               imageSource={sectionData?.backgroundImage?.expandedValue?.url}
               imageStyle="w-full"
