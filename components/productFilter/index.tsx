@@ -38,7 +38,7 @@ function ProductFilter({
                         width={24} className="mr-2" 
                         ariahidden={false}/> 
                
-                      <label htmlFor="acute" className="text-base font-extrabold text-sofia-bold text-mckblue z-[-1]"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
+                      <label htmlFor="acute" id={leftfiltermaindata?.mainCategory?.value[0].name} className="text-base font-extrabold text-sofia-bold text-mckblue z-[-1]"  aria-label={leftfiltermaindata?.mainCategory?.value[0].name}>
                         {leftfiltermaindata?.mainCategory?.value[0].name}
                       </label>
                     </div>
@@ -61,7 +61,7 @@ function ProductFilter({
                           <input
                             id={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All`}
                             type="checkbox"
-                            value="view all"
+                            value="view all111"
                             className='w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm'
                             checked={
                               selectedFilterItems[
@@ -73,7 +73,7 @@ function ProductFilter({
                                 leftfiltermaindata?.mainCategory?.value[0].id
                               ]?.isCategoryChecked
                             }
-                            aria-label="View All"
+                            aria-labelledby={`${leftfiltermaindata?.mainCategory?.value[0]?.name}_${index}+View All` + `${leftfiltermaindata?.mainCategory?.value[0].name}`}
                             role="checkbox"
                           />
                           <label
@@ -81,7 +81,7 @@ function ProductFilter({
                             className='ml-2 text-mcknormalgrey text-sm hover:text-mckblue cursor-pointer font-normal leading-[21px]'
                             id=""  aria-label="View All"
                           >
-                            View All
+                            View All111
                           </label>
                         </div>
                       </li>

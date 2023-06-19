@@ -542,7 +542,7 @@ const HealthNeedFilter = ({
                                       type="checkbox"
                                       value="view all"
                                       className="w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm"
-                                      aria-label="view all"
+                                      aria-label={`${"mck-" + activeFiltersData?.viewAllText?.value}` + `${leftfiltermaindata?.mainCategory?.value[0]?.name}`}
                                       role="checkbox"
                                       checked={
                                         selectedFilterItems[
@@ -595,7 +595,8 @@ const HealthNeedFilter = ({
                                           type="checkbox"
                                           value={leftfiltersubdata?.name}
                                           className="w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm"
-                                          aria-label={leftfiltersubdata?.name}
+                                          
+                                          aria-label={`${leftfiltersubdata?.name}` + `${leftfiltermaindata?.mainCategory?.value[0]?.name}`}
                                           role="checkbox"
                                           checked={
                                             selectedFilterItems[
