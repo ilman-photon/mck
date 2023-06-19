@@ -62,8 +62,7 @@ function ContactUsComponent() {
                     ),
                   }}
                 ></p>
-               {contactUsData?.data?.[0]?.contentArea?.expandedValue?.[0]?.phoneNumber?.value ? (
-               <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
+                <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                   <span
                     className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex mb-1 lg:mb-0"
                     id="cu_label_004"
@@ -101,8 +100,6 @@ function ContactUsComponent() {
                     }
                   </p>
                 </div>
-               ) : null} 
-              {contactUsData?.data?.[0]?.contentArea?.expandedValue?.[0]?.operationHourTitle?.value ? (
                 <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                   <span
                     className="contact-number font-extrabold lg:text-lg text-base text-mckblue text-sofia-bold lg:mr-3 flex mb-1 lg:mb-0"
@@ -142,7 +139,6 @@ function ContactUsComponent() {
                     )}
                   </p>
                 </div>
-              ) : null} 
                {contactUsData?.data[0]?.contentArea?.expandedValue[0]
                           ?.emailTitle?.value && <div className="flex flex-col lg:flex-row lg:pb-3 pb-4">
                   <span

@@ -1,4 +1,4 @@
-import { CommonImage } from "../Shared";
+import { ImageComponent } from "../Shared";
 import DOMPurify from 'isomorphic-dompurify';
 
 function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
@@ -6,7 +6,7 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
   return (
     <>
     {sectionData?.backgroundImage?.expandedValue?.url ? (
-      <CommonImage
+      <ImageComponent
       imageContainerStyle=""
       imageSource={sectionData?.backgroundImage?.expandedValue?.url}
       imageStyle="w-full"

@@ -2,7 +2,8 @@
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
-import { AVComponent, CommonImage, TextDescAndButton } from "../Shared";
+import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
+import YouTubePlayer from "react-player/youtube";
 
 export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
   const router = useRouter();
@@ -154,7 +155,7 @@ const ImageWithTextComponent = () => {
           : "text-left"
         } container mx-auto grid lg:flex`}
     >
-      <CommonImage
+      <ImageComponent
         imageContainerStyle='w-full lg:w-1/2 h-auto lg:px-9 lg:pt-0  col-span-1'
         imageStyle={sectionData?.image?.value?.url}
         imageSource={sectionData?.image?.value?.url}        
@@ -196,7 +197,7 @@ const ImageWithTextComponent = () => {
 const ImageBGWithTextComponent = () => {
   return(
       <div className="relative lg:mb-12 mb-10">
-            <CommonImage
+            <ImageComponent
               imageContainerStyle="flex flex-1"
               imageSource={sectionData?.backgroundImage?.expandedValue?.url}
               imageStyle="w-full"
