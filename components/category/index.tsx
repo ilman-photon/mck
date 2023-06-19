@@ -14,9 +14,9 @@ export default function CategoryComponent({ sectionData }: any) {
   const loading = useCategoryStore(state => state.isLoading)
 
   useEffect(() => {
-    // if(response === null){
+    if(response === null){
       getData(sectionData[0]?.contentBlockArea?.value)
-    // }
+    }
   },[response])
 
   function handleClickOnCategory(url: string) {
