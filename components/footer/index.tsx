@@ -28,7 +28,7 @@ export default function FooterComponent() {
         role="contentinfo"
         className="bg-mcklightyellow lg:mb-0 mb-16"
       >
-        <div className="mt-0 py-8 px-5 pt-[32px] pb-[32px] lg:pt-[36px] pb-[36px]">
+        <div className="mt-0 px-5 pt-[32px] pb-[32px] lg:pt-[36px] lg:pb-[36px]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="lg:my-0 text-gtl-med lg:border-r lg:border-b-0 border-b-2 lg:pb-0 pb-6 lg:mb-0 mb-6 border-mcknormalgrey">
               <ul className="mb-0 list-none lg:py-0 px-0">
