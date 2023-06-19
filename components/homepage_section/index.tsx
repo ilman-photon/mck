@@ -107,7 +107,7 @@ export default function ImageVideoWithTextBlocks ({sectionData,index} : any) {
               onSeek={() => setIsPlaying(true)} 
               onStart={() => setIsPlaying(true)} 
               onPlay={() => setIsPlaying(true)} 
-              onPause={() => setIsPlaying(false)} 
+              onPause={() => undefined} 
               flagVideoUrl={isInternalSourceMatchAPI} 
               onClickIconPlay={handleTogglePlay} 
               iconPlayWrapperRef={circlePlayButtonRef}            

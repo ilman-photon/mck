@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
@@ -8,7 +7,6 @@ import { AVComponent, ImageComponent, TextDescAndButton } from "../Shared";
 export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any) {
   const router = useRouter();
   const [ApiRespond, setApiRespond] = useState<any>();
-  const [deviceWidth] = useWindowResize();
   const handleCTABtn = (url: string) => {
     router.push({
       pathname: url,
@@ -101,7 +99,7 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
             onSeek={() => setIsPlaying(true)} 
             onStart={() => setIsPlaying(true)} 
             onPlay={() => setIsPlaying(true)} 
-            onPause={() => setIsPlaying(false)} 
+            onPause={() => undefined} 
             flagVideoUrl={isInternalSourceMatchAPI} 
             onClickIconPlay={handleTogglePlay} 
             iconPlayWrapperRef={circlePlayButtonRef}            
