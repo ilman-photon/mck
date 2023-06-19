@@ -21,11 +21,11 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const firstLogo = useHeaderStore((state) => state.logoSrc1);
   const beigeLogo = useHeaderStore((state) => state.logoSrc2);
   const isDataExist = useHeaderStore((state) => state.headerData);
-  const getHeaderData = useHeaderStore(state => state.getData)
-  
+  const getHeaderData = useHeaderStore((state) => state.getData);
+
   useLayoutEffect(() => {
     if (isDataExist === null) {
-      getHeaderData(checkEnableButton())
+      getHeaderData(checkEnableButton());
     }
   }, [isDataExist]);
   const handleScroll = (elTopOffset: any, elHeight: any) => {
@@ -62,7 +62,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
       window.removeEventListener("scroll", handleScrollEvent);
     };
   }, []);
-
 
   function handleOnClickLogo() {
     router.push({
@@ -144,7 +143,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         id="header"
         className={`header ${
           isCarusolAvaible
-            ? "sticky lg:bg-beige50 lg:bg-opacity-70"
+            ? "sticky lg:bg-beige50 lg:bg-opacity-10"
             : isSticky
             ? "sticky"
             : "relative z-40"
