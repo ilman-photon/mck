@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import "swiper/css/parallax";
 
 interface CarouselComponentProps {
   sectionData: any;
@@ -57,16 +58,16 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           <Swiper
             centeredSlides={true}
-            speed={timeDelayCarousel}
+            speed={5000}
             autoplay={{
+              delay: timeDelayCarousel,
               disableOnInteraction: false,
               stopOnLastSlide: autoRotate,
             }}
-            parallax
-            pagination={{
+            loop={!autoRotate}
+            pagination={{  
               clickable: true,
             }}
-            loop={true}
             effect="fade"
             modules={[Autoplay, Pagination]}
             className="mySwiper"
