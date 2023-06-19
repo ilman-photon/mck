@@ -22,7 +22,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const dataFetchedRef = useRef(false);
-  const [timeDelayCarousel, setTimeDelayCarousel] = useState(5000);
+  const [timeDelayCarousel, setTimeDelayCarousel] = useState(6000);
   const [autoRotate, setIsAutoRotate] = useState(true);
 
   useEffect(() => {
@@ -62,9 +62,11 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
               disableOnInteraction: false,
               stopOnLastSlide: autoRotate,
             }}
+            parallax
             pagination={{
               clickable: true,
             }}
+            loop={true}
             effect="fade"
             modules={[Autoplay, Pagination]}
             className="mySwiper"
