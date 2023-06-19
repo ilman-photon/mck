@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 export default function Search() {
   const router = useRouter();
   let textInput: any;
-  const [searchString, setSearchString] = useState<string>('');
+  const [searchString, setSearchString] = useState<string>("");
   const regex = /[#'']/;
-  
+
   const handleKey = (e: any) => {
     if (e.key === "Enter") {
       textInput = e.target.value;
@@ -17,7 +17,8 @@ export default function Search() {
     }
   };
   const handleSearch = (e: any) => {
-    if (searchString != undefined && regex.test(searchString)) {
+    if (searchString && !regex.test(searchString)) {
+      // searchString &&
       router.push({
         pathname: "/search_results",
         query: { search: searchString },
@@ -26,8 +27,8 @@ export default function Search() {
   };
   const handleKeyUp = (e: any) => {
     const { value } = e.target;
-    if (!regex.test(value)||value===''&&e.nativeEvent.data==="&") {
-      if(!(e.nativeEvent.data==="&")){
+    if (!regex.test(value) || (value === "" && e.nativeEvent.data === "&")) {
+      if (!(e.nativeEvent.data === "&")) {
         setSearchString(e.target.value);
       }
     }
@@ -38,7 +39,7 @@ export default function Search() {
       <div className="relative search-box lg:w-auto w-64" role="search">
         <div
           className="btn-search w-12 h-12 bg-transparent right-px absolute cursor-pointer outline-none font-black border-0"
-          onClick={(e) => handleSearch(e)}
+          onClick={(e: any) => handleSearch(e)}
         >
           <input
             type={textInput}
