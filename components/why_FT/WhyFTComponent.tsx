@@ -15,10 +15,10 @@ function WhyFTComponent(
     isCarusolAvaibleProps: null,
   }
 ) {
-  const whyFTData = useWhyFTStore((state) => state.data);
-  const getWhyFTDetails = useWhyFTStore((state) => state.getData);
-  const isLoading = useWhyFTStore((state) => state.isLoading);
-  const setLoadingTimeout = useWhyFTStore((state) => state.setTimeoutLoader);
+  const whyFTData = useWhyFTStore(state => state.data)
+  const getWhyFTDetails = useWhyFTStore(state => state.getData)
+  const isLoading = useWhyFTStore(state => state.isLoading)
+  const setLoadingTimeout = useWhyFTStore(state => state.setTimeoutLoader)
 
   useEffect(() => {
     document.documentElement.lang = "en";
@@ -47,8 +47,8 @@ function WhyFTComponent(
   }, []);
 
   useEffect(() => {
-    if (whyFTData === null) {
-      getWhyFTDetails();
+    if(whyFTData === null){
+      getWhyFTDetails()
     }
   }, [whyFTData]);
 
@@ -125,9 +125,6 @@ function WhyFTComponent(
                   {item?.contentType[1] === "CarouselBlock" ? (
                     <div className="lg:mb-12">
                       <CarouselComponent
-                        isCarouselAvaible={
-                          item?.contentType[1] === "CarouselBlock" && true
-                        }
                         sectionData={filteredData("CarouselBlock")}
                       />
                     </div>

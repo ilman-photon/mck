@@ -86,16 +86,7 @@ function HealthNeedsPage() {
         />
         {error && <p>{error.message}</p>}
         {!loading && !error && response && (
-          <CarouselComponent
-            isCarouselAvaible={
-              response?.data?.[0]?.contentArea?.expandedValue?.[0]?.contentType?.includes(
-                "CarouselBlock"
-              )
-                ? true
-                : false
-            }
-            sectionData={filteredData("CarouselBlock")}
-          />
+          <CarouselComponent sectionData={filteredData("CarouselBlock")} />
         )}
         <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
         <FooterComponent />
