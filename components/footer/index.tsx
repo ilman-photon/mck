@@ -106,11 +106,11 @@ export default function FooterComponent() {
         </div>
       </footer>
       <div className="fixed bottom-0 left-0 z-50 w-full border-t-0.5 border-mckblue bg-beige50 lg:hidden xl:hidden">
-        <ul className="grid h-full grid-cols-4 mx-auto bg-beige-50">
+        <ul className="flex h-full mx-auto bg-beige-50">
           {footerMobileNav &&
             footerMobileNav?.map((item: any,index:number) => {
               return (
-                <li key={item?.contentLink?.guidValue}>
+                <li className="flex-1" key={item?.contentLink?.guidValue}>
                   <button
                     id={`fotter-mobile-${index+1}`}
                     type="button"
