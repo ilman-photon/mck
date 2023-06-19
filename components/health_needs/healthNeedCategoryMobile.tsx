@@ -36,7 +36,10 @@ const HealthNeedCategoryMobile = ({
       query: {
         filter: updateUrl(healthNeedData.healthNeedsCategoryUrl.value, "1"),
       },
-    });
+    },
+    undefined,
+
+    { scroll: false });
 
     const cat_id = productCategoryData.mainCategory.value[0].id;
     const sub_cat_id = healthNeedData.healthNeedCategory.value[0].id;
