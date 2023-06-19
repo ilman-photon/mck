@@ -9,8 +9,6 @@ import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
-import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
-import CategoryComponent from "@/components/category";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
@@ -18,12 +16,6 @@ function ProductListPage() {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   let [response, setResponse] = useState<any>()
-  const getCategoryPlp = useAllProductCategory(
-    (state) => state.getPlpCategory
-  );
-  const categoryPlp = useAllProductCategory(
-    (state) => state.categoryPlp
-  );
 
   const fetchData = async () => {
     const data = await axiosInstance(
@@ -35,12 +27,6 @@ function ProductListPage() {
   useEffect(() => {
     fetchData()
   }, [categoryName])
-
-  useEffect(() => {
-    if(categoryPlp === null){
-      getCategoryPlp()
-    }
-  },[categoryPlp])
 
   function filteredData(valueType: string) {
     return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
@@ -102,7 +88,6 @@ function ProductListPage() {
           response && (
             <>
               <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-              {categoryPlp && <CategoryComponent sectionData={categoryPlp} />}
               <ProductListComponent />
             </>
           )
