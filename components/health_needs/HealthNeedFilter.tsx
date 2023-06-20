@@ -255,7 +255,7 @@ const HealthNeedFilter = ({
       const currentCategoryIndex = group?.findIndex(
         (gr: any) => gr.mainCatId === categoryId
       );
-      if (group[currentCategoryIndex]) {
+      if (group?.[currentCategoryIndex]) {
         group[currentCategoryIndex].subCateIds = [];
       }
     }

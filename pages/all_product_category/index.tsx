@@ -78,7 +78,7 @@ function AllProductCategoryPage({
 
         res.data.results.map((item: any) => {
           setProductSum(res.data.totalMatching);
-          let name = item.productType.value[0].name;
+          let name = item.productCategory.value[0].name;
           if (tempResults[name]) {
             let tempArray = tempResults[name];
             tempArray.push(item);
