@@ -5,7 +5,6 @@ export default function Search() {
   const router = useRouter();
   let textInput: any;
   const [searchString, setSearchString] = useState<string>("");
-  const regex = /[#'']/;
 
   const handleKey = (e: any) => {
     if (e.key === "Enter") {
@@ -17,8 +16,7 @@ export default function Search() {
     }
   };
   const handleSearch = (e: any) => {
-    if (searchString && !regex.test(searchString)) {
-      // searchString &&
+      if (searchString ) {
       router.push({
         pathname: "/search_results",
         query: { search: searchString },
@@ -26,12 +24,7 @@ export default function Search() {
     }
   };
   const handleKeyUp = (e: any) => {
-    const { value } = e.target;
-    if (!regex.test(value) || (value === "" && e.nativeEvent.data === "&")) {
-      if (!(e.nativeEvent.data === "&")) {
         setSearchString(e.target.value);
-      }
-    }
   };
 
   return (

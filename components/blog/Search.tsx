@@ -28,18 +28,21 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   }, [searchText]);
 
   const fetchSearchBlog = async () => {
-    if (search === undefined) {
+    if (search === undefined || search==='' ) {
+      handleResponse([], search);
+      setsearch('')
       setActiveClose(true);
     } else {
-      fetchBlogSearch(search)
+      if(search !=''){
+        fetchBlogSearch(search)
         .then((res) => {
           setActiveClose(false);
           handleResponse(res?.data?.results, search);
         })
         .catch((e: Error | AxiosError) => {
           setError(true);
-          // handleFetchSerach();
         });
+      }
     }
   };
   // const fetchSearchBlog = () => {
@@ -50,11 +53,10 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
-    const regex = /[#''&]/;
     if (value?.length === 0) {
       setActiveClose(true);
       setsearch("");
-    } else if (!regex.test(value) || event.keyCode === 55) {
+    } else {
       setsearch(value);
     }
   };
