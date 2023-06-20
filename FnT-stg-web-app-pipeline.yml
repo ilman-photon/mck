@@ -7,7 +7,8 @@ trigger:
 - Staging
 
 pr: # Trigger on pull requests towards branches
-- QA_Sprint4.0
+- QA_*
+- Staging
 
 #schedules:
 #- cron: "30 11 * * 0-6"
