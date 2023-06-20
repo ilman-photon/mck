@@ -52,6 +52,23 @@ const ProductComponent = ({
       swiper.autoplay.running = false;
     }
   };
+
+  const ariaHiddenArrow = (swiper: any) => {
+    let prevArrowTabIdxAtt = swiper.el.children[1].attributes[1].value
+    if(prevArrowTabIdxAtt == "-1") {
+      swiper.el.children[1].setAttribute('aria-hidden','true')
+    } else {
+      swiper.el.children[1].setAttribute('aria-hidden','false')
+    }
+
+    let nextArrowTabIdxAtt = swiper.el.children[2].attributes[1].value
+    if(nextArrowTabIdxAtt == "-1") {
+      swiper.el.children[2].setAttribute('aria-hidden','true')
+    } else {
+      swiper.el.children[2].setAttribute('aria-hidden','false')
+    }
+  }
+
   return (
     <>
       {selectedProduct?.map((product: any, index: number) => (
@@ -101,6 +118,10 @@ const ProductComponent = ({
                         className="lg:h-420 h-300 md:h-[305px]"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
+                          ariaHiddenArrow(swiper)
+                        }}
+                        onAfterInit={(swiper) => {
+                          ariaHiddenArrow(swiper)
                         }}
                         pagination={{
                           type:"fraction"}}
