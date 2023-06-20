@@ -336,7 +336,7 @@ const HealthNeedFilter = ({
               activeFilter?.map((item: any, index: number) => {
                 return (
                   <div
-                    className="flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]"
+                    className="flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB] max-h-[22px]"
                     key={item}
                   >
                     {extractMainCategoryName(productCategoryData)?.includes(
