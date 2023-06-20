@@ -12,12 +12,12 @@ export default function CategoryComponent({ sectionData }: any) {
   const response = useCategoryStore(state => state.data)
   const getData = useCategoryStore(state => state.getData)
   const loading = useCategoryStore(state => state.isLoading)
-
+  const _sectionData = sectionData?.[0]?.contentBlockArea?.value
   useEffect(() => {
-    if(response === null){
-      getData(sectionData[0]?.contentBlockArea?.value)
-    }
-  },[response])
+    // if(response === null){
+      getData(_sectionData)
+    // }
+  },[_sectionData])
 
   function handleClickOnCategory(url: string) {
     let f = "?filter=";
