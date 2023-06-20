@@ -4,7 +4,7 @@ import { useWindowResize } from "@/hooks/useWindowResize";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import SwiperCore, { Navigation, Autoplay, A11y } from "swiper";
+import SwiperCore, { Navigation, Autoplay, A11y, Pagination } from "swiper";
 import "swiper/css/navigation";
 import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
@@ -21,6 +21,10 @@ const ProductComponent = ({
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
   const [reviewCount, setReviewCount] = useState<number>(1);
 
+  if(!isMobile) {
+    SwiperCore.use([Pagination])
+  }
+  
   useEffect(() => {
     setIsMobile(windowWidth >= 968 ? false : true);
   }, [windowWidth]);
@@ -45,10 +49,8 @@ const ProductComponent = ({
   const handleOnSlideChange = (swiper: any) => {
     if (isMobile) {
       swiper.autoplay.running = false;
-      setReviewCount(() => Math.ceil(swiper.activeIndex) + 1);
     } else {
       swiper.autoplay.running = false;
-      setReviewCount(() => Math.ceil(swiper.activeIndex / 6) + 1);
     }
   };
   return (
@@ -95,12 +97,14 @@ const ProductComponent = ({
                       <Swiper
                         spaceBetween={4}
                         navigation={isMobile ? false : true}
-                        slidesPerView={isMobile ? "auto" : 6}
-                        slidesPerGroup={isMobile ? 1 : 6}
+                        slidesPerView={isMobile ? "auto" : 5}
+                        slidesPerGroup={isMobile ? 1 : 5}
                         className="lg:h-420 h-300 md:h-[305px]"
                         onSlideChange={(swiper) => {
                           handleOnSlideChange(swiper);
                         }}
+                        pagination={{
+                          type:"fraction"}}
                         a11y={{
                           prevSlideMessage:"",
                           nextSlideMessage: "",
@@ -129,12 +133,6 @@ const ProductComponent = ({
                         )}
                       </Swiper>
                     </div>
-                    {product?.data?.results?.length>=7&&!isMobile&&<div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-0 lg:absolute lg:left-0 lg:right-0 lg:bottom-[-2px]">
-                      {reviewCount}/
-                      {isMobile
-                        ? Math.ceil(product?.data?.results?.length)
-                        : Math.ceil(product?.data?.results?.length / 6)}
-                    </div>}
                   </>
                 )}
               </>
