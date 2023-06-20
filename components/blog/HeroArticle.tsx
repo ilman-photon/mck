@@ -59,7 +59,6 @@ const HeroArticle = ({ data }: any) => {
                             <div
                                 id={`blog-hero-article-tag` + index}
                                 key={index}
-                                tabIndex={0}
                                 style={{
                                     backgroundColor: handlecategoryColorCode(item.id, catMapping),
                                 }}
