@@ -18,7 +18,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
             {ArticleList ? ArticleList?.map((item: any, index: any) => (
                 <div key={`{blog-article_${item?.contentLink?.id}}`}>
                     <div
-                        className='articletitle-link max-h-620 w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
+                        className='articletitle-link max-h-620 w-full text-sofia-reg text-base font-normal text-mckblue no-underline'
                     >
 
                         <article className='shadow-md rounded-lg lg:mb-12 mb-6 overflow-hidden'>
@@ -28,7 +28,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     query: { id: item?.routeSegment },
                                 }}
                                 ariahidden={true}
-                                tabIndex={0}
+                                tabIndex={-1}
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
                                     <div className="lg:h-314 h-240 flex" aria-hidden="true" tabIndex={-1} >
@@ -47,7 +47,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                         ariahidden={false} 
                                         tabIndex={0}
                                     >
-                                        <div className='lg:h-28'><p  tabIndex={0} className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item?.title?.value)}>{DOMPurify.sanitize(item?.title?.value)}</p></div>
+                                        <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item?.title?.value)}>{DOMPurify.sanitize(item?.title?.value)}</p></div>
                                     </LinkComponent>
 
                                     <div className='pb-3 pt-3'>
@@ -58,7 +58,6 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                     <div className='flex flex-wrap h-[33px] overflow-hidden [&>*:nth-child(1)]:ml-0 min-h-52'>
                                         {item?.tag?.value.map((tagitem: any, idx: any) => (
                                             <div key={idx}
-                                            tabIndex={0}
                                                 style={{
                                                     backgroundColor: handlecategoryColorCode(tagitem?.id, catMapping),
                                                 }}
