@@ -19,7 +19,6 @@ const ProductComponent = ({
 }: any) => {
   const [windowWidth] = useWindowResize();
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
-  const [reviewCount, setReviewCount] = useState<number>(1);
 
   if(!isMobile) {
     SwiperCore.use([Pagination])
