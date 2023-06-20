@@ -29,7 +29,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="relative search-box lg:w-auto w-64" role="search">
+      <div className="relative search-box lg:w-auto w-64 lg:right-3" role="search">
         <div
           className="btn-search w-12 h-12 bg-transparent right-px absolute cursor-pointer outline-none font-black border-0"
           onClick={(e: any) => handleSearch(e)}

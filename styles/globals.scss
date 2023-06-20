@@ -1871,12 +1871,12 @@ Mobile and iPad Navigation
 **/
 .categoryname {
   + .megamenu-submenu {
-    margin-top: 14px;
-    li {
-      &:first-child {
-        padding-top: 0px;
-      }
-    }
+    margin-top: 6px;
+    // li {
+    //   &:first-child {
+    //     padding-top: 0px;
+    //   }
+    // }
   }
 }
 
@@ -1890,6 +1890,7 @@ Mobile and iPad Navigation
     position: sticky;
     padding: 0 19px;
   }
+
   .header:hover,
   .header-sticky:hover,
   .brand-logo:hover + .header-sticky {
@@ -2126,6 +2127,11 @@ Mobile and iPad Navigation
 
 .header:hover .search-icon path {
   fill: #fff;
+}
+
+.megamenu-submenu li:hover{
+  background-color: #fffcfa;
+  color: #001a71 !important;
 }
 
 .input-search:focus + .search-icon path {
