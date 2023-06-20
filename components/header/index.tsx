@@ -17,7 +17,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
-
+  
   const firstLogo = useHeaderStore((state) => state.logoSrc1);
   const beigeLogo = useHeaderStore((state) => state.logoSrc2);
   const isDataExist = useHeaderStore((state) => state.headerData);
@@ -71,14 +71,12 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   }
 
   // hamburger menu
-  const [isBarAnimated, setIsBarAnimated] = useState(false);
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   function handleHamburgerClick() {
-    setIsBarAnimated(!isBarAnimated);
     setIsMobileMenuActive(!isMobileMenuActive);
   }
-
+  
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
@@ -110,30 +108,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     };
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const hamburgerMenu = document.querySelector(".hamburger-menu");
-      const hamburgerMenuActive = document.querySelector(
-        ".hamburger-menu.active"
-      );
-      const a = document.getElementById("nav-bar")?.firstChild;
 
-      if (
-        hamburgerMenu &&
-        hamburgerMenuActive &&
-        !hamburgerMenu.contains(event.target as Node) &&
-        !hamburgerMenuActive.contains(event.target as Node)
-      ) {
-        setIsBarAnimated(false);
-      }
-    };
-
-    window.addEventListener("click", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   return (
     <>
@@ -141,6 +116,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         Skip to main content
       </a>
       <div
+        // onMouseEnter={handleHeaderMouseEnter}
+        // onMouseLeave={handleHeaderMouseLeave}
         id="header"
         className={`header ${
           isCarusolAvaible
@@ -153,32 +130,32 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         }`}
         style={!isMobile ? divHeight : undefined}
       >
-        <div className="flex">
-          <div
-            className={`hamburger-menu lg:hidden xl:hidden ${
-              isMobileMenuActive ? "active" : ""
-            }`}
-            onClick={() => handleHamburgerClick()}
-          >
-            <div className={`bar ${isBarAnimated ? "animate" : ""}`}></div>
+          <div className="flex">
+            <div
+              className={`hamburger-menu lg:hidden xl:hidden ${
+                isMobileMenuActive ? "active" : ""
+              }`}
+              onClick={() => handleHamburgerClick()}
+            >
+              <div className={`bar ${isMobileMenuActive ? "animate" : ""}`}></div>
+            </div>
           </div>
-        </div>
 
-        <div
-          ref={headerImgRef}
+          <div
+            ref={headerImgRef}
           className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
-          role="banner"
-          onClick={handleOnClickLogo}
-        >
+            role="banner"
+            onClick={handleOnClickLogo}
+          >
           {firstLogo && (
             <div>
-              <img
+            <img
                 id="logo-image-bgcolor"
                 src={DOMPurify.sanitize(firstLogo)}
                 alt="Foster Thrive Logo image Link"
-                className="logo-image lg:mt-7"
-                style={isMobile ? undefined : imgWidth}
-                tabIndex={0}
+              className="logo-image lg:mt-7"
+              style={isMobile ? undefined : imgWidth}
+              tabIndex={0}
               />
               <img
                 id="logo-image-beige"
@@ -187,8 +164,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
                 className="logo-image lg:mt-7 hidden"
                 style={isMobile ? undefined : imgWidth}
                 tabIndex={0}
-              />
-            </div>
+            />
+          </div>
           )}
         </div>
         <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
@@ -196,9 +173,9 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             isMobileMenuActive={isMobileMenuActive}
             setIsMobileMenuActive={setIsMobileMenuActive}
           />
-          <Search />
+            <Search />
+          </div>
         </div>
-      </div>
       {children}
     </>
   );
