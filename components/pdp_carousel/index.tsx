@@ -229,7 +229,7 @@ function PdpCarousel(prodViewData: any) {
         >
           <ImageComponent
             src={DOMPurify.sanitize(imgUrl)}
-            className="lg:w-[270px] max-w-[270px]"
+            className="lg:w-[270px] max-w-[180px]"
             alt={DOMPurify.sanitize("Image is not available")}
             ariahidden={false}
             id={
