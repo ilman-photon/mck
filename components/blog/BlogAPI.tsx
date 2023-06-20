@@ -22,8 +22,9 @@ export const fetchBlogFilter = (filter: any) => {
 }
 
 export const fetchBlogSearch = (search: string) => {
-    const StringParam = search.toString().toLowerCase();
-
+    const HandleStringParam = search.toString().toLowerCase();
+    const HandleApostrophe=HandleStringParam.replaceAll("'", "''")
+    const StringParam = encodeURIComponent(HandleApostrophe)
     return axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=ContentType/any(t:t eq 'BlogPage') and (contains(tolower(title/value), '${StringParam}') or contains(tolower(description/value), '${StringParam}'))&expand=*`,
         {
