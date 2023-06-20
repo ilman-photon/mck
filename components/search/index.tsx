@@ -16,11 +16,12 @@ export default function Search() {
     }
   };
   const handleSearch = (e: any) => {
-      // searchString &&
+      if (searchString ) {
       router.push({
         pathname: "/search_results",
         query: { search: searchString },
       });
+    }
   };
   const handleKeyUp = (e: any) => {
         setSearchString(e.target.value);
