@@ -94,7 +94,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
           onClick={() => {
             handleClose("List"), setsearch("");
           }}
-          className="focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
+          className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
           aria-label="close icon"
           width="18"
           height="19"
