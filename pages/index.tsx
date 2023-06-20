@@ -21,6 +21,7 @@ export default function Home() {
   const getHomeData = useHomeStore(state => state.getData)
   const response = useHomeStore(state => state.data)
   const isLoading = useHomeStore(state => state.isLoading)
+  const isCarouselAvailable = useHomeStore(state => state.isCarouselAvailable)
 
 
   useEffect(() => {
@@ -90,7 +91,9 @@ export default function Home() {
                   />
                         </div>
                 ) : item?.contentType[1] === "TwoCloumnBlock" ? (
-                  <div>
+                  <div className={isCarouselAvailable
+                      ? "mt-6 lg:mt-12"
+                      : ""}>
                     <ImageVideoAndTextSection
                       index={`hp_0${index}`}
                       customStyleClass={"lg:px-5"}
@@ -100,7 +103,11 @@ export default function Home() {
                     />
                   </div>
                 ) : item?.contentType[1] === "OneColumnBlock" ? (
-                  <div className="p-6 lg:p-0 text-center mb-6 lg:mb-12">
+                  <div className=  {`${
+                    isCarouselAvailable
+                    ? "mt-6 lg:mt-12"
+                    : ""
+                  } p-6 lg:p-0 text-center mb-6 lg:mb-12`}>
                     <ImageVideoOrTextSection
                       sectionData={
                         response.expandedValue[index]
@@ -110,7 +117,9 @@ export default function Home() {
                     />
                   </div>
                 ) : item?.contentType[1] === "RecommendedProductBlock" ? (
-                  <div className="">
+                  <div className={isCarouselAvailable
+                    ? "mt-6 lg:mt-12"
+                    : ""}>
                           <div className="mx-auto lg:px-72 px-15">
                       <RecommendationalProductComponent
                         indexs={`hp_0${index}`}

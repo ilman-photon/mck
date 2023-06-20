@@ -5,6 +5,7 @@ interface Controller {
     getData:() => Promise<void>
     data:any
     isLoading:boolean
+    isCarouselAvailable:boolean
 }
 
 export const useHomeStore = create<Controller>((set,get) => ({
@@ -16,8 +17,13 @@ export const useHomeStore = create<Controller>((set,get) => ({
               },
             method:'GET'
         })
-        set({data:(await callApi).data?.[0]?.blockArea,isLoading:false})
+        set(
+            {data:(await callApi).data?.[0]?.blockArea,
+                isLoading:false,
+                isCarouselAvailable:(await callApi).data?.[0]?.blockArea.expandedValue[0]?.contentType[1] ===  "CarouselBlock"
+            })
     },
     data: null,
     isLoading:true,
+    isCarouselAvailable:false
 }))
