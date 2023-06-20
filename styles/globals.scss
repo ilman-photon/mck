@@ -2485,10 +2485,6 @@ li.indicator.active {
   .swiper-button-prev {
     top: var(--swiper-navigation-top-offset, 47.5%) !important;
   }
-  /* This is for fix 1936 - 1937 */
-  // .swiper-pagination-fraction {
-  //   bottom: 66px !important;
-  // }
   .swiper {
     position: inherit !important;
   }
