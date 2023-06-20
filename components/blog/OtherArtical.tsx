@@ -31,7 +31,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                 tabIndex={0}
                             >
                                 <figure className='lg:h-80 overflow-hidden'>
-                                    <div className="lg:h-314 h-240 flex" aria-hidden="true" >
+                                    <div className="lg:h-314 h-240 flex" aria-hidden="true" tabIndex={-1} >
                                         <ImageComponent src={DOMPurify.sanitize(item?.image?.expandedValue?.url ? item?.image?.expandedValue?.url : item?.image?.value?.url)} className='w-full lg:max-h-314 max-h-240 object-cover' alt={DOMPurify.sanitize(item?.image?.expandedValue?.name)} id={item?.image?.expandedValue?.name} ariahidden={true} />
                                     </div>
                                 </figure>
@@ -47,7 +47,7 @@ const OtherArtical: React.FC<OtherArticalProps> = ({ ArticleList }) => {
                                         ariahidden={false} 
                                         tabIndex={0}
                                     >
-                                        <div className='lg:h-28'><p className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item?.title?.value)}>{DOMPurify.sanitize(item?.title?.value)}</p></div>
+                                        <div className='lg:h-28'><p  tabIndex={0} className='articleTitle lg:text-32 text-xl text-gtl-med text-mckblue pb-3 no-underline lg:leading-8 lg:h-24 text-p-ellipsis' aria-labelledby={DOMPurify.sanitize(item?.title?.value)}>{DOMPurify.sanitize(item?.title?.value)}</p></div>
                                     </LinkComponent>
 
                                     <div className='pb-3 pt-3'>

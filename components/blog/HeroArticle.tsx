@@ -21,7 +21,7 @@ const HeroArticle = ({ data }: any) => {
                 }}
                 className='articletitle-link w-full text-sofia-reg text-base font-normal text-mckblue cursor-pointer no-underline'
             >
-                <figure tabIndex={-1} className="w-full lg:h-402 lg:overflow-hidden">
+                <figure className="w-full lg:h-402 lg:overflow-hidden">
                     <img
                         className="w-full"
                         id={data?.image.value?.name}
@@ -37,7 +37,7 @@ const HeroArticle = ({ data }: any) => {
                     <LinkComponent
                         id={'blog-hero-title-article-01'}
                         key={'blog-hero-title-article-01'}
-                        ariahidden={true} 
+                        ariahidden={false} 
                         tabIndex={0}
                         href={{
                             pathname: "/blog_details",
@@ -59,6 +59,7 @@ const HeroArticle = ({ data }: any) => {
                             <div
                                 id={`blog-hero-article-tag` + index}
                                 key={index}
+                                tabIndex={0}
                                 style={{
                                     backgroundColor: handlecategoryColorCode(item.id, catMapping),
                                 }}
