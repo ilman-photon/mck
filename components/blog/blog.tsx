@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useLayoutEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { AxiosError } from "axios";
 import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
@@ -12,7 +12,6 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
   fetchBlogFilter,
-  // fetchBlogSetting,
 } from "./BlogAPI";
 import { useBlogStore } from "../global/Store/useBlogStore";
 
@@ -31,10 +30,8 @@ const BlogComponent = () => {
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
   const [ActiveSearch, setActiveSearch] = useState<any>(false);
   const [currentScreen, setCurrentScreen] = useState<any>("List");
-  // const [BlogSetting, setBlogSetting] = useState<any>();
   const BlogSetting = useBlogStore(state => state.blogSettings)
   const fetchBlogSetting = useBlogStore(state => state.getBlogSetting)
-  // const [loading, setIsLoading] = useState<any>();
   const loading = useBlogStore(state => state.isLoading)
   const setIsLoading = useBlogStore(state => state.setIsLoading)
 
@@ -61,6 +58,7 @@ const BlogComponent = () => {
   };
 
   const filterBlogList = async (Filterstring: any) => {
+    setIsLoading(true);
     fetchBlogFilter(Filterstring)
       .then((res) => {
         setFilterBlogList(res.data.results);
@@ -116,7 +114,7 @@ const BlogComponent = () => {
             } block w-full relative flex items-center content-center mb-6`}
         >
           <SearchComponent
-            placeholder={BlogSetting?.data?.[0].blogSearchPlaceholderText?.value}
+            placeholder={BlogSetting?.data?.[0].blogSearchPlaceholderText?.value||''}
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
@@ -171,7 +169,7 @@ const BlogComponent = () => {
             className="lg:block hidden relative flex items-center content-center mb-6"            
           >
             <SearchComponent
-              placeholder={`${BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value}`}              
+              placeholder={BlogSetting?.data?.[0]?.blogSearchPlaceholderText?.value||''}              
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
