@@ -1848,8 +1848,7 @@ Mobiles Menu
 }
 
 .search-icon {
-  pointer-events: none;
-  z-index: 999;
+  // z-index: 999;
 }
 .input-search:focus + .search-icon,
 .input-search:focus-visible + .search-icon,
