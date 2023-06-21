@@ -4,8 +4,10 @@ import ProductDropComponent from "../productdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 import { useOutsideClick } from "@/hooks/useClickOutside";
 import { useWindowResize } from "@/hooks/useWindowResize";
+import { useRouter } from "next/router";
 
 function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
+  const router = useRouter();
   const [active, setActive] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +22,6 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   const wrapperRef = useRef(null);
   const [isOutsideClicked] = useOutsideClick(isMobileMenuActive ? wrapperRef : null);
 
-  console.log("isOutsideClicked  --1234567-> ", isOutsideClicked, isMobileMenuActive);
   useEffect(() => {
     if (isOutsideClicked) {
       setIsMobileMenuActive(!isOutsideClicked)
@@ -90,6 +91,16 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
       });
     setMenuData_(a);
   }
+  const handleLinkClick = (url: any) => {
+    if (router.asPath === url) {
+        url == '/blog' && router.reload();
+    }else{
+      router.push({
+        pathname: url,
+      });
+    }
+    setIsMobileMenuActive(false)
+  };
   return (
     <>
       <div
@@ -143,6 +154,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                       className="text-lg text-sofia-reg text-center font-medium flex my-3 lg:border-b-2 lg:border-transparent hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                       href={item?.menuItemUrl?.value ?? ""}
                       onMouseEnter={() => onMouseHover(item?.menuItemName?.value)}
+                      onClick={() => handleLinkClick(item?.menuItemUrl?.value)}
                     >
                       {item?.menuItemName?.value}
                     </Link>
@@ -152,8 +164,8 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                       handleMenuOpen(item?.menuItemName?.value, item);
                     }}
                     className={`${item?.subMenuContentBlockArea?.value == null
-                        ? "lg:hidden xl:hidden"
-                        : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
+                      ? "lg:hidden xl:hidden"
+                      : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
                       } 
                     ${menuData_ && menuData_[idx] && menuData_[idx].flag
                         ? "open"
