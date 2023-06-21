@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { useState, memo } from "react";
 import DOMPurify from 'isomorphic-dompurify';
 
 interface CatogaryComponentProps {
@@ -6,6 +6,52 @@ interface CatogaryComponentProps {
   Catogarytitle: string;
   OnCatogarySelcete: (e: any) => void;
 }
+
+const ItemExpandeble = ({dataCategory, OnCatogarySelcete, idx} : any) => {
+  const [selectedValue, setSelectedValue] = useState<boolean>(false);
+  const handleOnClick = (e: string) => {
+    if (e == "Enter" || e === "click") {
+      setSelectedValue(!selectedValue);
+    }
+  };
+
+  return (
+     <div className="lg:px-6 px-2 desktop:px-4 smalldekstop:px-4" key={`${dataCategory?.contentLink?.id}${idx}`}>
+          <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
+            <React.Fragment>
+              <input type="checkbox" 
+              id={dataCategory?.categoryDisplayName?.value} 
+              className="hidden" checked={selectedValue} />
+              <label
+              className="tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative" 
+              htmlFor={dataCategory?.categoryDisplayName?.value}
+              tabIndex={0}
+              role="button"
+              onClick={(e) => handleOnClick("click")}
+              onKeyUp={(e) => handleOnClick(e.key)}>
+                {dataCategory?.categoryImage?.expandedValue?.url && (
+                  <img
+                    className="mr-3"
+                    src={DOMPurify.sanitize(dataCategory?.categoryImage?.expandedValue?.url)}
+                    alt={DOMPurify.sanitize(dataCategory?.categoryImage?.expandedValue?.name)}
+                    id={dataCategory?.categoryImage?.expandedValue?.name}
+                    aria-hidden={true}
+                  />
+                )}
+                {dataCategory?.categoryDisplayName?.value}
+              </label>
+            </React.Fragment>
+            <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
+              {dataCategory?.subCategory?.value?.map((item: any, index: number) => (
+                <button onClick={() => OnCatogarySelcete(item)} key={index} className="w-full list-none text-sofia-reg text-base font-normal text-mcknormalgrey cursor-pointer text-left hover:bg-shadesblue pl-2 py-1">
+                  {item?.description}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+  );
+};
 
 const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
   CatogaryListing,
@@ -19,32 +65,7 @@ const CatogaryComponent: React.FC<CatogaryComponentProps> = ({
         {Catogarytitle}
       </div>
       {CatogaryListing?.map((item: any, index: number) => (
-        <div className="lg:px-6 px-2 desktop:px-4 smalldekstop:px-4" key={`${item?.contentLink?.id}${index}`}>
-          <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
-            <React.Fragment>
-              <input type="checkbox" id={item.categoryDisplayName.value} className="hidden" />
-              <label className="tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative" htmlFor={item.categoryDisplayName.value}>
-                {item?.categoryImage?.expandedValue?.url && (
-                  <img
-                    className="mr-3"
-                    src={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.url)}
-                    alt={DOMPurify.sanitize(item?.categoryImage?.expandedValue?.name)}
-                    id={item.categoryImage.expandedValue.name}
-                    aria-hidden={true}
-                  />
-                )}
-                {item?.categoryDisplayName?.value}
-              </label>
-            </React.Fragment>
-            <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
-              {item.subCategory.value.map((item: any, index: number) => (
-                <button onClick={() => OnCatogarySelcete(item)} key={index} className="w-full list-none text-sofia-reg text-base font-normal text-mcknormalgrey cursor-pointer text-left hover:bg-shadesblue pl-2 py-1">
-                  {item?.description}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+         <ItemExpandeble key={index} dataCategory={item} OnCatogarySelcete={OnCatogarySelcete} idx={index}/>
       ))}
     </div>
   );
