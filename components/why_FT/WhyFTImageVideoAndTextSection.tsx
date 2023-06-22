@@ -82,7 +82,7 @@ export default function WhyFTImageVideoAndTextSection ({sectionData,index} : any
           className={`${sectionData?.assetPosition?.value === "Right"
             ? "flex-row-reverse text-center"
             : "text-left"
-            }  w-full lg:py-6 mb-6 lg:mb-12 py-6`}
+            }  w-full lg:py-6 mb-6 lg:mb-12 py-0`}
           style={{ backgroundColor: sectionData?.backgroundColor?.value }}
           key={sectionData?.image?.value?.id}
         >
@@ -138,7 +138,7 @@ const ImageWithTextComponent = () => {
     className={`${sectionData?.assetPosition?.value === "Right"
         ? "flex-row-reverse text-center"
         : "text-left"
-      } w-full lg:py-6 py-6 mb-6 lg:mb-12`}
+      } w-full lg:py-6 py-0 mb-6 lg:mb-12`}
     style={{ backgroundColor: sectionData?.backgroundColor?.value }}
     key={sectionData?.image?.value?.id}
   >
@@ -188,7 +188,7 @@ const ImageWithTextComponent = () => {
 
 const ImageBGWithTextComponent = () => {
   return(
-      <div className="relative lg:mb-12 mb-10">
+      <div className="relative lg:mb-12 mb-0">
             <ImageComponent
               imageContainerStyle="flex flex-1"
               imageSource={sectionData?.backgroundImage?.expandedValue?.url}
@@ -210,7 +210,7 @@ const ImageBGWithTextComponent = () => {
               descriptionStyle="lg:mb-6 mb-4 text-sofia-reg text-lg font-normal text-mcknormalgrey text-p-ellipsis" 
               buttonContainerStyle={`${isButtonRightAlignment ? 'flex justify-end': isButtonLeftAlignment ? 'flex justify-start' : isButtonCenterAlignment ? 'flex justify-center' : 'mx-auto'}`}
               buttonStyle={`jsx-290076256 w-fit leading-5 pd-12 text-sofia-bold justify-center items-center text-center text-white bg-mckblue hover:bg-mckblue-90 rounded-lg uppercase cursor-pointer flex`}
-              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center pt-8 lg:pt-0 xtralarge:left-[72px] mediumdesktop:left-[72px] mobile:left-[15px] px-[15px]'}`}
+              containerStyle={`${sectionData?.assetPosition?.value === 'Right' ? 'lg:absolute lg:right-28 top-0 bottom-0 pt-8 lg:pt-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center ' : 'lg:absolute top-0 bottom-0 lg:pr-11 lg:pl-6 w-[540px] mobilelarge:w-full flex flex-col justify-center pt-8 lg:pt-0 xtralarge:left-[72px] mediumdesktop:left-[72px] mobile:left-[15px]'}`}
            />
             </div>
       </div>
