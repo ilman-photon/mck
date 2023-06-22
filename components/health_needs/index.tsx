@@ -264,7 +264,7 @@ const HealthNeedsComponent = ({
           }
           queryParams += "(";
           const productCategoryName = category.productType.replace(/[^a-zA-Z ]/g, "")
-          const encodeProductCategoryName = encodeURI(productCategoryName)
+          const encodeProductCategoryName = encodeURIComponent(productCategoryName)
           {category.isBusinessVerticalCategory && category?.productType !== 'healthNeeds' ? queryParams += `productCategory/value/name eq '${encodeProductCategoryName}' and ` : ''}
           category.items.map((item: any, index: any) => {
             /**
@@ -275,13 +275,12 @@ const HealthNeedsComponent = ({
                 _temparray.push(item);
               }
             }
-            console.log(item)
             /**
              * @end
              */
             // console.log('ini',category)
             const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
+            const encodeItemName = encodeURIComponent(itemName);
 
             // console.log('encode',encodeItemName)
             // console.log(item)
