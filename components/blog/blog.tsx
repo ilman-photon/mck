@@ -9,22 +9,13 @@ import SearchResult from "./SearchResult";
 import OtherArtical from "./OtherArtical";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import {
   fetchBlogFilter,
 } from "./BlogAPI";
 import { useBlogStore } from "../global/Store/useBlogStore";
+import BlogListContainer from "./BlogListContainer";
 
-const BlogList = dynamic(() => import("./BlogListContainer"), {
-  loading: () => (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed inset-0 bg-black opacity-30"></div>
-      <div className="relative">
-        <Image src={gifImage} alt="coba-image" />{" "}
-      </div>
-    </div>
-  ),
-});
+
 const BlogComponent = () => {
   const [ArticleContent, setArticleContent] = useState<any>();
   const [FilterBlogList, setFilterBlogList] = useState<any>(false);
@@ -64,6 +55,7 @@ const BlogComponent = () => {
         setFilterBlogList(res.data.results);
         setCurrentScreen("Filter");
         setIsLoading(false);
+        setActiveSearch(false);
       })
       .catch((e: Error | AxiosError) => {
         setIsLoading(false);
@@ -118,7 +110,7 @@ const BlogComponent = () => {
             searchText={searchInfo.SearchString}
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
-            handleClose={() => HandleSearchClose()}
+            handleClose={() =>   setActiveSearch(false)}
           />
         </div>
         {loading ? (
@@ -151,7 +143,7 @@ const BlogComponent = () => {
               case "Filter":
                 return <OtherArtical ArticleList={FilterBlogList} />;
               case "List":
-                return <BlogList />;
+                return <BlogListContainer />;
               default:
                 return null;
             }
@@ -173,7 +165,7 @@ const BlogComponent = () => {
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
-              handleClose={() => HandleSearchClose()}
+              handleClose={() =>   setActiveSearch(false)}
             />
           </div>
         )}

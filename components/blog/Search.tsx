@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import React, { memo, useState, useEffect } from "react";
 import { fetchBlogSearch } from "./BlogAPI";
-import { useRouter } from "next/router";
 interface CatogaryComponentProps {
   placeholder: any;
   searchText: string;
@@ -19,7 +18,6 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
   const [error, setError] = useState<boolean>(false);
   const [search, setsearch] = useState<any>();
   const [ActiveClose, setActiveClose] = useState<any>(true);
-  const router = useRouter();
   useEffect(() => {
     if (searchText) {
       setsearch(searchText);
@@ -35,25 +33,19 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
     } else {
       if(search !=''){
         fetchBlogSearch(search)
-        .then((res) => {
-          setActiveClose(false);
-          handleResponse(res?.data?.results, search);
-        })
-        .catch((e: Error | AxiosError) => {
-          setError(true);
-        });
+          .then((res) => {
+            setActiveClose(false);
+            handleResponse(res?.data?.results, search);
+          })
+          .catch((e: Error | AxiosError) => {
+            setError(true);
+          });
       }
     }
   };
-  // const fetchSearchBlog = () => {
-  //   router.push({
-  //     pathname: "/blog-search-result",
-  //     query: { id: search },
-  //   });
-  // };
   const HandleChange = (event: any) => {
     const { value } = event.target;
-    if (value?.length === 0) {
+    if (value?.length === 0 ||value===undefined) {
       setActiveClose(true);
       setsearch("");
     } else {
@@ -94,7 +86,9 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         <svg
           tabIndex={0}
           onClick={() => {
-            handleClose("List"), setsearch("");
+            setsearch("");
+            handleResponse([], '');
+            setActiveClose(true)
           }}
           className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
           aria-label="close icon"
