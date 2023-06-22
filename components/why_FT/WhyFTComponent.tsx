@@ -147,7 +147,7 @@ function WhyFTComponent(
                         sectionData={item}
                       />
                     ) : item?.contentType[1] === "OneColumnBlock" ? (
-                      <div className="container mx-auto py-6 xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15 text-center mb-6 lg:mb-12">
+                      <div className="container mx-auto py-6 xtralarge:px-72 mediumdesktop:px-72 ipadlarge:px-72 mobile:px-15 text-center mb-0 lg:mb-12">
                         <ImageVideoOrTextSection
                           index={`wfnt_0${index}`}
                           sectionData={item}

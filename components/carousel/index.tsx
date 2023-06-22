@@ -79,7 +79,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
                     key={item.contentLink.id}
                     className={`w-full mx-auto ${item ? "block" : "hidden"}`}
                   >
-                    <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none h-[450px] lg:h-[800px]">
+                    <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none max-h-[450px] lg:max-h-[800px]">
                       <img
                         src={DOMPurify.sanitize(item?.image?.value.url)}
                         className="block object-cover object-center w-full h-[225px] lg:h-[800px]"
