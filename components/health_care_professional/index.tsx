@@ -213,7 +213,7 @@ function HealthCareProfessionalComponent({
                   className={`${
                     isCarusolAvaible &&
                     "lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6"
-                  }  `}
+                  }  lg:p-72 pt-6 lg:pb-16 pb-4 lg:pt-[72px]`}
                   style={{ background: customerBackgroundColorCode }}
                 >
                   <div className="container mx-auto hcp-testimonial">

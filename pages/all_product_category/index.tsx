@@ -189,8 +189,8 @@ function AllProductCategoryPage({
 
           queryParams += "(";
           category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURI(itemName);
+            // const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURIComponent(item);
             // const concatStr = category.isBusinessVerticalCategory ? " or " : " and ";
             const concatStr =
               category.items.length === index + 1
@@ -323,13 +323,13 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoadingFalse();
-    }, 500);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoadingFalse();
+  //   }, 1000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
   return (
     <>
       <Head>

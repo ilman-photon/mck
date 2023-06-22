@@ -446,7 +446,7 @@ const HealthNeedFilter = ({
           className="text-mcknormalgrey font-normal lg:text-lg lg:leading-[27px] text-base"
           id="hn_label_003_3"
         >
-          {productSum >= 0
+          {productSum >= 0 && productSum != null
             ? activeFiltersData?.showResultsText?.value?.replace(
                 /#/,
                 productSum
