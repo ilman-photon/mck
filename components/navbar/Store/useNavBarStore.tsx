@@ -2,6 +2,11 @@ import { create } from "zustand";
 import { NavBarData } from "../Model/NavBarModel";
 import axiosInstance from "@/utils/axiosInstance";
 
+interface FilterMegaMenu{
+  isClicked:boolean
+  clickedMenuName:string
+}
+
 interface ControllerNavBar {
   getData: (checkButtonName: any) => void;
   headerData: any;
@@ -19,7 +24,10 @@ interface ControllerNavBar {
   footerMobileNav: any
   activeButton: string
   setActiveButton: (buttonName: string) => void
+  selectedFilter:FilterMegaMenu | null
+  onSelectedSetFilter:(state:FilterMegaMenu|null) => void
 }
+
 
 export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
   getData: (checkButtonName) => {
@@ -41,6 +49,7 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
           buttonActive = item?.menuItemName?.value;
         }
       });
+      console.log(res?.data?.[0])
       set({
         headerData:
           res?.data?.[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea
@@ -102,5 +111,7 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
   footerSecondData:null,
   footerMobileNav: null,
   activeButton: 'Home',
-  setActiveButton: (buttonName) => set({ activeButton: buttonName })
+  setActiveButton: (buttonName) => set({ activeButton: buttonName }),
+  selectedFilter:null,
+  onSelectedSetFilter:(state) => set({selectedFilter:state})
 }));

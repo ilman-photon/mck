@@ -19,7 +19,7 @@ const nextConfig = {
 
   env: {
     API_URL: dev
-      ? "$(API_URL)"
+      ? "https://mcco02mstrub73kprod.dxcloud.episerver.net"
       : test
       ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
       : "https://mcco02mstrub73kinte.dxcloud.episerver.net",

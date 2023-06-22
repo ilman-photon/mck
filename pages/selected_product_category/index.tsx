@@ -9,6 +9,7 @@ import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
+import ProductList from "@/components/product_list/productlists";
 import CategoryComponent from "@/components/category";
 
 function ProductListPage() {
@@ -104,7 +105,8 @@ function ProductListPage() {
             <>
               <CarouselComponent sectionData={filteredData("CarouselBlock")} />
               {productCategoryBlock?.length > 0 ? <CategoryComponent sectionData={productCategoryBlock} /> : null}  
-              <ProductListComponent />
+              {/* <ProductListComponent /> */}
+              <ProductList/>
             </>
           )
         )}

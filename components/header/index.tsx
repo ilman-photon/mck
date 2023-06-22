@@ -124,7 +124,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             ? "sticky lg:bg-beige50 lg:bg-opacity-70"
             : isSticky
             ? "sticky"
-            : "relative z-40"
+            : "relative z-40 pb-[200px]"
         } flex lg:grid container mx-auto text-mckblue border-b bg-mckbeige lg:border-b border-mcknormalgrey lg:pb-1 ${
           isSticky ? "isStickyActive" : "isNotSticky"
         }`}

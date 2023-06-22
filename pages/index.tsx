@@ -65,7 +65,7 @@ export default function Home() {
           </div>
         </div>
       )}
-
+  
       <HeaderComponent
         isCarusolAvaible={
          DOMPurify.sanitize(response?.expandedValue[0]?.contentType[1]) ===

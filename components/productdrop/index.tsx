@@ -9,6 +9,8 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
    * @description onClickEachCategory is a func to set the state selected to the selectedCategory
    */
   const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
+  const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
+  const selectedFilter = useHeaderStore((state) => state.selectedFilter)
 
   /**
    * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
@@ -43,6 +45,10 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 id={`header-mainmenu-${index+1}`}
                   onClick={() => {
                     selectCategory(response?.menuItemName?.value);
+                    onSelectedSetFilter({
+                      isClicked:true,
+                      clickedMenuName:response?.menuItemName?.value
+                    })
                   }}
                   href={{
                     // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
@@ -77,6 +83,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
+                            // console.log(ele)
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
@@ -88,9 +95,23 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                                 updateUrl(ele?.menuItemUrl?.value, "1")
                               );
                             }
+                            if(selectedFilter === null){
+                              onSelectedSetFilter({
+                                isClicked:true,
+                                clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
+                              })
+                            } 
                           }}
                         >
                           <Link
+                          onClick={() => {
+                            if(selectedFilter === null){
+                              onSelectedSetFilter({
+                                isClicked:true,
+                                clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
+                              })
+                            } 
+                          }}
                             href={{
                               pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
                               query: {
