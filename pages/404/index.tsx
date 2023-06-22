@@ -12,7 +12,7 @@ function FourOhFour() {
         <title>McKesson</title>
         <link rel="icon" href="/favicon_mck.ico" />
       </Head>
-      <div className="grid">
+      <div className="grid wrapper">
         <HeaderComponent />
         <FourOhFourCoumponent />
         <FooterComponent />

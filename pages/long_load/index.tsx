@@ -11,13 +11,11 @@ function LongLoad() {
         <title>McKesson</title>
         <link rel="icon" href="/favicon_mck.ico" />
       </Head>
-      <div className="grid">
+      <div className="grid wrapper">
         <GoogleTagManager />
-        <div className="wrapper">
           <HeaderComponent />
           <LongLoadComponent />
           <FooterComponent />
-        </div>
       </div>
     </>
   );
