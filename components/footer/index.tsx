@@ -69,7 +69,7 @@ export default function FooterComponent() {
                                 ?.thumbnail?.value?.url)
                             }
                             ariahidden={false}
-                            className="mx-auto"
+                            className="mx-auto w-fit max-w-fit"
                             alt={
                               sociallink?.socialMediaImage?.expandedValue?.altText?.value
                             }
