@@ -54,18 +54,18 @@ const ProductComponent = ({
   };
 
   const ariaHiddenArrow = (swiper: any) => {
-    let prevArrowTabIdxAtt = swiper.el.children[1].attributes[1].value
+    let prevArrowTabIdxAtt = swiper?.el?.children[1]?.attributes[1]?.value
     if(prevArrowTabIdxAtt == "-1") {
-      swiper.el.children[1].setAttribute('aria-hidden','true')
+      swiper?.el?.children[1]?.setAttribute('aria-hidden','true')
     } else {
-      swiper.el.children[1].setAttribute('aria-hidden','true')
+      swiper?.el?.children[1]?.setAttribute('aria-hidden','true')
     }
 
-    let nextArrowTabIdxAtt = swiper.el.children[2].attributes[1].value
+    let nextArrowTabIdxAtt = swiper?.el?.children[2]?.attributes[1]?.value
     if(nextArrowTabIdxAtt == "-1") {
-      swiper.el.children[2].setAttribute('aria-hidden','true')
+      swiper?.el?.children[2]?.setAttribute('aria-hidden','true')
     } else {
-      swiper.el.children[2].setAttribute('aria-hidden','true')
+      swiper?.el?.children[2]?.setAttribute('aria-hidden','true')
     }
   }
 
