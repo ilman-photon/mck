@@ -43,9 +43,9 @@ export const callAPI: CallAPI = async (url, requestData, options) => {
       const data = {
         'grant_type': 'password',
         'client_id': 'frontend',
-        'client_secret': process.env.CLIENT_SECRET,
-        'username': process.env.USERNAME,
-        'password': process.env.PASSWORD,
+        'client_secret': process.env.TOKEN_KEY_CLI_SEC,
+        'username': process.env.TOKEN_KEY_NAME,
+        'password': process.env.TOKEN_KEY_VALUE,
         'scope': scope
       };
       
