@@ -26,7 +26,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ BlogListingContent, t
                             id={`blog-img-relatedProduct-0${index}`}
                             key={`blog-img-relatedProduct-0${index}`}
                             alt={`Product-alt${index}`}
-                            ariahidden={false}
+                            ariahidden={true}
                             className="px-5 lg:px-0 m-auto lg:w-32 lg:max-h-60 sm:max-h-[300px] cursor-pointer"
                         />
                     </figure>
