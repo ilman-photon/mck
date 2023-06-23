@@ -54,7 +54,7 @@ const ProductComponent = ({
   };
 
   const ariaHiddenArrow = (swiper: any) => {
-    let prevArrowTabIdxAtt = swiper.el.children[1].attributes[1]?.value
+    let prevArrowTabIdxAtt = swiper.el.children[1].attributes[1].value
     if(prevArrowTabIdxAtt == "-1") {
       swiper.el.children[1].setAttribute('aria-hidden','true')
     } else {
