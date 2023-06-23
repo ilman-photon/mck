@@ -40,182 +40,104 @@ const Loader = (props: LoaderProps) => {
 
 /**
  * 
- * @param selectedFilterItems 
- * @returns query constructor for SubCategory Products
-*/
-function constructQuerySubCategory(selectedFilterItems: ProductFilter.MainCategory[]) {
-    const filterConditions = selectedFilterItems.map((item) => {
-        return `productSubCategory/value/id eq ${item?.id}`;
-    });
+ * ((filterType.value/value/name eq 'Female' ) 
+ * and 
+ * (filterType.value/value/name eq 'Adults' ) and
+ * (filterType.value/value/name eq 'Capsule' or filterType.value/value/name eq 'Chewable' ) and 
+ * (productCategory/value/name eq 'Acute Care' and productSubCategory/value/name eq 'Ear Care' or productSubCategory/value/name eq 'Nasal Relief' ) and ()
+ * (productType/value/name eq 'Everyday Care')
+ * and (filterType.value/value/name eq 'Acid Reflux' or filterType.value/value/name eq 'Acid Reducer' ) 
+ * and ContentType/any(t:t eq 'ProductDetailsPage'))
+ *  */ 
 
-    const query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=${encodeURIComponent(
-        `((${filterConditions.join(" or ")}) and ContentType/any(t:t eq 'ProductDetailsPage'))`
-    )}`;
-
-    return query;
-}
-
-/**
- * 
- * @param mainCategoryData 
- * @returns query constructor for MainCategory products
-*/
-
-function constructQueryMainCategory(mainCategoryData: ProductFilter.MainCategory[]) {
-    const baseUrl = `${process.env.API_URL}/api/episerver/v3.0/search/content?`;
-    const contentTypeFilter = "ContentType/any(t:t eq 'ProductDetailsPage')";
-    let categoryFilters: ProductFilter.MainCategory[] | string[] | any = [];
-    
-    mainCategoryData.forEach((category) => {
-        const categoryName = encodeURIComponent(category.name);
-        const categoryFilter = `(productCategory/value/name eq '${categoryName}')`;
-        categoryFilters.push(categoryFilter);
-    });
-
-    const query = `${baseUrl}filter=((${categoryFilters.join(' or ')}) and ${contentTypeFilter})`;
-    return query;
-}
-
-// function constructQuery(data:ProductFilter.QueryBucketType[]) {
-//     let query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(`;
-  
-//     data.forEach((item, index) => {
-//       if (index !== 0) {
-//         query += ') or ';
-//       }
-//       const checkRootLength = data?.length > 1
-//       if (item.isBusinessVerticalCategory) {
-//         checkRootLength && index !== 0 && (query += '(')
-//         query += `productCategory/value/name eq '${item.name}' `;
-//         const checkLength = item?.subCategory?.length > 1
-//         //(productType/value/name eq 'Acute Care' and (productSubCategory/value/name eq 'Sleep Aid' or productSubCategory/value/name eq 'Alert Aid')) and ContentType/any(t:t eq 'ProductDetailsPage')
-//         query += `and `
-//         checkLength && (query += '(')
-//         item.subCategory.forEach((subItem,subIndex) => {
-//             query += 'productSubCategory/value/name eq'
-//             query += ` '${subItem.name}'`;
-//             checkLength && subIndex === 0 && (query += ' or ')
-//             item?.subCategory?.length > 1 && (query += ' ')
-//         });
-//         checkLength && (query += ')')
-//       } else {
-//         query += `${item?.name?.toLowerCase()}/value/name eq`
-//         item?.subCategory?.forEach((subItem) => {
-//             query += ` '${subItem?.name}' `
-//         })
-//       }
-//     });
-  
-//     query += `) and ContentType/any(t:t eq 'ProductDetailsPage')`;
-  
-//     return query;
-//   }
-
-/**
- * trial 2
- */
-// function constructQuery(data:ProductFilter.QueryBucketType[]) {
-//     let query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(`;
-  
-//     data.forEach((item, index) => {
-//       if (index !== 0) {
-//         query += ') or ';
-//       }
-//       const checkRootLength = data.length > 1;
-//       if (item.isBusinessVerticalCategory) {
-//         checkRootLength && index !== 0 && (query += '(');
-//         query += `productCategory/value/name eq '${item.name}' `;
-//         const checkLength = item.subCategory.length > 1;
-//         query += `and `;
-//         if (checkLength) {
-//           query += '(';
-//         }
-//         item.subCategory.forEach((subItem, subIndex) => {
-//           query += 'productSubCategory/value/name eq';
-//           query += ` '${subItem.name}'`;
-//           if (checkLength && subIndex < item.subCategory.length - 1) {
-//             query += ' or ';
-//           }
-//         });
-//         if (checkLength) {
-//           query += ')';
-//         }
-//       } else {
-//         query += `${item?.name?.toLowerCase()}/value/name eq`;
-//         item.subCategory.forEach((subItem, subIndex) => {
-//           query += ` '${subItem?.name}' `;
-//           if (subIndex < item.subCategory.length - 1) {
-//             query += ' or ';
-//           }
-//         });
-//       }
-//     });
-  
-//     query += `) and ContentType/any(t:t eq 'ProductDetailsPage')`;
-  
-//     return query;
-//   }
-
-function constructQuery(data:ProductFilter.QueryBucketType[]) {
-    let query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=(`;
-  
+const subCategory = (data:ProductFilter.MainCategory[], parrentQuery:string, isFirstParent: boolean = false) => {
+    let sbCategory = "";
     data.forEach((item, index) => {
-      if (index !== 0 && item.isBusinessVerticalCategory) {
-        query += ') or ';
-      } else if(index !== 0 && !item?.isBusinessVerticalCategory) {
-        query += ') and '
-      }
-      const checkRootLength = data.length > 1;
-      if (item.isBusinessVerticalCategory) {
-        checkRootLength && index !== 0 && (query += '(');
-        // query += `productCategory/value/name eq '${item.name}' `;
-        if(item.isViewAll){
-            query += `productType/value/name eq '${item.name}'`
-        } else{
-            query += `productCategory/value/name eq '${item.name}' `;
-        }
-        const checkLength = item.subCategory.length > 1;
-        !item.isViewAll && (query += `and `);
-        // data.length > 1 && !item.isViewAll  && (query+=`and `)
-        if (checkLength && !item.isViewAll) {
-          query += '(';
-        }
-        if(!item?.isViewAll){
-            item.subCategory.forEach((subItem, subIndex) => {
-              query += 'productSubCategory/value/name eq';
-              query += ` '${subItem.name}'`;
-              if (checkLength && subIndex < item.subCategory.length - 1) {
-                query += ' or ';
-              }
-            });
+        if (index > 0 || isFirstParent) {
+            sbCategory+= ' or '
         } 
-        if (checkLength && !item.isViewAll) {
-          query += ')';
-        }
-      } else {
-        // const subCategoryValues = item.subCategory.map((subItem) => `'${subItem.name}'`).join(' or ');
-        if(item.isViewAll){
-            if(index !== 0) query += '('
-            const itemName = item?.name === 'Health Needs' ? 'healthNeeds' : item?.name?.toLowerCase()
-            query += `${itemName}/value/name eq '${item?.name}'`    
-        } else {
-            const itemName = item?.name === 'Health Needs' ? 'healthNeeds' : item?.name?.toLowerCase()
-            const subCategoryValues = item?.subCategory?.map((subItem) => `${itemName}/value/name eq '${subItem.name}'`).join(' or ');
-            // query += '('
-            query += `${subCategoryValues}`;
-            // query += ')'
-        }    
-        // query += `${item.name.toLowerCase()}/value/name eq ${subCategoryValues} `;
-      }
-    });
-  
-    query += `) and ContentType/any(t:t eq 'ProductDetailsPage')`;
-  
-    return query;
-  }
-  
-  
+        sbCategory += `${parrentQuery}/value/name eq '${item.name}'`;
+    })
+    return sbCategory
+};
 
+const subCategoryNonBussiness = (data:ProductFilter.MainCategory[], parrentQuery:string, isFirstParent: boolean = false) => {
+    let sbCategory = "(";
+    data.forEach((item, index) => {
+        if (index > 0 || isFirstParent) {
+            sbCategory+= ' or '
+        } 
+        sbCategory += `${parrentQuery}/value/name eq '${item.name}'`;
+    })
+    return sbCategory+=")"
+};
+
+const category = (item: any) => {
+    let category = "";
+    category += `productCategory/value/name eq '${item.name}' and `;
+    category += subCategory(item.subCategory, 'productSubCategory');
+    return category
+};
+
+function constructQuery(data:ProductFilter.QueryBucketType[]){
+  let query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=`;
+  const dataBusinessVerticalCategory = data.filter((dtx) => dtx.isBusinessVerticalCategory);
+  const notDataBusinessVerticalCategory = data.filter((dtx) => !dtx.isBusinessVerticalCategory);
+
+  const viewAllviewAll = dataBusinessVerticalCategory.filter((item) => item.isViewAll);
+  const haveCategory = dataBusinessVerticalCategory.some((item) => !item.isViewAll);
+  let viewAllQuery = "";
+  let viewAllNonBusinessVertical = "";
+
+  let ctg = haveCategory ?"(" : "";
+  let viewAllIndex = 0;
+  let categoryIndex = 0;
+
+  dataBusinessVerticalCategory?.forEach((item,index) => {
+        if(item.isViewAll){
+            viewAllQuery += `(productType/value/name eq '${item?.name}')`
+            if (haveCategory) {
+                viewAllQuery += " or ";
+            }
+            if (!haveCategory && !(viewAllviewAll.length-1 === viewAllIndex)) {
+                viewAllQuery += " or ";
+            }
+            viewAllIndex += 1;
+        }else{
+            if (categoryIndex > 0) {
+                ctg += " or (";
+            }
+            ctg += category(item);
+            ctg += ")";
+
+            categoryIndex += 1
+        }    
+  });
+
+  let queryViewAllBusinessVertical = `${viewAllQuery} ${ctg}`;
+  const whiteSpace = ' '
+  queryViewAllBusinessVertical = queryViewAllBusinessVertical !== whiteSpace ? `${queryViewAllBusinessVertical} and` : '';
+//   console.log(notDataBusinessVerticalCategory)
+  let nonBusinessCatId = 0;
+  notDataBusinessVerticalCategory?.forEach((item, index) => {
+        if (item.isViewAll) {
+            if(index !== 0){
+                // viewAllNonBusinessVertical += " and "
+            }
+            viewAllNonBusinessVertical += `(${item?.filterType}/value/name eq '${item?.name}')`
+            nonBusinessCatId += 1;
+        } else {
+            viewAllNonBusinessVertical += subCategoryNonBussiness(item.subCategory, item.filterType)
+        }
+        
+        notDataBusinessVerticalCategory.length > index && (viewAllNonBusinessVertical += (notDataBusinessVerticalCategory.length === index+1?"": " and "))
+  });
+  const queryViewAllNonBusinessVertical = viewAllNonBusinessVertical !== '' ? `${viewAllNonBusinessVertical} and` : ''
+  query += `${queryViewAllNonBusinessVertical} ${queryViewAllBusinessVertical} ContentType/any(t:t eq 'ProductDetailsPage')`;
+//   console.log(query);
+  return query;
+}
+  
 /**
  * 
  * @author [Zaqi Akbar]("https://github.com/zaqiakbaar")
@@ -281,50 +203,14 @@ function ProductList() {
      */
     const fetchAllProductList = useSelectedProductCategoryStore(state => state.fetchAllProductList)
     const bucket = useSelectedProductCategoryStore(state => state.bucket)
-    console.log(bucket)
+    // console.log(bucket)
     const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
-    // const selectedFilter = useHeaderStore(state => state.selectedFilter)
-    // console.log(selectedFilterItems)
     /**
      * @end
      */
-    // console.log('ini lho', selectedFilterItems)
-    // const handleFetchProductsSubCategory = async () => {
-    //     setLoader(true)
-    //     await axiosInstance.get(constructQuerySubCategory(selectedFilterItems)).then((res) => {
-    //         const nameValue = res?.data?.results?.[0]?.productType?.value?.[0]?.name
-    //         const resultValue = res?.data?.results
-    //         const totalMatching = res?.data?.totalMatching
-    //         onProductQueried(
-    //             [
-    //                 { item: { name: nameValue } },
-    //                 { data: { results: resultValue } },
-    //             ],
-    //             totalMatching
-    //         )
-    //         setLoader(false)
-    //     }).catch(() => setLoader(false))
-    // }
     const handleFetchProductsSubCategories = async () => {
         setLoader(true)
         await axiosInstance.get(constructQuery(bucket)).then((res) => {
-            const nameValue = res?.data?.results?.[0]?.productType?.value?.[0]?.name
-            const resultValue = res?.data?.results
-            const totalMatching = res?.data?.totalMatching
-            onProductQueried(
-                [
-                    { item: { name: nameValue } },
-                    { data: { results: resultValue } },
-                ],
-                totalMatching
-            )
-            setLoader(false)
-        }).catch(() => setLoader(false))
-    }
-
-    const handleFetchOnViewAllSelected = async () => {
-        setLoader(true)
-        await axiosInstance.get(constructQueryMainCategory(bucket)).then((res) => {
             const nameValue = res?.data?.results?.[0]?.productType?.value?.[0]?.name
             const resultValue = res?.data?.results
             const totalMatching = res?.data?.totalMatching
@@ -361,16 +247,11 @@ function ProductList() {
 
     const isProductFilterSelected = selectedFilterItems?.length > 0
     const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
-    const isCategorySelectedIsAMainCategory = selectedMainCategory?.length > 0
+    // const isCategorySelectedIsAMainCategory = selectedMainCategory?.length > 0
 
     React.useEffect(() => {
         if (isProductFilterSelected) {
-            // if (isCategorySelectedIsAMainCategory) {
-                // handleFetchOnViewAllSelected()
-            // } else {
-                // handleFetchProductsSubCategory()
-                handleFetchProductsSubCategories()
-            // }
+            handleFetchProductsSubCategories()
         } else if (isProductFilterSelectedEmpty) {
             fetchAllProductList()
         }
@@ -379,15 +260,11 @@ function ProductList() {
 
 
     React.useEffect(() => {
-        // if (¿) {
-            getProductFilterList()
-        // }
+        getProductFilterList()
     }, [])
 
-    React.useEffect(() => {
-        // if () {
-            getRecommendedProductData(productItemName)
-        // }
+    React.useEffect(() => {        
+        getRecommendedProductData(productItemName)
     }, [])
 
 

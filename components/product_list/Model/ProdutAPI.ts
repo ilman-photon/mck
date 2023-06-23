@@ -139,5 +139,6 @@ export declare module ProductFilter {
         subCategory:MainCategory[]
         isViewAll:boolean
         childrenLength:number
+        filterType:string
     }
 }

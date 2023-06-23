@@ -356,7 +356,7 @@ const ProductListFilter = ({
                                             return onSelectCheckBox(subData)
                                           })
                                           const subCategoryDataChecked = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length)
+                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
                                           })
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
                                         }}
@@ -380,7 +380,7 @@ const ProductListFilter = ({
                                           // setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltermaindata?.subCategory?.value,leftfiltermaindata?.isBusinessVerticalCategory?.value,true)
                                           const subCategoryDataChecked = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
                                             // return onSelectCheckBox(subData)
-                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length)
+                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
                                           })
                                         }}
                                         htmlFor={
@@ -415,8 +415,8 @@ const ProductListFilter = ({
                                            <input
                                              onClick={() =>{
                                                onSelectCheckBox(leftfiltersubdata)
-                                                console.log(leftfiltermaindata)
-                                                setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltersubdata,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length)
+                                                // console.log(leftfiltermaindata)
+                                                setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltersubdata,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
                                               if(isNameMatchFilterMenu){
                                                 onDeselectedFilter(null)
                                               }

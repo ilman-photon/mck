@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
+import { ProductFilter } from "../product_list/Model/ProdutAPI";
 
 function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
@@ -11,13 +13,17 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
   const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
   const selectedFilter = useHeaderStore((state) => state.selectedFilter)
-
+  const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
+  const ini = useSelectedProductCategoryStore(state => state.selectedFilterItems)
+  const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
+  // console.log(ini)
   /**
    * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
    *
    * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
    *
    */
+  // console.log(subMenuData)
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -44,6 +50,14 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 <Link
                 id={`header-mainmenu-${index+1}`}
                   onClick={() => {
+                    const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
+                        subData.categoryItem?.value?.map((data:ProductFilter.MainCategory) => {
+                          onSelectCheckBox(data)
+                          setBucket(response?.categoryItem?.value?.[0],data,true,[subData?.categoryItem?.value]?.length,'')
+                        })
+                    })
+                    // setBucket()
+
                     selectCategory(response?.menuItemName?.value);
                     onSelectedSetFilter({
                       isClicked:true,
@@ -76,6 +90,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any,index:any) => {
+                      // console.log(ele)
                       // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li

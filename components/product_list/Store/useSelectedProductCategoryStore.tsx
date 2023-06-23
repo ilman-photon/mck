@@ -24,7 +24,7 @@ interface Controller{
     isLoading:boolean
     setLoader:(isLoading:boolean) => void
     bucket:ProductFilter.QueryBucketType | never[] | any
-    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength?:number,filterType:number) => void
+    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string) => void
     onDeselectRemoveBucket:(selectedCatIndex:number,selectedSubCatIndex:number) => void
 }
 
