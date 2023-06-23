@@ -66,6 +66,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
       />
       {ActiveClose ? (
         <svg
+        id={`blog-search-icon-inactive`}
           onClick={fetchSearchBlog}
           tabIndex={0}
           aria-label="search icon"
@@ -93,6 +94,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
           className="focus:outline-0 absolute top-4 right-4 z-8 cursor-pointer"
           aria-label="close icon"
           width="18"
+          id={`blog-search-icon-active`}
           height="19"
           viewBox="0 0 18 19"
           fill="none"
