@@ -25,6 +25,7 @@ const ItemExpandeble = ({dataCategory, OnCatogarySelcete, idx} : any) => {
               <label
               className="tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative" 
               htmlFor={dataCategory?.categoryDisplayName?.value}
+              id={`blog-subcatogary-lbl-${idx}`}
               tabIndex={0}
               role="button"
               onClick={(e) => handleOnClick("click")}
@@ -34,7 +35,7 @@ const ItemExpandeble = ({dataCategory, OnCatogarySelcete, idx} : any) => {
                     className="mr-3"
                     src={DOMPurify.sanitize(dataCategory?.categoryImage?.expandedValue?.url)}
                     alt={DOMPurify.sanitize(dataCategory?.categoryImage?.expandedValue?.name)}
-                    id={dataCategory?.categoryImage?.expandedValue?.name}
+                    id={`blog-subcatogary-img-${idx}`}
                     aria-hidden={true}
                   />
                 )}
@@ -43,7 +44,9 @@ const ItemExpandeble = ({dataCategory, OnCatogarySelcete, idx} : any) => {
             </React.Fragment>
             <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
               {dataCategory?.subCategory?.value?.map((item: any, index: number) => (
-                <button onClick={() => OnCatogarySelcete(item)} key={index} className="w-full list-none text-sofia-reg text-base font-normal text-mcknormalgrey cursor-pointer text-left hover:bg-shadesblue pl-2 py-1">
+                <button 
+                id={`blog-subcatogary-dis-${index}`}
+                onClick={() => OnCatogarySelcete(item)} key={index} className="w-full list-none text-sofia-reg text-base font-normal text-mcknormalgrey cursor-pointer text-left hover:bg-shadesblue pl-2 py-1">
                   {item?.description}
                 </button>
               ))}

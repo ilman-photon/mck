@@ -8,37 +8,37 @@ import SocialMediaIconComponent from "./SocialMediaIcon";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import { GetTime } from "../global/CommonUtil";
-import { fetchBlogDetails, fetchBlogSetting } from "../blog/BlogAPI";
+import { fetchBlogDetails } from "../blog/BlogAPI";
 import { ImageComponent } from "../global/ImageComponent";
 import TagsComponent from "../blog/Tags";
 import DOMPurify from "isomorphic-dompurify";
+import { useBlogStore } from "../global/Store/useBlogStore";
 
 const BlogDetailsComponent = () => {
   const router = useRouter();
   const { id }: any = router.query;
   const [BlogInfo, setBlogInfo] = useState<any>();
-  const [appSetting, setAppSetting] = useState<any>();
+  const appSetting = useBlogStore(state => state.blogSettings)
   const [loading, setIsLoading] = useState<boolean>(true);
+  const fetchBlogSetting = useBlogStore(state => state.getBlogSetting)
   useEffect(() => {
     if (id) {
       fetchBlodDetails();
     }
   }, [id]);
-
-  const fetchBlodDetails = async () => {
-    try {
-      const [BlodDetails, AppSetting] = await Promise.all([
-        fetchBlogDetails(id),
-        fetchBlogSetting(),
-      ]);
-      const Blogdata = await BlodDetails;
-      const APPdata = await AppSetting;
-      setIsLoading(false);
-      setBlogInfo(Blogdata.data[0]);
-      setAppSetting(APPdata);
-    } catch (error) {
-      console.error("Error fetching Blog data:", error);
+  useEffect(() => {
+    if(appSetting === null){
+      fetchBlogSetting()
     }
+  }, [appSetting]);
+  const fetchBlodDetails = async () => {
+    setIsLoading(true)
+    fetchBlogDetails(id)
+      .then((res) => {
+        setBlogInfo(res.data[0])
+        setIsLoading(false)
+      })
+      .catch((error) => console.error("Error fetching Blog data:", error))
   };
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -65,7 +65,8 @@ const BlogDetailsComponent = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -88,6 +89,7 @@ const BlogDetailsComponent = () => {
           </div>
         </div>
       ) : (
+        BlogInfo&&
         <div
           role="main"
           className="container blog-details-container w-full lg:px-0  lg:py-72 lg:pb-0 p-4 pt-6  mx-auto "
@@ -171,7 +173,7 @@ const BlogDetailsComponent = () => {
               </div>
               <RelatedProducts
                 OnRelatedProductClick={(e) => handleProductClick(e)}
-                title={BlogInfo?.relatedProductHeading?.value}
+                title={appSetting?.data[0]?.relatedProductHeadingText?.value}
                 BlogListingContent={BlogInfo?.relatedProducts?.expandedValue}
               />
             </div>
