@@ -40,52 +40,18 @@ const ProductListFilter = ({
 
   filterClicked,
 }: any) => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  // const router = useRouter();
   const [isFilterShow, setIsFilterShow] = useState(true);
-  const [mainCategoryId, setMainCategoryId] = useState("");
-  const [alternateFlag, setAlternateFlag] = useState(false);
-  const [group, setGroup] = useState<any>();
-  const [mainCatNames, setMainCatNames] = useState<any>([]);
-//   const [state, setState] = useState('')
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
-  // const selectedMainCategory = useSelectedProductCategoryStore(state => state.selectedMainCategory)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
   const onDeleteEachFilterItem = useSelectedProductCategoryStore(state => state.onDeleteEachFilterItem)
   const onSelectMainCategory = useSelectedProductCategoryStore(state => state.onSelectMainCategory)
   const getAlProductList = useSelectedProductCategoryStore(state => state.fetchAllProductList)
-  // const onViewAllDeselect = useSelectedProductCategoryStore(state => state.onViewAll)
   const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
   const selectedFilter = useHeaderStore(state => state.selectedFilter)
   const onDeselectedFilter = useHeaderStore(state => state.onSelectedSetFilter)
   const onDeselectRemoveBucket = useSelectedProductCategoryStore(state => state.onDeselectRemoveBucket)
-  // const s
-
-
-  // console.log(selectedFilter)  
-  
-
- 
-
-  // const { filter } = getQueryString()
-
-  // console.log(router.query.filter)
-
-  // console.log(filter)
-
-  // useEffect(() => {
-  //     if(router?.query?.filter === selectedFilter?.clickedMenuName){
-  //     handleFilterFromRoute()
-  //   }
-  //   // if(selectedFilter?.isClicked){
-  //     // }
-  //   },[router.query.filter,selectedFilter?.clickedMenuName])
-    // console.log(bucket)
-    // const mapFilterValue = selectedMainCategory?.length === 0 ? activeFilter : selectedMainCategory
-    
-    // const filterDataRoute = productCategoryData?.map((item:ProductFilter.ExpandedValue) => {
-      // return [item.mainCategory,item.subCategory]
-    // })
+  const onDeselectRemoveBuckets = useSelectedProductCategoryStore(state => state.onRemoveEachOfViewAllSelected)
 
   const handleClearAll = async() => {
     onClearAll()
@@ -130,16 +96,13 @@ const ProductListFilter = ({
                     className="flex gap-1 items-center rounded-xl px-2 py-0.5 text-xs border border-[#001A71] font-normal text-sofia-regular mr-1 mb-4 ml-0 lg:mb-0 leading-[18px] bg-[#F8F9FB]"
                     key={item?.id}
                   >
-                    {item?.name}
+                    {item?.name} - All
                     <Image
                       src="/images/hn-delete-icon.svg"
                       className="cursor-pointer mt-0.5"
                       alt="delete icon"
                       onClick={() => {
-                       return item?.subCategory.map((key,value) => {
-                          onDeselectRemoveBucket(index,value)
-                          onDeleteEachFilterItem(key)
-                        })
+                        onDeselectRemoveBuckets(item)
                       }}
                       width={7}
                       height={7}
@@ -360,16 +323,13 @@ const ProductListFilter = ({
                                           })
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
                                         }}
-                                        id={
-                                          leftfiltermaindata?.mainCategory
-                                            ?.value?.[0]?.name + "View All"
-                                        }
                                         type="checkbox"
-                                        value="view all"
                                         className="w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm"
                                         aria-label="view all"
                                         role="checkbox"
-                                        checked={activeFilter?.find((item:ProductFilter.QueryBucketType) => item.id === leftfiltermaindata?.mainCategory?.value?.[0]?.id && item?.isViewAll)}
+                                        checked={activeFilter?.some((item:ProductFilter.QueryBucketType) => {
+                                          return item?.id === leftfiltermaindata?.mainCategory.value?.[0].id && item?.isViewAll
+                                        })}
                                       />
                                       <label
                                         onClick={() => {
@@ -377,9 +337,7 @@ const ProductListFilter = ({
                                             return onSelectCheckBox(subData)
                                           })
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
-                                          // setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltermaindata?.subCategory?.value,leftfiltermaindata?.isBusinessVerticalCategory?.value,true)
                                           const subCategoryDataChecked = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            // return onSelectCheckBox(subData)
                                             return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
                                           })
                                         }}
@@ -401,12 +359,11 @@ const ProductListFilter = ({
                                 <ul>
                                   {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: ProductFilter.MainCategory,index:number) => {
                                     const isNameMatchFilterMenu = leftfiltersubdata?.name === selectedFilter?.clickedMenuName && selectedFilter?.isClicked
-                                    // const isIdActiveFilterStateIncludesInLeftFilter = activeFilter.map((item:ProductFilter.MainCategory) => item?.id).includes(leftfiltersubdata?.id)  
                                     const isSubDataChekcboxActive = activeFilter.map((data:ProductFilter.QueryBucketType) => (
                                       data?.subCategory?.filter((each:ProductFilter.MainCategory) => each.id === leftfiltersubdata.id)
                                     ))
                                     const isSubDataFiltered = isSubDataChekcboxActive?.flat()?.[0]
-                                     return (
+                                    return (
                                        <li
                                          className="list-none pb-1 lg:pb-0"
                                          key={leftfiltersubdata?.id}

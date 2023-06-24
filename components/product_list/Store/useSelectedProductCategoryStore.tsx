@@ -26,6 +26,7 @@ interface Controller{
     bucket:ProductFilter.QueryBucketType | never[] | any
     setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string) => void
     onDeselectRemoveBucket:(selectedCatIndex:number,selectedSubCatIndex:number) => void
+    onRemoveEachOfViewAllSelected:(selected:ProductFilter.QueryBucketType) => void
 }
 
 export const useSelectedProductCategoryStore = create<Controller>((set,get) => ({
@@ -43,8 +44,9 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       },    
       activeFiltersData:null,
       fetchRecommendedProductData: async (product) => {
+        set({isLoading:true})
         const productName = get().productName
-        const tempName = product?.length > 0 ? product : productName
+        const tempName = product ? product : productName
         const correctedName = tempName?.replace(/ /g, "-")
         const callApiRecommendCategoryData = await axiosInstance.get(
          `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
@@ -52,7 +54,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
         if(callApiRecommendCategoryData.data){
             const response = callApiRecommendCategoryData?.data[0]?.contentArea
             const productCategoryDataList = callApiRecommendCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
-            set({ recommendProductData:response,productCategoryDataList:productCategoryDataList})
+            set({ recommendProductData:response,productCategoryDataList:productCategoryDataList,isLoading:false})
         }
       },
       fetchAllProductList:async () => {
@@ -61,6 +63,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
           `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=( ContentType/any(t:t eq 'ProductDetailsPage'))`
         ).then((res) => {
           set({
+            productName:res?.data?.results[0]?.productType?.value[0]?.name,
             productSum:res?.data?.totalMatching,
             productQueriedData:[
               {item: {name: res.data?.[0]?.productType?.value[0].name }},
@@ -190,7 +193,19 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
           currentBucket.splice(mainCat, 1)
         }
         set({ bucket: [...currentBucket] });
+      },
+      onRemoveEachOfViewAllSelected:(selectedItem:ProductFilter.QueryBucketType) => {
+        const currentBucket = get().bucket;
+
+        // Find the index of the selected item in the bucket
+        const selectedIndex = currentBucket.findIndex(
+          (item: ProductFilter.QueryBucketType) => item.id === selectedItem.id
+        );
+      
+        if (selectedIndex !== -1) {
+          // Remove the selected item from the bucket
+          currentBucket.splice(selectedIndex, 1);
+          set({ bucket: [...currentBucket] });
+        }
       }
-      
-      
 }))

@@ -146,6 +146,7 @@ function constructQuery(data:ProductFilter.QueryBucketType[]){
  */
 function ProductList() {
     const router = useRouter()
+    // const productName:
     /**
      * @description Loader Component State
      */
@@ -185,7 +186,7 @@ function ProductList() {
    /**
     * @description State Bucket of on `View All` selected, stored in Array of Objects
    */
-  const selectedMainCategory = useSelectedProductCategoryStore(state => state.selectedMainCategory)
+//   const selectedMainCategory = useSelectedProductCategoryStore(state => state.selectedMainCategory)
     /**
      * @description State Bucket of Product Queried on Selected or deselected, if empty it returns all Products
      */
@@ -203,8 +204,9 @@ function ProductList() {
      */
     const fetchAllProductList = useSelectedProductCategoryStore(state => state.fetchAllProductList)
     const bucket = useSelectedProductCategoryStore(state => state.bucket)
-    // console.log(bucket)
+    // console.log(bucket,'ini lho')
     const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
+
     /**
      * @end
      */
@@ -255,16 +257,11 @@ function ProductList() {
         } else if (isProductFilterSelectedEmpty) {
             fetchAllProductList()
         }
-    }, [selectedFilterItems, selectedMainCategory])
-
-
+    }, [selectedFilterItems])
 
     React.useEffect(() => {
-        getProductFilterList()
-    }, [])
-
-    React.useEffect(() => {        
         getRecommendedProductData(productItemName)
+        getProductFilterList()
     }, [])
 
 

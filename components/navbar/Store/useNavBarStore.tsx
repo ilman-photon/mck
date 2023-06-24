@@ -113,5 +113,5 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
   activeButton: 'Home',
   setActiveButton: (buttonName) => set({ activeButton: buttonName }),
   selectedFilter:null,
-  onSelectedSetFilter:(state) => set({selectedFilter:state})
+  onSelectedSetFilter:(state) => set({selectedFilter:state}),
 }));

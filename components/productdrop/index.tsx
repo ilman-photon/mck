@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
@@ -14,9 +14,12 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
   const selectedFilter = useHeaderStore((state) => state.selectedFilter)
   const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
-  const ini = useSelectedProductCategoryStore(state => state.selectedFilterItems)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
-  // console.log(ini)
+  const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
+
+  const handleClearAll = React.useCallback(() => {
+    onClearAll()
+  },[])
   /**
    * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
    *
@@ -50,14 +53,20 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 <Link
                 id={`header-mainmenu-${index+1}`}
                   onClick={() => {
+                    handleClearAll()
                     const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
-                        subData.categoryItem?.value?.map((data:ProductFilter.MainCategory) => {
+                      return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
+                        const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                          return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                            id: data.id,
+                            name: data.name,
+                            description: data.description
+                          }));
+                         });
                           onSelectCheckBox(data)
-                          setBucket(response?.categoryItem?.value?.[0],data,true,[subData?.categoryItem?.value]?.length,'')
+                          setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'')
                         })
                     })
-                    // setBucket()
-
                     selectCategory(response?.menuItemName?.value);
                     onSelectedSetFilter({
                       isClicked:true,
@@ -90,15 +99,19 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any,index:any) => {
-                      // console.log(ele)
-                      // console.log(ele?.menuItemUrl?.value)
                       return (
                         <li
                         id={`header-submenu-${index+1}`}
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
-                            // console.log(ele)
+                            handleClearAll()
+                            const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
+                              return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
+                                  onSelectCheckBox(ele?.categoryItem?.value?.[0])
+                                  setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],true,0,'')
+                                })
+                            })
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
@@ -119,14 +132,15 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           }}
                         >
                           <Link
-                          onClick={() => {
-                            if(selectedFilter === null){
-                              onSelectedSetFilter({
-                                isClicked:true,
-                                clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
-                              })
-                            } 
-                          }}
+                          // onClick={() => {                          
+                          //   selectCategory(response?.menuItemName?.value);
+                          //   if(selectedFilter === null){
+                          //     onSelectedSetFilter({
+                          //       isClicked:true,
+                          //       clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
+                          //     })
+                          //   } 
+                          // }}
                             href={{
                               pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
                               query: {
