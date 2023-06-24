@@ -51,6 +51,8 @@ const ProductListFilter = ({
   const selectedFilter = useHeaderStore(state => state.selectedFilter)
   const onDeselectedFilter = useHeaderStore(state => state.onSelectedSetFilter)
   const onDeselectRemoveBucket = useSelectedProductCategoryStore(state => state.onDeselectRemoveBucket)
+  const selectedFilterItems = useSelectedProductCategoryStore(state => state.selectedFilterItems)
+  console.log(selectedFilterItems)
   const onDeselectRemoveBuckets = useSelectedProductCategoryStore(state => state.onRemoveEachOfViewAllSelected)
 
   const handleClearAll = async() => {
@@ -103,6 +105,9 @@ const ProductListFilter = ({
                       alt="delete icon"
                       onClick={() => {
                         onDeselectRemoveBuckets(item)
+                        item?.subCategory?.map((data:ProductFilter.MainCategory) => (
+                          onDeleteEachFilterItem(data)
+                        ))
                       }}
                       width={7}
                       height={7}
@@ -363,6 +368,7 @@ const ProductListFilter = ({
                                       data?.subCategory?.filter((each:ProductFilter.MainCategory) => each.id === leftfiltersubdata.id)
                                     ))
                                     const isSubDataFiltered = isSubDataChekcboxActive?.flat()?.[0]
+                                    // console.log(isSubDataFiltered)
                                     return (
                                        <li
                                          className="list-none pb-1 lg:pb-0"
@@ -380,11 +386,11 @@ const ProductListFilter = ({
                                              }}
                                              id={leftfiltersubdata?.name + index}
                                              type="checkbox"
-                                             value={leftfiltersubdata?.name}
+                                            //  value={leftfiltersubdata?.name}
                                              className="w-4 h-4 accent-[#001A71] cursor-pointer hover:before:content hover:before:block hover:before:w-full hover:before:h-full hover:before:bg-mckopacityblue hover:before:rounded-sm"
                                              role="checkbox"
                                              aria-label={leftfiltersubdata?.name}
-                                            checked={isSubDataFiltered}
+                                            checked={isSubDataFiltered === undefined ? false : isSubDataFiltered}
                                            />
                                            <label
                                              htmlFor={
