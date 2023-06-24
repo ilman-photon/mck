@@ -51,8 +51,6 @@ const ProductListFilter = ({
   const selectedFilter = useHeaderStore(state => state.selectedFilter)
   const onDeselectedFilter = useHeaderStore(state => state.onSelectedSetFilter)
   const onDeselectRemoveBucket = useSelectedProductCategoryStore(state => state.onDeselectRemoveBucket)
-  const selectedFilterItems = useSelectedProductCategoryStore(state => state.selectedFilterItems)
-  console.log(selectedFilterItems)
   const onDeselectRemoveBuckets = useSelectedProductCategoryStore(state => state.onRemoveEachOfViewAllSelected)
 
   const handleClearAll = async() => {
