@@ -12,6 +12,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
    */
   const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
   const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
+  const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const selectedFilter = useHeaderStore((state) => state.selectedFilter)
   const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
@@ -80,7 +81,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                     //   filter: updateUrl(item?.data[0]?.menuItemUrl?.value, "1"),
                     // },
                     query: {
-                      filter: updateUrl(response?.menuItemUrl?.value, "1"),
+                      filter: updateUrl(response?.menuItemUrl?.value, "1")
                     },
                   }}
                   className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
@@ -99,19 +100,18 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any,index:any) => {
+                      const filterParentCat = response?.menuItemName?.value
+                      const isBusinessVerticalCategory = filterParentCat ? true : false
                       return (
                         <li
                         id={`header-submenu-${index+1}`}
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
+                            console.log(response?.categoryItem?.value?.[0],'----',ele?.categoryItem?.value?.[0])
                             handleClearAll()
-                            const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
-                              return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
-                                  onSelectCheckBox(ele?.categoryItem?.value?.[0])
-                                  setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],true,0,'')
-                                })
-                            })
+                            setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'')
+                            onSelectCheckBox(ele?.categoryItem?.value?.[0])
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
@@ -132,18 +132,15 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           }}
                         >
                           <Link
-                          // onClick={() => {                          
-                          //   selectCategory(response?.menuItemName?.value);
-                          //   if(selectedFilter === null){
-                          //     onSelectedSetFilter({
-                          //       isClicked:true,
-                          //       clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
-                          //     })
-                          //   } 
-                          // }}
                             href={{
                               pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
-                              query: {
+                              query: response?.menuItemName?.value ? 
+                              {
+                                filter:updateUrl(ele?.menuItemUrl?.value, "1"),
+                                categoryOf:response?.menuItemName?.value
+                              }
+                              :
+                              {
                                 filter: updateUrl(ele?.menuItemUrl?.value, "1"),
                               },
                             }}

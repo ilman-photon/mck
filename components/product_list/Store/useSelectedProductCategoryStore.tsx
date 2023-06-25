@@ -4,7 +4,7 @@ import { ActiveFiltersDataResponse, ProductFilter } from "../Model/ProdutAPI";
 
 interface Controller{
     fetchProductFilterList: () => Promise<void>
-    fetchRecommendedProductData: (productItemName:string) => Promise<void>
+    fetchRecommendedProductData: (productItemName:string,routeFiltered:string) => Promise<void>
     activeFiltersData:ActiveFiltersDataResponse | null
     productName:string
     recommendProductData:any
@@ -43,20 +43,6 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
         }
       },    
       activeFiltersData:null,
-      fetchRecommendedProductData: async (product) => {
-        set({isLoading:true})
-        const productName = get().productName
-        const tempName = product ? product : productName
-        const correctedName = tempName?.replace(/ /g, "-")
-        const callApiRecommendCategoryData = await axiosInstance.get(
-         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
-        )
-        if(callApiRecommendCategoryData.data){
-            const response = callApiRecommendCategoryData?.data[0]?.contentArea
-            const productCategoryDataList = callApiRecommendCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
-            set({ recommendProductData:response,productCategoryDataList:productCategoryDataList,isLoading:false})
-        }
-      },
       fetchAllProductList:async () => {
         set({isLoading:true})
          await axiosInstance.get(
@@ -72,7 +58,20 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
             isLoading:false
           })
         }).catch(() => set({isLoading:false}))
-
+      },
+      fetchRecommendedProductData: async (product,routeFiltered) => {
+        set({isLoading:true})
+        const productState = get().productName
+        const tempName = product.length > 0 ? product : productState || routeFiltered
+        const correctedName = tempName?.replace(/ /g, "-")
+        const callApiRecommendCategoryData = await axiosInstance.get(
+         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
+        )
+        if(callApiRecommendCategoryData.data && callApiRecommendCategoryData.status === 200){
+            const response = callApiRecommendCategoryData?.data[0]?.contentArea
+            const productCategoryDataList = callApiRecommendCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
+            set({ recommendProductData:response,productCategoryDataList:productCategoryDataList,isLoading:false})
+        }
       },
       productSum:0,
       productName:'',

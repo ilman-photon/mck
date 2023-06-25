@@ -49,7 +49,6 @@ export const useHeaderStore = create<ControllerNavBar>((set, get) => ({
           buttonActive = item?.menuItemName?.value;
         }
       });
-      console.log(res?.data?.[0])
       set({
         headerData:
           res?.data?.[0]?.headerMegaMenu?.expandedValue[0]?.contentBlockArea

@@ -40,7 +40,7 @@ const ProductListFilter = ({
 
   filterClicked,
 }: any) => {
-  // const router = useRouter();
+  const router = useRouter();
   const [isFilterShow, setIsFilterShow] = useState(true);
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
@@ -250,12 +250,9 @@ const ProductListFilter = ({
                   {productCategoryData &&
                     productCategoryData?.map(
                       (leftfiltermaindata: any, index: number) => {
-                        // const viewAllRef = useRef<HTMLInputElement>
-                        // console.log(activeFilter)
                         return(
                           <>
                             {/* Left filter main category */}
-                              
                             <section className="tab overflow-hidden border-b-[0.5px] border-[#ccd1e3] lg:border-b-0">
                               <input
                                 className="hidden"

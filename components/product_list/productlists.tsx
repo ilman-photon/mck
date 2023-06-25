@@ -249,7 +249,7 @@ function ProductList() {
 
     const isProductFilterSelected = selectedFilterItems?.length > 0
     const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
-    // const isCategorySelectedIsAMainCategory = selectedMainCategory?.length > 0
+    const addressBarState = router?.query?.categoryOf
 
     React.useEffect(() => {
         if (isProductFilterSelected) {
@@ -257,13 +257,12 @@ function ProductList() {
         } else if (isProductFilterSelectedEmpty) {
             fetchAllProductList()
         }
-    }, [selectedFilterItems])
-
+    }, [selectedFilterItems])   
+    
     React.useEffect(() => {
-        getRecommendedProductData(productItemName)
+        getRecommendedProductData(productItemName,String(addressBarState))
         getProductFilterList()
     }, [])
-
 
     return (
         <>
