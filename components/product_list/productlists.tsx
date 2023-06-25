@@ -250,6 +250,7 @@ function ProductList() {
     const isProductFilterSelected = selectedFilterItems?.length > 0
     const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
     const addressBarState = router?.query?.categoryOf
+    const addressBarStateOfFilter = router?.query?.filter
 
     React.useEffect(() => {
         if (isProductFilterSelected) {
@@ -260,7 +261,7 @@ function ProductList() {
     }, [selectedFilterItems])   
     
     React.useEffect(() => {
-        getRecommendedProductData(productItemName,String(addressBarState))
+        getRecommendedProductData(productItemName,String(addressBarState || addressBarStateOfFilter))
         getProductFilterList()
     }, [])
 
