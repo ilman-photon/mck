@@ -316,10 +316,8 @@ const ProductListFilter = ({
                                       <input
                                         onClick={() =>{
                                           const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            return onSelectCheckBox(subData)
-                                          })
-                                          const subCategoryDataChecked = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
+                                             onSelectCheckBox(subData)
+                                             setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value,false)
                                           })
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
                                         }}
@@ -334,12 +332,10 @@ const ProductListFilter = ({
                                       <label
                                         onClick={() => {
                                           const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            return onSelectCheckBox(subData)
+                                             onSelectCheckBox(subData)
+                                             setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value,false)
                                           })
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
-                                          const subCategoryDataChecked = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                            return setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
-                                          })
                                         }}
                                         htmlFor={
                                           leftfiltermaindata?.mainCategory

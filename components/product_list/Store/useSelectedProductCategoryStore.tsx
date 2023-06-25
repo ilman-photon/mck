@@ -24,7 +24,7 @@ interface Controller{
     isLoading:boolean
     setLoader:(isLoading:boolean) => void
     bucket:ProductFilter.QueryBucketType | never[] | any
-    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string) => void
+    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string,subCatViewAllFlag?:boolean) => void
     onDeselectRemoveBucket:(selectedCatIndex:number,selectedSubCatIndex:number) => void
     onRemoveEachOfViewAllSelected:(selected:ProductFilter.QueryBucketType) => void
 }
@@ -131,7 +131,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       isLoading:false,
       setLoader:(loader) => set({isLoading:loader}),
       bucket:[],
-      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType) => {
+      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType,subCatViewAllFlag = true) => {
         const currentBucket = get().bucket;
       
         // Check if the subcategory already exists in the bucket
@@ -145,8 +145,10 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       
           if (existingSubCategoryIndex !== -1) {
             // If already selected, remove it from the bucket
-            existingSubCategories.splice(existingSubCategoryIndex, 1);
-      
+            if(subCatViewAllFlag){
+              existingSubCategories.splice(existingSubCategoryIndex, 1);
+            }
+            
             // Check if there are no more selected subcategories within the category
             if (existingSubCategories.length === 0) {
               // Remove the entire category from the bucket
@@ -176,7 +178,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
         });
       
          // Set `isViewAll` to `true` if the number of checked subcategories is equal to the total number of subcategories
-      
+        
         // Reset the bucket to an empty array if no subcategories are selected
         if (currentBucket.length === 0) {
           set({ bucket: [] });
