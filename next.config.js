@@ -18,16 +18,12 @@ const nextConfig = {
   },
 
   env: {
-    API_URL: dev
-      ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
-      : test
-      ? "https://mcco02mstrub73kinte.dxcloud.episerver.net"
-      : "https://mcco02mstrub73kinte.dxcloud.episerver.net",
-    PASSWORD:"$(PASSWORD)",
-    USERNAME:"$(USERNAME)",
-    CLIENT_SECRET:"$(CLIENT_SECRET)",
-    MAPSAPIKEY:'$(MAPSAPIKEY)',
-    HEARTMAPAPIKEY:'$(HEARTMAPAPIKEY)',
+    API_URL:process.env.API_URL,
+    TOKEN_KEY_VALUE:process.env.TOKEN_KEY_VALUE,
+    TOKEN_KEY_NAME:process.env.TOKEN_KEY_NAME,
+    TOKEN_KEY_CLI_SEC:process.env.TOKEN_KEY_CLI_SEC,
+    MAPSAPIKEY:process.env.MAPSAPIKEY,
+    HEARTMAPAPIKEY:process.env.HEARTMAPAPIKEY,
   },
 };
 

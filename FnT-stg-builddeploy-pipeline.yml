@@ -50,12 +50,12 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          cat next.config.js
-          mv config/env.stg.next.config.js next.config.js
+          mv config/.env.stg .env
           sleep 3s
-          printf "Stage url updated"
-          cat next.config.js
-      displayName: 'Stage Url updation'
+          printf "stg url updated"
+          cat .env
+      displayName: 'Stg Url updation'
+
 
     - task: CmdLine@2
       inputs:

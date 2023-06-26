@@ -1,9 +1,8 @@
 import { getYoutubeId } from '@/utils/URLUtils'
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from "react-player"
 import { SourceProps } from "react-player/base"
 import ReactYoutube from 'react-youtube'
-
 
 interface MediaComponentProps {
     isVideoExist: boolean
@@ -11,14 +10,14 @@ interface MediaComponentProps {
     videoSource: string | string[] | SourceProps[] | MediaStream | undefined
     idComponent: number
     videoControls: boolean
-    videoComponentRef: React.LegacyRef<ReactPlayer> | undefined
+    videoComponentRef: React.RefObject<ReactPlayer> | null;
     onSeek: ((seconds: number) => void) | undefined
     onStart: () => void
     onPlay: () => void
     onPause: () => void
     flagVideoUrl: boolean
     onClickIconPlay: React.MouseEventHandler<HTMLDivElement> | undefined
-    iconPlayWrapperRef: React.LegacyRef<HTMLDivElement> | undefined
+    iconPlayWrapperRef: React.RefObject<HTMLDivElement> | undefined;
 }
 
 export default function AVComponent(props: MediaComponentProps) {
@@ -39,7 +38,39 @@ export default function AVComponent(props: MediaComponentProps) {
         iconPlayWrapperRef
     } = props
 
-    const youtubeId = getYoutubeId(String(videoSource)) 
+    const youtubeId = getYoutubeId(String(videoSource));
+    const videoPlayerRef = useRef<ReactPlayer>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    useEffect(() => {
+        // Add event listener for key press
+        document.addEventListener('keydown', handleKeyPress);
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+        document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
+
+    const handleKeyPress = (event: KeyboardEvent) => {
+        // Check if the pressed key is the space bar (key code 32)
+        if (event.keyCode === 32) {
+        event.preventDefault();
+        togglePlay();
+        }
+    };
+
+    const togglePlay = () => {
+        setIsPlaying((prevIsPlaying) => {
+        const newIsPlaying = !prevIsPlaying;
+        if (newIsPlaying) {
+            onPlay();
+        } else {
+            onPause();
+        }
+        return newIsPlaying;
+        });
+    };
 
     const renderVideo = isVideoExist ? (
         <div
@@ -64,20 +95,21 @@ export default function AVComponent(props: MediaComponentProps) {
                         ) : (
 
                             <ReactPlayer
-                                className='react-player absolute top-0 left-0 rounded-10 overflow-hidden'
-                                url={videoSource}
-                                id={`${idComponent}_vid_001`}
-                                controls={videoControls}
-                                playsinline
-                                width='100%'
-                                height='100%'
-                                ref={videoComponentRef}
-                                playing={videoControls}
-                                onSeek={onSeek}
-                                onStart={onStart}
-                                onPlay={onPlay}
-                                onPause={onPause}
-                                pip={true}
+                            className='react-player absolute top-0 left-0 rounded-10 overflow-hidden'
+                            url={videoSource}
+                            id={`${idComponent}_vid_001`}
+                            controls={videoControls}
+                            playsinline
+                            width='100%'
+                            height='100%'
+                            ref={videoComponentRef!}
+                            playing={videoControls}
+                            onSeek={onSeek}
+                            onStart={onStart}
+                            onPlay={onPlay}
+                            onPause={onPause}
+                            pip={true}
+                            tabIndex='1'
                             />
                         )}
                     </div>
@@ -89,6 +121,7 @@ export default function AVComponent(props: MediaComponentProps) {
                                 id="circle-play-b"
                                 onClick={onClickIconPlay}
                                 ref={iconPlayWrapperRef}
+                                tabIndex={1}
                             >
                                 <svg className="w-100 h-100 fill-white stroke-white cursor-pointer bg-overlaygrey rounded-50 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
                                     <path d="M40 0a40 40 0 1040 40A40 40 0 0040 0zM26 61.56V18.44L64 40z" />

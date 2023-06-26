@@ -279,8 +279,8 @@ const HealthNeedsComponent = ({
              * @end
              */
             // console.log('ini',category)
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURIComponent(itemName);
+            // const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURIComponent(item);
 
             // console.log('encode',encodeItemName)
             // console.log(item)

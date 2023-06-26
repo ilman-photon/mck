@@ -21,7 +21,7 @@
             }
             strong{
                 color: $heading-color;
-                font-family: "GTAlpina-Medium";
+                font-family: "GTAlpina-Medium", Helvetica, Arial, Verdana, Tahoma, sans-serif;
                 font-size: 32px;
                 line-height: 36px;
                 @media (max-width: 1023px) {

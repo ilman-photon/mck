@@ -251,10 +251,10 @@ function HealthCareProfessionalComponent({
                                 key={idx}
                                 className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
                               >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px]">
+                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px] h-[213px]">
                                   <div
                                     key={customer?.customerName?.value}
-                                    className="content-wrapper lg:h-136 lg:overflow-auto textoverflow-scroll"
+                                    className="content-wrapper lg:h-136 h-[143px] overflow-auto textoverflow-scroll"
                                   >
                                     <div
                                       className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"

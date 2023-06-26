@@ -125,8 +125,8 @@ function ProductListComponent() {
 
           queryParams += "(";
           category.items.map((item: any, index: any) => {
-            const itemName = item.replace(/[^a-zA-Z ]/g, "");
-            const encodeItemName = encodeURIComponent(itemName);
+            // const itemName = item.replace(/[^a-zA-Z ]/g, "");
+            const encodeItemName = encodeURIComponent(item);
             const concatStr =
               category.items.length === index + 1
                 ? ""

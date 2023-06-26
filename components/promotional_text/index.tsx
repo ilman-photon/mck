@@ -19,13 +19,13 @@ function ImageVideoOrTextSection({ sectionData, textAlignment, index }: any) {
         className={`w-full ${textAlignment === 'text-center' && textAlignment} mx-auto`}
         key={sectionData?.contentLink?.id}
       >
-        <h3
+        <h1
           id={`${index}_lbl_001`}
           // id="promotion-heading"
           className="text-2xl lg:text-5xl text-gtl-med text-mckblue lg:mt-6 text-center" 
         >
           {sectionData?.title?.value}
-        </h3>
+        </h1>
         <div
           // id="promotion-text"
           className={`mx-auto w-full lg:${textAlignment === 'text-center' && 'w-1/2'} text-lg lg:mt-8 mt-4 text-sofia-reg grey-txt lg:text-left`}

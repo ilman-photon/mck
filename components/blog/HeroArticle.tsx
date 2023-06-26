@@ -24,7 +24,7 @@ const HeroArticle = ({ data }: any) => {
                 <figure className="w-full lg:h-402 lg:overflow-hidden">
                     <img
                         className="w-full"
-                        id={data?.image.value?.name}
+                        id={`{blog-hero-img-001}`}
                         src={DOMPurify.sanitize(data?.image?.value?.url)}
                         alt={DOMPurify.sanitize(data?.image?.value?.url)}
                         aria-hidden="true"  
@@ -49,15 +49,15 @@ const HeroArticle = ({ data }: any) => {
                     </LinkComponent>
                     <div className='pb-3 lg:pt-0 pt-3'>
 
-                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${data?.readMinute?.value ? 'shade-grey-right-border' : ''}`} id='blog-hero-label-001'>{GetTime(data?.startPublish)}</span>
+                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm pr-2 border-solid ${data?.readMinute?.value ? 'shade-grey-right-border' : ''}`} id='blog-hero-publish-time-01'>{GetTime(data?.startPublish)}</span>
 
-                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-hero-label-002'>{data?.readMinute?.value}</span>
+                        <span className={`text-mcknormalgrey text-sofia-reg font-normal lg:text-base text-sm px-2 border-solid ${false ? 'shade-grey-right-border' : ''}`} id='blog-hero-publish-time-02'>{data?.readMinute?.value}</span>
                         {/* <span className='text-mckblue text-sofia-reg font-normal lg:text-base text-sm pl-2' id='blog-label-003'>76.6K views</span> */}
                     </div>
                     <div className='flex flex-wrap mb-2.5 h-[33px] overflow-hidden [&>*:nth-child(1)]:ml-0 '>
                         {data?.tag?.value.map((item: any, index: any) => (
                             <div
-                                id={`blog-hero-article-tag` + index}
+                            id={`blog-hero-tag-${index}`}
                                 key={index}
                                 style={{
                                     backgroundColor: handlecategoryColorCode(item.id, catMapping),
