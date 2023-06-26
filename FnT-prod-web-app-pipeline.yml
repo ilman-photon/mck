@@ -28,12 +28,12 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          cat next.config.js
-          mv config/env.dev.next.config.js next.config.js
+          mv config/.env.prod .env
           sleep 3s
-          printf "dev url updated"
-          cat next.config.js
-      displayName: 'Dev Url updation'
+          printf "prod url updated"
+          cat .env
+      displayName: 'Prod Url updation'
+
 
     - task: CmdLine@2
       inputs:
