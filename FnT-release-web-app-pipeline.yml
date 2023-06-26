@@ -29,11 +29,10 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          cat next.config.js
-          mv config/env.prod.next.config.js next.config.js
+          mv config/.env.prod .env
           sleep 3s
-          printf "dev url updated"
-          cat next.config.js
+          printf "prod url updated"
+          cat .env
       displayName: 'Prod Url updation'
 
     - task: CmdLine@2
