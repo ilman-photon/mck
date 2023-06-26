@@ -57,13 +57,15 @@ function HealthCareProfessionalComponent({
   };
 
   const [ApiRespond, setApiRespond] = useState<any>();
-  const loading = useHealthCareProfessionalStore(state => state.isLoading)
-  const setLoading = useHealthCareProfessionalStore(state => state.setIsLoading)
-  const fetchUrl = useHealthCareProfessionalStore(state => state.getData)
-  const response = useHealthCareProfessionalStore(state => state.response)
+  const loading = useHealthCareProfessionalStore((state) => state.isLoading);
+  const setLoading = useHealthCareProfessionalStore(
+    (state) => state.setIsLoading
+  );
+  const fetchUrl = useHealthCareProfessionalStore((state) => state.getData);
+  const response = useHealthCareProfessionalStore((state) => state.response);
 
   useEffect(() => {
-    if(response === null){
+    if (response === null) {
       fetchUrl();
     }
   }, [response]);
@@ -208,113 +210,113 @@ function HealthCareProfessionalComponent({
                     </div>
                   )}
                 </div>
-                {response && customers && customers?.length > 0 &&
-                <div
-                  className={`${
-                    isCarusolAvaible &&
-                    "lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6"
-                  }  lg:p-72 pt-6 lg:pb-16 pb-4 lg:pt-[72px]`}
-                  style={{ background: customerBackgroundColorCode }}
-                >
-                  <div className="container mx-auto hcp-testimonial">
-                    <h1
-                      className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
-                      id="hcp-label-1"
-                    >
-                      {customerReviewTitle?.value}
-                    </h1>
-                    <div className="relative lg:p-0 px-6">
-                      <Swiper
-                        spaceBetween={48}
-                        navigation={isMobile ? false : true}
-                        autoplay={isMobile ? { delay: 3000 } : false}
-                        slidesPerView={isMobile ? "auto" : 3}
-                        slidesPerGroup={isMobile ? 1 : 3}
-                        className="h-auto"
-                        a11y={{
-                          prevSlideMessage: "",
-                          nextSlideMessage: "",
-                          firstSlideMessage: "",
-                          lastSlideMessage: "",
-                        }}
-                        modules={[A11y]}
-                        onSlideChange={(swiper) => {
-                          handleOnSlideChange(swiper);
-                        }}
+                {response && customers && customers?.length > 0 && (
+                  <div
+                    className={`${
+                      carouselRelated?.length &&
+                      "lg:p-72 pt-6 lg:pb-16 pb-4 lg:mt-[72px] lg:pt-[72px] mt-6"
+                    }  lg:p-72 pt-6 lg:pb-16 pb-4 lg:pt-[72px]`}
+                    style={{ background: customerBackgroundColorCode }}
+                  >
+                    <div className="container mx-auto hcp-testimonial">
+                      <h1
+                        className="text-gtl-med lg:text-54 text-27 font-medium text-mckblue text-center pb-6"
+                        id="hcp-label-1"
                       >
-                        {response &&
-                          customers &&
-                          customers.length > 0 &&
-                          customers.map((customer: any, idx: number) => {
-                            return (
-                              <SwiperSlide
-                                key={idx}
-                                className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
-                              >
-                                <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px] h-[213px]">
-                                  <div
-                                    key={customer?.customerName?.value}
-                                    className="content-wrapper lg:h-136 h-[143px] overflow-auto textoverflow-scroll"
-                                  >
+                        {customerReviewTitle?.value}
+                      </h1>
+                      <div className="relative lg:p-0 px-6">
+                        <Swiper
+                          spaceBetween={48}
+                          navigation={isMobile ? false : true}
+                          autoplay={isMobile ? { delay: 3000 } : false}
+                          slidesPerView={isMobile ? "auto" : 3}
+                          slidesPerGroup={isMobile ? 1 : 3}
+                          className="h-auto"
+                          a11y={{
+                            prevSlideMessage: "",
+                            nextSlideMessage: "",
+                            firstSlideMessage: "",
+                            lastSlideMessage: "",
+                          }}
+                          modules={[A11y]}
+                          onSlideChange={(swiper) => {
+                            handleOnSlideChange(swiper);
+                          }}
+                        >
+                          {response &&
+                            customers &&
+                            customers.length > 0 &&
+                            customers.map((customer: any, idx: number) => {
+                              return (
+                                <SwiperSlide
+                                  key={idx}
+                                  className="swiper-slide lg:mb-8 md:mb-6 sm:mb-2 mb-1"
+                                >
+                                  <div className="bg-mckwhite shadow-whatpeoplesaying rounded-lg  lg:p-6 lg:pb-54 p-4 relative lg:h-[220px] h-[213px]">
                                     <div
-                                      className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
-                                      id={`hcp-label-000${idx}`}
-                                      dangerouslySetInnerHTML={{
-                                        __html: DOMPurify.sanitize(
-                                          customer?.reviewComment?.value
-                                        ),
-                                      }}
-                                    ></div>
-                                    <div
-                                      className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
-                                      id={`hcp-label-0000${idx}`}
+                                      key={customer?.customerName?.value}
+                                      className="content-wrapper lg:h-136 h-[143px] overflow-auto textoverflow-scroll"
                                     >
-                                      {customer.customerName?.value} -{" "}
-                                      {customer?.customerQualification?.value}{" "}
+                                      <div
+                                        className="text-sofia-reg text-base font-normal text-mckblack mb-4 lg:min-h-[96px]"
+                                        id={`hcp-label-000${idx}`}
+                                        dangerouslySetInnerHTML={{
+                                          __html: DOMPurify.sanitize(
+                                            customer?.reviewComment?.value
+                                          ),
+                                        }}
+                                      ></div>
+                                      <div
+                                        className="text-sofia-reg text-base font-medium text-mckblue lg:mb-0 mb-8"
+                                        id={`hcp-label-0000${idx}`}
+                                      >
+                                        {customer.customerName?.value} -{" "}
+                                        {customer?.customerQualification?.value}{" "}
+                                      </div>
                                     </div>
-                                  </div>
 
-                                  <div className="w-full absolute left-0 -bottom-11">
-                                    <svg
-                                      width="84"
-                                      height="84"
-                                      className="mx-auto shadow-circleshadow rounded-full"
-                                      viewBox="0 0 84 84"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <rect
+                                    <div className="w-full absolute left-0 -bottom-11">
+                                      <svg
                                         width="84"
                                         height="84"
-                                        rx="42"
-                                        fill="white"
-                                      />
-                                      <path
-                                        d="M38 49.9841C38 56.6115 32.6274 61.984 26 61.984C19.3726 61.984 14 56.6115 14 49.9841C14 28.041 33 19.717 33 22.5508C33 22.5508 23 28.2834 26 35.7167C29 43.15 38 43.3567 38 49.9841Z"
-                                        fill="#A7C8E9"
-                                      />
-                                      <path
-                                        d="M70 49.9841C70 56.6115 64.6274 61.984 58 61.984C51.3726 61.984 46 56.6115 46 49.9841C46 28.041 65 19.717 65 22.5508C65 22.5508 55 28.2834 58 35.7167C61 43.15 70 43.3567 70 49.9841Z"
-                                        fill="#A7C8E9"
-                                      />
-                                    </svg>
+                                        className="mx-auto shadow-circleshadow rounded-full"
+                                        viewBox="0 0 84 84"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <rect
+                                          width="84"
+                                          height="84"
+                                          rx="42"
+                                          fill="white"
+                                        />
+                                        <path
+                                          d="M38 49.9841C38 56.6115 32.6274 61.984 26 61.984C19.3726 61.984 14 56.6115 14 49.9841C14 28.041 33 19.717 33 22.5508C33 22.5508 23 28.2834 26 35.7167C29 43.15 38 43.3567 38 49.9841Z"
+                                          fill="#A7C8E9"
+                                        />
+                                        <path
+                                          d="M70 49.9841C70 56.6115 64.6274 61.984 58 61.984C51.3726 61.984 46 56.6115 46 49.9841C46 28.041 65 19.717 65 22.5508C65 22.5508 55 28.2834 58 35.7167C61 43.15 70 43.3567 70 49.9841Z"
+                                          fill="#A7C8E9"
+                                        />
+                                      </svg>
+                                    </div>
                                   </div>
-                                </div>
-                              </SwiperSlide>
-                            );
-                          })}
-                      </Swiper>
+                                </SwiperSlide>
+                              );
+                            })}
+                        </Swiper>
+                      </div>
+
+                      <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
+                        {reviewCount}/
+                        {isMobile
+                          ? Math.ceil(customers?.length)
+                          : Math.ceil(customers?.length / 3)}
+                      </div>
                     </div>
-                    
-                          <div className="text-sofia-reg text-xl font-normal text-mckblue text-center lg:pt-4">
-                            {reviewCount}/
-                            {isMobile
-                              ? Math.ceil(customers?.length)
-                              : Math.ceil(customers?.length / 3)}
-                          </div>
                   </div>
-                </div>
-              }
+                )}
                 <div className="container mx-auto lg:pl-8 lg:pr-54 lg:pt-12 pt-6 pb-0">
                   <div
                     className="text-sofia-reg lg:text-32 text-xl font-extrabold text-mckblue text-center lg:leading-10 lg:pb-12 pb-6 lg:max-w-5xl max-w-sm mx-auto"
@@ -343,8 +345,18 @@ function HealthCareProfessionalComponent({
                                 name="tabs"
                                 className="hidden"
                                 id={DOMPurify.sanitize(sanitizedHtmlFor)}
-                                checked={isMobile? tabClicked && tabClicked[idx]?.flag && tab?.title?.value === tabSelected : tab?.title?.value === DOMPurify.sanitize(tabSelected)}
-                                onClick={() => {if (tab?.title?.value) { handleTabClick(idx, tab?.title?.value); }
+                                checked={
+                                  isMobile
+                                    ? tabClicked &&
+                                      tabClicked[idx]?.flag &&
+                                      tab?.title?.value === tabSelected
+                                    : tab?.title?.value ===
+                                      DOMPurify.sanitize(tabSelected)
+                                }
+                                onClick={() => {
+                                  if (tab?.title?.value) {
+                                    handleTabClick(idx, tab?.title?.value);
+                                  }
                                 }}
                               />
                               <label
@@ -367,9 +379,7 @@ function HealthCareProfessionalComponent({
                                     ariahidden={false}
                                   />
                                 ) : (
-                                  <div className="hidden">
-                                    &amp;nbsp;
-                                  </div>
+                                  <div className="hidden">&amp;nbsp;</div>
                                 )}
 
                                 {tab?.tabTitle?.value}
