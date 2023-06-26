@@ -10,6 +10,7 @@ import HealthNeedFilter from "../health_needs/HealthNeedFilter";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 
 import axiosInstance from "@/utils/axiosInstance";
+import { useSelectedProductCategoryStore } from "./Store/useSelectedProductCategoryStore";
 
 // let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
@@ -36,6 +37,7 @@ function ProductListComponent() {
   const [sectionData , setSectionData] = useState<any>([])
   const productSearchCard = true
   let selectedCategoryName: any = [];
+  // console.log(selectedFilterItems)
   // Right section product carousel data
   function fetchProductList(filter: any) {
     
@@ -181,8 +183,16 @@ function ProductListComponent() {
   const [activeFiltersData, setactiveFiltersData] = useState<any>();
   const [productCategoryData, setproductCategoryData] = useState<any>();
 
+  /**
+   * 
+   */
+  // const fetch = useSelectedProductCategoryStore(state => state.fetchProductFilterList) 
+  /**
+  * 
+  */
   useEffect(() => {
     fetchData();
+    // fetch()
   }, []);
 
   const fetchData = async () => {

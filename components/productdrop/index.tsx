@@ -1,6 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
+import { ProductFilter } from "../product_list/Model/ProdutAPI";
 
 function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
@@ -9,13 +11,23 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
    * @description onClickEachCategory is a func to set the state selected to the selectedCategory
    */
   const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
+  const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
+  const selectedCategory = useHeaderStore((state) => state.selectedCategory);
+  const selectedFilter = useHeaderStore((state) => state.selectedFilter)
+  const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
+  const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
+  const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
 
+  const handleClearAll = React.useCallback(() => {
+    onClearAll()
+  },[])
   /**
    * @description selectedCategory is a state that received value from onClickEachCategory where you can use it anywhere else
    *
    * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
    *
    */
+  // console.log(subMenuData)
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -42,7 +54,25 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 <Link
                 id={`header-mainmenu-${index+1}`}
                   onClick={() => {
+                    handleClearAll()
+                    const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
+                      return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
+                        const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                          return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                            id: data.id,
+                            name: data.name,
+                            description: data.description
+                          }));
+                         });
+                          onSelectCheckBox(data)
+                          setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'',true)
+                        })
+                    })
                     selectCategory(response?.menuItemName?.value);
+                    onSelectedSetFilter({
+                      isClicked:true,
+                      clickedMenuName:response?.menuItemName?.value
+                    })
                   }}
                   href={{
                     // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
@@ -51,7 +81,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                     //   filter: updateUrl(item?.data[0]?.menuItemUrl?.value, "1"),
                     // },
                     query: {
-                      filter: updateUrl(response?.menuItemUrl?.value, "1"),
+                      filter: updateUrl(response?.menuItemUrl?.value, "1")
                     },
                   }}
                   className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
@@ -70,13 +100,25 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 >
                   {response?.subMenuContentBlockArea?.expandedValue?.map(
                     (ele: any,index:any) => {
-                      // console.log(ele?.menuItemUrl?.value)
+                      const filterParentCat = response?.menuItemName?.value
+                      const isBusinessVerticalCategory = filterParentCat ? true : false
                       return (
                         <li
                         id={`header-submenu-${index+1}`}
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
+                            // console.log(response?.categoryItem?.value?.[0],'----',ele?.categoryItem?.value?.[0])
+                            handleClearAll()
+                            const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                              return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                                id: data.id,
+                                name: data.name,
+                                description: data.description
+                              }));
+                             });
+                            setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
+                            onSelectCheckBox(ele?.categoryItem?.value?.[0])
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
@@ -88,12 +130,24 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                                 updateUrl(ele?.menuItemUrl?.value, "1")
                               );
                             }
+                            if(selectedFilter === null){
+                              onSelectedSetFilter({
+                                isClicked:true,
+                                clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
+                              })
+                            } 
                           }}
                         >
                           <Link
                             href={{
                               pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
-                              query: {
+                              query: response?.menuItemName?.value ? 
+                              {
+                                filter:updateUrl(ele?.menuItemUrl?.value, "1"),
+                                categoryOf:response?.menuItemName?.value
+                              }
+                              :
+                              {
                                 filter: updateUrl(ele?.menuItemUrl?.value, "1"),
                               },
                             }}
