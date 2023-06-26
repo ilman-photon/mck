@@ -131,7 +131,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       isLoading:false,
       setLoader:(loader) => set({isLoading:loader}),
       bucket:[],
-      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType,subCatViewAllFlag = true) => {
+      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType,subCatViewAllFlag) => {
         const currentBucket = get().bucket;
       
         // Check if the subcategory already exists in the bucket

@@ -370,7 +370,7 @@ const ProductListFilter = ({
                                              onClick={() =>{
                                                onSelectCheckBox(leftfiltersubdata)
                                                 // console.log(leftfiltermaindata)
-                                                setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltersubdata,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value)
+                                                setBucket(leftfiltermaindata.mainCategory.value?.[0],leftfiltersubdata,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value,true)
                                               if(isNameMatchFilterMenu){
                                                 onDeselectedFilter(null)
                                               }

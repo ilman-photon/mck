@@ -65,7 +65,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           }));
                          });
                           onSelectCheckBox(data)
-                          setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'')
+                          setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'',true)
                         })
                     })
                     selectCategory(response?.menuItemName?.value);
@@ -108,9 +108,16 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
-                            console.log(response?.categoryItem?.value?.[0],'----',ele?.categoryItem?.value?.[0])
+                            // console.log(response?.categoryItem?.value?.[0],'----',ele?.categoryItem?.value?.[0])
                             handleClearAll()
-                            setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'')
+                            const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                              return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                                id: data.id,
+                                name: data.name,
+                                description: data.description
+                              }));
+                             });
+                            setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
                             onSelectCheckBox(ele?.categoryItem?.value?.[0])
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
