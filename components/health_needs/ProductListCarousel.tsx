@@ -16,6 +16,7 @@ const ProductComponent = ({
   selectedRecommendedProduct,
   filterClicked,
   productSearchCard,
+  activeFiltersData
 }: any) => {
   const [windowWidth] = useWindowResize();
   const [isMobile, setIsMobile] = useState(windowWidth >= 968 ? false : true);
@@ -181,7 +182,9 @@ const ProductComponent = ({
         </div>
       ))}
         {selectedProduct?.[1]?.data?.results?.length === 0 && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
-        {filterClicked ? "There are no products" : null}
+        {filterClicked ? activeFiltersData?.noResultsFoundText?.value
+        // "There are no products"
+         : null}
       </div>}
     </>
   );

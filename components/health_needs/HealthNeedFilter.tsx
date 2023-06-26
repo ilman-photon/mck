@@ -644,6 +644,7 @@ const HealthNeedFilter = ({
             selectedRecommendedProduct={selectedRecommendedProduct}
             productSearchCard={productSearchCard}
             filterClicked={filterClicked}
+            activeFiltersData={activeFiltersData}
           />
         </div>
       </div>
