@@ -318,17 +318,33 @@ const ProductListFilter = ({
                                     <div className="flex items-center my-px cursor-pointer">
                                       <input
                                         onClick={() =>{
-                                          const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                             onSelectCheckBox(subData)
-                                             setBucket(
-                                              leftfiltermaindata?.mainCategory?.value?.[0],
-                                              subData,
-                                              leftfiltermaindata?.isBusinessVerticalCategory?.value
-                                              ,leftfiltermaindata?.subCategory?.value?.length,
-                                              leftfiltermaindata?.filterType?.value,
-                                              false
-                                              )
-                                          })
+                                          if(activeFilter?.some((item:ProductFilter.QueryBucketType) => {
+                                            return item?.id === leftfiltermaindata?.mainCategory.value?.[0].id && item?.isViewAll
+                                          })){
+                                            const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                              onSelectCheckBox(subData)
+                                              setBucket(
+                                               leftfiltermaindata?.mainCategory?.value?.[0],
+                                               subData,
+                                               leftfiltermaindata?.isBusinessVerticalCategory?.value
+                                               ,leftfiltermaindata?.subCategory?.value?.length,
+                                               leftfiltermaindata?.filterType?.value,
+                                               true
+                                               )
+                                           })
+                                          }else{
+                                            const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                               onSelectCheckBox(subData)
+                                               setBucket(
+                                                leftfiltermaindata?.mainCategory?.value?.[0],
+                                                subData,
+                                                leftfiltermaindata?.isBusinessVerticalCategory?.value
+                                                ,leftfiltermaindata?.subCategory?.value?.length,
+                                                leftfiltermaindata?.filterType?.value,
+                                                false
+                                                )
+                                            })
+                                          }
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
                                         }}
                                         type="checkbox"
@@ -341,10 +357,33 @@ const ProductListFilter = ({
                                       />
                                       <label
                                         onClick={() => {
-                                          const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                                             onSelectCheckBox(subData)
-                                             setBucket(leftfiltermaindata?.mainCategory?.value?.[0],subData,leftfiltermaindata?.isBusinessVerticalCategory?.value,leftfiltermaindata?.subCategory?.value?.length,leftfiltermaindata?.filterType?.value,false)
-                                          })
+                                          if(activeFilter?.some((item:ProductFilter.QueryBucketType) => {
+                                            return item?.id === leftfiltermaindata?.mainCategory.value?.[0].id && item?.isViewAll
+                                          })){
+                                            const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                              onSelectCheckBox(subData)
+                                              setBucket(
+                                               leftfiltermaindata?.mainCategory?.value?.[0],
+                                               subData,
+                                               leftfiltermaindata?.isBusinessVerticalCategory?.value
+                                               ,leftfiltermaindata?.subCategory?.value?.length,
+                                               leftfiltermaindata?.filterType?.value,
+                                               true
+                                               )
+                                           })
+                                          }else{
+                                            const subCategoryData = leftfiltermaindata?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                               onSelectCheckBox(subData)
+                                               setBucket(
+                                                leftfiltermaindata?.mainCategory?.value?.[0],
+                                                subData,
+                                                leftfiltermaindata?.isBusinessVerticalCategory?.value
+                                                ,leftfiltermaindata?.subCategory?.value?.length,
+                                                leftfiltermaindata?.filterType?.value,
+                                                false
+                                                )
+                                            })
+                                          }
                                           onSelectMainCategory(leftfiltermaindata?.mainCategory?.value?.[0])
                                         }}
                                         htmlFor={
