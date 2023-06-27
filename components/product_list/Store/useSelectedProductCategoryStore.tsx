@@ -24,7 +24,7 @@ interface Controller{
     isLoading:boolean
     setLoader:(isLoading:boolean) => void
     bucket:ProductFilter.QueryBucketType | never[] | any
-    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string,subCatViewAllFlag?:boolean) => void
+    setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string,subCatViewAllFlag?:boolean,isPlp?:boolean) => void
     onDeselectRemoveBucket:(selectedCatIndex:number,selectedSubCatIndex:number) => void
     onRemoveEachOfViewAllSelected:(selected:ProductFilter.QueryBucketType) => void
 }
@@ -131,50 +131,51 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       isLoading:false,
       setLoader:(loader) => set({isLoading:loader}),
       bucket:[],
-      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType,subCatViewAllFlag) => {
+      setBucket: (bucket, subCategories,isBusinessVerticalCategory,childrenLength,filterType,subCatViewAllFlag,isPlp) => {
         const currentBucket = get().bucket;
       
         // Check if the subcategory already exists in the bucket
-        const existingCategoryIndex = currentBucket.findIndex((category:ProductFilter.QueryBucketType) => category.id === bucket.id);
+        const existingCategoryIndex = currentBucket?.findIndex((category:ProductFilter.QueryBucketType) => category?.id === bucket?.id);
       
         if (existingCategoryIndex !== -1) {
           const existingSubCategories = currentBucket[existingCategoryIndex].subCategory;
           
           // Check if the clicked subcategory already exists in the bucket
-          const existingSubCategoryIndex = existingSubCategories.findIndex((subCat:ProductFilter.QueryBucketType) => subCat.id === subCategories.id);
+          const existingSubCategoryIndex = existingSubCategories?.findIndex((subCat:ProductFilter.QueryBucketType) => subCat?.id === subCategories?.id);
       
           if (existingSubCategoryIndex !== -1) {
             // If already selected, remove it from the bucket
             if(subCatViewAllFlag){
-              existingSubCategories.splice(existingSubCategoryIndex, 1);
+              existingSubCategories?.splice(existingSubCategoryIndex, 1);
             }
             
             // Check if there are no more selected subcategories within the category
             if (existingSubCategories.length === 0) {
               // Remove the entire category from the bucket
-              currentBucket.splice(existingCategoryIndex, 1);
+              currentBucket?.splice(existingCategoryIndex, 1);
             }
           } else {
             // If not selected, add it to the bucket
             
-            existingSubCategories.push(subCategories);
+            existingSubCategories?.push(subCategories);
             // console.log(existingSubCategories)
           }
         } else {
           // If the category doesn't exist in the bucket, add it with the clicked subcategory
           const newCategory = {
-            id: bucket.id,
-            name: bucket.name,
+            id: bucket?.id,
+            name: bucket?.name,
             isBusinessVerticalCategory: isBusinessVerticalCategory,
             subCategory: [subCategories],
-            isViewAll: [subCategories].length === childrenLength,
+            isViewAll: [subCategories]?.length === childrenLength,
             childrenLength:childrenLength,
-            filterType:filterType
+            filterType:filterType,
+            isPlp:isPlp ? isPlp : false
           };
           currentBucket.push(newCategory);
         }
         currentBucket?.forEach((category: ProductFilter.QueryBucketType) => {
-          category.isViewAll = category.subCategory.length === category.childrenLength;
+          category.isViewAll = category?.subCategory?.length === category?.childrenLength;
         });
       
          // Set `isViewAll` to `true` if the number of checked subcategories is equal to the total number of subcategories

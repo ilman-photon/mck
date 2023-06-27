@@ -59,9 +59,9 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                       return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
                         const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
                           return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                            id: data.id,
-                            name: data.name,
-                            description: data.description
+                            id: data?.id,
+                            name: data?.name,
+                            description: data?.description
                           }));
                          });
                           onSelectCheckBox(data)
@@ -112,9 +112,9 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                             handleClearAll()
                             const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
                               return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                                id: data.id,
-                                name: data.name,
-                                description: data.description
+                                id: data?.id,
+                                name: data?.name,
+                                description: data?.description
                               }));
                              });
                             setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
