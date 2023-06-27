@@ -1,5 +1,5 @@
 import axiosInstance from "@/utils/axiosInstance";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import DOMPurify from "isomorphic-dompurify";
 
@@ -23,7 +23,7 @@ const ItemExpandeble = ({ bdata }: any) => {
         checked={selectedValue}
       />
       <label
-        role="button"
+        role="application"
         tabIndex={0}
         onClick={(e) => handleOnClick("click")}
         onKeyUp={(e) => handleOnClick(e.key)}
