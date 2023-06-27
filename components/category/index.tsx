@@ -16,12 +16,12 @@ export default function CategoryComponent({ sectionData }: any) {
   const getData = useCategoryStore(state => state.getData)
   const loading = useCategoryStore(state => state.isLoading)
   const _sectionData = sectionData?.[0]?.contentBlockArea?.value
-  const menuData = useHeaderStore(state => state.headerData)
 
   
   const setBucket = useSelectedProductCategoryStore((state) => state.setBucket)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
+  const productCategoryDataList = useSelectedProductCategoryStore(state => state.productCategoryDataList)
 
   const handleClearAll = React.useCallback(() => {
     onClearAll()
@@ -84,26 +84,17 @@ export default function CategoryComponent({ sectionData }: any) {
                 <div
                 onClick={() => {
                   handleClearAll()
-                  menuData?.map((data:any) => {
-                   const filterData = data?.subMenuContentBlockArea.value?.filter(({response}:any) => {
-                    return response?.categoryItem?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
+                  const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
+                      return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
                     })
-                    const filterResponse = filterData?.map(({response}:any) => {
-                      const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
-                        return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
-                          const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
-                            return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                              id: data?.id,
-                              name: data?.name,
-                              description: data?.description
-                            }));
-                           });
-                            onSelectCheckBox(data)
-                            setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'',true)
-                          })
+                  if(filteredData){
+                    filteredData?.map((filteredData:any) => {
+                      filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                        onSelectCheckBox(subData)
+                        setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
                       })
                     })
-                  })
+                  }
                 }}
                   className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
                   id={`category_name_0${index}`}

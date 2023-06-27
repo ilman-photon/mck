@@ -4,7 +4,7 @@ import { ActiveFiltersDataResponse, ProductFilter } from "../Model/ProdutAPI";
 
 interface Controller{
     fetchProductFilterList: () => Promise<void>
-    fetchRecommendedProductData: (productItemName:string,routeFiltered:string) => Promise<void>
+    fetchRecommendedProductData: (productItemName?:string,routeFiltered?:string) => Promise<void>
     activeFiltersData:ActiveFiltersDataResponse | null
     productName:string
     recommendProductData:any
@@ -27,6 +27,8 @@ interface Controller{
     setBucket:(bucket:any,subCat:any,isBusinessVerticalCategory:boolean,childrenLength:number,filterType:string,subCatViewAllFlag?:boolean,isPlp?:boolean) => void
     onDeselectRemoveBucket:(selectedCatIndex:number,selectedSubCatIndex:number) => void
     onRemoveEachOfViewAllSelected:(selected:ProductFilter.QueryBucketType) => void
+    sectionData:any
+    setSectionData:(data:any) => void
 }
 
 export const useSelectedProductCategoryStore = create<Controller>((set,get) => ({
@@ -62,7 +64,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
       fetchRecommendedProductData: async (product,routeFiltered) => {
         set({isLoading:true})
         const productState = get().productName
-        const tempName = product.length > 0 ? product : productState || routeFiltered
+        const tempName = String(product)?.length > 0 ? product : productState || routeFiltered
         const correctedName = tempName?.replace(/ /g, "-")
         const callApiRecommendCategoryData = await axiosInstance.get(
          `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
@@ -209,5 +211,7 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
           currentBucket.splice(selectedIndex, 1);
           set({ bucket: [...currentBucket] });
         }
-      }
+      },
+      sectionData:[],
+      setSectionData:(data) => set({sectionData:data})
 }))

@@ -61,7 +61,7 @@ const ProductListFilter = ({
     await getAlProductList()
   }
   
-
+  
   return (
     <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 smalldekstop:px-6 mobilelarge:px-0">
       {/* Health needs - Top Active Filter section starts */}
@@ -366,8 +366,10 @@ const ProductListFilter = ({
                                   {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: ProductFilter.MainCategory,index:number) => {
                                     const isNameMatchFilterMenu = leftfiltersubdata?.name === selectedFilter?.clickedMenuName && selectedFilter?.isClicked
                                     const isSubDataChekcboxActive = activeFilter.map((data:ProductFilter.QueryBucketType) => (
-                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata.id)
+                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata.id || data?.id === leftfiltermaindata?.mainCategory?.value?.[0]?.id && data?.isViewAll)
+                                     
                                     ))
+                                    
                                     const isSubDataFiltered = isSubDataChekcboxActive?.flat()?.[0]
                                     // console.log(isSubDataFiltered)
                                     return (

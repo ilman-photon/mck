@@ -5,6 +5,7 @@ import { useSelectedProductCategoryStore } from "../product_list/Store/useSelect
 import { ProductFilter } from "../product_list/Model/ProdutAPI";
 import { useHealthNeedsStore } from "../health_needs/components/Store/useHealthNeedsStore";
 import { useRouter } from "next/router";
+import axiosInstance from "@/utils/axiosInstance";
 
 function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
@@ -17,7 +18,8 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
   // const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const selectedFilter = useHeaderStore((state) => state.selectedFilter)
-
+  const productItemName = useHeaderStore(state => state.selectedCategory)
+  // console.log(productItemName)
   const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
@@ -26,6 +28,13 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const setBucketHealthNeeds = useHealthNeedsStore((state) => state.setBucket)
   const onSelectCheckBoxHealthNeeds = useHealthNeedsStore((state) => state.onSelectCheckBox)
   const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
+  const productCategoryDataList = useSelectedProductCategoryStore(state => state.productCategoryDataList)
+  const getRecommendProductData  = useSelectedProductCategoryStore(state => state.fetchRecommendedProductData)
+  const bucket  = useSelectedProductCategoryStore(state => state.bucket)
+  const setLoader = useSelectedProductCategoryStore(state => state.setLoader)
+
+  const addressBarState = router?.query?.categoryOf
+  const addressBarStateOfFilter = router?.query?.filter
 
   const handleOnClearAllHealthNeeds = React.useCallback(() => {
     onClearAllHealthNeeds()
@@ -41,7 +50,13 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
    * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
    *
    */
-  
+
+
+  // React.useEffect(() => {
+  //   if(productCategoryDataList === null && productItemName !== ''){
+  //     getRecommendProductData(productItemName)
+  //   }
+  // },[productCategoryDataList,productItemName])
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -58,6 +73,8 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
     }
   }
 
+  // console.log(bucket)
+
   return (
     <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
@@ -67,37 +84,40 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
               <div className="lg:border-l lg:border-black xl:border-l xl:border-black">
                 <Link
                 id={`header-mainmenu-${index+1}`}
-                  onClick={() => {
+                  onClick={async() => {
                     handleClearAll()
-                    const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.map((subData:any,index:number) => {
-                      return subData.categoryItem?.value?.map((data:ProductFilter.MainCategory,subIndex:number) => {
-                        const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
-                          return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                            id: data?.id,
-                            name: data?.name,
-                            description: data?.description
-                          }));
-                         });
-                          onSelectCheckBox(data)
-                          setBucket(response?.categoryItem?.value?.[0],data,true,subCategoryData.length,'',true)
-                        })
-                    })
                     selectCategory(response?.menuItemName?.value);
+                      const correctedName = response?.menuItemName?.value?.replace(/ /g, "-")
+                      const callApiRecommendCategoryData = await axiosInstance.get(
+                       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
+                      )
+                      if(callApiRecommendCategoryData.data && callApiRecommendCategoryData.status === 200){
+                          const productCategoryDataList = callApiRecommendCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
+                          const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
+                            return filterMainData?.mainCategory?.value?.[0]?.id === response?.categoryItem?.value?.[0]?.id
+                          })
+                          if(filteredData){
+                            filteredData?.map((filteredData:any) => {
+                              filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                onSelectCheckBox(subData)
+                                setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
+                              })
+                            })
+                          }
+                      }
+                    console.log(bucket,'ini yaaa')
                     onSelectedSetFilter({
                       isClicked:true,
                       clickedMenuName:response?.menuItemName?.value
                     })
+                    router.push({
+                      pathname: updateUrl(response?.menuItemUrl?.value, "0"),
+                      query: {
+                        filter: updateUrl(response?.menuItemUrl?.value, "1")
+                      },
+                    })
                   }}
-                  href={{
-                    // pathname: updateUrl(item?.data[0].menuItemUrl?.value, "0"),
-                    pathname: updateUrl(response?.menuItemUrl?.value, "0"),
-                    // query: {
-                    //   filter: updateUrl(item?.data[0]?.menuItemUrl?.value, "1"),
-                    // },
-                    query: {
-                      filter: updateUrl(response?.menuItemUrl?.value, "1")
-                    },
-                  }}
+                  href={"#"}
                   className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
                 >
                   {/* {item?.data[0]?.menuItemName?.value} */}

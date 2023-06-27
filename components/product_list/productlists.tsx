@@ -138,7 +138,7 @@ export function constructQuery(data:ProductFilter.QueryBucketType[],additionalQu
 //   console.log(query);
   return query;
 }
-  
+
 /**
  * 
  * @author [Zaqi Akbar]("https://github.com/zaqiakbaar")
@@ -207,6 +207,8 @@ function ProductList() {
     const bucket = useSelectedProductCategoryStore(state => state.bucket)
     // console.log(bucket,'ini lho')
     const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
+    // const sectionData = useSelectedProductCategoryStore(state => state.sectionData)
+    // const setSectionData = useSelectedProductCategoryStore(state => state.setSectionData)
     // console.log(bucket)
     /**
      * @end
@@ -227,7 +229,7 @@ function ProductList() {
             setLoader(false)
         }).catch(() => setLoader(false))
     }
-
+    
     const selectedFilter = useHeaderStore(state => state.selectedFilter)
 
     const handleFilterFromRoute = () => {
@@ -265,7 +267,6 @@ function ProductList() {
         getRecommendedProductData(productItemName,String(addressBarState || addressBarStateOfFilter))
         getProductFilterList()
     }, [])
-    
 
     return (
         <>
@@ -276,7 +277,7 @@ function ProductList() {
                     activeFiltersData={activeFilterDataList}
                     productCategoryData={productCategoryDataList}
                     recommendedProduct={recommendProductData}
-                    // activeFilter={selectedFilterItems}
+                    // activeFilter={selectedFilterItems}                    
                     activeFilter={bucket}
                     productSearchCard={true}
                     selectedProduct={productQueriedData}
