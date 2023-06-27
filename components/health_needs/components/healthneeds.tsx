@@ -18,7 +18,6 @@ function HealthNeeds() {
     const healthNeedData = useHealthNeedsStore((state) => state.healthNeedsCategory)
 
     const bucket = useHealthNeedsStore((state) => state.bucket)
-  console.log(bucket,'bucket ni')
     const productCategoryData = useHealthNeedsStore((state) => state.productCategoryDataList)
     const activeFiltersData = useHealthNeedsStore((state) => state.activeFiltersData)
     const recommendProductData = useHealthNeedsStore(state => state.recommendProductData)
