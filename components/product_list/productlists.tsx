@@ -56,7 +56,7 @@ const subCategory = (data:ProductFilter.MainCategory[], parrentQuery:string, isF
         if (index > 0 || isFirstParent) {
             sbCategory+= ' or '
         } 
-        sbCategory += `${parrentQuery}/value/name eq '${item.name}'`;
+        sbCategory += `${parrentQuery}/value/name eq '${item?.name}'`;
     })
     return sbCategory
 };
@@ -67,7 +67,7 @@ const subCategoryNonBussiness = (data:ProductFilter.MainCategory[], parrentQuery
         if (index > 0 || isFirstParent) {
             sbCategory+= ' or '
         } 
-        sbCategory += `${parrentQuery}/value/name eq '${item.name}'`;
+        sbCategory += `${parrentQuery}/value/name eq '${item?.name}'`;
     })
     return sbCategory+=")"
 };
@@ -79,7 +79,7 @@ const category = (item: any) => {
     return category
 };
 
-function constructQuery(data:ProductFilter.QueryBucketType[]){
+export function constructQuery(data:ProductFilter.QueryBucketType[],additionalQuery?:string){
   let query = `${process.env.API_URL}/api/episerver/v3.0/search/content?filter=`;
   const dataBusinessVerticalCategory = data.filter((dtx) => dtx.isBusinessVerticalCategory);
   const notDataBusinessVerticalCategory = data.filter((dtx) => !dtx.isBusinessVerticalCategory);
@@ -134,6 +134,7 @@ function constructQuery(data:ProductFilter.QueryBucketType[]){
   });
   const queryViewAllNonBusinessVertical = viewAllNonBusinessVertical !== '' ? `${viewAllNonBusinessVertical} and` : ''
   query += `${queryViewAllNonBusinessVertical} ${queryViewAllBusinessVertical} ContentType/any(t:t eq 'ProductDetailsPage')`;
+//   query += `&orderby=healthNeeds/value/name,title/value asc`
 //   console.log(query);
   return query;
 }
@@ -206,7 +207,7 @@ function ProductList() {
     const bucket = useSelectedProductCategoryStore(state => state.bucket)
     // console.log(bucket,'ini lho')
     const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
-
+    // console.log(bucket)
     /**
      * @end
      */
@@ -264,12 +265,14 @@ function ProductList() {
         getRecommendedProductData(productItemName,String(addressBarState || addressBarStateOfFilter))
         getProductFilterList()
     }, [])
+    
 
     return (
         <>
            <Loader isValidating={isLoading}/>
             <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1 mb-18">
                 <ProductListFilter
+        //   selectedRecommendedProduct={selectedRecommendedProduct}
                     activeFiltersData={activeFilterDataList}
                     productCategoryData={productCategoryDataList}
                     recommendedProduct={recommendProductData}

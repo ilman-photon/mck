@@ -10,6 +10,7 @@ import GoogleTagManager from "@/components/google_tag_manager";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
+import HealthNeeds from "@/components/health_needs/components/healthneeds";
 
 function HealthNeedsPage() {
   const [loadingTemp, setLoadingTemp] = useState(true);
@@ -88,7 +89,8 @@ function HealthNeedsPage() {
         {!loading && !error && response && (
           <CarouselComponent sectionData={filteredData("CarouselBlock")} />
         )}
-        <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} />
+        {/* <HealthNeedsComponent isCarusolAvaibleProps={setisCarusonAvible} /> */}
+        <HealthNeeds/>
         <FooterComponent />
       </div>
     </>

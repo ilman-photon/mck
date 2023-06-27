@@ -140,5 +140,6 @@ export declare module ProductFilter {
         isViewAll:boolean
         childrenLength:number
         filterType:string
+        isPlp:boolean
     }
 }

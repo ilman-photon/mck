@@ -378,7 +378,7 @@ function ProductListComponent() {
           selectedRecommendedProduct={selectedRecommendedProduct}
           filterClicked={filterClicked}
           productSum={productSum}
-          productSearchCard={productSearchCard}
+          productSearchCard={true}
         />
         
         

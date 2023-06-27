@@ -1,13 +1,14 @@
-import ProductComponent from "../health_needs/ProductListCarousel";
+import ProductComponent from "../ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 // import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
-import { ImageComponent } from "../global/ImageComponent";
+import { ImageComponent } from "@/components/global/ImageComponent";
 import DOMPurify from "isomorphic-dompurify";
-import { useSelectedProductCategoryStore } from "./Store/useSelectedProductCategoryStore";
-import { type ProductFilter } from "./Model/ProdutAPI";
-import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+// import { useSelectedProductCategoryStore } from "./Store/useSelectedProductCategoryStore";
+import { type ProductFilter } from "@/components/product_list/Model/ProdutAPI"; 
+import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";  
+import { useHealthNeedsStore } from "./Store/useHealthNeedsStore";
 // import { getQueryString } from "@/utils/URLUtils";
 
 interface ISubCategory {
@@ -20,9 +21,7 @@ interface ISubCategory {
 //   activeFilter:ProductFilter.QueryBucketType[]
 //   activeFiltersData:ActiveFiltersDataResponse
 // }
-
-let tempCategoryName: any = [];
-const ProductListFilter = ({
+const HealthNeedsFilterComponent = ({
   activeFiltersData,
   activeFilter,
   // setActiveFilter,
@@ -37,30 +36,26 @@ const ProductListFilter = ({
   selectedRecommendedProduct,
   productSum,
   productSearchCard,
-
   filterClicked,
 }: any) => {
   const router = useRouter();
   const [isFilterShow, setIsFilterShow] = useState(true);
-  const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
-  const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
-  const onDeleteEachFilterItem = useSelectedProductCategoryStore(state => state.onDeleteEachFilterItem)
-  const onSelectMainCategory = useSelectedProductCategoryStore(state => state.onSelectMainCategory)
-  const getAlProductList = useSelectedProductCategoryStore(state => state.fetchAllProductList)
-  const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
+  const onSelectCheckBox = useHealthNeedsStore(state => state.onSelectCheckBox)
+  const onClearAll = useHealthNeedsStore(state => state.onClearAll)
+  const onDeleteEachFilterItem = useHealthNeedsStore(state => state.onDeleteEachFilterItem)
+  const onSelectMainCategory = useHealthNeedsStore(state => state.onSelectMainCategory)
+  const getAlProductList = useHealthNeedsStore(state => state.fetchAllProductList)
+  const setBucket = useHealthNeedsStore(state => state.setBucket)
   const selectedFilter = useHeaderStore(state => state.selectedFilter)
   const onDeselectedFilter = useHeaderStore(state => state.onSelectedSetFilter)
-  const onDeselectRemoveBucket = useSelectedProductCategoryStore(state => state.onDeselectRemoveBucket)
-  const onDeselectRemoveBuckets = useSelectedProductCategoryStore(state => state.onRemoveEachOfViewAllSelected)
+  const onDeselectRemoveBucket = useHealthNeedsStore(state => state.onDeselectRemoveBucket)
+  const onDeselectRemoveBuckets = useHealthNeedsStore(state => state.onRemoveEachOfViewAllSelected)
 
-  // const bucket = useSelectedProductCategoryStore(state => state.bucket)
-  // console.log(bucket)
   const handleClearAll = async() => {
     onClearAll()
     onDeselectedFilter(null)
     await getAlProductList()
   }
-  
 
   return (
     <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 smalldekstop:px-6 mobilelarge:px-0">
@@ -366,7 +361,7 @@ const ProductListFilter = ({
                                   {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: ProductFilter.MainCategory,index:number) => {
                                     const isNameMatchFilterMenu = leftfiltersubdata?.name === selectedFilter?.clickedMenuName && selectedFilter?.isClicked
                                     const isSubDataChekcboxActive = activeFilter.map((data:ProductFilter.QueryBucketType) => (
-                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata.id)
+                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each.id === leftfiltersubdata.id)
                                     ))
                                     const isSubDataFiltered = isSubDataChekcboxActive?.flat()?.[0]
                                     // console.log(isSubDataFiltered)
@@ -434,4 +429,4 @@ const ProductListFilter = ({
     </div>
   );
 };
-export default ProductListFilter;
+export default HealthNeedsFilterComponent;

@@ -3,20 +3,34 @@ import Link from "next/link";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
 import { ProductFilter } from "../product_list/Model/ProdutAPI";
+import { useHealthNeedsStore } from "../health_needs/components/Store/useHealthNeedsStore";
+import { useRouter } from "next/router";
 
 function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const [active, setActive] = useState(null);
-
+  const router = useRouter()
+  const pathNameHealthNeeds = router?.pathname === '/health_needs'
   /**
    * @description onClickEachCategory is a func to set the state selected to the selectedCategory
    */
   const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
   const onSelectedSetFilter = useHeaderStore((state) => state.onSelectedSetFilter);
-  const selectedCategory = useHeaderStore((state) => state.selectedCategory);
+  // const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const selectedFilter = useHeaderStore((state) => state.selectedFilter)
+
   const setBucket = useSelectedProductCategoryStore(state => state.setBucket)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
+
+  
+  const setBucketHealthNeeds = useHealthNeedsStore((state) => state.setBucket)
+  const onSelectCheckBoxHealthNeeds = useHealthNeedsStore((state) => state.onSelectCheckBox)
+  const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
+
+  const handleOnClearAllHealthNeeds = React.useCallback(() => {
+    onClearAllHealthNeeds()
+  },[])
+
 
   const handleClearAll = React.useCallback(() => {
     onClearAll()
@@ -27,7 +41,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
    * @example `const selectedCategory = useHeaderStore(state => state.selectedCategory)`
    *
    */
-  // console.log(subMenuData)
+  
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -102,23 +116,33 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                     (ele: any,index:any) => {
                       const filterParentCat = response?.menuItemName?.value
                       const isBusinessVerticalCategory = filterParentCat ? true : false
+                      const healthNeedsBucket = {
+                        id: 52,
+                        name: "Health Needs",
+                        description:'Health Needs'
+                    }
                       return (
                         <li
                         id={`header-submenu-${index+1}`}
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
-                            // console.log(response?.categoryItem?.value?.[0],'----',ele?.categoryItem?.value?.[0])
-                            handleClearAll()
-                            const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
-                              return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                                id: data?.id,
-                                name: data?.name,
-                                description: data?.description
-                              }));
-                             });
-                            setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
-                            onSelectCheckBox(ele?.categoryItem?.value?.[0])
+                            if(pathNameHealthNeeds){
+                              handleOnClearAllHealthNeeds()
+                              setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)
+                              onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
+                            } else {
+                              handleClearAll()
+                              const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                                return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                                  id: data?.id,
+                                  name: data?.name,
+                                  description: data?.description
+                                }));
+                               });
+                              setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
+                              onSelectCheckBox(ele?.categoryItem?.value?.[0])
+                            }
                             /**
                              * @description refer to this as well because Health Needs doesn't have a `parent`
                              */
