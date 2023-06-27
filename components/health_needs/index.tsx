@@ -38,6 +38,7 @@ const HealthNeedsComponent = ({
     useState();
   const [productSum, setProductSum] = useState<any>();
   const productItemName = useHeaderStore((state) => state.selectedCategory);
+  
   // Right section product carousel data
   function fetchProductList(filter: any) {
     setIsLoading(true);
@@ -61,6 +62,7 @@ const HealthNeedsComponent = ({
     const values = matches.map((match) => match[1]);
 
     let categoryArrayList = _temparray;
+    console.log(categoryArrayList,'ini ya')
 
     let queryParameter = "";
     let url = "";
@@ -122,7 +124,7 @@ const HealthNeedsComponent = ({
             }
           });
         });
-
+        // console.log(_temparray,'---',tempResults)
         const transformedArray = Object.entries(tempResults).map(
           ([key, value]) => {
             return {
@@ -242,7 +244,7 @@ const HealthNeedsComponent = ({
     const searchParams = new URLSearchParams(queryString);
     return searchParams.get(paramName);
   };
-
+  // console.log(selectedFilterItems,'ini ya')
   const createQueryParameters = () => {
     let queryParams = "";
     let tempId = false;

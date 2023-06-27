@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useRef } from "react";
 import DOMPurify from "isomorphic-dompurify";
+import { useHealthNeedsStore } from "./components/Store/useHealthNeedsStore";
 
 const HealthNeedCategoryMobile = ({
   healthNeedData,
@@ -18,6 +19,13 @@ const HealthNeedCategoryMobile = ({
   const rowsPerPage = 2;
   const [isFirstIndex, setIsFirstIndex] = useState<boolean>(true);
   const [isLastIndex, setIsLastIndex] = useState<boolean>(false);
+  const setBucket = useHealthNeedsStore((state) => state.setBucket)
+  const onSelectCheckBox = useHealthNeedsStore((state) => state.onSelectCheckBox)
+  const onClearAll = useHealthNeedsStore((state) => state.onClearAll)
+
+  const handleClearAll = React.useCallback(() => {
+    onClearAll()
+  },[])
 
   function updateUrl(path: string, type: string) {
     let f = "?filter=";
@@ -29,7 +37,7 @@ const HealthNeedCategoryMobile = ({
     }
   }
 
-  const handleHealthNeedData = (data: any, healthNeedData: any) => {
+  const handleHealthNeedData = (healthNeedData: any) => {
     setActiveIcon(healthNeedData?.contentLink?.id);
     router.push({
       pathname: updateUrl(healthNeedData.healthNeedsCategoryUrl.value, "0"),
@@ -41,29 +49,6 @@ const HealthNeedCategoryMobile = ({
 
     { scroll: false });
 
-    const cat_id = productCategoryData.mainCategory.value[0].id;
-    const sub_cat_id = healthNeedData.healthNeedCategory.value[0].id;
-
-    if (selectedFilterItems[cat_id][sub_cat_id].checked) {
-      setActiveFilter(
-        activeFilter.filter((item: any) => {
-          return item !== selectedHealthNeed[data]?.key;
-        })
-      );
-      selectedFilterItems[cat_id][sub_cat_id].checked = false;
-    } else {
-      selectedFilterItems[cat_id].items = [];
-      selectedFilterItems[cat_id].items.push(data);
-      selectedFilterItems.map((category: any) => {
-        category.isCategoryChecked = false;
-        category.map((sub_category: any) => {
-          sub_category.checked = false;
-        });
-      });
-
-      setActiveFilter([data]);
-      selectedFilterItems[cat_id][sub_cat_id].checked = true;
-    }
   };
 
   const handlePrev = () => {
@@ -116,35 +101,46 @@ const HealthNeedCategoryMobile = ({
                   slideIndex * slidesPerRow * rowsPerPage,
                   (slideIndex + 1) * slidesPerRow * rowsPerPage
                 )
-                .map((healthneedsdata: any) => (
-                  <div
-                    key={healthneedsdata?.contentLink?.id}
-                    className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
-                      activeIcon === healthneedsdata?.contentLink?.id
-                        ? "active"
-                        : ""
-                    }`}
-                    onClick={() =>
-                      handleHealthNeedData(
-                        healthneedsdata?.title.value,
-                        healthneedsdata
-                      )
-                    }
-                    aria-label={DOMPurify.sanitize(
-                      healthneedsdata?.title?.value
-                    )}
-                  >
-                    <img
-                      id={healthneedsdata?.title.value}
-                      src={DOMPurify.sanitize(
-                        healthneedsdata?.image?.expandedValue?.url
+                .map((healthneedsdata: any) =>{
+                  const healthNeedsBucket = {
+                    id: 52,
+                    name: "Health Needs",
+                    description:'Health Needs'
+                }
+                  return(
+                    <div
+                      key={healthneedsdata?.contentLink?.id}
+                      className={`carousel-item text-sofia-reg text-mckblue text-lg text-center flex-auto pb-6 ${
+                        activeIcon === healthneedsdata?.contentLink?.id
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        handleClearAll()
+                        onSelectCheckBox(healthneedsdata.healthNeedCategory.value?.[0])
+                        setBucket(healthNeedsBucket,healthneedsdata.healthNeedCategory.value?.[0],false,0,'healthNeeds',true)
+                        handleHealthNeedData(
+                          healthneedsdata
+                        )
+                      }
+                      }
+                      aria-label={DOMPurify.sanitize(
+                        healthneedsdata?.title?.value
                       )}
-                      alt={healthneedsdata?.title.value}
-                      className="mb-3 mx-auto w-auto"
-                    />
-                    {healthneedsdata?.title.value}
-                  </div>
-                ))}
+                    >
+                      <img
+                        id={healthneedsdata?.title.value}
+                        src={DOMPurify.sanitize(
+                          healthneedsdata?.image?.expandedValue?.url
+                        )}
+                        alt={healthneedsdata?.title.value}
+                        className="mb-3 mx-auto w-auto"
+                      />
+                      {healthneedsdata?.title.value}
+                    </div>
+                  )
+                } 
+                )}
           </div>
           {healthNeedData?.length > slidesPerRow * rowsPerPage && (
             <div className="carousel-controls flex justify-center absolute top-[124px] w-full">

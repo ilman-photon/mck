@@ -15,7 +15,6 @@ import CategoryComponent from "@/components/category";
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const categoryName = selectedCategory?.replace(/ /g, "-");
-  const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   let [response, setResponse] = useState<any>()
   const [productCategoryBlock , setProductCategoryBlock] = useState<any>([])
