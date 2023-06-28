@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect,useCallback } from "react";
 import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
@@ -7,9 +7,24 @@ import { HeaderComponentType } from "./index.type";
 import axiosInstance from "@/utils/axiosInstance";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
 import DOMPurify from "isomorphic-dompurify";
+import { useHealthNeedsStore } from "../health_needs/components/Store/useHealthNeedsStore";
+import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
+import { useAllProductStore } from "../all_products_category/Store/useAllProductsStore";
 
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
+
+  const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
+  const onClearSelectedProductCat = useSelectedProductCategoryStore(state => state.onClearAll)
+  const onClearAllProductCat = useAllProductStore(state => state.onClearAll)
+  const onSelectedSetFilter = useHeaderStore(state => state.onSelectedSetFilter) 
+
+  const handleClearAll = useCallback(() => {
+    onClearAllHealthNeeds()
+    onClearAllProductCat()
+    onClearSelectedProductCat()
+    onSelectedSetFilter(null)
+  },[])
 
   const checkEnableButton = () => {
     return router.pathname;
@@ -65,6 +80,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
 
 
   function handleOnClickLogo() {
+    handleClearAll()
     router.push({
       pathname: "/",
     });

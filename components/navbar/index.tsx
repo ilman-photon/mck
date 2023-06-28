@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { useState, useLayoutEffect, useEffect, useRef } from "react";
+import { useState, useLayoutEffect, useEffect, useRef, useCallback } from "react";
 import ProductDropComponent from "../productdrop";
 import { useHeaderStore } from "./Store/useNavBarStore";
 import { useOutsideClick } from "@/hooks/useClickOutside";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import { useRouter } from "next/router";
+import { useHealthNeedsStore } from "../health_needs/components/Store/useHealthNeedsStore";
+import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
+import { useAllProductStore } from "../all_products_category/Store/useAllProductsStore";
 
 function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
   const router = useRouter();
@@ -21,6 +24,18 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
 
   const wrapperRef = useRef(null);
   const [isOutsideClicked] = useOutsideClick(isMobileMenuActive ? wrapperRef : null);
+
+  const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
+  const onClearSelectedProductCat = useSelectedProductCategoryStore(state => state.onClearAll)
+  const onClearAllProductCat = useAllProductStore(state => state.onClearAll)
+  const onSelectedSetFilter = useHeaderStore(state => state.onSelectedSetFilter) 
+
+  const handleClearAll = useCallback(() => {
+    onClearAllHealthNeeds()
+    onClearAllProductCat()
+    onClearSelectedProductCat()
+    onSelectedSetFilter(null)
+  },[])
 
   useEffect(() => {
     if (isOutsideClicked) {
@@ -147,14 +162,17 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
               >
                 <div className="relative megamenu-row">
                   <div className="lg:pr-2.5 mobilelarge:py-0"
-
+                    onClick={handleClearAll}
                     id={`header-menu-0${idx + 1}`}
                   >
                     <Link
                       className="text-lg text-sofia-reg text-center font-medium flex my-3 lg:border-b-2 lg:border-transparent hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                       href={item?.menuItemUrl?.value ?? ""}
                       onMouseEnter={() => onMouseHover(item?.menuItemName?.value)}
-                      onClick={() => handleLinkClick(item?.menuItemUrl?.value)}
+                      onClick={() => {
+                        handleClearAll()
+                        handleLinkClick(item?.menuItemUrl?.value)
+                      }}
                     >
                       {item?.menuItemName?.value}
                     </Link>

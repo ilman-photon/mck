@@ -31,22 +31,14 @@ function HealthNeeds() {
     const setLoader = useHealthNeedsStore(state => state.setLoader)
     const isProductFilterSelected = selectedFilterItems?.length > 0
     const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
-
     const productSum = useHealthNeedsStore((state) => state.productSum)
-    
+    console.log(selectedFilterItems,'---',bucket)
     const handleFetchProductsSubCategories = async (categoryArrayList:any) => {
         setLoader(true)
         let tempResults: any = [];
         await axiosInstance.get(constructQuery(bucket)).then((res) => {
           res.data.results.map((item:any) => {
             let name = item.productCategory.value[0].name;
-            // if (tempResults[name]) {
-            //   let tempArray = tempResults[name];
-            //   tempArray.push(item);
-            //   tempResults[name] = tempArray;
-            // } else {
-            //   tempResults[name] = [item];
-            // }
             item?.healthNeeds?.value.forEach((value: any) => {
             if (
               value.name !== "Health Needs" &&
@@ -68,9 +60,6 @@ function HealthNeeds() {
             } 
           });
           })
-            // const nameValue = res?.data?.results?.[0]?.productType?.value?.[0]?.name
-            // const resultValue = res?.data?.results
-            
             const totalMatching = res?.data?.totalMatching
             const transformedArray = Object.entries(tempResults).map(
               ([key, value]) => {
@@ -80,8 +69,6 @@ function HealthNeeds() {
                 };
               }
             );
-            // console.log(transformedArray)
-            // console.log(bucket)
             onProductQueried(
               transformedArray,
               totalMatching

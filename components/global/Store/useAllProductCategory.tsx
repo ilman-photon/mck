@@ -1,6 +1,9 @@
 import axiosInstance from "@/utils/axiosInstance";
 import { create } from "zustand";
 
+/**
+ * @deprecated please use Store from Components
+ */
 interface Controller {
     getProductCategorySettings:() => Promise<void>
     healthNeedData:any
@@ -24,6 +27,11 @@ interface Controller {
     activeFilters:any
     setActiveFilters:(filter:any) => void 
 }
+
+/**
+ * @deprecated please use Store from Components
+ */
+
 
 export const useAllProductCategory = create<Controller>((set,get) => ({
     getProductCategorySettings:async() => {

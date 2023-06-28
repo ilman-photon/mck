@@ -8,6 +8,7 @@ import { useCategoryStore } from "../global/Store/useCategoryStore";
 import { useSelectedProductCategoryStore } from "../product_list/Store/useSelectedProductCategoryStore";
 import { ProductFilter } from "../product_list/Model/ProdutAPI";
 import { useHeaderStore } from "../navbar/Store/useNavBarStore";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function CategoryComponent({ sectionData }: any) {
   const router = useRouter();
@@ -21,8 +22,10 @@ export default function CategoryComponent({ sectionData }: any) {
   const setBucket = useSelectedProductCategoryStore((state) => state.setBucket)
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
-  const productCategoryDataList = useSelectedProductCategoryStore(state => state.productCategoryDataList)
-
+  const setLoader = useSelectedProductCategoryStore(state => state.setLoader)
+  const setProductCategoryDataList = useSelectedProductCategoryStore(state => state.setProductCategoryDataList)
+  // const productCategoryDataList = useSelectedProductCategoryStore(state => state.productCategoryDataList)
+  const selectCategory = useHeaderStore((state) => state.onClickEachCategory);
   const handleClearAll = React.useCallback(() => {
     onClearAll()
   },[])
@@ -57,8 +60,43 @@ export default function CategoryComponent({ sectionData }: any) {
             return (
               <div
                 key={item?.data?.contentLink?.id}
-                  onClick={() =>
+                  onClick={async() => {
+                    handleClearAll()
+                    setLoader(true)
+                    selectCategory(item?.data?.productCategoryType?.value[0]?.name);
+                      const correctedName = item?.data?.productCategoryType?.value[0]?.name.replace(/ /g, "-")
+                      const callApiRecommendCategoryData = await axiosInstance.get(
+                       `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/${correctedName}/&expand=*`
+                      )
+                      if(callApiRecommendCategoryData.data && callApiRecommendCategoryData.status === 200){
+                          const productCategoryDataList = callApiRecommendCategoryData?.data?.[0]?.categoryFilter?.expandedValue;
+                          const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
+                            return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
+                          })
+                          setProductCategoryDataList(productCategoryDataList)
+                          if(filteredData){
+                            filteredData?.map((filteredData:any) => {
+                              filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                                onSelectCheckBox(subData)
+                                setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
+                              })
+                            })
+                          }
+                      }
+                    setLoader(false)
+                    // const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
+                    //     return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
+                    //   })
+                    // if(filteredData){
+                    //   filteredData?.map((filteredData:any) => {
+                    //     filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                    //       onSelectCheckBox(subData)
+                    //       setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
+                    //     })
+                    //   })
+                    // }
                     handleClickOnCategory(item?.data?.productCategoryUrl?.value)
+                  }
                   }
                 className={`mb-6 cursor-pointer ${
                   index < 4 ? "w-1/2 lg:w-1/4" : "w-full lg:w-1/2"
@@ -83,18 +121,18 @@ export default function CategoryComponent({ sectionData }: any) {
                 </div>
                 <div
                 onClick={() => {
-                  handleClearAll()
-                  const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
-                      return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
-                    })
-                  if(filteredData){
-                    filteredData?.map((filteredData:any) => {
-                      filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                        onSelectCheckBox(subData)
-                        setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
-                      })
-                    })
-                  }
+                  // handleClearAll()
+                  // const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
+                  //     return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
+                  //   })
+                  // if(filteredData){
+                  //   filteredData?.map((filteredData:any) => {
+                  //     filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
+                  //       onSelectCheckBox(subData)
+                  //       setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
+                  //     })
+                  //   })
+                  // }
                 }}
                   className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
                   id={`category_name_0${index}`}

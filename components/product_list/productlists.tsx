@@ -261,7 +261,7 @@ function ProductList() {
     React.useEffect(() => {
         if (isProductFilterSelected) {
             handleFetchProductsSubCategories()
-        } else if (isProductFilterSelectedEmpty && !selectedFilter?.isClicked) {
+        } else if (isProductFilterSelectedEmpty && selectedFilter === null) {
             fetchAllProductList()
         }
     }, [selectedFilterItems,selectedFilter])   

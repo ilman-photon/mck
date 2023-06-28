@@ -144,26 +144,6 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           className="text-mckblue text-left text-sofia-reg pt-9 smalldekstop:pt-0.5 smalldekstop:pb-0.5 pt pb-9 pl-2 hover:bg-beige-50"
                           key={`sbmenu${index}`}
                           onClick={() => {
-                            if(pathNameHealthNeeds){
-                              handleOnClearAllHealthNeeds()
-                              setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)
-                              onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
-                            } else {
-                              handleClearAll()
-                              const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
-                                return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
-                                  id: data?.id,
-                                  name: data?.name,
-                                  description: data?.description
-                                }));
-                               });
-                              setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
-                              onSelectCheckBox(ele?.categoryItem?.value?.[0])
-                            }
-                            /**
-                             * @description refer to this as well because Health Needs doesn't have a `parent`
-                             */
-                            handleClick(false)
                             if (response?.menuItemName?.value) {
                               selectCategory(response?.menuItemName?.value);
                             } else {
@@ -171,6 +151,26 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                                 updateUrl(ele?.menuItemUrl?.value, "1")
                               );
                             }
+                            if(pathNameHealthNeeds || !response.menuItemName?.value){
+                              handleOnClearAllHealthNeeds()
+                              onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
+                              setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)
+                            } else {
+                              handleClearAll()
+                              onSelectCheckBox(ele?.categoryItem?.value?.[0])
+                              const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                                return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                                  id: data?.id,
+                                  name: data?.name,
+                                  description: data?.description
+                                }));
+                              });
+                              setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
+                            }
+                            /**
+                             * @description refer to this as well because Health Needs doesn't have a `parent`
+                             */
+                            handleClick(false)
                             if(selectedFilter === null){
                               onSelectedSetFilter({
                                 isClicked:true,
@@ -180,6 +180,41 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           }}
                         >
                           <Link
+                          onClick={() => {
+                            if (response?.menuItemName?.value) {
+                              selectCategory(response?.menuItemName?.value);
+                            } else {
+                              selectCategory(
+                                updateUrl(ele?.menuItemUrl?.value, "1")
+                              );
+                            }
+                            if(pathNameHealthNeeds){
+                              handleOnClearAllHealthNeeds()
+                              onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
+                              setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)
+                            } else {
+                              handleClearAll()
+                              onSelectCheckBox(ele?.categoryItem?.value?.[0])
+                              const subCategoryData = response?.subMenuContentBlockArea?.expandedValue?.flatMap((subData: any) => {
+                                return subData.categoryItem?.value?.map((data: ProductFilter.MainCategory) => ({
+                                  id: data?.id,
+                                  name: data?.name,
+                                  description: data?.description
+                                }));
+                              });
+                              setBucket(response?.categoryItem?.value?.[0],ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,subCategoryData?.length,'',false)
+                            }
+                            /**
+                             * @description refer to this as well because Health Needs doesn't have a `parent`
+                             */
+                            handleClick(false)
+                            if(selectedFilter === null){
+                              onSelectedSetFilter({
+                                isClicked:true,
+                                clickedMenuName:updateUrl(ele?.menuItemUrl?.value,"1")
+                              })
+                            } 
+                          }}
                             href={{
                               pathname: updateUrl(ele?.menuItemUrl?.value, "0"),
                               query: response?.menuItemName?.value ? 
@@ -203,11 +238,6 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 </ul>
                 <span
                   onClick={() => setActive(response)}
-                  // className={`${
-                  //   response?.subMenuContentBlockArea?.value == null
-                  //     ? "lg:hidden xl:hidden"
-                  //     : "icon-arrow lg:hidden xl:hidden"
-                  // } ${active == response ? "open" : ""}`}
                 >
                   {" "}
                 </span>
@@ -215,19 +245,6 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
             </li>
           );
         })}
-        {/* <li className="w-1/5 signup-form">
-                    <div className="px-0 py-0 whitespace-normal mb-5">
-                        <div className="px-3 py-3 lg:px-3 bg-white rounded-lg border-mcknormalgrey border-solid border">
-                            <h5 className="m-0 pb-6 px-0 text-2xl text-sofia-reg text-mckblue">Email Signup & Rewards</h5>
-                            <div className="px-0 text-lg text-mckblue text-sofia-reg">
-                                Want to receive tips, personalized content and exclusive offers
-                                from Foster & Thrive?
-                            </div>
-                            <div className="text-mckblue py-6 px-0 text-lg text-sofia-reg">Sign up today!</div>
-                            <SignUpComponent />
-                        </div>
-                    </div>
-                </li> */}
       </ul>
     </div>
   );
