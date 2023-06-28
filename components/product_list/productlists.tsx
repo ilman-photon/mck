@@ -139,6 +139,9 @@ export function constructQuery(data:ProductFilter.QueryBucketType[],additionalQu
   return query;
 }
 
+let selectedRecommendedProduct:any = []
+let sectionData:any = []
+
 /**
  * 
  * @author [Zaqi Akbar]("https://github.com/zaqiakbaar")
@@ -268,12 +271,39 @@ function ProductList() {
         getProductFilterList()
     }, [])
 
+    React.useEffect(() => {
+        recommendProductData?.expandedValue?.map((id: any) => {
+          return recommendProductData?.expandedValue[1].contentBlockArea.expandedValue.map(
+            (item: any) => {
+              if (
+                id?.recommendedProductCategory?.value &&
+                id.recommendedProductCategory.value[0].id ===
+                  item.productCategoryType.value[0].id
+              ) {
+                const productName = id.recommendedProductCategory.value[0].name;
+                if (!selectedRecommendedProduct.includes(productName)) {
+                  selectedRecommendedProduct.push(productName);
+                }
+                const isDuplicate = sectionData.some(
+                  (item: any) => item.name === id.name
+                );
+    
+                if (!isDuplicate) {
+                  sectionData.push(id);
+                }
+              }
+            }
+          );
+        });
+      }, [recommendProductData]);
+
     return (
         <>
            <Loader isValidating={isLoading}/>
             <div className="mck-Product-Listing-page container w-full mx-auto grid grid-cols-1 mb-18">
                 <ProductListFilter
-        //   selectedRecommendedProduct={selectedRecommendedProduct}
+                    selectedRecommendedProduct={selectedRecommendedProduct}
+                    sectionData={sectionData}
                     activeFiltersData={activeFilterDataList}
                     productCategoryData={productCategoryDataList}
                     recommendedProduct={recommendProductData}
