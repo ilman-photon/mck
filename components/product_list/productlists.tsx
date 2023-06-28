@@ -261,10 +261,10 @@ function ProductList() {
     React.useEffect(() => {
         if (isProductFilterSelected) {
             handleFetchProductsSubCategories()
-        } else if (isProductFilterSelectedEmpty) {
+        } else if (isProductFilterSelectedEmpty && !selectedFilter?.isClicked) {
             fetchAllProductList()
         }
-    }, [selectedFilterItems])   
+    }, [selectedFilterItems,selectedFilter])   
     
     React.useEffect(() => {
         getRecommendedProductData(productItemName,String(addressBarState || addressBarStateOfFilter))
@@ -306,8 +306,7 @@ function ProductList() {
                     sectionData={sectionData}
                     activeFiltersData={activeFilterDataList}
                     productCategoryData={productCategoryDataList}
-                    recommendedProduct={recommendProductData}
-                    // activeFilter={selectedFilterItems}                    
+                    recommendedProduct={recommendProductData}                 
                     activeFilter={bucket}
                     productSearchCard={true}
                     selectedProduct={productQueriedData}

@@ -28,13 +28,8 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   const setBucketHealthNeeds = useHealthNeedsStore((state) => state.setBucket)
   const onSelectCheckBoxHealthNeeds = useHealthNeedsStore((state) => state.onSelectCheckBox)
   const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
-  const productCategoryDataList = useSelectedProductCategoryStore(state => state.productCategoryDataList)
-  const getRecommendProductData  = useSelectedProductCategoryStore(state => state.fetchRecommendedProductData)
-  const bucket  = useSelectedProductCategoryStore(state => state.bucket)
   const setLoader = useSelectedProductCategoryStore(state => state.setLoader)
-
-  const addressBarState = router?.query?.categoryOf
-  const addressBarStateOfFilter = router?.query?.filter
+  const setProductCategoryDataList = useSelectedProductCategoryStore(state => state.setProductCategoryDataList)
 
   const handleOnClearAllHealthNeeds = React.useCallback(() => {
     onClearAllHealthNeeds()
@@ -85,7 +80,12 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                 <Link
                 id={`header-mainmenu-${index+1}`}
                   onClick={async() => {
+                    onSelectedSetFilter({
+                      isClicked:true,
+                      clickedMenuName:response?.menuItemName?.value
+                    })
                     handleClearAll()
+                    setLoader(true)
                     selectCategory(response?.menuItemName?.value);
                       const correctedName = response?.menuItemName?.value?.replace(/ /g, "-")
                       const callApiRecommendCategoryData = await axiosInstance.get(
@@ -96,6 +96,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                           const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
                             return filterMainData?.mainCategory?.value?.[0]?.id === response?.categoryItem?.value?.[0]?.id
                           })
+                          setProductCategoryDataList(productCategoryDataList)
                           if(filteredData){
                             filteredData?.map((filteredData:any) => {
                               filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
@@ -105,17 +106,13 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                             })
                           }
                       }
-                    console.log(bucket,'ini yaaa')
-                    onSelectedSetFilter({
-                      isClicked:true,
-                      clickedMenuName:response?.menuItemName?.value
-                    })
                     router.push({
                       pathname: updateUrl(response?.menuItemUrl?.value, "0"),
                       query: {
                         filter: updateUrl(response?.menuItemUrl?.value, "1")
                       },
                     })
+                    setLoader(false)
                   }}
                   href={"#"}
                   className="text-gtl-med text-2xl text-mckblue text-left pl-2 empty:hidden categoryname font-medium"
