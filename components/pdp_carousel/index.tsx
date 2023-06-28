@@ -122,6 +122,7 @@ function PdpCarousel(prodViewData: any) {
           )}
           {isProductImageLessThanSix ? null : (
             <div
+              id={'pdp-left-arrow'}
               onClick={handleUpArrowClick}
               className={`carousel-prev -left-6 cursor-pointer lg:hidden flex items-center absolute left-[-10px] top-[27px] ${
                 selectedItemIndex <= 0 ? "opacity-25" : ""
@@ -196,6 +197,7 @@ function PdpCarousel(prodViewData: any) {
           )}
           {isProductImageLessThanSix ? null : (
             <div
+              id={'pdp-right-arrow'}
               onClick={handleDownArrowClick}
               className={`carousel-next -right-6 lg:hidden cursor-pointer flex items-center absolute top-[27px] right-[-10px] ${
                 prodResponse?.productImages?.value?.length - 1 <=
@@ -233,7 +235,7 @@ function PdpCarousel(prodViewData: any) {
             alt={DOMPurify.sanitize("Image is not available")}
             ariahidden={false}
             id={
-              "pdp_carousel_" + prodResponse?.productImages?.value?.imgdata?.id
+              "pdp_carousel_highlight"
             }
           />
         </div>
