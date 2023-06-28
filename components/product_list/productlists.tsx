@@ -234,7 +234,7 @@ function ProductList() {
     }
     
     const selectedFilter = useHeaderStore(state => state.selectedFilter)
-
+    // console.log(selectedFilterItems,'--',bucket)
     const handleFilterFromRoute = () => {
         const filterName = selectedFilter?.clickedMenuName
         if(productCategoryDataList){

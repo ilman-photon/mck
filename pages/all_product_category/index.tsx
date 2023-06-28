@@ -1,24 +1,21 @@
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
-import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import { useRouter } from "next/router";
-import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 import AllProductsFilter from "@/components/all_products_category/components/allproductsfilter";
 import { useAllProductStore } from "@/components/all_products_category/Store/useAllProductsStore";
 import { constructQuery } from "@/components/product_list/productlists";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
-let mainCatId: any = [];
 interface MyComponentProps {
   Response: {
     data: {
@@ -32,8 +29,6 @@ interface MyComponentProps {
 function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
-  const router = useRouter();
-  // const [activeFilter, setActiveFilter] = useState<any>([]);
   const recommendedProduct = useAllProductStore(state => state.recommendProductData)
   const isLoading = useAllProductStore(state => state.isLoading)
   const getProductCategoryList = useAllProductStore((state) => state.fetchRecommendedProductData)
@@ -203,24 +198,6 @@ function AllProductCategoryPage({
         {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={[recommendedProduct?.expandedValue[1]]} />}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
-          {/* <HealthNeedFilter
-            activeFiltersData={activeFiltersData}
-            activeFilter={activeFilter}
-            setActiveFilter={setActiveFilter}
-            productCategoryData={productCategoryData}
-            allProductCategoryList={allProductCategoryList}
-            selectedFilterItems={selectedFilterItems}
-            selectedProduct={selectedProduct}
-            setSelectedFilterItems={setSelectedFilterItems}
-            selectedViewAllCateory={selectedViewAllCateory}
-            fetchProductList={fetchProductList}
-            recommendedProduct={recommendedProduct}
-            sectionData={sectionData}
-            selectedRecommendedProduct={selectedRecommendedProduct}
-            productSum={productSum}
-            productSearchCard={productSearchCard}
-            filterClicked={filterClicked}
-          /> */}
           <AllProductsFilter
             activeFilter={bucket}
             activeFiltersData={activeFilterDataList}

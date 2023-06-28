@@ -29,8 +29,8 @@ function HealthNeeds() {
     const fetchAllProductList = useHealthNeedsStore(state => state.fetchAllProductList)
     const getProductFilterList = useHealthNeedsStore(state => state.fetchProductFilterList)
     const setLoader = useHealthNeedsStore(state => state.setLoader)
-    const isProductFilterSelected = selectedFilterItems?.length > 0
-    const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
+    const isProductFilterSelected = bucket?.length > 0
+    const isProductFilterSelectedEmpty = bucket?.length === 0
     const productSum = useHealthNeedsStore((state) => state.productSum)
     console.log(selectedFilterItems,'---',bucket)
     const handleFetchProductsSubCategories = async (categoryArrayList:any) => {
@@ -76,14 +76,14 @@ function HealthNeeds() {
             setLoader(false)
         }).catch(() => setLoader(false))
     }
-
+    
     React.useEffect(() => {
         if (isProductFilterSelected) {
             handleFetchProductsSubCategories(bucket)
         } else if (isProductFilterSelectedEmpty) {
             fetchAllProductList([])
         }
-    }, [selectedFilterItems])   
+    }, [bucket])   
     
 
     React.useEffect(() => {

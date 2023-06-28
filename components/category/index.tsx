@@ -84,17 +84,6 @@ export default function CategoryComponent({ sectionData }: any) {
                           }
                       }
                     setLoader(false)
-                    // const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
-                    //     return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
-                    //   })
-                    // if(filteredData){
-                    //   filteredData?.map((filteredData:any) => {
-                    //     filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                    //       onSelectCheckBox(subData)
-                    //       setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
-                    //     })
-                    //   })
-                    // }
                     handleClickOnCategory(item?.data?.productCategoryUrl?.value)
                   }
                   }
@@ -120,20 +109,6 @@ export default function CategoryComponent({ sectionData }: any) {
                   />
                 </div>
                 <div
-                onClick={() => {
-                  // handleClearAll()
-                  // const filteredData = productCategoryDataList?.filter((filterMainData:any) => {
-                  //     return filterMainData?.mainCategory?.value?.[0]?.id === item?.data?.productCategoryType?.value[0]?.id
-                  //   })
-                  // if(filteredData){
-                  //   filteredData?.map((filteredData:any) => {
-                  //     filteredData?.subCategory?.value?.map((subData:ProductFilter.MainCategory) => {
-                  //       onSelectCheckBox(subData)
-                  //       setBucket(filteredData?.mainCategory?.value?.[0],subData,filteredData?.isBusinessVerticalCategory?.value,filteredData?.subCategory?.value?.length,filteredData?.filterType?.value,true)
-                  //     })
-                  //   })
-                  // }
-                }}
                   className="text-center text-gtl-med text-xl lg:text-2xl mt-6 lg:mt-10 text-mckblue cursor-pointer text-oneline-ellipsis"
                   id={`category_name_0${index}`}
                 >
