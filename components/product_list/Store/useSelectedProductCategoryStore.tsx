@@ -29,6 +29,7 @@ interface Controller{
     onRemoveEachOfViewAllSelected:(selected:ProductFilter.QueryBucketType) => void
     sectionData:any
     setSectionData:(data:any) => void
+    setProductCategoryDataList:(data:any) => void
 }
 
 export const useSelectedProductCategoryStore = create<Controller>((set,get) => ({
@@ -213,5 +214,6 @@ export const useSelectedProductCategoryStore = create<Controller>((set,get) => (
         }
       },
       sectionData:[],
-      setSectionData:(data) => set({sectionData:data})
+      setSectionData:(data) => set({sectionData:data}),
+      setProductCategoryDataList:(data) => set({productCategoryDataList:data})
 }))
