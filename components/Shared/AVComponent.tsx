@@ -109,7 +109,8 @@ export default function AVComponent(props: MediaComponentProps) {
                             onPlay={onPlay}
                             onPause={onPause}
                             pip={true}
-                            tabIndex='1'
+                            tabIndex={0}
+                            role="button"
                             />
                         )}
                     </div>
