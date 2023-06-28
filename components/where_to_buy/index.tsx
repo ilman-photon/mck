@@ -14,9 +14,10 @@ import { useWhereToBuyStore } from "./Store/useWhereToBuyStore";
 import { mapConfigOptions } from "@/utils/MapConfig";
 import Link from "next/link";
 import { useWindowResize } from "@/hooks/useWindowResize";
+import DOMPurify from "isomorphic-dompurify";
 // import axiosInstance from "@/utils/axiosInstance";
 
-function WhereComponent() {
+function WhereComponent({storeSettings} : any) {
   const [responseValue, setResponseValue] = useState<any>();
   // const [latitude, setLatitude] = useState(33.2411354);
   const [latLong,setLatLong] = useState({
@@ -39,6 +40,8 @@ function WhereComponent() {
    * @state creds key
    */
   const mapKey = useWhereToBuyStore((state: any) => state.mapsApiKey);
+  const _mapkey = storeSettings?.[0]?.googleAPIKey?.value
+  let _healthApiKey = storeSettings?.[0]?.healthMartAPI?.value
   const healthApiKey = useWhereToBuyStore(
     (state: any) => state.healthMartApiKey
   );
@@ -61,7 +64,7 @@ function WhereComponent() {
   const onViewOnline = useWhereToBuyStore((state) => state.onViewOnlineStore);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: mapKey,
+    googleMapsApiKey: _mapkey,
   });
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [showTransit] = useState<boolean>();
@@ -72,17 +75,13 @@ function WhereComponent() {
 
   function fectchLatandLongDetails() {
     return axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=${mapKey}&${
-        !isNaN(textInput)
-          ? `components=postal_code:${Number(textInput)}`
-          : `address=${textInput}`
-      }`
+     `${storeSettings[0]?.googleAPI?.value}${_mapkey}&${!isNaN(textInput)?`components=postal_code:${Number(textInput)}`:`address=${textInput}`}`
     );
   }
 
   function fetchPDPLoctionDetails() {
     return axios.get(
-      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latLong.latitude}/${latLong.longitude}?apikey=${healthApiKey}`
+      `https://native.healthmart.com/HmNativeSvc/SearchByGpsAllNoState/${latLong.latitude}/${latLong.longitude}?apikey=${_healthApiKey}`
     );
   }
 
@@ -202,12 +201,14 @@ function WhereComponent() {
                 onChange={(e) => setTextInput(e.target.value)}
                 value={!isCustomSearch ? undefined : textInput}
                 onKeyDown={(e) => (e.key === "Enter" ? handleKey() : null)}
-                placeholder="City, State or Zip code"
+                // placeholder="City, State or Zip code"
+                placeholder={storeSettings?.[0]?.searchPlaceHolderText?.value}
                 className="border-mckblue bg-[#F8F9FB] w-full pl-3 py-3 pr-10 pt-[11px] pb-[11px] border rounded colors-[#4D5F9C] text-base font-normal text-sofia-reg text-mckblue70 relative wheretwobuy"
               />
               <div onClick={handleKey} className="cursor-pointer">
                 <Image
-                  src="images/Vector-nw.svg"
+                src={storeSettings?.[0]?.searchIcon?.expandedValue.url}
+                  // src="images/Vector-nw.svg"
                   alt="location"
                   aria-hidden={true}
                   className="text-mckgreyborder absolute top-[29px] right-[28px] lg:top-[12px] lg:right-5"
@@ -220,8 +221,10 @@ function WhereComponent() {
               className="lg:w-[640px] lg:desktop:w-[400px] w-full p-6 mr-6 text-mcknormalgrey text-sm font-normal text-sofia-reg lg:pt-0 mt-2 lg:mt-6"
               aria-label="Disclaimer"
               id="wb-label-001"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(storeSettings?.[0]?.disclaimer?.value),
+              }}
             >
-              Disclaimer: Products are subject to availability
             </div>
             <Link href={isMobile ? '#google-map' : {}} scroll onClick={handleScroll}>
             <div className="lg:w-[640px] lg:desktop:w-[500px] mobile:h-[551px] mobilelarge:h-[551px] pb-6 pl-6 lg:pr-4 pr-4 overflow-y-scroll lg:h-689 mr-6 location-box">
@@ -291,14 +294,16 @@ function WhereComponent() {
                           id={`wb-label-08_0${index}`}
                           onClick={() => onViewOnline(value?.StoreId)}
                         >
-                          View Online
+                          {storeSettings?.[0]?.viewOnlineText?.value}
+                          {/* View Online */}
                         </div>
                       ) : (
                         <div className="text-lg font-extrabold text-mckblue text-sofia-bold cursor-pointer"></div>
                       )}
                       <div className="text-lg font-extrabold text-mckblue text-sofia-bold">
                         <Image
-                          src="/images/directions_car_filled.svg"
+                        src={storeSettings?.[0].getDirectionsIcon?.expandedValue?.contentLink?.url}
+                          // src="/images/directions_car_filled.svg"
                           alt="direction"
                           className="inline-block"
                           id={`wb-label-09_0${index}`}
@@ -339,11 +344,11 @@ function WhereComponent() {
               center={{
                 lat:
                   responseValue?.length > 0 || isCustomSearch
-                    ? responseValue[0]?.Lat
+                    ? responseValue?.[0]?.Lat
                     : usaLat,
                 lng:
                   responseValue?.length > 0 || isCustomSearch
-                    ? responseValue[0]?.Lon
+                    ? responseValue?.[0]?.Lon
                     : usaLon,
               }}
             >
