@@ -55,8 +55,9 @@ const subCategory = (data:ProductFilter.MainCategory[], parrentQuery:string, isF
     data.forEach((item, index) => {
         if (index > 0 || isFirstParent) {
             sbCategory+= ' or '
-        } 
-        sbCategory += `${parrentQuery}/value/name eq '${item?.name}'`;
+        }
+        const encodeItemName = encodeURIComponent(item?.name);
+        sbCategory += `${parrentQuery}/value/name eq '${encodeItemName}'`;
     })
     return sbCategory
 };
@@ -67,7 +68,8 @@ const subCategoryNonBussiness = (data:ProductFilter.MainCategory[], parrentQuery
         if (index > 0 || isFirstParent) {
             sbCategory+= ' or '
         } 
-        sbCategory += `${parrentQuery}/value/name eq '${item?.name}'`;
+        const encodeItemName = encodeURIComponent(item?.name);
+        sbCategory += `${parrentQuery}/value/name eq '${encodeItemName}'`;
     })
     return sbCategory+=")"
 };

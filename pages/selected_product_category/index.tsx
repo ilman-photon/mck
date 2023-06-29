@@ -33,7 +33,7 @@ function ProductListPage() {
   }
   useEffect(() => {
     fetchData()
-  }, [categoryName])
+  }, [recognizedRoute])
 
   useEffect(()=>{
  categoryData()
