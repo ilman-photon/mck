@@ -138,7 +138,7 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
               key={getRandomNumber()}
             >
               <div className="relative megamenu-row">
-                <div className="pr-2.5">
+                <div className="pr-2.5 m-anchor-tag-dv">
                   <Link
                     className="text-lg text-sofia-reg text-center font-medium flex my-3 hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
                     href="/"
@@ -161,12 +161,11 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                 key={`mgmen${idx}`}
               >
                 <div className="relative megamenu-row">
-                  <div className="lg:pr-2.5 mobilelarge:py-0"
-                    onClick={handleClearAll}
+                  <div className="lg:pr-2.5 mobilelarge:py-0 m-anchor-tag-dv lg:hover:cursor-pointer"
                     id={`header-menu-0${idx + 1}`}
                   >
                     <Link
-                      className="text-lg text-sofia-reg text-center font-medium flex my-3 lg:border-b-2 lg:border-transparent hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link"
+                      className="text-lg text-sofia-reg text-center font-medium flex my-3 lg:border-b-2 lg:border-transparent hover:border-b-2 hover:border-mckwhite seperatemenu-hover lg:relative mainmenu-link mobilelarge:w-fit lg:hover:cursor-pointer"
                       href={item?.menuItemUrl?.value ?? ""}
                       onMouseEnter={() => onMouseHover(item?.menuItemName?.value)}
                       onClick={() => {
@@ -176,22 +175,22 @@ function NavBar({ isMobileMenuActive, setIsMobileMenuActive }: Props) {
                     >
                       {item?.menuItemName?.value}
                     </Link>
+                    <span
+                      onClick={() => {
+                        handleMenuOpen(item?.menuItemName?.value, item);
+                      }}
+                      className={`${item?.subMenuContentBlockArea?.value == null
+                        ? "lg:hidden xl:hidden"
+                        : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
+                        } 
+                      ${menuData_ && menuData_[idx] && menuData_[idx].flag
+                          ? "open"
+                          : ""
+                        }
+                      `}
+                      aria-hidden={true}
+                    ></span>
                   </div>
-                  <span
-                    onClick={() => {
-                      handleMenuOpen(item?.menuItemName?.value, item);
-                    }}
-                    className={`${item?.subMenuContentBlockArea?.value == null
-                      ? "lg:hidden xl:hidden"
-                      : "icon-arrow hidden lg:block xl:block lg:-right-[10px] lg:top-2.5"
-                      } 
-                    ${menuData_ && menuData_[idx] && menuData_[idx].flag
-                        ? "open"
-                        : ""
-                      }
-                    `}
-                    aria-hidden={true}
-                  ></span>
                 </div>
                 <div
                   className={`${'block'
