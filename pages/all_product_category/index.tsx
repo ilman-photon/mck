@@ -95,10 +95,9 @@ function AllProductCategoryPage({
     });
   }
   
-
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+      return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
