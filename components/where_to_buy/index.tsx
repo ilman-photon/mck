@@ -322,7 +322,8 @@ function WhereComponent({storeSettings} : any) {
                             )
                           }
                         >
-                          Get Directions
+                          {storeSettings?.[0]?.getDirectionsText?.value}
+                          {/* Get Directions */}
                         </button>
                       </div>
                     </div>
@@ -444,7 +445,8 @@ function WhereComponent({storeSettings} : any) {
                                   )
                                 }
                               >
-                                Get Directions
+                                {storeSettings?.[0].getDirectionsText?.value}
+                                {/* Get Directions */}
                               </button>
                             </div>
                           </div>
