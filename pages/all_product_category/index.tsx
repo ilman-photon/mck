@@ -87,6 +87,13 @@ function AllProductCategoryPage({
     getProductFilterList()
   },[])
 
+  function filteredData(valueType: string) {
+    return recommendedProduct?.expandedValue?.filter((ele: any) => {
+      return ele?.contentType?.some((arrEle: string) => {
+        return arrEle == valueType;
+      });
+    });
+  }
   
 
   useEffect(() => {
@@ -156,6 +163,7 @@ function AllProductCategoryPage({
 
   //   return () => clearTimeout(timer);
   // }, []);
+  
   return (
     <>
       <Head>
@@ -192,7 +200,7 @@ function AllProductCategoryPage({
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
             isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
-            sectionData={recommendedProduct?.expandedValue}
+            sectionData={filteredData("CarouselBlock")}
           />
         )}
         {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={[recommendedProduct?.expandedValue[1]]} />}
