@@ -10,6 +10,8 @@ import ProductCard from "./ProductCard";
 import RecommendationalProductComponent from "../recommendational_product";
 import ProductSearchCard from "../product_list/ProductSearchCard";
 import { useRouter } from "next/router";
+import { useHealthNeedsStore } from "./components/Store/useHealthNeedsStore";
+import { useAllProductStore } from "../all_products_category/Store/useAllProductsStore";
 SwiperCore.use([Navigation, Autoplay]);
 const ProductComponent = ({
   selectedProduct,
@@ -24,7 +26,9 @@ const ProductComponent = ({
   const router = useRouter()
   const pathNameHealthNeeds = router?.pathname === '/health_needs'
   const pathNameAllProducts = router?.pathname === '/all_product_category'
-
+  const bucketHealthNeeds = useHealthNeedsStore(state => state.bucket)
+  const bucketAllProducts = useAllProductStore(state => state.bucket)
+console.log(bucketAllProducts)
   if(!isMobile) {
     SwiperCore.use([Pagination])
   }
@@ -188,13 +192,21 @@ const ProductComponent = ({
         )
       } 
       )}
-      {pathNameHealthNeeds || pathNameAllProducts ? (
+      {pathNameHealthNeeds ? (
         <>
-        {selectedProduct?.length === 0 && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
+        {selectedProduct?.length === 0 &&  bucketHealthNeeds?.length !== 0 && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
         {selectedProduct?.length === 0  ? "There are no products" : null }
         </div>}
         </>
-      ) : (
+      ) : pathNameAllProducts ?
+      (
+        <>
+        {selectedProduct?.length === 0 &&  bucketAllProducts?.length !== 0 && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
+        {selectedProduct?.length === 0  ? "There are no products" : null }
+        </div>}
+        </>
+      )
+      : (
         <>
         {selectedProduct?.[1]?.data?.results?.length === 0  && <div  className="text-mckblue lg:text-5xl text-[27px] font-medium text-gtl-med lg:pb-0 pb-4 pt-0 lg:pt-0">
         {selectedProduct?.[1]?.data?.results?.length === 0  ? "There are no products" : null }
