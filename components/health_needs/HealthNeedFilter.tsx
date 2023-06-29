@@ -48,6 +48,7 @@ const HealthNeedFilter = ({
   const [mainCatNames, setMainCatNames] = useState<any>([]);
   const handleClearAll = () => {
     setActiveFilter([]);
+    setMainCatNames([])
     selectedFilterItems.map((category: any) => {
       category.isCategoryChecked = false;
       category.map((sub_category: any) => {
