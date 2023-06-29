@@ -49,34 +49,37 @@ export default function FooterComponent() {
                 </li>
                 <li className="lg:my-2 flex">
                 {footerSecondData?.data?.[0]?.socialMediaLinkBlock?.expandedValue.map(
-                    (sociallink: any, index: number) => (
-                      <>
-                        {sociallink?.socialMediaUrl?.value && <LinkComponent
-                          className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
-                          rel="stylesheet"
-                          href={sociallink?.socialMediaUrl?.value}
-                          key={sociallink?.contentLink?.id}
-                          id={`sl-00${index}`}
-                          ariahidden={false} 
-                          tabIndex={0}
-                          aria-label={sociallink?.socialMediaImage?.expandedValue?.altText?.value}
-                        >
-                          <ImageComponent
-                            id={sociallink?.socialMediaImage?.expandedValue?.altText
-                              ?.value}
-                            src={
-                              DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue
-                                ?.thumbnail?.value?.url)
-                            }
-                            ariahidden={false}
-                            className="mx-auto w-fit max-w-fit"
-                            alt={
-                              sociallink?.socialMediaImage?.expandedValue?.altText?.value
-                            }
-                          />
-                        </LinkComponent>}
-                      </>
-                    )
+                    (sociallink: any, index: number) => {
+                      // console.log()
+                      return  (
+                        <>
+                          {sociallink?.socialMediaUrl?.value && <LinkComponent
+                            className="text-sofia-reg text-lg text-mcknormalgrey w-6 h-6 mr-3"
+                            rel="stylesheet"
+                            href={sociallink?.socialMediaUrl?.value}
+                            key={sociallink?.contentLink?.id}
+                            id={`sl-00${index}`}
+                            ariahidden={false} 
+                            tabIndex={0}
+                            aria-label={sociallink?.socialMediaImage?.expandedValue?.altText?.value}
+                          >
+                            <ImageComponent
+                              id={sociallink?.socialMediaImage?.expandedValue?.altText
+                                ?.value}
+                              src={
+                                DOMPurify.sanitize(sociallink?.socialMediaImage?.expandedValue?.url)
+                              }
+                              ariahidden={false}
+                              className="mx-auto w-fit max-w-fit"
+                              alt={
+                                sociallink?.socialMediaImage?.expandedValue?.altText?.value
+                              }
+                            />
+                          </LinkComponent>}
+                        </>
+                      )
+                    } 
+                   
                   )}
                 </li>
               </ul>

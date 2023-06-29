@@ -32,7 +32,7 @@ const SocialMediaIconComponent = () => {
                         tabIndex={0}
                     >
                         <ImageComponent
-                            src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.thumbnail?.value?.url)}
+                            src={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.url)}
                             alt={DOMPurify.sanitize(item?.socialMediaImage?.expandedValue?.altText?.value)}
                             id={`social-Img-${index}${item?.contentLink?.id}`}
                             ariahidden={false}
