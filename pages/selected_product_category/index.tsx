@@ -11,6 +11,7 @@ import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
 import ProductList from "@/components/product_list/productlists";
 import CategoryComponent from "@/components/category";
+import { getQueryString } from "@/utils/URLUtils";
 
 function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
@@ -19,9 +20,13 @@ function ProductListPage() {
   let [response, setResponse] = useState<any>()
   const [productCategoryBlock , setProductCategoryBlock] = useState<any>([])
 
+  const { filter, categoryOf } = getQueryString()
+
+  const recognizedRoute = categoryOf?.length > 0 ? categoryOf.replace(/\+/g, "-") : filter?.length > 0 && categoryOf === undefined ? filter.replace(/\+/g, "-") : categoryName
+  
   const fetchData = async () => {
     const data = await axiosInstance(
-      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${categoryName}/&expand=*`
+      `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${recognizedRoute}/&expand=*`
     );
     setResponse(data)
 
