@@ -87,11 +87,17 @@ function AllProductCategoryPage({
     getProductFilterList()
   },[])
 
+  function filteredData(valueType: string) {
+    return recommendedProduct?.expandedValue?.filter((ele: any) => {
+      return ele?.contentType?.some((arrEle: string) => {
+        return arrEle == valueType;
+      });
+    });
+  }
   
-
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
+      return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
@@ -149,13 +155,6 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoadingFalse();
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
   return (
     <>
       <Head>
@@ -192,10 +191,10 @@ function AllProductCategoryPage({
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
             isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
-            sectionData={recommendedProduct?.expandedValue}
+            sectionData={filteredData("CarouselBlock")}
           />
         )}
-        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={[recommendedProduct?.expandedValue[1]]} />}
+        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={filteredData("ProductCategoryBlock")} />}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
           <AllProductsFilter
