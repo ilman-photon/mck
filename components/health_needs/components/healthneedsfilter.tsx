@@ -1,6 +1,6 @@
 import ProductComponent from "../ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 // import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "@/components/global/ImageComponent";
@@ -56,6 +56,16 @@ const HealthNeedsFilterComponent = ({
     onDeselectedFilter(null)
     await getAlProductList()
   }
+
+  React.useEffect(() => {
+    if (productCategoryData?.length) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort(
+          (a: ISubCategory, b: ISubCategory) => a.name.localeCompare(b.name)
+        );
+      });
+    }
+  }, [productCategoryData]);
 
   return (
     <div className="lg:mt-[50px] mt-6 lg:px-0 desktop:px-6 smalldekstop:px-6 mobilelarge:px-0">

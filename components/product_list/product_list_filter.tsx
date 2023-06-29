@@ -1,6 +1,6 @@
 import ProductComponent from "../health_needs/ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState,useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 // import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "../global/ImageComponent";
@@ -40,7 +40,6 @@ const ProductListFilter = ({
 
   filterClicked,
 }: any) => {
-  const router = useRouter();
   const [isFilterShow, setIsFilterShow] = useState(true);
   const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
   const onClearAll = useSelectedProductCategoryStore(state => state.onClearAll)
@@ -53,13 +52,21 @@ const ProductListFilter = ({
   const onDeselectRemoveBucket = useSelectedProductCategoryStore(state => state.onDeselectRemoveBucket)
   const onDeselectRemoveBuckets = useSelectedProductCategoryStore(state => state.onRemoveEachOfViewAllSelected)
 
-  // const bucket = useSelectedProductCategoryStore(state => state.bucket)
-  // console.log(bucket)
   const handleClearAll = async() => {
     onClearAll()
     onDeselectedFilter(null)
     await getAlProductList()
   }
+
+  React.useEffect(() => {
+    if (productCategoryData?.length) {
+      productCategoryData.map((filters: any) => {
+        return filters.subCategory.value.sort(
+          (a: ISubCategory, b: ISubCategory) => a.name.localeCompare(b.name)
+        );
+      });
+    }
+  }, [productCategoryData]);
   
   
   return (

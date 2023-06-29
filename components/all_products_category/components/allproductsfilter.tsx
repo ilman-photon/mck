@@ -1,25 +1,17 @@
 import ProductComponent from "@/components/health_needs/ProductListCarousel";
 import { useRouter } from "next/router";
-import { useState,useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-// import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import { ImageComponent } from "@/components/global/ImageComponent";
 import DOMPurify from "isomorphic-dompurify";
 import { type ProductFilter } from "@/components/product_list/Model/ProdutAPI";
 import { useHeaderStore } from "@/components/navbar/Store/useNavBarStore";
 import { useAllProductStore } from "../Store/useAllProductsStore";
-// import { getQueryString } from "@/utils/URLUtils";
-
 interface ISubCategory {
   id: number;
   name: string;
   description: string;
 }
-
-// interface ProductListFilterProps{
-//   activeFilter:ProductFilter.QueryBucketType[]
-//   activeFiltersData:ActiveFiltersDataResponse
-// }
 
 let tempCategoryName: any = [];
 const ProductListFilter = ({
@@ -40,7 +32,6 @@ const ProductListFilter = ({
 
   filterClicked,
 }: any) => {
-  const router = useRouter();
   const [isFilterShow, setIsFilterShow] = useState(true);
   const onSelectCheckBox = useAllProductStore(state => state.onSelectCheckBox)
   const onClearAll = useAllProductStore(state => state.onClearAll)
@@ -53,13 +44,22 @@ const ProductListFilter = ({
   const onDeselectRemoveBucket = useAllProductStore(state => state.onDeselectRemoveBucket)
   const onDeselectRemoveBuckets = useAllProductStore(state => state.onRemoveEachOfViewAllSelected)
 
-  // const bucket = useSelectedProductCategoryStore(state => state.bucket)
-  // console.log(bucket)
   const handleClearAll = async() => {
     onClearAll()
     onDeselectedFilter(null)
     await getAlProductList()
   }
+
+
+  React.useEffect(() => {
+    if (productCategoryData?.length) {
+      productCategoryData?.map((filters: any) => {
+        return filters?.subCategory?.value?.sort(
+          (a: ISubCategory, b: ISubCategory) => a?.name?.localeCompare(b?.name)
+        );
+      });
+    }
+  }, [productCategoryData]);
   
   
   return (

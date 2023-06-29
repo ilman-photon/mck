@@ -116,7 +116,6 @@ export const useHealthNeedsStore = create<Controller>((set,get) => ({
       onSelectCheckBox:(selectedCatOrSubCat) => {
         // Check if the selected category/subcategory already exists in the array
         const isSelected = get().selectedFilterItems.includes(selectedCatOrSubCat);
-    
         if (isSelected) {
           // If already selected, remove it from the array
           set((state) => ({
