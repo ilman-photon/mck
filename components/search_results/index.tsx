@@ -19,7 +19,8 @@ function ResultComponent() {
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [productCount, setProductCount] = useState<any>(0);
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
-  const [productSearch, setProductSearch] = useState<any>(router.query.search);
+  const productSearch = router.query.search
+  // const [productSearch, setProductSearch] = useState<any>(router.query.search);
   const [placeHolders, setSearchplaceHolders] = useState<any>();
   const productSearchCard = true
   const [productSum , setProductSum] = useState<any>()
@@ -44,7 +45,7 @@ function ResultComponent() {
     promise
       .then((res:any) => {
         setProductCount(res?.data?.totalMatching);
-        setProductSearch(router.query.search);
+        // setProductSearch(router.query.search);
         setSearchLoading(false);
         setProductSum(res?.data?.totalMatching)
         SetProductListData( [
@@ -61,99 +62,18 @@ function ResultComponent() {
         setProductFilter(res);
       })
       .catch((e:any) => console.log(e));
-
-    fetchProductList("");
+   if(router.query.search){
+    fetchProductList(router.query.search);
+   }
   }, [router.query.search]);
 
-  const handleCTABtn = (url: string) => {
-    router.push({
-      pathname: "",
-    });
-  };
 
-  const handleCheckBox = (
-    e: any,
-    filter: any,
-    categoryId: any,
-    subCategoryId: any
-  ) => {
-    let filterItems: any[] = [];
-    filterItems = selectedFilterItems;
-    if (e.target.checked) {
-      if (filterItems[categoryId]["items"].indexOf(filter) === -1) {
-        filterItems[categoryId]["items"].push(filter);
-      }
-      //existing code
-      setActiveFilter([...activeFilter, filter]);
-      filterItems[categoryId][subCategoryId].checked = true;
-    } else {
-      const index = filterItems[categoryId]["items"].indexOf(filter);
-      filterItems[categoryId]["items"].splice(index, 1);
-      //existing code
-      setActiveFilter(
-        activeFilter.filter((item: any) => {
-          return item !== filter;
-        })
-      );
-      filterItems[categoryId][subCategoryId].checked = false;
-      if (filterItems[categoryId]["items"] && filterItems[categoryId]["items"]?.length <= 0) {
-        filterItems[categoryId].isCategoryChecked = false;
-      }
-    }
-    setSelectedFilterItems(() => filterItems);
-  };
-
-  const handleViewAllChange = (e: any, categoryId: any) => {
-    let isCategoryChecked = false;
-    let subCategoryChecked = false;
-    if (e.target.checked) {
-      if (selectedViewAllCateory.indexOf(categoryId) === -1) {
-        selectedViewAllCateory.push(categoryId);
-      }
-      isCategoryChecked = true;
-      subCategoryChecked = true;
-    } else {
-      const index = selectedViewAllCateory.indexOf(categoryId);
-      selectedViewAllCateory.splice(index, 1);
-      isCategoryChecked = false;
-      subCategoryChecked = false;
-    }
-
-    let selectedFilterData: any[] = [];
-    selectedFilterData = selectedFilterItems;
-
-    selectedFilterData[categoryId].isCategoryChecked = isCategoryChecked;
-
-    selectedFilterData[categoryId].map((sub_category: any) => {
-      sub_category.checked = subCategoryChecked;
-      if (subCategoryChecked) {
-        if (selectedFilterData[categoryId]["items"].indexOf(sub_category.name) === -1) {
-          selectedFilterData[categoryId]["items"].push(sub_category.name);
-        }
-      } else {
-        const index = selectedFilterData[categoryId]["items"].indexOf(
-          sub_category.name
-        );
-        selectedFilterData[categoryId]["items"].splice(index, 1);
-      }
-    });
-
-    let selectedSubCat: any = [];
-    selectedFilterData.map((category: any) => {
-      category.items.map((name: any) => {
-        if (selectedSubCat.indexOf(name) === -1) {
-          selectedSubCat.push(name);
-        }
-      });
-    });
-    setActiveFilter(() => selectedSubCat);
-    setSelectedFilterItems(() => selectedFilterData);
-    
-  };
 
   useEffect(() => {
+    if(router.query.search){
     createQueryParameters();
-  }, [activeFilter]);
+    }
+  }, [activeFilter,router.query.search]);
 
   const createQueryParameters = () => {
     let queryParams = "";
@@ -191,8 +111,13 @@ function ResultComponent() {
       } else {
         queryParams = notBusinessQueryParams;
       }
-    fetchProductList(queryParams);
-  };
+        if(queryParams?.length>0){
+          fetchProductList(queryParams);
+        }
+        else{
+          fetchProductList(router?.query?.search);
+        }
+  }
 
   // -------- Health needs page data fetch starts -------- //
   const [healthNeedData, setHealthNeedData] = useState<any>();
@@ -270,50 +195,6 @@ function ResultComponent() {
     setSelectedFilterItems(tempArr);
   };
 
-  function handleClearOne(item: any) {
-    setActiveFilter(
-      activeFilter.filter((filterItem: any) => filterItem !== item)
-    );
-    let selectedFilterData: any[] = [];
-    selectedFilterData = selectedFilterItems;
-    selectedFilterData.map((category: any) => {
-      category.isCategoryChecked = false;
-      category.map((sub_category: any) => {
-        if (item == sub_category.name) {
-          sub_category.checked = false;
-        }
-        if (category["items"] && category["items"].indexOf(item) > -1) {
-          category["items"].splice(category["items"].indexOf(item), 1);
-        }
-      });
-    });
-    setSelectedFilterItems(() => selectedFilterData);
-
-  }
-
-  const handleClearAll = () => {
-    setActiveFilter([]);
-    let selectedFilterData: any[] = [];
-    selectedFilterData = selectedFilterItems;
-    selectedFilterData.map((category: any) => {
-      category.isCategoryChecked = false;
-      category.map((sub_category: any) => {
-        sub_category.checked = false;
-        if (category["items"] && category["items"].indexOf(sub_category.name) > -1) {
-          category["items"].splice(category["items"].indexOf(sub_category.name), 1);
-        }
-      });
-    });
-    setSelectedFilterItems(() => selectedFilterData);
-    fetchProductList("");
-  };
-  const handleProductClick = (data: any) => {
-    const title = data.routeSegment;
-    router.push({
-      pathname: "/product_detail",
-      query: { data: title },
-    });
-  };
 
   useEffect(() => {
     fetchBlogSetting()
@@ -344,20 +225,24 @@ function ResultComponent() {
               </div>
             </div>
           }
-          {productCount=== 0 && placeHolders?.noMatchFoundText ? <div className='lg:col-span-2 col-start-1 col-end-7'>
+          {productCount=== 0 && placeHolders?.noMatchFoundText ? 
+           <div className='lg:col-span-2 col-start-1 col-end-7'>
             < div className='w-full lg:pb-11 pb-5' >
               <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${placeHolders?.noMatchFoundText.value} “${productSearch}”`} </h1>
               <div className="text-base text-sofia-reg text-mckback font-normal lg:pb-px pb-3" id="srnf-label-001">{placeHolders?.searchForText.value} <strong className='text-mckred'><i>{productSearch}</i></strong></div>
               <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, 0)}</div>
             </div >
-          </div > :
+          </div > 
+           : 
             <>
             {placeHolders?.showingResultsText && 
               <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}”`} </h1>
             }
+            {/* <br /> */}
+</>
+}
               {/* <div className="text-lg text-sofia-reg text-mckback font-normal lg:pb-px pb-1" id="srnf-label-002">{placeHolders?.showingResultsText.value} <strong className='text-mckblue'><i>{productSearch}</i></strong></div> */}
-              {/* <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div> */}
-              <br />
+              {/* <div className='text-lg text-sofia-reg text-mcknormalgrey font-normal' id="srnf-label-003">{placeHolders?.showResultsText.value.replace(/#/g, productCount)}</div> */}            
                <div className="mck-product-filter">
         <HealthNeedFilter
           activeFiltersData={activeFiltersData}
@@ -373,7 +258,6 @@ function ResultComponent() {
           productSearchCard={productSearchCard}
         />
         </div>
-            </>}
 
         </div>
        
