@@ -110,7 +110,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     const handleScroll = () => {
       const offset = window.scrollY;
       // Adjust the scroll position value as per your requirements
-      if (offset > 28) {
+      if (offset > 0) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
