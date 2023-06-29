@@ -71,7 +71,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
   // console.log(bucket)
 
   return (
-    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12">
+    <div className="w-full lg:flex xl:flex lg:mx-auto xl:mx-auto absolute bg-mcklightyellow z-10 left-0 pt-6 pb-12 m-secondmenuview">
       <ul className="lg:w-11/12 xl:w-11/12 lg:container lg:flex lg:mx-auto xl:flex xl:mx-auto lg:justify-center">
         {subMenuData?.map(({ response }: any, index:any) => {
           return (
