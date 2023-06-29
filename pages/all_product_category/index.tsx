@@ -156,14 +156,6 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoadingFalse();
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-  
   return (
     <>
       <Head>
@@ -203,7 +195,7 @@ function AllProductCategoryPage({
             sectionData={filteredData("CarouselBlock")}
           />
         )}
-        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={[recommendedProduct?.expandedValue[1]]} />}
+        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={filteredData("ProductCategoryBlock")} />}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
           <AllProductsFilter
