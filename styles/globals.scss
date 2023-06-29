@@ -1131,9 +1131,9 @@ Mobiles Menu
   background-color: #ffeabc;
 }
 
-// .grey-bg {
-//   background-color: #d9f3fd;
-// }
+.grey-bg {
+  background-color: #d9f3fd;
+}
 
 .grey-light-bg {
   background-color: #eaf1f8;
@@ -1970,14 +1970,10 @@ Mobile and iPad Navigation
       top: -7px;
     }
   }
-  .blogright-sidebar {
-    .category-card {
-      .tab-label:after {
-        position: absolute;
-        right: 15px;
-        top: 7px;
-      }
-    }
+  .blogright-sidebar .category-card .tab-label:after {
+    position: absolute;
+    right: 15px;
+    top: 7px;
   }
 }
 
@@ -2022,6 +2018,9 @@ Mobile and iPad Navigation
 .input-search:focus {
   border: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+.search-box {
+  z-index: 9999;
 }
 .search-icon path {
   fill: #001a71;
@@ -2435,4 +2434,12 @@ li.indicator.active {
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: #001a71 !important;
+}
+
+@media screen and (max-width: 767px) {
+  .blockDetailsCarousel {
+    .swiper-slide {
+      margin: 0 auto !important;
+    }
+  }
 }
