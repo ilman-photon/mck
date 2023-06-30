@@ -505,18 +505,15 @@ const HealthNeedFilter = ({
                                 ) : null}
                                 <label
                                   htmlFor={
-                                    leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                    leftfiltermaindata?.categoryDisplayName?.value
                                   }
                                   className="text-base font-extrabold text-sofia-bold text-mckblue z-[-1]"
                                   aria-label={
-                                    leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                    leftfiltermaindata?.categoryDisplayName?.value
                                   }
                                 >
                                   {
-                                    leftfiltermaindata?.mainCategory?.value[0]
-                                      ?.name
+                                    leftfiltermaindata?.categoryDisplayName?.value
                                   }
                                 </label>
                               </div>
