@@ -28,7 +28,7 @@ const ProductComponent = ({
   const pathNameAllProducts = router?.pathname === '/all_product_category'
   const bucketHealthNeeds = useHealthNeedsStore(state => state.bucket)
   const bucketAllProducts = useAllProductStore(state => state.bucket)
-console.log(bucketAllProducts)
+// console.log(bucketAllProducts)
   if(!isMobile) {
     SwiperCore.use([Pagination])
   }
