@@ -225,7 +225,7 @@ function ResultComponent() {
               </div>
             </div>
           }
-          {productCount=== 0 && placeHolders?.noMatchFoundText ? 
+          {productCount=== 0 && placeHolders?.noMatchFoundText && !searchLoading ? 
            <div className='lg:col-span-2 col-start-1 col-end-7'>
             < div className='w-full lg:pb-11 pb-5' >
               <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${placeHolders?.noMatchFoundText.value} “${productSearch}”`} </h1>
