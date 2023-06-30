@@ -34,12 +34,12 @@ function HealthNeeds() {
     const productSum = useHealthNeedsStore((state) => state.productSum)
     
     const handleFetchProductsSubCategories = async (categoryArrayList:any) => {
-        setLoader(true)
-        let tempResults: any = [];
+      setLoader(true)
+      let tempResults: any = [];
         await axiosInstance.get(constructQuery(bucket)).then((res) => {
           res.data.results.map((item:any) => {
             let name = item.productCategory.value[0].name;
-            item?.healthNeeds?.value.forEach((value: any) => {
+            item?.healthNeeds?.value.map((value: any) => {
             if (
               value.name !== "Health Needs" &&
               categoryArrayList.some((element: ProductFilter.QueryBucketType) =>
@@ -52,12 +52,16 @@ function HealthNeeds() {
                 tempResults[value.name] = [];
               }
               tempResults[value.name].push(item);
-            }  else if (
-              value.name !== "Health Needs" &&
-              categoryArrayList.length === 0 
-              ) {
-              tempResults[name] = [item];
-            } 
+            }  else if(value?.name !== 'Health Needs' && categoryArrayList?.some((data:ProductFilter.QueryBucketType) => data.isBusinessVerticalCategory === true)) {
+              if (tempResults[name]) {
+                let tempArray = tempResults[name];
+                tempArray.push(item);
+                tempResults[name] = tempArray;
+              } else {
+                tempResults[name] = [item];
+              }
+            }
+            console.log(tempResults) 
           });
           })
             const totalMatching = res?.data?.totalMatching
