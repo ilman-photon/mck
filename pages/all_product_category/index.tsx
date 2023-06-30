@@ -1,21 +1,24 @@
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
+import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import { useRouter } from "next/router";
+import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 import AllProductsFilter from "@/components/all_products_category/components/allproductsfilter";
 import { useAllProductStore } from "@/components/all_products_category/Store/useAllProductsStore";
 import { constructQuery } from "@/components/product_list/productlists";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
+let mainCatId: any = [];
 interface MyComponentProps {
   Response: {
     data: {
@@ -29,26 +32,48 @@ interface MyComponentProps {
 function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
-  const recommendedProduct = useAllProductStore(state => state.recommendProductData)
-  const isLoading = useAllProductStore(state => state.isLoading)
-  const getProductCategoryList = useAllProductStore((state) => state.fetchRecommendedProductData)
-  const fetchAllProductList = useAllProductStore((state) => state.fetchAllProductList)
-  const bucket = useAllProductStore((state) => state.bucket)
-  const productCategoryDataList = useAllProductStore((state) => state.productCategoryDataList)
-  const productSum = useAllProductStore((state) => state.productSum)
-  const productQueriedData = useAllProductStore((state) => state.productQueriedData)
-  const selectedFilterItems = useAllProductStore((state) => state.selectedFilterItems)
-  const getProductFilterList = useAllProductStore(state => state.fetchProductFilterList)
-  const activeFilterDataList = useAllProductStore(state => state.activeFiltersData)
-  const onProductQueried = useAllProductStore(state => state.onProductQueried)
-  const setLoader = useAllProductStore(state => state.setLoader)
-  const isProductFilterSelected = selectedFilterItems?.length > 0
-  const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
+  const router = useRouter();
+  // const [activeFilter, setActiveFilter] = useState<any>([]);
+  const recommendedProduct = useAllProductStore(
+    (state) => state.recommendProductData
+  );
+  const isLoading = useAllProductStore((state) => state.isLoading);
+  const getProductCategoryList = useAllProductStore(
+    (state) => state.fetchRecommendedProductData
+  );
+  const fetchAllProductList = useAllProductStore(
+    (state) => state.fetchAllProductList
+  );
+  const bucket = useAllProductStore((state) => state.bucket);
+  const productCategoryDataList = useAllProductStore(
+    (state) => state.productCategoryDataList
+  );
+  const productSum = useAllProductStore((state) => state.productSum);
+  const productQueriedData = useAllProductStore(
+    (state) => state.productQueriedData
+  );
+  const selectedFilterItems = useAllProductStore(
+    (state) => state.selectedFilterItems
+  );
+  const getProductFilterList = useAllProductStore(
+    (state) => state.fetchProductFilterList
+  );
+  const activeFilterDataList = useAllProductStore(
+    (state) => state.activeFiltersData
+  );
+  const onProductQueried = useAllProductStore(
+    (state) => state.onProductQueried
+  );
+  const setLoader = useAllProductStore((state) => state.setLoader);
+  const isProductFilterSelected = selectedFilterItems?.length > 0;
+  const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0;
 
   const handleFetchProductsSubCategories = async () => {
-    setLoader(true)
-    await axiosInstance.get(constructQuery(bucket)).then((res) => {
-        const totalMatching = res?.data?.totalMatching
+    setLoader(true);
+    await axiosInstance
+      .get(constructQuery(bucket))
+      .then((res) => {
+        const totalMatching = res?.data?.totalMatching;
         let tempResults: any = [];
         res.data.results.map((item: any) => {
           let name = item?.productCategory?.value[0]?.name;
@@ -68,36 +93,28 @@ function AllProductCategoryPage({
             };
           }
         );
-        onProductQueried(transformedArray,totalMatching)
-        setLoader(false)
-    }).catch(() => setLoader(false))
-}
+        onProductQueried(transformedArray, totalMatching);
+        setLoader(false);
+      })
+      .catch(() => setLoader(false));
+  };
 
   React.useEffect(() => {
     if (isProductFilterSelected) {
-        handleFetchProductsSubCategories()
-    } else if (isProductFilterSelectedEmpty ) {
-        fetchAllProductList()
+      handleFetchProductsSubCategories();
+    } else if (isProductFilterSelectedEmpty) {
+      fetchAllProductList();
     }
-}, [selectedFilterItems])   
-
+  }, [selectedFilterItems]);
 
   React.useEffect(() => {
-    getProductCategoryList()
-    getProductFilterList()
-  },[])
+    getProductCategoryList();
+    getProductFilterList();
+  }, []);
 
-  function filteredData(valueType: string) {
-    return recommendedProduct?.expandedValue?.filter((ele: any) => {
-      return ele?.contentType?.some((arrEle: string) => {
-        return arrEle == valueType;
-      });
-    });
-  }
-  
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
+      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
         (item: any) => {
           if (
             id?.recommendedProductCategory?.value &&
@@ -155,6 +172,14 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoadingFalse();
+  //   }, 1000);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
+
   return (
     <>
       <Head>
@@ -170,7 +195,13 @@ function AllProductCategoryPage({
             </div>
           </div>
         )}
-        <HeaderComponent isCarusolAvaible={recommendedProduct?.expandedValue ? true : false} />
+
+        <HeaderComponent
+          isCarusolAvaible={
+            recommendedProduct?.expandedValue[0]?.name.includes("Carousel") &&
+            true
+          }
+        />
         {!recommendedProduct?.expandedValue && isLoading && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -191,12 +222,34 @@ function AllProductCategoryPage({
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
             isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
-            sectionData={filteredData("CarouselBlock")}
+            sectionData={recommendedProduct?.expandedValue}
           />
         )}
-        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={filteredData("ProductCategoryBlock")} />}
+        {recommendedProduct?.expandedValue[1] && (
+          <CategoryComponent
+            sectionData={[recommendedProduct?.expandedValue[1]]}
+          />
+        )}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
+          {/* <HealthNeedFilter
+            activeFiltersData={activeFiltersData}
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
+            productCategoryData={productCategoryData}
+            allProductCategoryList={allProductCategoryList}
+            selectedFilterItems={selectedFilterItems}
+            selectedProduct={selectedProduct}
+            setSelectedFilterItems={setSelectedFilterItems}
+            selectedViewAllCateory={selectedViewAllCateory}
+            fetchProductList={fetchProductList}
+            recommendedProduct={recommendedProduct}
+            sectionData={sectionData}
+            selectedRecommendedProduct={selectedRecommendedProduct}
+            productSum={productSum}
+            productSearchCard={productSearchCard}
+            filterClicked={filterClicked}
+          /> */}
           <AllProductsFilter
             activeFilter={bucket}
             activeFiltersData={activeFilterDataList}
