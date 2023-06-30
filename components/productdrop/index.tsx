@@ -151,7 +151,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                                 updateUrl(ele?.menuItemUrl?.value, "1")
                               );
                             }
-                            if(pathNameHealthNeeds || !response.menuItemName?.value){
+                            if(!response.menuItemName?.value){
                               handleOnClearAllHealthNeeds()
                               onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
                               setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)
@@ -181,6 +181,8 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                         >
                           <Link
                           onClick={() => {
+                            // handleClearAll()
+                            // handleOnClearAllHealthNeeds()
                             if (response?.menuItemName?.value) {
                               selectCategory(response?.menuItemName?.value);
                             } else {
@@ -188,7 +190,7 @@ function ProductDropComponent({ subMenuData ,handleClick}: Props) {
                                 updateUrl(ele?.menuItemUrl?.value, "1")
                               );
                             }
-                            if(pathNameHealthNeeds){
+                            if(!response.menuItemName?.value){
                               handleOnClearAllHealthNeeds()
                               onSelectCheckBoxHealthNeeds(ele?.categoryItem?.value?.[0])
                               setBucketHealthNeeds(healthNeedsBucket,ele?.categoryItem?.value?.[0],isBusinessVerticalCategory,0,'healthNeeds',false)

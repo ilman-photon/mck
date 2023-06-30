@@ -212,6 +212,7 @@ function ProductList() {
     const bucket = useSelectedProductCategoryStore(state => state.bucket)
     // console.log(bucket,'ini lho')
     const onSelectCheckBox = useSelectedProductCategoryStore(state => state.onSelectCheckBox)
+    
     // const sectionData = useSelectedProductCategoryStore(state => state.sectionData)
     // const setSectionData = useSelectedProductCategoryStore(state => state.setSectionData)
     // console.log(bucket)
@@ -255,8 +256,8 @@ function ProductList() {
       }
       },[selectedFilter?.isClicked])  
 
-    const isProductFilterSelected = selectedFilterItems?.length > 0
-    const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
+    const isProductFilterSelected = bucket?.length > 0
+    const isProductFilterSelectedEmpty = bucket?.length === 0
     const addressBarState = router?.query?.categoryOf
     const addressBarStateOfFilter = router?.query?.filter
 
