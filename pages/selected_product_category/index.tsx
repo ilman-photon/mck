@@ -17,36 +17,40 @@ function ProductListPage() {
   const selectedCategory = useHeaderStore((state) => state.selectedCategory);
   const categoryName = selectedCategory?.replace(/ /g, "-");
   const [isLoading, setIsLoading] = useState(true);
-  let [response, setResponse] = useState<any>()
-  const [productCategoryBlock , setProductCategoryBlock] = useState<any>([])
+  let [response, setResponse] = useState<any>();
+  const [productCategoryBlock, setProductCategoryBlock] = useState<any>([]);
 
-  const { filter, categoryOf } = getQueryString()
+  const { filter, categoryOf } = getQueryString();
 
-  const recognizedRoute = categoryOf?.length > 0 ? categoryOf.replace(/\+/g, "-") : filter?.length > 0 && categoryOf === undefined ? filter.replace(/\+/g, "-") : categoryName
-  
+  const recognizedRoute =
+    categoryOf?.length > 0
+      ? categoryOf.replace(/\+/g, "-")
+      : filter?.length > 0 && categoryOf === undefined
+      ? filter.replace(/\+/g, "-")
+      : categoryName;
+
   const fetchData = async () => {
     const data = await axiosInstance(
       `${process.env.API_URL}/api/episerver/v3.0/content/?ContentUrl=${process.env.API_URL}/en/product-category/${recognizedRoute}/&expand=*`
     );
-    setResponse(data)
-
-  }
+    setResponse(data);
+  };
   useEffect(() => {
-    fetchData()
-  }, [recognizedRoute])
+    fetchData();
+  }, [recognizedRoute]);
 
-  useEffect(()=>{
- categoryData()
-  },[response])
+  useEffect(() => {
+    categoryData();
+  }, [response]);
 
-  const categoryData = ()=> {
-    setProductCategoryBlock([])
-    response?.data?.[0]?.contentArea?.expandedValue?.filter((ele: any) =>{
-        if(ele?.contentType.includes("ProductCategoryBlock")){
-          setProductCategoryBlock((prev :any) => [...prev , ele])
-        }
-    })
-  }
+  const categoryData = () => {
+    setProductCategoryBlock([]);
+    response?.data?.[0]?.contentArea?.expandedValue?.filter((ele: any) => {
+      if (ele?.contentType.includes("ProductCategoryBlock")) {
+        setProductCategoryBlock((prev: any) => [...prev, ele]);
+      }
+    });
+  };
 
   function filteredData(valueType: string) {
     return response?.data[0]?.contentArea?.expandedValue?.filter((ele: any) => {
@@ -91,8 +95,9 @@ function ProductListPage() {
       <div className="wrapper">
         <HeaderComponent
           isCarusolAvaible={
-            response?.data[0]?.contentArea?.expandedValue[0]?.name ==
-            "Carousel" && true
+            response?.data[0]?.contentArea?.expandedValue[0]?.name.includes(
+              "Carousel"
+            ) && true
           }
         />
         {isLoading ? (
@@ -101,16 +106,17 @@ function ProductListPage() {
             <div
               className="relative"
               style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            >
-            </div>
+            ></div>
           </div>
         ) : (
           response && (
             <>
               <CarouselComponent sectionData={filteredData("CarouselBlock")} />
-              {productCategoryBlock?.length > 0 ? <CategoryComponent sectionData={productCategoryBlock} /> : null}  
+              {productCategoryBlock?.length > 0 ? (
+                <CategoryComponent sectionData={productCategoryBlock} />
+              ) : null}
               {/* <ProductListComponent /> */}
-              <ProductList/>
+              <ProductList />
             </>
           )
         )}
