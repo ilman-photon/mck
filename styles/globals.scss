@@ -1485,18 +1485,28 @@ Mobiles Menu
       margin-bottom: 18px;
     }
     + .tab-label {
-      &::after {
-        position: absolute;
-        right: 15px;
+      &:after {
+        content: "-";
         top: 5px;
+        display: flex;
       }
     }
   }
   .tab-label {
     &:after {
+      content: "+";
+      font-size: 30px;
+      text-align: center;
+      color: #3a3e41;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
       position: absolute;
       right: 15px;
       top: 7px;
+      width: 24px;
+      height: 24px;
+      transition: all 1s;
     }
   }
   .tab-content {
@@ -2067,36 +2077,6 @@ Mobile and iPad Navigation
 
 .input-search:focus + .search-icon path {
   fill: #001a71;
-}
-.category-card .tab input[type="checkbox"] {
-  display: none;
-}
-
-.category-card .tab-label:after {
-  content: "+";
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  transition: all 1s;
-  color: #3a3e41;
-  font-size: 30px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-.category-card .tab input:checked + .tab-label:after {
-  content: "-";
-  // background-image: url("../public/images/minus.svg");
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  transition: all 1s;
-  color: #3a3e41;
-  font-size: 30px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
 }
 
 .table-container {
