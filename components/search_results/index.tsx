@@ -208,7 +208,7 @@ function ResultComponent() {
           </div > 
            : 
             <>
-            {placeHolders?.showingResultsText && 
+            {placeHolders?.showingResultsText && productCount > 0 &&
               <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}”`} </h1>
             }
             {/* <br /> */}
