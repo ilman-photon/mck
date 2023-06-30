@@ -14,7 +14,6 @@ function ResultComponent() {
   const router = useRouter();
   const [productListData, SetProductListData] = useState<any>();
   const [activeFilter, setActiveFilter] = useState<any>([]);
-  const [productFilter, setProductFilter] = useState<any>();
   const [selectedFilterItems, setSelectedFilterItems] = useState<any>([]);
   const [selectedViewAllCateory, setSelectedViewAllCateory] = useState<any>([]);
   const [productCount, setProductCount] = useState<any>(0);
@@ -24,11 +23,6 @@ function ResultComponent() {
   const [placeHolders, setSearchplaceHolders] = useState<any>();
   const productSearchCard = true
   const [productSum , setProductSum] = useState<any>()
-
-  function FetchProductFilter() {
-    return axiosInstance.get(
-      `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`);
-  }
 
   // Right section product filter data
   function fetchProductList(filter: any) {
@@ -57,11 +51,6 @@ function ResultComponent() {
   }
 
   useEffect(() => {
-    FetchProductFilter()
-      .then((res:any) => {
-        setProductFilter(res);
-      })
-      .catch((e:any) => console.log(e));
    if(router.query.search){
     fetchProductList(router.query.search);
    }
@@ -120,27 +109,11 @@ function ResultComponent() {
   }
 
   // -------- Health needs page data fetch starts -------- //
-  const [healthNeedData, setHealthNeedData] = useState<any>();
   const [activeFiltersData, setactiveFiltersData] = useState<any>();
   const [productCategoryData, setproductCategoryData] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      // Health needs Categories List
-      const healthNeedsCategories = await axiosInstance.get(
-        `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category/health-needs/&expand=*`
-      );
-      const healthNeedsCategoriesList =
-        healthNeedsCategories?.data[0].contentArea?.expandedValue?.filter(
-          (categoryList: any) => categoryList.name === "Health Need Highlights"
-        );
-
-      const healthNeedsCategoriesListData =
-        healthNeedsCategoriesList?.length > 0
-          ? healthNeedsCategoriesList[0]?.healthNeedItem?.expandedValue
-          : [];
-      setHealthNeedData(healthNeedsCategoriesListData);
-
       // Product Category setting - Filters data
       const activeFiltersData = await axiosInstance.get(
         `${process.env.API_URL}/api/episerver/v3.0/content?ContentUrl=${process.env.API_URL}/en/product-category-setting/&expand=*`
@@ -235,7 +208,7 @@ function ResultComponent() {
           </div > 
            : 
             <>
-            {placeHolders?.showingResultsText && 
+            {placeHolders?.showingResultsText && productCount > 0 &&
               <h1 className='lg:text-32 text-3xl leading-linemax max-[576px]:leading-9 sm:text-32 text-gtl-med text-mckblue lg:pb-6 text-left' id='blog-link-001' >{`${productCount} ${placeHolders?.showingResultsText.value} “${productSearch}”`} </h1>
             }
             {/* <br /> */}
