@@ -32,7 +32,7 @@ function HealthNeeds() {
     const isProductFilterSelected = bucket?.length > 0
     const isProductFilterSelectedEmpty = bucket?.length === 0
     const productSum = useHealthNeedsStore((state) => state.productSum)
-    console.log(selectedFilterItems,'---',bucket)
+    
     const handleFetchProductsSubCategories = async (categoryArrayList:any) => {
         setLoader(true)
         let tempResults: any = [];
