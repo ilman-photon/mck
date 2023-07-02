@@ -61,7 +61,7 @@ function HealthNeeds() {
                 tempResults[name] = [item];
               }
             }
-            console.log(tempResults) 
+            // console.log(tempResults) 
           });
           })
             const totalMatching = res?.data?.totalMatching
@@ -95,7 +95,17 @@ function HealthNeeds() {
         getProductFilterList()
     },[])
 
+    function filteredData(valueType: string) {
+      return recommendProductData?.expandedValue?.filter((ele: any) => {
+        return ele?.contentType?.some((arrEle: string) => {
+          return arrEle == valueType;
+        });
+      });
+    }
+
     // console.log(recommendProductData)
+    // recommendedProduct?.expandedValue?.map((id: any) => {
+    //   return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
     React.useEffect(() => {
       let tempRecommendedProduct = recommendProductData?.expandedValue?.filter(
         (item: any) => {
@@ -108,13 +118,15 @@ function HealthNeeds() {
           }
         }
       );
+      console.log(tempRecommendedProduct,'ini')
       recommendProductData?.expandedValue?.map((id: any) => {
         return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
           (item: any) => {
             if (
-              id?.recommendedProductCategory?.value &&
-              id.recommendedProductCategory.value[0].id ===
-                item.healthNeedCategory.value[0].id
+              id?.recommendedProductCategory?.value 
+              // &&
+              // id.recommendedProductCategory.value[0].id ===
+                // item.healthNeedCategory.value[0].id
             ) {
               const productName = id.recommendedProductCategory.value[0].name;
               if (!selectedRecommendedProduct.includes(productName)) {
@@ -133,7 +145,7 @@ function HealthNeeds() {
         );
       });
     }, [recommendProductData]);
-
+    
   return (
     <>
      {isLoading && (
