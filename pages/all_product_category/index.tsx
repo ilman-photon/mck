@@ -216,12 +216,21 @@ function AllProductCategoryPage({
         )}
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
-            isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
+            isCarouselAvaible={
+              recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+                ? true
+                : false
+            }
             sectionData={filteredData("CarouselBlock")}
           />
         )}
         {recommendedProduct?.expandedValue[1] && (
           <CategoryComponent
+            isCarouselAvaible={
+              recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+                ? true
+                : false
+            }
             sectionData={filteredData("ProductCategoryBlock")}
           />
         )}
