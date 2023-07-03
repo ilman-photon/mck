@@ -68,11 +68,14 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         onKeyDown={(e: any) => e.keyCode === 13 && fetchSearchBlog()}
       />
       {ActiveClose ? (
+        <button
+        className="absolute right-2.5 top-4"
+        onClick={fetchSearchBlog}
+      >
         <svg
           id={`blog-search-icon-inactive`}
-          onClick={fetchSearchBlog}
           aria-label="search icon"
-          className="focus:outline-0 group-focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
+          className="focus:outline-0 group-focus:outline-1 top-4 right-4 z-8 cursor-pointer"
           width="18"
           height="19"
           viewBox="0 0 18 19"
@@ -85,6 +88,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
             fill="#001A71"
           />
         </svg>
+        </button>
       ) : (
         <button
           className="absolute right-2.5"

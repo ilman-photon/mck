@@ -17,21 +17,12 @@ const ItemExpandeble = ({ bdata }: any) => {
       id={"faq_label_003" + bdata?.contentLink?.id}
       key={bdata?.contentLink?.id}
     >
-      <input
-        type="checkbox"
-        id={bdata?.contentLink?.id}
-        checked={selectedValue}
-      />
-      <label
-        role="application"
-        tabIndex={0}
+      <button
         onClick={(e) => handleOnClick("click")}
-        onKeyUp={(e) => handleOnClick(e.key)}
-        className="tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base"
-        htmlFor={bdata?.contentLink?.id}
+        className={`${selectedValue? 'checked':''} w-full tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base`}
       >
         <span>{bdata?.question?.value}</span>
-      </label>
+      </button>
       <div
         className={` tab-content text-sofia-reg font-normal text-base text-mcknormalgrey`}
       >
