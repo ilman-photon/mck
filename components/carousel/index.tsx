@@ -54,7 +54,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
     <div className="flex items-center justify-center" role="main">
       <div id="carouselExampleCaptions" className="w-full relative">
         {isCarouselAvaible && <div className="bg-gradient absolute"></div>}
-
         <div className="absloute w-full overflow-hidden after:clear-both after:block after:content-['']">
           <Swiper
             centeredSlides={true}
@@ -65,7 +64,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({
               stopOnLastSlide: autoRotate,
             }}
             loop={!autoRotate}
-            pagination={{  
+            pagination={{
               clickable: true,
             }}
             effect="fade"

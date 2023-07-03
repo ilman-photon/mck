@@ -29,26 +29,46 @@ interface MyComponentProps {
 function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
-  const recommendedProduct = useAllProductStore(state => state.recommendProductData)
-  const isLoading = useAllProductStore(state => state.isLoading)
-  const getProductCategoryList = useAllProductStore((state) => state.fetchRecommendedProductData)
-  const fetchAllProductList = useAllProductStore((state) => state.fetchAllProductList)
-  const bucket = useAllProductStore((state) => state.bucket)
-  const productCategoryDataList = useAllProductStore((state) => state.productCategoryDataList)
-  const productSum = useAllProductStore((state) => state.productSum)
-  const productQueriedData = useAllProductStore((state) => state.productQueriedData)
-  const selectedFilterItems = useAllProductStore((state) => state.selectedFilterItems)
-  const getProductFilterList = useAllProductStore(state => state.fetchProductFilterList)
-  const activeFilterDataList = useAllProductStore(state => state.activeFiltersData)
-  const onProductQueried = useAllProductStore(state => state.onProductQueried)
-  const setLoader = useAllProductStore(state => state.setLoader)
-  const isProductFilterSelected = selectedFilterItems?.length > 0
-  const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0
+  const recommendedProduct = useAllProductStore(
+    (state) => state.recommendProductData
+  );
+  const isLoading = useAllProductStore((state) => state.isLoading);
+  const getProductCategoryList = useAllProductStore(
+    (state) => state.fetchRecommendedProductData
+  );
+  const fetchAllProductList = useAllProductStore(
+    (state) => state.fetchAllProductList
+  );
+  const bucket = useAllProductStore((state) => state.bucket);
+  const productCategoryDataList = useAllProductStore(
+    (state) => state.productCategoryDataList
+  );
+  const productSum = useAllProductStore((state) => state.productSum);
+  const productQueriedData = useAllProductStore(
+    (state) => state.productQueriedData
+  );
+  const selectedFilterItems = useAllProductStore(
+    (state) => state.selectedFilterItems
+  );
+  const getProductFilterList = useAllProductStore(
+    (state) => state.fetchProductFilterList
+  );
+  const activeFilterDataList = useAllProductStore(
+    (state) => state.activeFiltersData
+  );
+  const onProductQueried = useAllProductStore(
+    (state) => state.onProductQueried
+  );
+  const setLoader = useAllProductStore((state) => state.setLoader);
+  const isProductFilterSelected = selectedFilterItems?.length > 0;
+  const isProductFilterSelectedEmpty = selectedFilterItems?.length === 0;
 
   const handleFetchProductsSubCategories = async () => {
-    setLoader(true)
-    await axiosInstance.get(constructQuery(bucket)).then((res) => {
-        const totalMatching = res?.data?.totalMatching
+    setLoader(true);
+    await axiosInstance
+      .get(constructQuery(bucket))
+      .then((res) => {
+        const totalMatching = res?.data?.totalMatching;
         let tempResults: any = [];
         res.data.results.map((item: any) => {
           let name = item?.productCategory?.value[0]?.name;
@@ -68,24 +88,24 @@ function AllProductCategoryPage({
             };
           }
         );
-        onProductQueried(transformedArray,totalMatching)
-        setLoader(false)
-    }).catch(() => setLoader(false))
-}
+        onProductQueried(transformedArray, totalMatching);
+        setLoader(false);
+      })
+      .catch(() => setLoader(false));
+  };
 
   React.useEffect(() => {
     if (isProductFilterSelected) {
-        handleFetchProductsSubCategories()
-    } else if (isProductFilterSelectedEmpty ) {
-        fetchAllProductList()
+      handleFetchProductsSubCategories();
+    } else if (isProductFilterSelectedEmpty) {
+      fetchAllProductList();
     }
-}, [selectedFilterItems])   
-
+  }, [selectedFilterItems]);
 
   React.useEffect(() => {
-    getProductCategoryList()
-    getProductFilterList()
-  },[])
+    getProductCategoryList();
+    getProductFilterList();
+  }, []);
 
   function filteredData(valueType: string) {
     return recommendedProduct?.expandedValue?.filter((ele: any) => {
@@ -94,30 +114,30 @@ function AllProductCategoryPage({
       });
     });
   }
-  
+
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
-        (item: any) => {
-          if (
-            id?.recommendedProductCategory?.value &&
-            id.recommendedProductCategory?.value[0].id ===
-              item.productCategoryType?.value[0].id
-          ) {
-            const productName = id.recommendedProductCategory.value[0].name;
-            if (!selectedRecommendedProduct.includes(productName)) {
-              selectedRecommendedProduct.push(productName);
-            }
-            const isDuplicate = sectionData.some(
-              (item: any) => item.name === id.name
-            );
+      return filteredData(
+        "ProductCategoryBlock"
+      )?.[0]?.contentBlockArea?.expandedValue.map((item: any) => {
+        if (
+          id?.recommendedProductCategory?.value &&
+          id.recommendedProductCategory?.value[0].id ===
+            item.productCategoryType?.value[0].id
+        ) {
+          const productName = id.recommendedProductCategory.value[0].name;
+          if (!selectedRecommendedProduct.includes(productName)) {
+            selectedRecommendedProduct.push(productName);
+          }
+          const isDuplicate = sectionData.some(
+            (item: any) => item.name === id.name
+          );
 
-            if (!isDuplicate) {
-              sectionData.push(id);
-            }
+          if (!isDuplicate) {
+            sectionData.push(id);
           }
         }
-      );
+      });
     });
   }, [recommendedProduct]);
 
@@ -170,7 +190,13 @@ function AllProductCategoryPage({
             </div>
           </div>
         )}
-        <HeaderComponent isCarusolAvaible={recommendedProduct?.expandedValue ? true : false} />
+        <HeaderComponent
+          isCarusolAvaible={
+            recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+              ? true
+              : false
+          }
+        />
         {!recommendedProduct?.expandedValue && isLoading && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -190,11 +216,24 @@ function AllProductCategoryPage({
         )}
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
-            isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
+            isCarouselAvaible={
+              recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+                ? true
+                : false
+            }
             sectionData={filteredData("CarouselBlock")}
           />
         )}
-        {recommendedProduct?.expandedValue[1] && <CategoryComponent sectionData={filteredData("ProductCategoryBlock")} />}
+        {recommendedProduct?.expandedValue[1] && (
+          <CategoryComponent
+            isCarouselAvaible={
+              recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+                ? true
+                : false
+            }
+            sectionData={filteredData("ProductCategoryBlock")}
+          />
+        )}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
           <AllProductsFilter
