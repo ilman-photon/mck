@@ -18,6 +18,7 @@ const ItemExpandeble = ({ bdata }: any) => {
       key={bdata?.contentLink?.id}
     >
       <button
+      aria-expanded={`${selectedValue? true:false}`}
         onClick={(e) => handleOnClick("click")}
         className={`${selectedValue? 'checked':''} w-full tab-label shade-blue-bg py-3 px-4 flex justify-between cursor-pointer text-sofia-bold font-extrabold lg:text-lg text-base`}
       >
