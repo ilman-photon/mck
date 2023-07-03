@@ -58,30 +58,38 @@ function PdpDetail(pdpViewData: any) {
             
             <div  className="tab lg:w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-b relative mx-4 lg:mx-0">
                 <input type="checkbox" id="pdp_details_chck2" checked={selectedIngredient}/>
-                <button
-                    aria-expanded={`${selectedIngredient? true:false}`} 
-                    className={`${selectedIngredient? 'checked':''} w-full tab-label py-3 px-4 flex justify-between cursor-pointer lg:text-lg text-base`}
-                    onClick={() => onClickDropDown('click', "ingredient")}
-                    >Ingredients</button>
-                    
+                <label 
+                    className="tab-label py-3 px-4 flex justify-between cursor-pointer lg:text-lg text-base" 
+                    htmlFor="pdp_details_chck2"
+                    role="button"
+                    tabIndex={0}
+                    onClick={(e) => onClickDropDown('click', "ingredient")}
+                    onKeyUp={(e) => onClickDropDown(e.key, "ingredient")}
+                    >Ingredients</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.ingredients?.value), }} id="pdp_details_006" className="p-3"></p>
                 </div>
             </div>
             <div  className="tab lg:w-full overflow-hidden text-lg font-medium text-lg text-sofia-reg border-y relative mx-4 lg:mx-0">
-            <button
-                    aria-expanded={`${selectedDirections? true:false}`} 
-                className={`${selectedDirections? 'checked':''} w-full tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base`}
-                    onClick={() => onClickDropDown('click', "directions")}>Directions</button>
-                <div className={`${selectedDirections? 'checked':''} tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]`}>
+                <input type="checkbox" id="pdp_details_chck3" checked={selectedDirections}/>
+                <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" 
+                    htmlFor="pdp_details_chck3"
+                    role="button"
+                    tabIndex={0}
+                    onClick={(e) => onClickDropDown('click', "directions")}
+                    onKeyUp={(e) => onClickDropDown(e.key, "directions")}>Directions</label>
+                <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.directions?.value), }} id="pdp_details_007" className="p-3"></p>
                 </div>
             </div>
             <div  className="tab lg:w-full overflow-hidden font-medium text-lg text-sofia-reg border-y relative mx-4 lg:mx-0">
-            <button
-                    aria-expanded={`${selectedWarnings? true:false}`} 
-                    className={`${selectedWarnings? 'checked':''} w-full tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base`}
-                    onClick={() => onClickDropDown('click', "warnings")}>Warnings</button>
+                <input type="checkbox" id="pdp_details_chck4" checked={selectedWarnings}/>
+                <label className="tab-label py-3 px-4 flex justify-between border-y cursor-pointer lg:text-lg text-base" 
+                htmlFor="pdp_details_chck4"
+                    role="button"
+                    tabIndex={0}
+                    onClick={(e) => onClickDropDown('click', "warnings")}
+                    onKeyUp={(e) => onClickDropDown(e.key, "warnings")}>Warnings</label>
                 <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey w-full bg-[#F8F9FB]">
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(responceValue?.warnings?.value), }} id="pdp_details_008" className="p-3"></p>
                 </div>
