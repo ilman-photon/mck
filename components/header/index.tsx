@@ -1,4 +1,10 @@
-import { useState, useRef, useEffect, useLayoutEffect,useCallback } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import Search from "../search";
 import NavBar from "../navbar";
 import { useRouter } from "next/router";
@@ -14,17 +20,23 @@ import { useAllProductStore } from "../all_products_category/Store/useAllProduct
 function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const router = useRouter();
 
-  const onClearAllHealthNeeds = useHealthNeedsStore(state => state.onClearAll)
-  const onClearSelectedProductCat = useSelectedProductCategoryStore(state => state.onClearAll)
-  const onClearAllProductCat = useAllProductStore(state => state.onClearAll)
-  const onSelectedSetFilter = useHeaderStore(state => state.onSelectedSetFilter) 
+  const onClearAllHealthNeeds = useHealthNeedsStore(
+    (state) => state.onClearAll
+  );
+  const onClearSelectedProductCat = useSelectedProductCategoryStore(
+    (state) => state.onClearAll
+  );
+  const onClearAllProductCat = useAllProductStore((state) => state.onClearAll);
+  const onSelectedSetFilter = useHeaderStore(
+    (state) => state.onSelectedSetFilter
+  );
 
   const handleClearAll = useCallback(() => {
-    onClearAllHealthNeeds()
-    onClearAllProductCat()
-    onClearSelectedProductCat()
-    onSelectedSetFilter(null)
-  },[])
+    onClearAllHealthNeeds();
+    onClearAllProductCat();
+    onClearSelectedProductCat();
+    onSelectedSetFilter(null);
+  }, []);
 
   const checkEnableButton = () => {
     return router.pathname;
@@ -32,15 +44,15 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   const headerImgRef = useRef<HTMLDivElement>(null);
   const [imgWidth, setImgWidth] = useState({});
   const [divHeight, setDivHeight] = useState({});
-  
+
   const firstLogo = useHeaderStore((state) => state.logoSrc1);
   const beigeLogo = useHeaderStore((state) => state.logoSrc2);
   const isDataExist = useHeaderStore((state) => state.headerData);
-  const getHeaderData = useHeaderStore(state => state.getData)
-  
+  const getHeaderData = useHeaderStore((state) => state.getData);
+
   useLayoutEffect(() => {
     if (isDataExist === null) {
-      getHeaderData(checkEnableButton())
+      getHeaderData(checkEnableButton());
     }
   }, [isDataExist]);
   const handleScroll = (elTopOffset: any, elHeight: any) => {
@@ -78,9 +90,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     };
   }, []);
 
-
   function handleOnClickLogo() {
-    handleClearAll()
+    handleClearAll();
     router.push({
       pathname: "/",
     });
@@ -92,7 +103,7 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
   function handleHamburgerClick() {
     setIsMobileMenuActive(!isMobileMenuActive);
   }
-  
+
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
@@ -124,8 +135,6 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
     };
   }, []);
 
-
-
   return (
     <>
       <a className="skip-main" href="#carouselExampleCaptions">
@@ -146,32 +155,32 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
         }`}
         style={!isMobile ? divHeight : undefined}
       >
-          <div className="flex">
-            <div
-              className={`hamburger-menu lg:hidden xl:hidden ${
-                isMobileMenuActive ? "active" : ""
-              }`}
-              onClick={() => handleHamburgerClick()}
-            >
-              <div className={`bar ${isMobileMenuActive ? "animate" : ""}`}></div>
-            </div>
-          </div>
-
+        <div className="flex">
           <div
-            ref={headerImgRef}
-          className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
-            role="banner"
-            onClick={handleOnClickLogo}
+            className={`hamburger-menu lg:hidden xl:hidden ${
+              isMobileMenuActive ? "active" : ""
+            }`}
+            onClick={() => handleHamburgerClick()}
           >
+            <div className={`bar ${isMobileMenuActive ? "animate" : ""}`}></div>
+          </div>
+        </div>
+
+        <div
+          ref={headerImgRef}
+          className="brand-logo lg:max-w-[300px] mobilelarge:w-[183px] cursor-pointer z-9999"
+          role="banner"
+          onClick={handleOnClickLogo}
+        >
           {firstLogo && (
             <div>
-            <img
+              <img
                 id="logo-image-bgcolor"
                 src={DOMPurify.sanitize(firstLogo)}
                 alt="Foster Thrive Logo image Link"
-              className="logo-image lg:mt-7"
-              style={isMobile ? undefined : imgWidth}
-              tabIndex={0}
+                className="logo-image lg:mt-7"
+                style={isMobile ? undefined : imgWidth}
+                tabIndex={0}
               />
               <img
                 id="logo-image-beige"
@@ -180,8 +189,8 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
                 className="logo-image lg:mt-7 hidden"
                 style={isMobile ? undefined : imgWidth}
                 tabIndex={0}
-            />
-          </div>
+              />
+            </div>
           )}
         </div>
         <div className={`lg:w-full flex border-0 w-18 header-sticky`}>
@@ -189,9 +198,9 @@ function HeaderComponent({ isCarusolAvaible, children }: HeaderComponentType) {
             isMobileMenuActive={isMobileMenuActive}
             setIsMobileMenuActive={setIsMobileMenuActive}
           />
-            <Search />
-          </div>
+          <Search />
         </div>
+      </div>
       {children}
     </>
   );

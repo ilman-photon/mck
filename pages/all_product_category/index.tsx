@@ -1,24 +1,21 @@
 import CarouselComponent from "@/components/carousel";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CategoryComponent from "@/components/category";
 import GoogleTagManager from "@/components/google_tag_manager";
-import HealthNeedFilter from "@/components/health_needs/HealthNeedFilter";
 import gifImage from "../../public/images/FT-2593651-0423 Foster & Thrive Animated gif_circle.gif";
 import Image from "next/image";
 import Head from "next/head";
 import axiosInstance from "@/utils/axiosInstance";
 import DOMPurify from "isomorphic-dompurify";
 import { useRouter } from "next/router";
-import { useAllProductCategory } from "@/components/global/Store/useAllProductCategory";
 import AllProductsFilter from "@/components/all_products_category/components/allproductsfilter";
 import { useAllProductStore } from "@/components/all_products_category/Store/useAllProductsStore";
 import { constructQuery } from "@/components/product_list/productlists";
 
 let sectionData: any = [];
 let selectedRecommendedProduct: any = [];
-let mainCatId: any = [];
 interface MyComponentProps {
   Response: {
     data: {
@@ -32,8 +29,6 @@ interface MyComponentProps {
 function AllProductCategoryPage({
   Response,
 }: MyComponentProps): React.ReactElement {
-  const router = useRouter();
-  // const [activeFilter, setActiveFilter] = useState<any>([]);
   const recommendedProduct = useAllProductStore(
     (state) => state.recommendProductData
   );
@@ -112,29 +107,37 @@ function AllProductCategoryPage({
     getProductFilterList();
   }, []);
 
+  function filteredData(valueType: string) {
+    return recommendedProduct?.expandedValue?.filter((ele: any) => {
+      return ele?.contentType?.some((arrEle: string) => {
+        return arrEle == valueType;
+      });
+    });
+  }
+
   useEffect(() => {
     recommendedProduct?.expandedValue?.map((id: any) => {
-      return recommendedProduct?.expandedValue[1].contentBlockArea.expandedValue.map(
-        (item: any) => {
-          if (
-            id?.recommendedProductCategory?.value &&
-            id.recommendedProductCategory?.value[0].id ===
-              item.productCategoryType?.value[0].id
-          ) {
-            const productName = id.recommendedProductCategory.value[0].name;
-            if (!selectedRecommendedProduct.includes(productName)) {
-              selectedRecommendedProduct.push(productName);
-            }
-            const isDuplicate = sectionData.some(
-              (item: any) => item.name === id.name
-            );
+      return filteredData(
+        "ProductCategoryBlock"
+      )?.[0]?.contentBlockArea?.expandedValue.map((item: any) => {
+        if (
+          id?.recommendedProductCategory?.value &&
+          id.recommendedProductCategory?.value[0].id ===
+            item.productCategoryType?.value[0].id
+        ) {
+          const productName = id.recommendedProductCategory.value[0].name;
+          if (!selectedRecommendedProduct.includes(productName)) {
+            selectedRecommendedProduct.push(productName);
+          }
+          const isDuplicate = sectionData.some(
+            (item: any) => item.name === id.name
+          );
 
-            if (!isDuplicate) {
-              sectionData.push(id);
-            }
+          if (!isDuplicate) {
+            sectionData.push(id);
           }
         }
-      );
+      });
     });
   }, [recommendedProduct]);
 
@@ -172,14 +175,6 @@ function AllProductCategoryPage({
     }
   }, [JSON.stringify(Response)]);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoadingFalse();
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   return (
     <>
       <Head>
@@ -195,11 +190,11 @@ function AllProductCategoryPage({
             </div>
           </div>
         )}
-
         <HeaderComponent
           isCarusolAvaible={
-            recommendedProduct?.expandedValue[0]?.name.includes("Carousel") &&
-            true
+            recommendedProduct?.expandedValue[0]?.name.includes("Carousel")
+              ? true
+              : false
           }
         />
         {!recommendedProduct?.expandedValue && isLoading && (
@@ -222,34 +217,16 @@ function AllProductCategoryPage({
         {recommendedProduct?.expandedValue && (
           <CarouselComponent
             isCarouselAvaible={recommendedProduct?.expandedValue ? true : false}
-            sectionData={recommendedProduct?.expandedValue}
+            sectionData={filteredData("CarouselBlock")}
           />
         )}
         {recommendedProduct?.expandedValue[1] && (
           <CategoryComponent
-            sectionData={[recommendedProduct?.expandedValue[1]]}
+            sectionData={filteredData("ProductCategoryBlock")}
           />
         )}
 
         <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
-          {/* <HealthNeedFilter
-            activeFiltersData={activeFiltersData}
-            activeFilter={activeFilter}
-            setActiveFilter={setActiveFilter}
-            productCategoryData={productCategoryData}
-            allProductCategoryList={allProductCategoryList}
-            selectedFilterItems={selectedFilterItems}
-            selectedProduct={selectedProduct}
-            setSelectedFilterItems={setSelectedFilterItems}
-            selectedViewAllCateory={selectedViewAllCateory}
-            fetchProductList={fetchProductList}
-            recommendedProduct={recommendedProduct}
-            sectionData={sectionData}
-            selectedRecommendedProduct={selectedRecommendedProduct}
-            productSum={productSum}
-            productSearchCard={productSearchCard}
-            filterClicked={filterClicked}
-          /> */}
           <AllProductsFilter
             activeFilter={bucket}
             activeFiltersData={activeFilterDataList}
