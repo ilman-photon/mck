@@ -227,11 +227,11 @@ function PdpCarousel(prodViewData: any) {
         <div
           className={`lg:w-[526px] ${
             deviceWidth < 1024 && deviceWidth !== 0 ? "h-[300px]" : ""
-          } box-border flex flex-row justify-center items-center p-2 bg-white rounded border border-solid border-mckblue lg:ml-14`}
+          } box-border flex flex-row justify-center items-center p-4 bg-white rounded border border-solid border-mckblue lg:ml-14`}
         >
           <ImageComponent
             src={DOMPurify.sanitize(imgUrl)}
-            className="lg:w-[270px] max-w-[180px]"
+            className="max-h-[100%]"
             alt={DOMPurify.sanitize("Image is not available")}
             ariahidden={false}
             id={

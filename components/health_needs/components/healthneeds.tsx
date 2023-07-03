@@ -32,14 +32,14 @@ function HealthNeeds() {
     const isProductFilterSelected = bucket?.length > 0
     const isProductFilterSelectedEmpty = bucket?.length === 0
     const productSum = useHealthNeedsStore((state) => state.productSum)
-    console.log(selectedFilterItems,'---',bucket)
+    
     const handleFetchProductsSubCategories = async (categoryArrayList:any) => {
-        setLoader(true)
-        let tempResults: any = [];
+      setLoader(true)
+      let tempResults: any = [];
         await axiosInstance.get(constructQuery(bucket)).then((res) => {
           res.data.results.map((item:any) => {
             let name = item.productCategory.value[0].name;
-            item?.healthNeeds?.value.forEach((value: any) => {
+            item?.healthNeeds?.value.map((value: any) => {
             if (
               value.name !== "Health Needs" &&
               categoryArrayList.some((element: ProductFilter.QueryBucketType) =>
@@ -52,12 +52,16 @@ function HealthNeeds() {
                 tempResults[value.name] = [];
               }
               tempResults[value.name].push(item);
-            }  else if (
-              value.name !== "Health Needs" &&
-              categoryArrayList.length === 0 
-              ) {
-              tempResults[name] = [item];
-            } 
+            }  else if(value?.name !== 'Health Needs' && categoryArrayList?.some((data:ProductFilter.QueryBucketType) => data.isBusinessVerticalCategory === true)) {
+              if (tempResults[name]) {
+                let tempArray = tempResults[name];
+                tempArray.push(item);
+                tempResults[name] = tempArray;
+              } else {
+                tempResults[name] = [item];
+              }
+            }
+            // console.log(tempResults) 
           });
           })
             const totalMatching = res?.data?.totalMatching
@@ -91,7 +95,17 @@ function HealthNeeds() {
         getProductFilterList()
     },[])
 
+    function filteredData(valueType: string) {
+      return recommendProductData?.expandedValue?.filter((ele: any) => {
+        return ele?.contentType?.some((arrEle: string) => {
+          return arrEle == valueType;
+        });
+      });
+    }
+
     // console.log(recommendProductData)
+    // recommendedProduct?.expandedValue?.map((id: any) => {
+    //   return filteredData("ProductCategoryBlock")?.[0]?.contentBlockArea?.expandedValue.map(
     React.useEffect(() => {
       let tempRecommendedProduct = recommendProductData?.expandedValue?.filter(
         (item: any) => {
@@ -104,13 +118,15 @@ function HealthNeeds() {
           }
         }
       );
+      console.log(tempRecommendedProduct,'ini')
       recommendProductData?.expandedValue?.map((id: any) => {
         return tempRecommendedProduct[0].healthNeedItem?.expandedValue.map(
           (item: any) => {
             if (
-              id?.recommendedProductCategory?.value &&
-              id.recommendedProductCategory.value[0].id ===
-                item.healthNeedCategory.value[0].id
+              id?.recommendedProductCategory?.value 
+              // &&
+              // id.recommendedProductCategory.value[0].id ===
+                // item.healthNeedCategory.value[0].id
             ) {
               const productName = id.recommendedProductCategory.value[0].name;
               if (!selectedRecommendedProduct.includes(productName)) {
@@ -129,7 +145,7 @@ function HealthNeeds() {
         );
       });
     }, [recommendProductData]);
-
+    
   return (
     <>
      {isLoading && (
