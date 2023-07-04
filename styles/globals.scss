@@ -1517,6 +1517,20 @@ Mobiles Menu
       }
     }
   }
+  button.checked {
+    &:after {
+      content: "-";
+    }
+    ~ .tab-content {
+      border-top: 0px solid #ccd1e3;
+      padding-top: 0px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-bottom: 0px;
+      margin-bottom: 18px;
+      max-height: 100%;
+    }
+  }
   .tab-label {
     &:after {
       content: "+";

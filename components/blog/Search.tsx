@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect, useRef, LegacyRef, MutableRefObject, RefObject } from "react";
 import { fetchBlogSearch } from "./BlogAPI";
 interface CatogaryComponentProps {
   placeholder: any;
@@ -7,21 +7,21 @@ interface CatogaryComponentProps {
   ActiveSearch: boolean;
   handleResponse: (e: any, search: string) => void;
   handleClose: (value: any) => void;
+  inputRef?: RefObject<HTMLInputElement>;
 }
 const SearchComponent: React.FC<CatogaryComponentProps> = ({
   placeholder,
   searchText,
   ActiveSearch,
   handleResponse,
+  inputRef
 }) => {
   const [error, setError] = useState<boolean>(false);
   const [search, setsearch] = useState<any>();
   const [ActiveClose, setActiveClose] = useState<any>(true);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (searchText) {
-      inputRef?.current?.focus();
       setsearch(searchText);
       setActiveClose(ActiveSearch);
     }
@@ -68,11 +68,14 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
         onKeyDown={(e: any) => e.keyCode === 13 && fetchSearchBlog()}
       />
       {ActiveClose ? (
+                <button
+                className="absolute right-2.5 top-4"
+                onClick={fetchSearchBlog}
+              >
         <svg
           id={`blog-search-icon-inactive`}
-          onClick={fetchSearchBlog}
           aria-label="search icon"
-          className="focus:outline-0 group-focus:outline-1 absolute top-4 right-4 z-8 cursor-pointer"
+          className="focus:outline-0 group-focus:outline-1 top-4 right-4 z-8 cursor-pointer"
           width="18"
           height="19"
           viewBox="0 0 18 19"
@@ -85,6 +88,7 @@ const SearchComponent: React.FC<CatogaryComponentProps> = ({
             fill="#001A71"
           />
         </svg>
+        </button>
       ) : (
         <button
           className="absolute right-2.5"

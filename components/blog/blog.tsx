@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useRef } from "react";
 import { AxiosError } from "axios";
 import RelatedProducts from "../blog_details/RelatedProducts";
 import CatogaryComponent from "./Catogory";
@@ -25,6 +25,7 @@ const BlogComponent = () => {
   const fetchBlogSetting = useBlogStore(state => state.getBlogSetting)
   const loading = useBlogStore(state => state.isLoading)
   const setIsLoading = useBlogStore(state => state.setIsLoading)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [searchInfo, setSeachInfo] = useState<any>({
     ActiveSearch: true,
@@ -39,6 +40,14 @@ const BlogComponent = () => {
       fetchBlogSetting()
     }
   }, [BlogSetting]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if(ActiveSearch && inputRef) {
+        inputRef?.current?.focus()
+      }
+    }, 1000);
+  }, [ActiveSearch, inputRef])
 
   const handleProductClick = (data: any) => {
     const title = data.routeSegment;
@@ -73,16 +82,6 @@ const BlogComponent = () => {
     setArticleContent(data);
     setCurrentScreen("Search");
   };
-  const HandleSearchClose = () => {
-    setCurrentScreen("List");
-    setSeachInfo((prevState: any) => ({
-      ...prevState,
-      searchResult: [],
-      SearchString: "",
-      ActiveSearch: true,
-    }));
-    setActiveSearch(false);
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -111,6 +110,7 @@ const BlogComponent = () => {
             ActiveSearch={searchInfo.ActiveSearch}
             handleResponse={(e, str) => HandelSearch(e, str)}
             handleClose={() =>   setActiveSearch(false)}
+            inputRef={inputRef}
           />
         </div>
         {loading ? (
@@ -165,7 +165,7 @@ const BlogComponent = () => {
               searchText={searchInfo.searchText}
               ActiveSearch={searchInfo.ActiveSearch}
               handleResponse={(e, str) => HandelSearch(e, str)}
-              handleClose={() =>   setActiveSearch(false)}
+              handleClose={() =>  setActiveSearch(false)}
             />
           </div>
         )}
