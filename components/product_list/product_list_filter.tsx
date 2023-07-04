@@ -412,7 +412,7 @@ const ProductListFilter = ({
                                   {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: ProductFilter.MainCategory,index:number) => {
                                     const isNameMatchFilterMenu = leftfiltersubdata?.name === selectedFilter?.clickedMenuName && selectedFilter?.isClicked
                                     const isSubDataChekcboxActive = activeFilter.map((data:ProductFilter.QueryBucketType) => (
-                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata.id || data?.id === leftfiltermaindata?.mainCategory?.value?.[0]?.id && data?.isViewAll)
+                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata?.id || data?.id === leftfiltermaindata?.mainCategory?.value?.[0]?.id && data?.isViewAll)
                                      
                                     ))
                                     

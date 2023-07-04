@@ -410,7 +410,7 @@ const HealthNeedsFilterComponent = ({
                                   {leftfiltermaindata?.subCategory?.value?.map((leftfiltersubdata: ProductFilter.MainCategory,index:number) => {
                                     const isNameMatchFilterMenu = leftfiltersubdata?.name === selectedFilter?.clickedMenuName && selectedFilter?.isClicked
                                     const isSubDataChekcboxActive = activeFilter.map((data:ProductFilter.QueryBucketType) => (
-                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each.id === leftfiltersubdata.id)
+                                      data?.subCategory?.filter((each:ProductFilter.MainCategory) => each?.id === leftfiltersubdata?.id)
                                     ))
                                     const isSubDataFiltered = isSubDataChekcboxActive?.flat()?.[0]
                                     // console.log(isSubDataFiltered)
