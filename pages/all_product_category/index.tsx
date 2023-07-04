@@ -235,7 +235,7 @@ function AllProductCategoryPage({
           />
         )}
 
-        <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3]">
+        <div className="allproductlist-page container w-full mx-auto grid grid-cols-1 border-t border-[#CCD1E3] mb-12">
           <AllProductsFilter
             activeFilter={bucket}
             activeFiltersData={activeFilterDataList}
