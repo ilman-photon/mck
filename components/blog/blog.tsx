@@ -41,12 +41,16 @@ const BlogComponent = () => {
     }
   }, [BlogSetting]);
 
-  useEffect(() => {
+  const setFocusInputText = () => {
     setTimeout(() => {
       if(ActiveSearch && inputRef) {
         inputRef?.current?.focus()
       }
     }, 1000);
+  }
+
+  useEffect(() => {
+    setFocusInputText()
   }, [ActiveSearch, inputRef])
 
   const handleProductClick = (data: any) => {
@@ -81,6 +85,7 @@ const BlogComponent = () => {
     setActiveSearch(true);
     setArticleContent(data);
     setCurrentScreen("Search");
+    setFocusInputText()
   };
 
   useEffect(() => {
