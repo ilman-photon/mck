@@ -22,21 +22,10 @@ const ItemExpandeble = ({ dataCategory, OnCatogarySelcete, idx }: any) => {
     >
       <div className="tab text-mckblue w-full overflow-hidden lg:border-none sm:border-none xs:border-none">
         <React.Fragment>
-          <input
-            type="checkbox"
-            id={dataCategory?.categoryDisplayName?.value}
-            className="hidden"
-            checked={selectedValue}
-          />
-          <label
-            className="tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative"
-            htmlFor={dataCategory?.categoryDisplayName?.value}
-            id={`blog-subcatogary-lbl-${idx}`}
-            tabIndex={0}
-            role="application"
-            onClick={(e) => handleOnClick("click")}
-            onKeyUp={(e) => handleOnClick(e.key)}
-          >
+          <button
+           aria-expanded={`${selectedValue? true:false}`}
+             onClick={(e) => handleOnClick("click")}
+             className={`${selectedValue? 'checked':''} w-full tab-label py-2 pr-4 flex cursor-pointer text-sofia-reg font-extrabold text-base relative`}>
             {dataCategory?.categoryImage?.expandedValue?.url && (
               <img
                 className="mr-3"
@@ -51,7 +40,7 @@ const ItemExpandeble = ({ dataCategory, OnCatogarySelcete, idx }: any) => {
               />
             )}
             {dataCategory?.categoryDisplayName?.value}
-          </label>
+            </button>
         </React.Fragment>
         <div className="tab-content text-sofia-reg font-normal text-base text-mcknormalgrey">
           {dataCategory?.subCategory?.value?.map((item: any, index: number) => (
